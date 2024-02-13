@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class UserResource extends JsonResource
@@ -12,11 +13,13 @@ class UserResource extends JsonResource
     {
         $roleData = [
             'id' => '',
+            'slug' => '',
             'name' => '',
         ];
         if (count($this->roles)) {
             $roleData = [
                 'id' => $this->roles[0]->id,
+                'slug' => Str::slug($this->roles[0]->name),
                 'name' => $this->roles[0]->name,
             ];
         }

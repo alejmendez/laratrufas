@@ -26,35 +26,11 @@ class UsersController extends Controller
         $search = request('search', '');
         $users = ListUser::call($order, $search);
 
-        $columns = [
-            [
-                'text' => 'Nombre',
-                'data' => 'name',
-            ],
-            [
-                'text' => 'Rut',
-                'data' => 'dni',
-            ],
-            [
-                'text' => 'Telefono',
-                'data' => 'phone',
-            ],
-            [
-                'text' => 'Perfil',
-                'data' => 'role',
-            ],
-            [
-                'text' => 'Email',
-                'data' => 'email',
-            ],
-        ];
-
         return Inertia::render('Users/List', [
-            'columns' => $columns,
-            'user' => $users
+            'order' => $order,
+            'search' => $search,
+            'data' => new UserCollection($users->paginate()->withQueryString()),
         ]);
-
-        // return new UserCollection($users->paginate());
     }
 
     /**

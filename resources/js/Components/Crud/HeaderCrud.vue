@@ -13,19 +13,19 @@ const props = defineProps({
 </script>
 
 <template>
-  <header class="fi-header flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+  <header class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
     <div>
       <BreadCrumbs :elements="props.breadcrumbs" />
 
       <h1
-        class="fi-header-heading text-2xl font-bold tracking-tight text-gray-950 dark:text-white sm:text-3xl"
+        class="ftext-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
       >
         {{ props.title }}
       </h1>
     </div>
 
     <div
-      class="fi-ac gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
+      class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
       v-if="props.links"
     >
       <Link
@@ -39,7 +39,7 @@ const props = defineProps({
     </div>
 
     <div
-      class="fi-ac gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
+      class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
       v-if="slots.header"
     >
       <slot name="header"></slot>
