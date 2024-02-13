@@ -1,3 +1,103 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*,
+:before,
+:after,
+:root {
+  --vf-primary: #212226;
+  --vf-primary-darker: #09090a;
+  --vf-danger: #ef4444;
+  --vf-danger-lighter: #fee2e2;
+  --vf-success: #10b981;
+  --vf-success-lighter: #d1fae5;
+
+  --vf-gray-50: #f9fafb;
+  --vf-gray-100: #f3f4f6;
+  --vf-gray-200: #e5e7eb;
+  --vf-gray-300: #d1d5db;
+  --vf-gray-400: #9ca3af;
+  --vf-gray-500: #6b7280;
+  --vf-gray-600: #4b5563;
+  --vf-gray-700: #374151;
+  --vf-gray-800: #1f2937;
+  --vf-gray-900: #111827;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-50;
+  }
+  .router-link-active {
+    background-color: #6b7280;
+  }
+
+  .input-file {
+    @apply block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#CED4DA] file:text-gray-800 hover:file:bg-gray-400;
+  }
+
+  .btn.btn-primary {
+    @apply px-5 py-2 text-gray-100 transition-colors duration-150 bg-gray-900 rounded-lg hover:bg-gray-600;
+  }
+
+  .btn.btn-primary:disabled {
+    @apply bg-gray-600;
+  }
+
+  .btn.btn-secondary {
+    @apply px-5 py-2 text-gray-100 transition-colors duration-150 rounded-lg bg-white text-gray-950 hover:bg-gray-200 disabled:opacity-75 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 ring-1 ring-gray-950/10 dark:ring-white/20;
+  }
+  .btn.btn-secondary:disabled {
+    @apply bg-gray-200;
+  }
+
+  .pagination {
+    @apply m-5 flex items-center justify-between text-sm;
+  }
+
+  .pagination ul {
+    @apply flex;
+    list-style: none;
+  }
+
+  .pagination ul li button {
+    min-width: 40px;
+  }
+  .pagination ul li button.pagination-link {
+    @apply relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white;
+  }
+
+  .pagination ul li button.current {
+    @apply relative block rounded bg-blue-100 px-3 py-1.5 text-sm font-medium text-blue-700 transition-all duration-300;
+  }
+
+  .pagination ul li button.current span {
+    @apply absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)];
+  }
+
+  .role.agricultor {
+    @apply border-[#E9E9EA] text-[#495057] bg-[#F8F9FA];
+  }
+
+  .role.tecnico {
+    @apply border-[#DAF4E3] text-[#16A34A] bg-[#F0FDF4];
+  }
+
+  .role.administrador {
+    @apply border-[#DDEEF6] text-[#0B88A0] bg-[#E8F7FF];
+  }
+
+  .tableContainer {
+    @apply mt-8 bg-white shadow-sm ring-1 ring-gray-950/5 dark:divide-white/10 dark:bg-gray-900 dark:ring-white/10;
+  }
+
+  .tableContainer .inputSearch {
+    @apply block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400;
+  }
+}

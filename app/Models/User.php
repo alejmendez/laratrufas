@@ -3,14 +3,27 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\Orderable;
+use App\Traits\Searchable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, Orderable, Searchable;
+
+    protected $searchableColumns = [
+        'name',
+        'last_name',
+        'dni',
+        'email',
+        'phone',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +34,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'dni',
+        'avatar',
+        'last_name',
+        'phone',
     ];
 
     /**
@@ -42,4 +59,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getAvatarUrl(): ?string
+    {
+        if ($this->avatar == null) {
+            return '';
+        }
+
+        return Storage::url($this->avatar);
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->name} {$this->last_name}";
+    }
 }
