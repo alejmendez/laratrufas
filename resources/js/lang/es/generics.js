@@ -1,4 +1,6 @@
 export default {
+  list: 'Lista',
+  new: 'Nuevo',
   messages: {
     saved_successfully: 'Guardado satisfactoriamente',
     deleted_successfully: 'Eliminado satisfactoriamente',
