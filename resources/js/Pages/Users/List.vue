@@ -1,8 +1,7 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 import { useToast } from 'vue-toastification'
-import { useI18n } from 'vue-i18n'
 import Swal from 'sweetalert2'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
@@ -58,9 +57,9 @@ const deleteHandler = async (id) => {
 
     <AuthenticatedLayout>
         <HeaderCrud
-            title="t('user.titles.entity_breadcrumb')"
-            :breadcrumbs="[{ to: 'users.index', text: t('user.titles.entity_breadcrumb') }, { text: 'Listado' }]"
-            :links="[{ to: 'users.create', text: 'Ingresar' }]"
+            :title="t('user.titles.entity_breadcrumb')"
+            :breadcrumbs="[{ to: 'users.index', text: t('user.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
+            :links="[{ to: 'users.create', text: t('generics.new') }]"
         />
 
         <div class="tableContainer">
@@ -92,7 +91,7 @@ const deleteHandler = async (id) => {
                     <tbody>
                         <tr
                             class="border-b hover:bg-neutral-100"
-                            v-for="user of data"
+                            v-for="user of data.data"
                             :key="user.id"
                         >
                             <td class="px-6 py-3">{{ user.name }}</td>
