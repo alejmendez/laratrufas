@@ -40,8 +40,9 @@ const orderUrl = (col) => {
                         >
                             <Link :href="orderUrl(column.data)">
                                 {{ column.text }}
-                                props.order
-                                <font-awesome-icon :icon="['fa', 'sort']" />
+                                <font-awesome-icon icon="sort-down" v-if="props.order === column.data" />
+                                <font-awesome-icon icon="sort-up" v-else-if="props.order[0] === '-' && props.order.substring(1) === column.data" />
+                                <font-awesome-icon icon="sort" v-else />
                             </Link>
                         </th>
                         <th scope="col" class="px-6 py-3 w-[140px]">{{ t('generics.tables.actions') }}</th>
