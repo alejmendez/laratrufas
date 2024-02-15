@@ -17,7 +17,7 @@ const props = defineProps({
 const orderUrl = (col) => {
     const url = new URL(window.location.href)
     url.searchParams.set('order', (col === props.order ? '-' : '') + col)
-    return url
+    return url.href
 }
 </script>
 

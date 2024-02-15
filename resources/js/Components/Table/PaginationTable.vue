@@ -4,8 +4,6 @@ import { Link } from '@inertiajs/vue3';
 const props = defineProps({
   meta: Object
 })
-
-console.log(props.meta)
 </script>
 
 <template>
@@ -24,7 +22,6 @@ console.log(props.meta)
             :href="linkPagination.url || '#'"
             class="pagination-link"
             :class="{ 'opacity-35': linkPagination.active }"
-            @click.prevent="firstPage()"
             v-html="linkPagination.label"
         >
         </Link>

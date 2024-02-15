@@ -1,20 +1,19 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
-import { useToast } from 'vue-toastification'
-import Swal from 'sweetalert2'
+
+import { deleteRowTable } from '@/Utils/table'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
 import TableList from '@/Components/Table/TableList.vue'
 
 const { t } = useI18n()
-const toast = useToast()
 
 const props = defineProps({
     order: String,
     search: String,
-    data: Array,
+    data: Object,
 })
 
 const columns = [
@@ -25,29 +24,11 @@ const columns = [
     { text: 'Email', data: 'email' },
 ];
 
+
 const deleteHandler = async (id) => {
-  try {
-    const result = await Swal.fire({
-      title: t('generics.tables.confirm.delete'),
-      showDenyButton: true,
-      confirmButtonText: t('generics.tables.confirm.confirmButton'),
-      denyButtonText: t('generics.tables.confirm.denyButton'),
-      confirmButtonColor: "#111827",
-      cancelButtonColor: "#ffffff",
+    await deleteRowTable(t, () => {
+        route('users.destroy', id)
     })
-
-    if (!result.isConfirmed) {
-      return
-    }
-
-    console.log(route(props.delete_route, id))
-    toast.success(t('generics.messages.deleted_successfully'))
-  } catch (error) {
-    Swal.fire({
-      icon: "error",
-      text: t('generics.tables.errors.could_not_delete_the_record'),
-    });
-  }
 }
 </script>
 
