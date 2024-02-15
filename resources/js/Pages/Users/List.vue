@@ -6,8 +6,7 @@ import Swal from 'sweetalert2'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import PaginationTable from '@/Components/Table/PaginationTable.vue'
-import SearchInput from '@/Components/Table/SearchInput.vue'
+import TableList from '@/Components/Table/TableList.vue'
 
 const { t } = useI18n()
 const toast = useToast()
@@ -41,7 +40,7 @@ const deleteHandler = async (id) => {
       return
     }
 
-    await props.deleteHandler(id)
+    console.log(route(props.delete_route, id))
     toast.success(t('generics.messages.deleted_successfully'))
   } catch (error) {
     Swal.fire({
@@ -62,67 +61,40 @@ const deleteHandler = async (id) => {
             :links="[{ to: 'users.create', text: t('generics.new') }]"
         />
 
-        <div class="tableContainer">
-            <!-- Table responsive wrapper -->
-            <div class="overflow-x-auto bg-white">
-                <SearchInput />
-
-                <!-- Table -->
-                <table class="min-w-full text-left text-sm whitespace-nowrap border-t-2">
-                    <!-- Table head -->
-                    <thead class="uppercase tracking-wider border-b-2">
-                        <tr>
-                            <th
-                                v-for="column of columns"
-                                :key="column.data"
-                                scope="col"
-                                class="px-6 py-3 cursor-default"
-                            >
-                                <Link href="">
-                                    {{ column.text }}
-                                    <font-awesome-icon :icon="['fa', 'sort']" />
-                                </Link>
-                            </th>
-                            <th scope="col" class="px-6 py-3 w-[140px]">{{ t('generics.tables.actions') }}</th>
-                        </tr>
-                    </thead>
-
-                    <!-- Table body -->
-                    <tbody>
-                        <tr
-                            class="border-b hover:bg-neutral-100"
-                            v-for="user of data.data"
-                            :key="user.id"
-                        >
-                            <td class="px-6 py-3">{{ user.name }}</td>
-                            <td class="px-6 py-3">{{ user.dni }}</td>
-                            <td class="px-6 py-3">{{ user.phone }}</td>
-                            <td class="px-6 py-3">
-                                <span
-                                    class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none border rounded-full role"
-                                    :class="user.role.slug"
-                                >
-                                    {{ user.role.name }}
-                                </span>
-                            </td>
-                            <td class="px-6 py-3">{{ user.email }}</td>
-                            <td class="px-6 py-3">
-                                <Link :href="route('users.show', user.id)">
-                                    <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all hover:text-gray-600" />
-                                </Link>
-                                <Link :href="route('users.show', user.id)">
-                                    <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all hover:text-lime-600" />
-                                </Link>
-                                <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all hover:text-red-600"
-                                    @click="table.deleteEvent(user.id)" />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <PaginationTable :meta="props.data.meta" />
-            </div>
-        </div>
-
+        <TableList
+            :columns="columns"
+            :meta="props.data.meta"
+            :search="props.search"
+            :order="props.order"
+        >
+            <tr
+                class="border-b hover:bg-neutral-100"
+                v-for="user of data.data"
+                :key="user.id"
+            >
+                <td class="px-6 py-3">{{ user.name }}</td>
+                <td class="px-6 py-3">{{ user.dni }}</td>
+                <td class="px-6 py-3">{{ user.phone }}</td>
+                <td class="px-6 py-3">
+                    <span
+                        class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none border rounded-full role"
+                        :class="user.role.slug"
+                    >
+                        {{ user.role.name }}
+                    </span>
+                </td>
+                <td class="px-6 py-3">{{ user.email }}</td>
+                <td class="px-6 py-3">
+                    <Link :href="route('users.show', user.id)">
+                        <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all hover:text-gray-600" />
+                    </Link>
+                    <Link :href="route('users.show', user.id)">
+                        <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all hover:text-lime-600" />
+                    </Link>
+                    <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all hover:text-red-600"
+                        @click="deleteHandler(user.id)" />
+                </td>
+            </tr>
+        </TableList>
     </AuthenticatedLayout>
 </template>

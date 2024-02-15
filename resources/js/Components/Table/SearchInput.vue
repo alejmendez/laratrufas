@@ -9,6 +9,10 @@ const searchHandler = (e) => {
     url.searchParams.set('search', e.target.value)
     router.get(url)
 }
+
+const props = defineProps({
+  q: String,
+})
 </script>
 
 <template>
@@ -20,6 +24,7 @@ const searchHandler = (e) => {
                 type="text"
                 :placeholder="t('generics.tables.search') + '...'"
                 class="block w-64 rounded-lg border py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
+                :value="props.q"
                 @keyup.enter="searchHandler"
             />
             <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
