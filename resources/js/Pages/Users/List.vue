@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3'
+import { Head, Link, router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
 import { deleteRowTable } from '@/Utils/table'
@@ -27,7 +27,7 @@ const columns = [
 
 const deleteHandler = async (id) => {
     await deleteRowTable(t, () => {
-        route('users.destroy', id)
+        router.delete(route('users.destroy', id))
     })
 }
 </script>
@@ -75,6 +75,11 @@ const deleteHandler = async (id) => {
                     <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all hover:text-red-600"
                         @click="deleteHandler(user.id)" />
                 </td>
+            </tr>
+            <tr v-if="data.data.length === 0" class="border-b hover:bg-neutral-100">
+              <td :colspan="columns.length + 1" class="px-6 py-3 text-center">
+                {{ t('generics.tables.empty') }}
+              </td>
             </tr>
         </TableList>
     </AuthenticatedLayout>

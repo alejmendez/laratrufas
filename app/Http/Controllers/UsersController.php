@@ -34,6 +34,14 @@ class UsersController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return Inertia::render('Users/Create');
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreUserRequest $request)
@@ -51,7 +59,20 @@ class UsersController extends Controller
     public function show(string $id)
     {
         $user = FindUser::call($id);
-        return new UserResource($user);
+
+        return Inertia::render('Users/Edit', [
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(User $user)
+    {
+        return Inertia::render('Users/Edit', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -73,7 +94,7 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         DeleteUser::call($id);
-        return response()->json(null, 204);
+        return redirect()->back();
     }
 
     protected function storeAvatar(UpdateUserRequest | StoreUserRequest $request)
