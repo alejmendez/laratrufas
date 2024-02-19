@@ -22,22 +22,24 @@ class QuartersController extends Controller
      */
     public function index()
     {
-        $filters = request('filter', []);
         $order = request('order', '');
         $search = request('search', '');
+        $quarters = ListQuarter::call($order, $search);
 
-        $typeResult = request('type_result', 'pagination');
-
-        $quarters = ListQuarter::call($filters, $order, $search);
-
-        if ($typeResult === 'select') {
-            return $quarters->pluck('name', 'id');
-        }
-
-        // return new QuarterCollection($quarter->paginate());
         return Inertia::render('Quarters/List', [
-            'quarters' => $quarters
+            'order' => $order,
+            'search' => $search,
+            'toast' => session('toast'),
+            'data' => new QuarterCollection($quarters->paginate()->withQueryString()),
         ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return Inertia::render('Quarters/Create');
     }
 
     /**
@@ -45,12 +47,11 @@ class QuartersController extends Controller
      */
     public function store(StoreQuarterRequest $request)
     {
-        $blueprint = $this->storeBlueprint($request);
         $data = $request->all();
-        $data['blueprint'] = $blueprint;
-        $Quarter = CreateQuarter::call($data);
+        $data['blueprint'] = $this->storeBlueprint($request);
+        CreateQuarter::call($data);
 
-        return response()->json(new QuarterResource($Quarter), 201);
+        return redirect()->route('Quarters.index')->with('toast', 'Quarter created.');
     }
 
     /**
@@ -58,8 +59,23 @@ class QuartersController extends Controller
      */
     public function show(string $id)
     {
-        $Quarter = FindQuarter::call($id);
-        return new QuarterResource($Quarter);
+        $quarter = FindQuarter::call($id);
+
+        return Inertia::render('Quarters/Edit', [
+            'data' => new QuarterResource($quarter),
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $quarter = FindQuarter::call($id);
+
+        return Inertia::render('Quarters/Edit', [
+            'data' => new QuarterResource($user),
+        ]);
     }
 
     /**
@@ -67,13 +83,11 @@ class QuartersController extends Controller
      */
     public function update(UpdateQuarterRequest $request, string $id)
     {
-        $blueprint = $this->storeBlueprint($request);
         $data = $request->all();
-        $data['blueprint'] = $blueprint;
+        $data['blueprint'] = $this->storeBlueprint($request);
+        UpdateQuarter::call($id, $data);
 
-        $Quarter = UpdateQuarter::call($id, $data);
-
-        return response()->json(new QuarterResource($Quarter), 200);
+        return redirect()->route('quarters.index')->with('toast', 'Quarter updated.');
     }
 
     /**
@@ -82,7 +96,7 @@ class QuartersController extends Controller
     public function destroy(string $id)
     {
         DeleteQuarter::call($id);
-        return response()->json(null, 204);
+        return redirect()->back();
     }
 
     protected function storeBlueprint(UpdateQuarterRequest | StoreQuarterRequest $request)

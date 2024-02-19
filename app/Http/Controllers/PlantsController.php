@@ -22,15 +22,24 @@ class PlantsController extends Controller
      */
     public function index()
     {
-        $filters = request('filter', []);
         $order = request('order', '');
         $search = request('search', '');
-        $plants = ListPlant::call($filters, $order, $search);
+        $plants = ListPlant::call($order, $search);
 
-        // return new PlantCollection($plant->paginate());
         return Inertia::render('Plants/List', [
-            'quarters' => $plants
+            'order' => $order,
+            'search' => $search,
+            'toast' => session('toast'),
+            'data' => new PlantCollection($plants->paginate()->withQueryString()),
         ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return Inertia::render('Plants/Create');
     }
 
     /**
@@ -38,12 +47,11 @@ class PlantsController extends Controller
      */
     public function store(StorePlantRequest $request)
     {
-        $blueprint = $this->storeBlueprint($request);
         $data = $request->all();
-        $data['blueprint'] = $blueprint;
-        $plant = CreatePlant::call($data);
+        $data['blueprint'] = $this->storeBlueprint($request);
+        CreatePlant::call($data);
 
-        return response()->json(new PlantResource($plant), 201);
+        return redirect()->route('plants.index')->with('toast', 'Plant created.');
     }
 
     /**
@@ -51,8 +59,23 @@ class PlantsController extends Controller
      */
     public function show(string $id)
     {
-        $plant = FindPlant::call($id);
-        return new PlantResource($plant);
+        $Plant = FindPlant::call($id);
+
+        return Inertia::render('Plants/Edit', [
+            'data' => new PlantResource($Plant),
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $Plant = FindPlant::call($id);
+
+        return Inertia::render('Plants/Edit', [
+            'data' => new PlantResource($user),
+        ]);
     }
 
     /**
@@ -60,13 +83,11 @@ class PlantsController extends Controller
      */
     public function update(UpdatePlantRequest $request, string $id)
     {
-        $blueprint = $this->storeBlueprint($request);
         $data = $request->all();
-        $data['blueprint'] = $blueprint;
+        $data['blueprint'] = $this->storeBlueprint($request);
+        UpdatePlant::call($id, $data);
 
-        $plant = UpdatePlant::call($id, $data);
-
-        return response()->json(new PlantResource($plant), 200);
+        return redirect()->route('plants.index')->with('toast', 'Plant updated.');
     }
 
     /**
@@ -75,7 +96,7 @@ class PlantsController extends Controller
     public function destroy(string $id)
     {
         DeletePlant::call($id);
-        return response()->json(null, 204);
+        return redirect()->back();
     }
 
     protected function storeBlueprint(UpdatePlantRequest | StorePlantRequest $request)

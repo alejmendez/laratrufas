@@ -43,7 +43,7 @@ const form = useForm({
 })
 
 const submitHandler = () => {
-  form.post(route('users.store'), {
+  form.post(route('users.update'), {
     forceFormData: true,
   })
 }
@@ -72,7 +72,7 @@ const changeFileHandler = (e) => {
               :icon="['fas', 'circle-notch']"
               v-show="form.processing"
             />
-            {{ t('generics.buttons.create') }}
+            {{ t('generics.buttons.save_edit') }}
           </button>
           <Link
             :href="route('users.index')"

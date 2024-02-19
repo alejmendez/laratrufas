@@ -22,21 +22,24 @@ class FieldsController extends Controller
      */
     public function index()
     {
-        $filters = request('filter', []);
         $order = request('order', '');
         $search = request('search', '');
-        $typeResult = request('type_result', 'pagination');
+        $fields = ListField::call($order, $search);
 
-        $fields = ListField::call($filters, $order, $search);
-
-        if ($typeResult === 'select') {
-            return $fields->pluck('name', 'id');
-        }
-
-        // return new FieldCollection($fields->paginate());
         return Inertia::render('Fields/List', [
-            'fields' => $fields
+            'order' => $order,
+            'search' => $search,
+            'toast' => session('toast'),
+            'data' => new FieldCollection($fields->paginate()->withQueryString()),
         ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return Inertia::render('Fields/Create');
     }
 
     /**
@@ -44,12 +47,11 @@ class FieldsController extends Controller
      */
     public function store(StoreFieldRequest $request)
     {
-        $blueprint = $this->storeBlueprint($request);
         $data = $request->all();
-        $data['blueprint'] = $blueprint;
-        $field = CreateField::call($data);
+        $data['blueprint'] = $this->storeBlueprint($request);
+        CreateField::call($data);
 
-        return response()->json(new FieldResource($field), 201);
+        return redirect()->route('fields.index')->with('toast', 'Field created.');
     }
 
     /**
@@ -58,7 +60,22 @@ class FieldsController extends Controller
     public function show(string $id)
     {
         $field = FindField::call($id);
-        return new FieldResource($field);
+
+        return Inertia::render('Fields/Edit', [
+            'data' => new FieldResource($field),
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $field = FindField::call($id);
+
+        return Inertia::render('Fields/Edit', [
+            'data' => new FieldResource($user),
+        ]);
     }
 
     /**
@@ -66,13 +83,11 @@ class FieldsController extends Controller
      */
     public function update(UpdateFieldRequest $request, string $id)
     {
-        $blueprint = $this->storeBlueprint($request);
         $data = $request->all();
-        $data['blueprint'] = $blueprint;
+        $data['blueprint'] = $this->storeBlueprint($request);
+        UpdateField::call($id, $data);
 
-        $field = UpdateField::call($id, $data);
-
-        return response()->json(new FieldResource($field), 200);
+        return redirect()->route('fields.index')->with('toast', 'Field updated.');
     }
 
     /**
@@ -81,7 +96,7 @@ class FieldsController extends Controller
     public function destroy(string $id)
     {
         DeleteField::call($id);
-        return response()->json(null, 204);
+        return redirect()->back();
     }
 
     protected function storeBlueprint(UpdateFieldRequest | StoreFieldRequest $request)

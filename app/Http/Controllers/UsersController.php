@@ -65,7 +65,7 @@ class UsersController extends Controller
     {
         $user = FindUser::call($id);
 
-        return Inertia::render('Users/Edit', [
+        return Inertia::render('Users/Show', [
             'data' => new UserResource($user),
             'roles' => $this->getSelectRoles(),
         ]);
@@ -89,12 +89,11 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id)
     {
-        $avatar = $this->storeAvatar($request);
         $data = $request->all();
-        $data['avatar'] = $avatar;
-        $user = UpdateUser::call($id, $data);
+        $data['avatar'] = $this->storeAvatar($request);
+        UpdateUser::call($id, $data);
 
-        return response()->json(new UserResource($user), 200);
+        return redirect()->route('users.index')->with('toast', 'User updated.');
     }
 
     /**
