@@ -29,8 +29,6 @@ const dniMask = {
 
 const { data } = props.data
 
-console.log(data)
-
 const avatarPreview = ref(data.avatar)
 
 const form = useForm({
@@ -40,7 +38,7 @@ const form = useForm({
   email: data.email,
   phone: data.phone,
   password: data.password,
-  role: data.role.id,
+  role: data.role.name,
   avatar: data.avatar,
 })
 
