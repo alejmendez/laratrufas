@@ -26,7 +26,7 @@ class StoreUserRequest extends FormRequest
             'name' => 'required|min:3|max:250',
             'last_name' => 'required|min:3|max:250',
             'email' => 'required|email|unique:users,email',
-            'dni' => 'required|min:8|max:12',
+            'dni' => 'required|min:8|max:12|unique:users,dni',
             'phone' => 'required|min:11|max:20',
             'password' => ['required', Password::min(6)],
         ];

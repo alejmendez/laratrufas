@@ -1,6 +1,7 @@
 export default {
   list: 'Lista',
   new: 'Nuevo',
+  please_select: 'Seleccione',
   messages: {
     saved_successfully: 'Guardado satisfactoriamente',
     deleted_successfully: 'Eliminado satisfactoriamente',

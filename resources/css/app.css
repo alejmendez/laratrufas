@@ -38,6 +38,14 @@ body {
     background-color: #6b7280;
   }
 
+  .input-label {
+    @apply block font-medium text-sm text-gray-700 mb-1;
+  }
+
+  .input {
+    @apply w-full border-gray-300 focus:border-gray-500 focus:ring-gray-500 rounded-md shadow-sm;
+  }
+
   .input-file {
     @apply block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#CED4DA] file:text-gray-800 hover:file:bg-gray-400;
   }
@@ -99,5 +107,17 @@ body {
 
   .tableContainer .inputSearch {
     @apply block w-64 rounded-lg border py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400;
+  }
+
+  .tableContainer table {
+    @apply min-w-full text-left text-sm whitespace-nowrap border-t-2;
+  }
+
+  .tableContainer table th {
+    @apply px-6 py-3 cursor-default;
+  }
+
+  .tableContainer table td {
+    @apply px-6 py-3;
   }
 }

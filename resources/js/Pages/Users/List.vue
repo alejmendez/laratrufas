@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link, router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
+import { useToast } from 'vue-toastification'
 
 import { deleteRowTable } from '@/Utils/table'
 
@@ -9,26 +10,31 @@ import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
 import TableList from '@/Components/Table/TableList.vue'
 
 const { t } = useI18n()
+const toast = useToast()
 
 const props = defineProps({
     order: String,
     search: String,
     data: Object,
+    toast: String,
 })
 
+if (props.toast) {
+  toast.success(t('generics.messages.saved_successfully'))
+}
+
 const columns = [
-    { text: 'Nombre', data: 'name' },
-    { text: 'Rut', data: 'dni' },
-    { text: 'Telefono', data: 'phone' },
-    { text: 'Perfil', data: 'role' },
-    { text: 'Email', data: 'email' },
+  { text: 'Nombre', data: 'name' },
+  { text: 'Rut', data: 'dni' },
+  { text: 'Telefono', data: 'phone' },
+  { text: 'Perfil', data: 'role' },
+  { text: 'Email', data: 'email' },
 ];
 
-
 const deleteHandler = async (id) => {
-    await deleteRowTable(t, () => {
-        router.delete(route('users.destroy', id))
-    })
+  await deleteRowTable(t, () => {
+    router.delete(route('users.destroy', id))
+  })
 }
 </script>
 
@@ -53,10 +59,10 @@ const deleteHandler = async (id) => {
                 v-for="user of data.data"
                 :key="user.id"
             >
-                <td class="px-6 py-3">{{ user.name }}</td>
-                <td class="px-6 py-3">{{ user.dni }}</td>
-                <td class="px-6 py-3">{{ user.phone }}</td>
-                <td class="px-6 py-3">
+                <td>{{ user.name }}</td>
+                <td>{{ user.dni }}</td>
+                <td>{{ user.phone }}</td>
+                <td>
                     <span
                         class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none border rounded-full role"
                         :class="user.role.slug"
@@ -64,8 +70,8 @@ const deleteHandler = async (id) => {
                         {{ user.role.name }}
                     </span>
                 </td>
-                <td class="px-6 py-3">{{ user.email }}</td>
-                <td class="px-6 py-3">
+                <td>{{ user.email }}</td>
+                <td>
                     <Link :href="route('users.show', user.id)">
                         <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all hover:text-gray-600" />
                     </Link>
@@ -77,7 +83,7 @@ const deleteHandler = async (id) => {
                 </td>
             </tr>
             <tr v-if="data.data.length === 0" class="border-b hover:bg-neutral-100">
-              <td :colspan="columns.length + 1" class="px-6 py-3 text-center">
+              <td :colspan="columns.length + 1" class="text-center">
                 {{ t('generics.tables.empty') }}
               </td>
             </tr>

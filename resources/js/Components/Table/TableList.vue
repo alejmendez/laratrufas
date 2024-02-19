@@ -28,7 +28,7 @@ const orderUrl = (col) => {
             <SearchInput :q="props.search" />
 
             <!-- Table -->
-            <table class="min-w-full text-left text-sm whitespace-nowrap border-t-2">
+            <table>
                 <!-- Table head -->
                 <thead class="uppercase tracking-wider border-b-2">
                     <tr>
@@ -36,7 +36,6 @@ const orderUrl = (col) => {
                             v-for="column of props.columns"
                             :key="column.data"
                             scope="col"
-                            class="px-6 py-3 cursor-default"
                         >
                             <Link :href="orderUrl(column.data)">
                                 {{ column.text }}
@@ -45,7 +44,7 @@ const orderUrl = (col) => {
                                 <font-awesome-icon icon="sort" v-else />
                             </Link>
                         </th>
-                        <th scope="col" class="px-6 py-3 w-[140px]">{{ t('generics.tables.actions') }}</th>
+                        <th scope="col" class="w-[140px]">{{ t('generics.tables.actions') }}</th>
                     </tr>
                 </thead>
 

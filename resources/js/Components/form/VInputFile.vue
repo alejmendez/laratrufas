@@ -16,6 +16,10 @@ const props = defineProps({
   image: {
     type: String,
     default: ''
+  },
+  label: {
+    type: String,
+    default: ''
   }
 })
 
@@ -39,8 +43,8 @@ const preview = computed(() => {
 const changeFileHandler = (e) => {
   const [file] = e.target.files
   emit('change', {
-    fileRemove: fileRemove.value,
-    fileInput: fileInput.value,
+    fileRemove: false,
+    fileInput: file,
   })
   if (file) {
     fileRemove.value = false
@@ -53,8 +57,8 @@ const fileRemoveHandler = () => {
   fileInput.value.value = null
   filePreview.value = null
   emit('change', {
-    fileRemove: fileRemove.value,
-    fileInput: fileInput.value,
+    fileRemove: true,
+    fileInput: null,
   })
 }
 </script>
@@ -74,7 +78,7 @@ const fileRemoveHandler = () => {
       </div>
     </div>
     <div class="w-full">
-      <div class="mb-2 w-full">{{ t('generics.form.file.select_a_image') }}</div>
+      <div class="mb-2 w-full">{{ props.label }}</div>
       <input
         ref="fileInput"
         type="file"

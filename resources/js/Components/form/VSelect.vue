@@ -10,13 +10,16 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  type: {
-    type: String,
-    default: 'text'
-  },
   label: {
     type: String,
     default: ''
+  },
+  options: {
+    type: Array,
+    default: []
+  },
+  placeholder: {
+    type: String
   },
   disabled: {
     type: Boolean,
@@ -43,20 +46,28 @@ onMounted(() => {
       {{ props.label }}
     </label>
 
-    <input
-      v-bind="attrs"
+    <select
       class="input"
-      :type="props.type"
+      v-bind="attrs"
       :disabled="props.disabled"
       @change="emit('change', $event)"
       @blur="emit('blur', $event)"
       v-model="model"
       ref="input"
-    />
+    >
+      <option v-if="props.placeholder" value="">{{ props.placeholder }}</option>
+      <option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+      >
+        {{ option.text }}
+      </option>
+    </select>
 
     <div v-show="message">
       <p class="text-sm text-red-600">
-          {{ message }}
+        {{ message }}
       </p>
     </div>
   </div>

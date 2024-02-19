@@ -10,6 +10,8 @@ use App\Services\Users\CreateUser;
 use App\Services\Users\UpdateUser;
 use App\Services\Users\DeleteUser;
 
+use App\Services\Roles\ListRole;
+
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
@@ -29,6 +31,7 @@ class UsersController extends Controller
         return Inertia::render('Users/List', [
             'order' => $order,
             'search' => $search,
+            'toast' => session('toast'),
             'data' => new UserCollection($users->paginate()->withQueryString()),
         ]);
     }
@@ -38,7 +41,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Users/Create');
+        return Inertia::render('Users/Create', [
+            'roles' => $this->getSelectRoles(),
+        ]);
     }
 
     /**
@@ -48,9 +53,9 @@ class UsersController extends Controller
     {
         $data = $request->all();
         $data['avatar'] = $this->storeAvatar($request);
-        $user = CreateUser::call($data);
+        CreateUser::call($data);
 
-        return response()->json(new UserResource($user), 201);
+        return redirect()->route('users.index')->with('toast', 'User created.');
     }
 
     /**
@@ -61,17 +66,21 @@ class UsersController extends Controller
         $user = FindUser::call($id);
 
         return Inertia::render('Users/Edit', [
-            'user' => $user
+            'data' => new UserResource($user),
+            'roles' => $this->getSelectRoles(),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(string $id)
     {
+        $user = FindUser::call($id);
+
         return Inertia::render('Users/Edit', [
-            'user' => $user
+            'data' => new UserResource($user),
+            'roles' => $this->getSelectRoles(),
         ]);
     }
 
@@ -104,5 +113,10 @@ class UsersController extends Controller
         }
 
         return $request->file('avatar')->store(options: 'avatars');
+    }
+
+    protected function getSelectRoles()
+    {
+        return collect(ListRole::call())->map(fn($r) => [ 'value' => $r->name, 'text' => $r->name ]);
     }
 }
