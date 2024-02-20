@@ -8,6 +8,7 @@ class UpdateQuarter
 {
     public static function call($id, $data): Quarter
     {
+        unset($data['id']);
         $quarter = Quarter::findOrFail($id);
 
         $blueprintRemove = $data['blueprintRemove'] ?? false;

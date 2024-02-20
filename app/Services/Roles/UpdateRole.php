@@ -9,6 +9,7 @@ class UpdateRole
 {
     public static function call($id, $data): Role
     {
+        unset($data['id']);
         $role = Role::findOrFail($id);
 
         $role->update($data);

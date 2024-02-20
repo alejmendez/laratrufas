@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -25,8 +26,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:250',
             'last_name' => 'required|min:3|max:250',
-            'email' => 'required|email|unique:users,email',
-            'dni' => 'required|min:8|max:12|unique:users,dni',
+            'email' => ['required', 'email', Rule::unique('users')->ignore($this->id)],
+            'dni' => ['required', 'regex:/^[\d]{1,2}\.[\d]{3}\.[\d]{3}\-[\d|k|K]$/', Rule::unique('users')],
             'phone' => 'required|min:11|max:20',
             'password' => ['required', Password::min(6)],
         ];

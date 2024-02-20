@@ -6,7 +6,7 @@ use App\Models\User;
 
 class ListUser
 {
-    public static function call($order, $search)
+    public static function call($order = '', $search = '')
     {
         $users = User::with('roles')
             ->order($order)

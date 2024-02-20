@@ -8,12 +8,19 @@ class UpdateUser
 {
     public static function call($id, $data): User
     {
+        unset($data['id']);
         $user = User::findOrFail($id);
 
         $avatarRemove = $data['avatarRemove'] ?? false;
 
         if ($avatarRemove === true) {
             $data['avatar'] = null;
+        }
+
+        if ($data['password'] == '') {
+            unset($data['password']);
+        } else {
+            $data['password'] = Hash::make($data['password']);
         }
 
         $user->update($data);

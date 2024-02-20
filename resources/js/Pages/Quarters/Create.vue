@@ -19,7 +19,7 @@ const form = useForm({
   location: null,
   area: null,
   planned_at: null,
-  field_id: null,
+  field_id: '',
   blueprint: null,
 })
 
@@ -106,7 +106,7 @@ const changeFileHandler = (e) => {
               v-model="form.field_id"
               :placeholder="t('generics.please_select')"
               :options="props.fields"
-              :label="t('user.form.field_id.label')"
+              :label="t('quarter.form.field_id.label')"
               :message="form.errors.field_id"
             />
           </div>

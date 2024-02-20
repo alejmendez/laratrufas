@@ -9,6 +9,7 @@ use App\Services\Quarters\ListQuarter;
 use App\Services\Quarters\CreateQuarter;
 use App\Services\Quarters\UpdateQuarter;
 use App\Services\Quarters\DeleteQuarter;
+use App\Services\Fields\ListField;
 
 use App\Http\Resources\QuarterResource;
 use App\Http\Resources\QuarterCollection;
@@ -39,7 +40,9 @@ class QuartersController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Quarters/Create');
+        return Inertia::render('Quarters/Create', [
+            'fields' => $this->getSelectFields(),
+        ]);
     }
 
     /**
@@ -51,7 +54,7 @@ class QuartersController extends Controller
         $data['blueprint'] = $this->storeBlueprint($request);
         CreateQuarter::call($data);
 
-        return redirect()->route('Quarters.index')->with('toast', 'Quarter created.');
+        return redirect()->route('quarters.index')->with('toast', 'Quarter created.');
     }
 
     /**
@@ -74,7 +77,7 @@ class QuartersController extends Controller
         $quarter = FindQuarter::call($id);
 
         return Inertia::render('Quarters/Edit', [
-            'data' => new QuarterResource($user),
+            'data' => new QuarterResource($quarter),
         ]);
     }
 
@@ -106,5 +109,10 @@ class QuartersController extends Controller
         }
 
         return $request->file('blueprint')->store(options: 'blueprints');
+    }
+
+    protected function getSelectFields()
+    {
+        return collect(ListField::call()->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
     }
 }

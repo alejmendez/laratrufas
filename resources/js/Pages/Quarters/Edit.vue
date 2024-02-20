@@ -21,6 +21,8 @@ const { data } = props.data
 const blueprintPreview = ref(data.blueprint)
 
 const form = useForm({
+  _method: 'PATCH',
+  id: data.id,
   name: data.name,
   location: data.location,
   area: data.area,
@@ -30,7 +32,7 @@ const form = useForm({
 })
 
 const submitHandler = () => {
-  form.post(route('quarters.update'), {
+  form.post(route('quarters.update', data.id), {
     forceFormData: true,
   })
 }
@@ -112,7 +114,7 @@ const changeFileHandler = (e) => {
               v-model="form.field_id"
               :placeholder="t('generics.please_select')"
               :options="props.fields"
-              :label="t('user.form.field_id.label')"
+              :label="t('quarter.form.field_id.label')"
               :message="form.errors.field_id"
             />
           </div>

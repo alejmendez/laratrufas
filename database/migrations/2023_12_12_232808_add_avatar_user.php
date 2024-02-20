@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();
+            $table->softDeletes();
         });
     }
 

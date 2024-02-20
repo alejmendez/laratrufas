@@ -32,6 +32,8 @@ const { data } = props.data
 const avatarPreview = ref(data.avatar)
 
 const form = useForm({
+  _method: 'PATCH',
+  id: data.id,
   dni: data.dni,
   name: data.name,
   last_name: data.last_name,
@@ -43,7 +45,7 @@ const form = useForm({
 })
 
 const submitHandler = () => {
-  form.post(route('users.update'), {
+  form.post(route('users.update', data.id), {
     forceFormData: true,
   })
 }
