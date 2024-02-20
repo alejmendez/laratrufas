@@ -12,11 +12,12 @@ const { t } = useI18n()
 
 const props = defineProps({
   fields: Array,
+  types: Array,
 })
 
 const form = useForm({
   name: null,
-  type: null,
+  plant_type_id: null,
   age: null,
   location: null,
   location_xy: null,
@@ -25,6 +26,7 @@ const form = useForm({
   code: null,
   field_id: null,
   quarter_id: null,
+  row: null,
 })
 
 const submitHandler = () => {
@@ -70,82 +72,44 @@ const changeFileHandler = (e) => {
       <form @submit.prevent="submitHandler">
         <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
           <div class="p-6 grid grid-cols-2 gap-x-16 gap-y-4">
-
-
-
             <VInput
               id="name"
               v-model="form.name"
-              :label="t('quarter.form.name.label')"
+              :label="t('plant.form.name.label')"
               :message="form.errors.name"
             />
 
-            <VInput
-              id="type"
-              v-model="form.type"
-              :label="t('quarter.form.type.label')"
+            <VSelect
+              id="plant_type_id"
+              v-model="form.plant_type_id"
+              :placeholder="t('generics.please_select')"
+              :options="props.types"
+              :label="t('plant.form.plant_type_id.label')"
               :message="form.errors.type"
             />
 
             <VInput
               id="age"
               v-model="form.age"
-              :label="t('quarter.form.age.label')"
+              :label="t('plant.form.age.label')"
               :message="form.errors.age"
-            />
-
-            <VInput
-              id="location"
-              v-model="form.location"
-              :label="t('quarter.form.location.label')"
-              :message="form.errors.location"
-            />
-
-            <VInput
-              id="location_xy"
-              v-model="form.location_xy"
-              :label="t('quarter.form.location_xy.label')"
-              :message="form.errors.location_xy"
             />
 
             <VInput
               id="planned_at"
               v-model="form.planned_at"
-              :label="t('quarter.form.planned_at.label')"
+              :label="t('plant.form.planned_at.label')"
               :message="form.errors.planned_at"
-            />
-
-            <VInput
-              id="manager"
-              v-model="form.manager"
-              :label="t('quarter.form.manager.label')"
-              :message="form.errors.manager"
             />
 
             <VInput
               id="code"
               v-model="form.code"
-              :label="t('quarter.form.code.label')"
+              :label="t('plant.form.code.label')"
               :message="form.errors.code"
             />
 
-            <VSelect
-              id="field_id"
-              v-model="form.field_id"
-              :placeholder="t('generics.please_select')"
-              :options="props.fields"
-              :label="t('user.form.field_id.label')"
-              :message="form.errors.field_id"
-            />
 
-            <VSelect
-              id="quarter_id"
-              v-model="form.quarter_id"
-              :placeholder="t('generics.please_select')"
-              :options="props.fields"
-              :label="t('user.form.quarter_id.label')"
-              :message="form.errors.quarter_id"
-            />
           </div>
         </section>
         <section
@@ -153,7 +117,46 @@ const changeFileHandler = (e) => {
         >
           <header class="flex items-center gap-x-3 overflow-hidden px-6 py-4">
             <h3 class="text-base font-semibold leading-6 text-gray-950">
-              {{ t('quarter.sections.blueprint') }}
+              {{ t('plant.sections.location') }}
+            </h3>
+          </header>
+          <div class="border-t border-gray-200">
+            <div class="p-6 grid grid-cols-2 gap-x-16 gap-y-4">
+              <VSelect
+                id="field_id"
+                v-model="form.field_id"
+                :placeholder="t('generics.please_select')"
+                :options="props.fields"
+                :label="t('plant.form.field_id.label')"
+                :message="form.errors.field_id"
+              />
+
+              <VSelect
+                id="quarter_id"
+                v-model="form.quarter_id"
+                :placeholder="t('generics.please_select')"
+                :options="props.fields"
+                :label="t('plant.form.quarter_id.label')"
+                :message="form.errors.quarter_id"
+              />
+
+              <VSelect
+                id="row"
+                v-model="form.row"
+                :placeholder="t('generics.please_select')"
+                :options="props.fields"
+                :label="t('plant.form.row.label')"
+                :message="form.errors.row"
+              />
+            </div>
+          </div>
+        </section>
+        <section
+          class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5"
+        >
+          <header class="flex items-center gap-x-3 overflow-hidden px-6 py-4">
+            <h3 class="text-base font-semibold leading-6 text-gray-950">
+              {{ t('plant.sections.blueprint') }}
             </h3>
           </header>
           <div class="border-t border-gray-200">
@@ -161,7 +164,7 @@ const changeFileHandler = (e) => {
               <div class="form-text col-span-2 form-text-type">
                 <VInputFile
                   :imagePreview="true"
-                  :label="t('quarter.form.blueprint.label')"
+                  :label="t('plant.form.blueprint.label')"
                   @change="changeFileHandler"
                 />
               </div>

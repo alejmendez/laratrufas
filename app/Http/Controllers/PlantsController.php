@@ -9,6 +9,8 @@ use App\Services\Plants\ListPlant;
 use App\Services\Plants\CreatePlant;
 use App\Services\Plants\UpdatePlant;
 use App\Services\Plants\DeletePlant;
+use App\Services\Fields\ListFields;
+use App\Services\PlantTypes\ListPlantTypes;
 
 use App\Http\Resources\PlantResource;
 use App\Http\Resources\PlantCollection;
@@ -39,7 +41,10 @@ class PlantsController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Plants/Create');
+        return Inertia::render('Plants/Create', [
+            'types' => $this->getSelectTypes(),
+            'fields' => $this->getSelectFields(),
+        ]);
     }
 
     /**
@@ -71,10 +76,10 @@ class PlantsController extends Controller
      */
     public function edit(string $id)
     {
-        $Plant = FindPlant::call($id);
+        $plant = FindPlant::call($id);
 
         return Inertia::render('Plants/Edit', [
-            'data' => new PlantResource($user),
+            'data' => new PlantResource($plant),
         ]);
     }
 
@@ -106,5 +111,15 @@ class PlantsController extends Controller
         }
 
         return $request->file('blueprint')->store(options: 'blueprints');
+    }
+
+    protected function getSelectTypes()
+    {
+        return collect(ListPlantTypes::call()->get())->map(fn($plant_type) => [ 'value' => $plant_type->id, 'text' => $plant_type->name ]);
+    }
+
+    protected function getSelectFields()
+    {
+        return collect(ListFields::call()->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
     }
 }

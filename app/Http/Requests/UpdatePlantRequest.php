@@ -23,7 +23,7 @@ class UpdatePlantRequest extends FormRequest
     {
         return [
             'name' => 'required|max:250',
-            'type' => 'required|max:250',
+            'plant_type_id' => 'require',
             'age' => 'required|max:250',
             'location' => 'required|max:250',
             'location_xy' => 'required|max:250',

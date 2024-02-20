@@ -8,6 +8,7 @@ class UpdatePlant
 {
     public static function call($id, $data, $avatar): Plant
     {
+        unset($data['id']);
         $plant = Plant::findOrFail($id);
 
         $blueprintRemove = $data['blueprintRemove'] ?? false;

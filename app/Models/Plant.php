@@ -17,7 +17,7 @@ class Plant extends Model
 
     protected $fillable = [
         'name',
-        'type',
+        'plant_type_id',
         'age',
         'location',
         'location_xy',

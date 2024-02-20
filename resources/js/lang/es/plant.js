@@ -16,43 +16,33 @@ export default {
   form: {
     name: {
       label: 'Nombre del planta',
-      name: 'nombre'
     },
-    type: {
+    plant_type_id: {
       label: 'Tipo de planta',
-      name: 'tipo'
     },
     age: {
       label: 'Edad de la planta',
-      name: 'edad'
     },
     location: {
       label: 'Ubicación Coordenadas',
-      name: 'ubicación'
     },
     location_xy: {
       label: 'Ubicación Eje X, Eje Y',
-      name: 'ubicación xy'
     },
     planned_at: {
       label: 'Fecha de plantación',
-      name: 'fecha de plantación'
     },
     manager: {
       label: 'Responsable',
-      name: 'responsable'
     },
     code: {
       label: 'Código de la planta (QR)',
-      name: 'código'
     },
     quarter_id: {
       label: 'Perteneciente al cuartel',
-      name: 'cuartel'
     },
     field_id: {
       label: 'Perteneciente al campo',
-      name: 'campo'
     },
     blueprint: {
       label: 'Seleccione sus planos',
