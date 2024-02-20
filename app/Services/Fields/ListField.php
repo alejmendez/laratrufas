@@ -6,9 +6,9 @@ use App\Models\Field;
 
 class ListField
 {
-    public static function call($order, $search)
+    public static function call($order = '', $search = '')
     {
-        $fields = Field::order($order)->search($search);
+        $fields = Field::with('owner', 'plants')->order($order)->search($search);
 
         return $fields;
     }

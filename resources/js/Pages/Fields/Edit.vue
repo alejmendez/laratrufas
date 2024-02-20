@@ -19,14 +19,18 @@ const { data } = props.data
 const blueprintPreview = ref(data.blueprint)
 
 const form = useForm({
+  _method: 'PATCH',
+  id: data.id,
   name: data.name,
   location: data.location,
   size: data.size,
+  owner_dni: data.owner.dni,
+  owner_name: data.owner.name,
   blueprint: data.blueprint,
 })
 
 const submitHandler = () => {
-  form.post(route('fields.update'), {
+  form.post(route('fields.update', data.id), {
     forceFormData: true,
   })
 }
@@ -92,6 +96,25 @@ const changeFileHandler = (e) => {
             </div>
           </div>
         </section>
+
+        <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
+          <div class="p-6 grid grid-cols-2 gap-x-16 gap-y-4">
+            <VInput
+              id="owner_dni"
+              v-model="form.owner_dni"
+              :label="t('field.form.owner_dni.label')"
+              :message="form.errors.owner_dni"
+            />
+
+            <VInput
+              id="owner_name"
+              v-model="form.owner_name"
+              :label="t('field.form.owner_name.label')"
+              :message="form.errors.owner_name"
+            />
+          </div>
+        </section>
+
         <section
           class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5"
         >

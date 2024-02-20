@@ -12,19 +12,22 @@ export default {
   },
   form: {
     name: {
-      label: 'Nombre del campo',
-      name: 'nombre'
+      label: 'Nombre del campo'
     },
     location: {
-      label: 'Ubicación',
-      name: 'ubicación'
+      label: 'Ubicación'
     },
     size: {
-      label: 'Superficie del campo',
-      name: 'superficie'
+      label: 'Superficie del campo'
     },
     number_of_trees: {
       label: 'Cantidad de arboles'
+    },
+    owner_dni: {
+      label: 'Rut/Id del propietario'
+    },
+    owner_name: {
+      label: 'Nombre del propietario'
     },
     blueprint: {
       label: 'Seleccione sus planos',

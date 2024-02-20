@@ -22,6 +22,11 @@ class Field extends Model
         'blueprint',
     ];
 
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(Owner::class);
+    }
+
     public function quarters(): HasMany
     {
         return $this->hasMany(Quarter::class);

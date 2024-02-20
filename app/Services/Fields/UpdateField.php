@@ -8,6 +8,7 @@ class UpdateField
 {
     public static function call($id, $data): Field
     {
+        unset($data['id']);
         $field = Field::findOrFail($id);
 
         $blueprintRemove = $data['blueprintRemove'] ?? false;

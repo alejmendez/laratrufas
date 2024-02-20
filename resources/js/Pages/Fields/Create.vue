@@ -13,6 +13,8 @@ const form = useForm({
   name: null,
   location: null,
   size: null,
+  owner_dni: null,
+  owner_name: null,
   blueprint: null,
 })
 
@@ -81,6 +83,25 @@ const changeFileHandler = (e) => {
             />
           </div>
         </section>
+
+        <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
+          <div class="p-6 grid grid-cols-2 gap-x-16 gap-y-4">
+            <VInput
+              id="owner_dni"
+              v-model="form.owner_dni"
+              :label="t('field.form.owner_dni.label')"
+              :message="form.errors.owner_dni"
+            />
+
+            <VInput
+              id="owner_name"
+              v-model="form.owner_name"
+              :label="t('field.form.owner_name.label')"
+              :message="form.errors.owner_name"
+            />
+          </div>
+        </section>
+
         <section
           class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5"
         >

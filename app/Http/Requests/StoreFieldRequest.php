@@ -25,6 +25,8 @@ class StoreFieldRequest extends FormRequest
             'name' => 'required|max:250',
             'location' => 'required|max:250',
             'size' => 'required|max:250',
+            'owner_dni' => ['required', 'regex:/^[\d]{1,2}\.[\d]{3}\.[\d]{3}\-[\d|k|K]$/'],
+            'owner_name' => 'required|max:250',
         ];
     }
 }
