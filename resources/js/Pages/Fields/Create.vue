@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
 import VInput from '@/Components/form/VInput.vue'
+import VInputDni from '@/Components/form/VInputDni.vue'
 import VInputFile from '@/Components/form/VInputFile.vue'
 
 const { t } = useI18n()
@@ -86,7 +87,7 @@ const changeFileHandler = (e) => {
 
         <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
           <div class="p-6 grid grid-cols-2 gap-x-16 gap-y-4">
-            <VInput
+            <VInputDni
               id="owner_dni"
               v-model="form.owner_dni"
               :label="t('field.form.owner_dni.label')"

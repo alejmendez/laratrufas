@@ -17,6 +17,7 @@ class Quarter extends Model
 
     protected $fillable = [
         'name',
+        'location',
         'area',
         'planned_at',
         'blueprint',

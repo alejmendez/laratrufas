@@ -8,6 +8,7 @@ import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
 import VInput from '@/Components/form/VInput.vue'
 import VSelect from '@/Components/form/VSelect.vue'
 import VInputFile from '@/Components/form/VInputFile.vue'
+import VInputDni from '@/Components/form/VInputDni.vue'
 
 const { t } = useI18n()
 
@@ -15,17 +16,6 @@ const props = defineProps({
   data: Object,
   roles: Array,
 })
-
-const dniMask = {
-  mask: '##.###.###-K',
-  tokens: {
-    '#': {pattern: /\d/},
-    'K': {
-      pattern: /[0-9kK]/,
-      transform: v => v.toLocaleUpperCase()
-    }
-  }
-}
 
 const { data } = props.data
 
@@ -102,10 +92,9 @@ const changeFileHandler = (e) => {
                 />
               </div>
 
-              <VInput
+              <VInputDni
                 id="dni"
                 v-model="form.dni"
-                v-mask="dniMask"
                 :label="t('user.form.dni.label')"
                 :message="form.errors.dni"
               />
