@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('age');
-            $table->string('location');
-            $table->string('location_xy');
             $table->date('planned_at');
-            $table->string('manager');
+            $table->string('nursery_origin');
             $table->string('code');
+            $table->string('row');
             $table->string('blueprint')->nullable();
             $table->foreignId('quarter_id')->constrained();
             $table->foreignId('plant_type_id')->constrained();

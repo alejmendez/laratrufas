@@ -64,7 +64,7 @@ class QuartersController extends Controller
     {
         $quarter = FindQuarter::call($id);
 
-        return Inertia::render('Quarters/Edit', [
+        return Inertia::render('Quarters/Show', [
             'data' => new QuarterResource($quarter),
             'fields' => $this->getSelectFields(),
         ]);

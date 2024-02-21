@@ -19,17 +19,21 @@ class Plant extends Model
         'name',
         'plant_type_id',
         'age',
-        'location',
-        'location_xy',
         'planned_at',
-        'manager',
+        'nursery_origin',
         'code',
         'blueprint',
         'quarter_id',
+        'row',
     ];
 
     public function quarter(): BelongsTo
     {
         return $this->belongsTo(Quarter::class);
+    }
+
+    public function plant_type(): BelongsTo
+    {
+        return $this->belongsTo(PlantType::class);
     }
 }

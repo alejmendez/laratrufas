@@ -23,23 +23,20 @@ export default {
     age: {
       label: 'Edad de la planta',
     },
-    location: {
-      label: 'Ubicación Coordenadas',
-    },
-    location_xy: {
-      label: 'Ubicación Eje X, Eje Y',
-    },
     planned_at: {
       label: 'Fecha de plantación',
     },
-    manager: {
-      label: 'Responsable',
+    nursery_origin: {
+      label: 'Vivero de origen',
     },
     code: {
       label: 'Código de la planta (QR)',
     },
     quarter_id: {
       label: 'Perteneciente al cuartel',
+    },
+    row: {
+      label: 'Hilera',
     },
     field_id: {
       label: 'Perteneciente al campo',

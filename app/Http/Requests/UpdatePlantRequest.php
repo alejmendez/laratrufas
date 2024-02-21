@@ -23,13 +23,14 @@ class UpdatePlantRequest extends FormRequest
     {
         return [
             'name' => 'required|max:250',
-            'plant_type_id' => 'require',
+            'plant_type_id' => 'required|exists:plant_types,id',
             'age' => 'required|max:250',
-            'location' => 'required|max:250',
-            'location_xy' => 'required|max:250',
-            'planned_at' => 'required|max:250',
-            'manager' => 'required|max:250',
+            'planned_at' => 'required|date_format:Y-m-d',
+            'nursery_origin' => 'required|max:250',
             'code' => 'required|max:250',
+            'field_id' => 'required|exists:fields,id',
+            'quarter_id' => 'required|exists:quarters,id',
+            'row' => 'required|max:1',
         ];
     }
 }

@@ -61,7 +61,7 @@ class FieldsController extends Controller
     {
         $field = FindField::call($id);
 
-        return Inertia::render('Fields/Edit', [
+        return Inertia::render('Fields/Show', [
             'data' => new FieldResource($field),
         ]);
     }

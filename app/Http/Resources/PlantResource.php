@@ -18,13 +18,15 @@ class PlantResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'type' => $this->type,
+            'plant_type' => [
+                'id' => $this->plant_type->id,
+                'name' => $this->plant_type->name,
+            ],
             'age' => $this->age,
-            'location' => $this->location,
-            'location_xy' => $this->location_xy,
             'planned_at' => $this->planned_at,
-            'manager' => $this->manager,
+            'nursery_origin' => $this->nursery_origin,
             'code' => $this->code,
+            'row' => $this->row,
             'blueprint' => $this->blueprint ? Storage::disk('blueprints')->url($this->blueprint) : '',
             'field' => [
                 'id' => $this->quarter->field->id,

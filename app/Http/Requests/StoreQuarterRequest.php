@@ -24,8 +24,8 @@ class StoreQuarterRequest extends FormRequest
         return [
             'name' => 'required|max:250',
             'area' => 'required|max:250',
-            'planned_at' => 'required|max:250',
-            'field_id' => 'required|max:250',
+            'planned_at' => 'required|date_format:Y-m-d',
+            'field_id' => 'required|exists:fields,id',
         ];
     }
 }

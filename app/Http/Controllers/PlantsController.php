@@ -9,8 +9,9 @@ use App\Services\Plants\ListPlant;
 use App\Services\Plants\CreatePlant;
 use App\Services\Plants\UpdatePlant;
 use App\Services\Plants\DeletePlant;
-use App\Services\Fields\ListFields;
-use App\Services\PlantTypes\ListPlantTypes;
+use App\Services\Fields\ListField;
+use App\Services\Quarters\ListQuarter;
+use App\Services\PlantTypes\ListPlantType;
 
 use App\Http\Resources\PlantResource;
 use App\Http\Resources\PlantCollection;
@@ -44,6 +45,8 @@ class PlantsController extends Controller
         return Inertia::render('Plants/Create', [
             'types' => $this->getSelectTypes(),
             'fields' => $this->getSelectFields(),
+            'quarters' => $this->getSelectQuarters(),
+            'rows' => $this->getSelectRows(),
         ]);
     }
 
@@ -53,7 +56,6 @@ class PlantsController extends Controller
     public function store(StorePlantRequest $request)
     {
         $data = $request->all();
-        $data['blueprint'] = $this->storeBlueprint($request);
         CreatePlant::call($data);
 
         return redirect()->route('plants.index')->with('toast', 'Plant created.');
@@ -66,8 +68,12 @@ class PlantsController extends Controller
     {
         $Plant = FindPlant::call($id);
 
-        return Inertia::render('Plants/Edit', [
+        return Inertia::render('Plants/Show', [
             'data' => new PlantResource($Plant),
+            'types' => $this->getSelectTypes(),
+            'fields' => $this->getSelectFields(),
+            'quarters' => $this->getSelectQuarters(),
+            'rows' => $this->getSelectRows(),
         ]);
     }
 
@@ -80,6 +86,10 @@ class PlantsController extends Controller
 
         return Inertia::render('Plants/Edit', [
             'data' => new PlantResource($plant),
+            'types' => $this->getSelectTypes(),
+            'fields' => $this->getSelectFields(),
+            'quarters' => $this->getSelectQuarters(),
+            'rows' => $this->getSelectRows(),
         ]);
     }
 
@@ -89,7 +99,6 @@ class PlantsController extends Controller
     public function update(UpdatePlantRequest $request, string $id)
     {
         $data = $request->all();
-        $data['blueprint'] = $this->storeBlueprint($request);
         UpdatePlant::call($id, $data);
 
         return redirect()->route('plants.index')->with('toast', 'Plant updated.');
@@ -104,22 +113,23 @@ class PlantsController extends Controller
         return redirect()->back();
     }
 
-    protected function storeBlueprint(UpdatePlantRequest | StorePlantRequest $request)
-    {
-        if (!$request->hasFile('blueprint')) {
-            return null;
-        }
-
-        return $request->file('blueprint')->store(options: 'blueprints');
-    }
-
     protected function getSelectTypes()
     {
-        return collect(ListPlantTypes::call()->get())->map(fn($plant_type) => [ 'value' => $plant_type->id, 'text' => $plant_type->name ]);
+        return collect(ListPlantType::call()->get())->map(fn($plant_type) => [ 'value' => $plant_type->id, 'text' => $plant_type->name ]);
     }
 
     protected function getSelectFields()
     {
-        return collect(ListFields::call()->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
+        return collect(ListField::call()->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
+    }
+
+    protected function getSelectQuarters()
+    {
+        return collect(ListQuarter::call()->get())->map(fn($quarter) => [ 'value' => $quarter->id, 'text' => $quarter->name, 'field_id' => $quarter->field_id ]);
+    }
+
+    protected function getSelectRows()
+    {
+        return collect(range('A', 'Z'))->map(fn($letter) => [ 'value' => $letter, 'text' => $letter ]);
     }
 }

@@ -48,8 +48,8 @@ const changeFileHandler = (e) => {
 
     <AuthenticatedLayout>
       <HeaderCrud
-        :title="t('field.titles.create')"
-        :breadcrumbs="[{ to: 'fields.index', text: t('field.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+        :title="t('field.titles.edit')"
+        :breadcrumbs="[{ to: 'fields.index', text: t('field.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
       >
         <template v-slot:header>
           <button

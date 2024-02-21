@@ -89,6 +89,7 @@ const changeFileHandler = (e) => {
 
             <VInput
               id="planned_at"
+              type="date"
               v-model="form.planned_at"
               :label="t('quarter.form.planned_at.label')"
               :message="form.errors.planned_at"

@@ -1,52 +1,50 @@
 <script setup>
+import { computed } from 'vue';
 import { Head, Link, useForm } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
 import VInput from '@/Components/form/VInput.vue'
-import VInputFile from '@/Components/form/VInputFile.vue'
 import VSelect from '@/Components/form/VSelect.vue'
 
 const { t } = useI18n()
 
 const props = defineProps({
   fields: Array,
+  quarters: Array,
   types: Array,
+  rows: Array,
 })
 
 const form = useForm({
   name: null,
-  plant_type_id: null,
+  plant_type_id: '',
   age: null,
-  location: null,
-  location_xy: null,
   planned_at: null,
-  manager: null,
+  nursery_origin: null,
   code: null,
-  field_id: null,
-  quarter_id: null,
-  row: null,
+  field_id: '',
+  quarter_id: '',
+  row: '',
 })
 
+const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id === form.field_id))
+
 const submitHandler = () => {
-  form.post(route('quarters.store'), {
+  form.post(route('plants.store'), {
     forceFormData: true,
   })
-}
-
-const changeFileHandler = (e) => {
-  form.blueprint = e.fileInput
 }
 </script>
 
 <template>
-    <Head :title="t('quarter.titles.entity_breadcrumb')" />
+    <Head :title="t('plant.titles.entity_breadcrumb')" />
 
     <AuthenticatedLayout>
       <HeaderCrud
-        :title="t('quarter.titles.create')"
-        :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+        :title="t('plant.titles.create')"
+        :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
       >
         <template v-slot:header>
           <button
@@ -62,7 +60,7 @@ const changeFileHandler = (e) => {
             {{ t('generics.buttons.create') }}
           </button>
           <Link
-            :href="route('quarters.index')"
+            :href="route('plants.index')"
             class="btn btn-secondary"
           >
             {{ t('generics.buttons.cancel') }}
@@ -97,9 +95,17 @@ const changeFileHandler = (e) => {
 
             <VInput
               id="planned_at"
+              type="date"
               v-model="form.planned_at"
               :label="t('plant.form.planned_at.label')"
               :message="form.errors.planned_at"
+            />
+
+            <VInput
+              id="nursery_origin"
+              v-model="form.nursery_origin"
+              :label="t('plant.form.nursery_origin.label')"
+              :message="form.errors.nursery_origin"
             />
 
             <VInput
@@ -108,8 +114,6 @@ const changeFileHandler = (e) => {
               :label="t('plant.form.code.label')"
               :message="form.errors.code"
             />
-
-
           </div>
         </section>
         <section
@@ -135,7 +139,7 @@ const changeFileHandler = (e) => {
                 id="quarter_id"
                 v-model="form.quarter_id"
                 :placeholder="t('generics.please_select')"
-                :options="props.fields"
+                :options="quartersOptions"
                 :label="t('plant.form.quarter_id.label')"
                 :message="form.errors.quarter_id"
               />
@@ -144,30 +148,10 @@ const changeFileHandler = (e) => {
                 id="row"
                 v-model="form.row"
                 :placeholder="t('generics.please_select')"
-                :options="props.fields"
+                :options="props.rows"
                 :label="t('plant.form.row.label')"
                 :message="form.errors.row"
               />
-            </div>
-          </div>
-        </section>
-        <section
-          class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5"
-        >
-          <header class="flex items-center gap-x-3 overflow-hidden px-6 py-4">
-            <h3 class="text-base font-semibold leading-6 text-gray-950">
-              {{ t('plant.sections.blueprint') }}
-            </h3>
-          </header>
-          <div class="border-t border-gray-200">
-            <div class="p-6 grid grid-cols-2 gap-x-16 gap-y-4">
-              <div class="form-text col-span-2 form-text-type">
-                <VInputFile
-                  :imagePreview="true"
-                  :label="t('plant.form.blueprint.label')"
-                  @change="changeFileHandler"
-                />
-              </div>
             </div>
           </div>
         </section>

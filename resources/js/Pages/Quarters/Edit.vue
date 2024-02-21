@@ -49,8 +49,8 @@ const changeFileHandler = (e) => {
 
     <AuthenticatedLayout>
       <HeaderCrud
-        :title="t('quarter.titles.create')"
-        :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+        :title="t('quarter.titles.edit')"
+        :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
       >
         <template v-slot:header>
           <button
@@ -99,6 +99,7 @@ const changeFileHandler = (e) => {
 
             <VInput
               id="planned_at"
+              type="date"
               v-model="form.planned_at"
               :label="t('quarter.form.planned_at.label')"
               :message="form.errors.planned_at"

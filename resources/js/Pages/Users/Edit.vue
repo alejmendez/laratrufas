@@ -52,8 +52,8 @@ const changeFileHandler = (e) => {
 
     <AuthenticatedLayout>
       <HeaderCrud
-        :title="t('user.titles.create')"
-        :breadcrumbs="[{ to: 'users.index', text: t('user.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+        :title="t('user.titles.edit')"
+        :breadcrumbs="[{ to: 'users.index', text: t('user.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
       >
         <template v-slot:header>
           <button

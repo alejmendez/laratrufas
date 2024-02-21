@@ -24,30 +24,29 @@ if (props.toast) {
 }
 
 const columns = [
-  { text: t('quarter.table.name'), data: 'name' },
-  { text: t('quarter.table.quarter_id'), data: 'quarter_id' },
-  { text: t('quarter.table.field_id'), data: 'field_id' },
-  { text: t('quarter.table.location'), data: 'location' },
-  { text: t('quarter.table.type'), data: 'type' },
-  { text: t('quarter.table.age'), data: 'age' },
-  { text: t('quarter.table.manager'), data: 'manager' },
+  { text: t('plant.table.name'), data: 'name' },
+  { text: t('plant.table.quarter_id'), data: 'quarter_id' },
+  { text: t('plant.table.field_id'), data: 'field_id' },
+  { text: t('plant.table.type'), data: 'plant_type_id' },
+  { text: t('plant.table.age'), data: 'age' },
+  { text: t('plant.table.manager'), data: 'manager' },
 ];
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, () => {
-    router.delete(route('quarters.destroy', id))
+    router.delete(route('plants.destroy', id))
   })
 }
 </script>
 
 <template>
-    <Head :title="t('quarter.titles.entity_breadcrumb')" />
+    <Head :title="t('plant.titles.entity_breadcrumb')" />
 
     <AuthenticatedLayout>
         <HeaderCrud
-            :title="t('quarter.titles.entity_breadcrumb')"
-            :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-            :links="[{ to: 'quarters.create', text: t('generics.new') }]"
+            :title="t('plant.titles.entity_breadcrumb')"
+            :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
+            :links="[{ to: 'plants.create', text: t('generics.new') }]"
         />
 
         <TableList
@@ -58,25 +57,24 @@ const deleteHandler = async (id) => {
         >
             <tr
                 class="border-b hover:bg-neutral-100"
-                v-for="quarter of data.data"
-                :key="quarter.id"
+                v-for="plant of data.data"
+                :key="plant.id"
             >
-                <td>{{ quarter.name }}</td>
-                <td>{{ quarter.quarter_id }}</td>
-                <td>{{ quarter.field_id }}</td>
-                <td>{{ quarter.location }}</td>
-                <td>{{ quarter.type }}</td>
-                <td>{{ quarter.age }}</td>
-                <td>{{ quarter.manager }}</td>
+                <td>{{ plant.name }}</td>
+                <td>{{ plant.quarter.name }}</td>
+                <td>{{ plant.field.name }}</td>
+                <td>{{ plant.plant_type.name }}</td>
+                <td>{{ plant.age }}</td>
+                <td>{{ plant.manager }}</td>
                 <td>
-                    <Link :href="route('quarters.show', quarter.id)">
+                    <Link :href="route('plants.show', plant.id)">
                         <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all hover:text-gray-600" />
                     </Link>
-                    <Link :href="route('quarters.edit', quarter.id)">
+                    <Link :href="route('plants.edit', plant.id)">
                         <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all hover:text-lime-600" />
                     </Link>
                     <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all hover:text-red-600"
-                        @click="deleteHandler(quarter.id)" />
+                        @click="deleteHandler(plant.id)" />
                 </td>
             </tr>
             <tr v-if="data.data.length === 0" class="border-b hover:bg-neutral-100">
