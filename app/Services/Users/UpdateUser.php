@@ -11,9 +11,7 @@ class UpdateUser
         unset($data['id']);
         $user = User::findOrFail($id);
 
-        $avatarRemove = $data['avatarRemove'] ?? false;
-
-        if ($avatarRemove === true) {
+        if ($data['avatarRemove'] === '1') {
             $data['avatar'] = null;
         }
 

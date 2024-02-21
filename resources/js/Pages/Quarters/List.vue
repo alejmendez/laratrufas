@@ -60,7 +60,7 @@ const deleteHandler = async (id) => {
                 :key="quarter.id"
             >
                 <td>{{ quarter.name }}</td>
-                <td>{{ quarter.field_id }}</td>
+                <td>{{ quarter.field.name }}</td>
                 <td>{{ quarter.planned_at }}</td>
                 <td>{{ quarter.area }}</td>
                 <td>{{ quarter.number_of_trees }}</td>

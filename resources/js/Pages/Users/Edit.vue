@@ -32,6 +32,7 @@ const form = useForm({
   password: data.password,
   role: data.role.name,
   avatar: data.avatar,
+  avatarRemove: false,
 })
 
 const submitHandler = () => {
@@ -42,6 +43,7 @@ const submitHandler = () => {
 
 const changeFileHandler = (e) => {
   form.avatar = e.fileInput
+  form.avatarRemove = e.fileRemove
 }
 </script>
 

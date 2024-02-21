@@ -28,6 +28,7 @@ const form = useForm({
   owner_dni: data.owner.dni,
   owner_name: data.owner.name,
   blueprint: data.blueprint,
+  blueprintRemove: false,
 })
 
 const submitHandler = () => {
@@ -38,6 +39,7 @@ const submitHandler = () => {
 
 const changeFileHandler = (e) => {
   form.blueprint = e.fileInput
+  form.blueprintRemove = e.fileRemove
 }
 </script>
 

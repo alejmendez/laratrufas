@@ -12,13 +12,11 @@ class UpdateField
         unset($data['id']);
         $field = Field::findOrFail($id);
 
-        $blueprintRemove = $data['blueprintRemove'] ?? false;
-
         if (!$data['blueprint']) {
             unset($data['blueprint']);
         }
 
-        if ($blueprintRemove === true) {
+        if ($data['blueprintRemove'] === '1') {
             $data['blueprint'] = null;
         }
 

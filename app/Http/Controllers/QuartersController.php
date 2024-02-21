@@ -66,6 +66,7 @@ class QuartersController extends Controller
 
         return Inertia::render('Quarters/Edit', [
             'data' => new QuarterResource($quarter),
+            'fields' => $this->getSelectFields(),
         ]);
     }
 
@@ -78,6 +79,7 @@ class QuartersController extends Controller
 
         return Inertia::render('Quarters/Edit', [
             'data' => new QuarterResource($quarter),
+            'fields' => $this->getSelectFields(),
         ]);
     }
 

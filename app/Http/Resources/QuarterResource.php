@@ -19,6 +19,7 @@ class QuarterResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'area' => $this->area,
+            'location' => $this->location,
             'planned_at' => $this->planned_at,
             'field_id' => $this->field_id,
             'number_of_trees' => $this->plants->count(),

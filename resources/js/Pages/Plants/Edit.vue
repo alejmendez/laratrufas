@@ -19,8 +19,6 @@ const props = defineProps({
 
 const { data } = props.data
 
-const blueprintPreview = ref(data.blueprint)
-
 const form = useForm({
   _method: 'PATCH',
   id: data.id,
@@ -40,10 +38,6 @@ const submitHandler = () => {
   form.post(route('quarters.update', data.id), {
     forceFormData: true,
   })
-}
-
-const changeFileHandler = (e) => {
-  form.blueprint = e.fileInput
 }
 </script>
 
@@ -155,27 +149,6 @@ const changeFileHandler = (e) => {
               :label="t('plant.form.quarter_id.label')"
               :message="form.errors.quarter_id"
             />
-          </div>
-        </section>
-        <section
-          class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5"
-        >
-          <header class="flex items-center gap-x-3 overflow-hidden px-6 py-4">
-            <h3 class="text-base font-semibold leading-6 text-gray-950">
-              {{ t('quarter.sections.blueprint') }}
-            </h3>
-          </header>
-          <div class="border-t border-gray-200">
-            <div class="p-6 grid grid-cols-2 gap-x-16 gap-y-4">
-              <div class="form-text col-span-2 form-text-type">
-                <VInputFile
-                  :image="blueprintPreview"
-                  :imagePreview="true"
-                  :label="t('quarter.form.blueprint.label')"
-                  @change="changeFileHandler"
-                />
-              </div>
-            </div>
           </div>
         </section>
       </form>

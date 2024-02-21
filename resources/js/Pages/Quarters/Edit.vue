@@ -29,6 +29,7 @@ const form = useForm({
   planned_at: data.planned_at,
   field_id: data.field_id,
   blueprint: data.blueprint,
+  blueprintRemove: false,
 })
 
 const submitHandler = () => {
@@ -39,6 +40,7 @@ const submitHandler = () => {
 
 const changeFileHandler = (e) => {
   form.blueprint = e.fileInput
+  form.blueprintRemove = e.fileRemove
 }
 </script>
 
