@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function($table) {
-            $table->string('dni')->unique();
-            $table->string('last_name')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('dni', 12)->unique();
+            $table->string('last_name', 80)->nullable();
+            $table->string('phone', 20)->nullable();
             $table->string('avatar')->nullable();
             $table->softDeletes();
         });

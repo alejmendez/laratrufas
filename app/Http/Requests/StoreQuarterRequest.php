@@ -22,8 +22,9 @@ class StoreQuarterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:250',
-            'area' => 'required|max:250',
+            'name' => 'required|max:80',
+            'area' => 'required|integer',
+            'location' => 'required|max:25',
             'planned_at' => 'required|date_format:Y-m-d',
             'field_id' => 'required|exists:fields,id',
         ];

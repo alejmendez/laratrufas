@@ -24,12 +24,12 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3|max:250',
-            'last_name' => 'required|min:3|max:250',
-            'email' => ['required', 'email', Rule::unique('users')->ignore($this->id)],
+            'name' => 'required|min:3|max:80',
+            'last_name' => 'required|min:3|max:80',
+            'email' => ['required', 'email', 'max:200', Rule::unique('users')->ignore($this->id)],
             'dni' => ['required', 'regex:/^[\d]{1,2}\.[\d]{3}\.[\d]{3}\-[\d|k|K]$/', Rule::unique('users')->ignore($this->id)],
             'phone' => 'required|min:11|max:20',
-            'password' => [],
+            'password' => [Password::min(6)],
         ];
     }
 }

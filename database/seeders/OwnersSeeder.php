@@ -4,15 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Field;
+use App\Models\Owner;
 
-class FieldsSeeder extends Seeder
+class OwnersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Field::factory(100)->create();
+        Owner::factory(10)->create();
     }
 }

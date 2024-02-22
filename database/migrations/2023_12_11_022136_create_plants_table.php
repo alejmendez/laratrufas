@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('plants', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 80);
             $table->integer('age');
             $table->date('planned_at');
-            $table->string('nursery_origin');
-            $table->string('code');
-            $table->string('row');
+            $table->string('nursery_origin', 80);
+            $table->string('code', 12);
+            $table->string('row', 1);
             $table->string('blueprint')->nullable();
             $table->foreignId('quarter_id')->constrained();
             $table->foreignId('plant_type_id')->constrained();

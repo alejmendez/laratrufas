@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\plants>
  */
-class PlantsFactory extends Factory
+class PlantFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,12 @@ class PlantsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'age' => rand(1, 30),
+            'planned_at' => fake()->date(),
+            'nursery_origin' => fake()->name(),
+            'code' => strtoupper(fake()->lexify('??-??-??')),
+            'row' => strtoupper(fake()->randomLetter()),
         ];
     }
 }

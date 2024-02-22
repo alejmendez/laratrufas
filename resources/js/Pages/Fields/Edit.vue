@@ -96,6 +96,13 @@ const changeFileHandler = (e) => {
                 :label="t('field.form.size.label')"
                 :message="form.errors.size"
               />
+
+              <div>
+                <label class="input-label">
+                  {{ t('quarter.form.number_of_trees.label') }}
+                </label>
+                <div class="input">{{ data.number_of_trees }}</div>
+              </div>
             </div>
           </div>
         </section>

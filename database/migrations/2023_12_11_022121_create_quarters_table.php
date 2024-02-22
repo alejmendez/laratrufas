@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('quarters', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('area');
-            $table->string('location');
+            $table->string('name', 80);
+            $table->integer('area');
+            $table->string('location', 25);
             $table->date('planned_at');
             $table->string('blueprint')->nullable();
             $table->foreignId('field_id')->constrained();

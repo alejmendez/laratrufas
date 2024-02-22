@@ -109,7 +109,7 @@ const changeFileHandler = (e) => {
               <label class="input-label">
                 {{ t('quarter.form.number_of_trees.label') }}
               </label>
-              <div class="input">0</div>
+              <div class="input">{{ data.number_of_trees }}</div>
             </div>
 
             <VSelect

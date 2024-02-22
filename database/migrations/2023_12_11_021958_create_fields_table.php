@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('fields', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('location');
-            $table->string('size');
+            $table->string('name', 80);
+            $table->string('location', 25);
+            $table->integer('size');
             $table->foreignId('owner_id')->constrained();
             $table->string('blueprint')->nullable();
             $table->timestamps();

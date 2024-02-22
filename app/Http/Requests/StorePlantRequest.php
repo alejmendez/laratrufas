@@ -22,15 +22,15 @@ class StorePlantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:250',
+            'name' => 'required|max:80',
             'plant_type_id' => 'required|exists:plant_types,id',
-            'age' => 'required|max:250',
+            'age' => 'required|integer',
             'planned_at' => 'required|date_format:Y-m-d',
-            'nursery_origin' => 'required|max:250',
-            'code' => 'required|max:250',
+            'nursery_origin' => 'required|max:80',
+            'code' => 'required|max:12',
+            'row' => 'required|max:1',
             'field_id' => 'required|exists:fields,id',
             'quarter_id' => 'required|exists:quarters,id',
-            'row' => 'required|max:1',
         ];
     }
 }
