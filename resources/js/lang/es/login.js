@@ -2,6 +2,7 @@ export default {
   form: {
     email: 'Correo electrónico',
     password: 'Contraseña',
+    remember_me: 'Recuerdame',
     submit: 'Ingresar'
   },
   links: {
