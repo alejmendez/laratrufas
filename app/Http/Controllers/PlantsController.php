@@ -115,17 +115,17 @@ class PlantsController extends Controller
 
     protected function getSelectTypes()
     {
-        return collect(ListPlantType::call()->get())->map(fn($plant_type) => [ 'value' => $plant_type->id, 'text' => $plant_type->name ]);
+        return collect(ListPlantType::call('name')->get())->map(fn($plant_type) => [ 'value' => $plant_type->id, 'text' => $plant_type->name ]);
     }
 
     protected function getSelectFields()
     {
-        return collect(ListField::call()->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
+        return collect(ListField::call('name')->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
     }
 
     protected function getSelectQuarters()
     {
-        return collect(ListQuarter::call()->get())->map(fn($quarter) => [ 'value' => $quarter->id, 'text' => $quarter->name, 'field_id' => $quarter->field_id ]);
+        return collect(ListQuarter::call('name')->get())->map(fn($quarter) => [ 'value' => $quarter->id, 'text' => $quarter->name, 'field_id' => $quarter->field_id ]);
     }
 
     protected function getSelectRows()

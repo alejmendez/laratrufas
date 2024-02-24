@@ -8,7 +8,7 @@ class FindQuarter
 {
     public static function call($id)
     {
-        $quarter = Quarter::findOrFail($id);
+        $quarter = Quarter::with('responsible', 'field', 'plants')->findOrFail($id);
 
         return $quarter;
     }

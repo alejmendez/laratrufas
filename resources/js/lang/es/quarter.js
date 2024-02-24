@@ -30,6 +30,9 @@ export default {
     field_id: {
       label: 'Perteneciente al campo',
     },
+    responsible_id: {
+      label: 'Responsable',
+    },
     blueprint: {
       label: 'Seleccione sus planos',
     },

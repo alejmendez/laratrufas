@@ -1,4 +1,5 @@
 <script setup>
+import { toRaw } from 'vue'
 import { Head, Link, useForm } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
@@ -12,6 +13,7 @@ const { t } = useI18n()
 
 const props = defineProps({
   fields: Array,
+  responsibles: Array,
 })
 
 const form = useForm({
@@ -20,6 +22,7 @@ const form = useForm({
   area: null,
   planned_at: null,
   field_id: '',
+  responsible_id: '',
   blueprint: null,
 })
 
@@ -101,6 +104,15 @@ const changeFileHandler = (e) => {
               </label>
               <div class="input">0</div>
             </div>
+
+            <VSelect
+              id="responsible_id"
+              v-model="form.responsible_id"
+              :placeholder="t('generics.please_select')"
+              :options="props.responsibles"
+              :label="t('quarter.form.responsible_id.label')"
+              :message="form.errors.responsible_id"
+            />
 
             <VSelect
               id="field_id"

@@ -23,6 +23,14 @@ if (props.toast) {
   toast.success(t('generics.messages.saved_successfully'))
 }
 
+const plants = props.data.data.map(p => {
+  p.field_name = p.field.name
+  p.quarter_name = p.quarter.name
+  p.plant_type_name = p.plant_type.name
+  p.responsible_name = p.responsible.name
+  return p
+})
+
 const columns = [
   { text: t('plant.table.name'), data: 'name' },
   { text: t('plant.table.quarter_id'), data: 'quarter_id' },
@@ -57,15 +65,15 @@ const deleteHandler = async (id) => {
         >
             <tr
                 class="border-b hover:bg-neutral-100"
-                v-for="plant of data.data"
+                v-for="plant of plants"
                 :key="plant.id"
             >
                 <td>{{ plant.name }}</td>
-                <td>{{ plant.quarter.name }}</td>
-                <td>{{ plant.field.name }}</td>
-                <td>{{ plant.plant_type.name }}</td>
+                <td>{{ plant.quarter_name }}</td>
+                <td>{{ plant.field_name }}</td>
+                <td>{{ plant.plant_type_name }}</td>
                 <td>{{ plant.age }}</td>
-                <td>{{ plant.manager }}</td>
+                <td>{{ plant.responsible_name }}</td>
                 <td>
                     <Link :href="route('plants.show', plant.id)">
                         <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all hover:text-gray-600" />

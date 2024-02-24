@@ -23,6 +23,12 @@ if (props.toast) {
   toast.success(t('generics.messages.saved_successfully'))
 }
 
+const quarters = props.data.data.map(q => {
+  q.field_name = q.field.name
+  q.planned_at = new Date(Date.parse(q.planned_at)).toLocaleDateString('en-GB')
+  return q
+})
+
 const columns = [
   { text: t('quarter.table.name'), data: 'name' },
   { text: t('quarter.table.field_id'), data: 'field_id' },
@@ -56,13 +62,13 @@ const deleteHandler = async (id) => {
         >
             <tr
                 class="border-b hover:bg-neutral-100"
-                v-for="quarter of data.data"
+                v-for="quarter of quarters"
                 :key="quarter.id"
             >
                 <td>{{ quarter.name }}</td>
-                <td>{{ quarter.field.name }}</td>
+                <td>{{ quarter.field_name }}</td>
                 <td>{{ quarter.planned_at }}</td>
-                <td>{{ quarter.area }}</td>
+                <td>{{ quarter.area }} m<sup>2</sup></td>
                 <td>{{ quarter.number_of_trees }}</td>
                 <td>
                     <Link :href="route('quarters.show', quarter.id)">
@@ -75,7 +81,7 @@ const deleteHandler = async (id) => {
                         @click="deleteHandler(quarter.id)" />
                 </td>
             </tr>
-            <tr v-if="data.data.length === 0" class="border-b hover:bg-neutral-100">
+            <tr v-if="quarters.length === 0" class="border-b hover:bg-neutral-100">
               <td :colspan="columns.length + 1" class="text-center">
                 {{ t('generics.tables.empty') }}
               </td>

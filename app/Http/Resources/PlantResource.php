@@ -36,6 +36,10 @@ class PlantResource extends JsonResource
                 'id' => $this->quarter->id,
                 'name' => $this->quarter->name,
             ],
+            'responsible' => [
+                'id' => $this->quarter->responsible->id,
+                'name' => $this->quarter->responsible->full_name,
+            ],
         ];
     }
 }

@@ -10,6 +10,7 @@ use App\Services\Quarters\CreateQuarter;
 use App\Services\Quarters\UpdateQuarter;
 use App\Services\Quarters\DeleteQuarter;
 use App\Services\Fields\ListField;
+use App\Services\Users\ListUser;
 
 use App\Http\Resources\QuarterResource;
 use App\Http\Resources\QuarterCollection;
@@ -42,6 +43,7 @@ class QuartersController extends Controller
     {
         return Inertia::render('Quarters/Create', [
             'fields' => $this->getSelectFields(),
+            'responsibles' => $this->getSelectResponsibles(),
         ]);
     }
 
@@ -67,6 +69,7 @@ class QuartersController extends Controller
         return Inertia::render('Quarters/Show', [
             'data' => new QuarterResource($quarter),
             'fields' => $this->getSelectFields(),
+            'responsibles' => $this->getSelectResponsibles(),
         ]);
     }
 
@@ -80,6 +83,7 @@ class QuartersController extends Controller
         return Inertia::render('Quarters/Edit', [
             'data' => new QuarterResource($quarter),
             'fields' => $this->getSelectFields(),
+            'responsibles' => $this->getSelectResponsibles(),
         ]);
     }
 
@@ -115,6 +119,12 @@ class QuartersController extends Controller
 
     protected function getSelectFields()
     {
-        return collect(ListField::call()->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
+        return collect(ListField::call('name')->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
+    }
+
+    protected function getSelectResponsibles()
+    {
+        return collect(ListUser::call('name')->get())
+            ->map(fn($responsible) => [ 'value' => $responsible->id, 'text' => $responsible->full_name ]);
     }
 }

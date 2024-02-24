@@ -27,6 +27,7 @@ class UpdateQuarterRequest extends FormRequest
             'location' => 'required|max:25',
             'planned_at' => 'required|date_format:Y-m-d',
             'field_id' => 'required|exists:fields,id',
+            'responsible_id' => 'required|exists:users,id',
         ];
     }
 }

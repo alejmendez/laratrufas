@@ -22,6 +22,7 @@ class Quarter extends Model
         'planned_at',
         'blueprint',
         'field_id',
+        'responsible_id',
     ];
 
     public function plants(): HasMany
@@ -32,6 +33,11 @@ class Quarter extends Model
     public function field(): BelongsTo
     {
         return $this->belongsTo(Field::class);
+    }
+
+    public function responsible(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'responsible_id');
     }
 
     public function getCountPlantsAttribute(): int

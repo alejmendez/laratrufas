@@ -15,10 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('name', 80);
             $table->integer('area');
+
+            $table->integer('responsible_id');
+            $table->foreign('responsible_id')->references('id')->on('users');
+
             $table->string('location', 25);
             $table->date('planned_at');
             $table->string('blueprint')->nullable();
+
             $table->foreignId('field_id')->constrained();
+
             $table->timestamps();
             $table->softDeletes();
         });

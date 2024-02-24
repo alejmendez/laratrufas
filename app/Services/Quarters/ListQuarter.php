@@ -8,8 +8,7 @@ class ListQuarter
 {
     public static function call($order = '', $search = '')
     {
-        $quarter = Quarter::with('field', 'plants')->order($order)->search($search);
-
+        $quarter = Quarter::with('field', 'plants', 'responsible')->order($order)->search($search);
         return $quarter;
     }
 }

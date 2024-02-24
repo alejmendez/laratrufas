@@ -14,6 +14,7 @@ const { t } = useI18n()
 const props = defineProps({
   data: Object,
   fields: Array,
+  responsibles: Array,
 })
 
 const { data } = props.data
@@ -27,7 +28,8 @@ const form = useForm({
   location: data.location,
   area: data.area,
   planned_at: data.planned_at,
-  field_id: data.field_id,
+  field_id: data.field.id,
+  responsible_id: data.responsible.id,
   blueprint: data.blueprint,
   blueprintRemove: false,
 })
@@ -111,6 +113,15 @@ const changeFileHandler = (e) => {
               </label>
               <div class="input">{{ data.number_of_trees }}</div>
             </div>
+
+            <VSelect
+              id="responsible_id"
+              v-model="form.responsible_id"
+              :placeholder="t('generics.please_select')"
+              :options="props.responsibles"
+              :label="t('quarter.form.responsible_id.label')"
+              :message="form.errors.responsible_id"
+            />
 
             <VSelect
               id="field_id"
