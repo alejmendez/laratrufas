@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FieldsController;
 use App\Http\Controllers\QuartersController;
 use App\Http\Controllers\PlantsController;
+use App\Http\Controllers\DogsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
         'fields' => FieldsController::class,
         'quarters' => QuartersController::class,
         'plants' => PlantsController::class,
+        'dogs' => DogsController::class,
     ]);
 });
 

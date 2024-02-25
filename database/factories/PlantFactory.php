@@ -17,7 +17,7 @@ class PlantFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => 'plant ' . fake()->name(),
             'age' => rand(1, 30),
             'planned_at' => fake()->date(),
             'nursery_origin' => fake()->name(),

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             QuartersSeeder::class,
             PlantsSeeder::class,
             HarvestsSeeder::class,
+            DogSeeder::class,
         ]);
     }
 }

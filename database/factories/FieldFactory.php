@@ -19,7 +19,7 @@ class FieldFactory extends Factory
     {
         $owner = Owner::factory(1)->create();
         return [
-            'name' => fake()->name(),
+            'name' => 'field ' . fake()->name(),
             'location' => fake()->numerify('##.######, -##.######'), // 41.191374, -95.394946
             'size' => fake()->numerify('###'), // 	123 m²
             'owner_id' => $owner->first()->id,

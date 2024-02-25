@@ -29,7 +29,7 @@ const { t } = useI18n()
 
         <div>{{ t('menu.settings') }}</div>
         <MenuElement :link="route('users.index')" :text="t('menu.users')" />
-        <MenuElement :link="route('users.index')" :text="t('menu.dogs')" />
+        <MenuElement :link="route('dogs.index')" :text="t('menu.dogs')" />
         <MenuElement :link="route('users.index')" :text="t('menu.alerts')" />
         <MenuElement :link="route('users.index')" :text="t('menu.bulk_uploads')" />
       </div>
