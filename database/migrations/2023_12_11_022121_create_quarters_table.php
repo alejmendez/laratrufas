@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('quarters', function (Blueprint $table) {
             $table->id();
             $table->string('name', 80);
-            $table->integer('area');
+            $table->string('area');
 
             $table->integer('responsible_id');
             $table->foreign('responsible_id')->references('id')->on('users');
