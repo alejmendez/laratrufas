@@ -4,6 +4,56 @@ import MenuElement from './MenuElement.vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
+
+const menuData = [
+  {
+    text: t('menu.management'),
+    children: [
+      {link: route('fields.index'), text: t('menu.fields')},
+      {link: route('quarters.index'), text: t('menu.quarters')},
+      {link: route('plants.index'), text: t('menu.plants')},
+    ]
+  },
+  {
+    text: t('menu.harvest_management'),
+    children: [
+      {link: route('users.index'), text: t('menu.harvest')},
+      {link: route('users.index'), text: t('menu.batch')},
+    ]
+  },
+  {
+    text: t('menu.task_management'),
+    children: [
+      {link: route('users.index'), text: t('menu.tasks')},
+    ]
+  },
+  {
+    text: t('menu.records'),
+    children: [
+      {link: route('users.index'), text: t('menu.machineries')},
+      {link: route('users.index'), text: t('menu.tools')},
+      {link: route('users.index'), text: t('menu.suppliers')},
+    ]
+  },
+  {
+    text: t('menu.settings'),
+    children: [
+      {link: route('users.index'), text: t('menu.users')},
+      {link: route('dogs.index'), text: t('menu.dogs')},
+      {link: route('users.index'), text: t('menu.alerts')},
+      {link: route('users.index'), text: t('menu.bulk_uploads')},
+    ]
+  },
+]
+const initialState = Array(menuData.length).fill(true)
+const menuState = JSON.parse(localStorage.getItem("menu-state")) || initialState
+
+const openHandler = (e, index) => {
+  const menuState = JSON.parse(localStorage.getItem("menu-state")) || initialState
+  const newState = [...menuState]
+  newState[index] = e.value
+  localStorage.setItem("menu-state", JSON.stringify(newState))
+}
 </script>
 <template>
   <aside class="min-h-[calc(100vh-64px)] py-[20px]">
@@ -12,46 +62,12 @@ const { t } = useI18n()
         <MenuElement :link="route('dashboard')" :text="t('menu.dashboard')" />
 
         <MenuGroup
-          :text="t('menu.management')"
-          :elements="[
-            {link: route('fields.index'), text: t('menu.fields')},
-            {link: route('quarters.index'), text: t('menu.quarters')},
-            {link: route('plants.index'), text: t('menu.plants')},
-          ]"
-        />
-
-        <MenuGroup
-          :text="t('menu.harvest_management')"
-          :elements="[
-            {link: route('users.index'), text: t('menu.harvest')},
-            {link: route('users.index'), text: t('menu.batch')},
-          ]"
-        />
-
-        <MenuGroup
-          :text="t('menu.task_management')"
-          :elements="[
-            {link: route('users.index'), text: t('menu.tasks')},
-          ]"
-        />
-
-        <MenuGroup
-          :text="t('menu.records')"
-          :elements="[
-            {link: route('users.index'), text: t('menu.machineries')},
-            {link: route('users.index'), text: t('menu.tools')},
-            {link: route('users.index'), text: t('menu.suppliers')},
-          ]"
-        />
-
-        <MenuGroup
-          :text="t('menu.settings')"
-          :elements="[
-            {link: route('users.index'), text: t('menu.users')},
-            {link: route('dogs.index'), text: t('menu.dogs')},
-            {link: route('users.index'), text: t('menu.alerts')},
-            {link: route('users.index'), text: t('menu.bulk_uploads')},
-          ]"
+          v-for="(menu, index) in menuData"
+          :key="index"
+          :text="menu.text"
+          :elements="menu.children"
+          :open="menuState[index]"
+          @open="openHandler($event, index)"
         />
       </div>
     </div>

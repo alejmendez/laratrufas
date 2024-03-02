@@ -5,7 +5,10 @@ import MenuElement from './MenuElement.vue'
 const props = defineProps({
   text: String,
   elements: Array,
+  open: Boolean,
 })
+
+const emit = defineEmits(['open'])
 
 const heights = [
   'h-[40px]',
@@ -15,14 +18,19 @@ const heights = [
   'h-[200px]',
 ]
 
-const open = ref(true)
+const open = ref(props.open)
+
+const clickHandler = () => {
+  open.value = !open.value
+  emit('open', open)
+}
 </script>
 
 <template>
-  <div>
+  <div id="id">
     <div
       class="cursor-pointer"
-      @click="open = !open"
+      @click="clickHandler"
     >
       {{ props.text }}
       <font-awesome-icon
@@ -36,9 +44,12 @@ const open = ref(true)
       class="transition-all ease-out duration-300 overflow-hidden w-full"
       :class="open ? `opacity-100 ${heights[props.elements.length - 1]}` : 'opacity-0 h-0'"
     >
-      <template v-for="ele in props.elements" :key="index">
-        <MenuElement :link="ele.link" :text="ele.text" />
-      </template>
+      <MenuElement
+        v-for="(ele, index) in props.elements"
+        :key="index"
+        :link="ele.link"
+        :text="ele.text"
+      />
     </div>
   </div>
 </template>
