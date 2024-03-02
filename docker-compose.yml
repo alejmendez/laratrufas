@@ -1,0 +1,58 @@
+version: "3.9"
+services:
+  app:
+    build:
+      args:
+        user: user_trufas
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: docker-trufas
+    container_name: app-trufas
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - network-trufas
+    depends_on:
+      - db
+      - redis
+      - nginx
+  redis:
+    image: redis:7.2.4-alpine
+    container_name: ${PROJECT_NAME}-redis
+    networks:
+      - network-trufas
+  db:
+    image: postgres:16.2-alpine
+    container_name: ${PROJECT_NAME}-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+       - "5433:5432"
+    volumes:
+      - ./docker-compose/db_data:/var/lib/postgresql/data
+    networks:
+      - network-trufas
+  nginx:
+    image: nginx:1.25.4-alpine
+    container_name: ${PROJECT_NAME}-webserver
+    restart: unless-stopped
+    ports:
+      - 9000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - network-trufas
+networks:
+  network-trufas:
+    driver: bridge
+volumes:
+  db:
+    driver: local
