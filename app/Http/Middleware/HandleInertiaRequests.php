@@ -32,7 +32,9 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $user = $request->user();
-        $user->avatar = $user->avatar ? Storage::disk('avatars')->url($user->avatar) : '';
+        if ($user) {
+            $user->avatar = $user->avatar ? Storage::disk('avatars')->url($user->avatar) : '';
+        }
         return [
             ...parent::share($request),
             'auth' => [
