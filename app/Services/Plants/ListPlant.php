@@ -8,7 +8,7 @@ class ListPlant
 {
     public static function call($order = '', $search = '')
     {
-        $plants = Plant::with('quarter.field')->order($order)->search($search);
+        $plants = Plant::with('quarter.field', 'quarter.responsible', 'plant_type')->order($order)->search($search);
 
         return $plants;
     }
