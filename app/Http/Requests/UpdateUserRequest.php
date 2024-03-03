@@ -29,7 +29,7 @@ class UpdateUserRequest extends FormRequest
             'email' => ['required', 'email', 'max:200', Rule::unique('users')->ignore($this->id)],
             'dni' => ['required', 'regex:/^[\d]{1,2}\.[\d]{3}\.[\d]{3}\-[\d|k|K]$/', Rule::unique('users')->ignore($this->id)],
             'phone' => 'required|min:11|max:20',
-            'password' => [Password::min(6)],
+            'password' => [],
         ];
     }
 }

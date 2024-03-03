@@ -60,7 +60,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function getAvatarUrl(): ?string
+    public function getAvatarUrlAttribute(): ?string
     {
         if ($this->avatar == null) {
             return '';
