@@ -49,6 +49,7 @@ const clickHandler = () => {
         :key="index"
         :link="ele.link"
         :text="ele.text"
+        :icon="ele.icon"
       />
     </div>
   </div>

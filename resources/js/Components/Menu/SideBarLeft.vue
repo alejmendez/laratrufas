@@ -17,22 +17,22 @@ const menuData = [
   {
     text: t('menu.harvest_management'),
     children: [
-      {link: route('users.index'), text: t('menu.harvest')},
-      {link: route('users.index'), text: t('menu.batch')},
+      {link: route('users.index'), text: t('menu.harvest'), icon: 'fa-solid fa-person-digging' },
+      {link: route('users.index'), text: t('menu.batch'), icon: 'fa-solid fa-person-digging'},
     ]
   },
   {
     text: t('menu.task_management'),
     children: [
-      {link: route('users.index'), text: t('menu.tasks')},
+      {link: route('users.index'), text: t('menu.tasks'), icon: 'fa-solid fa-person-digging'},
     ]
   },
   {
     text: t('menu.records'),
     children: [
-      {link: route('users.index'), text: t('menu.machineries')},
-      {link: route('users.index'), text: t('menu.tools')},
-      {link: route('users.index'), text: t('menu.suppliers')},
+      {link: route('users.index'), text: t('menu.machineries'), icon: 'fa-solid fa-person-digging'},
+      {link: route('users.index'), text: t('menu.tools'), icon: 'fa-solid fa-person-digging'},
+      {link: route('users.index'), text: t('menu.suppliers'), icon: 'fa-solid fa-person-digging'},
     ]
   },
   {
@@ -40,8 +40,8 @@ const menuData = [
     children: [
       {link: route('users.index'), text: t('menu.users')},
       {link: route('dogs.index'), text: t('menu.dogs')},
-      {link: route('users.index'), text: t('menu.alerts')},
-      {link: route('users.index'), text: t('menu.bulk_uploads')},
+      {link: route('users.index'), text: t('menu.alerts'), icon: 'fa-solid fa-person-digging'},
+      {link: route('users.index'), text: t('menu.bulk_uploads'), icon: 'fa-solid fa-person-digging'},
     ]
   },
 ]
