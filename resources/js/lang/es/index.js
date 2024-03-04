@@ -1,5 +1,6 @@
 import generics from './generics'
 import login from './login'
+import dashboard from './dashboard'
 import user from './user'
 import field from './field'
 import quarter from './quarter'
@@ -13,6 +14,7 @@ export default {
   },
   generics,
   login,
+  dashboard,
   user,
   field,
   quarter,

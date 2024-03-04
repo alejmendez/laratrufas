@@ -86,13 +86,8 @@ php artisan key:generate
 php artisan storage:link
 php artisan migrate --seed --force
 composer install --optimize-autoloader --no-dev
-chmod -R ugo+rw storage/logs
-mkdir -p storage/framework/{sessions,views,cache}
-chmod -R ugo+rw storage/framework
-php artisan config:cache
-php artisan event:cache
-php artisan route:cache
-php artisan view:cache
+chmod -R ugo+rw storage/logs ; mkdir -p storage/framework/{sessions,views,cache} ; chmod -R ugo+rw storage/framework
+php artisan config:cache ; php artisan event:cache ; php artisan route:cache ; php artisan view:cache
 
 sudo nginx -t
 sudo service nginx restart

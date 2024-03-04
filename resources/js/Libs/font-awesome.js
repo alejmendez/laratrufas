@@ -19,6 +19,10 @@ import {
   faAnglesRight,
   faChevronDown,
   faPersonDigging,
+  faArrowUpLong,
+  faLocationDot,
+  faVectorSquare,
+  faTree,
 } from '@fortawesome/free-solid-svg-icons'
 
 const icons = [
@@ -40,6 +44,10 @@ const icons = [
   faAnglesRight,
   faChevronDown,
   faPersonDigging,
+  faArrowUpLong,
+  faLocationDot,
+  faVectorSquare,
+  faTree,
 ]
 
 export const initFontAwesome = (app) => {
