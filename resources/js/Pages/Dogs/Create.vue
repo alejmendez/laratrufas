@@ -49,9 +49,7 @@ const genders = [
   }
 ]
 
-const age = computed(() => {
-  return getAge(form.birthdate)
-})
+const age = computed(() => getAge(form.birthdate))
 
 const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id === form.field_id))
 

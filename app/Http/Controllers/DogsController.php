@@ -27,13 +27,13 @@ class DogsController extends Controller
     {
         $order = request('order', '');
         $search = request('search', '');
-        $Dogs = ListDog::call($order, $search);
+        $dogs = ListDog::call($order, $search);
 
         return Inertia::render('Dogs/List', [
             'order' => $order,
             'search' => $search,
             'toast' => session('toast'),
-            'data' => new DogCollection($Dogs->paginate()->withQueryString()),
+            'data' => new DogCollection($dogs->paginate()->withQueryString()),
         ]);
     }
 
@@ -55,9 +55,10 @@ class DogsController extends Controller
     public function store(StoreDogRequest $request)
     {
         $data = $request->all();
+        $data['avatar'] = $this->storeAvatar($request);
         CreateDog::call($data);
 
-        return redirect()->route('Dogs.index')->with('toast', 'Dog created.');
+        return redirect()->route('dogs.index')->with('toast', 'Dog created.');
     }
 
     /**
@@ -65,10 +66,10 @@ class DogsController extends Controller
      */
     public function show(string $id)
     {
-        $Dog = FindDog::call($id);
+        $dog = FindDog::call($id);
 
         return Inertia::render('Dogs/Show', [
-            'data' => new DogResource($Dog),
+            'data' => new DogResource($dog),
             'fields' => $this->getSelectFields(),
             'quarters' => $this->getSelectQuarters(),
             'couples' => $this->getSelectCouples(),
@@ -80,10 +81,10 @@ class DogsController extends Controller
      */
     public function edit(string $id)
     {
-        $Dog = FindDog::call($id);
+        $dog = FindDog::call($id);
 
         return Inertia::render('Dogs/Edit', [
-            'data' => new DogResource($Dog),
+            'data' => new DogResource($dog),
             'fields' => $this->getSelectFields(),
             'quarters' => $this->getSelectQuarters(),
             'couples' => $this->getSelectCouples(),
@@ -96,9 +97,10 @@ class DogsController extends Controller
     public function update(UpdateDogRequest $request, string $id)
     {
         $data = $request->all();
+        $data['avatar'] = $this->storeAvatar($request);
         UpdateDog::call($id, $data);
 
-        return redirect()->route('Dogs.index')->with('toast', 'Dog updated.');
+        return redirect()->route('dogs.index')->with('toast', 'Dog updated.');
     }
 
     /**
@@ -108,6 +110,15 @@ class DogsController extends Controller
     {
         DeleteDog::call($id);
         return redirect()->back();
+    }
+
+    protected function storeAvatar(UpdateDogRequest | StoreDogRequest $request)
+    {
+        if (!$request->hasFile('avatar')) {
+            return null;
+        }
+
+        return $request->file('avatar')->store(options: 'avatars');
     }
 
     protected function getSelectFields()

@@ -15,6 +15,10 @@ class Quarter extends Model
 {
     use HasFactory, Orderable, Searchable, Filterable;
 
+    protected $searchableColumns = [
+        'name',
+    ];
+
     protected $fillable = [
         'name',
         'location',

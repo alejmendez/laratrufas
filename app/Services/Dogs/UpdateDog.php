@@ -11,6 +11,14 @@ class UpdateDog
         unset($data['id']);
         $dog = Dog::findOrFail($id);
 
+        if (!$data['avatar']) {
+            unset($data['avatar']);
+        }
+
+        if ($data['avatarRemove'] === '1') {
+            $data['avatar'] = null;
+        }
+
         $dog->update($data);
 
         return $dog;

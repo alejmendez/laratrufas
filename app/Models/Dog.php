@@ -25,6 +25,13 @@ class Dog extends Model
         'veterinary',
         'quarter_id',
         'couple_id',
+        'avatar',
+    ];
+
+    protected $searchableColumns = [
+        'name',
+        'breed',
+        'veterinary',
     ];
 
     public function quarter(): BelongsTo
