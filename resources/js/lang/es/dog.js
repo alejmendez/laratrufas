@@ -13,6 +13,9 @@ export default {
     veterinary: 'Veterinario',
     couple: 'Pareja',
   },
+  buttons: {
+    add_vaccine: 'Añadir otro',
+  },
   form: {
     name: {
       label: 'Nombres'
@@ -48,7 +51,7 @@ export default {
     avatar: {
       label: 'Seleccione una imagen',
     },
-    vaccine: {
+    vaccines: {
       name: {
         label: 'Nombre de vacuna',
       },
@@ -61,6 +64,6 @@ export default {
     },
   },
   sections: {
-    vaccine: 'Vacunas'
+    vaccines: 'Vacunas'
   },
 }

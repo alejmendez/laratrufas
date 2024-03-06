@@ -39,13 +39,7 @@ const form = useForm({
   avatarRemove: false,
   field_id: data.field.id,
   quarter_id: data.quarter.id,
-  vaccine: [
-    {
-      name: null,
-      date: null,
-      code: null,
-    }
-  ],
+  vaccines: data.vaccines,
 })
 
 const genders = [
@@ -73,6 +67,19 @@ const submitHandler = () => {
 const changeFileHandler = (e) => {
   form.avatar = e.fileInput
   form.avatarRemove = e.fileRemove
+}
+
+const add_vaccine = () => {
+  form.vaccines.push({
+    id: null,
+    name: null,
+    date: null,
+    code: null,
+  })
+}
+
+const remove_vaccine = (index) => {
+  form.vaccines.splice(index, 1)
 }
 </script>
 
@@ -191,7 +198,6 @@ const changeFileHandler = (e) => {
           </div>
         </section>
 
-        <!--
         <section
           class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5"
         >
@@ -201,32 +207,45 @@ const changeFileHandler = (e) => {
             </h3>
           </header>
           <div class="border-t border-gray-200">
-            <div class="p-6 grid grid-cols-2 gap-x-16 gap-y-4">
+            <div
+              class="p-6 grid grid-cols-2 gap-x-16 gap-y-4"
+              v-for="(vaccine, index) in form.vaccines"
+            >
               <VInput
-                :id="vaccine_name_1"
-                v-model="form.vaccine[0].name"
-                :label="t('dog.form.vaccine.name.label')"
-                :message="form.errors.vaccine[0].name"
+                :id="`vaccines_name_${index}`"
+                v-model="vaccine.name"
+                :label="t('dog.form.vaccines.name.label')"
+                :message="form.errors.vaccines? form.errors.vaccines[index].name : ''"
               />
 
-              <VInput
-                :id="vaccine_date_1"
-                type="date"
-                v-model="form.vaccine[0].date"
-                :label="t('dog.form.vaccine.date.label')"
-                :message="form.errors.vaccine[0].date"
-              />
+              <div class="grid grid-cols-11 gap-x-16 gap-y-4">
+                <VInput
+                  :id="`vaccines_date_${index}`"
+                  type="date"
+                  v-model="vaccine.date"
+                  class="col-span-5"
+                  :label="t('dog.form.vaccines.date.label')"
+                  :message="form.errors.vaccines? form.errors.vaccines[index].date : ''"
+                />
 
-              <VInput
-                :id="vaccine_code_1"
-                v-model="form.vaccine[0].code"
-                :label="t('dog.form.vaccine.code.label')"
-                :message="form.errors.vaccine[0].code"
-              />
+                <VInput
+                  :id="`vaccines_code_${index}`"
+                  v-model="vaccine.code"
+                  class="col-span-5"
+                  :label="t('dog.form.vaccines.code.label')"
+                  :message="form.errors.vaccines? form.errors.vaccines[index].code : ''"
+                />
+                <div class="pt-8 text-black hover:text-red-500" v-if="index !== 0" @click="remove_vaccine(index)">
+                  <font-awesome-icon :icon="['fas', 'trash-can']" />
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6">
+              <button class="btn btn-secondary border-gray-800" @click.prevent="add_vaccine">{{ t('dog.buttons.add_vaccine') }}</button>
             </div>
           </div>
         </section>
-         -->
       </form>
     </AuthenticatedLayout>
 </template>

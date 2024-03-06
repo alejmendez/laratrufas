@@ -8,7 +8,7 @@ class ListDog
 {
     public static function call($order = '', $search = '')
     {
-        $dogs = Dog::with('quarter.field')->order($order)->search($search);
+        $dogs = Dog::with('quarter.field', 'vaccines')->order($order)->search($search);
 
         return $dogs;
     }

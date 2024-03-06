@@ -33,6 +33,9 @@ class UpdateDogRequest extends FormRequest
             'quarter_id' => 'required|exists:quarters,id',
             'veterinary' => 'required|max:80',
             'couple_id' => 'required|exists:users,id',
+            'vaccines.*.name' => 'max:80',
+            'vaccines.*.date' => 'date_format:Y-m-d',
+            'vaccines.*.code' => 'max:80',
         ];
     }
 }
