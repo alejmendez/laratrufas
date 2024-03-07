@@ -24,8 +24,6 @@ const { data } = props.data
 
 const avatarPreview = ref(data.avatar)
 
-console.log({data})
-
 const form = useForm({
   _method: 'PATCH',
   id: data.id,
@@ -58,7 +56,6 @@ const age = computed(() => getAge(form.birthdate))
 const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id === form.field_id))
 
 const submitHandler = () => {
-  console.log({form})
   form.post(route('dogs.update', data.id), {
     forceFormData: true,
   })
