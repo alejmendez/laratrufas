@@ -195,7 +195,7 @@ const remove_vaccine = (index) => {
         >
           <header class="flex items-center gap-x-3 overflow-hidden px-6 py-4">
             <h3 class="text-base font-semibold leading-6 text-gray-950">
-              {{ t('dog.sections.vaccine') }}
+              {{ t('dog.sections.vaccines') }}
             </h3>
           </header>
           <div class="border-t border-gray-200">
@@ -210,12 +210,12 @@ const remove_vaccine = (index) => {
                 :message="form.errors.vaccines? form.errors.vaccines[index].name : ''"
               />
 
-              <div class="grid grid-cols-11 gap-x-16 gap-y-4">
+              <div class="grid grid-cols-9 gap-x-16 gap-y-4">
                 <VInput
                   :id="`vaccines_date_${index}`"
                   type="date"
                   v-model="vaccine.date"
-                  class="col-span-5"
+                  class="col-span-4"
                   :label="t('dog.form.vaccines.date.label')"
                   :message="form.errors.vaccines? form.errors.vaccines[index].date : ''"
                 />
@@ -223,7 +223,7 @@ const remove_vaccine = (index) => {
                 <VInput
                   :id="`vaccines_code_${index}`"
                   v-model="vaccine.code"
-                  class="col-span-5"
+                  class="col-span-4"
                   :label="t('dog.form.vaccines.code.label')"
                   :message="form.errors.vaccines? form.errors.vaccines[index].code : ''"
                 />
