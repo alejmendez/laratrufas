@@ -2,6 +2,8 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Link } from '@inertiajs/vue3';
 
+import MenuNotification from './MenuNotification.vue'
+
 const root = ref(null)
 
 const showDropDown = ref(false)
@@ -26,6 +28,8 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <MenuNotification />
+
   <div class="w-[40px]" ref="root">
     <!-- User login -->
     <div class="flex items-center justify-start space-x-4" @click="toggleDrop">

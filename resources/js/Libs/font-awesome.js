@@ -23,7 +23,10 @@ import {
   faLocationDot,
   faVectorSquare,
   faTree,
+  faTriangleExclamation,
 } from '@fortawesome/free-solid-svg-icons'
+
+import { faBell }  from '@fortawesome/free-regular-svg-icons'
 
 const icons = [
   faBars,
@@ -48,6 +51,8 @@ const icons = [
   faLocationDot,
   faVectorSquare,
   faTree,
+  faBell,
+  faTriangleExclamation,
 ]
 
 export const initFontAwesome = (app) => {
