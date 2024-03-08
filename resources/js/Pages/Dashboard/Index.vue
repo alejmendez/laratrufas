@@ -20,11 +20,11 @@ const { t } = useI18n()
 
     <AuthenticatedLayout>
       <FiltersDashboard :fields="props.fields" />
-      <CardsDashboard :fields="props.fields" />
+      <CardsDashboard />
 
       <section class="mt-5 grid grid-cols-4 gap-4">
-        <MapDashboard :fields="props.fields" />
-        <MessageDashboard :fields="props.fields" />
+        <MapDashboard />
+        <MessageDashboard />
       </section>
     </AuthenticatedLayout>
 </template>

@@ -2,7 +2,6 @@
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
-  tasks: Array,
 })
 
 const { t } = useI18n()
@@ -40,6 +39,10 @@ const { t } = useI18n()
       <div class="text-gray-500 font-bold">
         Alertas
         <span class="inline-flex items-center rounded-md bg-red-800 px-1 py-0 text-xs text-white ring-1 ring-inset ring-gray-500/10">3</span>
+      </div>
+      <div class="bg-cyan-100 border border-cyan-300 p-3 mt-3 rounded-lg truncate">
+        <font-awesome-icon :icon="['fas', 'triangle-exclamation']" class="text-gray-700 pe-2" />
+        Riego con fertilizantes cambió de estado.
       </div>
     </div>
   </section>

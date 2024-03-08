@@ -36,6 +36,7 @@ class HandleInertiaRequests extends Middleware
         if ($user) {
             $userData = $user->toArray();
             $userData['full_name'] = $user->full_name;
+            $userData['avatar_url'] = Storage::disk('avatars')->url($user->avatar);
         }
         return [
             ...parent::share($request),

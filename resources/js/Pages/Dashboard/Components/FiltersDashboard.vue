@@ -21,7 +21,7 @@ const form = useForm({
 <template>
   <section class="mt-5 p-5 rounded-xl bg-white shadow-sm border border-gray-200 grid grid-cols-4 gap-x-16 gap-y-4">
     <div class="flex">
-      <img class="object-cover object-center w-[72px] h-[72px] rounded-full border-2 border-gray-50" :src="$page.props.auth.user.avatar" alt="" />
+      <img class="object-cover object-center w-[72px] h-[72px] rounded-full border-2 border-gray-50" :src="$page.props.auth.user.avatar_url || 'https://i.pravatar.cc/150?img=3'" alt="" />
       <div class="pt-3 ps-2">
         <div>
           Hola!

@@ -2,14 +2,13 @@
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
-  tasks: Array,
 })
 
 const { t } = useI18n()
 </script>
 
 <template>
-  <section class="col-span-3 mt-5 rounded-xl bg-white shadow-sm border border-gray-200">
+  <div class="col-span-3 rounded-xl bg-white shadow-sm border border-gray-200">
     <header class="flex items-center overflow-hidden border-b">
       <h3 class="px-4 py-3 text-base font-semibold leading-6 text-gray-950">
         Campo: Pricilla
@@ -55,5 +54,5 @@ const { t } = useI18n()
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>

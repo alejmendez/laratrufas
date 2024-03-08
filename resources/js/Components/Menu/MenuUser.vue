@@ -33,7 +33,7 @@ onUnmounted(() => {
   <div class="w-[40px]" ref="root">
     <!-- User login -->
     <div class="flex items-center justify-start space-x-4" @click="toggleDrop">
-      <img class="w-10 h-10 rounded-full border-2 border-gray-50" :src="$page.props.auth.user.avatar" alt="" />
+      <img class="w-10 h-10 rounded-full border-2 border-gray-50" :src="$page.props.auth.user.avatar_url || 'https://i.pravatar.cc/150?img=3'" alt="" />
     </div>
     <!-- Drop down -->
     <div

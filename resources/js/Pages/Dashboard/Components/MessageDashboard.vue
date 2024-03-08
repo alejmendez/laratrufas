@@ -53,7 +53,7 @@ const messages = [
 </script>
 
 <template>
-  <section class="mt-5 p-5 rounded-xl bg-white shadow-sm border border-gray-200">
+  <div class="p-5 rounded-xl bg-white shadow-sm border border-gray-200">
     <h5 class="text-gray-500 font-bold">Mensajes</h5>
 
     <div class="mt-5" v-for="message in messages" :key="message.id">
@@ -63,5 +63,5 @@ const messages = [
         {{ message.text }}
       </div>
     </div>
-  </section>
+  </div>
 </template>
