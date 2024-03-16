@@ -1,15 +1,19 @@
 <script setup>
 import { useSlots } from 'vue'
-import BreadCrumbs from '@/Components/Crud/BreadCrumbs.vue'
+import { useI18n } from 'vue-i18n'
 import { Link } from '@inertiajs/vue3';
+
+import BreadCrumbs from '@/Components/Crud/BreadCrumbs.vue'
 import { Button } from '@/Components/ui/button'
 
 const slots = useSlots()
+const { t } = useI18n()
 
 const props = defineProps({
   breadcrumbs: Array,
   title: String,
-  links: Array
+  links: Array,
+  form: Object,
 })
 </script>
 
@@ -39,15 +43,34 @@ const props = defineProps({
         </Link>
       </Button>
     </div>
-    <Button variant="destructive">
-    Destructive
-  </Button>
-
     <div
       class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
       v-if="slots.header"
     >
       <slot name="header"></slot>
+    </div>
+    <div
+      class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
+      v-if="props.form"
+    >
+      <button
+        class="btn btn-primary"
+        :disabled="props.form.instance.processing"
+        @click="props.form.submitHandler"
+      >
+        <font-awesome-icon
+          class="animate-spin"
+          :icon="['fas', 'circle-notch']"
+          v-show="props.form.instance.processing"
+        />
+        {{ t('generics.buttons.create') }}
+      </button>
+      <Link
+        :href="props.form.hrefCancel"
+        class="btn btn-secondary"
+      >
+        {{ t('generics.buttons.cancel') }}
+      </Link>
     </div>
   </header>
 </template>

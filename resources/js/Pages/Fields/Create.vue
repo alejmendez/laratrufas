@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3'
+import { Head, useForm } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
@@ -37,28 +37,8 @@ const changeFileHandler = (e) => {
       <HeaderCrud
         :title="t('field.titles.create')"
         :breadcrumbs="[{ to: 'fields.index', text: t('field.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-      >
-        <template v-slot:header>
-          <button
-            class="btn btn-primary"
-            :disabled="form.processing"
-            @click="submitHandler"
-          >
-            <font-awesome-icon
-              class="animate-spin"
-              :icon="['fas', 'circle-notch']"
-              v-show="form.processing"
-            />
-            {{ t('generics.buttons.create') }}
-          </button>
-          <Link
-            :href="route('fields.index')"
-            class="btn btn-secondary"
-          >
-            {{ t('generics.buttons.cancel') }}
-          </Link>
-        </template>
-      </HeaderCrud>
+        :form="{ instance: form, submitHandler, hrefCancel: route('fields.index') }"
+      />
       <form @submit.prevent="submitHandler">
         <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
           <div class="p-6 grid grid-cols-2 gap-x-16 gap-y-4">
