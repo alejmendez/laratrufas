@@ -2,6 +2,7 @@
 import { useSlots } from 'vue'
 import BreadCrumbs from '@/Components/Crud/BreadCrumbs.vue'
 import { Link } from '@inertiajs/vue3';
+import { Button } from '@/Components/ui/button'
 
 const slots = useSlots()
 
@@ -28,15 +29,19 @@ const props = defineProps({
       class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
       v-if="props.links"
     >
-      <Link
+      <Button
         v-for="link in props.links"
         :key="link.text"
-        :href="route(link.to)"
-        class="btn btn-primary"
+        as-child
       >
-        {{ link.text }}
-      </Link>
+        <Link :href="route(link.to)">
+          {{ link.text }}
+        </Link>
+      </Button>
     </div>
+    <Button variant="destructive">
+    Destructive
+  </Button>
 
     <div
       class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
