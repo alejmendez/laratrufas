@@ -89,12 +89,10 @@
   }
 
   .input-label {
-    @apply block font-medium text-sm text-gray-700 mb-1;
+    @apply mb-1;
   }
 
-  .input {
-    @apply bg-white py-2 px-3 leading-6 w-full border border-gray-300 focus:border-gray-500 focus:ring-gray-500 rounded-md shadow-sm;
-  }
+  .input {}
 
   .input-file {
     @apply block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#CED4DA] file:text-gray-800 hover:file:bg-gray-400;

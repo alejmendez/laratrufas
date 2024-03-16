@@ -28,6 +28,7 @@ const form = useForm({
   location: data.location,
   area: data.area,
   planned_at: data.planned_at,
+  number_of_trees: data.number_of_trees,
   field_id: data.field.id,
   responsible_id: data.responsible.id,
   blueprint: data.blueprint,
@@ -87,12 +88,12 @@ const changeFileHandler = (e) => {
               :message="form.errors.planned_at"
             />
 
-            <div>
-              <label class="input-label">
-                {{ t('quarter.form.number_of_trees.label') }}
-              </label>
-              <div class="input">{{ data.number_of_trees }}</div>
-            </div>
+            <VInput
+              id="number_of_trees"
+              :label="t('quarter.form.number_of_trees.label')"
+              v-model="form.number_of_trees"
+              disabled
+            />
 
             <VSelect
               id="responsible_id"

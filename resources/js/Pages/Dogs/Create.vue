@@ -27,6 +27,7 @@ const form = useForm({
   veterinary: null,
   couple_id: '',
   avatar: null,
+  age: null,
   field_id: '',
   quarter_id: '',
   vaccines: [
@@ -49,7 +50,7 @@ const genders = [
   }
 ]
 
-const age = computed(() => getAge(form.birthdate))
+const calculateAge = () => form.age = getAge(form.birthdate)
 
 const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id === form.field_id))
 
@@ -125,14 +126,15 @@ const remove_vaccine = (index) => {
               v-model="form.birthdate"
               :label="t('dog.form.birthdate.label')"
               :message="form.errors.birthdate"
+              @change="calculateAge"
             />
 
-            <div>
-              <label class="input-label">
-                {{ t('dog.form.age.label') }}
-              </label>
-              <div class="input">{{ age }}</div>
-            </div>
+            <VInput
+              id="age"
+              :label="t('dog.form.age.label')"
+              v-model="form.age"
+              disabled
+            />
 
             <VSelect
               id="field_id"

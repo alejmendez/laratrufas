@@ -25,6 +25,7 @@ const form = useForm({
   name: data.name,
   location: data.location,
   size: data.size,
+  number_of_trees: data.number_of_trees,
   owner_dni: data.owner.dni,
   owner_name: data.owner.name,
   blueprint: data.blueprint,
@@ -77,12 +78,12 @@ const changeFileHandler = (e) => {
                 :message="form.errors.size"
               />
 
-              <div>
-                <label class="input-label">
-                  {{ t('quarter.form.number_of_trees.label') }}
-                </label>
-                <div class="input">{{ data.number_of_trees }}</div>
-              </div>
+              <VInput
+                id="number_of_trees"
+                :label="t('quarter.form.number_of_trees.label')"
+                v-model="form.number_of_trees"
+                disabled
+              />
             </div>
           </div>
         </section>

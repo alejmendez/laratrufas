@@ -1,5 +1,7 @@
 <script setup>
 import { useAttrs, ref, onMounted } from 'vue'
+import { Input } from '@/Components/ui/input'
+import { Label } from '@/Components/ui/label'
 
 const model = defineModel()
 
@@ -25,27 +27,31 @@ const props = defineProps({
   message: {
     type: String,
   },
+  autofocus: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const emit = defineEmits(['change', 'blur'])
 const input = ref(null);
 
 onMounted(() => {
-    if (input.value.hasAttribute('autofocus')) {
-        input.value.focus();
-    }
+  if (props.autofocus) {
+    input.value.focus();
+  }
 });
 </script>
 
 <template>
   <div :class="props.classWrapper">
-    <label :for="attrs.id" class="input-label" v-if="props.label !== ''">
+    <Label :for="attrs.id" class="input-label" v-if="props.label !== ''">
       {{ props.label }}
-    </label>
+    </Label>
 
-    <input
+    <Input
       v-bind="attrs"
-      class="input"
+      class="input mt-1"
       :type="props.type"
       :disabled="props.disabled"
       @change="emit('change', $event)"
