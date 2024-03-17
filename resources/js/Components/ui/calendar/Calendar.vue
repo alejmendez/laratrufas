@@ -1,6 +1,5 @@
 <script setup>
 import { useVModel } from "@vueuse/core";
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-icons/vue";
 import { DatePicker } from "v-calendar";
 import { computed, nextTick, onMounted, ref, useSlots } from "vue";
 import { isVCalendarSlot } from ".";
@@ -65,7 +64,7 @@ const vCalendarSlots = computed(() => {
         "
         @click="handleNav('prev')"
       >
-        <ChevronLeftIcon class="w-4 h-4" />
+        <font-awesome-icon :icon="['fa', 'chevron-left']" class="w-4 h-4" />
       </button>
       <button
         :class="
@@ -76,7 +75,7 @@ const vCalendarSlots = computed(() => {
         "
         @click="handleNav('next')"
       >
-        <ChevronRightIcon class="w-4 h-4" />
+        <font-awesome-icon :icon="['fa', 'chevron-right']" class="w-4 h-4" />
       </button>
     </div>
 
@@ -95,11 +94,11 @@ const vCalendarSlots = computed(() => {
       </template>
 
       <template #nav-prev-button>
-        <ChevronLeftIcon />
+        <font-awesome-icon :icon="['fa', 'chevron-left']" />
       </template>
 
       <template #nav-next-button>
-        <ChevronRightIcon />
+        <font-awesome-icon :icon="['fa', 'chevron-right']" />
       </template>
     </DatePicker>
   </div>

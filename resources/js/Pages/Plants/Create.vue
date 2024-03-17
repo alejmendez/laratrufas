@@ -29,7 +29,7 @@ const form = useForm({
   row: '',
 })
 
-const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id === form.field_id))
+const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id))
 
 const submitHandler = () => {
   form.post(route('plants.store'), {
@@ -79,6 +79,7 @@ const submitHandler = () => {
               v-model="form.planned_at"
               :label="t('plant.form.planned_at.label')"
               :message="form.errors.planned_at"
+              :max-date="new Date()"
             />
 
             <VInput

@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
@@ -39,7 +39,7 @@ const form = useForm({
   ],
 })
 
-const genders = [
+const genders = ref([
   {
     value: 'M',
     text: t('dog.form.gender.options.male'),
@@ -48,11 +48,11 @@ const genders = [
     value: 'F',
     text: t('dog.form.gender.options.female'),
   }
-]
+])
 
 const calculateAge = () => form.age = getAge(form.birthdate)
 
-const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id === form.field_id))
+const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id))
 
 const submitHandler = () => {
   form.post(route('dogs.store'), {
@@ -127,6 +127,7 @@ const remove_vaccine = (index) => {
               :label="t('dog.form.birthdate.label')"
               :message="form.errors.birthdate"
               @change="calculateAge"
+              :maxDate="new Date()"
             />
 
             <VInput
@@ -200,6 +201,7 @@ const remove_vaccine = (index) => {
                   class="col-span-4"
                   :label="t('dog.form.vaccines.date.label')"
                   :message="form.errors.vaccines? form.errors.vaccines[index].date : ''"
+                  :max-date="new Date()"
                 />
 
                 <VInput

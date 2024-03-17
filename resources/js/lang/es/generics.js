@@ -32,6 +32,9 @@ export default {
     file: {
       select_a_image: 'Seleccione un imagen',
       remove_image: 'Quitar imagen'
+    },
+    date: {
+      label: 'Seleccione una fecha'
     }
   },
   buttons: {

@@ -26,7 +26,7 @@ import {
   faTriangleExclamation,
 } from '@fortawesome/free-solid-svg-icons'
 
-import { faBell }  from '@fortawesome/free-regular-svg-icons'
+import { faBell, faCalendar }  from '@fortawesome/free-regular-svg-icons'
 
 const icons = [
   faBars,
@@ -53,6 +53,7 @@ const icons = [
   faTree,
   faBell,
   faTriangleExclamation,
+  faCalendar,
 ]
 
 export const initFontAwesome = (app) => {

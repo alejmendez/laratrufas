@@ -54,7 +54,7 @@ const genders = [
 
 const calculateAge = () => form.age = getAge(form.birthdate)
 
-const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id === form.field_id))
+const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id))
 
 const submitHandler = () => {
   form.post(route('dogs.update', data.id), {
@@ -131,6 +131,7 @@ const remove_vaccine = (index) => {
               v-model="form.birthdate"
               :label="t('dog.form.birthdate.label')"
               :message="form.errors.birthdate"
+              :max-date="new Date()"
             />
 
             <VInput
@@ -204,6 +205,7 @@ const remove_vaccine = (index) => {
                   class="col-span-4"
                   :label="t('dog.form.vaccines.date.label')"
                   :message="form.errors.vaccines? form.errors.vaccines[index].date : ''"
+                  :max-date="new Date()"
                 />
 
                 <VInput
