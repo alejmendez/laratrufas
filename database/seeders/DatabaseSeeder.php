@@ -19,13 +19,13 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RolesSeeder::class,
-            OwnersSeeder::class,
+            // OwnersSeeder::class,
             UserSeeder::class,
-            FieldsSeeder::class,
-            QuartersSeeder::class,
-            PlantsSeeder::class,
-            HarvestsSeeder::class,
-            DogSeeder::class,
+            // FieldsSeeder::class,
+            // QuartersSeeder::class,
+            // PlantsSeeder::class,
+            // HarvestsSeeder::class,
+            // DogSeeder::class,
         ]);
     }
 }

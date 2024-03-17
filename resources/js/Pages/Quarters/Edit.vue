@@ -2,12 +2,14 @@
 import { ref } from 'vue'
 import { Head, useForm } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
+import { format } from 'date-fns'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
 import VInput from '@/Components/form/VInput.vue'
 import VInputFile from '@/Components/form/VInputFile.vue'
 import VSelect from '@/Components/form/VSelect.vue'
+import { stringToDate } from '@/Utils/date'
 
 const { t } = useI18n()
 
@@ -27,16 +29,19 @@ const form = useForm({
   name: data.name,
   location: data.location,
   area: data.area,
-  planned_at: data.planned_at,
+  planned_at: stringToDate(data.planned_at),
   number_of_trees: data.number_of_trees,
-  field_id: data.field.id,
-  responsible_id: data.responsible.id,
-  blueprint: data.blueprint,
+  field_id: data.field.id.toString(),
+  responsible_id: data.responsible.id.toString(),
+  blueprint: null,
   blueprintRemove: false,
 })
 
 const submitHandler = () => {
-  form.post(route('quarters.update', data.id), {
+  form.transform((data) => ({
+    ...data,
+    planned_at: format(data.planned_at, 'yyyy-MM-dd'),
+  })).post(route('quarters.update', data.id), {
     forceFormData: true,
   })
 }
@@ -54,7 +59,7 @@ const changeFileHandler = (e) => {
       <HeaderCrud
         :title="t('quarter.titles.edit')"
         :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-        :form="{ instance: form, submitHandler, hrefCancel: route('quarters.index') }"
+        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('quarters.index') }"
       />
       <form @submit.prevent="submitHandler">
         <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
@@ -93,7 +98,7 @@ const changeFileHandler = (e) => {
               id="number_of_trees"
               :label="t('quarter.form.number_of_trees.label')"
               v-model="form.number_of_trees"
-              disabled
+              readonly
             />
 
             <VSelect

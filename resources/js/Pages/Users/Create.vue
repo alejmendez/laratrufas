@@ -44,7 +44,7 @@ const changeFileHandler = (e) => {
       <HeaderCrud
         :title="t('user.titles.create')"
         :breadcrumbs="[{ to: 'users.index', text: t('user.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, hrefCancel: route('users.index') }"
+        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('users.index') }"
       />
       <form @submit.prevent="submitHandler">
         <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">

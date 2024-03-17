@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
+import { format } from 'date-fns'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
@@ -20,7 +21,7 @@ const props = defineProps({
 const form = useForm({
   name: null,
   plant_type_id: '',
-  age: null,
+  age: 0,
   planned_at: null,
   nursery_origin: null,
   code: null,
@@ -32,7 +33,10 @@ const form = useForm({
 const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id))
 
 const submitHandler = () => {
-  form.post(route('plants.store'), {
+  form.transform((data) => ({
+    ...data,
+    planned_at: format(data.planned_at, 'yyyy-MM-dd'),
+  })).post(route('plants.store'), {
     forceFormData: true,
   })
 }
@@ -45,7 +49,7 @@ const submitHandler = () => {
       <HeaderCrud
         :title="t('plant.titles.create')"
         :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, hrefCancel: route('plants.index') }"
+        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('plants.index') }"
       />
       <form @submit.prevent="submitHandler">
         <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
@@ -68,6 +72,10 @@ const submitHandler = () => {
 
             <VInput
               id="age"
+              type="number"
+              min="0"
+              max="200"
+              step="0.1"
               v-model="form.age"
               :label="t('plant.form.age.label')"
               :message="form.errors.age"
@@ -125,11 +133,11 @@ const submitHandler = () => {
                 :message="form.errors.quarter_id"
               />
 
-              <VSelect
+              <VInput
                 id="row"
+                maxlength="2"
                 v-model="form.row"
-                :placeholder="t('generics.please_select')"
-                :options="props.rows"
+                v-mask="'AA'"
                 :label="t('plant.form.row.label')"
                 :message="form.errors.row"
               />

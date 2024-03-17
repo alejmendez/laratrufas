@@ -168,4 +168,9 @@
   .tableContainer table td {
     @apply px-6 py-3;
   }
+
+}
+
+.swal2-modal .swal2-actions .swal2-deny {
+  color: #333 !important;
 }

@@ -1,5 +1,5 @@
 <script setup>
-import { useAttrs, watch } from 'vue'
+import { watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { format } from 'date-fns'
 

@@ -8,8 +8,8 @@ export const deleteRowTable = async (t, handler) => {
             showDenyButton: true,
             confirmButtonText: t("generics.tables.confirm.confirmButton"),
             denyButtonText: t("generics.tables.confirm.denyButton"),
-            confirmButtonColor: "#111827",
-            cancelButtonColor: "#ffffff",
+            confirmButtonColor: "#0F172A",
+            denyButtonColor: "#C7C7C7",
         });
 
         if (!result.isConfirmed) {

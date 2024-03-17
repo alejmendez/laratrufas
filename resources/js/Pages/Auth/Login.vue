@@ -1,13 +1,11 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+
+import GuestLayout from '@/Layouts/GuestLayout.vue';
+import VInput from '@/Components/form/VInput.vue'
+import { Checkbox } from '@/Components/ui/checkbox'
+import { Button } from '@/Components/ui/button'
 
 const { t } = useI18n()
 
@@ -35,10 +33,10 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Log in" />
+        <Head :title="t('login.title')" />
 
         <div class="my-4 text-4xl text-gray-900 font-bold text-center">
-            Login
+          {{ t('login.title') }}
         </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -46,36 +44,24 @@ const submit = () => {
         </div>
 
         <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" :value="t('login.form.email')" />
+          <VInput
+            id="email"
+            type="email"
+            classWrapper="mt-4"
+            v-model="form.email"
+            :label="t('login.form.email')"
+            :message="form.errors.email"
+          />
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" :value="t('login.form.password')" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="current-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
+          <VInput
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            classWrapper="mt-4"
+            v-model="form.password"
+            :label="t('login.form.password')"
+            :message="form.errors.password"
+          />
 
             <div class="block mt-4">
                 <label class="flex items-center">
@@ -85,15 +71,17 @@ const submit = () => {
             </div>
 
             <div class="block mt-4">
-              <button
-                  class="w-full text-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
-                  :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-              >
-              {{ t('login.form.submit') }}
-              </button>
+              <Button :disabled="form.processing" class="w-full">
+                <font-awesome-icon
+                  class="animate-spin me-1"
+                  :icon="['fas', 'circle-notch']"
+                  v-show="form.processing"
+                />
+                {{ t('login.form.submit') }}
+              </Button>
             </div>
 
-            <div class="block mt-4 text-center ">
+            <div class="block mt-4 text-center">
               <Link
                   v-if="canResetPassword"
                   :href="route('password.request')"

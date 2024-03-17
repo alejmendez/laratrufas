@@ -1,6 +1,7 @@
 <script setup>
 import { Head, useForm } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
+import { format } from 'date-fns'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
@@ -27,7 +28,10 @@ const form = useForm({
 })
 
 const submitHandler = () => {
-  form.post(route('quarters.store'), {
+  form.transform((data) => ({
+    ...data,
+    planned_at: format(data.planned_at, 'yyyy-MM-dd'),
+  })).post(route('quarters.store'), {
     forceFormData: true,
   })
 }
@@ -44,7 +48,7 @@ const changeFileHandler = (e) => {
       <HeaderCrud
         :title="t('quarter.titles.create')"
         :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, hrefCancel: route('quarters.index') }"
+        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('quarters.index') }"
       />
       <form @submit.prevent="submitHandler">
         <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
@@ -83,7 +87,7 @@ const changeFileHandler = (e) => {
               id="number_of_trees"
               :label="t('quarter.form.number_of_trees.label')"
               v-model="form.number_of_trees"
-              disabled
+              readonly
             />
 
             <VSelect

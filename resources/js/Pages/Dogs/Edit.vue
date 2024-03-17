@@ -2,14 +2,15 @@
 import { ref, computed } from 'vue'
 import { Head, useForm } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
+import { format } from 'date-fns'
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
 import VInput from '@/Components/form/VInput.vue'
 import VInputFile from '@/Components/form/VInputFile.vue'
 import VSelect from '@/Components/form/VSelect.vue'
 
-import { getAge } from '@/Utils/date';
+import { stringToDate, getAge } from '@/Utils/date'
 
 const { t } = useI18n()
 
@@ -23,6 +24,10 @@ const props = defineProps({
 const { data } = props.data
 
 const avatarPreview = ref(data.avatar)
+const vaccines = data.vaccines.map(v => {
+  v.date = stringToDate(v.date)
+  return v
+})
 
 const form = useForm({
   _method: 'PATCH',
@@ -30,15 +35,15 @@ const form = useForm({
   name: data.name,
   breed: data.breed,
   gender: data.gender,
-  birthdate: data.birthdate,
+  birthdate: stringToDate(data.birthdate),
   age: getAge(data.birthdate),
   veterinary: data.veterinary,
-  couple_id: data.couple.id,
+  couple_id: data.couple.id.toString(),
   avatar: data.avatar,
   avatarRemove: false,
-  field_id: data.field.id,
-  quarter_id: data.quarter.id,
-  vaccines: data.vaccines,
+  field_id: data.field.id.toString(),
+  quarter_id: data.quarter.id.toString(),
+  vaccines,
 })
 
 const genders = [
@@ -57,7 +62,19 @@ const calculateAge = () => form.age = getAge(form.birthdate)
 const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id))
 
 const submitHandler = () => {
-  form.post(route('dogs.update', data.id), {
+  form.transform((data) => {
+    const birthdate = format(data.birthdate, 'yyyy-MM-dd')
+    const vaccines = data.vaccines.map(v => ({
+      name: v.name,
+      date: format(v.date, 'yyyy-MM-dd'),
+      code: v.code,
+    }))
+    return {
+      ...data,
+      birthdate,
+      vaccines,
+    }
+  }).post(route('dogs.update', data.id), {
     forceFormData: true,
   })
 }
@@ -88,7 +105,7 @@ const remove_vaccine = (index) => {
       <HeaderCrud
         :title="t('dog.titles.edit')"
         :breadcrumbs="[{ to: 'dogs.index', text: t('dog.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-        :form="{ instance: form, submitHandler, hrefCancel: route('dogs.index') }"
+        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('dogs.index') }"
       />
       <form @submit.prevent="submitHandler">
         <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
@@ -131,14 +148,15 @@ const remove_vaccine = (index) => {
               v-model="form.birthdate"
               :label="t('dog.form.birthdate.label')"
               :message="form.errors.birthdate"
-              :max-date="new Date()"
+              @change="calculateAge"
+              :maxDate="new Date()"
             />
 
             <VInput
               id="age"
               :label="t('dog.form.age.label')"
               v-model="form.age"
-              disabled
+              readonly
             />
 
             <VSelect

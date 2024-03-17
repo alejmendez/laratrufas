@@ -2,8 +2,10 @@
 import { Head, Link, router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 import { useToast } from 'vue-toastification'
+import { format } from 'date-fns'
 
 import { deleteRowTable } from '@/Utils/table'
+import { stringToDate } from '@/Utils/date'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
@@ -25,7 +27,7 @@ if (props.toast) {
 
 const quarters = props.data.data.map(q => {
   q.field_name = q.field.name
-  q.planned_at = new Date(Date.parse(q.planned_at)).toLocaleDateString('en-GB')
+  q.planned_at = format(stringToDate(q.planned_at), 'dd/MM/yyyy')
   return q
 })
 

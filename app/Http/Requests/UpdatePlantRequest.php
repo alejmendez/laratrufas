@@ -24,11 +24,11 @@ class UpdatePlantRequest extends FormRequest
         return [
             'name' => 'required|max:80',
             'plant_type_id' => 'required|exists:plant_types,id',
-            'age' => 'required|decimal:2',
+            'age' => 'required|numeric|between:0,200',
             'planned_at' => 'required|date_format:Y-m-d',
             'nursery_origin' => 'required|max:80',
             'code' => 'required|max:12',
-            'row' => 'required|max:1',
+            'row' => 'required|max:2',
             'field_id' => 'required|exists:fields,id',
             'quarter_id' => 'required|exists:quarters,id',
         ];

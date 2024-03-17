@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('planned_at');
             $table->string('nursery_origin', 80);
             $table->string('code', 12);
-            $table->string('row', 1);
+            $table->string('row', 2);
             $table->string('blueprint')->nullable();
             $table->foreignId('quarter_id')->constrained();
             $table->foreignId('plant_type_id')->constrained();

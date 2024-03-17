@@ -1,4 +1,5 @@
 export default {
+  title: 'Iniciar Sesión',
   form: {
     email: 'Correo electrónico',
     password: 'Contraseña',

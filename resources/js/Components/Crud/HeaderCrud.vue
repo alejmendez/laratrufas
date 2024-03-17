@@ -53,24 +53,27 @@ const props = defineProps({
       class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
       v-if="props.form"
     >
-      <button
-        class="btn btn-primary"
+      <Button
         :disabled="props.form.instance.processing"
         @click="props.form.submitHandler"
       >
         <font-awesome-icon
-          class="animate-spin"
+          class="animate-spin me-1"
           :icon="['fas', 'circle-notch']"
           v-show="props.form.instance.processing"
         />
-        {{ t('generics.buttons.create') }}
-      </button>
-      <Link
-        :href="props.form.hrefCancel"
-        class="btn btn-secondary"
+        {{ props.form.submitText }}
+      </Button>
+
+      <Button
+        variant="secondary"
+        as-child
+        :disabled="props.form.instance.processing"
       >
-        {{ t('generics.buttons.cancel') }}
-      </Link>
+        <Link :href="props.form.hrefCancel">
+          {{ t('generics.buttons.cancel') }}
+        </Link>
+      </Button>
     </div>
   </header>
 </template>

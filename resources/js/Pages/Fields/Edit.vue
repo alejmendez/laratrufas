@@ -28,7 +28,7 @@ const form = useForm({
   number_of_trees: data.number_of_trees,
   owner_dni: data.owner.dni,
   owner_name: data.owner.name,
-  blueprint: data.blueprint,
+  blueprint: null,
   blueprintRemove: false,
 })
 
@@ -51,7 +51,7 @@ const changeFileHandler = (e) => {
       <HeaderCrud
         :title="t('field.titles.edit')"
         :breadcrumbs="[{ to: 'fields.index', text: t('field.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-        :form="{ instance: form, submitHandler, hrefCancel: route('fields.index') }"
+        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('fields.index') }"
       />
       <form @submit.prevent="submitHandler">
         <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
@@ -82,7 +82,7 @@ const changeFileHandler = (e) => {
                 id="number_of_trees"
                 :label="t('quarter.form.number_of_trees.label')"
                 v-model="form.number_of_trees"
-                disabled
+                readonly
               />
             </div>
           </div>

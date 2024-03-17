@@ -2,11 +2,13 @@
 import { computed } from 'vue'
 import { Head, useForm } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
+import { format } from 'date-fns'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
 import VInput from '@/Components/form/VInput.vue'
 import VSelect from '@/Components/form/VSelect.vue'
+import { stringToDate } from '@/Utils/date'
 
 const { t } = useI18n()
 
@@ -24,20 +26,23 @@ const form = useForm({
   _method: 'PATCH',
   id: data.id,
   name: data.name,
-  plant_type_id: data.plant_type.id,
+  plant_type_id: data.plant_type.id.toString(),
   age: data.age,
-  planned_at: data.planned_at,
+  planned_at: stringToDate(data.planned_at),
   nursery_origin: data.nursery_origin,
   code: data.code,
-  field_id: data.field.id,
-  quarter_id: data.quarter.id,
+  field_id: data.field.id.toString(),
+  quarter_id: data.quarter.id.toString(),
   row: data.row,
 })
 
 const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id))
 
 const submitHandler = () => {
-  form.post(route('plants.update', data.id), {
+  form.transform((data) => ({
+    ...data,
+    planned_at: format(data.planned_at, 'yyyy-MM-dd'),
+  })).post(route('plants.update', data.id), {
     forceFormData: true,
   })
 }
@@ -50,7 +55,7 @@ const submitHandler = () => {
       <HeaderCrud
         :title="t('plant.titles.edit')"
         :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-        :form="{ instance: form, submitHandler, hrefCancel: route('plants.index') }"
+        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('plants.index') }"
       />
       <form @submit.prevent="submitHandler">
         <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
@@ -73,6 +78,10 @@ const submitHandler = () => {
 
             <VInput
               id="age"
+              type="number"
+              min="0"
+              max="200"
+              step="0.1"
               v-model="form.age"
               :label="t('plant.form.age.label')"
               :message="form.errors.age"
@@ -130,11 +139,11 @@ const submitHandler = () => {
                 :message="form.errors.quarter_id"
               />
 
-              <VSelect
+              <VInput
                 id="row"
+                maxlength="2"
                 v-model="form.row"
-                :placeholder="t('generics.please_select')"
-                :options="props.rows"
+                v-mask="'AA'"
                 :label="t('plant.form.row.label')"
                 :message="form.errors.row"
               />
