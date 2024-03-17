@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('plants', function (Blueprint $table) {
             $table->id();
             $table->string('name', 80);
-            $table->integer('age');
+            $table->decimal('age', total: 3, places: 2);
             $table->date('planned_at');
             $table->string('nursery_origin', 80);
             $table->string('code', 12);
