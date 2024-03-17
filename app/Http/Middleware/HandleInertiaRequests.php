@@ -37,7 +37,12 @@ class HandleInertiaRequests extends Middleware
         if ($user) {
             $userData = $user->toArray();
             $userData['full_name'] = $user->full_name;
-            $userData['avatar_url'] = Str::startsWith($user->avatar, 'http') ? $user->avatar : Storage::disk('avatars')->url($user->avatar);
+
+            if ($user->avatar === null) {
+                $userData['avatar_url'] = null;
+            } else {
+                $userData['avatar_url'] = Str::startsWith($user->avatar, 'http') ? $user->avatar : Storage::disk('avatars')->url($user->avatar);
+            }
         }
         return [
             ...parent::share($request),
