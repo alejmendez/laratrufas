@@ -1,46 +1,62 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import DeleteUserForm from './Partials/DeleteUserForm.vue';
-import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
-import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3'
+import { useI18n } from 'vue-i18n'
+import { useToast } from 'vue-toastification'
 
-defineProps({
-    mustVerifyEmail: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
+import FormUser from '@/Pages/Users/Form.vue'
+
+const { t } = useI18n()
+const toast = useToast()
+
+const props = defineProps({
+  data: Object,
+  roles: Array,
+  toast: String,
+})
+
+if (props.toast) {
+  toast.success(t('generics.messages.saved_successfully'))
+}
+
+const { data } = props.data
+
+const form = useForm({
+  _method: 'PATCH',
+  id: data.id,
+  dni: data.dni,
+  name: data.name,
+  last_name: data.last_name,
+  email: data.email,
+  phone: data.phone,
+  password: data.password,
+  role: data.role.name,
+  avatar: data.avatar,
+  avatarRemove: false,
+})
+
+const submitHandler = () => {
+  form.post(route('profile.update', data.id), {
+    forceFormData: true,
+  })
+}
 </script>
 
 <template>
-    <Head title="Profile" />
+    <Head :title="t('profile.titles.entity_breadcrumb')" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <UpdateProfileInformationForm
-                        :must-verify-email="mustVerifyEmail"
-                        :status="status"
-                        class="max-w-xl"
-                    />
-                </div>
-
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <UpdatePasswordForm class="max-w-xl" />
-                </div>
-
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <DeleteUserForm class="max-w-xl" />
-                </div>
-            </div>
-        </div>
+      <HeaderCrud
+        :title="t('profile.titles.edit')"
+        :breadcrumbs="[{ text: t('profile.titles.entity_breadcrumb') }]"
+        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('dashboard') }"
+      />
+      <FormUser
+        :form="form"
+        :roles="props.roles"
+        :submitHandler="submitHandler"
+        :showRole="false"
+      />
     </AuthenticatedLayout>
 </template>

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Resources\UserResource;
+use App\Services\Roles\ListRole;
+use App\Services\Users\UpdateUser;
+use App\Services\Users\DeleteUser;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,8 +23,9 @@ class ProfileController extends Controller
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
+            'data' => new UserResource($request->user()),
+            'roles' => $this->getSelectRoles(),
+            'toast' => session('toast'),
         ]);
     }
 
@@ -29,15 +34,11 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $data = $request->all();
+        $data['avatar'] = $this->storeAvatar($request);
+        UpdateUser::call($request->user()->id, $data);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit');
+        return redirect()->route('profile.edit')->with('toast', 'Profile updated.');
     }
 
     /**
@@ -45,19 +46,29 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validate([
-            'password' => ['required', 'current_password'],
-        ]);
-
         $user = $request->user();
 
         Auth::logout();
 
-        $user->delete();
+        DeleteUser::call($user->id);
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return redirect()->route('login');
+    }
+
+    protected function storeAvatar(ProfileUpdateRequest $request)
+    {
+        if (!$request->hasFile('avatar')) {
+            return null;
+        }
+
+        return $request->file('avatar')->store(options: 'avatars');
+    }
+
+    protected function getSelectRoles()
+    {
+        return collect(ListRole::call())->map(fn($r) => [ 'value' => $r->name, 'text' => $r->name ]);
     }
 }

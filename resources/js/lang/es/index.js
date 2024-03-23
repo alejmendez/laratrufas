@@ -1,5 +1,6 @@
 import generics from './generics'
 import login from './login'
+import profile from './profile'
 import dashboard from './dashboard'
 import user from './user'
 import field from './field'
@@ -14,6 +15,7 @@ export default {
   },
   generics,
   login,
+  profile,
   dashboard,
   user,
   field,

@@ -1,12 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
-
 
 import SideBarLeft from '@/Components/Menu/SideBarLeft.vue'
 import MenuUser from '@/Components/Menu/MenuUser.vue'
@@ -31,7 +24,7 @@ const toggleSideBar = () => {
         </div>
         <div class="w-full min-h-screen z-20">
             <div class="flex items-center w-full h-[64px] border-b px-[20px] py-[10px] z-30">
-                <div class="cursor-pointer rounded-lg outline-none transition duration-75 text-gray-400 hover:text-gray-500 focus-visible:ring-primary-600 border border-gray-400 rounded px-3 py-1"
+                <div class="cursor-pointer rounded outline-none transition duration-75 text-gray-400 hover:text-gray-500 focus-visible:ring-primary-600 border border-gray-400 rounded px-3 py-1"
                     @click="toggleSideBar">
                     <FontAwesomeIcon icon="fa-solid fa-bars" />
                 </div>

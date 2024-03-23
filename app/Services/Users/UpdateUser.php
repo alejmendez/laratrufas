@@ -25,6 +25,10 @@ class UpdateUser
             $data['password'] = Hash::make($data['password']);
         }
 
+        if ($user->email !== $data['email']) {
+            $data['email_verified_at'] = null;
+        }
+
         $user->update($data);
         $role = $data['role'] ?? null;
         self::assignRole($user, $role);
