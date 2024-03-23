@@ -1,4 +1,8 @@
 export default {
+  top: {
+    profile: 'Perfil',
+    logout: 'Cerrar Sesión',
+  },
   dashboard: 'Escritorio',
 
   management: 'Gestión',
