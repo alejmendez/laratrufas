@@ -1,18 +1,18 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
-import { router } from '@inertiajs/vue3'
+import { useI18n } from 'vue-i18n';
+import { router } from '@inertiajs/vue3';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const searchHandler = (e) => {
-    const url = new URL(window.location.href)
-    url.searchParams.set('search', e.target.value)
-    router.get(url)
-}
+  const url = new URL(window.location.href);
+  url.searchParams.set('search', e.target.value);
+  router.get(url);
+};
 
 const props = defineProps({
   q: String,
-})
+});
 </script>
 
 <template>

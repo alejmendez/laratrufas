@@ -1,30 +1,30 @@
 <script setup>
-import { useAttrs } from 'vue'
+import { useAttrs } from 'vue';
 
-const model = defineModel({ default: false })
+const model = defineModel({ default: false });
 
-const attrs = useAttrs()
+const attrs = useAttrs();
 
 const props = defineProps({
   classWrapper: {
     type: String,
-    default: ''
+    default: '',
   },
   type: {
     type: String,
-    default: 'text'
+    default: 'text',
   },
   label: {
     type: String,
-    default: ''
+    default: '',
   },
   disabled: {
     type: Boolean,
-    default: false
-  }
-})
+    default: false,
+  },
+});
 
-const emit = defineEmits(['click'])
+const emit = defineEmits(['click']);
 </script>
 
 <template>

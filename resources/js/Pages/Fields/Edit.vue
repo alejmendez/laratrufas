@@ -1,23 +1,23 @@
 <script setup>
-import { ref } from 'vue'
-import { Head, useForm } from '@inertiajs/vue3'
-import { useI18n } from 'vue-i18n'
+import { ref } from 'vue';
+import { Head, useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import VInput from '@/Components/form/VInput.vue'
-import VInputFile from '@/Components/form/VInputFile.vue'
-import VInputDni from '@/Components/form/VInputDni.vue'
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import VInput from '@/Components/form/VInput.vue';
+import VInputFile from '@/Components/form/VInputFile.vue';
+import VInputDni from '@/Components/form/VInputDni.vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const props = defineProps({
-  data: Object
-})
+  data: Object,
+});
 
-const { data } = props.data
+const { data } = props.data;
 
-const blueprintPreview = ref(data.blueprint)
+const blueprintPreview = ref(data.blueprint);
 
 const form = useForm({
   _method: 'PATCH',
@@ -30,18 +30,18 @@ const form = useForm({
   owner_name: data.owner.name,
   blueprint: null,
   blueprintRemove: false,
-})
+});
 
 const submitHandler = () => {
   form.post(route('fields.update', data.id), {
     forceFormData: true,
-  })
-}
+  });
+};
 
 const changeFileHandler = (e) => {
-  form.blueprint = e.fileInput
-  form.blueprintRemove = e.fileRemove
-}
+  form.blueprint = e.fileInput;
+  form.blueprintRemove = e.fileRemove;
+};
 </script>
 
 <template>

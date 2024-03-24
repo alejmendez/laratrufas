@@ -1,16 +1,16 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3'
-import { useI18n } from 'vue-i18n'
+import { Head, useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import FormUser from '@/Pages/Users/Form.vue'
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import FormUser from '@/Pages/Users/Form.vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const props = defineProps({
   roles: Array,
-})
+});
 
 const form = useForm({
   dni: null,
@@ -21,13 +21,13 @@ const form = useForm({
   password: null,
   role: '',
   avatar: null,
-})
+});
 
 const submitHandler = () => {
   form.post(route('users.store'), {
     forceFormData: true,
-  })
-}
+  });
+};
 </script>
 
 <template>

@@ -2,10 +2,10 @@
 import { Link } from '@inertiajs/vue3';
 
 defineProps({
-    href: {
-        type: String,
-        required: true,
-    },
+  href: {
+    type: String,
+    required: true,
+  },
 });
 </script>
 

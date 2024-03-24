@@ -1,5 +1,5 @@
 <script setup>
-import { SelectValue } from "radix-vue";
+import { SelectValue } from 'radix-vue';
 
 const props = defineProps({
   placeholder: { type: String, required: false },

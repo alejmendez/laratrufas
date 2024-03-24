@@ -2,7 +2,7 @@ export default {
   titles: {
     entity_breadcrumb: 'Usuarios',
     create: 'Crear Usuario',
-    edit: 'Editar Usuario'
+    edit: 'Editar Usuario',
   },
   table: {
     name: 'Nombre',
@@ -14,44 +14,44 @@ export default {
   form: {
     name: {
       label: 'Nombre',
-      name: 'nombre'
+      name: 'nombre',
     },
     last_name: {
       label: 'Apellidos',
-      name: 'apellidos'
+      name: 'apellidos',
     },
     email: {
       label: 'Correo electrónico',
-      name: 'correo electrónico'
+      name: 'correo electrónico',
     },
     password: {
       label: 'Contraseña',
-      name: 'contraseña'
+      name: 'contraseña',
     },
     dni: {
       label: 'RUT / ID',
-      name: 'rut'
+      name: 'rut',
     },
     avatar: {
       label: 'Seleccione un imagen',
-      name: 'seleccione un imagen'
+      name: 'seleccione un imagen',
     },
     phone: {
       label: 'Teléfono',
-      name: 'teléfono'
+      name: 'teléfono',
     },
     role: {
       label: 'Tipo de usuario',
-      name: 'tipo de usuario'
-    }
+      name: 'tipo de usuario',
+    },
   },
   sections: {
     details: 'Detalles del perfil',
     login: 'Inicio de sesión',
-    roles: 'Permisos'
+    roles: 'Permisos',
   },
   buttons: {
     change_email: 'Cambiar correo',
-    resend_password: 'Reenvía la contraseña'
-  }
-}
+    resend_password: 'Reenvía la contraseña',
+  },
+};

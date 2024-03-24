@@ -1,20 +1,20 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3'
-import { useI18n } from 'vue-i18n'
-import { format } from 'date-fns'
+import { Head, useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { format } from 'date-fns';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import VInput from '@/Components/form/VInput.vue'
-import VInputFile from '@/Components/form/VInputFile.vue'
-import VSelect from '@/Components/form/VSelect.vue'
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import VInput from '@/Components/form/VInput.vue';
+import VInputFile from '@/Components/form/VInputFile.vue';
+import VSelect from '@/Components/form/VSelect.vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const props = defineProps({
   fields: Array,
   responsibles: Array,
-})
+});
 
 const form = useForm({
   name: null,
@@ -25,20 +25,22 @@ const form = useForm({
   field_id: '',
   responsible_id: '',
   blueprint: null,
-})
+});
 
 const submitHandler = () => {
-  form.transform((data) => ({
-    ...data,
-    planned_at: format(data.planned_at, 'yyyy-MM-dd'),
-  })).post(route('quarters.store'), {
-    forceFormData: true,
-  })
-}
+  form
+    .transform((data) => ({
+      ...data,
+      planned_at: format(data.planned_at, 'yyyy-MM-dd'),
+    }))
+    .post(route('quarters.store'), {
+      forceFormData: true,
+    });
+};
 
 const changeFileHandler = (e) => {
-  form.blueprint = e.fileInput
-}
+  form.blueprint = e.fileInput;
+};
 </script>
 
 <template>

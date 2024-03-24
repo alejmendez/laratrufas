@@ -2,7 +2,7 @@ export default {
   titles: {
     entity_breadcrumb: 'Plantas',
     create: 'Crear Planta',
-    edit: 'Editar Planta'
+    edit: 'Editar Planta',
   },
   table: {
     name: 'planta',
@@ -48,5 +48,5 @@ export default {
   sections: {
     location: 'Ubicación',
     blueprint: 'Planos',
-  }
-}
+  },
+};

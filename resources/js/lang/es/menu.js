@@ -27,4 +27,4 @@ export default {
   dogs: 'Perros',
   alerts: 'Alertas',
   bulk_uploads: 'Cargas masivas',
-}
+};

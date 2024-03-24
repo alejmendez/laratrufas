@@ -1,10 +1,10 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
-import { Link } from '@inertiajs/vue3'
-import PaginationTable from '@/Components/Table/PaginationTable.vue'
-import SearchInput from '@/Components/Table/SearchInput.vue'
+import { useI18n } from 'vue-i18n';
+import { Link } from '@inertiajs/vue3';
+import PaginationTable from '@/Components/Table/PaginationTable.vue';
+import SearchInput from '@/Components/Table/SearchInput.vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const props = defineProps({
   columns: Array,
@@ -12,13 +12,13 @@ const props = defineProps({
   meta: Object,
   search: String,
   order: String,
-})
+});
 
 const orderUrl = (col) => {
-    const url = new URL(window.location.href)
-    url.searchParams.set('order', (col === props.order ? '-' : '') + col)
-    return url.href
-}
+  const url = new URL(window.location.href);
+  url.searchParams.set('order', (col === props.order ? '-' : '') + col);
+  return url.href;
+};
 </script>
 
 <template>

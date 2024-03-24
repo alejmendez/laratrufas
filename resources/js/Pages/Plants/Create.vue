@@ -1,22 +1,22 @@
 <script setup>
 import { computed } from 'vue';
-import { Head, useForm } from '@inertiajs/vue3'
-import { useI18n } from 'vue-i18n'
-import { format } from 'date-fns'
+import { Head, useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { format } from 'date-fns';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import VInput from '@/Components/form/VInput.vue'
-import VSelect from '@/Components/form/VSelect.vue'
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import VInput from '@/Components/form/VInput.vue';
+import VSelect from '@/Components/form/VSelect.vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const props = defineProps({
   fields: Array,
   quarters: Array,
   types: Array,
   rows: Array,
-})
+});
 
 const form = useForm({
   name: null,
@@ -28,18 +28,20 @@ const form = useForm({
   field_id: '',
   quarter_id: '',
   row: '',
-})
+});
 
-const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id))
+const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id));
 
 const submitHandler = () => {
-  form.transform((data) => ({
-    ...data,
-    planned_at: format(data.planned_at, 'yyyy-MM-dd'),
-  })).post(route('plants.store'), {
-    forceFormData: true,
-  })
-}
+  form
+    .transform((data) => ({
+      ...data,
+      planned_at: format(data.planned_at, 'yyyy-MM-dd'),
+    }))
+    .post(route('plants.store'), {
+      forceFormData: true,
+    });
+};
 </script>
 
 <template>

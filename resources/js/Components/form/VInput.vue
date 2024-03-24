@@ -1,29 +1,29 @@
 <script setup>
-import { useAttrs, ref, onMounted } from 'vue'
-import { Input as InputShadcn } from '@/Components/ui/input'
-import { Label as LabelShadcn } from '@/Components/ui/label'
-import VInputDate from './VInputDate.vue'
+import { useAttrs, ref, onMounted } from 'vue';
+import { Input as InputShadcn } from '@/Components/ui/input';
+import { Label as LabelShadcn } from '@/Components/ui/label';
+import VInputDate from './VInputDate.vue';
 
-const model = defineModel()
+const model = defineModel();
 
-const attrs = useAttrs()
+const attrs = useAttrs();
 
 const props = defineProps({
   classWrapper: {
     type: String,
-    default: ''
+    default: '',
   },
   type: {
     type: String,
-    default: 'text'
+    default: 'text',
   },
   label: {
     type: String,
-    default: ''
+    default: '',
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: false,
   },
   message: {
     type: String,
@@ -38,9 +38,9 @@ const props = defineProps({
   minDate: {
     type: Object,
   },
-})
+});
 
-const emit = defineEmits(['change', 'blur'])
+const emit = defineEmits(['change', 'blur']);
 const input = ref(null);
 
 onMounted(() => {

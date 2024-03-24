@@ -1,16 +1,16 @@
 <script setup>
-import { useAttrs } from 'vue'
+import { useAttrs } from 'vue';
 import { Link } from '@inertiajs/vue3';
-const attrs = useAttrs()
+const attrs = useAttrs();
 
 const props = defineProps({
   link: String,
   text: String,
   icon: {
     type: String,
-    default: 'fa-solid fa-circle'
-  }
-})
+    default: 'fa-solid fa-circle',
+  },
+});
 </script>
 
 <template>

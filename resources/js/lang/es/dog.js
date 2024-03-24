@@ -2,7 +2,7 @@ export default {
   titles: {
     entity_breadcrumb: 'Perros',
     create: 'Crear Perro',
-    edit: 'Editar Perro'
+    edit: 'Editar Perro',
   },
   table: {
     name: 'Nombre',
@@ -18,35 +18,35 @@ export default {
   },
   form: {
     name: {
-      label: 'Nombres'
+      label: 'Nombres',
     },
     breed: {
-      label: 'Raza'
+      label: 'Raza',
     },
     gender: {
       label: 'Género',
       options: {
         male: 'Masculino',
         female: 'Femenino',
-      }
+      },
     },
     birthdate: {
-      label: 'Fecha de nacimiento'
+      label: 'Fecha de nacimiento',
     },
     age: {
-      label: 'Edad'
+      label: 'Edad',
     },
     field_id: {
-      label: 'Campo'
+      label: 'Campo',
     },
     quarter_id: {
-      label: 'Cuartel'
+      label: 'Cuartel',
     },
     veterinary: {
-      label: 'Veterinario'
+      label: 'Veterinario',
     },
     couple_id: {
-      label: 'Pareja'
+      label: 'Pareja',
     },
     avatar: {
       label: 'Seleccione una imagen',
@@ -64,6 +64,6 @@ export default {
     },
   },
   sections: {
-    vaccines: 'Vacunas'
+    vaccines: 'Vacunas',
   },
-}
+};

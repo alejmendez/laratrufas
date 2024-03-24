@@ -1,27 +1,27 @@
 <script setup>
-import { ref } from 'vue'
-import { Head, useForm } from '@inertiajs/vue3'
-import { useI18n } from 'vue-i18n'
-import { format } from 'date-fns'
+import { ref } from 'vue';
+import { Head, useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { format } from 'date-fns';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import VInput from '@/Components/form/VInput.vue'
-import VInputFile from '@/Components/form/VInputFile.vue'
-import VSelect from '@/Components/form/VSelect.vue'
-import { stringToDate } from '@/Utils/date'
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import VInput from '@/Components/form/VInput.vue';
+import VInputFile from '@/Components/form/VInputFile.vue';
+import VSelect from '@/Components/form/VSelect.vue';
+import { stringToDate } from '@/Utils/date';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const props = defineProps({
   data: Object,
   fields: Array,
   responsibles: Array,
-})
+});
 
-const { data } = props.data
+const { data } = props.data;
 
-const blueprintPreview = ref(data.blueprint)
+const blueprintPreview = ref(data.blueprint);
 
 const form = useForm({
   _method: 'PATCH',
@@ -35,21 +35,23 @@ const form = useForm({
   responsible_id: data.responsible.id.toString(),
   blueprint: null,
   blueprintRemove: false,
-})
+});
 
 const submitHandler = () => {
-  form.transform((data) => ({
-    ...data,
-    planned_at: format(data.planned_at, 'yyyy-MM-dd'),
-  })).post(route('quarters.update', data.id), {
-    forceFormData: true,
-  })
-}
+  form
+    .transform((data) => ({
+      ...data,
+      planned_at: format(data.planned_at, 'yyyy-MM-dd'),
+    }))
+    .post(route('quarters.update', data.id), {
+      forceFormData: true,
+    });
+};
 
 const changeFileHandler = (e) => {
-  form.blueprint = e.fileInput
-  form.blueprintRemove = e.fileRemove
-}
+  form.blueprint = e.fileInput;
+  form.blueprintRemove = e.fileRemove;
+};
 </script>
 
 <template>

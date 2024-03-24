@@ -2,8 +2,8 @@
 import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
-  meta: Object
-})
+  meta: Object,
+});
 </script>
 
 <template>

@@ -1,14 +1,14 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3'
-import { useI18n } from 'vue-i18n'
+import { Head, useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import VInput from '@/Components/form/VInput.vue'
-import VInputDni from '@/Components/form/VInputDni.vue'
-import VInputFile from '@/Components/form/VInputFile.vue'
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import VInput from '@/Components/form/VInput.vue';
+import VInputDni from '@/Components/form/VInputDni.vue';
+import VInputFile from '@/Components/form/VInputFile.vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const form = useForm({
   name: null,
@@ -17,17 +17,17 @@ const form = useForm({
   owner_dni: null,
   owner_name: null,
   blueprint: null,
-})
+});
 
 const submitHandler = () => {
   form.post(route('fields.store'), {
     forceFormData: true,
-  })
-}
+  });
+};
 
 const changeFileHandler = (e) => {
-  form.blueprint = e.fileInput
-}
+  form.blueprint = e.fileInput;
+};
 </script>
 
 <template>

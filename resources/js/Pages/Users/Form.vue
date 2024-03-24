@@ -1,13 +1,13 @@
 <script setup>
-import { ref } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-import VInput from '@/Components/form/VInput.vue'
-import VSelect from '@/Components/form/VSelect.vue'
-import VInputFile from '@/Components/form/VInputFile.vue'
-import VInputDni from '@/Components/form/VInputDni.vue'
+import VInput from '@/Components/form/VInput.vue';
+import VSelect from '@/Components/form/VSelect.vue';
+import VInputFile from '@/Components/form/VInputFile.vue';
+import VInputDni from '@/Components/form/VInputDni.vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const props = defineProps({
   form: Object,
@@ -17,16 +17,16 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-})
+});
 
-const form = props.form
+const form = props.form;
 
-const avatarPreview = ref(form.avatar)
+const avatarPreview = ref(form.avatar);
 
 const changeFileHandler = (e) => {
-  form.avatar = e.fileInput
-  form.avatarRemove = e.fileRemove
-}
+  form.avatar = e.fileInput;
+  form.avatarRemove = e.fileRemove;
+};
 </script>
 
 <template>

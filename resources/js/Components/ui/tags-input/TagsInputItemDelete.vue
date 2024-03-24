@@ -1,8 +1,8 @@
 <script setup>
-import { computed } from "vue";
-import { TagsInputItemDelete, useForwardProps } from "radix-vue";
-import { Cross2Icon } from "@radix-icons/vue";
-import { cn } from "@/lib/utils";
+import { computed } from 'vue';
+import { TagsInputItemDelete, useForwardProps } from 'radix-vue';
+import { Cross2Icon } from '@radix-icons/vue';
+import { cn } from '@/lib/utils';
 
 const props = defineProps({
   asChild: { type: Boolean, required: false },

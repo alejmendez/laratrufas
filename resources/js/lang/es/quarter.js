@@ -2,7 +2,7 @@ export default {
   titles: {
     entity_breadcrumb: 'Cuarteles',
     create: 'Crear Cuartel',
-    edit: 'Editar Cuartel'
+    edit: 'Editar Cuartel',
   },
   table: {
     name: 'cuartel',
@@ -25,7 +25,7 @@ export default {
       label: 'Fecha de plantación',
     },
     number_of_trees: {
-      label: 'Cantidad de arboles'
+      label: 'Cantidad de arboles',
     },
     field_id: {
       label: 'Perteneciente al campo',
@@ -38,6 +38,6 @@ export default {
     },
   },
   sections: {
-    blueprint: 'Planos'
-  }
-}
+    blueprint: 'Planos',
+  },
+};

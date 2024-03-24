@@ -1,8 +1,8 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const props = defineProps({
   imagePreview: {
@@ -15,52 +15,52 @@ const props = defineProps({
   },
   image: {
     type: String,
-    default: ''
+    default: '',
   },
   label: {
     type: String,
-    default: ''
-  }
-})
+    default: '',
+  },
+});
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change']);
 
-const fileInput = ref(null)
-const fileRemove = ref(false)
-const filePreview = ref(null)
+const fileInput = ref(null);
+const fileRemove = ref(false);
+const filePreview = ref(null);
 
 const preview = computed(() => {
   if (fileRemove.value) {
-    return null
+    return null;
   }
   if (filePreview.value) {
-    return filePreview.value
+    return filePreview.value;
   }
 
-  return props.image
-})
+  return props.image;
+});
 
 const changeFileHandler = (e) => {
-  const [file] = e.target.files
+  const [file] = e.target.files;
   emit('change', {
     fileRemove: false,
     fileInput: file,
-  })
+  });
   if (file) {
-    fileRemove.value = false
-    filePreview.value = URL.createObjectURL(file)
+    fileRemove.value = false;
+    filePreview.value = URL.createObjectURL(file);
   }
-}
+};
 
 const fileRemoveHandler = () => {
-  fileRemove.value = true
-  fileInput.value.value = null
-  filePreview.value = null
+  fileRemove.value = true;
+  fileInput.value.value = null;
+  filePreview.value = null;
   emit('change', {
     fileRemove: true,
     fileInput: null,
-  })
-}
+  });
+};
 </script>
 
 <template>

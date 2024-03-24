@@ -1,35 +1,35 @@
 <script setup>
-import { Head, Link, router } from '@inertiajs/vue3'
-import { useI18n } from 'vue-i18n'
-import { useToast } from 'vue-toastification'
+import { Head, Link, router } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { useToast } from 'vue-toastification';
 
-import { deleteRowTable } from '@/Utils/table'
+import { deleteRowTable } from '@/Utils/table';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import TableList from '@/Components/Table/TableList.vue'
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import TableList from '@/Components/Table/TableList.vue';
 
-const { t } = useI18n()
-const toast = useToast()
+const { t } = useI18n();
+const toast = useToast();
 
 const props = defineProps({
-    order: String,
-    search: String,
-    data: Object,
-    toast: String,
-})
+  order: String,
+  search: String,
+  data: Object,
+  toast: String,
+});
 
 if (props.toast) {
-  toast.success(t('generics.messages.saved_successfully'))
+  toast.success(t('generics.messages.saved_successfully'));
 }
 
-const plants = props.data.data.map(p => {
-  p.field_name = p.field.name
-  p.quarter_name = p.quarter.name
-  p.plant_type_name = p.plant_type.name
-  p.responsible_name = p.responsible.name
-  return p
-})
+const plants = props.data.data.map((p) => {
+  p.field_name = p.field.name;
+  p.quarter_name = p.quarter.name;
+  p.plant_type_name = p.plant_type.name;
+  p.responsible_name = p.responsible.name;
+  return p;
+});
 
 const columns = [
   { text: t('plant.table.name'), data: 'name' },
@@ -42,9 +42,9 @@ const columns = [
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, () => {
-    router.delete(route('plants.destroy', id))
-  })
-}
+    router.delete(route('plants.destroy', id));
+  });
+};
 </script>
 
 <template>

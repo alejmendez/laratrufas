@@ -1,16 +1,16 @@
 <script setup>
-import { useAttrs } from 'vue'
+import { useAttrs } from 'vue';
 
-const attrs = useAttrs()
+const attrs = useAttrs();
 
 const props = defineProps({
   disabled: {
     type: Boolean,
-    default: false
-  }
-})
+    default: false,
+  },
+});
 
-const emit = defineEmits(['click'])
+const emit = defineEmits(['click']);
 </script>
 
 <template>

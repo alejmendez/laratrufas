@@ -1,39 +1,31 @@
 <script setup>
-import { useAttrs, ref, onMounted, watch } from 'vue'
-import { Label as LabelShadcn } from '@/Components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/Components/ui/select'
+import { useAttrs, ref, onMounted, watch } from 'vue';
+import { Label as LabelShadcn } from '@/Components/ui/label';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/Components/ui/select';
 
-const model = defineModel()
+const model = defineModel();
 
-const attrs = useAttrs()
+const attrs = useAttrs();
 
 const props = defineProps({
   classWrapper: {
     type: String,
-    default: ''
+    default: '',
   },
   label: {
     type: String,
-    default: ''
+    default: '',
   },
   options: {
     type: Array,
-    default: []
+    default: [],
   },
   placeholder: {
-    type: String
+    type: String,
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: false,
   },
   message: {
     type: String,
@@ -42,15 +34,18 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-})
+});
 
-watch(() => props.options, async (newValue, _) => {
-  if (!newValue.find(v => v.value.toString() === model.value)) {
-    model.value = ''
-  }
-})
+watch(
+  () => props.options,
+  async (newValue, _) => {
+    if (!newValue.find((v) => v.value.toString() === model.value)) {
+      model.value = '';
+    }
+  },
+);
 
-const emit = defineEmits(['change', 'blur'])
+const emit = defineEmits(['change', 'blur']);
 const input = ref(null);
 
 onMounted(() => {

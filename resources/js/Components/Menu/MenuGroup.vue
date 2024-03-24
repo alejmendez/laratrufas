@@ -1,29 +1,23 @@
 <script setup>
-import { ref } from 'vue'
-import MenuElement from './MenuElement.vue'
+import { ref } from 'vue';
+import MenuElement from './MenuElement.vue';
 
 const props = defineProps({
   text: String,
   elements: Array,
   open: Boolean,
-})
+});
 
-const emit = defineEmits(['open'])
+const emit = defineEmits(['open']);
 
-const heights = [
-  'h-[40px]',
-  'h-[80px]',
-  'h-[120px]',
-  'h-[160px]',
-  'h-[200px]',
-]
+const heights = ['h-[40px]', 'h-[80px]', 'h-[120px]', 'h-[160px]', 'h-[200px]'];
 
-const open = ref(props.open)
+const open = ref(props.open);
 
 const clickHandler = () => {
-  open.value = !open.value
-  emit('open', open)
-}
+  open.value = !open.value;
+  emit('open', open);
+};
 </script>
 
 <template>

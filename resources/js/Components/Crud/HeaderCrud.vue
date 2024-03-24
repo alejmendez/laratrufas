@@ -1,20 +1,20 @@
 <script setup>
-import { useSlots } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { useSlots } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { Link } from '@inertiajs/vue3';
 
-import BreadCrumbs from '@/Components/Crud/BreadCrumbs.vue'
-import { Button } from '@/Components/ui/button'
+import BreadCrumbs from '@/Components/Crud/BreadCrumbs.vue';
+import { Button } from '@/Components/ui/button';
 
-const slots = useSlots()
-const { t } = useI18n()
+const slots = useSlots();
+const { t } = useI18n();
 
 const props = defineProps({
   breadcrumbs: Array,
   title: String,
   links: Array,
   form: Object,
-})
+});
 </script>
 
 <template>

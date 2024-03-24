@@ -1,8 +1,8 @@
 <script setup>
-import { computed } from "vue";
-import { TagsInputItem, useForwardProps } from "radix-vue";
+import { computed } from 'vue';
+import { TagsInputItem, useForwardProps } from 'radix-vue';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 const props = defineProps({
   value: { type: String, required: true },

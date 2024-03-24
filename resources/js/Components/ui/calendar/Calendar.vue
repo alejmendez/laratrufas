@@ -1,10 +1,10 @@
 <script setup>
-import { useVModel } from "@vueuse/core";
-import { DatePicker } from "v-calendar";
-import { computed, nextTick, onMounted, ref, useSlots } from "vue";
-import { isVCalendarSlot } from ".";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/Components/ui/button";
+import { useVModel } from '@vueuse/core';
+import { DatePicker } from 'v-calendar';
+import { computed, nextTick, onMounted, ref, useSlots } from 'vue';
+import { isVCalendarSlot } from '.';
+import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/Components/ui/button';
 
 defineOptions({
   inheritAttrs: false,
@@ -14,11 +14,11 @@ const props = defineProps({
   modelValue: { type: [String, Number, Date, Object, null], required: false },
   modelModifiers: { type: Object, required: false },
   columns: { type: Number, required: false, default: 1 },
-  type: { type: String, required: false, default: "single" },
+  type: { type: String, required: false, default: 'single' },
 });
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(['update:modelValue']);
 
-const modelValue = useVModel(props, "modelValue", emits, {
+const modelValue = useVModel(props, 'modelValue', emits, {
   passive: true,
 });
 
@@ -28,14 +28,13 @@ const calendarRef = computed(() => datePicker.value.calendarRef);
 function handleNav(direction) {
   if (!calendarRef.value) return;
 
-  if (direction === "prev") calendarRef.value.movePrev();
+  if (direction === 'prev') calendarRef.value.movePrev();
   else calendarRef.value.moveNext();
 }
 
 onMounted(async () => {
   await nextTick();
-  if (modelValue.value instanceof Date && calendarRef.value)
-    calendarRef.value.focusDate(modelValue.value);
+  if (modelValue.value instanceof Date && calendarRef.value) calendarRef.value.focusDate(modelValue.value);
 });
 
 const $slots = useSlots();

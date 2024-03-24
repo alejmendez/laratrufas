@@ -1,21 +1,21 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n'
+import { useI18n } from 'vue-i18n';
 
-import VSelect from '@/Components/form/VSelect.vue'
-import VInput from '@/Components/form/VInput.vue'
+import VSelect from '@/Components/form/VSelect.vue';
+import VInput from '@/Components/form/VInput.vue';
 
 const props = defineProps({
   fields: Array,
-})
+});
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const form = useForm({
   field_id: '',
   start_date: '',
   end_date: '',
-})
+});
 </script>
 
 <template>

@@ -1,13 +1,13 @@
 export default {
   form: {
     field_id: {
-      label: 'Campo'
+      label: 'Campo',
     },
     start_date: {
-      label: 'Fecha de inicio'
+      label: 'Fecha de inicio',
     },
     end_date: {
-      label: 'Fecha de fin'
+      label: 'Fecha de fin',
     },
   },
-}
+};

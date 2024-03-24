@@ -1,19 +1,19 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3'
-import { useI18n } from 'vue-i18n'
+import { Head, useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import FormUser from '@/Pages/Users/Form.vue'
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import FormUser from '@/Pages/Users/Form.vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const props = defineProps({
   data: Object,
   roles: Array,
-})
+});
 
-const { data } = props.data
+const { data } = props.data;
 
 const form = useForm({
   _method: 'PATCH',
@@ -27,13 +27,13 @@ const form = useForm({
   role: data.role.name,
   avatar: data.avatar,
   avatarRemove: false,
-})
+});
 
 const submitHandler = () => {
   form.post(route('users.update', data.id), {
     forceFormData: true,
-  })
-}
+  });
+};
 </script>
 
 <template>

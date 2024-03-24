@@ -1,26 +1,26 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3'
-import { useI18n } from 'vue-i18n'
-import { useToast } from 'vue-toastification'
+import { Head, useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { useToast } from 'vue-toastification';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import FormUser from '@/Pages/Users/Form.vue'
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import FormUser from '@/Pages/Users/Form.vue';
 
-const { t } = useI18n()
-const toast = useToast()
+const { t } = useI18n();
+const toast = useToast();
 
 const props = defineProps({
   data: Object,
   roles: Array,
   toast: String,
-})
+});
 
 if (props.toast) {
-  toast.success(t('generics.messages.saved_successfully'))
+  toast.success(t('generics.messages.saved_successfully'));
 }
 
-const { data } = props.data
+const { data } = props.data;
 
 const form = useForm({
   _method: 'PATCH',
@@ -34,13 +34,13 @@ const form = useForm({
   role: data.role.name,
   avatar: data.avatar,
   avatarRemove: false,
-})
+});
 
 const submitHandler = () => {
   form.post(route('profile.update', data.id), {
     forceFormData: true,
-  })
-}
+  });
+};
 </script>
 
 <template>

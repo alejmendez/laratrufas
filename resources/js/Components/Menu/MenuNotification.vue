@@ -1,27 +1,27 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue';
 
-const root = ref(null)
+const root = ref(null);
 
-const showDropDown = ref(false)
+const showDropDown = ref(false);
 
 const toggleDrop = () => {
-  showDropDown.value = !showDropDown.value
-}
+  showDropDown.value = !showDropDown.value;
+};
 
 const closeDropDown = (e) => {
   if (!root.value.contains(e.target)) {
-    showDropDown.value = false
+    showDropDown.value = false;
   }
-}
+};
 
 onMounted(() => {
-  document.addEventListener('click', closeDropDown)
-})
+  document.addEventListener('click', closeDropDown);
+});
 
 onUnmounted(() => {
-  document.removeEventListener('click', closeDropDown)
-})
+  document.removeEventListener('click', closeDropDown);
+});
 </script>
 
 <template>

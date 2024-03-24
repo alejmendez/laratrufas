@@ -1,27 +1,27 @@
 <script setup>
-import { Head, Link, router } from '@inertiajs/vue3'
-import { useI18n } from 'vue-i18n'
-import { useToast } from 'vue-toastification'
+import { Head, Link, router } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { useToast } from 'vue-toastification';
 
-import { deleteRowTable } from '@/Utils/table'
-import { getAge } from '@/Utils/date'
+import { deleteRowTable } from '@/Utils/table';
+import { getAge } from '@/Utils/date';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import TableList from '@/Components/Table/TableList.vue'
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import TableList from '@/Components/Table/TableList.vue';
 
-const { t } = useI18n()
-const toast = useToast()
+const { t } = useI18n();
+const toast = useToast();
 
 const props = defineProps({
-    order: String,
-    search: String,
-    data: Object,
-    toast: String,
-})
+  order: String,
+  search: String,
+  data: Object,
+  toast: String,
+});
 
 if (props.toast) {
-  toast.success(t('generics.messages.saved_successfully'))
+  toast.success(t('generics.messages.saved_successfully'));
 }
 
 const columns = [
@@ -37,13 +37,13 @@ const columns = [
 const genders = {
   M: t('dog.form.gender.options.male'),
   F: t('dog.form.gender.options.female'),
-}
+};
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, () => {
-    router.delete(route('dogs.destroy', id))
-  })
-}
+    router.delete(route('dogs.destroy', id));
+  });
+};
 </script>
 
 <template>

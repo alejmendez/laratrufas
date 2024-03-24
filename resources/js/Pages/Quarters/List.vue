@@ -1,35 +1,35 @@
 <script setup>
-import { Head, Link, router } from '@inertiajs/vue3'
-import { useI18n } from 'vue-i18n'
-import { useToast } from 'vue-toastification'
-import { format } from 'date-fns'
+import { Head, Link, router } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { useToast } from 'vue-toastification';
+import { format } from 'date-fns';
 
-import { deleteRowTable } from '@/Utils/table'
-import { stringToDate } from '@/Utils/date'
+import { deleteRowTable } from '@/Utils/table';
+import { stringToDate } from '@/Utils/date';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import TableList from '@/Components/Table/TableList.vue'
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import TableList from '@/Components/Table/TableList.vue';
 
-const { t } = useI18n()
-const toast = useToast()
+const { t } = useI18n();
+const toast = useToast();
 
 const props = defineProps({
-    order: String,
-    search: String,
-    data: Object,
-    toast: String,
-})
+  order: String,
+  search: String,
+  data: Object,
+  toast: String,
+});
 
 if (props.toast) {
-  toast.success(t('generics.messages.saved_successfully'))
+  toast.success(t('generics.messages.saved_successfully'));
 }
 
-const quarters = props.data.data.map(q => {
-  q.field_name = q.field.name
-  q.planned_at = format(stringToDate(q.planned_at), 'dd/MM/yyyy')
-  return q
-})
+const quarters = props.data.data.map((q) => {
+  q.field_name = q.field.name;
+  q.planned_at = format(stringToDate(q.planned_at), 'dd/MM/yyyy');
+  return q;
+});
 
 const columns = [
   { text: t('quarter.table.name'), data: 'name' },
@@ -41,9 +41,9 @@ const columns = [
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, () => {
-    router.delete(route('quarters.destroy', id))
-  })
-}
+    router.delete(route('quarters.destroy', id));
+  });
+};
 </script>
 
 <template>

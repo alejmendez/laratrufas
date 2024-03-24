@@ -2,7 +2,7 @@ export default {
   titles: {
     entity_breadcrumb: 'Campos',
     create: 'Crear Campo',
-    edit: 'Editar Campo'
+    edit: 'Editar Campo',
   },
   table: {
     name: 'Campo',
@@ -12,28 +12,28 @@ export default {
   },
   form: {
     name: {
-      label: 'Nombre del campo'
+      label: 'Nombre del campo',
     },
     location: {
-      label: 'Ubicación'
+      label: 'Ubicación',
     },
     size: {
-      label: 'Superficie del campo'
+      label: 'Superficie del campo',
     },
     number_of_trees: {
-      label: 'Cantidad de arboles'
+      label: 'Cantidad de arboles',
     },
     owner_dni: {
-      label: 'Rut/Id del propietario'
+      label: 'Rut/Id del propietario',
     },
     owner_name: {
-      label: 'Nombre del propietario'
+      label: 'Nombre del propietario',
     },
     blueprint: {
       label: 'Seleccione sus planos',
     },
   },
   sections: {
-    blueprint: 'Planos'
+    blueprint: 'Planos',
   },
-}
+};

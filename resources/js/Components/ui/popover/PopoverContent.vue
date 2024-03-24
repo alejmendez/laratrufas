@@ -1,7 +1,7 @@
 <script setup>
-import { computed } from "vue";
-import { PopoverContent, PopoverPortal, useForwardPropsEmits } from "radix-vue";
-import { cn } from "@/lib/utils";
+import { computed } from 'vue';
+import { PopoverContent, PopoverPortal, useForwardPropsEmits } from 'radix-vue';
+import { cn } from '@/lib/utils';
 
 defineOptions({
   inheritAttrs: false,
@@ -12,7 +12,7 @@ const props = defineProps({
   trapFocus: { type: Boolean, required: false },
   side: { type: null, required: false },
   sideOffset: { type: Number, required: false, default: 4 },
-  align: { type: null, required: false, default: "center" },
+  align: { type: null, required: false, default: 'center' },
   alignOffset: { type: Number, required: false },
   avoidCollisions: { type: Boolean, required: false },
   collisionBoundary: { type: null, required: false },
@@ -27,14 +27,7 @@ const props = defineProps({
   disableOutsidePointerEvents: { type: Boolean, required: false },
   class: { type: null, required: false },
 });
-const emits = defineEmits([
-  "escapeKeyDown",
-  "pointerDownOutside",
-  "focusOutside",
-  "interactOutside",
-  "openAutoFocus",
-  "closeAutoFocus",
-]);
+const emits = defineEmits(['escapeKeyDown', 'pointerDownOutside', 'focusOutside', 'interactOutside', 'openAutoFocus', 'closeAutoFocus']);
 
 const delegatedProps = computed(() => {
   const { class: _, ...delegated } = props;

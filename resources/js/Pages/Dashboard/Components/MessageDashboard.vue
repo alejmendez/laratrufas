@@ -1,11 +1,11 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
   tasks: Array,
-})
+});
 
-const { t } = useI18n()
+const { t } = useI18n();
 const messages = [
   {
     id: 1,
@@ -49,7 +49,7 @@ const messages = [
     text: 'Riego con fertilizantes cambió de estado a terminado',
     dateRelative: '20/02/24',
   },
-]
+];
 </script>
 
 <template>

@@ -1,14 +1,14 @@
 <script setup>
 import { ref } from 'vue';
 
-import SideBarLeft from '@/Components/Menu/SideBarLeft.vue'
-import MenuUser from '@/Components/Menu/MenuUser.vue'
+import SideBarLeft from '@/Components/Menu/SideBarLeft.vue';
+import MenuUser from '@/Components/Menu/MenuUser.vue';
 
-const showSide = ref(true)
+const showSide = ref(true);
 
 const toggleSideBar = () => {
-    showSide.value = !showSide.value
-}
+  showSide.value = !showSide.value;
+};
 </script>
 
 <template>

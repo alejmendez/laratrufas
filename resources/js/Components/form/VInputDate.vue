@@ -1,18 +1,14 @@
 <script setup>
-import { watch } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { format } from 'date-fns'
+import { watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { format } from 'date-fns';
 
-import { cn } from '@/lib/utils'
-import { Button } from '@/Components/ui/button'
-import { Calendar } from '@/Components/ui/calendar'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/Components/ui/popover'
+import { cn } from '@/lib/utils';
+import { Button } from '@/Components/ui/button';
+import { Calendar } from '@/Components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/Components/ui/popover';
 
-const model = defineModel()
+const model = defineModel();
 const props = defineProps({
   maxDate: {
     type: Object,
@@ -20,15 +16,15 @@ const props = defineProps({
   minDate: {
     type: Object,
   },
-})
+});
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const emit = defineEmits(['change', 'blur'])
+const emit = defineEmits(['change', 'blur']);
 
 watch(model, async (newValue, _) => {
-  emit('change', newValue)
-})
+  emit('change', newValue);
+});
 </script>
 
 <template>
