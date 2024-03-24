@@ -15,7 +15,7 @@ const props = defineProps({
 
 const form = props.form;
 
-const blueprintPreview = ref(form.avatar);
+const blueprintPreview = ref(form.blueprint);
 
 const changeFileHandler = (e) => {
   form.blueprint = e.fileInput;
