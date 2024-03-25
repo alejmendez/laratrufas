@@ -60,7 +60,7 @@ const deleteHandler = async (id) => {
             >
                 <td>{{ field.name }}</td>
                 <td>{{ field.location }}</td>
-                <td>{{ field.size }} m<sup>2</sup></td>
+                <td>{{ field.size }} ha</td>
                 <td>{{ field.number_of_trees }}</td>
                 <td>
                     <Link :href="route('fields.show', field.id)">

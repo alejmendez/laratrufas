@@ -48,7 +48,7 @@ const changeFileHandler = (e) => {
             type="number"
             min="0"
             max="2000"
-            step="0.1"
+            step="0.01"
             v-model="form.size"
             :label="t('field.form.size.label')"
             :message="form.errors.size"

@@ -18,7 +18,7 @@ export default {
       label: 'Ubicación',
     },
     size: {
-      label: 'Superficie del campo',
+      label: 'Superficie del campo (Hectáreas)',
     },
     number_of_trees: {
       label: 'Cantidad de arboles',
