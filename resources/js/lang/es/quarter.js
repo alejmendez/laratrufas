@@ -19,7 +19,7 @@ export default {
       label: 'Ubicación',
     },
     area: {
-      label: 'Superficie del cuartel',
+      label: 'Superficie del cuartel (Hectáreas)',
     },
     planned_at: {
       label: 'Fecha de plantación',

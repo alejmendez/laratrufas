@@ -19,8 +19,6 @@ const form = props.form;
 
 const blueprintPreview = ref(form.blueprint);
 
-const fieldLocation = computed(() => props.fields.find((f) => f.value == form.field_id)?.location);
-
 const changeFileHandler = (e) => {
   form.blueprint = e.fileInput;
   form.blueprintRemove = e.fileRemove;
@@ -39,14 +37,6 @@ const changeFileHandler = (e) => {
           :label="t('quarter.form.field_id.label')"
           :message="form.errors.field_id"
         />
-
-        <VInput
-          id="location"
-          v-model="fieldLocation"
-          :readonly="true"
-          :label="t('quarter.form.location.label')"
-          :message="form.errors.location"
-        />
       </div>
     </section>
 
@@ -61,25 +51,13 @@ const changeFileHandler = (e) => {
 
         <VInput
           id="area"
+          type="number"
+          min="0"
+          max="2000"
+          step="0.01"
           v-model="form.area"
           :label="t('quarter.form.area.label')"
           :message="form.errors.area"
-        />
-
-        <VInput
-          id="planned_at"
-          type="date"
-          v-model="form.planned_at"
-          :label="t('quarter.form.planned_at.label')"
-          :message="form.errors.planned_at"
-          :max-date="new Date()"
-        />
-
-        <VInput
-          id="number_of_trees"
-          :label="t('quarter.form.number_of_trees.label')"
-          v-model="form.number_of_trees"
-          readonly
         />
 
         <VSelect
@@ -90,8 +68,6 @@ const changeFileHandler = (e) => {
           :label="t('quarter.form.responsible_id.label')"
           :message="form.errors.responsible_id"
         />
-
-
       </div>
     </section>
     <section

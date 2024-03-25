@@ -70,7 +70,7 @@ const deleteHandler = async (id) => {
                 <td>{{ quarter.name }}</td>
                 <td>{{ quarter.field_name }}</td>
                 <td>{{ quarter.planned_at }}</td>
-                <td>{{ quarter.area }} m<sup>2</sup></td>
+                <td>{{ quarter.area }} ha</td>
                 <td>{{ quarter.number_of_trees }}</td>
                 <td>
                     <Link :href="route('quarters.show', quarter.id)">

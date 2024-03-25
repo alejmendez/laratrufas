@@ -119,7 +119,7 @@ class QuartersController extends Controller
 
     protected function getSelectFields()
     {
-        return collect(ListField::call('name')->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name, 'location' => $field->location ]);
+        return collect(ListField::call('name')->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
     }
 
     protected function getSelectResponsibles()

@@ -23,9 +23,7 @@ class UpdateQuarterRequest extends FormRequest
     {
         return [
             'name' => 'required|max:80',
-            'area' => 'required|integer',
-            'location' => 'required|max:25',
-            'planned_at' => 'required|date_format:Y-m-d',
+            'area' => 'required|numeric|between:0,2000',
             'field_id' => 'required|exists:fields,id',
             'responsible_id' => 'required|exists:users,id',
         ];
