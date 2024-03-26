@@ -30,7 +30,7 @@ export default {
       label: 'Vivero de origen',
     },
     code: {
-      label: 'Código de la planta (QR)',
+      label: 'Código de la planta',
     },
     quarter_id: {
       label: 'Perteneciente al cuartel',

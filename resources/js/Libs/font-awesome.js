@@ -25,6 +25,8 @@ import {
   faTree,
   faTriangleExclamation,
   faCheck,
+  faPlus,
+  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faBell, faCalendar } from '@fortawesome/free-regular-svg-icons';
@@ -56,6 +58,8 @@ const icons = [
   faTriangleExclamation,
   faCalendar,
   faCheck,
+  faPlus,
+  faXmark,
 ];
 
 export const initFontAwesome = (app) => {

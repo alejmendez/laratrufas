@@ -46,7 +46,6 @@ class PlantsController extends Controller
             'types' => $this->getSelectTypes(),
             'fields' => $this->getSelectFields(),
             'quarters' => $this->getSelectQuarters(),
-            'rows' => $this->getSelectRows(),
         ]);
     }
 
@@ -73,7 +72,6 @@ class PlantsController extends Controller
             'types' => $this->getSelectTypes(),
             'fields' => $this->getSelectFields(),
             'quarters' => $this->getSelectQuarters(),
-            'rows' => $this->getSelectRows(),
         ]);
     }
 
@@ -89,7 +87,6 @@ class PlantsController extends Controller
             'types' => $this->getSelectTypes(),
             'fields' => $this->getSelectFields(),
             'quarters' => $this->getSelectQuarters(),
-            'rows' => $this->getSelectRows(),
         ]);
     }
 
@@ -126,10 +123,5 @@ class PlantsController extends Controller
     protected function getSelectQuarters()
     {
         return collect(ListQuarter::call('name')->get())->map(fn($quarter) => [ 'value' => $quarter->id, 'text' => $quarter->name, 'field_id' => $quarter->field_id ]);
-    }
-
-    protected function getSelectRows()
-    {
-        return collect(range('A', 'Z'))->map(fn($letter) => [ 'value' => $letter, 'text' => $letter ]);
     }
 }
