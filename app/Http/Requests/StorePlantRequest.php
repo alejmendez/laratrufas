@@ -22,12 +22,11 @@ class StorePlantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:80',
             'plant_type_id' => 'required|exists:plant_types,id',
             'age' => 'required|numeric|between:0,200',
             'planned_at' => 'required|date_format:Y-m-d',
             'nursery_origin' => 'required|max:80',
-            'code' => 'required|max:12',
+            'code' => ['required', 'max:12', Rule::unique('plants')],
             'row' => 'required|max:2',
             'field_id' => 'required|exists:fields,id',
             'quarter_id' => 'required|exists:quarters,id',

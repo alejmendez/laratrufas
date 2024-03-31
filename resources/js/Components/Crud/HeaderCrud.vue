@@ -43,19 +43,22 @@ const props = defineProps({
         </Link>
       </Button>
     </div>
+
     <div
       class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
       v-if="slots.header"
     >
       <slot name="header"></slot>
     </div>
+
     <div
       class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
-      v-if="props.form"
+      v-if="props.form?.submitHandler || props.form?.hrefCancel"
     >
       <Button
         :disabled="props.form.instance.processing"
         @click="props.form.submitHandler"
+        v-if="props.form.submitHandler"
       >
         <font-awesome-icon
           class="animate-spin me-1"
@@ -69,6 +72,7 @@ const props = defineProps({
         variant="secondary"
         as-child
         :disabled="props.form.instance.processing"
+        v-if="props.form.hrefCancel"
       >
         <Link :href="props.form.hrefCancel">
           {{ t('generics.buttons.cancel') }}

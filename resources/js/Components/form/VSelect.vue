@@ -48,6 +48,11 @@ watch(
 const emit = defineEmits(['change', 'blur']);
 const input = ref(null);
 
+const changeHandler = (value) => {
+  model.value = value;
+  emit('change', value);
+};
+
 onMounted(() => {
   if (props.autofocus) {
     input.value.focus();
@@ -64,8 +69,7 @@ onMounted(() => {
     <Select
       class="input"
       :disabled="props.disabled"
-      @change="emit('change', $event)"
-      @blur="emit('blur', $event)"
+      @update:modelValue="changeHandler"
       v-model="model"
       ref="input"
     >

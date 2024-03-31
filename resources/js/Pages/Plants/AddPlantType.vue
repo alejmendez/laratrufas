@@ -5,27 +5,17 @@ import { useI18n } from 'vue-i18n';
 import VInput from '@/Components/form/VInput.vue';
 import { Button } from '@/Components/ui/button';
 
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/Components/ui/dialog'
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/Components/ui/dialog';
 
 const { t } = useI18n();
 
-const props = defineProps({
-});
+const props = defineProps({});
 
 const form = useForm({
   name: null,
 });
 
-const addPlantType = () => {
-
-};
+const addPlantType = () => {};
 </script>
 
 <template>

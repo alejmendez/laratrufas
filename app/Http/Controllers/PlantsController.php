@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 use App\Services\Plants\FindPlant;
 use App\Services\Plants\ListPlant;
@@ -17,6 +18,10 @@ use App\Http\Resources\PlantResource;
 use App\Http\Resources\PlantCollection;
 use App\Http\Requests\StorePlantRequest;
 use App\Http\Requests\UpdatePlantRequest;
+use App\Http\Requests\BulkPlantRequest;
+
+use App\Imports\PlantsImport;
+use App\Exports\PlantsTemplateExport;
 
 class PlantsController extends Controller
 {
@@ -108,6 +113,33 @@ class PlantsController extends Controller
     {
         DeletePlant::call($id);
         return redirect()->back();
+    }
+
+    public function download_bulk_template()
+    {
+        return Excel::download(new PlantsTemplateExport(), 'carga_masiva_plantas.xlsx');
+    }
+
+    public function create_bulk()
+    {
+        return Inertia::render('Plants/Bulk/Create', [
+            'fields' => $this->getSelectFields(),
+            'quarters' => $this->getSelectQuarters(),
+            'alert' => session('alert'),
+            'errors' => session('errors'),
+        ]);
+    }
+
+    public function store_bulk(BulkPlantRequest $request)
+    {
+        try {
+            $file = request()->file('bulk_file');
+            $quarter_id = $request['quarter_id'];
+            $result = Excel::import(new PlantsImport($quarter_id), $file);
+            return redirect()->route('plants.create.bulk')->with('alert', 'alert');
+        } catch (Exception $e) {
+            return redirect()->route('plants.create.bulk')->with('errors', 'errors');
+        }
     }
 
     protected function getSelectTypes()

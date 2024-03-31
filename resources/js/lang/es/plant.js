@@ -3,6 +3,7 @@ export default {
     entity_breadcrumb: 'Plantas',
     create: 'Crear Planta',
     edit: 'Editar Planta',
+    bulk: 'Nuevo carga masiva de plantas',
   },
   table: {
     name: 'planta',
@@ -48,5 +49,12 @@ export default {
   sections: {
     location: 'Ubicación',
     blueprint: 'Planos',
+    recommendations: 'Recomendaciones',
+  },
+  bulk: {
+    form: {
+      field_id: 'Campo',
+      quarter_id: 'Cuartel',
+    },
   },
 };

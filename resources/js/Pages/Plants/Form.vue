@@ -5,7 +5,6 @@ import { useI18n } from 'vue-i18n';
 import VInput from '@/Components/form/VInput.vue';
 import VSelect from '@/Components/form/VSelect.vue';
 import AddPlantType from '@/Pages/Plants/AddPlantType.vue';
-import { Button } from '@/Components/ui/button';
 
 const { t } = useI18n();
 
@@ -20,10 +19,6 @@ const props = defineProps({
 const form = props.form;
 
 const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id));
-
-const addPlantType = () => {
-
-}
 </script>
 
 <template>
@@ -70,10 +65,10 @@ const addPlantType = () => {
     <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
       <div class="p-6 grid grid-cols-2 gap-x-16 gap-y-4">
         <VInput
-          id="name"
-          v-model="form.name"
-          :label="t('plant.form.name.label')"
-          :message="form.errors.name"
+          id="code"
+          v-model="form.code"
+          :label="t('plant.form.code.label')"
+          :message="form.errors.code"
         />
 
         <div class="grid grid-cols-12">
@@ -116,13 +111,6 @@ const addPlantType = () => {
           v-model="form.nursery_origin"
           :label="t('plant.form.nursery_origin.label')"
           :message="form.errors.nursery_origin"
-        />
-
-        <VInput
-          id="code"
-          v-model="form.code"
-          :label="t('plant.form.code.label')"
-          :message="form.errors.code"
         />
       </div>
     </section>

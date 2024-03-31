@@ -18,9 +18,7 @@ class QuarterFactory extends Factory
     {
         return [
             'name' => 'quarter ' . fake()->name(),
-            'location' => fake()->numerify('##.######, -##.######'), // 41.191374, -95.394946
             'area' => fake()->numerify('##.###'),
-            'planned_at' => fake()->date(),
         ];
     }
 }

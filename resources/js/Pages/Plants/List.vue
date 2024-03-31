@@ -32,7 +32,7 @@ const plants = props.data.data.map((p) => {
 });
 
 const columns = [
-  { text: t('plant.table.name'), data: 'name' },
+  { text: t('plant.table.name'), data: 'code' },
   { text: t('plant.table.quarter_id'), data: 'quarter_id' },
   { text: t('plant.table.field_id'), data: 'field_id' },
   { text: t('plant.table.type'), data: 'plant_type_id' },
@@ -54,7 +54,7 @@ const deleteHandler = async (id) => {
         <HeaderCrud
             :title="t('plant.titles.entity_breadcrumb')"
             :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-            :links="[{ to: 'plants.create', text: t('generics.new') }]"
+            :links="[{ to: 'plants.create', text: t('generics.new') }, { to: 'plants.create.bulk', text: t('generics.bulk.button') }]"
         />
 
         <TableList
@@ -68,7 +68,7 @@ const deleteHandler = async (id) => {
                 v-for="plant of plants"
                 :key="plant.id"
             >
-                <td>{{ plant.name }}</td>
+                <td>{{ plant.code }}</td>
                 <td>{{ plant.quarter_name }}</td>
                 <td>{{ plant.field_name }}</td>
                 <td>{{ plant.plant_type_name }}</td>

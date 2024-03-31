@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('plants', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 80);
-            $table->decimal('age', total: 3, places: 2);
             $table->date('planned_at');
             $table->string('nursery_origin', 80);
-            $table->string('code', 12);
+            $table->string('code', 12)->unique();
             $table->string('row', 2);
             $table->string('blueprint')->nullable();
             $table->foreignId('quarter_id')->constrained();

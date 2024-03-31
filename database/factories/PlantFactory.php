@@ -17,12 +17,10 @@ class PlantFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'plant ' . fake()->name(),
-            'age' => rand(1, 30),
             'planned_at' => fake()->date(),
             'nursery_origin' => fake()->name(),
             'code' => strtoupper(fake()->lexify('??-??-??')),
-            'row' => strtoupper(fake()->randomLetter()),
+            'row' => strtoupper(fake()->randomLetter() . fake()->randomLetter()),
         ];
     }
 }

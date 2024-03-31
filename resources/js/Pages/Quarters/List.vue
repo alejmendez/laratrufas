@@ -27,14 +27,12 @@ if (props.toast) {
 
 const quarters = props.data.data.map((q) => {
   q.field_name = q.field.name;
-  q.planned_at = format(stringToDate(q.planned_at), 'dd/MM/yyyy');
   return q;
 });
 
 const columns = [
   { text: t('quarter.table.name'), data: 'name' },
   { text: t('quarter.table.field_id'), data: 'field_id' },
-  { text: t('quarter.table.planned_at'), data: 'planned_at' },
   { text: t('quarter.table.area'), data: 'area' },
   { text: t('quarter.table.number_of_trees'), data: 'number_of_trees' },
 ];
@@ -69,7 +67,6 @@ const deleteHandler = async (id) => {
             >
                 <td>{{ quarter.name }}</td>
                 <td>{{ quarter.field_name }}</td>
-                <td>{{ quarter.planned_at }}</td>
                 <td>{{ quarter.area }} ha</td>
                 <td>{{ quarter.number_of_trees }}</td>
                 <td>

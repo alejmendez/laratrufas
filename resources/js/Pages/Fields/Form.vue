@@ -59,6 +59,7 @@ const changeFileHandler = (e) => {
             :label="t('quarter.form.number_of_trees.label')"
             v-model="form.number_of_trees"
             readonly
+            v-if="form.number_of_trees"
           />
         </div>
       </div>

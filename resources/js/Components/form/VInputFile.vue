@@ -2,6 +2,9 @@
 import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { Button } from '@/Components/ui/button';
+import VInput from '@/Components/form/VInput.vue';
+
 const { t } = useI18n();
 
 const props = defineProps({
@@ -21,6 +24,14 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  withRemove: {
+    type: Boolean,
+    default: true,
+  },
+  showPathFile: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['change']);
@@ -28,6 +39,7 @@ const emit = defineEmits(['change']);
 const fileInput = ref(null);
 const fileRemove = ref(false);
 const filePreview = ref(null);
+const filePath = ref('');
 
 const preview = computed(() => {
   if (fileRemove.value) {
@@ -49,6 +61,7 @@ const changeFileHandler = (e) => {
   if (file) {
     fileRemove.value = false;
     filePreview.value = URL.createObjectURL(file);
+    filePath.value = file.name;
   }
 };
 
@@ -60,6 +73,10 @@ const fileRemoveHandler = () => {
     fileRemove: true,
     fileInput: null,
   });
+};
+
+const selectFile = () => {
+  fileInput.value.click();
 };
 </script>
 
@@ -82,17 +99,30 @@ const fileRemoveHandler = () => {
       <input
         ref="fileInput"
         type="file"
-        className="input-file mb-4"
-        style="width: 160px;"
+        class="hidden"
         :accept="accept"
         @change="changeFileHandler"
       />
-      <button
-        class="btn btn-secondary"
+
+      <div class="flex max-w-md items-center">
+        <div class="border p-2 grow h-[40px] truncate rounded-s" :title="filePath">{{ filePath }}</div>
+        <Button
+
+          class="bg-gray-300 text-gray-800 hover:bg-gray-300/80 rounded-s-none"
+          @click.prevent="selectFile"
+        >
+          {{ t('generics.form.file.upload_file') }}
+        </Button>
+      </div>
+      <div class="text-slate-500 text-sm">Las imágenes no debe superar 5 mb</div class="">
+      <Button
+        variant="secondary"
+        v-if="props.withRemove"
+        class="bg-white text-slate-500 border-slate-500 border hover:slate-500/80 mt-4"
         @click.prevent="fileRemoveHandler"
       >
         {{ t('generics.form.file.remove_image') }}
-      </button>
+      </Button>
     </div>
   </div>
 </template>

@@ -16,7 +16,6 @@ const props = defineProps({
   fields: Array,
   quarters: Array,
   types: Array,
-  rows: Array,
 });
 
 const { data } = props.data;
