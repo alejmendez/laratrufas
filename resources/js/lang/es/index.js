@@ -1,5 +1,5 @@
 import generics from './generics';
-import login from './login';
+import auth from './auth';
 import profile from './profile';
 import dashboard from './dashboard';
 import user from './user';
@@ -14,7 +14,7 @@ export default {
     name: 'SW Agricola',
   },
   generics,
-  login,
+  auth,
   profile,
   dashboard,
   user,

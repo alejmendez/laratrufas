@@ -33,10 +33,10 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head :title="t('login.title')" />
+        <Head :title="t('auth.login.title')" />
 
         <div class="my-4 text-4xl text-gray-900 font-bold text-center">
-          {{ t('login.title') }}
+          {{ t('auth.login.title') }}
         </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -49,7 +49,7 @@ const submit = () => {
             type="email"
             classWrapper="mt-4"
             v-model="form.email"
-            :label="t('login.form.email')"
+            :label="t('auth.login.form.email')"
             :message="form.errors.email"
           />
 
@@ -59,14 +59,14 @@ const submit = () => {
             autocomplete="current-password"
             classWrapper="mt-4"
             v-model="form.password"
-            :label="t('login.form.password')"
+            :label="t('auth.login.form.password')"
             :message="form.errors.password"
           />
 
             <div class="block mt-4">
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ t('login.form.remember_me') }}</span>
+                    <span class="ms-2 text-sm text-gray-600">{{ t('auth.login.form.remember_me') }}</span>
                 </label>
             </div>
 
@@ -77,7 +77,7 @@ const submit = () => {
                   :icon="['fas', 'circle-notch']"
                   v-show="form.processing"
                 />
-                {{ t('login.form.submit') }}
+                {{ t('auth.login.form.submit') }}
               </Button>
             </div>
 
@@ -87,7 +87,7 @@ const submit = () => {
                   :href="route('password.request')"
                   class="text-l font-bold text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                {{ t('login.links.restore_password') }}
+                {{ t('auth.login.links.restore_password') }}
               </Link>
             </div>
         </form>

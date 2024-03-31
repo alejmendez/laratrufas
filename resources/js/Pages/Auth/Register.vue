@@ -6,6 +6,9 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 const form = useForm({
   name: '',
   email: '',
@@ -22,11 +25,11 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Register" />
+        <Head :title="t('auth.register.title')" />
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" :value="t('auth.register.form.name')" />
 
                 <TextInput
                     id="name"
@@ -42,7 +45,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" :value="t('auth.register.form.email')" />
 
                 <TextInput
                     id="email"
@@ -57,7 +60,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" :value="t('auth.register.form.password')" />
 
                 <TextInput
                     id="password"
@@ -72,7 +75,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <InputLabel for="password_confirmation" :value="t('auth.register.form.confirm_password')" />
 
                 <TextInput
                     id="password_confirmation"
@@ -91,11 +94,11 @@ const submit = () => {
                     :href="route('login')"
                     class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                    Already registered?
+                    {{ t('auth.register.already_registered') }}
                 </Link>
 
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
+                  {{ t('auth.register.already_registered') }}
                 </PrimaryButton>
             </div>
         </form>
