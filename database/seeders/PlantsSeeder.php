@@ -15,7 +15,7 @@ class PlantsSeeder extends Seeder
      */
     public function run(): void
     {
-        PlantType::create(['name' => 'Encina']);
+        PlantType::create(['name' => 'Encina', 'slug' => 'encina']);
 
         $plant_types_ids = PlantType::all()->pluck('id')->all();
         $plant_types_ids_count = count($plant_types_ids) - 1;

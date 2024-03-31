@@ -16,6 +16,7 @@ class PlantType extends Model
 
     protected $fillable = [
         'name',
+        'slug',
     ];
 
     public function plants(): HasMany
