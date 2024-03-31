@@ -21,7 +21,7 @@ const clickHandler = () => {
 </script>
 
 <template>
-  <div id="id">
+  <div>
     <div
       class="cursor-pointer"
       @click="clickHandler"

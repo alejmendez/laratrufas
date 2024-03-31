@@ -44,7 +44,8 @@ export default {
   },
   forgotPassword: {
     title: 'Olvidé mi contraseña',
-    subtitle: '¿Ha olvidado su contraseña? No se preocupe. Díganos su dirección de correo electrónico y le enviaremos un enlace para restablecer la contraseña. que le permitirá elegir una nueva.',
+    subtitle:
+      '¿Ha olvidado su contraseña? No se preocupe. Díganos su dirección de correo electrónico y le enviaremos un enlace para restablecer la contraseña. que le permitirá elegir una nueva.',
     form: {
       email: 'Correo electrónico',
       submit: 'Enlace de restablecimiento de contraseña por correo electrónico',
@@ -52,7 +53,8 @@ export default {
   },
   verifyEmail: {
     title: 'Verificación del correo electrónico',
-    subtitle: 'Gracias por registrarte. Antes de empezar, ¿podrías verificar tu dirección de correo electrónico haciendo clic en el enlace que te acabamos de enviar? Si no lo has recibido, estaremos encantados de enviarte otro.',
+    subtitle:
+      'Gracias por registrarte. Antes de empezar, ¿podrías verificar tu dirección de correo electrónico haciendo clic en el enlace que te acabamos de enviar? Si no lo has recibido, estaremos encantados de enviarte otro.',
     alert: 'Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónico que proporcionó durante el registro.',
     form: {
       submit: 'Reenviar correo de verificación',

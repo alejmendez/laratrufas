@@ -22,39 +22,39 @@ const orderUrl = (col) => {
 </script>
 
 <template>
-    <div class="tableContainer">
-        <!-- Table responsive wrapper -->
-        <div class="overflow-x-auto bg-white">
-            <SearchInput :q="props.search" />
+  <div class="tableContainer">
+    <!-- Table responsive wrapper -->
+    <div class="overflow-x-auto bg-white">
+      <SearchInput :q="props.search" />
 
-            <!-- Table -->
-            <table>
-                <!-- Table head -->
-                <thead class="uppercase tracking-wider border-b-2">
-                    <tr>
-                        <th
-                            v-for="column of props.columns"
-                            :key="column.data"
-                            scope="col"
-                        >
-                            <Link :href="orderUrl(column.data)">
-                                {{ column.text }}
-                                <font-awesome-icon icon="sort-down" v-if="props.order === column.data" />
-                                <font-awesome-icon icon="sort-up" v-else-if="props.order[0] === '-' && props.order.substring(1) === column.data" />
-                                <font-awesome-icon icon="sort" v-else />
-                            </Link>
-                        </th>
-                        <th scope="col" class="w-[140px]">{{ t('generics.tables.actions') }}</th>
-                    </tr>
-                </thead>
+      <!-- Table -->
+      <table>
+        <!-- Table head -->
+        <thead class="uppercase tracking-wider border-b-2">
+          <tr>
+            <th
+              v-for="column of props.columns"
+              :key="column.data"
+              scope="col"
+            >
+              <Link :href="orderUrl(column.data)">
+                {{ column.text }}
+                <font-awesome-icon icon="sort-down" v-if="props.order === column.data" />
+                <font-awesome-icon icon="sort-up" v-else-if="props.order[0] === '-' && props.order.substring(1) === column.data" />
+                <font-awesome-icon icon="sort" v-else />
+              </Link>
+            </th>
+            <th scope="col" class="w-[140px]">{{ t('generics.tables.actions') }}</th>
+          </tr>
+        </thead>
 
-                <!-- Table body -->
-                <tbody>
-                    <slot />
-                </tbody>
-            </table>
+        <!-- Table body -->
+        <tbody>
+          <slot />
+        </tbody>
+      </table>
 
-            <PaginationTable :meta="props.meta" />
-        </div>
+      <PaginationTable :meta="props.meta" />
     </div>
+  </div>
 </template>

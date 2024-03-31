@@ -19,10 +19,10 @@ const props = defineProps({
     <ul>
       <li v-for="linkPagination in props.meta.links">
         <Link
-            :href="linkPagination.url || '#'"
-            class="pagination-link"
-            :class="{ 'opacity-35': linkPagination.active }"
-            v-html="linkPagination.label"
+          :href="linkPagination.url || '#'"
+          class="pagination-link"
+          :class="{ 'opacity-35': linkPagination.active }"
+          v-html="linkPagination.label"
         >
         </Link>
       </li>
