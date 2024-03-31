@@ -7,17 +7,17 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 defineProps({
-    status: {
-        type: String,
-    },
+  status: {
+    type: String,
+  },
 });
 
 const form = useForm({
-    email: '',
+  email: '',
 });
 
 const submit = () => {
-    form.post(route('password.email'));
+  form.post(route('password.email'));
 };
 </script>
 
