@@ -3,7 +3,6 @@ import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { Button } from '@/Components/ui/button';
-import VInput from '@/Components/form/VInput.vue';
 
 const { t } = useI18n();
 

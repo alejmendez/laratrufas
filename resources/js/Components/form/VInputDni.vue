@@ -1,6 +1,6 @@
 <script setup>
 import { useAttrs } from 'vue';
-import VInput from '@/Components/form/VInput.vue';
+import VInput from '@/Components/Form/VInput.vue';
 
 const model = defineModel();
 

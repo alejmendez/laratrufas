@@ -2,9 +2,9 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import VInput from '@/Components/form/VInput.vue';
-import VInputFile from '@/Components/form/VInputFile.vue';
-import VInputDni from '@/Components/form/VInputDni.vue';
+import VInput from '@/Components/Form/VInput.vue';
+import VInputFile from '@/Components/Form/VInputFile.vue';
+import VInputDni from '@/Components/Form/VInputDni.vue';
 
 const { t } = useI18n();
 

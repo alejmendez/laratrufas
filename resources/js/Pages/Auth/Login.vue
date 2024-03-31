@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import VInput from '@/Components/form/VInput.vue';
+import VInput from '@/Components/Form/VInput.vue';
 import { Checkbox } from '@/Components/ui/checkbox';
 import { Button } from '@/Components/ui/button';
 

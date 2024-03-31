@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import VInput from '@/Components/form/VInput.vue';
+import VInput from '@/Components/Form/VInput.vue';
 import { Button } from '@/Components/ui/button';
 
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/Components/ui/dialog';

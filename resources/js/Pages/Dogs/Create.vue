@@ -6,9 +6,9 @@ import { format } from 'date-fns';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
-import VInput from '@/Components/form/VInput.vue';
-import VInputFile from '@/Components/form/VInputFile.vue';
-import VSelect from '@/Components/form/VSelect.vue';
+import VInput from '@/Components/Form/VInput.vue';
+import VInputFile from '@/Components/Form/VInputFile.vue';
+import VSelect from '@/Components/Form/VSelect.vue';
 
 import { getAge } from '@/Utils/date';
 
