@@ -39,7 +39,7 @@ const menuData = [
       { link: route('users.index'), text: t('menu.users') },
       { link: route('dogs.index'), text: t('menu.dogs') },
       { link: route('users.index'), text: t('menu.alerts'), icon: 'fa-solid fa-person-digging' },
-      { link: route('users.index'), text: t('menu.bulk_uploads'), icon: 'fa-solid fa-person-digging' },
+      { link: route('bulk.index'), text: t('menu.bulk_uploads') },
     ],
   },
 ];

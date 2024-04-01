@@ -8,6 +8,7 @@ use App\Http\Controllers\QuartersController;
 use App\Http\Controllers\PlantsController;
 use App\Http\Controllers\DogsController;
 use App\Http\Controllers\HarvestsController;
+use App\Http\Controllers\BulksController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/bulk', [BulksController::class, 'index'])->name('bulk.index');
 
     Route::get('/plants/bulk', [PlantsController::class, 'create_bulk'])->name('plants.create.bulk');
     Route::post('/plants/bulk', [PlantsController::class, 'store_bulk'])->name('plants.store.bulk');

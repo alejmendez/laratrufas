@@ -8,6 +8,7 @@ import quarter from './quarter';
 import plant from './plant';
 import dog from './dog';
 import menu from './menu';
+import bulk from './bulk';
 
 export default {
   brand: {
@@ -23,4 +24,5 @@ export default {
   plant,
   dog,
   menu,
+  bulk,
 };
