@@ -13,7 +13,19 @@ return new class extends Migration
     {
         Schema::create('harvests', function (Blueprint $table) {
             $table->id();
+
+            $table->date('date');
+            $table->string('batch', 2);
+            $table->string('comments', 250);
+
+            $table->foreignId('dog_id')->constrained();
+            $table->integer('farmer_id');
+            $table->foreign('farmer_id')->references('id')->on('users');
+            $table->integer('assistant_id');
+            $table->foreign('assistant_id')->references('id')->on('users');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

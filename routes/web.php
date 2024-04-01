@@ -7,6 +7,7 @@ use App\Http\Controllers\FieldsController;
 use App\Http\Controllers\QuartersController;
 use App\Http\Controllers\PlantsController;
 use App\Http\Controllers\DogsController;
+use App\Http\Controllers\HarvestsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -47,6 +48,7 @@ Route::middleware('auth')->group(function () {
         'quarters' => QuartersController::class,
         'plants' => PlantsController::class,
         'dogs' => DogsController::class,
+        'harvests' => HarvestsController::class,
     ]);
 });
 
