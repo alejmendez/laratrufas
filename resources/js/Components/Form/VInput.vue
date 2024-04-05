@@ -2,6 +2,7 @@
 import { useAttrs, ref, onMounted } from 'vue';
 import { Input as InputShadcn } from '@/Components/ui/input';
 import { Label as LabelShadcn } from '@/Components/ui/label';
+import { Textarea } from '@/Components/ui/textarea';
 import VInputDate from './VInputDate.vue';
 
 const model = defineModel();
@@ -66,16 +67,24 @@ onMounted(() => {
         :maxDate="props.maxDate"
       />
     </template>
-    <template v-else>
-      <InputShadcn
-        v-bind="attrs"
+    <template v-else-if="props.type === 'textarea'">
+      <Textarea
         class="input mt-1"
-        :type="props.type"
-        :disabled="props.disabled"
+        ref="input"
+        v-bind="attrs"
+        v-model="model"
         @change="emit('change', $event)"
         @blur="emit('blur', $event)"
-        v-model="model"
+      />
+    </template>
+    <template v-else>
+      <InputShadcn
+        class="input mt-1"
         ref="input"
+        v-bind="attrs"
+        v-model="model"
+        @change="emit('change', $event)"
+        @blur="emit('blur', $event)"
       />
     </template>
 

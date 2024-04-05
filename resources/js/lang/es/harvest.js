@@ -24,11 +24,8 @@ export default {
       label: 'Batch',
     },
     details: {
-      plant_id: {
-        label: 'Código de la planta (QR)',
-      },
-      number: {
-        label: 'Unidad',
+      plant_code: {
+        label: 'Planta',
       },
       quality: {
         label: 'Calidad',
@@ -36,6 +33,9 @@ export default {
       weight: {
         label: 'Peso',
       },
+    },
+    quarter_ids: {
+      label: 'Cuarteles',
     },
     dog_id: {
       label: 'Perro',
@@ -51,7 +51,7 @@ export default {
     },
   },
   sections: {
-    responsibles: 'Responsables',
+    harvest: 'Cosecha',
     comments: 'Comentarios',
   },
 };

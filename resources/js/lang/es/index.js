@@ -9,6 +9,7 @@ import plant from './plant';
 import dog from './dog';
 import menu from './menu';
 import bulk from './bulk';
+import harvest from './harvest';
 
 export default {
   brand: {
@@ -25,4 +26,5 @@ export default {
   dog,
   menu,
   bulk,
+  harvest,
 };

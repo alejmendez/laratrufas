@@ -17,7 +17,7 @@ const menuData = [
   {
     text: t('menu.harvest_management'),
     children: [
-      { link: route('users.index'), text: t('menu.harvest'), icon: 'fa-solid fa-person-digging' },
+      { link: route('harvests.index'), text: t('menu.harvest') },
       { link: route('users.index'), text: t('menu.batch'), icon: 'fa-solid fa-person-digging' },
     ],
   },

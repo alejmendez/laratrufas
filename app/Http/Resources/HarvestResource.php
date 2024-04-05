@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
-class PlantResource extends JsonResource
+class HarvestResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -40,14 +40,14 @@ class PlantResource extends JsonResource
                     'id' => $quearter->id,
                     'name' => $quearter->name,
                 ];
-            }),
+            })->unique('id'),
             'quarters' => $this->details->map(function ($detail) {
-                $quearter = $detail->plant->quearter;
+                $field = $detail->plant->quearter->field;
                 return [
-                    'id' => $quearter->id,
-                    'name' => $quearter->name,
+                    'id' => $field->id,
+                    'name' => $field->name,
                 ];
-            }),
+            })->unique('id'),
         ];
     }
 }

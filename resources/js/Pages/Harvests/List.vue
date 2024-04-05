@@ -64,7 +64,7 @@ const deleteHandler = async (id) => {
       >
         <td>{{ harvest.date }}</td>
         <td>{{ harvest.batch }}</td>
-        <td>{{ harvest.detail.reduce((total, d) => total + (d.weight * d.number)) }}</td>
+        <td>{{ harvest.detail.reduce((total, d) => total + (d.weight * d.number), 0) }}</td>
         <td>{{ harvest.detail.map(d => d.plant.code).join(', ') }}</td>
         <td>{{ harvest.breed }}</td>
         <td>{{ harvest.age }}</td>

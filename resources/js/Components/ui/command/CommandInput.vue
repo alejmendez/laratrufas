@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import { MagnifyingGlassIcon } from "@radix-icons/vue";
+
 import { ComboboxInput, useForwardProps } from "radix-vue";
 import { cn } from "@/lib/utils";
 
@@ -28,7 +28,10 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 <template>
   <div class="flex items-center border-b px-3" cmdk-input-wrapper>
-    <MagnifyingGlassIcon class="mr-2 h-4 w-4 shrink-0 opacity-50" />
+    <font-awesome-icon
+      class="mr-2 h-4 w-4 shrink-0 opacity-50"
+      :icon="['fas', 'magnifying-glass']"
+    />
     <ComboboxInput
       v-bind="{ ...forwardedProps, ...$attrs }"
       auto-focus
