@@ -33,8 +33,7 @@ const form = useForm({
 });
 
 const submitHandler = () => {
-  form
-    .post(route('harvests.store'));
+  form.post(route('harvests.store'));
 };
 </script>
 

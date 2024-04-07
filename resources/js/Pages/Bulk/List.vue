@@ -13,7 +13,7 @@ const list = [
     icon: ['fas', 'seedling'],
     title: t('bulk.plants.title'),
     subtitle: t('bulk.plants.subtitle'),
-  }
+  },
 ];
 </script>
 

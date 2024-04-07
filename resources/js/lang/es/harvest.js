@@ -19,6 +19,7 @@ export default {
   form: {
     date: {
       label: 'Semana',
+      renderText: 'Semana {week} - {start} al {end}',
     },
     batch: {
       label: 'Batch',

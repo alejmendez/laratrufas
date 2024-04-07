@@ -40,7 +40,7 @@ export default {
       label: 'Seleccione una fecha',
     },
     multiselect: {
-      not_found: '¡Ups! No se han encontrado elementos. Considere la posibilidad de cambiar la consulta de búsqueda.'
+      not_found: '¡Ups! No se han encontrado elementos. Considere la posibilidad de cambiar la consulta de búsqueda.',
     },
   },
   buttons: {

@@ -3,5 +3,5 @@ export default {
   plants: {
     title: 'Plantas',
     subtitle: 'Importador masivo de plantas',
-  }
+  },
 };

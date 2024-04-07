@@ -18,7 +18,7 @@ const props = defineProps({
   },
   renderText: {
     type: Function,
-    default: (m) => format(m, 'dd/MM/yyyy')
+    default: (m) => format(m, 'dd/MM/yyyy'),
   },
 });
 
