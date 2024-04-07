@@ -33,6 +33,9 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  renderText: {
+    type: Function,
+  },
   maxDate: {
     type: Object,
   },
@@ -63,6 +66,7 @@ onMounted(() => {
         @blur="emit('blur', $event)"
         v-model="model"
         ref="input"
+        :renderText="props.renderText"
         :minDate="props.minDate"
         :maxDate="props.maxDate"
       />

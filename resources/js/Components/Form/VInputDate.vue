@@ -16,6 +16,10 @@ const props = defineProps({
   minDate: {
     type: Object,
   },
+  renderText: {
+    type: Function,
+    default: (m) => format(m, 'dd/MM/yyyy')
+  },
 });
 
 const { t } = useI18n();
@@ -38,7 +42,7 @@ watch(model, async (newValue, _) => {
         )"
       >
         <font-awesome-icon :icon="['far', 'calendar']" class="mr-2 h-4 w-4" />
-        <span>{{ model ? format(model, "dd/MM/yyyy") : t('generics.form.date.label') }}</span>
+        <span>{{ model ? props.renderText(model) : t('generics.form.date.label') }}</span>
       </Button>
     </PopoverTrigger>
     <PopoverContent class="w-auto p-0" align="start">

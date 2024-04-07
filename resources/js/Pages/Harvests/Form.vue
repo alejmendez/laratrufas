@@ -1,5 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
+import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
 
 import VueMultiselect from 'vue-multiselect'
 import VInput from '@/Components/Form/VInput.vue';
@@ -31,6 +32,13 @@ const add_detail = () => {
 const remove_detail = (index) => {
   form.details.splice(index, 1);
 };
+
+const dateRenderText = (m) => {
+  const start = format(startOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
+  const end = format(endOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
+  const week = getWeek(m, { weekStartsOn: 1 });
+  return `Semana ${week} - ${start} al ${end}`;
+}
 </script>
 
 <template>
@@ -42,6 +50,8 @@ const remove_detail = (index) => {
             id="date"
             type="date"
             v-model="form.date"
+            :renderText="dateRenderText"
+            :maxDate="new Date()"
             :label="t('harvest.form.date.label')"
             :message="form.errors.date"
           />
@@ -56,13 +66,14 @@ const remove_detail = (index) => {
               v-model="form.quarter_ids"
               :options="props.quarters"
               :multiple="true"
-              :group-select="true"
               :placeholder="t('generics.please_select')"
+              :group-select="true"
               group-values="quarters"
               group-label="field"
-              track-by="text"
+              track-by="value"
+              :customLabel="(o) => o.text"
             >
-              <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
+              <span slot="noResult">{{ t('generics.form.multiselect.not_found') }}</span>
             </VueMultiselect>
           </div>
 
