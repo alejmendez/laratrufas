@@ -200,6 +200,11 @@
   background: linear-gradient(180deg, #C2C2C2 0%, #DEDEDE 13.5%, #ECECEC 100%);
 }
 
+.menu-element.active {
+  background: #F0F2F5;
+  color: #0B0B0E;
+}
+
 .multiselect__tags .multiselect__tag {
   background: #E9ECEF;
   color: #343A40;

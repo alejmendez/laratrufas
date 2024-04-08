@@ -39,9 +39,9 @@ const orderUrl = (col) => {
             >
               <Link :href="orderUrl(column.data)">
                 {{ column.text }}
-                <font-awesome-icon icon="sort-down" v-if="props.order === column.data" />
-                <font-awesome-icon icon="sort-up" v-else-if="props.order[0] === '-' && props.order.substring(1) === column.data" />
-                <font-awesome-icon icon="sort" v-else />
+                <font-awesome-icon class="text-[#7B849C]" icon="sort-down" v-if="props.order === column.data" />
+                <font-awesome-icon class="text-[#7B849C]" icon="sort-up" v-else-if="props.order[0] === '-' && props.order.substring(1) === column.data" />
+                <font-awesome-icon class="text-[#7B849C]" icon="sort" v-else />
               </Link>
             </th>
             <th scope="col" class="w-[140px]">{{ t('generics.tables.actions') }}</th>

@@ -28,9 +28,23 @@ import {
   faPlus,
   faXmark,
   faSeedling,
+  faTableCells,
+  faTableCellsLarge,
+  faAppleAlt,
+  faFileInvoiceDollar,
+  faListCheck,
+  faTractor,
+  faWrench,
+  faHandshake,
+  faUsers,
+  faSquarePollVertical,
+  faDog,
+  faFileArrowUp,
+  faBasketShopping,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faBell, faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { faBuromobelexperte, faEnvira } from '@fortawesome/free-brands-svg-icons';
 
 const icons = [
   faBars,
@@ -62,6 +76,19 @@ const icons = [
   faPlus,
   faXmark,
   faSeedling,
+  faTableCells,
+  faTableCellsLarge,
+  faEnvira,
+  faBasketShopping,
+  faFileInvoiceDollar,
+  faListCheck,
+  faTractor,
+  faWrench,
+  faHandshake,
+  faUsers,
+  faSquarePollVertical,
+  faDog,
+  faFileArrowUp,
 ];
 
 export const initFontAwesome = (app) => {

@@ -10,6 +10,10 @@ const props = defineProps({
     type: String,
     default: 'fa-solid fa-circle',
   },
+  active: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
@@ -17,9 +21,10 @@ const props = defineProps({
   <Link
     v-bind="attrs"
     :href="props.link"
-    class="menu-element inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800 transition duration-400 ease-in-out"
+    class="menu-element inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium text-[#7B849C] rounded-md border-gray-200 hover:bg-[#FFEBE2] hover:text-[#ED3900] transition duration-400 ease-in-out"
+    :class="{ active: props.active }"
   >
-    <FontAwesomeIcon :icon="props.icon" class="mr-2" />
+    <FontAwesomeIcon :icon="props.icon" class="mr-2 text-xl" />
     {{ props.text }}
   </Link>
 </template>

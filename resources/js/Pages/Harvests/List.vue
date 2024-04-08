@@ -72,12 +72,12 @@ const deleteHandler = async (id) => {
         <td>{{ harvest.couple.name }}</td>
         <td>
           <Link :href="route('harvests.show', harvest.id)">
-            <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all hover:text-gray-600" />
+            <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
           </Link>
           <Link :href="route('harvests.edit', harvest.id)">
-            <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all hover:text-lime-600" />
+            <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
           </Link>
-          <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all hover:text-red-600"
+          <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-red-600"
             @click="deleteHandler(harvest.id)" />
         </td>
       </tr>

@@ -44,6 +44,7 @@ const clickHandler = () => {
         :link="ele.link"
         :text="ele.text"
         :icon="ele.icon"
+        :active="ele.active"
       />
     </div>
   </div>
