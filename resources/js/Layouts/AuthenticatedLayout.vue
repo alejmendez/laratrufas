@@ -25,7 +25,7 @@ const toggleSideBar = () => {
       <SideBarLeft />
     </div>
     <div class="w-full min-h-screen z-20">
-      <div class="flex items-center w-full h-[64px] border-b px-[20px] py-[10px] z-30">
+      <div class="flex items-center w-full h-[64px] bg-[#F0F2F5] px-[20px] py-[10px] z-30">
         <div
           class="cursor-pointer rounded outline-none transition duration-75 text-gray-400 hover:text-gray-500 focus-visible:ring-primary-600 border border-gray-400 px-3 py-1"
           @click="toggleSideBar"
@@ -33,11 +33,11 @@ const toggleSideBar = () => {
           <FontAwesomeIcon icon="fa-solid fa-bars" />
         </div>
 
-        <div class="w-[calc(100%-30px)] flex justify-end">
+        <div class="w-[calc(100%-30px)] flex justify-end bg-[#F0F2F5]">
           <MenuUser />
         </div>
       </div>
-      <div class="min-h-[calc(100vh-64px)] w-full bg-gray-50 pb-5">
+      <div class="min-h-[calc(100vh-64px)] w-full bg-[#F0F2F5] pb-5">
         <main class="py-[10px] px-[25px] min-h-screen">
           <slot></slot>
         </main>

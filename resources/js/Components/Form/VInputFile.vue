@@ -106,7 +106,7 @@ const selectFile = () => {
       <div class="flex max-w-md items-center">
         <div class="border p-2 grow h-[40px] truncate rounded-s" :title="filePath">{{ filePath }}</div>
         <Button
-
+          variant="secondary"
           class="bg-gray-300 text-gray-800 hover:bg-gray-300/80 rounded-s-none"
           @click.prevent="selectFile"
         >
