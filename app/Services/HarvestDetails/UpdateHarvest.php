@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Services\Harvests;
+namespace App\Services\HarvestDetailss;
 
-use App\Models\Harvest;
-use App\Models\HarvestDetail;
+use App\Models\HarvestDetails;
+use App\Models\HarvestDetailsDetail;
 
-class UpdateHarvest
+class UpdateHarvestDetails
 {
-    public static function call($id, $data): Harvest
+    public static function call($id, $data): HarvestDetails
     {
         unset($data['id']);
 
-        $harvest = Harvest::findOrFail($id);
+        $harvest = HarvestDetails::findOrFail($id);
         $harvest->quarters()->sync($data['quarter_ids']);
 
         $details = collect($data['details']);
@@ -23,13 +23,13 @@ class UpdateHarvest
         })->toArray();
 
         $harvest->update($data);
-        HarvestDetail::destroy($idDetailsToDestroy);
+        HarvestDetailsDetail::destroy($idDetailsToDestroy);
         foreach ($details as $detail) {
             $detail['harvest_id'] = $harvest->id;
             if ($detail['id'] === null) {
-                HarvestDetail::create($detail);
+                HarvestDetailsDetail::create($detail);
             } else {
-                HarvestDetail::where('id', $detail['id'])->update($detail);
+                HarvestDetailsDetail::where('id', $detail['id'])->update($detail);
             }
         }
 

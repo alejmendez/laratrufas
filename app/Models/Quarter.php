@@ -48,4 +48,9 @@ class Quarter extends Model
     {
         return $this->plants->count();
     }
+
+    public function harvests()
+    {
+        return $this->belongsToMany(Harvest::class);
+    }
 }

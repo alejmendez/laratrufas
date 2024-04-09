@@ -1,6 +1,7 @@
 <script setup>
 import { Head, useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+import { format } from 'date-fns';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
@@ -23,17 +24,16 @@ const form = useForm({
   dog_id: '',
   farmer_id: '',
   assistant_id: '',
-  details: [
-    {
-      plant_code: null,
-      quality: '',
-      weight: null,
-    },
-  ],
 });
 
 const submitHandler = () => {
-  form.post(route('harvests.store'));
+  form
+    .transform((data) => ({
+      ...data,
+      date: format(data.date, 'yyyy-MM-dd'),
+      quarter_ids: data.quarter_ids.map(q => q.value),
+    }))
+    .post(route('harvests.store'));
 };
 </script>
 

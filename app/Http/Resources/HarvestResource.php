@@ -19,35 +19,34 @@ class HarvestResource extends JsonResource
             'id' => $this->id,
             'date' => $this->date,
             'batch' => $this->batch,
-            'comments' => $this->comments,
-            'dog_id' => $this->dog_id,
-            'farmer_id' => $this->farmer_id,
-            'assistant_id' => $this->assistant_id,
+            'dog' => [
+                'id' => $this->dog->id,
+                'name' => $this->dog->name,
+            ],
+            'farmer' => [
+                'id' => $this->farmer->id,
+                'name' => $this->farmer->name,
+            ],
+            'assistant' => [
+                'id' => $this->assistant->id,
+                'name' => $this->assistant->name,
+            ],
+            'quarters' => $this->quarters->map(function ($quarter) {
+                return [
+                    'id' => $quarter->id,
+                    'name' => $quarter->name,
+                ];
+            }),
             'detail' => $this->details->map(function ($detail) {
                 return [
                     'plant' => [
                         'id' => $detail->plant_id,
                         'code' => $detail->plant->plant
                     ],
-                    'number' => $detail->number,
                     'quality' => $detail->quality,
                     'weight' => $detail->weight,
                 ];
             }),
-            'quarters' => $this->details->map(function ($detail) {
-                $quearter = $detail->plant->quearter;
-                return [
-                    'id' => $quearter->id,
-                    'name' => $quearter->name,
-                ];
-            })->unique('id'),
-            'quarters' => $this->details->map(function ($detail) {
-                $field = $detail->plant->quearter->field;
-                return [
-                    'id' => $field->id,
-                    'name' => $field->name,
-                ];
-            })->unique('id'),
         ];
     }
 }

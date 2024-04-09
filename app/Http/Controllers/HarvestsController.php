@@ -59,7 +59,7 @@ class HarvestsController extends Controller
     {
         CreateHarvest::call($request->all());
 
-        return redirect()->route('Harvests.index')->with('toast', 'Harvest created.');
+        return redirect()->route('harvests.index')->with('toast', 'Harvest created.');
     }
 
     /**

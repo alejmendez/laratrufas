@@ -9,14 +9,8 @@ class CreateHarvest
 {
     public static function call($data): Harvest
     {
-        $details = $data['details'];
-        unset($data['details']);
-
         $harvest = Harvest::create($data);
-        foreach ($details as $detail) {
-            $detail['harvest_id'] = $harvest->id;
-            HarvestDetail::create($detail);
-        }
+        $harvest->quarters()->attach($data['quarter_ids']);
         return $harvest;
     }
 }

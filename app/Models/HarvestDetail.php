@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HarvestsDetail extends Model
+class HarvestDetail extends Model
 {
     protected $fillable = [
         'harvest_id',

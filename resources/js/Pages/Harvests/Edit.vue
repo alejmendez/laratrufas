@@ -1,6 +1,7 @@
 <script setup>
 import { Head, useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+import { format } from 'date-fns';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
@@ -30,7 +31,13 @@ const form = useForm({
 });
 
 const submitHandler = () => {
-  form.post(route('harvests.update', data.id));
+  form
+    .transform((data) => ({
+      ...data,
+      date: format(data.date, 'yyyy-MM-dd'),
+      quarter_ids: data.quarter_ids.map(q => q.value),
+    }))
+    .post(route('harvests.update', data.id));
 };
 </script>
 

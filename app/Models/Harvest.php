@@ -22,7 +22,6 @@ class Harvest extends Model
     protected $fillable = [
         'date',
         'batch',
-        'comments',
         'dog_id',
         'farmer_id',
         'assistant_id',
@@ -30,7 +29,7 @@ class Harvest extends Model
 
     public function details(): HasMany
     {
-        return $this->hasMany(HarvestsDetail::class);
+        return $this->hasMany(HarvestDetail::class);
     }
 
     public function dog(): BelongsTo
@@ -46,5 +45,10 @@ class Harvest extends Model
     public function assistant(): BelongsTo
     {
         return $this->belongsTo(User::class, 'assistant_id');
+    }
+
+    public function quarters()
+    {
+        return $this->belongsToMany(Quarter::class);
     }
 }

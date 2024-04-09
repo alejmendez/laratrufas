@@ -16,7 +16,6 @@ return new class extends Migration
 
             $table->date('date');
             $table->string('batch', 2);
-            $table->string('comments', 250);
 
             $table->foreignId('dog_id')->constrained();
             $table->integer('farmer_id');

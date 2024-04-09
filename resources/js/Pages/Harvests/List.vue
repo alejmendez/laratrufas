@@ -2,9 +2,11 @@
 import { Head, Link, router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification';
+import { getWeek } from 'date-fns';
+import { stringToDate } from '@/Utils/date';
 
 import { deleteRowTable } from '@/Utils/table';
-import { getAge } from '@/Utils/date';
+
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
@@ -30,7 +32,6 @@ const columns = [
   { text: t('harvest.table.weight'), data: 'weight' },
   { text: t('harvest.table.plant'), data: 'plant' },
   { text: t('harvest.table.quarter'), data: 'quarter' },
-  { text: t('harvest.table.field'), data: 'field' },
   { text: t('harvest.table.responsible'), data: 'responsible' },
 ];
 
@@ -62,14 +63,12 @@ const deleteHandler = async (id) => {
           v-for="harvest of data.data"
           :key="harvest.id"
       >
-        <td>{{ harvest.date }}</td>
+        <td>Semana {{ getWeek(stringToDate(harvest.date), { weekStartsOn: 1 }) }}</td>
         <td>{{ harvest.batch }}</td>
-        <td>{{ harvest.detail.reduce((total, d) => total + (d.weight * d.number), 0) }}</td>
-        <td>{{ harvest.detail.map(d => d.plant.code).join(', ') }}</td>
-        <td>{{ harvest.breed }}</td>
-        <td>{{ harvest.age }}</td>
-        <td>{{ harvest.veterinary }}</td>
-        <td>{{ harvest.couple.name }}</td>
+        <td>{{ harvest.detail?.reduce((total, d) => total + (d.weight * d.number), 0) }}</td>
+        <td>{{ harvest.detail?.map(d => d.plant.code).join(', ') }}</td>
+        <td>{{ harvest.quarters?.map(d => d.name).join(', ') }}</td>
+        <td>{{ harvest.farmer.name }}</td>
         <td>
           <Link :href="route('harvests.show', harvest.id)">
             <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />

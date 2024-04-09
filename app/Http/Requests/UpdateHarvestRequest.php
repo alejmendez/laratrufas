@@ -24,12 +24,12 @@ class UpdateHarvestRequest extends FormRequest
         return [
             'date' => 'required|date_format:Y-m-d',
             'batch' => 'required|max:2',
-            'comments' => 'required|max:250',
             'dog_id' => 'required|exists:dogs,id',
             'farmer_id' => 'required|exists:users,id',
             'assistant_id' => 'required|exists:users,id',
+            'quarter_ids'   => 'required|array',
+            'quarter_ids.*' => 'integer',
             'details.*.plant_id' => 'required|exists:plants,id',
-            'details.*.number' => 'required|integer',
             'details.*.quality' => 'required|integer',
             'details.*.weight' => 'required|numeric|between:0,99999',
         ];
