@@ -65,6 +65,8 @@ const dateRenderText = (m) => {
           v-model="form.quarter_ids"
           :options="props.quarters"
           :multiple="true"
+          :close-on-select="false"
+          :clear-on-select="false"
           :placeholder="t('generics.please_select')"
           :group-select="true"
           group-values="quarters"
