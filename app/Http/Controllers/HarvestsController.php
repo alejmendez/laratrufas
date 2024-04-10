@@ -71,6 +71,10 @@ class HarvestsController extends Controller
 
         return Inertia::render('Harvests/Show', [
             'data' => new HarvestResource($harvest),
+            'quarters' => $this->getSelectQuarters(),
+            'dogs' => $this->getSelectDogs(),
+            'users' => $this->getSelectUsers(),
+            'plant_codes' => $this->getSelectPlantCodes(),
         ]);
     }
 
@@ -83,6 +87,10 @@ class HarvestsController extends Controller
 
         return Inertia::render('Harvests/Edit', [
             'data' => new HarvestResource($harvest),
+            'quarters' => $this->getSelectQuarters(),
+            'dogs' => $this->getSelectDogs(),
+            'users' => $this->getSelectUsers(),
+            'plant_codes' => $this->getSelectPlantCodes(),
         ]);
     }
 

@@ -39,10 +39,7 @@ class HarvestResource extends JsonResource
             }),
             'detail' => $this->details->map(function ($detail) {
                 return [
-                    'plant' => [
-                        'id' => $detail->plant_id,
-                        'code' => $detail->plant->plant
-                    ],
+                    'plant_code' => $detail->plant->plant,
                     'quality' => $detail->quality,
                     'weight' => $detail->weight,
                 ];

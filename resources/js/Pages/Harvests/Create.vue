@@ -19,7 +19,6 @@ const props = defineProps({
 const form = useForm({
   date: null,
   batch: null,
-  comments: '',
   quarter_ids: [],
   dog_id: '',
   farmer_id: '',

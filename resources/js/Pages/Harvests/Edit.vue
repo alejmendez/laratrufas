@@ -5,6 +5,9 @@ import { format } from 'date-fns';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import FormHarvest from '@/Pages/Harvests/Form.vue';
+
+import { stringToDate } from '@/Utils/date';
 
 const { t } = useI18n();
 
@@ -20,14 +23,17 @@ const { data } = props.data;
 
 const form = useForm({
   _method: 'PATCH',
-  date: data.date,
+  date: stringToDate(data.date),
   batch: data.batch,
-  comments: data.comments,
-  quarter_ids: data.quarter_ids,
-  dog_id: data.dog_id,
-  farmer_id: data.farmer_id,
-  assistant_id: data.assistant_id,
-  details: data.details,
+  quarter_ids: data.quarters.map(q => ({ value: q.id, text: q.name})),
+  dog_id: data.dog.id + '',
+  farmer_id: data.farmer.id + '',
+  assistant_id: data.assistant.id + '',
+  details: data.details || [{
+    plant_code: null,
+    quality: null,
+    weight: null,
+  }],
 });
 
 const submitHandler = () => {
@@ -56,7 +62,7 @@ const submitHandler = () => {
         :dogs="props.dogs"
         :users="props.users"
         :plant_codes="props.plant_codes"
-        :details="false"
+        :details="true"
         :submitHandler="submitHandler"
       />
     </AuthenticatedLayout>
