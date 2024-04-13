@@ -107,7 +107,8 @@ const selectFile = () => {
         <div class="border p-2 grow h-[40px] truncate rounded-s" :title="filePath">{{ filePath }}</div>
         <Button
           variant="secondary"
-          class="bg-gray-300 text-gray-800 hover:bg-gray-300/80 rounded-s-none"
+          class="bg-gray-300 text-gray-800 hover:bg-gray-300/80"
+          style="border-end-start-radius:0; border-start-start-radius:0; "
           @click.prevent="selectFile"
         >
           {{ t('generics.form.file.upload_file') }}
@@ -117,7 +118,7 @@ const selectFile = () => {
       <Button
         variant="secondary"
         v-if="props.withRemove"
-        class="bg-white text-slate-500 border-slate-500 border hover:slate-500/80 mt-4"
+        class="mt-4"
         @click.prevent="fileRemoveHandler"
       >
         {{ t('generics.form.file.remove_image') }}
