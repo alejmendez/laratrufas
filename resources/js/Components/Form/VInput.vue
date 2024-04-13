@@ -87,6 +87,7 @@ onMounted(() => {
         ref="input"
         v-bind="attrs"
         v-model="model"
+        :type="props.type"
         @change="emit('change', $event)"
         @blur="emit('blur', $event)"
       />
@@ -94,7 +95,7 @@ onMounted(() => {
 
     <div v-show="message">
       <p class="text-sm text-red-600">
-          {{ message }}
+        {{ message }}
       </p>
     </div>
   </div>
