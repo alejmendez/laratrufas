@@ -18,7 +18,6 @@ const form = useForm({
   name: null,
   location: null,
   area: null,
-  planned_at: null,
   number_of_trees: 0,
   field_id: '',
   responsible_id: '',
@@ -26,14 +25,9 @@ const form = useForm({
 });
 
 const submitHandler = () => {
-  form
-    .transform((data) => ({
-      ...data,
-      planned_at: format(data.planned_at, 'yyyy-MM-dd'),
-    }))
-    .post(route('quarters.store'), {
-      forceFormData: true,
-    });
+  form.post(route('quarters.store'), {
+    forceFormData: true,
+  });
 };
 </script>
 

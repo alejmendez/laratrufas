@@ -23,7 +23,7 @@ const form = useForm({
   number_of_trees: data.number_of_trees,
   owner_dni: data.owner.dni,
   owner_name: data.owner.name,
-  blueprint: null,
+  blueprint: data.blueprint,
   blueprintRemove: false,
 });
 

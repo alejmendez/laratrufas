@@ -24,23 +24,17 @@ const form = useForm({
   name: data.name,
   location: data.location,
   area: data.area,
-  planned_at: stringToDate(data.planned_at),
   number_of_trees: data.number_of_trees,
   field_id: data.field.id.toString(),
   responsible_id: data.responsible.id.toString(),
-  blueprint: null,
+  blueprint: data.blueprint,
   blueprintRemove: false,
 });
 
 const submitHandler = () => {
-  form
-    .transform((data) => ({
-      ...data,
-      planned_at: format(data.planned_at, 'yyyy-MM-dd'),
-    }))
-    .post(route('quarters.update', data.id), {
-      forceFormData: true,
-    });
+  form.post(route('quarters.update', data.id), {
+    forceFormData: true,
+  });
 };
 </script>
 
