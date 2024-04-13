@@ -52,7 +52,7 @@ class QuartersController extends Controller
      */
     public function store(StoreQuarterRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['blueprint'] = $this->storeBlueprint($request);
         CreateQuarter::call($data);
 
@@ -92,7 +92,7 @@ class QuartersController extends Controller
      */
     public function update(UpdateQuarterRequest $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['blueprint'] = $this->storeBlueprint($request);
         UpdateQuarter::call($id, $data);
 

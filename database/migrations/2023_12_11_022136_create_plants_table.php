@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nursery_origin', 80);
             $table->string('code', 20);
             $table->string('row', 2);
+            $table->decimal('age', total: 5, places: 2);
             $table->string('blueprint')->nullable();
             $table->foreignId('quarter_id')->constrained();
             $table->foreignId('plant_type_id')->constrained();

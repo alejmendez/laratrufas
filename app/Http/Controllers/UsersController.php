@@ -51,7 +51,7 @@ class UsersController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['avatar'] = $this->storeAvatar($request);
         CreateUser::call($data);
 
@@ -89,7 +89,7 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['avatar'] = $this->storeAvatar($request);
         UpdateUser::call($id, $data);
 

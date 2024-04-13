@@ -27,6 +27,8 @@ class UpdateFieldRequest extends FormRequest
             'size' => 'required|numeric|between:0,2000',
             'owner_dni' => ['required', 'regex:/^\d{1,2}\.\d{3}\.\d{3}\-[\d|k|K]$/'],
             'owner_name' => 'required|max:80',
+            'blueprint' => '',
+            'blueprintRemove' => 'boolean',
         ];
     }
 }

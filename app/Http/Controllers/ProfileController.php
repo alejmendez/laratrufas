@@ -34,7 +34,7 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['avatar'] = $this->storeAvatar($request);
         UpdateUser::call($request->user()->id, $data);
 

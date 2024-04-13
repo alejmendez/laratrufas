@@ -21,6 +21,7 @@ class PlantFactory extends Factory
             'nursery_origin' => fake()->name(),
             'code' => strtoupper(fake()->lexify('??-??-??')),
             'row' => strtoupper(fake()->randomLetter() . fake()->randomLetter()),
+            'age' => fake()->numerify('###'),
         ];
     }
 }

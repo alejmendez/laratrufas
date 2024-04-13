@@ -22,6 +22,8 @@ class ProfileUpdateRequest extends FormRequest
             'dni' => ['required', 'regex:/^\d{1,2}\.\d{3}\.\d{3}\-[\d|k|K]$/', Rule::unique(User::class)->ignore($this->id)],
             'phone' => 'required|min:11|max:20',
             'password' => [],
+            'avatar' => '',
+            'avatarRemove' => 'boolean',
         ];
     }
 }

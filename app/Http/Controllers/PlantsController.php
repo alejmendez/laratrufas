@@ -59,7 +59,7 @@ class PlantsController extends Controller
      */
     public function store(StorePlantRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         CreatePlant::call($data);
 
         return redirect()->route('plants.index')->with('toast', 'Plant created.');
@@ -100,7 +100,7 @@ class PlantsController extends Controller
      */
     public function update(UpdatePlantRequest $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->validated();
         UpdatePlant::call($id, $data);
 
         return redirect()->route('plants.index')->with('toast', 'Plant updated.');

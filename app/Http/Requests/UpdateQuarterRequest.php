@@ -26,6 +26,8 @@ class UpdateQuarterRequest extends FormRequest
             'area' => 'required|numeric|between:0,2000',
             'field_id' => 'required|exists:fields,id',
             'responsible_id' => 'required|exists:users,id',
+            'blueprint' => '',
+            'blueprintRemove' => 'boolean',
         ];
     }
 }

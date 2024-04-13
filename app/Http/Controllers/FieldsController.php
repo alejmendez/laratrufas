@@ -47,7 +47,7 @@ class FieldsController extends Controller
      */
     public function store(StoreFieldRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['blueprint'] = $this->storeBlueprint($request);
         CreateField::call($data);
 
@@ -83,7 +83,7 @@ class FieldsController extends Controller
      */
     public function update(UpdateFieldRequest $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['blueprint'] = $this->storeBlueprint($request);
         UpdateField::call($id, $data);
 

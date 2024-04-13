@@ -54,7 +54,7 @@ class DogsController extends Controller
      */
     public function store(StoreDogRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['avatar'] = $this->storeAvatar($request);
         CreateDog::call($data);
 
@@ -96,7 +96,7 @@ class DogsController extends Controller
      */
     public function update(UpdateDogRequest $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['avatar'] = $this->storeAvatar($request);
         UpdateDog::call($id, $data);
 

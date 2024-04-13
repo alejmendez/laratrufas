@@ -57,7 +57,7 @@ class HarvestsController extends Controller
      */
     public function store(StoreHarvestRequest $request)
     {
-        CreateHarvest::call($request->all());
+        CreateHarvest::call($request->validated());
 
         return redirect()->route('harvests.index')->with('toast', 'Harvest created.');
     }
@@ -99,7 +99,7 @@ class HarvestsController extends Controller
      */
     public function update(UpdateHarvestRequest $request, string $id)
     {
-        UpdateHarvest::call($id, $request->all());
+        UpdateHarvest::call($id, $request->validated());
 
         return redirect()->route('Harvests.index')->with('toast', 'Harvest updated.');
     }
