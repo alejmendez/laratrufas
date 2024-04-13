@@ -171,33 +171,33 @@
 }
 
 .btn-primary {
-  background: linear-gradient(180deg, #FABEB3 0%, #F06F38 9.82%, #ED3900 100%);
-  border: 1px solid #C5150E;
+  background: #F06F38;
+  border: 1px solid #F06F38;
   border-radius: 6px;
   color: white;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(180deg, #FABEB3 0%, #FB9773 9.82%, #ED3900 100%);
+  background: #FB9773;
 }
 
 .btn-primary:active {
-  background: linear-gradient(180deg, #B73A2A 0%, #ED3900 9.82%, #F06F38 100%);
+  background: #F06F38;
 }
 
 .btn-secondary {
-  background: linear-gradient(180deg, #F6F6F6 0%, #FFFFFF 8%, #F2F2F2 100%);
+  background: #FDFDFD;
   border: 1px solid #C7C7C7;
   border-radius: 6px;
   color: #ED3900;
 }
 
 .btn-secondary:hover {
-  background: linear-gradient(180deg, #F6F6F6 0%, #FFFFFF 8%, #F2F2F2 100%);
+  background: #FFF1E9;
 }
 
 .btn-secondary:active {
-  background: linear-gradient(180deg, #C2C2C2 0%, #DEDEDE 13.5%, #ECECEC 100%);
+  background: #FED1C1;
 }
 
 .menu-element.active {
