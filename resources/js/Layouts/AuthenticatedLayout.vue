@@ -14,7 +14,7 @@ const toggleSideBar = () => {
 <template>
   <div class="w-full min-h-screen flex bg-gray-50 font-normal text-gray-950 antialiased">
     <div
-      class="min-h-screen transition-all duration-200 ease-out z-10 border-r bg-gray-100 "
+      class="min-h-screen transition-all duration-200 ease-out z-10 border-r bg-white"
       :class="{ 'w-[320px] opacity-100': showSide, 'w-[0px] opacity-0': !showSide }"
     >
       <div class="flex justify-start items-center h-[64px]">
