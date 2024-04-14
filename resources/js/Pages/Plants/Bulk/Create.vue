@@ -54,7 +54,7 @@ const changeFileHandler = (e) => {
       <BulkWrapper
         :alert="props.alert"
         :errors="props.errors"
-        :title="t('plant.sections.recommendations')"
+        :title="t('generics.bulk.section_title')"
         downloadRoute="plants.download.bulk.template"
       >
         <div class="px-6 pb-6 grid grid-cols-2 gap-x-16 gap-y-4">

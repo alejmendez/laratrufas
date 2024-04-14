@@ -16,11 +16,9 @@ class Plant extends Model
     use HasFactory, Orderable, Searchable, Filterable;
 
     protected $searchableColumns = [
-        'name',
     ];
 
     protected $fillable = [
-        'name',
         'plant_type_id',
         'age',
         'planned_at',

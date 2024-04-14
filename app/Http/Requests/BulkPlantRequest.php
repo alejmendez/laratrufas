@@ -24,6 +24,7 @@ class BulkPlantRequest extends FormRequest
         return [
             'field_id' => 'required|exists:fields,id',
             'quarter_id' => 'required|exists:quarters,id',
+            'bulk_file' => 'required',
         ];
     }
 }

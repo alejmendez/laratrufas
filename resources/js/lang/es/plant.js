@@ -49,7 +49,6 @@ export default {
   sections: {
     location: 'Ubicación',
     blueprint: 'Planos',
-    recommendations: 'Recomendaciones',
   },
   bulk: {
     form: {
