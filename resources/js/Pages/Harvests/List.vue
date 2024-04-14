@@ -49,7 +49,7 @@ const deleteHandler = async (id) => {
     <HeaderCrud
       :title="t('harvest.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-      :links="[{ to: 'harvests.create', text: t('generics.new') }]"
+      :links="[{ to: 'harvests.create', text: t('generics.new') }, { to: 'harvests.create.bulk', text: t('generics.bulk.button') }]"
     />
 
     <TableList

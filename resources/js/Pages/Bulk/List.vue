@@ -14,6 +14,12 @@ const list = [
     title: t('bulk.plants.title'),
     subtitle: t('bulk.plants.subtitle'),
   },
+  {
+    to: 'harvests.create.bulk',
+    icon: ['fas', 'basket-shopping'],
+    title: t('bulk.harvests.title'),
+    subtitle: t('bulk.harvests.subtitle'),
+  },
 ];
 </script>
 

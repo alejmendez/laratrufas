@@ -4,4 +4,8 @@ export default {
     title: 'Plantas',
     subtitle: 'Importador masivo de plantas',
   },
+  harvests: {
+    title: 'Cosechas',
+    subtitle: 'Importador masivo de cosecha',
+  },
 };

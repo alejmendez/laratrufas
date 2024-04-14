@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->foreignId('harvest_id')->constrained();
             $table->foreignId('plant_id')->constrained();
-            $table->integer('quality');
+            $table->string('quality');
             $table->decimal('weight', total: 5, places: 2);
 
             $table->timestamps();

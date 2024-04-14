@@ -31,19 +31,17 @@ class HarvestResource extends JsonResource
                 'id' => $this->assistant->id,
                 'name' => $this->assistant->name,
             ],
-            'quarters' => $this->quarters->map(function ($quarter) {
-                return [
-                    'id' => $quarter->id,
-                    'name' => $quarter->name,
-                ];
-            }),
-            'detail' => $this->details->map(function ($detail) {
-                return [
-                    'plant_code' => $detail->plant->plant,
-                    'quality' => $detail->quality,
-                    'weight' => $detail->weight,
-                ];
-            }),
+            'quarters' => $this->quarters->map(fn ($quarter) => [
+                'id' => $quarter->id,
+                'name' => $quarter->name,
+            ]),
+            'details' => $this->details->map(fn ($detail) => [
+                'id' => $detail->id,
+                'plant_id' => $detail->plant->id,
+                'plant_code' => $detail->plant->code,
+                'quality' => $detail->quality,
+                'weight' => $detail->weight,
+            ]),
         ];
     }
 }

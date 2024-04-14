@@ -24,6 +24,7 @@ const form = props.form;
 
 const add_detail = () => {
   form.details.push({
+    id: null,
     plant_code: null,
     quality: '',
     weight: null,
@@ -124,7 +125,7 @@ const dateRenderText = (m) => {
           :id="`details_plant_code_${index}`"
           v-model="detail.plant_code"
           :label="t('harvest.form.details.plant_code.label')"
-          :message="form.errors.details? form.errors.details[index].plant_code : ''"
+          :message="form.errors[`details.${index}.plant_code`]"
         />
 
         <div class="grid grid-cols-9 gap-x-16 gap-y-4">
@@ -133,15 +134,19 @@ const dateRenderText = (m) => {
             v-model="detail.quality"
             class="col-span-4"
             :label="t('harvest.form.details.quality.label')"
-            :message="form.errors.details? form.errors.details[index].quality : ''"
+            :message="form.errors[`details.${index}.quality`]"
           />
 
           <VInput
             :id="`details_weight_${index}`"
-            v-model="detail.weight"
+            type="number"
+            min="0"
+            max="2000"
+            step="0.01"
             class="col-span-4"
+            v-model="detail.weight"
             :label="t('harvest.form.details.weight.label')"
-            :message="form.errors.details? form.errors.details[index].weight : ''"
+            :message="form.errors[`details.${index}.weight`]"
           />
           <div class="pt-8 text-black hover:text-red-500" v-if="index !== 0" @click="remove_detail(index)">
             <font-awesome-icon :icon="['fas', 'trash-can']" />

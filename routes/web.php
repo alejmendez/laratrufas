@@ -45,6 +45,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/plants/bulk', [PlantsController::class, 'store_bulk'])->name('plants.store.bulk');
     Route::get('/plants/download/bulk/template', [PlantsController::class, 'download_bulk_template'])->name('plants.download.bulk.template');
 
+    Route::get('/harvests/bulk', [HarvestsController::class, 'create_bulk'])->name('harvests.create.bulk');
+    Route::post('/harvests/bulk', [HarvestsController::class, 'store_bulk'])->name('harvests.store.bulk');
+    Route::get('/harvests/download/bulk/template', [HarvestsController::class, 'download_bulk_template'])->name('harvests.download.bulk.template');
+
     Route::resources([
         'users' => UsersController::class,
         'fields' => FieldsController::class,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 use App\Services\Harvests\FindHarvest;
 use App\Services\Harvests\ListHarvest;
@@ -19,6 +20,10 @@ use App\Http\Resources\HarvestResource;
 use App\Http\Resources\HarvestCollection;
 use App\Http\Requests\StoreHarvestRequest;
 use App\Http\Requests\UpdateHarvestRequest;
+use App\Http\Requests\BulkHarvestRequest;
+
+use App\Imports\HarvestsImport;
+use App\Exports\HarvestsTemplateExport;
 
 class HarvestsController extends Controller
 {
@@ -101,7 +106,7 @@ class HarvestsController extends Controller
     {
         UpdateHarvest::call($id, $request->validated());
 
-        return redirect()->route('Harvests.index')->with('toast', 'Harvest updated.');
+        return redirect()->route('harvests.index')->with('toast', 'Harvest updated.');
     }
 
     /**
@@ -111,6 +116,32 @@ class HarvestsController extends Controller
     {
         DeleteHarvest::call($id);
         return redirect()->back();
+    }
+
+    public function download_bulk_template()
+    {
+        return Excel::download(new HarvestsTemplateExport(), 'carga_masiva_cosecha.xlsx');
+    }
+
+    public function create_bulk()
+    {
+        return Inertia::render('Harvests/Bulk/Create', [
+            'harvests' => $this->getSelectHarvests(),
+            'alert' => session('alert'),
+            'errors' => session('errors'),
+        ]);
+    }
+
+    public function store_bulk(BulkHarvestRequest $request)
+    {
+        try {
+            $file = request()->file('bulk_file');
+            $harvest_id = $request['harvest_id'];
+            $result = Excel::import(new HarvestsImport($harvest_id), $file);
+            return redirect()->route('harvests.create.bulk')->with('alert', 'alert');
+        } catch (Exception $e) {
+            return redirect()->route('harvests.create.bulk')->with('errors', 'errors');
+        }
     }
 
     protected function getSelectQuarters()
@@ -146,6 +177,12 @@ class HarvestsController extends Controller
     protected function getSelectPlantCodes()
     {
         return collect(ListPlant::call('name')->get())
-            ->map(fn($plant) => [ 'value' => $plant->id, 'text' => $plant->code ]);
+            ->map(fn($plant) => [ 'value' => $plant->id, 'text' => $plant->code, 'quarter_id' => $plant->quarter->id ]);
+    }
+
+    protected function getSelectHarvests()
+    {
+        return collect(ListHarvest::call('batch')->get())
+            ->map(fn($harvest) => [ 'id' => $harvest->id, 'batch' => $harvest->batch, 'date' => $harvest->date ]);
     }
 }

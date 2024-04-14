@@ -56,6 +56,7 @@ export default {
   bulk: {
     button: 'Carga Masiva',
     download_template: 'Descargar template',
+    section_title: 'Recomendaciones',
     important: 'IMPORTANTE',
     instruction_1:
       'La carga masiva de datos es un proceso que te permite ingresar una gran cantidad de información en el sistema de forma rápida y eficiente. Para realizar la carga masiva de datos, debes seguir los siguientes pasos:',

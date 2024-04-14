@@ -29,9 +29,10 @@ class UpdateHarvestRequest extends FormRequest
             'assistant_id' => 'required|exists:users,id',
             'quarter_ids'   => 'required|array',
             'quarter_ids.*' => 'integer',
-            'details.*.plant_id' => 'required|exists:plants,id',
-            'details.*.quality' => 'required|integer',
-            'details.*.weight' => 'required|numeric|between:0,99999',
+            'details.*.id' => '',
+            'details.*.plant_code' => 'exists:plants,code|nullable',
+            'details.*.quality' => 'max:30|nullable',
+            'details.*.weight' => 'numeric|between:0,99999|nullable',
         ];
     }
 }

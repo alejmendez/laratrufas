@@ -29,7 +29,7 @@ const submitHandler = () => {
   form
     .transform((data) => ({
       ...data,
-      date: format(data.date, 'yyyy-MM-dd'),
+      date: data.date ? format(data.date, 'yyyy-MM-dd') : null,
       quarter_ids: data.quarter_ids.map(q => q.value),
     }))
     .post(route('harvests.store'));

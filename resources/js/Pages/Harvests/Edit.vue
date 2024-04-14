@@ -29,7 +29,8 @@ const form = useForm({
   dog_id: data.dog.id + '',
   farmer_id: data.farmer.id + '',
   assistant_id: data.assistant.id + '',
-  details: data.details || [{
+  details: data.details.length ? data.details : [{
+    id: null,
     plant_code: null,
     quality: null,
     weight: null,
@@ -40,7 +41,7 @@ const submitHandler = () => {
   form
     .transform((data) => ({
       ...data,
-      date: format(data.date, 'yyyy-MM-dd'),
+      date: data.date ? format(data.date, 'yyyy-MM-dd') : null,
       quarter_ids: data.quarter_ids.map(q => q.value),
     }))
     .post(route('harvests.update', data.id));

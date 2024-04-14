@@ -3,6 +3,7 @@ export default {
     entity_breadcrumb: 'Cosechas',
     create: 'Crear Cosecha',
     edit: 'Editar Cosecha',
+    bulk: 'Nuevo carga masiva de cosechas',
   },
   table: {
     date: 'Semana',
@@ -54,5 +55,10 @@ export default {
   sections: {
     harvest: 'Cosecha',
     comments: 'Comentarios',
+  },
+  bulk: {
+    form: {
+      harvest_id: 'Cosecha',
+    },
   },
 };
