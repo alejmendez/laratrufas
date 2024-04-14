@@ -35,9 +35,9 @@ class StoreDogRequest extends FormRequest
             'couple_id' => 'required|exists:users,id',
             'avatar' => '',
             'avatarRemove' => 'boolean',
-            'vaccines.*.name' => 'max:80',
-            'vaccines.*.date' => 'date_format:Y-m-d',
-            'vaccines.*.code' => 'max:80',
+            'vaccines.*.name' => 'max:80|nullable',
+            'vaccines.*.date' => 'date_format:Y-m-d|nullable',
+            'vaccines.*.code' => 'max:80|nullable',
         ];
     }
 }
