@@ -5,6 +5,7 @@ import VInput from '@/Components/Form/VInput.vue';
 import VInputFile from '@/Components/Form/VInputFile.vue';
 import VSelect from '@/Components/Form/VSelect.vue';
 import CardSection from '@/Components/CardSection.vue';
+import ButtonShadcn from '@/Components/ui/button/Button.vue';
 
 import { getAge } from '@/Utils/date';
 
@@ -180,7 +181,7 @@ const remove_vaccine = (index) => {
       </div>
 
       <div class="p-6">
-        <button class="btn btn-secondary border-gray-800" @click.prevent="add_vaccine">{{ t('dog.buttons.add_vaccine') }}</button>
+        <ButtonShadcn class="btn btn-secondary border-gray-800" @click.prevent="add_vaccine">{{ t('dog.buttons.add_vaccine') }}</ButtonShadcn>
       </div>
     </CardSection>
   </form>

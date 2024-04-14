@@ -7,6 +7,7 @@ import VInput from '@/Components/Form/VInput.vue';
 import VSelect from '@/Components/Form/VSelect.vue';
 import CardSection from '@/Components/CardSection.vue';
 import { Label } from '@/Components/ui/label';
+import ButtonShadcn from '@/Components/ui/button/Button.vue';
 
 const { t } = useI18n();
 
@@ -25,7 +26,7 @@ const form = props.form;
 const add_detail = () => {
   form.details.push({
     id: null,
-    plant_code: null,
+    plant_code: form.details[form.details.length - 1].plant_code,
     quality: '',
     weight: null,
   });
@@ -148,13 +149,13 @@ const dateRenderText = (m) => {
             :label="t('harvest.form.details.weight.label')"
             :message="form.errors[`details.${index}.weight`]"
           />
-          <div class="pt-8 text-black hover:text-red-500" v-if="index !== 0" @click="remove_detail(index)">
+          <div class="pt-8 text-black hover:text-red-500" @click="remove_detail(index)">
             <font-awesome-icon :icon="['fas', 'trash-can']" />
           </div>
         </div>
       </div>
       <div class="px-6 py-3">
-        <button class="btn btn-secondary border-gray-800" @click.prevent="add_detail">{{ t('harvest.buttons.add_detail') }}</button>
+        <ButtonShadcn variant="secondary" @click.prevent="add_detail">{{ t('harvest.buttons.add_detail') }}</ButtonShadcn>
       </div>
     </CardSection>
   </form>
