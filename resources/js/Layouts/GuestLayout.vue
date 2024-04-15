@@ -13,7 +13,6 @@
 <style>
 #container-guest {
   background-color: #cc6844;
-  background-image: url("/assets/img/background_guest.png");
   background-size: cover;
 }
 </style>
