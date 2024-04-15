@@ -3,7 +3,7 @@ const props = defineProps({
   headerText: String,
   wrapperClass: {
     type: String,
-    default: 'p-6 grid grid-cols-2 gap-x-16 gap-y-4',
+    default: 'p-6 grid md:grid-cols-2 gap-x-16 gap-y-4 sm:grid-cols-1',
   },
 });
 </script>
