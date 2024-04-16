@@ -60,25 +60,23 @@ const openHandler = (e, index) => {
 };
 </script>
 <template>
-  <aside class="min-h-[calc(100vh-64px)] py-[20px]">
-    <div class="flex flex-col justify-between h-full px-[20px] space-y-[10px]">
-      <div class="flex flex-col justify-between space-y-[10px]">
-        <MenuElement
-          :link="route('dashboard')"
-          :text="t('menu.dashboard')"
-          :active="page.component.startsWith('Dashboard')"
-          icon="fa-solid fa-square-poll-vertical"
-        />
+  <aside class="min-h-[calc(100vh-64px)] px-[20px]">
+    <div class="flex flex-col justify-between space-y-[10px]">
+      <MenuElement
+        :link="route('dashboard')"
+        :text="t('menu.dashboard')"
+        :active="page.component.startsWith('Dashboard')"
+        icon="fa-solid fa-square-poll-vertical"
+      />
 
-        <MenuGroup
-          v-for="(menu, index) in menuData"
-          :key="index"
-          :text="menu.text"
-          :elements="menu.children"
-          :open="menuState[index]"
-          @open="openHandler($event, index)"
-        />
-      </div>
+      <MenuGroup
+        v-for="(menu, index) in menuData"
+        :key="index"
+        :text="menu.text"
+        :elements="menu.children"
+        :open="menuState[index]"
+        @open="openHandler($event, index)"
+      />
     </div>
   </aside>
 </template>
