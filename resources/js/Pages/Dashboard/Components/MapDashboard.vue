@@ -7,7 +7,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <div class="col-span-3 rounded-xl bg-white shadow-sm border border-gray-200">
+  <div class="lg:col-span-3 rounded-xl bg-white shadow-sm border border-gray-200">
     <header class="flex items-center overflow-hidden border-b">
       <h3 class="px-4 py-3 text-base font-semibold leading-6 text-gray-950">
         Campo: Pricilla

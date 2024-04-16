@@ -7,7 +7,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <section class="grid grid-cols-4 gap-4">
+  <section class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
     <div class="mt-5 p-5 rounded-xl bg-orange-800/70 shadow-sm text-white">
       <span class="text-2xl">2</span> Tareas Pendientes
       <div class="flex justify-between mt-3">
