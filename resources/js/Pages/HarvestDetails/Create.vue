@@ -2,7 +2,7 @@
 import { Head, useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HarvestDetailLayout from '@/Layouts/HarvestDetailLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormHarvestDetails from '@/Pages/HarvestDetails/Form.vue';
 
@@ -21,21 +21,27 @@ const form = useForm({
 const submitHandler = () => {
   form.post(route('harvests.details.store'));
 };
+
+const submitAndLoadAnother = () => {
+  form.post(route('harvests.details.store'));
+};
 </script>
 
 <template>
     <Head :title="t('harvest.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
+    <HarvestDetailLayout>
       <HeaderCrud
-        :title="t('harvest.titles.create')"
-        :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('harvests.index') }"
+        :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }]"
       />
+      <h3 class="text-2xl mb-3">
+        Planta {{ form.plant_code }}
+      </h3>
       <FormHarvestDetails
         :form="form"
         :harvests="props.harvests"
         :submitHandler="submitHandler"
+        :submitAndLoadAnother="submitAndLoadAnother"
       />
-    </AuthenticatedLayout>
+    </HarvestDetailLayout>
 </template>

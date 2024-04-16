@@ -1,13 +1,10 @@
 <script setup>
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { getWeek } from 'date-fns';
 import { QrcodeStream } from 'vue-qrcode-reader';
 
-import { stringToDate } from '@/Utils/date';
-
 import VInput from '@/Components/Form/VInput.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
-import CardSection from '@/Components/CardSection.vue';
+import { Button } from '@/Components/ui/button';
 
 const { t } = useI18n();
 
@@ -15,63 +12,101 @@ const props = defineProps({
   form: Object,
   harvests: Array,
   submitHandler: Function,
+  submitAndLoadAnother: Function,
 });
 
 const form = props.form;
 
-const harvests = props.harvests.map(h => {
-  const week = getWeek(stringToDate(h.date), { weekStartsOn: 1 });
-  return {
-    value: h.id,
-    text: `Semana ${week} Batch ${h.batch}`,
-  }
-}).sort((a, b) => a.text - b.text);
+const paused = ref(!!form.plant_code);
 
 const onDetect = (detectedCodes) => {
+  paused.value = true;
   form.plant_code = detectedCodes[0].rawValue;
 };
 </script>
 
 <template>
   <form @submit.prevent="props.submitHandler">
-    <CardSection>
-      <div>
-        <QrcodeStream @detect="onDetect"></QrcodeStream>
-      </div>
+    <div class="mb-5">
+      <QrcodeStream
+        :paused="paused"
+        @detect="onDetect"
+      >
+        <div
+          v-if="form.plant_code"
+          @click="paused = false; form.plant_code = null"
+          class="feedback"
+        >
+          {{ form.plant_code }}
+          <font-awesome-icon :icon="['fas', 'rotate-right']" class="mt-3" />
+        </div>
+      </QrcodeStream>
+    </div>
 
-      <VSelect
-        id="harvest_id"
-        v-model="form.harvest_id"
-        :placeholder="t('generics.please_select')"
-        :options="harvests"
-        :label="t('harvest.bulk.form.harvest_id')"
-        :message="form.errors.harvest_id"
-      />
+    <VInput
+      id="quality"
+      v-model="form.quality"
+      :label="t('harvest.form.details.quality.label')"
+      :message="form.errors.quality"
+    />
 
-      <VInput
-        id="plant_code"
-        v-model="form.plant_code"
-        :label="t('harvest.form.details.plant_code.label')"
-        :message="form.errors.plant_code"
-      />
+    <VInput
+      id="weight"
+      v-model="form.weight"
+      type="number"
+      min="0"
+      max="2000"
+      step="0.01"
+      :label="t('harvest.form.details.weight.label')"
+      :message="form.errors.weight"
+    />
 
-      <VInput
-        id="quality"
-        v-model="form.quality"
-        :label="t('harvest.form.details.quality.label')"
-        :message="form.errors.quality"
-      />
+    <div class="mt-20">
+      <Button
+        variant="secondary"
+        class="w-full text-xl h-16"
+        :disabled="form.processing"
+        @click="props.submitAndLoadAnother"
+      >
+        <font-awesome-icon
+          class="animate-spin me-1"
+          :icon="['fas', 'circle-notch']"
+          v-show="form.processing"
+        />
+        Guardar y cargar otra
+      </Button>
 
-      <VInput
-        id="weight"
-        v-model="form.weight"
-        type="number"
-        min="0"
-        max="2000"
-        step="0.01"
-        :label="t('harvest.form.details.weight.label')"
-        :message="form.errors.weight"
-      />
-    </CardSection>
+      <Button
+        class="w-full mt-3 text-xl h-16"
+        :disabled="form.processing"
+        @click="props.submitHandler"
+      >
+        <font-awesome-icon
+          class="animate-spin me-1"
+          :icon="['fas', 'circle-notch']"
+          v-show="form.processing"
+        />
+        Guardar
+      </Button>
+    </div>
   </form>
 </template>
+
+<style>
+.feedback {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: black;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+</style>
