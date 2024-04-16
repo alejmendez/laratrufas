@@ -36,6 +36,7 @@
         "vue-toastification": "^2.0.0-rc.5"
     },
     "dependencies": {
-        "vue-multiselect": "^3.0.0-beta.3"
+        "vue-multiselect": "^3.0.0-beta.3",
+        "vue-qrcode-reader": "^5.5.3"
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\QuartersController;
 use App\Http\Controllers\PlantsController;
 use App\Http\Controllers\DogsController;
 use App\Http\Controllers\HarvestsController;
+use App\Http\Controllers\HarvestDetailsController;
 use App\Http\Controllers\BulksController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/harvests/bulk', [HarvestsController::class, 'create_bulk'])->name('harvests.create.bulk');
     Route::post('/harvests/bulk', [HarvestsController::class, 'store_bulk'])->name('harvests.store.bulk');
     Route::get('/harvests/download/bulk/template', [HarvestsController::class, 'download_bulk_template'])->name('harvests.download.bulk.template');
+
+    Route::get('/harvests/details', [HarvestDetailsController::class, 'create'])->name('harvests.details.create');
+    Route::post('/harvests/details', [HarvestDetailsController::class, 'store'])->name('harvests.details.store');
 
     Route::resources([
         'users' => UsersController::class,

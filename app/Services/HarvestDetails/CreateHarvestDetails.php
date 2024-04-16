@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\HarvestDetailss;
+namespace App\Services\HarvestDetails;
 
 use App\Models\HarvestDetails;
 

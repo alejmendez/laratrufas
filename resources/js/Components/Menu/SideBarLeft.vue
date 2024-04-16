@@ -22,6 +22,7 @@ const menuData = [
     text: t('menu.harvest_management'),
     children: [
       { link: route('harvests.index'), text: t('menu.harvest'), icon: 'fa-solid fa-basket-shopping', active: page.component.startsWith('Harvest') },
+      { link: route('harvests.details.create'), text: t('menu.harvest_details'), icon: 'fa-solid fa-barcode', active: page.component.startsWith('HarvestDetails') },
       { link: route('users.index'), text: t('menu.batch'), icon: 'fa-solid fa-file-invoice-dollar' },
     ],
   },
