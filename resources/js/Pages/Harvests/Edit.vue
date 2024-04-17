@@ -17,6 +17,7 @@ const props = defineProps({
   dogs: Array,
   users: Array,
   plant_codes: Array,
+  qualities: Array,
 });
 
 const { data } = props.data;
@@ -63,6 +64,7 @@ const submitHandler = () => {
         :dogs="props.dogs"
         :users="props.users"
         :plant_codes="props.plant_codes"
+        :qualities="props.qualities"
         :details="true"
         :submitHandler="submitHandler"
       />

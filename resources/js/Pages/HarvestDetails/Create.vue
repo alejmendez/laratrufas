@@ -9,13 +9,15 @@ import FormHarvestDetails from '@/Pages/HarvestDetails/Form.vue';
 const { t } = useI18n();
 
 const props = defineProps({
-  harvests: Array,
+  qualities: Array,
+  plant_code: Array,
 });
 
 const form = useForm({
-  plant_code: null,
+  plant_code: props.plant_code || null,
   quality: null,
   weight: null,
+  keep_plant_code: false,
 });
 
 const submitHandler = () => {
@@ -23,6 +25,7 @@ const submitHandler = () => {
 };
 
 const submitAndLoadAnother = () => {
+  form.keep_plant_code = true;
   form.post(route('harvests.details.store'));
 };
 </script>
@@ -39,7 +42,7 @@ const submitAndLoadAnother = () => {
       </h3>
       <FormHarvestDetails
         :form="form"
-        :harvests="props.harvests"
+        :qualities="props.qualities"
         :submitHandler="submitHandler"
         :submitAndLoadAnother="submitAndLoadAnother"
       />

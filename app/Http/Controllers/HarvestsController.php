@@ -10,6 +10,7 @@ use App\Services\Harvests\ListHarvest;
 use App\Services\Harvests\CreateHarvest;
 use App\Services\Harvests\UpdateHarvest;
 use App\Services\Harvests\DeleteHarvest;
+use App\Services\HarvestDetails\ListHarvestQualities;
 
 use App\Services\Quarters\ListQuarter;
 use App\Services\Dogs\ListDog;
@@ -54,6 +55,7 @@ class HarvestsController extends Controller
             'dogs' => $this->getSelectDogs(),
             'users' => $this->getSelectUsers(),
             'plant_codes' => $this->getSelectPlantCodes(),
+            'qualities' => $this->getSelectQualities(),
         ]);
     }
 
@@ -80,6 +82,7 @@ class HarvestsController extends Controller
             'dogs' => $this->getSelectDogs(),
             'users' => $this->getSelectUsers(),
             'plant_codes' => $this->getSelectPlantCodes(),
+            'qualities' => $this->getSelectQualities(),
         ]);
     }
 
@@ -96,6 +99,7 @@ class HarvestsController extends Controller
             'dogs' => $this->getSelectDogs(),
             'users' => $this->getSelectUsers(),
             'plant_codes' => $this->getSelectPlantCodes(),
+            'qualities' => $this->getSelectQualities(),
         ]);
     }
 
@@ -184,5 +188,10 @@ class HarvestsController extends Controller
     {
         return collect(ListHarvest::call('batch')->get())
             ->map(fn($harvest) => [ 'id' => $harvest->id, 'batch' => $harvest->batch, 'date' => $harvest->date ]);
+    }
+
+    protected function getSelectQualities()
+    {
+        return ListHarvestQualities::call('select');
     }
 }

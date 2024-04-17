@@ -17,6 +17,7 @@ const props = defineProps({
   dogs: Array,
   users: Array,
   plant_codes: Array,
+  qualities: Array,
   details: Boolean,
   submitHandler: Function,
 });
@@ -130,10 +131,12 @@ const dateRenderText = (m) => {
         />
 
         <div class="grid grid-cols-9 gap-x-16 gap-y-4">
-          <VInput
+          <VSelect
             :id="`details_quality_${index}`"
-            v-model="detail.quality"
             class="col-span-4"
+            v-model="detail.quality"
+            :placeholder="t('generics.please_select')"
+            :options="props.qualities"
             :label="t('harvest.form.details.quality.label')"
             :message="form.errors[`details.${index}.quality`]"
           />

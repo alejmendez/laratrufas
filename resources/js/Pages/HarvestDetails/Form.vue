@@ -4,13 +4,14 @@ import { useI18n } from 'vue-i18n';
 import { QrcodeStream } from 'vue-qrcode-reader';
 
 import VInput from '@/Components/Form/VInput.vue';
+import VSelect from '@/Components/Form/VSelect.vue';
 import { Button } from '@/Components/ui/button';
 
 const { t } = useI18n();
 
 const props = defineProps({
   form: Object,
-  harvests: Array,
+  qualities: Array,
   submitHandler: Function,
   submitAndLoadAnother: Function,
 });
@@ -41,11 +42,18 @@ const onDetect = (detectedCodes) => {
           <font-awesome-icon :icon="['fas', 'rotate-right']" class="mt-3" />
         </div>
       </QrcodeStream>
+      <div v-show="form.errors.plant_code">
+        <p class="text-sm text-red-600">
+          {{ form.errors.plant_code }}
+        </p>
+      </div>
     </div>
 
-    <VInput
+    <VSelect
       id="quality"
       v-model="form.quality"
+      :placeholder="t('generics.please_select')"
+      :options="props.qualities"
       :label="t('harvest.form.details.quality.label')"
       :message="form.errors.quality"
     />
