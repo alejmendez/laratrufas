@@ -61,7 +61,7 @@ const openHandler = (e, index) => {
 </script>
 <template>
   <aside class="min-h-[calc(100vh-64px)] px-[20px]">
-    <div class="flex flex-col justify-between space-y-[10px]">
+    <div class="flex flex-col justify-between space-y-[10px] mt-3">
       <MenuElement
         :link="route('dashboard')"
         :text="t('menu.dashboard')"
