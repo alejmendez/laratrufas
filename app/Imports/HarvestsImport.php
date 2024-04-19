@@ -28,7 +28,7 @@ class HarvestsImport implements ToModel, WithHeadingRow, WithValidation
         return new HarvestDetail([
             'harvest_id' => $this->harvest_id,
             'plant_id'   => $this->getPlantIdByCode($row['codigo_de_planta']),
-            'quality'    => $row['calidad'],
+            'quality'    => Str::slug($row['calidad']),
             'weight'     => $row['peso'],
         ]);
     }

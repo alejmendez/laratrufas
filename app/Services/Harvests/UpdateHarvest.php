@@ -6,6 +6,8 @@ use App\Models\Plant;
 use App\Models\Harvest;
 use App\Models\HarvestDetail;
 
+use Illuminate\Support\Str;
+
 class UpdateHarvest
 {
     public static function call($id, $data): Harvest
@@ -34,6 +36,7 @@ class UpdateHarvest
 
             $detail['harvest_id'] = $harvest->id;
             $detail['plant_id'] = $plant->id;
+            $detail['quality'] = Str::slug($detail['quality']);
             if ($detail['id'] === null) {
                 HarvestDetail::create($detail);
             } else {
