@@ -82,6 +82,7 @@
     @apply bg-gray-50;
     overflow-x: hidden;
     overflow-y: auto;
+    margin-bottom: 0 !important;
   }
 
   .router-link-active {
@@ -201,8 +202,25 @@
 }
 
 .menu-element.active {
-  background: #F0F2F5;
-  color: #ED3900;
+  background: #2C3344;
+  color: #F8F9FA;
+}
+
+.menu-element svg{
+  color: #7B849C;
+}
+
+.menu-element.active svg{
+  color: #F8F9FA;
+}
+
+.menu-element:hover {
+  background: #2C3344;
+  color: #F8F9FA;
+}
+
+.menu-element:hover svg{
+  color: #F8F9FA;
 }
 
 .multiselect__tags .multiselect__tag {

@@ -21,7 +21,7 @@ const props = defineProps({
   <Link
     v-bind="attrs"
     :href="props.link"
-    class="menu-element inline-flex relative items-center py-[10px] w-full text-sm font-medium text-[#7B849C] rounded-md border-gray-200 hover:bg-[#FFEBE2] hover:text-[#ED3900] transition duration-400 ease-in-out"
+    class="menu-element inline-flex relative items-center py-[10px] w-full text-sm font-medium text-[#F8F9FA] rounded-md border-gray-200 transition duration-400 ease-in-out"
     :class="{ active: props.active }"
   >
     <div class="w-[25px] mr-2 flex justify-center">

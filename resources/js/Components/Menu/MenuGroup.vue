@@ -23,7 +23,7 @@ const clickHandler = () => {
 <template>
   <div>
     <div
-      class="cursor-pointer"
+      class="cursor-pointer text-[#DD6633]"
       @click="clickHandler"
     >
       {{ props.text }}
