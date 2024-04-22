@@ -5,6 +5,7 @@ namespace App\Services\Harvests;
 use App\Models\Plant;
 use App\Models\Harvest;
 use App\Models\HarvestDetail;
+use App\Services\Plants\FindPlantByCode;
 
 use Illuminate\Support\Str;
 
@@ -29,7 +30,7 @@ class UpdateHarvest
         HarvestDetail::destroy($idDetailsToDestroy);
 
         foreach ($details as $detail) {
-            $plant = Plant::where('code', $detail['plant_code'])->first();
+            $plant = FindPlantByCode::call($detail['plant_code']);
             if (!$plant) {
                 continue;
             }

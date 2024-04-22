@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\Importable;
+use App\Services\Plants\FindPlantByCode;
 
 use Illuminate\Validation\Rule;
 
@@ -35,7 +36,7 @@ class HarvestsImport implements ToModel, WithHeadingRow, WithValidation
 
     public function getPlantIdByCode($code)
     {
-        return optional(Plant::where('code', $code)->first(), fn (Plant $plant) => $plant->id);
+        return optional(FindPlantByCode::call($code), fn (Plant $plant) => $plant->id);
     }
 
     public function rules(): array

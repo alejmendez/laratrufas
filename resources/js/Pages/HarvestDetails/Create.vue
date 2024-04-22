@@ -26,7 +26,7 @@ const submitHandler = () => {
 
 const submitAndLoadAnother = () => {
   form.keep_plant_code = true;
-  form.post(route('harvests.details.store'));
+  submitHandler();
 };
 </script>
 

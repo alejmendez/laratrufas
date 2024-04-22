@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/harvests/details', [HarvestDetailsController::class, 'create'])->name('harvests.details.create');
     Route::post('/harvests/details', [HarvestDetailsController::class, 'store'])->name('harvests.details.store');
+    Route::get('/harvests/details/{code}', [HarvestDetailsController::class, 'find_by_code'])->name('harvests.details.find_by_code');
 
     Route::resources([
         'users' => UsersController::class,

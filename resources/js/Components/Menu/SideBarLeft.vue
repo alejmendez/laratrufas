@@ -9,8 +9,6 @@ const { t } = useI18n();
 
 const page = usePage();
 
-console.log(page.component)
-
 const menuData = [
   {
     text: t('menu.management'),

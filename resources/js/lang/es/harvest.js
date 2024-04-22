@@ -61,4 +61,9 @@ export default {
       harvest_id: 'Cosecha',
     },
   },
+  errors: {
+    details: {
+      plant_code_not_found: 'El código {plant_code} no fue encontrado',
+    }
+  }
 };

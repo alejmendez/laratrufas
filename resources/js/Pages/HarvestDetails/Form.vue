@@ -6,6 +6,7 @@ import { QrcodeStream } from 'vue-qrcode-reader';
 import VInput from '@/Components/Form/VInput.vue';
 import VSelect from '@/Components/Form/VSelect.vue';
 import { Button } from '@/Components/ui/button';
+import { findByCode } from '@/Services/Plant.js';
 
 const { t } = useI18n();
 
@@ -19,10 +20,21 @@ const props = defineProps({
 const form = props.form;
 
 const paused = ref(!!form.plant_code);
+const hasError = ref(false);
 
-const onDetect = (detectedCodes) => {
+const onDetect = async (detectedCodes) => {
   paused.value = true;
   form.plant_code = detectedCodes[0].rawValue;
+  const plant = await findByCode(form.plant_code);
+  if (!plant) {
+    hasError.value = true;
+  }
+};
+
+const resetQr = () => {
+  paused.value = false;
+  hasError.value = false;
+  form.plant_code = null;
 };
 </script>
 
@@ -35,10 +47,11 @@ const onDetect = (detectedCodes) => {
       >
         <div
           v-if="form.plant_code"
-          @click="paused = false; form.plant_code = null"
+          @click="resetQr"
           class="feedback"
+          :class="{ 'text-red-800' : hasError }"
         >
-          {{ form.plant_code }}
+          {{ hasError ? t('harvest.errors.details.plant_code_not_found', { plant_code: form.plant_code }) : form.plant_code }}
           <font-awesome-icon :icon="['fas', 'rotate-right']" class="mt-3" />
         </div>
       </QrcodeStream>
@@ -73,7 +86,7 @@ const onDetect = (detectedCodes) => {
       <Button
         variant="secondary"
         class="w-full text-xl h-16"
-        :disabled="form.processing"
+        :disabled="form.processing || hasError"
         @click="props.submitAndLoadAnother"
       >
         <font-awesome-icon
@@ -86,7 +99,7 @@ const onDetect = (detectedCodes) => {
 
       <Button
         class="w-full mt-3 text-xl h-16"
-        :disabled="form.processing"
+        :disabled="form.processing || hasError"
         @click="props.submitHandler"
       >
         <font-awesome-icon
@@ -111,7 +124,6 @@ const onDetect = (detectedCodes) => {
   text-align: center;
   font-weight: bold;
   font-size: 1.8rem;
-  color: black;
 
   display: flex;
   flex-flow: column nowrap;

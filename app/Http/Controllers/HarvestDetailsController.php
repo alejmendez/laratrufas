@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Services\Harvests\ListHarvest;
 use App\Services\HarvestDetails\CreateHarvestDetails;
 use App\Services\HarvestDetails\ListHarvestQualities;
+use App\Services\Plants\FindPlantByCode;
 
 use App\Http\Requests\StoreHarvestDetailRequest;
 
@@ -34,6 +35,13 @@ class HarvestDetailsController extends Controller
         } else {
             return redirect()->route('harvests.details.create');
         }
+
+    }
+    public function find_by_code()
+    {
+        return [
+            'plant' => FindPlantByCode::call(request('code', '')),
+        ];
     }
 
     protected function getSelectHarvests()
