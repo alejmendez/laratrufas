@@ -1,32 +1,37 @@
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import VInput from '@/Components/Form/VInput.vue';
 import { Button } from '@/Components/ui/button';
+import { create } from '@/Services/PlantType.js';
 
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/Components/ui/dialog';
 
 const { t } = useI18n();
 
-const props = defineProps({});
-
-const form = useForm({
-  name: null,
+const props = defineProps({
+  callback: Function,
 });
 
-const addPlantType = () => {};
+const plant_type_name = ref('');
+const open = ref(false);
+
+const addPlantType = async () => {
+  const newType = await create(plant_type_name.value);
+  open.value = false;
+  props.callback(newType);
+};
 </script>
 
 <template>
-  <Dialog>
-    <DialogTrigger as-child>
-      <Button
-        variant="outline"
-      >
-        <font-awesome-icon :icon="['fas', 'plus']" />
-      </Button>
-    </DialogTrigger>
+  <Dialog :open="open">
+    <Button
+      variant="outline"
+      @click.prevent="open = true"
+    >
+      <font-awesome-icon :icon="['fas', 'plus']" />
+    </Button>
     <DialogContent class="sm:max-w-[425px]">
       <DialogHeader>
         <DialogTitle>Agregar un tipo de planta</DialogTitle>
@@ -35,10 +40,9 @@ const addPlantType = () => {};
       <div class="grid gap-4 py-4">
         <div class="grid items-center gap-4">
           <VInput
-            id="name"
-            v-model="form.name"
+            id="plant_type_name"
+            v-model="plant_type_name"
             :label="t('plant.form.name.label')"
-            :message="form.errors.name"
           />
         </div>
       </div>

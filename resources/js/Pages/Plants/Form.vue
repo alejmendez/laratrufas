@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import VInput from '@/Components/Form/VInput.vue';
@@ -18,8 +18,16 @@ const props = defineProps({
 });
 
 const form = props.form;
+const plant_types = ref(props.types);
 
 const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id));
+
+const addPlantTypeCallback = (newType) => {
+  plant_types.value = [
+    ...plant_types.value,
+    { value: newType.id, text: newType.name },
+  ];
+}
 </script>
 
 <template>
@@ -67,12 +75,12 @@ const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id =
           v-model="form.plant_type_id"
           :classWrapper="'col-span-11'"
           :placeholder="t('generics.please_select')"
-          :options="props.types"
+          :options="plant_types"
           :label="t('plant.form.plant_type_id.label')"
           :message="form.errors.type"
         />
         <div class="ms-2" style="margin-top: 28px;">
-          <AddPlantType />
+          <AddPlantType :callback="addPlantTypeCallback" />
         </div>
       </div>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FieldsController;
 use App\Http\Controllers\QuartersController;
 use App\Http\Controllers\PlantsController;
+use App\Http\Controllers\PlantTypesController;
 use App\Http\Controllers\DogsController;
 use App\Http\Controllers\HarvestsController;
 use App\Http\Controllers\HarvestDetailsController;
@@ -53,6 +54,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/harvests/details', [HarvestDetailsController::class, 'create'])->name('harvests.details.create');
     Route::post('/harvests/details', [HarvestDetailsController::class, 'store'])->name('harvests.details.store');
     Route::get('/harvests/details/{code}', [HarvestDetailsController::class, 'find_by_code'])->name('harvests.details.find_by_code');
+
+    Route::post('/plants/types', [PlantTypesController::class, 'store'])->name('plants.types.store');
 
     Route::resources([
         'users' => UsersController::class,
