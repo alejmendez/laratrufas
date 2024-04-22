@@ -7,7 +7,6 @@ import { stringToDate } from '@/Utils/date';
 
 import { deleteRowTable } from '@/Utils/table';
 
-
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import TableList from '@/Components/Table/TableList.vue';

@@ -18,13 +18,15 @@ const props = defineProps({
   errors: String,
 });
 
-const harvests = props.harvests.map(h => {
-  const week = getWeek(stringToDate(h.date), { weekStartsOn: 1 });
-  return {
-    value: h.id,
-    text: `Semana ${week} Batch ${h.batch}`,
-  }
-}).sort((a, b) => a.text - b.text)
+const harvests = props.harvests
+  .map((h) => {
+    const week = getWeek(stringToDate(h.date), { weekStartsOn: 1 });
+    return {
+      value: h.id,
+      text: `Semana ${week} Batch ${h.batch}`,
+    };
+  })
+  .sort((a, b) => a.text - b.text);
 
 const form = useForm({
   harvest_id: '',

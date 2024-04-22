@@ -30,7 +30,7 @@ const submitHandler = () => {
     .transform((data) => ({
       ...data,
       date: data.date ? format(data.date, 'yyyy-MM-dd') : null,
-      quarter_ids: data.quarter_ids.map(q => q.value),
+      quarter_ids: data.quarter_ids.map((q) => q.value),
     }))
     .post(route('harvests.store'));
 };

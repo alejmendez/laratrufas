@@ -26,16 +26,20 @@ const form = useForm({
   _method: 'PATCH',
   date: stringToDate(data.date),
   batch: data.batch,
-  quarter_ids: data.quarters.map(q => ({ value: q.id, text: q.name})),
+  quarter_ids: data.quarters.map((q) => ({ value: q.id, text: q.name })),
   dog_id: data.dog.id + '',
   farmer_id: data.farmer.id + '',
   assistant_id: data.assistant.id + '',
-  details: data.details.length ? data.details : [{
-    id: null,
-    plant_code: null,
-    quality: null,
-    weight: null,
-  }],
+  details: data.details.length
+    ? data.details
+    : [
+        {
+          id: null,
+          plant_code: null,
+          quality: null,
+          weight: null,
+        },
+      ],
 });
 
 const submitHandler = () => {
@@ -43,7 +47,7 @@ const submitHandler = () => {
     .transform((data) => ({
       ...data,
       date: data.date ? format(data.date, 'yyyy-MM-dd') : null,
-      quarter_ids: data.quarter_ids.map(q => q.value),
+      quarter_ids: data.quarter_ids.map((q) => q.value),
     }))
     .post(route('harvests.update', data.id));
 };
