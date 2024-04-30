@@ -53,13 +53,15 @@ const preview = computed(() => {
 
 const changeFileHandler = (e) => {
   const [file] = e.target.files;
+  const previewUrl = URL.createObjectURL(file);
   emit('change', {
     fileRemove: false,
     fileInput: file,
+    filePreview: previewUrl,
   });
   if (file) {
     fileRemove.value = false;
-    filePreview.value = URL.createObjectURL(file);
+    filePreview.value = previewUrl;
     filePath.value = file.name;
   }
 };
@@ -71,6 +73,7 @@ const fileRemoveHandler = () => {
   emit('change', {
     fileRemove: true,
     fileInput: null,
+    filePreview: null,
   });
 };
 
