@@ -6,7 +6,7 @@ import VInput from '@/Components/Form/VInput.vue';
 import VInputFile from '@/Components/Form/VInputFile.vue';
 import VInputDni from '@/Components/Form/VInputDni.vue';
 import CardSection from '@/Components/CardSection.vue';
-import BlueprintMap from '@/Pages/Fields/BlueprintMap.vue';
+import ImageMap from '@/Components/ImageMap.vue';
 
 const { t } = useI18n();
 
@@ -18,8 +18,10 @@ const props = defineProps({
 const form = props.form;
 
 const blueprintPreview = ref(form.blueprint);
+const blueprintInput = ref(null);
 
 const changeFileHandler = (e) => {
+  blueprintInput.value = e.fileInput;
   form.blueprint = e.fileInput;
   form.blueprintRemove = e.fileRemove;
 };
@@ -88,7 +90,7 @@ const changeFileHandler = (e) => {
           @change="changeFileHandler"
         />
       </div>
-      <BlueprintMap />
+      <ImageMap :input="blueprintInput" />
     </CardSection>
   </form>
 </template>

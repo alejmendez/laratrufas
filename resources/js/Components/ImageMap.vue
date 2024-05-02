@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, reactive, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { fabric } from "fabric";
 
@@ -8,6 +8,7 @@ import { Button } from '@/Components/ui/button';
 const { t } = useI18n();
 
 const props = defineProps({
+  input: Object,
 });
 
 let canvas;
@@ -16,6 +17,13 @@ let canvasWrapper = ref(null);
 let elementList = ref([]);
 let seq = ref(0);
 
+let polygonCreator = reactive({
+  startDrawing: false,
+  circleCount: 1,
+  polygonCount: 1,
+  name: '',
+});
+
 onMounted(() => {
   const width = canvasWrapper.value.offsetWidth;
   const height = Math.round(width / (16 / 9));
@@ -23,52 +31,68 @@ onMounted(() => {
     width,
     height,
   });
-  fabric.Image.fromURL(`https://placehold.co/${width}x${height}`, (myImg) => {
-    const img = myImg.set({
-      left: 0,
-      top: 0,
-      selectable: false,
+
+  // https://stackoverflow.com/questions/48761416/how-to-add-polygon-points-and-draw-it-on-an-image-in-fabric-js
+
+  canvas.on('object:moving', function(option) {
+    var object = option.target;
+    canvas.forEachObject(function(obj) {
+      if (obj.name == "Polygon") {
+        if (obj.PolygonNumber == object.polygonNo) {
+          var points = window["polygon" + object.polygonNo].get("points");
+          points[object.circleNo - 1].x = object.left;
+          points[object.circleNo - 1].y = object.top;
+          window["polygon" + object.polygonNo].set({
+            points: points
+          });
+        }
+      }
+    })
+    canvas.renderAll();
+  });
+
+  canvas.on('mouse:down', function(option) {
+    if (!polygonCreator.startDrawing || (option.target && option.target.name == "draggableCircle")) {
+      return;
+    }
+
+    const pointer = canvas.getPointer(option.e);
+    const circle = new fabric.Circle({
+      left: pointer.x,
+      top: pointer.y,
+      radius: 5,
       hasBorders: false,
       hasControls: false,
-      evented: false,
+      polygon_id: polygonCreator.name,
+      name: "draggableCircle",
+      circleNo: polygonCreator.circleCount++,
+      fill: "rgba(0, 0, 0, 0.5)",
+      hasRotatingPoint: false,
+      originX: 'center',
+      originY: 'center'
     });
-    canvas.add(img);
+    canvas.add(circle);
   });
 });
 
-const changeFileHandler = (e) => {
+watch(() => props.input, (input, prevInput) => {
+  removeElement('background');
   const imgNode = new Image();
-  imgNode.src = URL.createObjectURL(e.fileInput);
+  imgNode.src = URL.createObjectURL(input);
   imgNode.onload = () => {
-    const imageScale = Math.round((900 / imgNode.width) * 100) / 100;
     const img = new fabric.Image(imgNode, {
+      id: 'background',
       left: 0,
       top: 0,
       selectable: false,
       hasBorders: false,
       hasControls: false,
       evented: false,
-    }).scale(imageScale);
+    }).scaleToWidth(canvas.width, false);
 
     canvas.add(img);
-
-    var rect = new fabric.Rect({
-      left: 100,
-      top: 50,
-      fill: '#0F172A',
-      width: 200,
-      height: 100,
-      objectCaching: false,
-      stroke: 'lightgreen',
-      strokeWidth: 2,
-      borderColor: '#0F172A',
-      cornerStyle2: true
-    });
-
-    canvas.add(rect);
-    canvas.setActiveObject(rect);
   };
-};
+});
 
 const attr_base = {
   left: 100,
@@ -111,11 +135,31 @@ const addCircle = () => {
 }
 
 const addPolygon = () => {
-  const ele = new fabric.Polygon({
-    ...attr_base,
-    id: `polygon_${getSeq()}`,
+  polygonCreator.name = `polygon_${getSeq()}`;
+  polygonCreator.startDrawing = true;
+  // const ele = new fabric.Polygon({
+  //   ...attr_base,
+  //   id: `polygon_${getSeq()}`,
+  // });
+  // addElement(ele, 'polygon');
+}
+
+const addImage = () => {
+  removeElement('background');
+  fabric.Image.fromURL(`https://placehold.co/1280x720`, (myImg) => {
+    const img = myImg.set({
+      id: 'background',
+      left: 0,
+      top: 0,
+      selectable: false,
+      selectable: false,
+      hasBorders: false,
+      hasControls: false,
+      evented: false,
+    });
+    img.scaleToWidth(canvas.width, false)
+    canvas.add(img);
   });
-  addElement(ele, 'polygon');
 }
 
 const addElement = (ele, type) => {
@@ -158,6 +202,10 @@ const removeElement = (id) => {
 
     <Button variant="outline" class="mt-3 ms-3" @click.prevent="addPolygon">
       Agregar poligono
+    </Button>
+
+    <Button variant="outline" class="mt-3 ms-3" @click.prevent="addImage">
+      Agregar imagen
     </Button>
   </div>
 
