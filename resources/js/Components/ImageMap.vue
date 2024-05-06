@@ -21,8 +21,8 @@ let polygonCreator = reactive({
   startDrawing: false,
   circleCount: 1,
   polygonCount: 1,
-  name: '',
-});
+  id: '',
+});;
 
 onMounted(() => {
   const width = canvasWrapper.value.offsetWidth;
@@ -36,17 +36,15 @@ onMounted(() => {
 
   canvas.on('object:moving', function(option) {
     var object = option.target;
-    canvas.forEachObject(function(obj) {
-      if (obj.name == "Polygon") {
-        if (obj.PolygonNumber == object.polygonNo) {
-          var points = window["polygon" + object.polygonNo].get("points");
-          points[object.circleNo - 1].x = object.left;
-          points[object.circleNo - 1].y = object.top;
-          window["polygon" + object.polygonNo].set({
-            points: points
-          });
-        }
-      }
+    canvas.getObjects().forEach((o) => {
+      if (o.name !== "Polygon" || o.polygon_id !== object.polygon_owner) return;
+      const polygon = getShapeById(o.polygon_id);
+      const points = poly.get("points");
+      points[object.circleNo - 1].x = object.left;
+      points[object.circleNo - 1].y = object.top;
+      polygon.set({
+        points,
+      });
     })
     canvas.renderAll();
   });
@@ -63,15 +61,16 @@ onMounted(() => {
       radius: 5,
       hasBorders: false,
       hasControls: false,
-      polygon_id: polygonCreator.name,
       name: "draggableCircle",
-      circleNo: polygonCreator.circleCount++,
+      polygon_owner: polygonCreator.id,
+      circleNo: polygonCreator.circleCount,
       fill: "rgba(0, 0, 0, 0.5)",
       hasRotatingPoint: false,
       originX: 'center',
       originY: 'center'
     });
     canvas.add(circle);
+    polygonCreator.circleCount++;
   });
 });
 
@@ -95,8 +94,6 @@ watch(() => props.input, (input, prevInput) => {
 });
 
 const attr_base = {
-  left: 100,
-  top: 50,
   fill: '#ddd',
   opacity: 0.6,
   stroke: '#0F172A',
@@ -119,6 +116,8 @@ const addRectangle = () => {
   const ele = new fabric.Rect({
     ...attr_base,
     id: `rectangle_${getSeq()}`,
+    left: 100,
+    top: 50,
     width: 200,
     height: 100,
   });
@@ -129,19 +128,63 @@ const addCircle = () => {
   const ele = new fabric.Circle({
     ...attr_base,
     id: `circle_${getSeq()}`,
+    left: 100,
+    top: 50,
     radius: 75,
   });
   addElement(ele, 'circle');
 }
 
 const addPolygon = () => {
-  polygonCreator.name = `polygon_${getSeq()}`;
+  polygonCreator.id = `polygon_${getSeq()}`;
   polygonCreator.startDrawing = true;
   // const ele = new fabric.Polygon({
   //   ...attr_base,
   //   id: `polygon_${getSeq()}`,
   // });
   // addElement(ele, 'polygon');
+}
+
+const donePolygon = () => {
+  const ArrayLength = polygonCreator.circleCount;
+
+  polygonCreator.startDrawing = false;
+  polygonCreator.circleCount = 1;
+
+  const points = [];
+  console.log(polygonCreator.id)
+  canvas.getObjects().forEach((o) => {
+    if(o.polygon_owner === polygonCreator.id) {
+      points.push({
+        x: o.left,
+        y: o.top
+      });
+      canvas.renderAll();
+    }
+  });
+  console.log(points)
+
+  const ele = new fabric.Polygon(points, {
+    ...attr_base,
+    id: polygonCreator.id,
+    polygon_id: polygonCreator.id,
+    PolygonNumber: polygonCreator.polygonCount,
+    name: "Polygon",
+    noofcircles: ArrayLength,
+    objectCaching: false
+  });
+  canvas.add(ele);
+  canvas.sendToBack(ele)
+
+  canvas.getObjects().forEach((o) => {
+    if (o.name === 'draggableCircle') {
+      canvas.remove(o);
+    }
+  });
+
+  canvas.renderAll();
+  polygonCreator.polygonCount++;
+  addElement(ele, 'polygon');
 }
 
 const addImage = () => {
@@ -171,6 +214,16 @@ const addElement = (ele, type) => {
   });
 }
 
+const getShapeById = (id) => {
+  let obj;
+  canvas.getObjects().forEach((o) => {
+    if(o.id === id) {
+      obj = o;
+    }
+  });
+  return obj;
+}
+
 const selectElement = (id) => {
   canvas.getObjects().forEach((o) => {
     if(o.id == id) {
@@ -192,21 +245,29 @@ const removeElement = (id) => {
 
 <template>
   <div class="form-text col-span-2 form-text-type">
-    <Button variant="outline" class="mt-3" @click.prevent="addRectangle">
-      Agregar Rectangulo
-    </Button>
+    <template v-if="!polygonCreator.startDrawing">
+      <Button variant="outline" class="mt-3" @click.prevent="addRectangle">
+        Agregar Rectangulo
+      </Button>
 
-    <Button variant="outline" class="mt-3 ms-3" @click.prevent="addCircle">
-      Agregar Circulo
-    </Button>
+      <Button variant="outline" class="mt-3 ms-3" @click.prevent="addCircle">
+        Agregar Circulo
+      </Button>
 
-    <Button variant="outline" class="mt-3 ms-3" @click.prevent="addPolygon">
-      Agregar poligono
-    </Button>
+      <Button variant="outline" class="mt-3 ms-3" @click.prevent="addPolygon">
+        Agregar poligono
+      </Button>
 
-    <Button variant="outline" class="mt-3 ms-3" @click.prevent="addImage">
-      Agregar imagen
-    </Button>
+      <Button variant="outline" class="mt-3 ms-3" @click.prevent="addImage">
+        Agregar imagen
+      </Button>
+    </template>
+
+    <template v-else>
+      <Button variant="outline" class="mt-3 ms-3" @click.prevent="donePolygon">
+        Cerrar poligono
+      </Button>
+    </template>
   </div>
 
   <div ref="canvasWrapper">
