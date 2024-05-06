@@ -146,8 +146,6 @@ const addPolygon = () => {
 }
 
 const donePolygon = () => {
-  const ArrayLength = polygonCreator.circleCount;
-
   polygonCreator.startDrawing = false;
   polygonCreator.circleCount = 1;
 
@@ -168,13 +166,8 @@ const donePolygon = () => {
     ...attr_base,
     id: polygonCreator.id,
     polygon_id: polygonCreator.id,
-    PolygonNumber: polygonCreator.polygonCount,
     name: "Polygon",
-    noofcircles: ArrayLength,
-    objectCaching: false
   });
-  canvas.add(ele);
-  canvas.sendToBack(ele)
 
   canvas.getObjects().forEach((o) => {
     if (o.name === 'draggableCircle') {
@@ -182,9 +175,9 @@ const donePolygon = () => {
     }
   });
 
+  addElement(ele, 'polygon');
   canvas.renderAll();
   polygonCreator.polygonCount++;
-  addElement(ele, 'polygon');
 }
 
 const addImage = () => {
