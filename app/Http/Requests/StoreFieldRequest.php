@@ -25,7 +25,7 @@ class StoreFieldRequest extends FormRequest
             'name' => 'required|max:80',
             'location' => 'required|max:100',
             'size' => 'required|numeric|between:0,2000',
-            'owner_dni' => ['required', 'regex:/^\d{1,2}\.\d{3}\.\d{3}\-[\d|k|K]$/'],
+            'owner_dni' => ['required', 'regex:/^\d?\d\.\d{3}\.\d{3}\-[\d|k|K]$/'],
             'owner_name' => 'required|max:80',
             'blueprint' => '',
             'blueprintRemove' => 'boolean',
