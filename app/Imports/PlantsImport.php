@@ -31,6 +31,7 @@ class PlantsImport implements ToModel, WithHeadingRow, WithValidation
             'quarter_id'     => $this->quarter_id,
             'code'           => $row['codigo'],
             'row'            => $row['hilera'],
+            'age'            => $row['edad'],
             'plant_type_id'  => $this->getPlantTypeIdByName($row['tipo_de_planta']),
             'planned_at'     => $row['fecha_de_plantacion'],
             'nursery_origin' => $row['vivero_de_origen'],
@@ -57,6 +58,7 @@ class PlantsImport implements ToModel, WithHeadingRow, WithValidation
         return [
             'codigo' => ['required', 'max:12', Rule::unique('plants')],
             'hilera' => 'required|max:2',
+            'edad' => 'required|max:3',
             'tipo_de_planta' => 'required|max:20',
             'fecha_de_plantacion' => 'required|date_format:Y-m-d',
             'vivero_de_origen' => 'required|max:80',

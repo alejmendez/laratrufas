@@ -9,8 +9,8 @@ class PlantsTemplateExport implements FromArray
     public function array(): array
     {
         return [
-            ['Código', 'Hilera', 'Tipo de Planta', 'Fecha de plantación', 'Vivero de origen'],
-            ['FL01AA12', 'A', 'Encina', date('Y-m-d'), 'Jane Cooper']
+            ['Código', 'Hilera', 'Tipo de Planta', 'Fecha de plantación', 'Edad', 'Vivero de origen'],
+            ['FL01AA12', 'A', 'Encina', date('Y-m-d'), '1', 'Jane Cooper']
         ];
     }
 }
