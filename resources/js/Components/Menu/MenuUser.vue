@@ -41,13 +41,13 @@ onUnmounted(() => {
     <!-- Drop down -->
     <div
       v-show="showDropDown"
-      class="absolute right-[10px] z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+      class="absolute right-[10px] z-50 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="menu-button"
       tabindex="-1"
     >
-      <div class="font-semibold text-left block px-4 py-2">
+      <div class="text-black font-semibold text-left block px-4 py-2">
         <div>{{ $page.props.auth.user.full_name }}</div>
       </div>
       <div class="py-1 text-left" role="none">
