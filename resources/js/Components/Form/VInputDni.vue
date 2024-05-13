@@ -7,7 +7,7 @@ const model = defineModel();
 const attrs = useAttrs();
 
 const dniMask = {
-  mask: '##.###.###-K',
+  mask: ['##.###.###-K', '#.###.###-K'],
   tokens: {
     '#': { pattern: /\d/ },
     K: {
