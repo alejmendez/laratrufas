@@ -9,13 +9,19 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Events\AfterImport;
 
 use Illuminate\Validation\Rule;
 
-class PlantsImport implements ToModel, WithHeadingRow, WithValidation
+class PlantsImport implements ToModel, WithHeadingRow, WithValidation, WithEvents
 {
-    use Importable;
+    use Importable, RegistersEventListeners;
+
+    private $rowCount = 0;
+
 
     protected $quarter_id;
     protected $plant_types;
@@ -27,6 +33,7 @@ class PlantsImport implements ToModel, WithHeadingRow, WithValidation
 
     public function model(array $row)
     {
+        $this->rowCount++;
         return new Plant([
             'quarter_id'     => $this->quarter_id,
             'code'           => $row['codigo'],
@@ -63,6 +70,18 @@ class PlantsImport implements ToModel, WithHeadingRow, WithValidation
             'fecha_de_plantacion' => 'required|date_format:Y-m-d',
             'vivero_de_origen' => 'required|max:80',
         ];
+    }
+
+    public static function afterImport(AfterImport $event)
+    {
+        $import = $event->getConcernable();
+        // Aquí puedes acceder al contador de filas procesadas
+        session(['rowCount' => $import->rowCount]);
+    }
+
+    public function getRowCount()
+    {
+        return $this->rowCount;
     }
 
 }

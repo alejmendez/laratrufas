@@ -126,7 +126,7 @@ class PlantsController extends Controller
             'fields' => $this->getSelectFields(),
             'quarters' => $this->getSelectQuarters(),
             'alert' => session('alert'),
-            'errors' => session('errors'),
+            'errors' => session('errors', []),
         ]);
     }
 
@@ -136,9 +136,21 @@ class PlantsController extends Controller
             $file = request()->file('bulk_file');
             $quarter_id = $request['quarter_id'];
             $result = Excel::import(new PlantsImport($quarter_id), $file);
-            return redirect()->route('plants.create.bulk')->with('alert', 'alert');
-        } catch (Exception $e) {
-            return redirect()->route('plants.create.bulk')->with('errors', 'errors');
+            $rowCount = session('rowCount', 0);
+            return redirect()
+                ->route('plants.create.bulk')
+                ->with('alert', "La carga de datos ha sido completada con éxito. Se han ingresado $rowCount registros de tipo de datos al sistema. ¡Buen trabajo!");
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            $errors = [];
+            foreach ($failures as $failure) {
+                foreach ($failure->errors() as $error) {
+                    $errors[] = "Linea {$failure->row()}: {$error}";
+                }
+            }
+            return redirect()->route('plants.create.bulk')->with('errors', $errors);
+       } catch (Exception $e) {
+            return redirect()->route('plants.create.bulk')->with('errors', []);
         }
     }
 

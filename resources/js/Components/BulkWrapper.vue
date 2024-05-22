@@ -9,7 +9,7 @@ const { t } = useI18n();
 
 const props = defineProps({
   alert: String,
-  errors: String,
+  errors: Array,
   title: String,
   downloadRoute: String,
 });
@@ -49,16 +49,16 @@ const openErrors = ref(true);
     <div class="px-6 pb-6" v-if="props.alert && openAlert">
       <div class="p-4 rounded-lg bg-[#D7EAE1] border border-[#89C1A7] text-[#2E5342]">
         <font-awesome-icon :icon="['fas', 'triangle-exclamation']" class="me-1" />
-        {{ t('generics.bulk.alert') }}
+        {{ props.alert }}
         <font-awesome-icon :icon="['fas', 'xmark']" class="float-right text-lg" @click="openAlert = !openAlert" />
       </div>
     </div>
 
-    <div class="px-6 pb-6" v-if="props.errors && openErrors">
+    <div class="px-6 pb-6" v-if="props.errors.length && openErrors">
       <div class="p-4 rounded-lg bg-[#F8DCDF] border border-[#EC979F] text-[#926065]">
         <font-awesome-icon :icon="['fas', 'triangle-exclamation']" class="me-1" />
         {{ t('generics.bulk.error') }}
-        <font-awesome-icon :icon="['fas', 'xmark']" class="float-right text-lg" @click="openError = !openError" />
+        <font-awesome-icon :icon="['fas', 'xmark']" class="float-right text-lg" @click="openErrors = !openErrors" />
         <ul class="list-disc ps-5">
           <li v-for="error in props.errors">
             {{ error }}

@@ -15,7 +15,7 @@ const props = defineProps({
   fields: Array,
   quarters: Array,
   alert: String,
-  errors: String,
+  errors: Array,
 });
 
 const form = useForm({
