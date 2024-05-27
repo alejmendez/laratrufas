@@ -131,8 +131,9 @@ class HarvestsController extends Controller
     {
         return Inertia::render('Harvests/Bulk/Create', [
             'harvests' => $this->getSelectHarvests(),
+            'id' => request('id'),
             'alert' => session('alert'),
-            'errors' => session('errors'),
+            'errors' => session('errors', []),
         ]);
     }
 
@@ -142,9 +143,21 @@ class HarvestsController extends Controller
             $file = request()->file('bulk_file');
             $harvest_id = $request['harvest_id'];
             $result = Excel::import(new HarvestsImport($harvest_id), $file);
-            return redirect()->route('harvests.create.bulk')->with('alert', 'alert');
+            $rowCount = session('rowCount', 0);
+            return redirect()
+                ->route('harvests.create.bulk')
+                ->with('alert', "La carga de datos ha sido completada con éxito. Se han ingresado $rowCount registros de tipo de datos al sistema. ¡Buen trabajo!");
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            $errors = [];
+            foreach ($failures as $failure) {
+                foreach ($failure->errors() as $error) {
+                    $errors[] = "Linea {$failure->row()}: {$error}";
+                }
+            }
+            return redirect()->route('harvests.create.bulk')->with('errors', $errors);
         } catch (Exception $e) {
-            return redirect()->route('harvests.create.bulk')->with('errors', 'errors');
+            return redirect()->route('harvests.create.bulk')->with('errors', []);
         }
     }
 
