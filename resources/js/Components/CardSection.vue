@@ -11,7 +11,7 @@ const props = defineProps({
 <template>
   <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
     <header class="flex items-center gap-x-3 overflow-hidden px-6 py-4" v-if="props.headerText">
-      <h3 class="text-base font-semibold leading-6 text-gray-950">
+      <h3 class="text-xl font-bold leading-6 text-gray-950">
         {{ props.headerText }}
       </h3>
     </header>
