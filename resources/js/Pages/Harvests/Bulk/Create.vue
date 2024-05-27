@@ -14,6 +14,7 @@ const { t } = useI18n();
 
 const props = defineProps({
   harvests: Array,
+  id: Number,
   alert: String,
   errors: String,
 });
@@ -29,7 +30,7 @@ const harvests = props.harvests
   .sort((a, b) => a.text - b.text);
 
 const form = useForm({
-  harvest_id: '',
+  harvest_id: props.id ?? '',
   bulk_file: null,
 });
 

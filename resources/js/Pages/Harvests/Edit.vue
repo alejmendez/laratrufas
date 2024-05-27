@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormHarvest from '@/Pages/Harvests/Form.vue';
+import { Button } from '@/Components/ui/button';
 
 import { stringToDate } from '@/Utils/date';
 
@@ -24,6 +25,7 @@ const { data } = props.data;
 
 const form = useForm({
   _method: 'PATCH',
+  id: data.id,
   date: stringToDate(data.date),
   batch: data.batch,
   quarter_ids: data.quarters.map((q) => ({ value: q.id, text: q.name })),
@@ -57,11 +59,35 @@ const submitHandler = () => {
     <Head :title="t('harvest.titles.entity_breadcrumb')" />
 
     <AuthenticatedLayout>
+      <!-- { to: 'harvests.create.bulk', text: t('generics.bulk.button') } -->
       <HeaderCrud
         :title="t('harvest.titles.edit')"
         :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('harvests.index') }"
-      />
+      >
+        <Button
+          :disabled="form.processing"
+          @click="submitHandler"
+          v-if="submitHandler"
+        >
+          <font-awesome-icon
+            class="animate-spin me-1"
+            :icon="['fas', 'circle-notch']"
+            v-show="form.processing"
+          />
+          {{ t('generics.buttons.save_edit') }}
+        </Button>
+
+        <Button
+          variant="secondary"
+          as-child
+          :disabled="form.processing"
+        >
+          <Link :href="route('harvests.index')">
+            {{ t('generics.buttons.cancel') }}
+          </Link>
+        </Button>
+      </HeaderCrud>
+
       <FormHarvest
         :form="form"
         :quarters="props.quarters"

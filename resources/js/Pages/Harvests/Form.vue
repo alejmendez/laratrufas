@@ -1,6 +1,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
+import { Link } from '@inertiajs/vue3';
 
 import VueMultiselect from 'vue-multiselect';
 import VInput from '@/Components/Form/VInput.vue';
@@ -158,6 +159,16 @@ const dateRenderText = (m) => {
       </div>
       <div class="px-6 py-3">
         <ButtonShadcn variant="secondary" @click.prevent="add_detail">{{ t('harvest.buttons.add_detail') }}</ButtonShadcn>
+
+        <ButtonShadcn
+          variant="secondary"
+          as-child
+          class="ms-3"
+        >
+          <Link :href="route('harvests.create.bulk', { id: form.id })">
+            {{ t('generics.bulk.button') }}
+          </Link>
+        </ButtonShadcn>
       </div>
     </CardSection>
   </form>
