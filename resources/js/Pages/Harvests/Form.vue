@@ -53,7 +53,6 @@ const dateRenderText = (m) => {
         type="date"
         v-model="form.date"
         :renderText="dateRenderText"
-        :maxDate="new Date()"
         :label="t('harvest.form.date.label')"
         :message="form.errors.date"
       />
