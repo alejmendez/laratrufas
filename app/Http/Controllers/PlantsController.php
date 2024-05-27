@@ -149,7 +149,7 @@ class PlantsController extends Controller
                 }
             }
             return redirect()->route('plants.create.bulk')->with('errors', $errors);
-       } catch (Exception $e) {
+        } catch (Exception $e) {
             return redirect()->route('plants.create.bulk')->with('errors', []);
         }
     }
