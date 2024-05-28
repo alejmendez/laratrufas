@@ -2,7 +2,7 @@ export default {
   titles: {
     entity_breadcrumb: 'Cosechas',
     create: 'Crear Cosecha',
-    edit: 'Editar Cosecha',
+    edit: 'Editar Cosecha Semana {week} Batch {batch}',
     bulk: 'Nuevo carga masiva de cosechas',
   },
   table: {

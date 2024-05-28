@@ -26,6 +26,7 @@ class UpdateHarvest
             return !$details->firstWhere('id', $id);
         })->toArray();
 
+        $data['batch'] = strtoupper($data['batch']);
         $harvest->update($data);
         HarvestDetail::destroy($idDetailsToDestroy);
 
@@ -41,6 +42,7 @@ class UpdateHarvest
             if ($detail['id'] === null) {
                 HarvestDetail::create($detail);
             } else {
+                unset($detail['plant_code']);
                 HarvestDetail::where('id', $detail['id'])->update($detail);
             }
         }
