@@ -36,7 +36,7 @@ onUnmounted(() => {
   </div>
   <div
     v-show="showDropDown"
-    class="absolute right-[60px] z-10 mt-12 w-96 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+    class="absolute right-[60px] z-50 mt-12 w-96 origin-top-right rounded-md text-black bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
     tabindex="-1"
   >
     <div class="font-semibold text-left block px-4 py-2">
