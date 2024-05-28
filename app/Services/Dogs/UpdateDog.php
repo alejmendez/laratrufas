@@ -9,15 +9,20 @@ class UpdateDog
 {
     public static function call($id, $data): Dog
     {
-        $vaccines = collect($data['vaccines']);
-        unset($data['id']);
-        unset($data['vaccine']);
+        $vaccines = $data['vaccines'] ?? [];
+        $data = self::clean_data($data);
 
         $dog = Dog::findOrFail($id);
-        $idVaccines = $dog->vaccines()->pluck('id');
-        $idVaccinesToDestroy = $idVaccines->filter(function ($id, int $key) use ($vaccines) {
-            return !$vaccines->firstWhere('id', $id);
-        })->toArray();
+        $dog->update($data);
+
+        self::save_vaccines($vaccines);
+
+        return $dog;
+    }
+
+    protected static function clean_data($data) {
+        unset($data['id']);
+        unset($data['vaccines']);
 
         if (!$data['avatar']) {
             unset($data['avatar']);
@@ -27,7 +32,21 @@ class UpdateDog
             $data['avatar'] = null;
         }
 
-        $dog->update($data);
+        return $data;
+    }
+
+    protected static function save_vaccines($data) {
+        if (count($data) === 0) {
+            return;
+        }
+
+        $vaccines = collect($data);
+
+        $idVaccines = $dog->vaccines()->pluck('id');
+        $idVaccinesToDestroy = $idVaccines->filter(function ($id, int $key) use ($vaccines) {
+            return !$vaccines->firstWhere('id', $id);
+        })->toArray();
+
         DogVaccine::destroy($idVaccinesToDestroy);
         foreach ($vaccines as $vaccine) {
             $vaccine['dog_id'] = $dog->id;
@@ -37,7 +56,5 @@ class UpdateDog
                 DogVaccine::where('id', $vaccine['id'])->update($vaccine);
             }
         }
-
-        return $dog;
     }
 }
