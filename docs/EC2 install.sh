@@ -92,4 +92,4 @@ php artisan config:cache ; php artisan event:cache ; php artisan route:cache ; p
 sudo nginx -t
 sudo service nginx restart
 
-alias update_app="git pull ; npm run build ; php artisan config:cache ; php artisan event:cache ; php artisan route:cache ; php artisan view:cache"
+alias update_app="git pull ; composer install --optimize-autoloader --no-dev ; npm run build ; php artisan config:cache ; php artisan event:cache ; php artisan route:cache ; php artisan view:cache"
