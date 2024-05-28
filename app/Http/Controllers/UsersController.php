@@ -111,7 +111,7 @@ class UsersController extends Controller
             return null;
         }
 
-        return $request->file('avatar')->store('public/avatars');
+        return $request->file('avatar')->storePublicly('public/avatars');
     }
 
     protected function getSelectRoles()

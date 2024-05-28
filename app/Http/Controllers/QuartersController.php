@@ -114,7 +114,7 @@ class QuartersController extends Controller
             return null;
         }
 
-        return $request->file('blueprint')->store('public/blueprints');
+        return $request->file('blueprint')->storePublicly('public/blueprints');
     }
 
     protected function getSelectFields()
