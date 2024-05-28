@@ -31,7 +31,7 @@ class UserResource extends JsonResource
             'dni' => $this->dni,
             'last_name' => $this->last_name,
             'phone' => $this->phone,
-            'avatar' => $this->avatar ? Storage::disk('avatars')->url($this->avatar) : '',
+            'avatar' => $this->avatar ? Storage::url($this->avatar) : '',
             'role' => $roleData,
         ];
     }
