@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('purchase_date');
-            $table->date('last_maintenance_date');
-            $table->string('purchase_place');
+            $table->date('last_maintenance');
+            $table->string('purchase_location');
             $table->string('type');
             $table->string('contact');
             $table->timestamps();
