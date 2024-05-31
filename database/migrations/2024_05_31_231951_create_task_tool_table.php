@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('task_tool', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('task_id')->constrained();
+            $table->foreignId('tool_id')->constrained();
             $table->timestamps();
         });
     }

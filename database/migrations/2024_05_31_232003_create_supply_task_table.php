@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('supply_task', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('brand');
+            $table->decimal('quantity', total: 5, places: 2);
+            $table->string('unit');
+
+            $table->foreignId('task_id')->constrained();
             $table->timestamps();
         });
     }
