@@ -12,6 +12,7 @@ use App\Http\Controllers\HarvestsController;
 use App\Http\Controllers\HarvestDetailsController;
 use App\Http\Controllers\BulksController;
 use App\Http\Controllers\ToolsController;
+use App\Http\Controllers\EquipmentsController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +68,7 @@ Route::middleware('auth')->group(function () {
         'dogs' => DogsController::class,
         'harvests' => HarvestsController::class,
         'tools' => ToolsController::class,
+        'equipments' => EquipmentsController::class,
     ]);
 });
 

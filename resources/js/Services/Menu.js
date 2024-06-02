@@ -38,7 +38,7 @@ export const menuElements = (t, page) => {
     {
       text: t('menu.records'),
       children: [
-        { link: route('users.index'), text: t('menu.machineries'), icon: 'fa-solid fa-tractor' },
+        { link: route('equipments.index'), text: t('menu.machineries'), icon: 'fa-solid fa-tractor' },
         { link: route('tools.index'), text: t('menu.tools'), icon: 'fa-solid fa-wrench' },
         { link: route('users.index'), text: t('menu.suppliers'), icon: 'fa-solid fa-handshake' },
       ],
