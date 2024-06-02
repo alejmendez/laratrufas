@@ -30,7 +30,6 @@ import {
   faSeedling,
   faTableCells,
   faTableCellsLarge,
-  faAppleAlt,
   faFileInvoiceDollar,
   faListCheck,
   faTractor,
@@ -46,7 +45,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faBell, faCalendar } from '@fortawesome/free-regular-svg-icons';
-import { faBuromobelexperte, faEnvira } from '@fortawesome/free-brands-svg-icons';
+import { faEnvira } from '@fortawesome/free-brands-svg-icons';
 
 const icons = [
   faBars,

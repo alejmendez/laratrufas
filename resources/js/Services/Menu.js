@@ -3,7 +3,12 @@ export const menuElements = (t, page) => {
     {
       text: t('menu.management'),
       children: [
-        { link: route('fields.index'), text: t('menu.fields'), icon: 'fa-solid fa-table-cells', active: page.component.startsWith('Field') },
+        {
+          link: route('fields.index'),
+          text: t('menu.fields'),
+          icon: 'fa-solid fa-table-cells',
+          active: page.component.startsWith('Field'),
+        },
         {
           link: route('quarters.index'),
           text: t('menu.quarters'),

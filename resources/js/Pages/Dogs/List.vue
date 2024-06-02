@@ -4,7 +4,6 @@ import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification';
 
 import { deleteRowTable } from '@/Utils/table';
-import { getAge } from '@/Utils/date';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';

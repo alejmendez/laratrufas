@@ -7,7 +7,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormTool from '@/Pages/Tools/Form.vue';
 
-import { stringToDate, getAge } from '@/Utils/date';
+import { stringToDate } from '@/Utils/date';
 
 const { t } = useI18n();
 

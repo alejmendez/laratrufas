@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { format } from 'date-fns';

@@ -1,7 +1,7 @@
 <script setup>
 import { Head, useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
+import { format, getWeek } from 'date-fns';
 import { Link } from '@inertiajs/vue3';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
@@ -60,7 +60,6 @@ const submitHandler = () => {
     <Head :title="t('harvest.titles.entity_breadcrumb')" />
 
     <AuthenticatedLayout>
-      <!-- { to: 'harvests.create.bulk', text: t('generics.bulk.button') } -->
       <HeaderCrud
         :title="t('harvest.titles.edit', { batch: form.batch.toUpperCase(), week: getWeek(form.date, { weekStartsOn: 1 })})"
         :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
