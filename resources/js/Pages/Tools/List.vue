@@ -2,6 +2,9 @@
 import { Head, Link, router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification';
+import { format } from 'date-fns';
+
+import { stringToDate } from '@/Utils/date';
 
 import { deleteRowTable } from '@/Utils/table';
 
@@ -60,8 +63,8 @@ const deleteHandler = async (id) => {
                 :key="tool.id"
             >
                 <td>{{ tool.name }}</td>
-                <td>{{ tool.purchase_date }}</td>
-                <td>{{ tool.last_maintenance }}</td>
+                <td>{{ format(stringToDate(tool.purchase_date), 'dd/MM/yyyy') }}</td>
+                <td>{{ format(stringToDate(tool.last_maintenance), 'dd/MM/yyyy') }}</td>
                 <td>{{ tool.purchase_location }}</td>
                 <td>{{ tool.contact }}</td>
                 <td>
