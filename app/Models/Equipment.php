@@ -17,6 +17,8 @@ class Equipment extends Model
 {
     use HasFactory, Orderable, Searchable, Filterable;
 
+    protected $table = 'equipments';
+
     protected $fillable = [
         'name',
         'purchase_date',
