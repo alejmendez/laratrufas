@@ -38,7 +38,7 @@ export const menuElements = (t, page) => {
     },
     {
       text: t('menu.task_management'),
-      children: [{ link: route('users.index'), text: t('menu.tasks'), icon: 'fa-solid fa-list-check' }],
+      children: [{ link: route('tasks.index'), text: t('menu.tasks'), icon: 'fa-solid fa-list-check' }],
     },
     {
       text: t('menu.records'),

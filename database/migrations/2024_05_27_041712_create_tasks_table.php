@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('status');
+            $table->string('repeat_number');
+            $table->string('repeat_type');
             $table->string('priority');
             $table->date('start_date');
             $table->date('end_date');

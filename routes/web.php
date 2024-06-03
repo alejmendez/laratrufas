@@ -13,6 +13,7 @@ use App\Http\Controllers\HarvestDetailsController;
 use App\Http\Controllers\BulksController;
 use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\EquipmentsController;
+use App\Http\Controllers\TasksController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,7 @@ Route::middleware('auth')->group(function () {
         'harvests' => HarvestsController::class,
         'tools' => ToolsController::class,
         'equipments' => EquipmentsController::class,
+        'tasks' => TasksController::class,
     ]);
 });
 

@@ -12,6 +12,7 @@ import bulk from './bulk';
 import harvest from './harvest';
 import tool from './tool';
 import equipment from './equipment';
+import task from './task';
 
 export default {
   brand: {
@@ -31,4 +32,5 @@ export default {
   harvest,
   tool,
   equipment,
+  task,
 };
