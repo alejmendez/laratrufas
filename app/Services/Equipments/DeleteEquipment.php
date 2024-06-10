@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services\Equipments;
+namespace App\Services\Machineries;
 
-use App\Models\Equipment;
+use App\Models\Machinery;
 
-class DeleteEquipment
+class DeleteMachinery
 {
     public static function call($id): void
     {
-        Equipment::destroy($id);
+        Machinery::destroy($id);
     }
 }

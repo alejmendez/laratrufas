@@ -19,13 +19,29 @@ export default {
       label: 'Repetir',
     },
     repeat_type: {
-      label: 'Diario',
+      options: {
+        diary: 'Diario',
+        weekly: 'Semanalmente',
+        monthly: 'Mensualmente',
+      }
     },
     priority: {
       label: 'Prioridad',
+      options: {
+        when_possible: 'Cuando se pueda',
+        routine: 'Rutinario',
+        important: 'Importante',
+        urgent: 'Urgente',
+      }
     },
     status: {
       label: 'Estado',
+      options: {
+        to_begin: 'Por iniciar',
+        started: 'Iniciada',
+        stopped: 'Detenida',
+        finished: 'Terminada',
+      }
     },
     start_date: {
       label: 'Fecha inicio',
@@ -48,7 +64,7 @@ export default {
     tools: {
       label: 'Herramientas',
     },
-    equipments: {
+    machineries: {
       label: 'Maquinarias',
     },
     supplies: {
@@ -63,11 +79,39 @@ export default {
       },
       unit: {
         label: 'Unidad',
+        options: {
+          unit: 'Unidad (ud)',
+          package: 'Paquete (paq)',
+          box: 'Caja (caja)',
+          pallet: 'Pallet (pal)',
+          container: 'Contenedor (cont)',
+          grams: 'Gramos (g)',
+          kilograms: 'Kilogramos (kg)',
+          tons: 'Toneladas (ton)',
+          milliliters: 'Mililitros (ml)',
+          liters: 'Litros (l)',
+          gallons: 'Galones (gal)',
+          barrels: 'Barriles (bbl)',
+          millimeters: 'Milímetros (mm)',
+          centimeters: 'Centímetros (cm)',
+          meters: 'Metros (m)',
+          kilometers: 'Kilómetros (km)',
+          inches: 'Pulgadas (in)',
+          feet: 'Pies (ft)',
+          yards: 'Yardas (yd)',
+        }
       },
+    },
+    comments: {
+      placeholder: 'Ingrese comentarios adicionales',
     },
   },
   sections: {
     assignment: 'Asignación',
     resources: 'Recursos',
+    comments: 'Comentarios',
+  },
+  buttons: {
+    add_supply: 'Añadir otro',
   },
 };

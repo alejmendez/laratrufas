@@ -32,4 +32,44 @@ class Task extends Model
         'note',
         'comments',
     ];
+
+    public function field()
+    {
+        return $this->belongsTo(Field::class);
+    }
+
+    public function quarter()
+    {
+        return $this->belongsTo(Quarter::class);
+    }
+
+    public function plant()
+    {
+        return $this->belongsTo(Plant::class);
+    }
+
+    public function responsible()
+    {
+        return $this->belongsTo(User::class, 'responsible_id');
+    }
+
+    public function tools()
+    {
+        return $this->belongsToMany(Tool::class, 'task_tool');
+    }
+
+    public function machineries()
+    {
+        return $this->belongsToMany(Machinery::class, 'machineries_task');
+    }
+
+    public function supplies()
+    {
+        return $this->hasMany(SupplyTask::class);
+    }
+
+    public function comments()
+    {
+        return $this->belongsToMany(Comment::class, 'comment_task');
+    }
 }

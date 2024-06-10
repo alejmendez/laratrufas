@@ -4,18 +4,18 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 
-use App\Services\Equipments\FindEquipment;
-use App\Services\Equipments\ListEquipment;
-use App\Services\Equipments\CreateEquipment;
-use App\Services\Equipments\UpdateEquipment;
-use App\Services\Equipments\DeleteEquipment;
+use App\Services\Machineries\FindMachinery;
+use App\Services\Machineries\ListMachinery;
+use App\Services\Machineries\CreateMachinery;
+use App\Services\Machineries\UpdateMachinery;
+use App\Services\Machineries\DeleteMachinery;
 
-use App\Http\Resources\EquipmentResource;
-use App\Http\Resources\EquipmentCollection;
-use App\Http\Requests\StoreEquipmentRequest;
-use App\Http\Requests\UpdateEquipmentRequest;
+use App\Http\Resources\MachineryResource;
+use App\Http\Resources\MachineryCollection;
+use App\Http\Requests\StoreMachineryRequest;
+use App\Http\Requests\UpdateMachineryRequest;
 
-class EquipmentsController extends Controller
+class MachineriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,13 +24,13 @@ class EquipmentsController extends Controller
     {
         $order = request('order', '');
         $search = request('search', '');
-        $equipments = ListEquipment::call($order, $search);
+        $machineries = ListMachinery::call($order, $search);
 
-        return Inertia::render('Equipments/List', [
+        return Inertia::render('Machineries/List', [
             'order' => $order,
             'search' => $search,
             'toast' => session('toast'),
-            'data' => new EquipmentCollection($equipments->paginate()->withQueryString()),
+            'data' => new MachineryCollection($machineries->paginate()->withQueryString()),
         ]);
     }
 
@@ -39,17 +39,17 @@ class EquipmentsController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Equipments/Create');
+        return Inertia::render('Machineries/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEquipmentRequest $request)
+    public function store(StoreMachineryRequest $request)
     {
-        CreateEquipment::call($request->validated());
+        CreateMachinery::call($request->validated());
 
-        return redirect()->route('equipments.index')->with('toast', 'Equipment created.');
+        return redirect()->route('machineries.index')->with('toast', 'Machinery created.');
     }
 
     /**
@@ -57,10 +57,10 @@ class EquipmentsController extends Controller
      */
     public function show(string $id)
     {
-        $equipment = FindEquipment::call($id);
+        $machinery = FindMachinery::call($id);
 
-        return Inertia::render('Equipments/Show', [
-            'data' => new EquipmentResource($equipment),
+        return Inertia::render('Machineries/Show', [
+            'data' => new MachineryResource($machinery),
         ]);
     }
 
@@ -69,21 +69,21 @@ class EquipmentsController extends Controller
      */
     public function edit(string $id)
     {
-        $equipment = FindEquipment::call($id);
+        $machinery = FindMachinery::call($id);
 
-        return Inertia::render('Equipments/Edit', [
-            'data' => new EquipmentResource($equipment),
+        return Inertia::render('Machineries/Edit', [
+            'data' => new MachineryResource($machinery),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEquipmentRequest $request, string $id)
+    public function update(UpdateMachineryRequest $request, string $id)
     {
-        UpdateEquipment::call($id, $request->validated());
+        UpdateMachinery::call($id, $request->validated());
 
-        return redirect()->route('equipments.index')->with('toast', 'Equipment updated.');
+        return redirect()->route('machineries.index')->with('toast', 'Machinery updated.');
     }
 
     /**
@@ -91,7 +91,7 @@ class EquipmentsController extends Controller
      */
     public function destroy(string $id)
     {
-        DeleteEquipment::call($id);
+        DeleteMachinery::call($id);
         return redirect()->back();
     }
 }

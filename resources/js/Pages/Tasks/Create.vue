@@ -12,39 +12,43 @@ const { t } = useI18n();
 const props = defineProps({
   fields: Array,
   responsibles: Array,
+  tools: Array,
+  machineries: Array,
 });
 
 const form = useForm({
   name: null,
-  status: null,
-  priority: null,
+  repeat_number: '1',
+  repeat_type: 'diary',
+  status: 'to_begin',
+  priority: '',
   start_date: null,
   end_date: null,
-  field_id: null,
-  quarter_id: null,
-  plant_id: null,
-  responsible_id: null,
+  field_id: '',
+  quarter_id: '',
+  plant_id: '',
+  responsible_id: '',
   note: null,
   comments: null,
   tools: [],
-  equipments: [],
+  machineries: [],
   supplies: [{
     name: null,
     brand: null,
     quantity: null,
-    unit: null,
+    unit: '',
   }],
 });
 
 const submitHandler = () => {
   form
-    .transform((data) => {
-      return {
-        ...data,
-        purchase_date: format(data.purchase_date, 'yyyy-MM-dd'),
-        last_maintenance: format(data.last_maintenance, 'yyyy-MM-dd'),
-      };
-    })
+    .transform((data) => ({
+      ...data,
+      start_date: format(data.start_date, 'yyyy-MM-dd'),
+      end_date: format(data.end_date, 'yyyy-MM-dd'),
+      tools: data.tools.map((q) => q.value),
+      machineries: data.machineries.map((q) => q.value),
+    }))
     .post(route('tasks.store'), {
       forceFormData: true,
     });
@@ -63,6 +67,9 @@ const submitHandler = () => {
       <FormTask
         :form="form"
         :fields="props.fields"
+        :responsibles="props.responsibles"
+        :tools="props.tools"
+        :machineries="props.machineries"
         :submitHandler="submitHandler"
       />
     </AuthenticatedLayout>

@@ -27,28 +27,28 @@ if (props.toast) {
 }
 
 const columns = [
-  { text: t('equipment.table.name'), data: 'name' },
-  { text: t('equipment.table.purchase_date'), data: 'purchase_date' },
-  { text: t('equipment.table.last_maintenance'), data: 'last_maintenance' },
-  { text: t('equipment.table.purchase_location'), data: 'purchase_location' },
-  { text: t('equipment.table.contact'), data: 'contact' },
+  { text: t('machinery.table.name'), data: 'name' },
+  { text: t('machinery.table.purchase_date'), data: 'purchase_date' },
+  { text: t('machinery.table.last_maintenance'), data: 'last_maintenance' },
+  { text: t('machinery.table.purchase_location'), data: 'purchase_location' },
+  { text: t('machinery.table.contact'), data: 'contact' },
 ];
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, () => {
-    router.delete(route('equipments.destroy', id));
+    router.delete(route('machineries.destroy', id));
   });
 };
 </script>
 
 <template>
-    <Head :title="t('equipment.titles.entity_breadcrumb')" />
+    <Head :title="t('machinery.titles.entity_breadcrumb')" />
 
     <AuthenticatedLayout>
         <HeaderCrud
-            :title="t('equipment.titles.entity_breadcrumb')"
-            :breadcrumbs="[{ to: 'equipments.index', text: t('equipment.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-            :links="[{ to: 'equipments.create', text: t('generics.new') }]"
+            :title="t('machinery.titles.entity_breadcrumb')"
+            :breadcrumbs="[{ to: 'machineries.index', text: t('machinery.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
+            :links="[{ to: 'machineries.create', text: t('generics.new') }]"
         />
 
         <TableList
@@ -59,23 +59,23 @@ const deleteHandler = async (id) => {
         >
             <tr
                 class="border-b hover:bg-neutral-100"
-                v-for="equipment of data.data"
-                :key="equipment.id"
+                v-for="machinery of data.data"
+                :key="machinery.id"
             >
-                <td>{{ equipment.name }}</td>
-                <td>{{ format(stringToDate(equipment.purchase_date), 'dd/MM/yyyy') }}</td>
-                <td>{{ format(stringToDate(equipment.last_maintenance), 'dd/MM/yyyy') }}</td>
-                <td>{{ equipment.purchase_location }}</td>
-                <td>{{ equipment.contact }}</td>
+                <td>{{ machinery.name }}</td>
+                <td>{{ format(stringToDate(machinery.purchase_date), 'dd/MM/yyyy') }}</td>
+                <td>{{ format(stringToDate(machinery.last_maintenance), 'dd/MM/yyyy') }}</td>
+                <td>{{ machinery.purchase_location }}</td>
+                <td>{{ machinery.contact }}</td>
                 <td>
-                  <Link :href="route('equipments.show', equipment.id)">
+                  <Link :href="route('machineries.show', machinery.id)">
                     <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
                   </Link>
-                  <Link :href="route('equipments.edit', equipment.id)">
+                  <Link :href="route('machineries.edit', machinery.id)">
                     <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
                   </Link>
                   <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-red-600"
-                    @click="deleteHandler(equipment.id)" />
+                    @click="deleteHandler(machinery.id)" />
                 </td>
             </tr>
             <tr v-if="data.data.length === 0" class="border-b hover:bg-neutral-100">

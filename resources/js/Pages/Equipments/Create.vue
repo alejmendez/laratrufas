@@ -27,20 +27,20 @@ const submitHandler = () => {
         last_maintenance: format(data.last_maintenance, 'yyyy-MM-dd'),
       };
     })
-    .post(route('equipments.store'), {
+    .post(route('machineries.store'), {
       forceFormData: true,
     });
 };
 </script>
 
 <template>
-    <Head :title="t('equipment.titles.entity_breadcrumb')" />
+    <Head :title="t('machinery.titles.entity_breadcrumb')" />
 
     <AuthenticatedLayout>
       <HeaderCrud
-        :title="t('equipment.titles.create')"
-        :breadcrumbs="[{ to: 'equipments.index', text: t('equipment.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('equipments.index') }"
+        :title="t('machinery.titles.create')"
+        :breadcrumbs="[{ to: 'machineries.index', text: t('machinery.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('machineries.index') }"
       />
       <FormTool
         :form="form"

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Services\Equipments;
+namespace App\Services\Machineries;
 
-use App\Models\Equipment;
+use App\Models\Machinery;
 
-class FindEquipment
+class FindMachinery
 {
     public static function call($id)
     {
-        $equipment = Equipment::findOrFail($id);
+        $machinery = Machinery::findOrFail($id);
 
-        return $equipment;
+        return $machinery;
     }
 }

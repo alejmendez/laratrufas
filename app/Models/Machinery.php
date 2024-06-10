@@ -13,11 +13,9 @@ use App\Traits\Filterable;
 
 use Carbon\Carbon;
 
-class Equipment extends Model
+class Machinery extends Model
 {
     use HasFactory, Orderable, Searchable, Filterable;
-
-    protected $table = 'equipments';
 
     protected $fillable = [
         'name',

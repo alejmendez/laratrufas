@@ -34,8 +34,8 @@ const form = useForm({
   note: data.note,
   comments: data.comments,
   tools: data.tools,
-  equipments: data.equipments,
-  supplies: data.equipments,
+  machineries: data.machineries,
+  supplies: data.machineries,
 });
 
 const submitHandler = () => {

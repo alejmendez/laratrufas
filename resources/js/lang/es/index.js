@@ -11,7 +11,7 @@ import menu from './menu';
 import bulk from './bulk';
 import harvest from './harvest';
 import tool from './tool';
-import equipment from './equipment';
+import machinery from './machinery';
 import task from './task';
 
 export default {
@@ -31,6 +31,6 @@ export default {
   bulk,
   harvest,
   tool,
-  equipment,
+  machinery,
   task,
 };

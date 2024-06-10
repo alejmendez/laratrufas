@@ -31,7 +31,7 @@ class TaskResource extends JsonResource
             'comments' => $this->comments,
             // Additional validation rules for related tables
             'tools' => $this->tools->pluck('id'),
-            'equipments' => $this->equipments->pluck('id'),
+            'machineries' => $this->machineries->pluck('id'),
             'supplies' =>  $this->supplies->map(fn ($supply) => [
                 'id' => $supply->id,
                 'name' => $supply->name,

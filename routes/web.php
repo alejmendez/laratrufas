@@ -12,8 +12,9 @@ use App\Http\Controllers\HarvestsController;
 use App\Http\Controllers\HarvestDetailsController;
 use App\Http\Controllers\BulksController;
 use App\Http\Controllers\ToolsController;
-use App\Http\Controllers\EquipmentsController;
+use App\Http\Controllers\MachineriesController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\SelectsController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/plants/types', [PlantTypesController::class, 'store'])->name('plants.types.store');
 
+    Route::get('/select/{entity}', [SelectsController::class, 'index'])->name('selects');
+
     Route::resources([
         'users' => UsersController::class,
         'fields' => FieldsController::class,
@@ -69,7 +72,7 @@ Route::middleware('auth')->group(function () {
         'dogs' => DogsController::class,
         'harvests' => HarvestsController::class,
         'tools' => ToolsController::class,
-        'equipments' => EquipmentsController::class,
+        'machineries' => MachineriesController::class,
         'tasks' => TasksController::class,
     ]);
 });

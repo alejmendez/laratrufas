@@ -37,6 +37,13 @@ class HandleInertiaRequests extends Middleware
         if ($user) {
             $userData = $user->toArray();
             $userData['full_name'] = $user->full_name;
+            unset(
+                $userData['email_verified_at'],
+                $userData['created_at'],
+                $userData['updated_at'],
+                $userData['deleted_at'],
+                $userData['avatar']
+            );
 
             if ($user->avatar === null) {
                 $userData['avatar_url'] = null;

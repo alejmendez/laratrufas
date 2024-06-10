@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Services\Equipments;
+namespace App\Services\Machineries;
 
-use App\Models\Equipment;
+use App\Models\Machinery;
 
-class CreateEquipment
+class CreateMachinery
 {
-    public static function call($data): Equipment
+    public static function call($data): Machinery
     {
-        $equipment = Equipment::create($data);
-        return $equipment;
+        $machinery = Machinery::create($data);
+        return $machinery;
     }
 }

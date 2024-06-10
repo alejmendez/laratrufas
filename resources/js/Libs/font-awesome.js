@@ -44,7 +44,7 @@ import {
   faRotateRight,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { faBell, faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { faBell, faCalendar, faSquare, faSquareCheck } from '@fortawesome/free-regular-svg-icons';
 import { faEnvira } from '@fortawesome/free-brands-svg-icons';
 
 const icons = [
@@ -92,6 +92,8 @@ const icons = [
   faFileArrowUp,
   faBarcode,
   faRotateRight,
+  faSquare,
+  faSquareCheck,
 ];
 
 export const initFontAwesome = (app) => {

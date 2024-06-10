@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Services\Equipments;
+namespace App\Services\Machineries;
 
-use App\Models\Equipment;
-use App\Models\EquipmentVaccine;
+use App\Models\Machinery;
+use App\Models\MachineryVaccine;
 
-class UpdateEquipment
+class UpdateMachinery
 {
-    public static function call($id, $data): Equipment
+    public static function call($id, $data): Machinery
     {
-        $equipment = Equipment::findOrFail($id);
-        $equipment->update($data);
+        $machinery = Machinery::findOrFail($id);
+        $machinery->update($data);
 
-        return $equipment;
+        return $machinery;
     }
 }

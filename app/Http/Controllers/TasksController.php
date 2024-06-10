@@ -11,6 +11,7 @@ use App\Services\Tasks\UpdateTask;
 use App\Services\Tasks\DeleteTask;
 use App\Services\Fields\ListField;
 use App\Services\Users\ListUser;
+use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\TaskResource;
 use App\Http\Resources\TaskCollection;
@@ -42,8 +43,10 @@ class TasksController extends Controller
     public function create()
     {
         return Inertia::render('Tasks/Create', [
-            'fields' => $this->getSelectFields(),
-            'responsibles' => $this->getSelectResponsibles(),
+            'fields' => ListEntity::call('field'),
+            'responsibles' => ListEntity::call('responsible'),
+            'tools' => ListEntity::call('tool'),
+            'machineries' => ListEntity::call('machinery'),
         ]);
     }
 
@@ -66,8 +69,10 @@ class TasksController extends Controller
 
         return Inertia::render('Tasks/Show', [
             'data' => new TaskResource($task),
-            'fields' => $this->getSelectFields(),
-            'responsibles' => $this->getSelectResponsibles(),
+            'fields' => ListEntity::call('field'),
+            'responsibles' => ListEntity::call('responsible'),
+            'tools' => ListEntity::call('tool'),
+            'machineries' => ListEntity::call('machinery'),
         ]);
     }
 
@@ -80,8 +85,10 @@ class TasksController extends Controller
 
         return Inertia::render('Tasks/Edit', [
             'data' => new TaskResource($task),
-            'fields' => $this->getSelectFields(),
-            'responsibles' => $this->getSelectResponsibles(),
+            'fields' => ListEntity::call('field'),
+            'responsibles' => ListEntity::call('responsible'),
+            'tools' => ListEntity::call('tool'),
+            'machineries' => ListEntity::call('machinery'),
         ]);
     }
 
@@ -102,16 +109,5 @@ class TasksController extends Controller
     {
         DeleteTask::call($id);
         return redirect()->back();
-    }
-
-    protected function getSelectFields()
-    {
-        return collect(ListField::call('name')->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
-    }
-
-    protected function getSelectResponsibles()
-    {
-        return collect(ListUser::call('name')->get())
-            ->map(fn($responsible) => [ 'value' => $responsible->id, 'text' => $responsible->full_name ]);
     }
 }

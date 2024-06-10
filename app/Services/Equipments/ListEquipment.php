@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Services\Equipments;
+namespace App\Services\Machineries;
 
-use App\Models\Equipment;
+use App\Models\Machinery;
 
-class ListEquipment
+class ListMachinery
 {
     public static function call($order = '', $search = '')
     {
-        $equipments = Equipment::order($order)->search($search);
+        $machineries = Machinery::order($order)->search($search);
 
-        return $equipments;
+        return $machineries;
     }
 }

@@ -37,8 +37,8 @@ class UpdateTaskRequest extends FormRequest
             // Additional validation rules for related tables
             'tools' => 'nullable|array',
             'tools.*' => 'exists:tools,id',
-            'equipments' => 'nullable|array',
-            'equipments.*' => 'exists:equipments,id',
+            'machineries' => 'nullable|array',
+            'machineries.*' => 'exists:machineries,id',
             'supplies' => 'nullable|array',
             'supplies.*.name' => 'required_with:supplies|string|max:255',
             'supplies.*.brand' => 'required_with:supplies|string|max:255',
