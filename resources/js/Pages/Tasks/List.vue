@@ -30,7 +30,7 @@ const columns = [
   { text: t('task.table.name'), data: 'name' },
   { text: t('task.table.priority'), data: 'priority' },
   { text: t('task.table.note'), data: 'note' },
-  { text: t('task.table.update_at'), data: 'update_at' },
+  { text: t('task.table.updated_at'), data: 'updated_at' },
   { text: t('task.table.responsible'), data: 'responsible' },
 ];
 
@@ -65,8 +65,8 @@ const deleteHandler = async (id) => {
                 <td>{{ task.name }}</td>
                 <td>{{ task.priority }}</td>
                 <td>{{ task.note }}</td>
-                <td>{{ format(stringToDate(task.update_at), 'dd/MM/yyyy') }}</td>
-                <td>{{ task.responsible }}</td>
+                <td>{{ format(stringToDate(task.updated_at), 'dd/MM/yyyy') }}</td>
+                <td>{{ task.responsible_name }}</td>
                 <td>
                   <Link :href="route('tasks.show', task.id)">
                     <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />

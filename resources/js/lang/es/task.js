@@ -8,7 +8,7 @@ export default {
     name: 'Tarea',
     priority: 'Prioridad',
     note: 'Nota',
-    update_at: 'Actualización',
+    updated_at: 'Actualización',
     responsible: 'Responsable',
   },
   form: {

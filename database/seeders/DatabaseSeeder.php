@@ -17,15 +17,25 @@ class DatabaseSeeder extends Seeder
             return;
         }
 
-        $this->call([
+        $seeders = [
             RolesSeeder::class,
-            // OwnersSeeder::class,
             UserSeeder::class,
-            // FieldsSeeder::class,
-            // QuartersSeeder::class,
-            // PlantsSeeder::class,
-            // HarvestsSeeder::class,
-            // DogSeeder::class,
-        ]);
+        ];
+
+        if (app()->isLocal()) {
+            $seeders = [
+                RolesSeeder::class,
+                UserSeeder::class,
+                FieldsSeeder::class,
+                QuartersSeeder::class,
+                PlantsSeeder::class,
+                DogSeeder::class,
+                ToolsSeeder::class,
+                MachineriesSeeder::class,
+                // OwnersSeeder::class,
+                // HarvestsSeeder::class,
+            ];
+        }
+        $this->call($seeders);
     }
 }

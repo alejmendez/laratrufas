@@ -1,5 +1,5 @@
 <script setup>
-import { watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Label as LabelShadcn } from '@/Components/ui/label';
 import { Input as InputShadcn } from '@/Components/ui/input';
@@ -47,15 +47,15 @@ const repeat_types = [
   'monthly',
 ].map(s => ({ value: s, text: t('task.form.repeat_type.options.' + s), }));
 
-let quarters = [];
-let plants = [];
+const quarters = ref([]);
+const plants = ref([]);
 
 watch(() => form.field_id, async (field_id) => {
-  quarters = await getDataSelect('quarter', { field_id })
+  quarters.value = await getDataSelect('quarter', { field_id })
 });
 
 watch(() => form.quarter_id, async (quarter_id) => {
-  plants = await getDataSelect('plant', { quarter_id })
+  plants.value = await getDataSelect('plant', { quarter_id })
 });
 
 const units = [

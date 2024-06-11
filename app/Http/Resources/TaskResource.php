@@ -27,11 +27,13 @@ class TaskResource extends JsonResource
             'quarter_id' => $this->quarter_id,
             'plant_id' => $this->plant_id,
             'responsible_id' => $this->responsible_id,
+            'responsible_name' => $this->responsible->name,
             'note' => $this->note,
             'comments' => $this->comments,
             // Additional validation rules for related tables
             'tools' => $this->tools->pluck('id'),
             'machineries' => $this->machineries->pluck('id'),
+            'updated_at' => $this->updated_at,
             'supplies' =>  $this->supplies->map(fn ($supply) => [
                 'id' => $supply->id,
                 'name' => $supply->name,
