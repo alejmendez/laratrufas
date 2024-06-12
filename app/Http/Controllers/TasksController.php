@@ -86,6 +86,8 @@ class TasksController extends Controller
         return Inertia::render('Tasks/Edit', [
             'data' => new TaskResource($task),
             'fields' => ListEntity::call('field'),
+            'quarters' => ListEntity::call('quarter', ['field_id' => $task->field_id]),
+            'plants' => ListEntity::call('plant', ['quarter_id' => $task->quarter_id]),
             'responsibles' => ListEntity::call('responsible'),
             'tools' => ListEntity::call('tool'),
             'machineries' => ListEntity::call('machinery'),

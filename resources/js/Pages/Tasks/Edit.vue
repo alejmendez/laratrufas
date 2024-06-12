@@ -15,6 +15,10 @@ const props = defineProps({
   data: Object,
   fields: Array,
   responsibles: Array,
+  quarters: Array,
+  plants: Array,
+  tools: Array,
+  machineries: Array,
 });
 
 const { data } = props.data;
@@ -23,19 +27,21 @@ const form = useForm({
   _method: 'PATCH',
   id: data.id,
   name: data.name,
+  repeat_number: data.repeat_number,
+  repeat_type: data.repeat_type,
   status: data.status,
   priority: data.priority,
   start_date: stringToDate(data.start_date),
   end_date: stringToDate(data.end_date),
-  field_id: data.field_id,
-  quarter_id: data.quarter_id,
-  plant_id: data.plant_id,
-  responsible_id: data.responsible_id,
+  field_id: data.field_id.toString(),
+  quarter_id: data.quarter_id.toString(),
+  plant_id: data.plant_id.toString(),
+  responsible_id: data.responsible_id.toString(),
   note: data.note,
   comments: data.comments,
-  tools: data.tools,
-  machineries: data.machineries,
-  supplies: data.machineries,
+  tools: data.tools.map((t) => ({ value: t.id, text: t.name })),
+  machineries: data.machineries.map((m) => ({ value: m.id, text: m.name })),
+  supplies: data.supplies,
 });
 
 const submitHandler = () => {
@@ -43,8 +49,10 @@ const submitHandler = () => {
     .transform((data) => {
       return {
         ...data,
-        start_date: format(data.purchase_date, 'yyyy-MM-dd'),
-        end_date: format(data.last_maintenance, 'yyyy-MM-dd'),
+        start_date: format(data.start_date, 'yyyy-MM-dd'),
+        end_date: format(data.end_date, 'yyyy-MM-dd'),
+        tools: data.tools.map((q) => q.value),
+        machineries: data.machineries.map((q) => q.value),
       };
     })
     .post(route('tasks.update', data.id), {
@@ -65,6 +73,11 @@ const submitHandler = () => {
       <FormTask
         :form="form"
         :fields="props.fields"
+        :responsibles="props.responsibles"
+        :tools="props.tools"
+        :machineries="props.machineries"
+        :quarters="props.quarters"
+        :plants="props.plants"
         :submitHandler="submitHandler"
       />
     </AuthenticatedLayout>

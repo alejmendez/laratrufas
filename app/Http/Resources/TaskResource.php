@@ -18,7 +18,8 @@ class TaskResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'repeat' => $this->repeat,
+            'repeat_number' => $this->repeat_number,
+            'repeat_type' => $this->repeat_type,
             'status' => $this->status,
             'priority' => $this->priority,
             'start_date' => $this->start_date,
@@ -31,8 +32,14 @@ class TaskResource extends JsonResource
             'note' => $this->note,
             'comments' => $this->comments,
             // Additional validation rules for related tables
-            'tools' => $this->tools->pluck('id'),
-            'machineries' => $this->machineries->pluck('id'),
+            'tools' => $this->tools->map(fn ($tool) => [
+                'id' => $tool->id,
+                'name' => $tool->name,
+            ]),
+            'machineries' => $this->machineries->map(fn ($machinery) => [
+                'id' => $machinery->id,
+                'name' => $machinery->name,
+            ]),
             'updated_at' => $this->updated_at,
             'supplies' =>  $this->supplies->map(fn ($supply) => [
                 'id' => $supply->id,

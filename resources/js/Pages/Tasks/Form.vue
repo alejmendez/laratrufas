@@ -18,6 +18,14 @@ const props = defineProps({
   form: Object,
   submitHandler: Function,
   fields: Array,
+  quarters: {
+    type: Array,
+    default: [],
+  },
+  plants: {
+    type: Array,
+    default: [],
+  },
   responsibles: Array,
   tools: Array,
   machineries: Array,
@@ -47,8 +55,8 @@ const repeat_types = [
   'monthly',
 ].map(s => ({ value: s, text: t('task.form.repeat_type.options.' + s), }));
 
-const quarters = ref([]);
-const plants = ref([]);
+const quarters = ref(props.quarters);
+const plants = ref(props.plants);
 
 watch(() => form.field_id, async (field_id) => {
   quarters.value = await getDataSelect('quarter', { field_id })
@@ -172,8 +180,11 @@ const remove_supply = (index) => {
           <InputShadcn
             id="repeat_number"
             class="input mt-1"
-            type="text"
             v-model="form.repeat_number"
+            type="number"
+            min="1"
+            max="2000"
+            step="1"
             :message="form.errors.repeat_number"
           />
           <VSelect
@@ -321,6 +332,10 @@ const remove_supply = (index) => {
             <VInput
               :id="`supplies_quantity_${index}`"
               v-model="supply.quantity"
+              type="number"
+              min="0"
+              max="2000"
+              step="0.01"
               :label="t('task.form.supplies.quantity.label')"
               :message="form.errors.supplies? form.errors.supplies[index].quantity : ''"
             />
