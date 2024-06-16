@@ -60,10 +60,12 @@ const plants = ref(props.plants);
 
 watch(() => form.field_id, async (field_id) => {
   quarters.value = await getDataSelect('quarter', { field_id })
+  form.quarter_id = null;
 });
 
 watch(() => form.quarter_id, async (quarter_id) => {
   plants.value = await getDataSelect('plant', { quarter_id })
+  form.plant_id = null;
 });
 
 const units = [

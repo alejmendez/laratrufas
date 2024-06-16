@@ -10,13 +10,16 @@ class ListField
     {
         $fields = Field::select('id', 'name', 'location', 'size')
             ->withCount('plants')
-            ->order($order)
-            ->whereAny([
+            ->order($order);
+
+        if ($search) {
+            $fields->whereAny([
                 'name',
                 'location',
                 'size',
                 'plants_count',
             ], 'LIKE', "%{$search}%");
+        }
 
         return $fields;
     }

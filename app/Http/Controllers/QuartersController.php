@@ -42,8 +42,8 @@ class QuartersController extends Controller
     public function create()
     {
         return Inertia::render('Quarters/Create', [
-            'fields' => $this->getSelectFields(),
-            'responsibles' => $this->getSelectResponsibles(),
+            'fields' => ListEntity::call('field'),
+            'responsibles' => ListEntity::call('responsible'),
         ]);
     }
 
@@ -68,8 +68,8 @@ class QuartersController extends Controller
 
         return Inertia::render('Quarters/Show', [
             'data' => new QuarterResource($quarter),
-            'fields' => $this->getSelectFields(),
-            'responsibles' => $this->getSelectResponsibles(),
+            'fields' => ListEntity::call('field'),
+            'responsibles' => ListEntity::call('responsible'),
         ]);
     }
 
@@ -82,8 +82,8 @@ class QuartersController extends Controller
 
         return Inertia::render('Quarters/Edit', [
             'data' => new QuarterResource($quarter),
-            'fields' => $this->getSelectFields(),
-            'responsibles' => $this->getSelectResponsibles(),
+            'fields' => ListEntity::call('field'),
+            'responsibles' => ListEntity::call('responsible'),
         ]);
     }
 
@@ -115,16 +115,5 @@ class QuartersController extends Controller
         }
 
         return $request->file('blueprint')->storePublicly('public/blueprints');
-    }
-
-    protected function getSelectFields()
-    {
-        return collect(ListField::call('name')->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
-    }
-
-    protected function getSelectResponsibles()
-    {
-        return collect(ListUser::call('name')->get())
-            ->map(fn($responsible) => [ 'value' => $responsible->id, 'text' => $responsible->full_name ]);
     }
 }

@@ -8,15 +8,20 @@ class ListQuarter
 {
     public static function call($order = '', $search = '')
     {
-        return Quarter::leftJoin('fields', 'quarters.field_id', '=', 'fields.id')
+        $quarters = Quarter::leftJoin('fields', 'quarters.field_id', '=', 'fields.id')
             ->select('quarters.id', 'quarters.name', 'fields.name as field_name', 'area')
             ->withCount('plants')
-            ->order($order)
-            ->whereAny([
+            ->order($order);
+
+        if ($search != '') {
+            $quarters->whereAny([
                 'quarters.name',
                 'fields.name',
                 'area',
                 'plants_count',
             ], 'LIKE', "%{$search}%");
+        }
+
+        return $quarters;
     }
 }

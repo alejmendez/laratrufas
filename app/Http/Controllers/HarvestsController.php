@@ -16,6 +16,7 @@ use App\Services\Quarters\ListQuarter;
 use App\Services\Dogs\ListDog;
 use App\Services\Users\ListUser;
 use App\Services\Plants\ListPlant;
+use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\HarvestResource;
 use App\Http\Resources\HarvestCollection;
@@ -51,11 +52,11 @@ class HarvestsController extends Controller
     public function create()
     {
         return Inertia::render('Harvests/Create', [
-            'quarters' => $this->getSelectQuarters(),
-            'dogs' => $this->getSelectDogs(),
-            'users' => $this->getSelectUsers(),
-            'plant_codes' => $this->getSelectPlantCodes(),
-            'qualities' => $this->getSelectQualities(),
+            'quarters' => ListEntity::call('quarterMultiselect'),
+            'dogs' => ListEntity::call('dog'),
+            'users' => ListEntity::call('user'),
+            'plant_codes' => ListEntity::call('plant'),
+            'qualities' => ListHarvestQualities::call('select'),
         ]);
     }
 
@@ -78,11 +79,11 @@ class HarvestsController extends Controller
 
         return Inertia::render('Harvests/Show', [
             'data' => new HarvestResource($harvest),
-            'quarters' => $this->getSelectQuarters(),
-            'dogs' => $this->getSelectDogs(),
-            'users' => $this->getSelectUsers(),
-            'plant_codes' => $this->getSelectPlantCodes(),
-            'qualities' => $this->getSelectQualities(),
+            'quarters' => ListEntity::call('quarterMultiselect'),
+            'dogs' => ListEntity::call('dog'),
+            'users' => ListEntity::call('user'),
+            'plant_codes' => ListEntity::call('plant'),
+            'qualities' => ListHarvestQualities::call('select'),
         ]);
     }
 
@@ -95,11 +96,11 @@ class HarvestsController extends Controller
 
         return Inertia::render('Harvests/Edit', [
             'data' => new HarvestResource($harvest),
-            'quarters' => $this->getSelectQuarters(),
-            'dogs' => $this->getSelectDogs(),
-            'users' => $this->getSelectUsers(),
-            'plant_codes' => $this->getSelectPlantCodes(),
-            'qualities' => $this->getSelectQualities(),
+            'quarters' => ListEntity::call('quarter'),
+            'dogs' => ListEntity::call('dog'),
+            'users' => ListEntity::call('user'),
+            'plant_codes' => ListEntity::call('plant'),
+            'qualities' => ListHarvestQualities::call('select'),
         ]);
     }
 
@@ -130,7 +131,7 @@ class HarvestsController extends Controller
     public function create_bulk()
     {
         return Inertia::render('Harvests/Bulk/Create', [
-            'harvests' => $this->getSelectHarvests(),
+            'harvests' => ListEntity::call('harvest'),
             'id' => request('id'),
             'alert' => session('alert'),
             'errors' => session('errors', []),
@@ -159,52 +160,5 @@ class HarvestsController extends Controller
         } catch (Exception $e) {
             return redirect()->route('harvests.create.bulk')->with('errors', []);
         }
-    }
-
-    protected function getSelectQuarters()
-    {
-        return ListQuarter::call('name')
-            ->get()
-            ->groupBy('field.name')
-            ->map(function($group, $fieldName) {
-                return [
-                    'field' => $fieldName,
-                    'quarters' => collect($group)->map(function($quarter) {
-                        return [
-                            'value' => $quarter->id,
-                            'text' => $quarter->name,
-                        ];
-                    }),
-                ];
-            })->values();
-    }
-
-    protected function getSelectDogs()
-    {
-        return collect(ListDog::call('name')->get())
-            ->map(fn($dog) => [ 'value' => $dog->id, 'text' => $dog->name ]);
-    }
-
-    protected function getSelectUsers()
-    {
-        return collect(ListUser::call('name')->get())
-            ->map(fn($user) => [ 'value' => $user->id, 'text' => $user->full_name ]);
-    }
-
-    protected function getSelectPlantCodes()
-    {
-        return collect(ListPlant::call('name')->get())
-            ->map(fn($plant) => [ 'value' => $plant->id, 'text' => $plant->code, 'quarter_id' => $plant->quarter->id ]);
-    }
-
-    protected function getSelectHarvests()
-    {
-        return collect(ListHarvest::call('batch')->get())
-            ->map(fn($harvest) => [ 'id' => $harvest->id, 'batch' => $harvest->batch, 'date' => $harvest->date ]);
-    }
-
-    protected function getSelectQualities()
-    {
-        return ListHarvestQualities::call('select');
     }
 }

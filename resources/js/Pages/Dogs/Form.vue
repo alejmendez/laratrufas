@@ -1,11 +1,12 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import VInput from '@/Components/Form/VInput.vue';
 import VInputFile from '@/Components/Form/VInputFile.vue';
 import VSelect from '@/Components/Form/VSelect.vue';
 import CardSection from '@/Components/CardSection.vue';
 import ButtonShadcn from '@/Components/ui/button/Button.vue';
+import { getDataSelect } from '@/Services/Selects';
 
 import { getAge } from '@/Utils/date';
 
@@ -36,7 +37,11 @@ const genders = [
 
 const calculateAge = () => (form.age = getAge(form.birthdate));
 
-const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id));
+const quartersOptions = ref(props.quarters);
+watch(() => form.field_id, async (field_id) => {
+  quartersOptions.value = await getDataSelect('quarter', { field_id });
+  form.quarter_id = null;
+});
 
 const changeFileHandler = (e) => {
   form.avatar = e.fileInput;

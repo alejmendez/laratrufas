@@ -19,7 +19,7 @@ class HarvestDetailsController extends Controller
     public function create()
     {
         return Inertia::render('HarvestDetails/Create', [
-            'qualities' => $this->getSelectQualities(),
+            'qualities' => ListHarvestQualities::call('select'),
             'plant_code' => session('plant_code'),
         ]);
     }
@@ -42,16 +42,5 @@ class HarvestDetailsController extends Controller
         return [
             'plant' => FindPlantByCode::call(request('code', '')),
         ];
-    }
-
-    protected function getSelectHarvests()
-    {
-        return collect(ListHarvest::call('batch')->get())
-            ->map(fn($harvest) => [ 'id' => $harvest->id, 'batch' => $harvest->batch, 'date' => $harvest->date ]);
-    }
-
-    protected function getSelectQualities()
-    {
-        return ListHarvestQualities::call('select');
     }
 }

@@ -13,6 +13,7 @@ use App\Services\Plants\DeletePlant;
 use App\Services\Fields\ListField;
 use App\Services\Quarters\ListQuarter;
 use App\Services\PlantTypes\ListPlantType;
+use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\PlantResource;
 use App\Http\Resources\PlantCollection;
@@ -48,9 +49,8 @@ class PlantsController extends Controller
     public function create()
     {
         return Inertia::render('Plants/Create', [
-            'types' => $this->getSelectTypes(),
-            'fields' => $this->getSelectFields(),
-            'quarters' => $this->getSelectQuarters(),
+            'types' => ListEntity::call('plant_type'),
+            'fields' => ListEntity::call('field'),
         ]);
     }
 
@@ -70,13 +70,13 @@ class PlantsController extends Controller
      */
     public function show(string $id)
     {
-        $Plant = FindPlant::call($id);
+        $plant = FindPlant::call($id);
 
         return Inertia::render('Plants/Show', [
-            'data' => new PlantResource($Plant),
-            'types' => $this->getSelectTypes(),
-            'fields' => $this->getSelectFields(),
-            'quarters' => $this->getSelectQuarters(),
+            'data' => new PlantResource($plant),
+            'types' => ListEntity::call('plant_type'),
+            'fields' => ListEntity::call('field'),
+            'quarters' => ListEntity::call('quarter', ['field_id' => $plant->quarter->field_id]),
         ]);
     }
 
@@ -89,9 +89,9 @@ class PlantsController extends Controller
 
         return Inertia::render('Plants/Edit', [
             'data' => new PlantResource($plant),
-            'types' => $this->getSelectTypes(),
-            'fields' => $this->getSelectFields(),
-            'quarters' => $this->getSelectQuarters(),
+            'types' => ListEntity::call('plant_type'),
+            'fields' => ListEntity::call('field'),
+            'quarters' => ListEntity::call('quarter', ['field_id' => $plant->quarter->field_id]),
         ]);
     }
 
@@ -123,8 +123,7 @@ class PlantsController extends Controller
     public function create_bulk()
     {
         return Inertia::render('Plants/Bulk/Create', [
-            'fields' => $this->getSelectFields(),
-            'quarters' => $this->getSelectQuarters(),
+            'fields' => ListEntity::call('field'),
             'alert' => session('alert'),
             'errors' => session('errors', []),
         ]);
@@ -152,20 +151,5 @@ class PlantsController extends Controller
         } catch (Exception $e) {
             return redirect()->route('plants.create.bulk')->with('errors', []);
         }
-    }
-
-    protected function getSelectTypes()
-    {
-        return collect(ListPlantType::call('name')->get())->map(fn($plant_type) => [ 'value' => $plant_type->id, 'text' => $plant_type->name ]);
-    }
-
-    protected function getSelectFields()
-    {
-        return collect(ListField::call('name')->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
-    }
-
-    protected function getSelectQuarters()
-    {
-        return collect(ListQuarter::call('name')->get())->map(fn($quarter) => [ 'value' => $quarter->id, 'text' => $quarter->name, 'field_id' => $quarter->field_id ]);
     }
 }

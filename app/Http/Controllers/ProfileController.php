@@ -24,7 +24,7 @@ class ProfileController extends Controller
     {
         return Inertia::render('Profile/Edit', [
             'data' => new UserResource($request->user()),
-            'roles' => $this->getSelectRoles(),
+            'roles' => ListEntity::call('role'),
             'toast' => session('toast'),
         ]);
     }
@@ -65,10 +65,5 @@ class ProfileController extends Controller
         }
 
         return $request->file('avatar')->storePublicly('public/avatars');
-    }
-
-    protected function getSelectRoles()
-    {
-        return collect(ListRole::call())->map(fn($r) => [ 'value' => $r->name, 'text' => $r->name ]);
     }
 }

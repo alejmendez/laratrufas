@@ -11,6 +11,7 @@ use App\Services\Users\UpdateUser;
 use App\Services\Users\DeleteUser;
 
 use App\Services\Roles\ListRole;
+use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
@@ -42,7 +43,7 @@ class UsersController extends Controller
     public function create()
     {
         return Inertia::render('Users/Create', [
-            'roles' => $this->getSelectRoles(),
+            'roles' => ListEntity::call('role'),
         ]);
     }
 
@@ -67,7 +68,7 @@ class UsersController extends Controller
 
         return Inertia::render('Users/Show', [
             'data' => new UserResource($user),
-            'roles' => $this->getSelectRoles(),
+            'roles' => ListEntity::call('role'),
         ]);
     }
 
@@ -80,7 +81,7 @@ class UsersController extends Controller
 
         return Inertia::render('Users/Edit', [
             'data' => new UserResource($user),
-            'roles' => $this->getSelectRoles(),
+            'roles' => ListEntity::call('role'),
         ]);
     }
 
@@ -112,10 +113,5 @@ class UsersController extends Controller
         }
 
         return $request->file('avatar')->storePublicly('public/avatars');
-    }
-
-    protected function getSelectRoles()
-    {
-        return collect(ListRole::call())->map(fn($r) => [ 'value' => $r->name, 'text' => $r->name ]);
     }
 }

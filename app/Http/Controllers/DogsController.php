@@ -12,6 +12,7 @@ use App\Services\Dogs\DeleteDog;
 use App\Services\Fields\ListField;
 use App\Services\Quarters\ListQuarter;
 use App\Services\Users\ListUser;
+use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\DogResource;
 use App\Http\Resources\DogCollection;
@@ -43,9 +44,8 @@ class DogsController extends Controller
     public function create()
     {
         return Inertia::render('Dogs/Create', [
-            'fields' => $this->getSelectFields(),
-            'quarters' => $this->getSelectQuarters(),
-            'couples' => $this->getSelectCouples(),
+            'fields' => ListEntity::call('field'),
+            'couples' => ListEntity::call('couple'),
         ]);
     }
 
@@ -70,9 +70,9 @@ class DogsController extends Controller
 
         return Inertia::render('Dogs/Show', [
             'data' => new DogResource($dog),
-            'fields' => $this->getSelectFields(),
-            'quarters' => $this->getSelectQuarters(),
-            'couples' => $this->getSelectCouples(),
+            'fields' => ListEntity::call('field'),
+            'quarters' => ListEntity::call('quarter', ['field_id' => $dog->quarter->field_id]),
+            'couples' => ListEntity::call('couple'),
         ]);
     }
 
@@ -85,9 +85,9 @@ class DogsController extends Controller
 
         return Inertia::render('Dogs/Edit', [
             'data' => new DogResource($dog),
-            'fields' => $this->getSelectFields(),
-            'quarters' => $this->getSelectQuarters(),
-            'couples' => $this->getSelectCouples(),
+            'fields' => ListEntity::call('field'),
+            'quarters' => ListEntity::call('quarter', ['field_id' => $dog->quarter->field_id]),
+            'couples' => ListEntity::call('couple'),
         ]);
     }
 
@@ -119,21 +119,5 @@ class DogsController extends Controller
         }
 
         return $request->file('avatar')->storePublicly('public/avatars');
-    }
-
-    protected function getSelectFields()
-    {
-        return collect(ListField::call('name')->get())->map(fn($field) => [ 'value' => $field->id, 'text' => $field->name ]);
-    }
-
-    protected function getSelectQuarters()
-    {
-        return collect(ListQuarter::call('name')->get())->map(fn($quarter) => [ 'value' => $quarter->id, 'text' => $quarter->name, 'field_id' => $quarter->field_id ]);
-    }
-
-    protected function getSelectCouples()
-    {
-        return collect(ListUser::call('name')->get())
-            ->map(fn($couple) => [ 'value' => $couple->id, 'text' => $couple->full_name ]);
     }
 }
