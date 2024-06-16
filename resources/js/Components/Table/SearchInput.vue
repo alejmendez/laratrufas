@@ -27,7 +27,7 @@ const props = defineProps({
         :value="props.q"
         @keyup.enter="searchHandler"
       />
-      <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
+      <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform text-gray-400">
         <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
       </span>
     </div>
