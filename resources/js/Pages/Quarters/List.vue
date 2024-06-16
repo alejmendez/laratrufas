@@ -23,14 +23,9 @@ if (props.toast) {
   toast.success(t('generics.messages.saved_successfully'));
 }
 
-const quarters = props.data.data.map((q) => {
-  q.field_name = q.field.name;
-  return q;
-});
-
 const columns = [
-  { text: t('quarter.table.name'), data: 'name' },
-  { text: t('quarter.table.field_id'), data: 'field_id' },
+  { text: t('quarter.table.name'), data: 'quarters.name' },
+  { text: t('quarter.table.field_id'), data: 'fields.name' },
   { text: t('quarter.table.area'), data: 'area' },
   { text: t('quarter.table.plants_count'), data: 'plants_count' },
 ];
@@ -54,13 +49,13 @@ const deleteHandler = async (id) => {
 
         <TableList
             :columns="columns"
-            :meta="props.data.meta"
+            :meta="props.data"
             :search="props.search"
             :order="props.order"
         >
             <tr
                 class="border-b hover:bg-neutral-100"
-                v-for="quarter of quarters"
+                v-for="quarter of props.data.data"
                 :key="quarter.id"
             >
                 <td>{{ quarter.name }}</td>
@@ -78,7 +73,7 @@ const deleteHandler = async (id) => {
                         @click="deleteHandler(quarter.id)" />
                 </td>
             </tr>
-            <tr v-if="quarters.length === 0" class="border-b hover:bg-neutral-100">
+            <tr v-if="props.data.data.length === 0" class="border-b hover:bg-neutral-100">
               <td :colspan="columns.length + 1" class="text-center">
                 {{ t('generics.tables.empty') }}
               </td>

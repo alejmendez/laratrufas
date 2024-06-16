@@ -32,7 +32,7 @@ class QuartersController extends Controller
             'order' => $order,
             'search' => $search,
             'toast' => session('toast'),
-            'data' => new QuarterCollection($quarters->paginate()->withQueryString()),
+            'data' => $quarters->paginate()->withQueryString(),
         ]);
     }
 

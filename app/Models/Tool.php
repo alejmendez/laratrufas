@@ -15,18 +15,9 @@ use Carbon\Carbon;
 
 class Tool extends Model
 {
-    use HasFactory, Orderable, Searchable, Filterable;
+    use HasFactory, Orderable, Filterable;
 
     protected $fillable = [
-        'name',
-        'purchase_date',
-        'last_maintenance',
-        'purchase_location',
-        'type',
-        'contact',
-    ];
-
-    protected $searchableColumns = [
         'name',
         'purchase_date',
         'last_maintenance',
