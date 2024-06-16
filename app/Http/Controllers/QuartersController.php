@@ -11,6 +11,7 @@ use App\Services\Quarters\UpdateQuarter;
 use App\Services\Quarters\DeleteQuarter;
 use App\Services\Fields\ListField;
 use App\Services\Users\ListUser;
+use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\QuarterResource;
 use App\Http\Resources\QuarterCollection;

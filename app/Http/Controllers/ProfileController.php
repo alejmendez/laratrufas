@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use App\Services\Roles\ListRole;
 use App\Services\Users\UpdateUser;
 use App\Services\Users\DeleteUser;
+use App\Services\Entities\ListEntity;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;

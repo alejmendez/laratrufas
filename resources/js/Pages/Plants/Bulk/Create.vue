@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { ref, watch } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
@@ -8,6 +8,7 @@ import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import VSelect from '@/Components/Form/VSelect.vue';
 import VInputFile from '@/Components/Form/VInputFile.vue';
 import BulkWrapper from '@/Components/BulkWrapper.vue';
+import { getDataSelect } from '@/Services/Selects';
 
 const { t } = useI18n();
 
@@ -24,7 +25,11 @@ const form = useForm({
   bulk_file: null,
 });
 
-const quartersOptions = computed(() => props.quarters.filter((q) => q.field_id == form.field_id));
+const quartersOptions = ref(props.quarters);
+watch(() => form.field_id, async (field_id) => {
+  quartersOptions.value = await getDataSelect('quarter', { field_id });
+  form.quarter_id = null;
+});
 
 const submitHandler = () => {
   if (form.field_id === '' || form.quarter_id === '' || form.bulk_file === null) {
