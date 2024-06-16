@@ -20,7 +20,7 @@ const form = useForm({
   name: data.name,
   location: data.location,
   size: data.size,
-  number_of_trees: data.number_of_trees,
+  plants_count: data.plants_count,
   owner_dni: data.owner.dni,
   owner_name: data.owner.name,
   blueprint: data.blueprint,

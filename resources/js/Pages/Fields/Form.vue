@@ -54,11 +54,11 @@ const changeFileHandler = (e) => {
       />
 
       <VInput
-        id="number_of_trees"
-        :label="t('quarter.form.number_of_trees.label')"
-        v-model="form.number_of_trees"
+        id="plants_count"
+        :label="t('quarter.form.plants_count.label')"
+        v-model="form.plants_count"
         readonly
-        v-if="form.number_of_trees"
+        v-if="form.plants_count"
       />
     </CardSection>
 

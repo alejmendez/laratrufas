@@ -27,7 +27,7 @@ const columns = [
   { text: t('field.table.name'), data: 'name' },
   { text: t('field.table.location'), data: 'location' },
   { text: t('field.table.size'), data: 'size' },
-  { text: t('field.table.number_of_trees'), data: 'number_of_trees' },
+  { text: t('field.table.plants_count'), data: 'plants_count' },
 ];
 
 const deleteHandler = async (id) => {
@@ -49,19 +49,19 @@ const deleteHandler = async (id) => {
 
         <TableList
             :columns="columns"
-            :meta="props.data.meta"
+            :meta="props.data"
             :search="props.search"
             :order="props.order"
         >
             <tr
                 class="border-b hover:bg-neutral-100"
-                v-for="field of data.data"
+                v-for="field of props.data.data"
                 :key="field.id"
             >
                 <td>{{ field.name }}</td>
                 <td>{{ field.location }}</td>
                 <td>{{ field.size }} ha</td>
-                <td>{{ field.number_of_trees }}</td>
+                <td>{{ field.plants_count }}</td>
                 <td>
                     <Link :href="route('fields.show', field.id)">
                         <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />

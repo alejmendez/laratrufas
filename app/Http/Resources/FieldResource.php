@@ -20,7 +20,7 @@ class FieldResource extends JsonResource
             'name' => $this->name,
             'location' => $this->location,
             'size' => $this->size,
-            'number_of_trees' => $this->plants->count(),
+            'plants_count' => $this->plants->count(),
             'blueprint' => $this->blueprint ? Storage::url($this->blueprint) : '',
             'owner' => [
                 'id' => $this->owner->id,

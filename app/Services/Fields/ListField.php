@@ -8,7 +8,15 @@ class ListField
 {
     public static function call($order = '', $search = '')
     {
-        $fields = Field::with('owner', 'plants')->order($order)->search($search);
+        $fields = Field::select('id', 'name', 'location', 'size')
+            ->withCount('plants')
+            ->order($order)
+            ->whereAny([
+                'name',
+                'location',
+                'size',
+                'plants_count',
+            ], 'LIKE', "%{$search}%");
 
         return $fields;
     }

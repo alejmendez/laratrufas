@@ -22,7 +22,7 @@ const form = useForm({
   name: data.name,
   location: data.location,
   area: data.area,
-  number_of_trees: data.number_of_trees,
+  plants_count: data.plants_count,
   field_id: data.field.id.toString(),
   responsible_id: data.responsible.id.toString(),
   blueprint: data.blueprint,

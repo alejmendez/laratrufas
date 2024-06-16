@@ -17,7 +17,7 @@ const form = useForm({
   name: null,
   location: null,
   area: null,
-  number_of_trees: 0,
+  plants_count: 0,
   field_id: '',
   responsible_id: '',
   blueprint: null,

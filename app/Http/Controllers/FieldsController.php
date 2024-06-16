@@ -26,11 +26,13 @@ class FieldsController extends Controller
         $search = request('search', '');
         $fields = ListField::call($order, $search);
 
+        // dd($fields->get()->toJson());
+
         return Inertia::render('Fields/List', [
             'order' => $order,
             'search' => $search,
             'toast' => session('toast'),
-            'data' => new FieldCollection($fields->paginate()->withQueryString()),
+            'data' => $fields->paginate()->withQueryString(),
         ]);
     }
 

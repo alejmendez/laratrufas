@@ -8,7 +8,7 @@ export default {
     name: 'Campo',
     location: 'Ubicación',
     size: 'Superficie',
-    number_of_trees: 'Arboles',
+    plants_count: 'Arboles',
   },
   form: {
     name: {
@@ -20,7 +20,7 @@ export default {
     size: {
       label: 'Superficie del campo (Hectáreas)',
     },
-    number_of_trees: {
+    plants_count: {
       label: 'Cantidad de arboles',
     },
     owner_dni: {

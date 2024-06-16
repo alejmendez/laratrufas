@@ -9,7 +9,7 @@ export default {
     field_id: 'campo',
     planned_at: 'f. plantación',
     area: 'superficie',
-    number_of_trees: 'arboles',
+    plants_count: 'arboles',
   },
   form: {
     name: {
@@ -24,7 +24,7 @@ export default {
     planned_at: {
       label: 'Fecha de plantación',
     },
-    number_of_trees: {
+    plants_count: {
       label: 'Cantidad de arboles',
     },
     field_id: {

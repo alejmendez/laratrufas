@@ -32,7 +32,7 @@ const columns = [
   { text: t('quarter.table.name'), data: 'name' },
   { text: t('quarter.table.field_id'), data: 'field_id' },
   { text: t('quarter.table.area'), data: 'area' },
-  { text: t('quarter.table.number_of_trees'), data: 'number_of_trees' },
+  { text: t('quarter.table.plants_count'), data: 'plants_count' },
 ];
 
 const deleteHandler = async (id) => {
@@ -66,7 +66,7 @@ const deleteHandler = async (id) => {
                 <td>{{ quarter.name }}</td>
                 <td>{{ quarter.field_name }}</td>
                 <td>{{ quarter.area }} ha</td>
-                <td>{{ quarter.number_of_trees }}</td>
+                <td>{{ quarter.plants_count }}</td>
                 <td>
                     <Link :href="route('quarters.show', quarter.id)">
                         <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
