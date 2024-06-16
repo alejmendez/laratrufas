@@ -16,7 +16,7 @@ const props = defineProps({
   harvests: Array,
   id: Number,
   alert: String,
-  errors: String,
+  errors: Array,
 });
 
 const harvests = props.harvests
