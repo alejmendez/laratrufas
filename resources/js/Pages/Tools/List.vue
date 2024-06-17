@@ -53,9 +53,9 @@ const deleteHandler = async (id) => {
 
         <TableList
             :columns="columns"
-            :meta="props.data.meta"
-            :search="props.search"
-            :order="props.order"
+            :meta="data"
+            :search="search"
+            :order="order"
         >
             <tr
                 class="border-b hover:bg-neutral-100"

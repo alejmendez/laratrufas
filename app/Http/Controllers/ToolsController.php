@@ -30,7 +30,7 @@ class ToolsController extends Controller
             'order' => $order,
             'search' => $search,
             'toast' => session('toast'),
-            'data' => new ToolCollection($tools->paginate()->withQueryString()),
+            'data' => $tools->paginate()->withQueryString(),
         ]);
     }
 

@@ -8,7 +8,17 @@ class ListTool
 {
     public static function call($order = '', $search = '')
     {
-        $tools = Tool::order($order)->search($search);
+        $tools = Tool::order($order);
+
+        if ($search) {
+            $tools->whereAny([
+                'name',
+                'purchase_date',
+                'last_maintenance',
+                'purchase_location',
+                'contact',
+            ], 'LIKE', "%{$search}%");
+        }
 
         return $tools;
     }
