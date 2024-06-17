@@ -30,7 +30,7 @@ class MachineriesController extends Controller
             'order' => $order,
             'search' => $search,
             'toast' => session('toast'),
-            'data' => new MachineryCollection($machineries->paginate()->withQueryString()),
+            'data' => $machineries->paginate()->withQueryString(),
         ]);
     }
 
