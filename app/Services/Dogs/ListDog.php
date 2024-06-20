@@ -2,6 +2,7 @@
 
 namespace App\Services\Dogs;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Dog;
 
 class ListDog
@@ -18,7 +19,7 @@ class ListDog
                 'gender',
                 'breed',
                 'veterinary',
-                'users.name as couple_name'
+                DB::raw("CONCAT(users.name, ' ', users.last_name) as couple_name"),
             )
             ->order($order);
 
@@ -31,6 +32,7 @@ class ListDog
                 // 'age',
                 'veterinary',
                 'users.name',
+                'users.last_name',
             ], 'ILIKE', "%{$search}%");
         }
 

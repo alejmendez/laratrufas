@@ -32,7 +32,7 @@ class TasksController extends Controller
             'order' => $order,
             'search' => $search,
             'toast' => session('toast'),
-            'data' => new TaskCollection($tasks->paginate()->withQueryString()),
+            'data' => $tasks->paginate()->withQueryString(),
         ]);
     }
 

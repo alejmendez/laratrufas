@@ -33,7 +33,7 @@ class UsersController extends Controller
             'order' => $order,
             'search' => $search,
             'toast' => session('toast'),
-            'data' => new UserCollection($users->paginate()->withQueryString()),
+            'data' => $users->paginate()->withQueryString(),
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Services\Plants;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Plant;
 
 class ListPlant
@@ -15,7 +16,7 @@ class ListPlant
             'fields.name as field_name',
             'plant_types.name as plant_type_name',
             'plants.age',
-            'users.name as responsible_name'
+            DB::raw("CONCAT(users.name, ' ', users.last_name) as responsible_name"),
         )
         ->join('quarters', 'plants.quarter_id', '=', 'quarters.id')
         ->join('fields', 'quarters.field_id', '=', 'fields.id')
@@ -31,6 +32,7 @@ class ListPlant
                 'plant_types.name',
                 'plants.age',
                 'users.name',
+                'users.last_name',
             ], 'ILIKE', "%{$search}%");
         }
 

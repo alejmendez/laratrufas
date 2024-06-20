@@ -53,7 +53,7 @@ const deleteHandler = async (id) => {
 
         <TableList
             :columns="columns"
-            :meta="props.data.meta"
+            :meta="props.data"
             :search="props.search"
             :order="props.order"
         >
@@ -63,7 +63,7 @@ const deleteHandler = async (id) => {
                 :key="task.id"
             >
                 <td>{{ task.name }}</td>
-                <td>{{ task.priority }}</td>
+                <td>{{ t('task.form.priority.options.' + task.priority) }}</td>
                 <td>{{ task.note }}</td>
                 <td>{{ format(stringToDate(task.updated_at), 'dd/MM/yyyy') }}</td>
                 <td>{{ task.responsible_name }}</td>

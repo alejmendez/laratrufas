@@ -8,7 +8,14 @@ class ListMachinery
 {
     public static function call($order = '', $search = '')
     {
-        $machineries = Machinery::order($order);
+        $machineries = Machinery::select(
+            'id',
+            'name',
+            'purchase_date',
+            'last_maintenance',
+            'purchase_location',
+            'contact',
+        )->order($order);
 
         if ($search) {
             $machineries->whereAny([

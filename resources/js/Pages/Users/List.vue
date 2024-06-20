@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification';
 
 import { deleteRowTable } from '@/Utils/table';
+import slugify from '@/Utils/slugify';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
@@ -27,7 +28,7 @@ const columns = [
   { text: t('user.table.name'), data: 'name' },
   { text: t('user.table.dni'), data: 'dni' },
   { text: t('user.table.phone'), data: 'phone' },
-  { text: t('user.table.role'), data: 'role' },
+  { text: t('user.table.role'), data: 'roles_name' },
   { text: t('user.table.email'), data: 'email' },
 ];
 
@@ -50,7 +51,7 @@ const deleteHandler = async (id) => {
 
         <TableList
             :columns="columns"
-            :meta="props.data.meta"
+            :meta="props.data"
             :search="props.search"
             :order="props.order"
         >
@@ -65,9 +66,9 @@ const deleteHandler = async (id) => {
                 <td>
                     <span
                         class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none border rounded-full role"
-                        :class="user.role.slug"
+                        :class="slugify(user.roles_name)"
                     >
-                        {{ user.role.name }}
+                        {{ user.roles_name }}
                     </span>
                 </td>
                 <td>{{ user.email }}</td>
