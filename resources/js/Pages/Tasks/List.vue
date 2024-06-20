@@ -31,7 +31,7 @@ const columns = [
   { text: t('task.table.priority'), data: 'priority' },
   { text: t('task.table.note'), data: 'note' },
   { text: t('task.table.updated_at'), data: 'updated_at' },
-  { text: t('task.table.responsible'), data: 'responsible' },
+  { text: t('task.table.responsible'), data: 'responsible_name' },
 ];
 
 const deleteHandler = async (id) => {

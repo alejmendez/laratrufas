@@ -14,7 +14,8 @@ class ListDog
             ->select(
                 'dogs.id',
                 'dogs.name',
-                'birthdate',
+                'dogs.birthdate',
+                DB::raw("DATE_PART('year', AGE(dogs.birthdate)) as age"),
                 'quarters.name as quarter_name',
                 'gender',
                 'breed',
@@ -29,7 +30,6 @@ class ListDog
                 'quarters.name',
                 'gender',
                 'breed',
-                // 'age',
                 'veterinary',
                 'users.name',
                 'users.last_name',
