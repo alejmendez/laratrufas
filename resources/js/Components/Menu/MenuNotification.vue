@@ -5,6 +5,8 @@ const root = ref(null);
 
 const showDropDown = ref(false);
 
+const numberOfNotifications = ref(0);
+
 const toggleDrop = () => {
   showDropDown.value = !showDropDown.value;
 };
@@ -31,7 +33,12 @@ onUnmounted(() => {
       @click="toggleDrop"
     >
       <font-awesome-icon :icon="['far', 'bell']" />
-      <span class="text-xs bg-orange-700 text-white rounded-full px-1 py-0 absolute top-2 right-2">3</span>
+      <span
+        class="text-xs bg-orange-700 text-white rounded-full px-1 py-0 absolute top-2 right-2"
+        v-if="numberOfNotifications > 0"
+      >
+        {{ numberOfNotifications }}
+      </span>
     </div>
   </div>
   <div
@@ -40,7 +47,12 @@ onUnmounted(() => {
     tabindex="-1"
   >
     <div class="font-semibold text-left block px-4 py-2">
-      <div>
+      <div
+        v-if="numberOfNotifications === 0"
+      >
+        🥳 No tienes notificaciones pendientes
+      </div>
+      <div v-else>
         <font-awesome-icon :icon="['fas', 'triangle-exclamation']" class="text-orange-700" />
         Riego con fertilizantes cambió de estado.
       </div>
