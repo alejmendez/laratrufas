@@ -12,7 +12,6 @@ use App\Services\Plants\UpdatePlant;
 use App\Services\Plants\DeletePlant;
 use App\Services\Fields\ListField;
 use App\Services\Quarters\ListQuarter;
-use App\Services\PlantTypes\ListPlantType;
 use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\PlantResource;
@@ -39,7 +38,7 @@ class PlantsController extends Controller
             'order' => $order,
             'search' => $search,
             'toast' => session('toast'),
-            'data' => new PlantCollection($plants->paginate()->withQueryString()),
+            'data' => $plants->paginate()->withQueryString(),
         ]);
     }
 

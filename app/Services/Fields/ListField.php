@@ -18,7 +18,7 @@ class ListField
                 'location',
                 'size',
                 'plants_count',
-            ], 'LIKE', "%{$search}%");
+            ], 'ILIKE', "%{$search}%");
         }
 
         return $fields;

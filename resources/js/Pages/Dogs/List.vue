@@ -24,13 +24,13 @@ if (props.toast) {
 }
 
 const columns = [
-  { text: t('dog.table.name'), data: 'name' },
-  { text: t('dog.table.quarter'), data: 'quarter' },
+  { text: t('dog.table.name'), data: 'dogs.name' },
+  { text: t('dog.table.quarter'), data: 'quarter_name' },
   { text: t('dog.table.gender'), data: 'gender' },
   { text: t('dog.table.breed'), data: 'breed' },
   { text: t('dog.table.age'), data: 'age' },
   { text: t('dog.table.veterinary'), data: 'veterinary' },
-  { text: t('dog.table.couple'), data: 'couple' },
+  { text: t('dog.table.couple'), data: 'couple_name' },
 ];
 
 const genders = {
@@ -57,9 +57,9 @@ const deleteHandler = async (id) => {
 
         <TableList
             :columns="columns"
-            :meta="props.data.meta"
-            :search="props.search"
-            :order="props.order"
+            :meta="data"
+            :search="search"
+            :order="order"
         >
             <tr
                 class="border-b hover:bg-neutral-100"
@@ -67,12 +67,12 @@ const deleteHandler = async (id) => {
                 :key="dog.id"
             >
                 <td>{{ dog.name }}</td>
-                <td>{{ dog.quarter.name }}</td>
+                <td>{{ dog.quarter_name }}</td>
                 <td>{{ genders[dog.gender] }}</td>
                 <td>{{ dog.breed }}</td>
                 <td>{{ dog.age }}</td>
                 <td>{{ dog.veterinary }}</td>
-                <td>{{ dog.couple.name }}</td>
+                <td>{{ dog.couple_name }}</td>
                 <td>
                   <Link :href="route('dogs.show', dog.id)">
                     <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />

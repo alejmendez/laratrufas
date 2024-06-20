@@ -10,7 +10,6 @@ use App\Services\Quarters\CreateQuarter;
 use App\Services\Quarters\UpdateQuarter;
 use App\Services\Quarters\DeleteQuarter;
 use App\Services\Fields\ListField;
-use App\Services\Users\ListUser;
 use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\QuarterResource;

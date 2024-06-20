@@ -14,8 +14,6 @@ use App\Services\HarvestDetails\ListHarvestQualities;
 
 use App\Services\Quarters\ListQuarter;
 use App\Services\Dogs\ListDog;
-use App\Services\Users\ListUser;
-use App\Services\Plants\ListPlant;
 use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\HarvestResource;
@@ -42,7 +40,7 @@ class HarvestsController extends Controller
             'order' => $order,
             'search' => $search,
             'toast' => session('toast'),
-            'data' => new HarvestCollection($harvests->paginate()->withQueryString()),
+            'data' => $harvests->paginate()->withQueryString(),
         ]);
     }
 

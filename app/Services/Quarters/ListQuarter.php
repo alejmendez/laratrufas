@@ -19,7 +19,7 @@ class ListQuarter
                 'fields.name',
                 'area',
                 'plants_count',
-            ], 'LIKE', "%{$search}%");
+            ], 'ILIKE', "%{$search}%");
         }
 
         return $quarters;

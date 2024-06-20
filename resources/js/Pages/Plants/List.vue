@@ -23,21 +23,13 @@ if (props.toast) {
   toast.success(t('generics.messages.saved_successfully'));
 }
 
-const plants = props.data.data.map((p) => {
-  p.field_name = p.field.name;
-  p.quarter_name = p.quarter.name;
-  p.plant_type_name = p.plant_type.name;
-  p.responsible_name = p.responsible.name;
-  return p;
-});
-
 const columns = [
   { text: t('plant.table.name'), data: 'code' },
-  { text: t('plant.table.quarter_id'), data: 'quarter_id' },
-  { text: t('plant.table.field_id'), data: 'field_id' },
-  { text: t('plant.table.type'), data: 'plant_type_id' },
+  { text: t('plant.table.quarter_id'), data: 'quarter_name' },
+  { text: t('plant.table.field_id'), data: 'field_name' },
+  { text: t('plant.table.type'), data: 'plant_type_name' },
   { text: t('plant.table.age'), data: 'age' },
-  { text: t('plant.table.manager'), data: 'manager' },
+  { text: t('plant.table.manager'), data: 'responsible_name' },
 ];
 
 const deleteHandler = async (id) => {
@@ -59,13 +51,13 @@ const deleteHandler = async (id) => {
 
         <TableList
             :columns="columns"
-            :meta="props.data.meta"
+            :meta="props.data"
             :search="props.search"
             :order="props.order"
         >
             <tr
                 class="border-b hover:bg-neutral-100"
-                v-for="plant of plants"
+                v-for="plant of data.data"
                 :key="plant.id"
             >
                 <td>{{ plant.code }}</td>

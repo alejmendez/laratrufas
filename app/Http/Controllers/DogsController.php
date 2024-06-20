@@ -11,7 +11,6 @@ use App\Services\Dogs\UpdateDog;
 use App\Services\Dogs\DeleteDog;
 use App\Services\Fields\ListField;
 use App\Services\Quarters\ListQuarter;
-use App\Services\Users\ListUser;
 use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\DogResource;
@@ -34,7 +33,7 @@ class DogsController extends Controller
             'order' => $order,
             'search' => $search,
             'toast' => session('toast'),
-            'data' => new DogCollection($dogs->paginate()->withQueryString()),
+            'data' => $dogs->paginate()->withQueryString(),
         ]);
     }
 

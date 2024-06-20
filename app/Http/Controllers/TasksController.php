@@ -10,7 +10,6 @@ use App\Services\Tasks\CreateTask;
 use App\Services\Tasks\UpdateTask;
 use App\Services\Tasks\DeleteTask;
 use App\Services\Fields\ListField;
-use App\Services\Users\ListUser;
 use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\TaskResource;

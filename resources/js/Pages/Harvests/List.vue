@@ -28,10 +28,10 @@ if (props.toast) {
 const columns = [
   { text: t('harvest.table.date'), data: 'date' },
   { text: t('harvest.table.batch'), data: 'batch' },
-  { text: t('harvest.table.weight'), data: 'weight' },
-  { text: t('harvest.table.plant'), data: 'plant' },
-  { text: t('harvest.table.quarter'), data: 'quarter' },
-  { text: t('harvest.table.responsible'), data: 'responsible' },
+  { text: t('harvest.table.weight'), data: 'total_weight' },
+  { text: t('harvest.table.plant'), data: 'plant_codes' },
+  { text: t('harvest.table.quarter'), data: 'quarter_names' },
+  { text: t('harvest.table.responsible'), data: 'farmer_name' },
 ];
 
 const deleteHandler = async (id) => {
@@ -53,7 +53,7 @@ const deleteHandler = async (id) => {
 
     <TableList
       :columns="columns"
-      :meta="props.data.meta"
+      :meta="props.data"
       :search="props.search"
       :order="props.order"
     >
@@ -64,10 +64,17 @@ const deleteHandler = async (id) => {
       >
         <td>Semana {{ getWeek(stringToDate(harvest.date), { weekStartsOn: 1 }) }}</td>
         <td>{{ harvest.batch }}</td>
-        <td>{{ harvest.detail?.reduce((total, d) => total + (d.weight * d.number), 0) }}</td>
-        <td>{{ harvest.detail?.map(d => d.plant.code).join(', ') }}</td>
-        <td>{{ harvest.quarters?.map(d => d.name).join(', ') }}</td>
-        <td>{{ harvest.farmer.name }}</td>
+        <td>{{ harvest.total_weight }}</td>
+        <td class="max-w-[200px] text-balance">
+          <span
+            v-for="plant_code of (harvest.plant_codes?.split(', ') || '')"
+            class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
+          >
+            {{ plant_code }}
+          </span>
+        </td>
+        <td class="max-w-[200px] text-balance">{{ harvest.quarter_names }}</td>
+        <td>{{ harvest.farmer_name }}</td>
         <td>
           <Link :href="route('harvests.show', harvest.id)">
             <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
