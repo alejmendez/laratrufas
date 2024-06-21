@@ -34,6 +34,7 @@ const props = defineProps({
       <Button
         v-for="link in props.links"
         :key="link.text"
+        :variant="link.variant"
         as-child
       >
         <Link :href="route(link.to)">

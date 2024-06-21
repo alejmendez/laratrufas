@@ -46,7 +46,7 @@ const deleteHandler = async (id) => {
         <HeaderCrud
             :title="t('plant.titles.entity_breadcrumb')"
             :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-            :links="[{ to: 'plants.create', text: t('generics.new') }, { to: 'plants.create.bulk', text: t('generics.bulk.button') }]"
+            :links="[{ to: 'plants.create.bulk', text: t('generics.bulk.button'), variant: 'secondary' }, { to: 'plants.create', text: t('generics.new') }]"
         />
 
         <TableList
