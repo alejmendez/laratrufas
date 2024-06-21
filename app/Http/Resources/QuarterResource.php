@@ -29,7 +29,7 @@ class QuarterResource extends JsonResource
             ],
             'responsible' => [
                 'id' => $this->responsible->id,
-                'name' => $this->responsible->name,
+                'name' => $this->responsible->full_name,
             ],
         ];
     }

@@ -18,7 +18,7 @@ class ListQuarter
                 'quarters.name',
                 'fields.name',
                 'area',
-                'plants_count',
+                // 'plants_count',
             ], 'ILIKE', "%{$search}%");
         }
 

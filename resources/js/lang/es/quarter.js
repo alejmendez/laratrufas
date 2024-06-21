@@ -3,6 +3,7 @@ export default {
     entity_breadcrumb: 'Cuarteles',
     create: 'Crear Cuartel',
     edit: 'Editar Cuartel',
+    show: 'Detalle del Cuartel',
   },
   table: {
     name: 'cuartel',
@@ -35,6 +36,30 @@ export default {
     },
     blueprint: {
       label: 'Seleccione sus planos',
+    },
+  },
+  show: {
+    file: {
+      title: 'Cuartel: {name}',
+      field: 'Perteneciente al campo',
+      area: 'Superficie del cuartel (hectáreas)',
+      plants_count: 'Cantidad de arboles',
+      responsible: 'Responsable',
+    },
+    documentation: {
+      title: 'Documentación',
+    },
+    activity: {
+      title: 'Actividad',
+    },
+    statistics: {
+      title: 'Estadísticas',
+    },
+    tabs: {
+      file: 'Ficha',
+      documentation: 'Documentación',
+      activity: 'Actividad',
+      statistics: 'Estadísticas',
     },
   },
   sections: {
