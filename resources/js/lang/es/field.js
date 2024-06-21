@@ -3,6 +3,7 @@ export default {
     entity_breadcrumb: 'Campos',
     create: 'Crear Campo',
     edit: 'Editar Campo',
+    show: 'Detalle del Campo',
   },
   table: {
     name: 'Campo',
@@ -31,6 +32,30 @@ export default {
     },
     blueprint: {
       label: 'Seleccione sus planos',
+    },
+  },
+  show: {
+    file: {
+      title: 'Campo: {name}',
+      location: 'Ubicación',
+      size: 'Superficie del campo (hectáreas)',
+      plants_count: 'Cantidad de arboles',
+      quarters_count: 'Cantidad de Cuarteles',
+    },
+    logbook: {
+      title: 'Bitácora',
+    },
+    harvest: {
+      title: 'Cosecha',
+    },
+    statistics: {
+      title: 'Estadísticas',
+    },
+    tabs: {
+      file: 'Ficha',
+      logbook: 'Bitácora',
+      harvest: 'Cosecha',
+      statistics: 'Estadísticas',
     },
   },
   sections: {

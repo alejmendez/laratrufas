@@ -1,6 +1,7 @@
 export default {
   list: 'Lista',
   new: 'Nuevo',
+  detail: 'Detalle',
   please_select: 'Seleccione',
   messages: {
     saved_successfully: 'Guardado satisfactoriamente',
@@ -51,6 +52,7 @@ export default {
   actions: {
     create: 'Crear',
     edit: 'Editar',
+    delete: 'Eliminar',
     bulk: 'Carga Masiva',
   },
   bulk: {
