@@ -73,9 +73,6 @@ class PlantsController extends Controller
 
         return Inertia::render('Plants/Show', [
             'data' => new PlantResource($plant),
-            'types' => ListEntity::call('plant_type'),
-            'fields' => ListEntity::call('field'),
-            'quarters' => ListEntity::call('quarter', ['field_id' => $plant->quarter->field_id]),
         ]);
     }
 

@@ -4,6 +4,7 @@ export default {
     create: 'Crear Planta',
     edit: 'Editar Planta',
     bulk: 'Nuevo carga masiva de plantas',
+    show: 'Detalle de la Planta',
   },
   table: {
     name: 'planta',
@@ -44,6 +45,36 @@ export default {
     },
     blueprint: {
       label: 'Seleccione sus planos',
+    },
+  },
+  show: {
+    file: {
+      title: 'Planta: {name}',
+      field: 'Perteneciente al campo',
+      quarter: 'Perteneciente al cuartel',
+      plant_type: 'Tipo de planta',
+      age: 'Edad',
+      planned_at: 'Fecha de plantación',
+      responsible: 'Responsable',
+    },
+    variables: {
+      title: 'Variables',
+    },
+    logs: {
+      title: 'Bitácora',
+    },
+    harvest: {
+      title: 'Cosecha',
+    },
+    statistics: {
+      title: 'Estadísticas',
+    },
+    tabs: {
+      file: 'Ficha',
+      variables: 'Variables',
+      logs: 'Bitácoras',
+      harvest: 'Cosecha',
+      statistics: 'Estadísticas',
     },
   },
   sections: {
