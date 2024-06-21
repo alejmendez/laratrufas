@@ -76,9 +76,6 @@ const deleteHandler = async (id) => {
         <td class="max-w-[200px] text-balance">{{ harvest.quarter_names }}</td>
         <td>{{ harvest.farmer_name }}</td>
         <td>
-          <Link :href="route('harvests.show', harvest.id)">
-            <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
-          </Link>
           <Link :href="route('harvests.edit', harvest.id)">
             <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
           </Link>

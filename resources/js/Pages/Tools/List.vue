@@ -68,9 +68,6 @@ const deleteHandler = async (id) => {
                 <td>{{ tool.purchase_location }}</td>
                 <td>{{ tool.contact }}</td>
                 <td>
-                  <Link :href="route('tools.show', tool.id)">
-                    <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
-                  </Link>
                   <Link :href="route('tools.edit', tool.id)">
                     <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
                   </Link>
