@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('harvest_quarter', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('harvest_id')->constrained();
-            $table->foreignId('quarter_id')->constrained();
+
+            $table->integer('harvest_id')->unsigned()->nullable();
+            $table->foreign('harvest_id')->references('id')->on('harvests')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->integer('quarter_id')->unsigned()->nullable();
+            $table->foreign('quarter_id')->references('id')->on('quarters')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

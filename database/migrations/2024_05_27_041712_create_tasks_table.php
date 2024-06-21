@@ -21,12 +21,18 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
 
-            $table->foreignId('field_id')->constrained();
-            $table->foreignId('quarter_id')->constrained();
-            $table->foreignId('plant_id')->constrained();
+            $table->integer('field_id')->unsigned()->nullable();
+            $table->foreign('field_id')->references('id')->on('fields')->onUpdate('cascade')->onDelete('set null');
 
-            $table->integer('responsible_id');
-            $table->foreign('responsible_id')->references('id')->on('users');
+            $table->integer('quarter_id')->unsigned()->nullable();
+            $table->foreign('quarter_id')->references('id')->on('quarters')->onUpdate('cascade')->onDelete('set null');
+
+            $table->integer('plant_id')->unsigned()->nullable();
+            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('cascade')->onDelete('set null');
+
+            $table->integer('responsible_id')->unsigned()->nullable();
+            $table->foreign('responsible_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+
             $table->text('note')->nullable();
             $table->text('comments')->nullable();
 

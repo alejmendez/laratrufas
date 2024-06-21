@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('name', 80);
             $table->string('location', 100);
             $table->decimal('size', total: 5, places: 2);
-            $table->foreignId('owner_id')->constrained();
+
+            $table->integer('owner_id')->unsigned()->nullable();
+            $table->foreign('owner_id')->references('id')->on('owners')->onUpdate('cascade')->onDelete('set null');
+
             $table->string('blueprint')->nullable();
             $table->timestamps();
             $table->softDeletes();

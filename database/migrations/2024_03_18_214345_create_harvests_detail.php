@@ -14,8 +14,12 @@ return new class extends Migration
         Schema::create('harvest_details', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('harvest_id')->constrained();
-            $table->foreignId('plant_id')->constrained();
+            $table->integer('harvest_id')->unsigned()->nullable();
+            $table->foreign('harvest_id')->references('id')->on('harvests')->onUpdate('cascade')->onDelete('set null');
+
+            $table->integer('plant_id')->unsigned()->nullable();
+            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('cascade')->onDelete('set null');
+
             $table->string('quality');
             $table->decimal('weight', total: 5, places: 2);
 

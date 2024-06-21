@@ -18,10 +18,14 @@ return new class extends Migration
             $table->string('gender', 80);
             $table->date('birthdate');
             $table->string('veterinary', 80);
-            $table->integer('couple_id');
-            $table->foreign('couple_id')->references('id')->on('users');
+
             $table->string('avatar', 250)->nullable();
-            $table->foreignId('quarter_id')->constrained();
+
+            $table->integer('couple_id')->unsigned()->nullable();
+            $table->foreign('couple_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+
+            $table->integer('quarter_id')->unsigned()->nullable();
+            $table->foreign('quarter_id')->references('id')->on('quarters')->onUpdate('cascade')->onDelete('set null');
 
             $table->timestamps();
             $table->softDeletes();

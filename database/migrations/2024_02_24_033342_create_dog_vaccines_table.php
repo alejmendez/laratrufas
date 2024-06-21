@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name', 80);
             $table->date('date');
             $table->string('code', 50);
-            $table->foreignId('dog_id')->constrained();
+
+            $table->integer('dog_id')->unsigned()->nullable();
+            $table->foreign('dog_id')->references('id')->on('dogs')->onUpdate('cascade')->onDelete('set null');
 
             $table->timestamps();
             $table->softDeletes();

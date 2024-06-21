@@ -19,8 +19,13 @@ return new class extends Migration
             $table->string('row', 2);
             $table->decimal('age', total: 5, places: 2);
             $table->string('blueprint')->nullable();
-            $table->foreignId('quarter_id')->constrained();
-            $table->foreignId('plant_type_id')->constrained();
+
+            $table->integer('quarter_id')->unsigned()->nullable();
+            $table->foreign('quarter_id')->references('id')->on('quarters')->onUpdate('cascade')->onDelete('set null');
+
+            $table->integer('plant_type_id')->unsigned()->nullable();
+            $table->foreign('plant_type_id')->references('id')->on('plant_types')->onUpdate('cascade')->onDelete('set null');
+
             $table->timestamps();
             $table->softDeletes();
         });

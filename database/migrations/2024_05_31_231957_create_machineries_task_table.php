@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('machineries_task', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('task_id')->constrained();
-            $table->foreignId('machinery_id')->constrained();
+
+            $table->integer('task_id')->unsigned()->nullable();
+            $table->foreign('task_id')->references('id')->on('tasks')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->integer('machinery')->unsigned()->nullable();
+            $table->foreign('machinery')->references('id')->on('machineries')->onUpdate('cascade')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

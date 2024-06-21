@@ -17,11 +17,14 @@ return new class extends Migration
             $table->date('date');
             $table->string('batch', 2);
 
-            $table->foreignId('dog_id')->constrained();
-            $table->integer('farmer_id');
-            $table->foreign('farmer_id')->references('id')->on('users');
-            $table->integer('assistant_id');
-            $table->foreign('assistant_id')->references('id')->on('users');
+            $table->integer('dog_id')->unsigned()->nullable();
+            $table->foreign('dog_id')->references('id')->on('dogs')->onUpdate('cascade')->onDelete('set null');
+
+            $table->integer('farmer_id')->unsigned()->nullable();
+            $table->foreign('farmer_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+
+            $table->integer('assistant_id')->unsigned()->nullable();
+            $table->foreign('assistant_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
 
             $table->timestamps();
             $table->softDeletes();

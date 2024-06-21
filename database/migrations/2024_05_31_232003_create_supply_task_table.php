@@ -18,7 +18,8 @@ return new class extends Migration
             $table->decimal('quantity', total: 5, places: 2);
             $table->string('unit');
 
-            $table->foreignId('task_id')->constrained();
+            $table->integer('task_id')->unsigned()->nullable();
+            $table->foreign('task_id')->references('id')->on('tasks')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

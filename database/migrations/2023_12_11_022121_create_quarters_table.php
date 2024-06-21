@@ -16,12 +16,13 @@ return new class extends Migration
             $table->string('name', 80);
             $table->decimal('area', total: 5, places: 2);
 
-            $table->integer('responsible_id');
-            $table->foreign('responsible_id')->references('id')->on('users');
-
             $table->string('blueprint')->nullable();
 
-            $table->foreignId('field_id')->constrained();
+            $table->integer('responsible_id')->unsigned()->nullable();
+            $table->foreign('responsible_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+
+            $table->integer('field_id')->unsigned()->nullable();
+            $table->foreign('field_id')->references('id')->on('fields')->onUpdate('cascade')->onDelete('set null');
 
             $table->timestamps();
             $table->softDeletes();
