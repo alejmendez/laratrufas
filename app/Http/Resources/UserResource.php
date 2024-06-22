@@ -33,6 +33,8 @@ class UserResource extends JsonResource
             'phone' => $this->phone,
             'avatar' => $this->avatar ? Storage::url($this->avatar) : '',
             'role' => $roleData,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

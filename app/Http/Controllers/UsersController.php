@@ -68,7 +68,6 @@ class UsersController extends Controller
 
         return Inertia::render('Users/Show', [
             'data' => new UserResource($user),
-            'roles' => ListEntity::call('role'),
         ]);
     }
 

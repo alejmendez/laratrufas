@@ -3,6 +3,7 @@ export default {
     entity_breadcrumb: 'Usuarios',
     create: 'Crear Usuario',
     edit: 'Editar Usuario',
+    show: 'Detalle del Usuario',
   },
   table: {
     name: 'Nombre',
@@ -43,6 +44,48 @@ export default {
     role: {
       label: 'Tipo de usuario',
       name: 'tipo de usuario',
+    },
+  },
+  show: {
+    created_at: 'Fecha de creación',
+    updated_at: 'Última modificación',
+    file: {
+      title: 'Detalles del perfil',
+      name: {
+        label: 'Nombre',
+      },
+      last_name: {
+        label: 'Apellidos',
+      },
+      email: {
+        label: 'Correo electrónico',
+      },
+      password: {
+        label: 'Contraseña',
+      },
+      dni: {
+        label: 'RUT / ID',
+      },
+      avatar: {
+        label: 'Seleccione un imagen',
+      },
+      phone: {
+        label: 'Teléfono',
+      },
+      role: {
+        label: 'Tipo de usuario',
+      },
+    },
+    activity: {
+      title: 'Actividad',
+    },
+    statistics: {
+      title: 'Estadísticas',
+    },
+    tabs: {
+      file: 'Ficha',
+      activity: 'Actividad',
+      statistics: 'Estadísticas',
     },
   },
   sections: {
