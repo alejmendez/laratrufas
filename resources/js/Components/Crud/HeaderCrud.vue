@@ -13,6 +13,10 @@ const props = defineProps({
   links: Array,
   form: Object,
 });
+
+const isPromise = (obj) => obj instanceof Promise;
+const isFunction = (obj) => obj instanceof Function;
+const isLink = (str) => str.toLowerCase().startsWith('http');
 </script>
 
 <template>
@@ -31,16 +35,27 @@ const props = defineProps({
       class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
       v-if="props.links"
     >
-      <Button
+      <template
         v-for="link in props.links"
         :key="link.text"
-        :variant="link.variant"
-        as-child
       >
-        <Link :href="route(link.to)">
-          {{ link.text }}
-        </Link>
-      </Button>
+        <template v-if="isPromise(link.to) || isFunction(link.to)">
+          <Button :variant="link.variant" @click="link.to">
+            {{ link.text }}
+          </Button>
+        </template>
+        <template v-else>
+          <Button
+            :key="link.text"
+            :variant="link.variant"
+            as-child
+          >
+            <Link :href="isLink(link.to) ? link.to : route(link.to)">
+              {{ link.text }}
+            </Link>
+          </Button>
+        </template>
+      </template>
     </div>
 
     <div

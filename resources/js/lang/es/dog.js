@@ -3,6 +3,7 @@ export default {
     entity_breadcrumb: 'Perros',
     create: 'Crear Perro',
     edit: 'Editar Perro',
+    show: 'Detalle del Perro',
   },
   table: {
     name: 'Nombre',
@@ -61,6 +62,52 @@ export default {
       code: {
         label: 'Código',
       },
+    },
+  },
+  show: {
+    created_at: 'Fecha de creación',
+    updated_at: 'Última modificación',
+    file: {
+      title: 'Detalles del perfil',
+      breed: {
+        label: 'Raza',
+      },
+      gender: {
+        label: 'Género',
+        options: {
+          male: 'Masculino',
+          female: 'Femenino',
+        },
+      },
+      birthdate: {
+        label: 'Fecha de nacimiento',
+      },
+      age: {
+        label: 'Edad',
+      },
+      field_id: {
+        label: 'Campo',
+      },
+      quarter_id: {
+        label: 'Cuartel',
+      },
+      veterinary: {
+        label: 'Veterinario',
+      },
+      couple: {
+        label: 'Pareja',
+      },
+    },
+    activity: {
+      title: 'Actividad',
+    },
+    statistics: {
+      title: 'Estadísticas',
+    },
+    tabs: {
+      file: 'Ficha',
+      activity: 'Actividad',
+      statistics: 'Estadísticas',
     },
   },
   sections: {

@@ -66,12 +66,8 @@ class DogsController extends Controller
     public function show(string $id)
     {
         $dog = FindDog::call($id);
-
         return Inertia::render('Dogs/Show', [
             'data' => new DogResource($dog),
-            'fields' => ListEntity::call('field'),
-            'quarters' => ListEntity::call('quarter', ['field_id' => $dog->quarter->field_id]),
-            'couples' => ListEntity::call('couple'),
         ]);
     }
 
@@ -108,7 +104,7 @@ class DogsController extends Controller
     public function destroy(string $id)
     {
         DeleteDog::call($id);
-        return redirect()->back();
+        return redirect()->route('dogs.index');
     }
 
     protected function storeAvatar(UpdateDogRequest | StoreDogRequest $request)
