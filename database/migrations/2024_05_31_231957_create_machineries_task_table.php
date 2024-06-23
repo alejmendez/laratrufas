@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('task_id')->unsigned()->nullable();
             $table->foreign('task_id')->references('id')->on('tasks')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->integer('machinery')->unsigned()->nullable();
-            $table->foreign('machinery')->references('id')->on('machineries')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('machinery_id')->unsigned()->nullable();
+            $table->foreign('machinery_id')->references('id')->on('machineries')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
         });
