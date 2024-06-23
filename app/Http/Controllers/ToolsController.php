@@ -92,6 +92,6 @@ class ToolsController extends Controller
     public function destroy(string $id)
     {
         DeleteTool::call($id);
-        return redirect()->back();
+        return redirect()->route('tools.index');
     }
 }

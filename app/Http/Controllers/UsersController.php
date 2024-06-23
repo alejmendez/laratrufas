@@ -102,7 +102,7 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         DeleteUser::call($id);
-        return redirect()->back();
+        return redirect()->route('users.index');
     }
 
     protected function storeAvatar(UpdateUserRequest | StoreUserRequest $request)

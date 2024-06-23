@@ -105,6 +105,6 @@ class TasksController extends Controller
     public function destroy(string $id)
     {
         DeleteTask::call($id);
-        return redirect()->back();
+        return redirect()->route('tasks.index');
     }
 }

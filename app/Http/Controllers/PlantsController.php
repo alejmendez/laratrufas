@@ -108,7 +108,7 @@ class PlantsController extends Controller
     public function destroy(string $id)
     {
         DeletePlant::call($id);
-        return redirect()->back();
+        return redirect()->route('plants.index');
     }
 
     public function download_bulk_template()

@@ -105,7 +105,7 @@ class QuartersController extends Controller
     public function destroy(string $id)
     {
         DeleteQuarter::call($id);
-        return redirect()->back();
+        return redirect()->route('quarters.index');
     }
 
     protected function storeBlueprint(UpdateQuarterRequest | StoreQuarterRequest $request)

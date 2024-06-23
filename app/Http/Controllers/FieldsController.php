@@ -98,7 +98,7 @@ class FieldsController extends Controller
     public function destroy(string $id)
     {
         DeleteField::call($id);
-        return redirect()->back();
+        return redirect()->route('fields.index');
     }
 
     protected function storeBlueprint(UpdateFieldRequest | StoreFieldRequest $request)

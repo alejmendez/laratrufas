@@ -92,6 +92,6 @@ class MachineriesController extends Controller
     public function destroy(string $id)
     {
         DeleteMachinery::call($id);
-        return redirect()->back();
+        return redirect()->route('machineries.index');
     }
 }
