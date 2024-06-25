@@ -1,58 +1,87 @@
-version: "3.9"
+version: '3.9'
+
 services:
-  app:
-    build:
-      args:
-        user: user_trufas
-        uid: 1000
-      context: ./
-      dockerfile: Dockerfile
-    image: docker-trufas
-    container_name: app-trufas
-    restart: unless-stopped
-    working_dir: /var/www/
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
     volumes:
-      - ./:/var/www
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs:ro
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
     networks:
-      - network-trufas
-    depends_on:
-      - db
-      - redis
-      - nginx
-  redis:
-    image: redis:7.2.4-alpine
-    container_name: ${PROJECT_NAME}-redis
-    networks:
-      - network-trufas
-  db:
-    image: postgres:16.2-alpine
-    container_name: ${PROJECT_NAME}-postgres
+      - app-network
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
     restart: always
     environment:
-      POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      PGDATA: /var/lib/postgresql/data/pgdata
-    ports:
-       - "5433:5432"
+      - NGINX_PROXY_CONTAINER=nginx-proxy
     volumes:
-      - ./docker-compose/db_data:/var/lib/postgresql/data
+      - certs:/etc/nginx/certs:rw
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme:/etc/acme.sh
     networks:
-      - network-trufas
-  nginx:
-    image: nginx:1.25.4-alpine
-    container_name: ${PROJECT_NAME}-webserver
-    restart: unless-stopped
-    ports:
-      - 9000:80
+      - app-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: php artisan octane:frankenphp --max-requests=5
+    image: frankenphp_laratrufa
+    container_name: frankenphp_app
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=laratrufas
+      - DB_USERNAME=laratrufas
+      - DB_PASSWORD=laratrufas
+      - VIRTUAL_HOST=agricolafrayleon.app,www.agricolafrayleon.app,app.agricolafrayleon.app
+      - LETSENCRYPT_HOST=agricolafrayleon.app,www.agricolafrayleon.app,app.agricolafrayleon.app
+      - LETSENCRYPT_EMAIL=alejmendez.87@gmail.com
     volumes:
-      - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
+      - .:/app
+    depends_on:
+      - nginx-proxy
+      - letsencrypt
+      - db
     networks:
-      - network-trufas
-networks:
-  network-trufas:
-    driver: bridge
-volumes:
+      - app-network
+
   db:
-    driver: local
+    image: postgres:16.3-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: laratrufas
+      POSTGRES_USER: laratrufas
+      POSTGRES_PASSWORD: laratrufas
+      PGDATA: /var/lib/postgresql/data/laratrufas/
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/laratrufas
+    networks:
+      - app-network
+
+volumes:
+  certs:
+  html:
+  vhostd:
+  acme:
+  pgdata:
+
+networks:
+  app-network:
+    driver: bridge
