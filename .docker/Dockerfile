@@ -13,6 +13,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install zip pdo pdo_pgsql gd
 
+# Copia el archivo de configuración de Nginx
+COPY .docker/nginx.conf /etc/nginx/nginx.conf
+
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -39,9 +42,6 @@ RUN npm install && npm run build
 RUN php artisan config:cache \
     && php artisan route:cache \
     && php artisan view:cache
-
-# Copia el archivo de configuración de Nginx
-COPY .docker/nginx.conf /etc/nginx/nginx.conf
 
 # Expone el puerto 80
 EXPOSE 80
