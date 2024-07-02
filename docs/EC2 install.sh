@@ -77,7 +77,7 @@ sudo chmod 0777 -R /home/ubuntu/www/trufas
 sudo chown www-data:www-data -R /home/ubuntu/www/trufas
 
 cd /home/ubuntu/www/trufas
-npm install -g npm@10.5.0
+npm install -g npm@latest
 npm install
 composer install
 npm run build
@@ -92,4 +92,5 @@ php artisan config:cache ; php artisan event:cache ; php artisan route:cache ; p
 sudo nginx -t
 sudo service nginx restart
 
-alias update_app="git pull ; composer install --optimize-autoloader --no-dev ; npm run build ; php artisan config:cache ; php artisan event:cache ; php artisan route:cache ; php artisan view:cache"
+cd /home/ubuntu/www/trufas
+alias update_app="git pull ; composer install --optimize-autoloader --no-dev ; npm install -g npm@latest; npm run build ; php artisan config:cache ; php artisan event:cache ; php artisan route:cache ; php artisan view:cache"

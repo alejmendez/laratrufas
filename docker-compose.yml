@@ -35,7 +35,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./.docker/Dockerfile
     entrypoint: php artisan octane:frankenphp --max-requests=5
     image: frankenphp_laratrufa
     container_name: frankenphp_app
