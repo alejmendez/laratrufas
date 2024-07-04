@@ -45,8 +45,7 @@ services:
       - VIRTUAL_HOST=agricolafrayleon.app,www.agricolafrayleon.app,app.agricolafrayleon.app
       - LETSENCRYPT_HOST=agricolafrayleon.app,www.agricolafrayleon.app,app.agricolafrayleon.app
       - LETSENCRYPT_EMAIL=alejmendez.87@gmail.com
-    expose:
-      - "80"
+      - VIRTUAL_PORT=443
     volumes:
       - .:/app
       - caddy_data:/data
