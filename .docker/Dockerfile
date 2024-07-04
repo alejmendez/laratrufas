@@ -16,6 +16,9 @@ RUN apt-get update && apt-get install -y \
 # Copia el archivo de configuración de Nginx
 COPY .docker/nginx.conf /etc/nginx/nginx.conf
 
+# Cambiar el puerto de PHP-FPM
+RUN sed -i 's/listen = 9000/listen = 9001/' /usr/local/etc/php-fpm.d/zz-docker.conf
+
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -31,7 +34,7 @@ RUN chown -R www-data:www-data /var/www/html
 # Instala las dependencias de PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Instala Node.js y npm (usando Node.js 18)
+# Instala Node.js y npm (usando Node.js 20)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs
 
@@ -40,6 +43,7 @@ RUN npm install && npm run build
 
 # Optimización de Laravel para producción
 RUN php artisan config:cache \
+    && php artisan event:cache \
     && php artisan route:cache \
     && php artisan view:cache
 

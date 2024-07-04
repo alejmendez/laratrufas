@@ -25,4 +25,5 @@ Thumbs.db
 /storage/*.cache
 /storage/debugbar
 
+/.git/
 # /.docker/*

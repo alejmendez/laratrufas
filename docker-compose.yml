@@ -23,6 +23,7 @@ services:
     restart: always
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
+      - DEFAULT_EMAIL=alejmendez.87@gmail.com
     volumes:
       - certs:/etc/nginx/certs:rw
       - vhostd:/etc/nginx/vhost.d
@@ -33,12 +34,9 @@ services:
       - app-network
 
   app:
-    build:
-      context: .
-      dockerfile: ./.docker/Dockerfile
-    entrypoint: php artisan octane:frankenphp --max-requests=5
-    image: frankenphp_laratrufa
-    container_name: frankenphp_app
+    image: dunglas/frankenphp
+    restart: always
+    container_name: laratrufa_app
     environment:
       - APP_ENV=production
       - APP_DEBUG=false
@@ -53,6 +51,8 @@ services:
       - LETSENCRYPT_EMAIL=alejmendez.87@gmail.com
     volumes:
       - .:/app
+      - caddy_data:/data
+      - caddy_config:/config
     depends_on:
       - nginx-proxy
       - letsencrypt
@@ -81,7 +81,12 @@ volumes:
   vhostd:
   acme:
   pgdata:
+  caddy_data:
+  caddy_config:
 
 networks:
   app-network:
     driver: bridge
+  default:
+    external:
+      name: nginx-proxy
