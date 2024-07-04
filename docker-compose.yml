@@ -44,8 +44,8 @@ services:
       - DB_DATABASE=laratrufas
       - DB_USERNAME=laratrufas
       - DB_PASSWORD=laratrufas
-      - VIRTUAL_HOST=agricolafrayleon.app,www.agricolafrayleon.app,app.agricolafrayleon.app
-      - LETSENCRYPT_HOST=agricolafrayleon.app,www.agricolafrayleon.app,app.agricolafrayleon.app
+      - VIRTUAL_HOST=app.agricolafrayleon.app
+      - LETSENCRYPT_HOST=app.agricolafrayleon.app
       - LETSENCRYPT_EMAIL=alejmendez.87@gmail.com
       - VIRTUAL_PORT=443
     volumes:
