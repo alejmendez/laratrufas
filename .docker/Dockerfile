@@ -1,54 +1,54 @@
-# Utiliza una imagen oficial de PHP 8.3
+# Imagen base
 FROM php:8.3-fpm
 
-# Instala las extensiones necesarias para Laravel
+# Instalar dependencias y Nginx
 RUN apt-get update && apt-get install -y \
-    libzip-dev \
-    unzip \
-    nginx \
-    libpq-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
+    git \
+    curl \
     libpng-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install zip pdo pdo_pgsql gd
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    nodejs \
+    npm \
+    libpq-dev \
+    libzip-dev \
+    nginx
 
-# Copia el archivo de configuración de Nginx
-COPY .docker/nginx.conf /etc/nginx/nginx.conf
+# Limpiar cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Cambiar el puerto de PHP-FPM
-RUN sed -i 's/listen = 9000/listen = 9001/' /usr/local/etc/php-fpm.d/zz-docker.conf
+# Instalar extensiones PHP, incluyendo zip, pgsql y pdo_pgsql para PostgreSQL
+RUN docker-php-ext-install pdo pdo_pgsql pgsql mbstring exif pcntl bcmath gd zip
 
-# Instala Composer
+# Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Establece el directorio de trabajo
-WORKDIR /var/www/html
+# Establecer directorio de trabajo
+WORKDIR /var/www
 
-# Copia los archivos de la aplicación
-COPY . /var/www/html
+# Copiar archivos de la aplicación
+COPY . /var/www
 
-# Da permisos al usuario www-data
-RUN chown -R www-data:www-data /var/www/html
+# Instalar dependencias de Composer
+RUN composer install
 
-# Instala las dependencias de PHP
-RUN composer install --no-dev --optimize-autoloader
-
-# Instala Node.js y npm (usando Node.js 20)
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
-
-# Instala las dependencias de JavaScript y construye los assets
+# Instalar dependencias de npm y construir assets
 RUN npm install && npm run build
 
-# Optimización de Laravel para producción
-RUN php artisan config:cache \
-    && php artisan event:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
+# Copiar configuración de Nginx
+COPY .docker/nginx/default.conf /etc/nginx/nginx.conf
 
-# Expone el puerto 80
+# Exponer puerto 80
 EXPOSE 80
 
-# Inicia PHP-FPM y Nginx
-CMD service nginx start && php-fpm
+# Crear script de inicio
+RUN echo '#!/bin/sh' > /usr/local/bin/start-container.sh \
+    && echo 'set -e' >> /usr/local/bin/start-container.sh \
+    && echo 'nginx' >> /usr/local/bin/start-container.sh \
+    && echo 'php-fpm' >> /usr/local/bin/start-container.sh \
+    && chmod +x /usr/local/bin/start-container.sh
+
+# Iniciar Nginx y PHP-FPM
+CMD ["/usr/local/bin/start-container.sh"]

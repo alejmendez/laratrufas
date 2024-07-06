@@ -32,26 +32,18 @@ services:
       - acme:/etc/acme.sh
 
   app:
-    image: dunglas/frankenphp
-    restart: always
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile
+    # restart: always
     container_name: laratrufa_app
     environment:
-      - APP_ENV=production
-      - APP_DEBUG=false
-      - DB_CONNECTION=pgsql
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_DATABASE=laratrufas
-      - DB_USERNAME=laratrufas
-      - DB_PASSWORD=laratrufas
       - VIRTUAL_HOST=app.agricolafrayleon.app
       - LETSENCRYPT_HOST=app.agricolafrayleon.app
       - LETSENCRYPT_EMAIL=alejmendez.87@gmail.com
-      - VIRTUAL_PORT=443
+      - VIRTUAL_PORT=80
     volumes:
-      - .:/app
-      - caddy_data:/data
-      - caddy_config:/config
+      - .:/var/www
     depends_on:
       - nginx-proxy
       - letsencrypt
@@ -61,14 +53,14 @@ services:
     image: postgres:16.3-alpine
     container_name: postgres_db
     environment:
-      POSTGRES_DB: laratrufas
-      POSTGRES_USER: laratrufas
-      POSTGRES_PASSWORD: laratrufas
-      PGDATA: /var/lib/postgresql/data/laratrufas/
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data/laratrufas/
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data/laratrufas
+      - pgdata:/var/lib/postgresql/data
 
 volumes:
   certs:
@@ -76,5 +68,3 @@ volumes:
   vhostd:
   acme:
   pgdata:
-  caddy_data:
-  caddy_config:

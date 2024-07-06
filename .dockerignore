@@ -1,13 +1,13 @@
 # Ignorar node_modules
-/node_modules
+# /node_modules
 /npm-debug.log
 /yarn-error.log
 
 # Ignorar directorios de Composer
-/vendor
+# /vendor
 
 # Ignorar archivos y directorios específicos de Laravel
-/.env
+# /.env
 /.env.example
 /storage/*
 !/storage/app
@@ -21,7 +21,7 @@
 Thumbs.db
 
 # Ignorar archivos de logs y de caché
-/storage/*.log
+#/storage/*.log
 /storage/*.cache
 /storage/debugbar
 
