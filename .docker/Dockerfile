@@ -32,16 +32,20 @@ WORKDIR /var/www
 COPY . /var/www
 
 # Instalar dependencias de Composer
-RUN composer install
+# RUN composer install
 
 # Instalar dependencias de npm y construir assets
-RUN npm install && npm run build
+# RUN npm install && npm run build
 
 # Copiar configuración de Nginx
 COPY .docker/nginx/default.conf /etc/nginx/nginx.conf
 
 # Exponer puerto 80
 EXPOSE 80
+
+# agregar permisos
+RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
 
 # Crear script de inicio
 RUN echo '#!/bin/sh' > /usr/local/bin/start-container.sh \
