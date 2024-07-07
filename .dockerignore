@@ -9,10 +9,10 @@
 # Ignorar archivos y directorios específicos de Laravel
 # /.env
 /.env.example
-/storage/*
-!/storage/app
-!/storage/framework
-!/storage/logs
+# /storage/*
+# !/storage/app
+# !/storage/framework
+# !/storage/logs
 
 # Ignorar configuraciones de IDE y del sistema operativo
 /.idea
