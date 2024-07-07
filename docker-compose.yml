@@ -41,6 +41,7 @@ services:
       - VIRTUAL_HOST=app.agricolafrayleon.app
       - LETSENCRYPT_HOST=app.agricolafrayleon.app
       - LETSENCRYPT_EMAIL=alejmendez.87@gmail.com
+      - LETSENCRYPT_SINGLE_DOMAIN_CERTS=true
       - VIRTUAL_PORT=80
     volumes:
       - .:/var/www
