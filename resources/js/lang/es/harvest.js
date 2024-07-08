@@ -53,7 +53,7 @@ export default {
     },
   },
   sections: {
-    harvest: 'Cosecha',
+    harvest: 'Registro Manual Semana {week} Batch {batch}',
     comments: 'Comentarios',
   },
   bulk: {

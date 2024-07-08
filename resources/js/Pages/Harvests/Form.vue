@@ -118,7 +118,7 @@ const dateRenderText = (m) => {
       />
     </CardSection>
 
-    <CardSection :header-text="t('harvest.sections.harvest')" wrapperClass="" v-if="props.details">
+    <CardSection :header-text="t('harvest.sections.harvest', { batch: form.batch.toUpperCase(), week: getWeek(form.date, { weekStartsOn: 1 })})" wrapperClass="" v-if="props.details">
       <div
         class="px-6 py-3 grid grid-cols-2 gap-x-16 gap-y-4"
         v-for="(detail, index) in form.details"
