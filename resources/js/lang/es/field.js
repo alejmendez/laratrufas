@@ -3,7 +3,7 @@ export default {
     entity_breadcrumb: 'Campos',
     create: 'Crear Campo',
     edit: 'Editar Campo',
-    show: 'Detalle del Campo',
+    show: 'Ficha del Campo',
   },
   table: {
     name: 'Campo',
