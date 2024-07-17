@@ -3,12 +3,11 @@
 namespace App\Services\Harvests;
 
 use Illuminate\Support\Facades\DB;
-use App\Models\Harvest;
 use App\Utils\Query;
 
 class ListHarvest
 {
-    public static function call($order = '', $search = '')
+    public static function call($order = '', $search = '', $filters = [])
     {
         $subquery = DB::table('harvests')
             ->select(
@@ -30,6 +29,12 @@ class ListHarvest
         $harvests = DB::table(DB::raw("({$subquery->toSql()}) as harvest"));
 
         Query::order($harvests, $order);
+
+        if ($filters['year']) {
+            $start_date = $filters['year'] . '-01-01';
+            $end_date = $filters['year'] . '-12-31';
+            $harvests->whereBetween('date', [$start_date, $end_date]);
+        }
 
         if ($search) {
             $harvests->whereAny([

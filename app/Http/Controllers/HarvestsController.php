@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 use App\Services\Harvests\FindHarvest;
 use App\Services\Harvests\ListHarvest;
+use App\Services\Harvests\HarvestAvailableYears;
 use App\Services\Harvests\CreateHarvest;
 use App\Services\Harvests\UpdateHarvest;
 use App\Services\Harvests\DeleteHarvest;
@@ -34,11 +35,17 @@ class HarvestsController extends Controller
     {
         $order = request('order', '');
         $search = request('search', '');
-        $harvests = ListHarvest::call($order, $search);
+        $filter_year = request('filter_year', '');
+
+        $harvests = ListHarvest::call($order, $search, [
+            'year' => $filter_year,
+        ]);
 
         return Inertia::render('Harvests/List', [
             'order' => $order,
             'search' => $search,
+            'filter_year' => $filter_year,
+            'filter_year_options' => HarvestAvailableYears::call(),
             'toast' => session('toast'),
             'data' => $harvests->paginate()->withQueryString(),
         ]);

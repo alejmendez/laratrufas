@@ -14,6 +14,12 @@ export default {
     field: 'Campo',
     responsible: 'Responsable',
   },
+  table_filters: {
+    year: 'Año de cosecha',
+  },
+  table_data: {
+    date: 'Semana {week}',
+  },
   buttons: {
     add_detail: 'Añadir otro',
   },

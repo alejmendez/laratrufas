@@ -48,6 +48,7 @@ export default {
     create: 'Crear',
     save_edit: 'Guardar Cambios',
     cancel: 'Cancelar',
+    filter: 'Filtrar',
   },
   actions: {
     create: 'Crear',

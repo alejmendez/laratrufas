@@ -1,4 +1,5 @@
 <script setup>
+import { reactive } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification';
@@ -13,6 +14,8 @@ const toast = useToast();
 const props = defineProps({
   order: String,
   search: String,
+  filter_year: String,
+  filter_year_options: Array,
   data: Object,
   toast: String,
 });
@@ -20,6 +23,10 @@ const props = defineProps({
 if (props.toast) {
   toast.success(t('generics.messages.saved_successfully'));
 }
+
+const form = reactive({
+  year: props.filter_year,
+});
 
 const columns = [
   { text: t('harvest.table.date'), data: 'date' },
@@ -29,6 +36,13 @@ const columns = [
   { text: t('harvest.table.quarter'), data: 'quarter_names' },
   { text: t('harvest.table.responsible'), data: 'farmer_name' },
 ];
+
+const filterHandler = () => {
+  const url = new URL(window.location.href);
+
+  url.searchParams.set('filter_year', form.year);
+  router.get(url);
+}
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, () => {
@@ -53,6 +67,18 @@ const deleteHandler = async (id) => {
       :search="props.search"
       :order="props.order"
     >
+      <template v-slot:header>
+        <div class="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
+          <VSelect
+            id="year"
+            v-model="form.year"
+            :placeholder="t('generics.please_select')"
+            :options="props.filter_year_options"
+            :label="t('harvest.table_filters.year')"
+            @change="filterHandler"
+          />
+        </div>
+      </template>
       <tr
           class="border-b hover:bg-neutral-100"
           v-for="harvest of data.data"

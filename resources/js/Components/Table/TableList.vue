@@ -19,6 +19,8 @@ const orderUrl = (col) => {
 
 <template>
   <div class="tableContainer">
+    <slot name="header"></slot>
+
     <!-- Table responsive wrapper -->
     <div class="overflow-x-auto bg-white">
       <SearchInput :q="props.search" />
