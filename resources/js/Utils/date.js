@@ -1,17 +1,18 @@
+import { parse, parseISO, format } from 'date-fns';
+
 export const getAge = (birthDate) => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e10);
 export const stringToDate = (date) => {
-  // Si el texto no incluye una 'T', asumimos que es una fecha sin tiempo y agregamos 'T00:00:00Z'
-  if (!date.includes('T')) {
-    date += 'T00:00:00Z';
+  // Verifica si la fecha contiene una 'T', indicando un formato ISO
+  if (date.includes('T')) {
+    return parseISO(date);
   }
+  return parse(date, 'yyyy-MM-dd', new Date());
+};
 
-  // Crea un nuevo objeto Date usando la cadena de texto
-  let fecha = new Date(date);
+export const dateToString = (date, f = 'dd/MM/yyyy') => {
+  return format(date, f);
+};
 
-  // Verifica si la fecha es válida
-  if (isNaN(fecha.getTime())) {
-      throw new Error("Fecha no válida");
-  }
-
-  return fecha;
+export const stringToFormat = (date, f = 'dd/MM/yyyy') => {
+  return format(stringToDate(date), f);
 };
