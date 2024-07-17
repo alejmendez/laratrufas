@@ -15,7 +15,7 @@ class ListHarvest
                 'harvests.date',
                 'harvests.batch',
                 DB::raw('SUM(harvest_details.weight) as total_weight'),
-                DB::raw("STRING_AGG(DISTINCT plants.code, ', ') as plant_codes"),
+                DB::raw("(select count(*) from harvest_details where harvest_id = harvests.id) as count_details"),
                 DB::raw("STRING_AGG(DISTINCT quarters.name, ', ') as quarter_names"),
                 DB::raw("CONCAT(users.name, ' ', users.last_name) as farmer_name")
             )
@@ -41,7 +41,7 @@ class ListHarvest
                 'date',
                 'batch',
                 'total_weight',
-                'plant_codes',
+                'count_details',
                 'quarter_names',
                 'farmer_name',
             ], 'ILIKE', "%{$search}%");

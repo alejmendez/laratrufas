@@ -8,13 +8,12 @@ use App\Models\HarvestDetail;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\Importable;
 use App\Services\Plants\FindPlantByCode;
 
 use Illuminate\Validation\Rule;
 
-class HarvestsImport implements ToModel, WithHeadingRow, WithValidation
+class HarvestsImport implements ToModel, WithHeadingRow
 {
     use Importable;
 
@@ -26,6 +25,15 @@ class HarvestsImport implements ToModel, WithHeadingRow, WithValidation
 
     public function model(array $row)
     {
+        $rows = $rows->toArray();
+        $row['codigo_de_planta'] = strtoupper(trim($row['codigo_de_planta']));
+
+        Validator::make($rows, [
+            'codigo_de_planta' => 'required|exists:plants,code',
+            'calidad' => 'max:30|nullable',
+            'peso' => 'required|numeric|between:0,99999',
+        ])->validate();
+
         return new HarvestDetail([
             'harvest_id' => $this->harvest_id,
             'plant_id'   => $this->getPlantIdByCode($row['codigo_de_planta']),
@@ -38,14 +46,4 @@ class HarvestsImport implements ToModel, WithHeadingRow, WithValidation
     {
         return optional(FindPlantByCode::call($code), fn (Plant $plant) => $plant->id);
     }
-
-    public function rules(): array
-    {
-        return [
-            'codigo_de_planta' => 'required|exists:plants,code',
-            'calidad' => 'required|max:30',
-            'peso' => 'required|numeric|between:0,99999',
-        ];
-    }
-
 }

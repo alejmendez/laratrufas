@@ -32,7 +32,7 @@ const columns = [
   { text: t('harvest.table.date'), data: 'date' },
   { text: t('harvest.table.batch'), data: 'batch' },
   { text: t('harvest.table.weight'), data: 'total_weight' },
-  { text: t('harvest.table.plant'), data: 'plant_codes' },
+  { text: t('harvest.table.count_details'), data: 'count_details' },
   { text: t('harvest.table.quarter'), data: 'quarter_names' },
   { text: t('harvest.table.responsible'), data: 'farmer_name' },
 ];
@@ -88,12 +88,7 @@ const deleteHandler = async (id) => {
         <td>{{ harvest.batch }}</td>
         <td>{{ harvest.total_weight }}</td>
         <td class="max-w-[200px] text-balance">
-          <span
-            v-for="plant_code of (harvest.plant_codes?.split(', ') || '')"
-            class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
-          >
-            {{ plant_code }}
-          </span>
+          {{ harvest.count_details }}
         </td>
         <td class="max-w-[200px] text-balance">{{ harvest.quarter_names }}</td>
         <td>{{ harvest.farmer_name }}</td>

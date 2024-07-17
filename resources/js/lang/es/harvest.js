@@ -9,7 +9,7 @@ export default {
     date: 'Semana',
     batch: 'Batch',
     weight: 'Peso',
-    plant: 'Planta',
+    count_details: 'Unidades',
     quarter: 'Cuartel',
     field: 'Campo',
     responsible: 'Responsable',
