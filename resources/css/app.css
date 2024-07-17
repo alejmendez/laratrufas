@@ -164,6 +164,7 @@
 
   .tableContainer table th {
     @apply px-6 py-3 cursor-default;
+    vertical-align: top;
   }
 
   .tableContainer table td {
