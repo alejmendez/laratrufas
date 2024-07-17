@@ -1,16 +1,10 @@
 <script setup>
-import { Head, Link, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification';
-import { format } from 'date-fns';
-
-import { stringToDate } from '@/Utils/date';
+import { stringToFormat } from '@/Utils/date';
 
 import { deleteRowTable } from '@/Utils/table';
-
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
-import TableList from '@/Components/Table/TableList.vue';
 
 const { t } = useI18n();
 const toast = useToast();
@@ -63,8 +57,8 @@ const deleteHandler = async (id) => {
                 :key="machinery.id"
             >
                 <td>{{ machinery.name }}</td>
-                <td>{{ format(stringToDate(machinery.purchase_date), 'dd/MM/yyyy') }}</td>
-                <td>{{ format(stringToDate(machinery.last_maintenance), 'dd/MM/yyyy') }}</td>
+                <td>{{ stringToFormat(machinery.purchase_date) }}</td>
+                <td>{{ stringToFormat(machinery.last_maintenance) }}</td>
                 <td>{{ machinery.purchase_location }}</td>
                 <td>{{ machinery.contact }}</td>
                 <td>
@@ -77,7 +71,7 @@ const deleteHandler = async (id) => {
             </tr>
             <tr v-if="data.data.length === 0" class="border-b hover:bg-neutral-100">
               <td :colspan="columns.length + 1" class="text-center">
-                {{ t('generics.tables.empty') }}
+                {{ $t('generics.tables.empty') }}
               </td>
             </tr>
         </TableList>

@@ -1,9 +1,8 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
 import HarvestDetailLayout from '@/Layouts/HarvestDetailLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormHarvestDetails from '@/Pages/HarvestDetails/Form.vue';
 
 const { t } = useI18n();

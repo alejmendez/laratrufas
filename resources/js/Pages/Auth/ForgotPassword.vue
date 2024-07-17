@@ -2,9 +2,8 @@
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
@@ -29,7 +28,7 @@ const submit = () => {
         <Head :title="t('auth.forgotPassword.title')" />
 
         <div class="mb-4 text-sm text-gray-600">
-            {{ t('auth.forgotPassword.subtitle') }}
+            {{ $t('auth.forgotPassword.subtitle') }}
         </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -55,7 +54,7 @@ const submit = () => {
 
             <div class="flex items-center justify-end mt-4">
                 <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    {{ t('auth.forgotPassword.form.submit') }}
+                    {{ $t('auth.forgotPassword.form.submit') }}
                 </PrimaryButton>
             </div>
         </form>

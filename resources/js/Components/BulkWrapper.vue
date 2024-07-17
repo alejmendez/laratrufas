@@ -1,11 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import { Button } from '@/Components/ui/button';
 import CardSection from '@/Components/CardSection.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   alert: String,
@@ -21,17 +18,17 @@ const openErrors = ref(true);
 <template>
   <CardSection :header-text="props.title" wrapperClass="">
     <div class="p-6">
-      <p class="pb-3">{{ t('generics.bulk.instruction_1') }}</p>
+      <p class="pb-3">{{ $t('generics.bulk.instruction_1') }}</p>
       <ul class="list-decimal ps-5">
-        <li>{{ t('generics.bulk.instruction_2') }}</li>
-        <li>{{ t('generics.bulk.instruction_3') }}</li>
-        <li>{{ t('generics.bulk.instruction_4') }}</li>
-        <li>{{ t('generics.bulk.instruction_5') }}</li>
-        <li>{{ t('generics.bulk.instruction_6') }}</li>
+        <li>{{ $t('generics.bulk.instruction_2') }}</li>
+        <li>{{ $t('generics.bulk.instruction_3') }}</li>
+        <li>{{ $t('generics.bulk.instruction_4') }}</li>
+        <li>{{ $t('generics.bulk.instruction_5') }}</li>
+        <li>{{ $t('generics.bulk.instruction_6') }}</li>
       </ul>
       <p class="py-3">
-        <b>{{ t('generics.bulk.important') }}:</b>
-        {{ t('generics.bulk.instruction_7') }}
+        <b>{{ $t('generics.bulk.important') }}:</b>
+        {{ $t('generics.bulk.instruction_7') }}
       </p>
 
       <Button
@@ -39,7 +36,7 @@ const openErrors = ref(true);
         as-child
       >
         <a :href="route(props.downloadRoute)" target="_blank">
-          {{ t('generics.bulk.download_template') }}
+          {{ $t('generics.bulk.download_template') }}
         </a>
       </Button>
     </div>
@@ -57,7 +54,7 @@ const openErrors = ref(true);
     <div class="px-6 pb-6" v-if="props.errors.length && openErrors">
       <div class="p-4 rounded-lg bg-[#F8DCDF] border border-[#EC979F] text-[#926065]">
         <font-awesome-icon :icon="['fas', 'triangle-exclamation']" class="me-1" />
-        {{ t('generics.bulk.error') }}
+        {{ $t('generics.bulk.error') }}
         <font-awesome-icon :icon="['fas', 'xmark']" class="float-right text-lg" @click="openErrors = !openErrors" />
         <ul class="list-disc ps-5">
           <li v-for="error in props.errors">

@@ -1,9 +1,5 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 
 const { t } = useI18n();
 

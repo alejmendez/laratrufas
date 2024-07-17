@@ -1,14 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
-import { format } from 'date-fns';
-import { stringToDate } from '@/Utils/date';
-
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import CardSection from '@/Components/CardSection.vue';
+import { stringToFormat } from '@/Utils/date';
 
 const { t } = useI18n();
 
@@ -63,10 +58,10 @@ const deleteHandler = async (id) => {
         </div>
 
         <div class="p-4 mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
-          <div class="text-gray-400 pb-1">{{ t('user.show.created_at') }}</div>
-          <div class="pb-3">{{ format(stringToDate(data.created_at), 'dd/MM/yyyy') }}</div>
-          <div class="text-gray-400 pb-1">{{ t('user.show.updated_at') }}</div>
-          <div>{{ format(stringToDate(data.updated_at), 'dd/MM/yyyy') }}</div>
+          <div class="text-gray-400 pb-1">{{ $t('user.show.created_at') }}</div>
+          <div class="pb-3">{{ stringToFormat(data.created_at) }}</div>
+          <div class="text-gray-400 pb-1">{{ $t('user.show.updated_at') }}</div>
+          <div>{{ stringToFormat(data.updated_at) }}</div>
         </div>
       </div>
 
@@ -78,7 +73,7 @@ const deleteHandler = async (id) => {
             :class="currentTab === tab ? 'text-red-600' : 'hover:text-red-300 text-gray-400'"
             @click="currentTab = tab"
           >
-            {{ t('user.show.tabs.' + tab) }}
+            {{ $t('user.show.tabs.' + tab) }}
           </span>
         </nav>
       </div>
@@ -89,32 +84,32 @@ const deleteHandler = async (id) => {
         v-show="currentTab === tabs[0]"
       >
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('user.show.file.dni.label') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('user.show.file.dni.label') }}</div>
           <div class="">{{ data.dni }}</div>
         </div>
 
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('user.show.file.name.label') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('user.show.file.name.label') }}</div>
           <div class="">{{ data.name }}</div>
         </div>
 
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('user.show.file.last_name.label') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('user.show.file.last_name.label') }}</div>
           <div class="">{{ data.last_name }}</div>
         </div>
 
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('user.show.file.email.label') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('user.show.file.email.label') }}</div>
           <div class="">{{ data.email }}</div>
         </div>
 
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('user.show.file.phone.label') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('user.show.file.phone.label') }}</div>
           <div class="">{{ data.phone }}</div>
         </div>
 
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('user.show.file.role.label') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('user.show.file.role.label') }}</div>
           <div class="">{{ data.role.name }}</div>
         </div>
       </CardSection>

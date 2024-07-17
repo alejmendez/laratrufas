@@ -1,10 +1,6 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
-import { Link } from '@inertiajs/vue3';
 import PaginationTable from '@/Components/Table/PaginationTable.vue';
 import SearchInput from '@/Components/Table/SearchInput.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   columns: Array,
@@ -44,7 +40,7 @@ const orderUrl = (col) => {
                 <font-awesome-icon class="text-[#7B849C]" icon="sort" v-else />
               </Link>
             </th>
-            <th scope="col" class="w-[140px]">{{ t('generics.tables.actions') }}</th>
+            <th scope="col" class="w-[140px]">{{ $t('generics.tables.actions') }}</th>
           </tr>
         </thead>
 

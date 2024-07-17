@@ -2,9 +2,8 @@
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
@@ -25,7 +24,7 @@ const submit = () => {
         <Head :title="t('auth.confirmPassword.title')" />
 
         <div class="mb-4 text-sm text-gray-600">
-          {{ t('auth.confirmPassword.subtitle') }}
+          {{ $t('auth.confirmPassword.subtitle') }}
         </div>
 
         <form @submit.prevent="submit">
@@ -45,7 +44,7 @@ const submit = () => {
 
             <div class="flex justify-end mt-4">
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                  {{ t('auth.confirmPassword.form.password') }}
+                  {{ $t('auth.confirmPassword.form.password') }}
                 </PrimaryButton>
             </div>
         </form>

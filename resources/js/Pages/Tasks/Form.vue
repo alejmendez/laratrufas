@@ -1,14 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Label as LabelShadcn } from '@/Components/ui/label';
 import { Input as InputShadcn } from '@/Components/ui/input';
-import ButtonShadcn from '@/Components/ui/button/Button.vue';
-
-import VInput from '@/Components/Form/VInput.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
-import CardSection from '@/Components/CardSection.vue';
-import VueMultiselect from 'vue-multiselect';
 
 import { getDataSelect } from '@/Services/Selects';
 
@@ -146,7 +139,7 @@ const remove_supply = (index) => {
 
 <template>
   <div class="mt-5">
-    <ButtonShadcn
+    <Button
       v-for="state in statesValues"
       :class="`btn btn-status btn-${state} text-l`"
       @click.prevent="form.status = state"
@@ -161,8 +154,8 @@ const remove_supply = (index) => {
         :icon="['far', 'square']"
         v-else
       />
-      {{ t(`task.form.status.options.${state}`) }}
-    </ButtonShadcn>
+      {{ $t(`task.form.status.options.${state}`) }}
+    </Button>
   </div>
   <form @submit.prevent="props.submitHandler">
     <CardSection>
@@ -175,7 +168,7 @@ const remove_supply = (index) => {
 
       <div>
         <LabelShadcn for="repeat_number" class="input-label">
-          {{ t('task.form.repeat_number.label') }}
+          {{ $t('task.form.repeat_number.label') }}
         </LabelShadcn>
 
         <div class="flex">
@@ -275,7 +268,7 @@ const remove_supply = (index) => {
       <div class="p-6 grid md:grid-cols-2 gap-x-16 gap-y-4 sm:grid-cols-1">
         <div>
           <LabelShadcn class="input-label">
-            {{ t('task.form.tools.label') }}
+            {{ $t('task.form.tools.label') }}
           </LabelShadcn>
           <VueMultiselect
             class="mt-1"
@@ -288,13 +281,13 @@ const remove_supply = (index) => {
             track-by="value"
             :customLabel="(o) => o.text"
           >
-            <span slot="noResult">{{ t('generics.form.multiselect.not_found') }}</span>
+            <span slot="noResult">{{ $t('generics.form.multiselect.not_found') }}</span>
           </VueMultiselect>
         </div>
 
         <div>
           <LabelShadcn class="input-label">
-            {{ t('task.form.machineries.label') }}
+            {{ $t('task.form.machineries.label') }}
           </LabelShadcn>
           <VueMultiselect
             class="mt-1"
@@ -307,7 +300,7 @@ const remove_supply = (index) => {
             track-by="value"
             :customLabel="(o) => o.text"
           >
-            <span slot="noResult">{{ t('generics.form.multiselect.not_found') }}</span>
+            <span slot="noResult">{{ $t('generics.form.multiselect.not_found') }}</span>
           </VueMultiselect>
         </div>
       </div>
@@ -362,7 +355,7 @@ const remove_supply = (index) => {
       </div>
 
       <div class="p-6">
-        <ButtonShadcn class="btn btn-secondary border-gray-800" @click.prevent="add_supply">{{ t('task.buttons.add_supply') }}</ButtonShadcn>
+        <Button class="btn btn-secondary border-gray-800" @click.prevent="add_supply">{{ $t('task.buttons.add_supply') }}</Button>
       </div>
     </CardSection>
 

@@ -2,9 +2,8 @@
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
@@ -87,7 +86,7 @@ const submit = () => {
 
             <div class="flex items-center justify-end mt-4">
                 <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    {{ t('auth.resetPassword.form.submit') }}
+                    {{ $t('auth.resetPassword.form.submit') }}
                 </PrimaryButton>
             </div>
         </form>

@@ -1,13 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, Link, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
-
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import { Button } from '@/Components/ui/button';
-import CardSection from '@/Components/CardSection.vue';
 
 const { t } = useI18n();
 
@@ -52,11 +47,11 @@ const deleteHandler = async (id) => {
           variant="secondary"
           @click="deleteHandler(data.id)"
         >
-          {{ t('generics.actions.delete') }}
+          {{ $t('generics.actions.delete') }}
         </Button>
         <Button as-child>
           <Link :href="route('quarters.edit', data.id)">
-            {{ t('generics.actions.edit') }}
+            {{ $t('generics.actions.edit') }}
           </Link>
         </Button>
       </HeaderCrud>
@@ -69,7 +64,7 @@ const deleteHandler = async (id) => {
             :class="currentTab === tab ? 'text-red-600' : 'hover:text-red-300 text-gray-400'"
             @click="currentTab = tab"
           >
-            {{ t('quarter.show.tabs.' + tab) }}
+            {{ $t('quarter.show.tabs.' + tab) }}
           </span>
         </nav>
       </div>

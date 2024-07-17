@@ -2,9 +2,6 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import VSelect from '@/Components/Form/VSelect.vue';
-import VInput from '@/Components/Form/VInput.vue';
-
 const props = defineProps({
   fields: Array,
 });

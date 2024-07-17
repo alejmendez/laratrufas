@@ -2,8 +2,6 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import VInput from '@/Components/Form/VInput.vue';
-import { Button } from '@/Components/ui/button';
 import { create } from '@/Services/PlantType.js';
 
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/Components/ui/dialog';
@@ -48,7 +46,7 @@ const addPlantType = async () => {
       </div>
       <DialogFooter>
         <Button type="submit" @click="addPlantType">
-          {{ t('generics.actions.create') }}
+          {{ $t('generics.actions.create') }}
         </Button>
       </DialogFooter>
     </DialogContent>

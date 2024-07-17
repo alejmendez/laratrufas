@@ -1,10 +1,5 @@
 <script setup>
 import { ref, computed } from 'vue';
-import { useI18n } from 'vue-i18n';
-
-import { Button } from '@/Components/ui/button';
-
-const { t } = useI18n();
 
 const props = defineProps({
   imagePreview: {
@@ -111,7 +106,7 @@ const selectFile = () => {
           style="border-end-start-radius:0; border-start-start-radius:0; "
           @click.prevent="selectFile"
         >
-          {{ t('generics.form.file.upload_file') }}
+          {{ $t('generics.form.file.upload_file') }}
         </Button>
       </div>
       <div class="text-slate-500 text-sm">Las imágenes no debe superar 5 mb</div class="">
@@ -121,7 +116,7 @@ const selectFile = () => {
         class="mt-4"
         @click.prevent="fileRemoveHandler"
       >
-        {{ t('generics.form.file.remove_image') }}
+        {{ $t('generics.form.file.remove_image') }}
       </Button>
     </div>
   </div>

@@ -1,14 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
-import { format } from 'date-fns';
-import { stringToDate } from '@/Utils/date';
-
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import CardSection from '@/Components/CardSection.vue';
+import { stringToFormat } from '@/Utils/date';
 
 const { t } = useI18n();
 
@@ -55,7 +50,7 @@ const deleteHandler = async (id) => {
             :class="currentTab === tab ? 'text-red-600' : 'hover:text-red-300 text-gray-400'"
             @click="currentTab = tab"
           >
-            {{ t('task.show.tabs.' + tab) }}
+            {{ $t('task.show.tabs.' + tab) }}
           </span>
         </nav>
       </div>
@@ -66,34 +61,34 @@ const deleteHandler = async (id) => {
           wrapperClass="p-5"
         >
           <div class="text-gray-400 mb-1">
-            {{ t('task.show.detail.priority.label') }}
+            {{ $t('task.show.detail.priority.label') }}
           </div>
           <div class="mb-4">
             <span class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-              {{ t('task.show.detail.priority.options.' + data.priority) }}
+              {{ $t('task.show.detail.priority.options.' + data.priority) }}
             </span>
           </div>
 
           <div class="text-gray-400 mb-1">
-            {{ t('task.show.detail.status.label') }}
+            {{ $t('task.show.detail.status.label') }}
           </div>
           <div class="mb-4">
-            {{ t('task.show.detail.status.options.' + data.status) }}
+            {{ $t('task.show.detail.status.options.' + data.status) }}
           </div>
           <div class="text-gray-400 mb-1">
-            {{ t('task.show.detail.start_date.label') }}
+            {{ $t('task.show.detail.start_date.label') }}
           </div>
           <div class="mb-4">
-            {{ format(stringToDate(data.start_date), 'dd/MM/yyyy') }}
+            {{ stringToFormat(data.start_date) }}
           </div>
           <div class="text-gray-400 mb-1">
-            {{ t('task.show.detail.end_date.label') }}
+            {{ $t('task.show.detail.end_date.label') }}
           </div>
           <div class="mb-4">
-            {{ format(stringToDate(data.end_date), 'dd/MM/yyyy') }}
+            {{ stringToFormat(data.end_date) }}
           </div>
           <div class="text-gray-400 mb-1">
-            {{ t('task.show.detail.responsible.label') }}
+            {{ $t('task.show.detail.responsible.label') }}
           </div>
           <div class="mb-4">
             {{ data.responsible_name }}
@@ -105,7 +100,7 @@ const deleteHandler = async (id) => {
             wrapperClass="p-5"
           >
             <div class="mb-1 font-semibold">
-              {{ t('task.show.detail.tools.label') }}
+              {{ $t('task.show.detail.tools.label') }}
             </div>
             <div class="mb-4">
               <div class="py-1 ps-3 border rounded-md bg-white ring-1 ring-gray-950/5">
@@ -118,7 +113,7 @@ const deleteHandler = async (id) => {
               </div>
             </div>
             <div class="mb-1 font-semibold">
-              {{ t('task.show.detail.machineries.label') }}
+              {{ $t('task.show.detail.machineries.label') }}
             </div>
             <div class="mb-4">
               <div class="py-1 ps-3 border rounded-md bg-white ring-1 ring-gray-950/5">
@@ -134,10 +129,10 @@ const deleteHandler = async (id) => {
             <table class="w-full">
               <thead>
                 <tr>
-                  <th class="text-gray-400 font-normal text-left">{{ t('task.show.detail.supplies.name.label') }}</th>
-                  <th class="text-gray-400 font-normal text-left">{{ t('task.show.detail.supplies.brand.label') }}</th>
-                  <th class="text-gray-400 font-normal text-left">{{ t('task.show.detail.supplies.quantity.label') }}</th>
-                  <th class="text-gray-400 font-normal text-left">{{ t('task.show.detail.supplies.unit.label') }}</th>
+                  <th class="text-gray-400 font-normal text-left">{{ $t('task.show.detail.supplies.name.label') }}</th>
+                  <th class="text-gray-400 font-normal text-left">{{ $t('task.show.detail.supplies.brand.label') }}</th>
+                  <th class="text-gray-400 font-normal text-left">{{ $t('task.show.detail.supplies.quantity.label') }}</th>
+                  <th class="text-gray-400 font-normal text-left">{{ $t('task.show.detail.supplies.unit.label') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -145,7 +140,7 @@ const deleteHandler = async (id) => {
                   <td>{{ supply.name }}</td>
                   <td>{{ supply.brand }}</td>
                   <td>{{ supply.quantity }}</td>
-                  <td>{{ t('task.show.detail.supplies.unit.options.' + supply.unit) }}</td>
+                  <td>{{ $t('task.show.detail.supplies.unit.options.' + supply.unit) }}</td>
                 </tr>
               </tbody>
             </table>

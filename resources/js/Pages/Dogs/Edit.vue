@@ -1,10 +1,8 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { format } from 'date-fns';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormDog from '@/Pages/Dogs/Form.vue';
 
 import { stringToDate, getAge } from '@/Utils/date';

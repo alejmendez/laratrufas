@@ -1,6 +1,5 @@
 <script setup>
 import { watch } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { format } from 'date-fns';
 
 import { cn } from '@/lib/utils';
@@ -10,6 +9,9 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/Components/ui/popover
 
 const model = defineModel();
 const props = defineProps({
+  placeholder: {
+    type: String,
+  },
   maxDate: {
     type: Object,
   },
@@ -21,8 +23,6 @@ const props = defineProps({
     default: (m) => format(m, 'dd/MM/yyyy'),
   },
 });
-
-const { t } = useI18n();
 
 const emit = defineEmits(['change', 'blur']);
 
@@ -42,7 +42,7 @@ watch(model, async (newValue, _) => {
         )"
       >
         <font-awesome-icon :icon="['far', 'calendar']" class="mr-2 h-4 w-4" />
-        <span>{{ model ? props.renderText(model) : t('generics.form.date.label') }}</span>
+        <span>{{ model ? props.renderText(model) : (props.placeholder ?? $t('generics.form.date.label')) }}</span>
       </Button>
     </PopoverTrigger>
     <PopoverContent class="w-auto p-0" align="start">

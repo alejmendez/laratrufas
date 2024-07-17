@@ -1,13 +1,9 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { format, getWeek } from 'date-fns';
-import { Link } from '@inertiajs/vue3';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormHarvest from '@/Pages/Harvests/Form.vue';
-import { Button } from '@/Components/ui/button';
 
 import { stringToDate } from '@/Utils/date';
 
@@ -74,7 +70,7 @@ const submitHandler = () => {
             :icon="['fas', 'circle-notch']"
             v-show="form.processing"
           />
-          {{ t('generics.buttons.save_edit') }}
+          {{ $t('generics.buttons.save_edit') }}
         </Button>
 
         <Button
@@ -83,7 +79,7 @@ const submitHandler = () => {
           :disabled="form.processing"
         >
           <Link :href="route('harvests.index')">
-            {{ t('generics.buttons.cancel') }}
+            {{ $t('generics.buttons.cancel') }}
           </Link>
         </Button>
       </HeaderCrud>

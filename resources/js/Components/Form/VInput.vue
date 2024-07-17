@@ -26,6 +26,9 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  placeholder: {
+    type: String,
+  },
   message: {
     type: String,
   },
@@ -66,6 +69,7 @@ onMounted(() => {
         @blur="emit('blur', $event)"
         v-model="model"
         ref="input"
+        :placeholder="props.placeholder"
         :renderText="props.renderText"
         :minDate="props.minDate"
         :maxDate="props.maxDate"

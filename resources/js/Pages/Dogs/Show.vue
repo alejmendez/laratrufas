@@ -1,14 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
-import { format } from 'date-fns';
-import { stringToDate } from '@/Utils/date';
-
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue'
-import CardSection from '@/Components/CardSection.vue';
+import { stringToFormat } from '@/Utils/date';
 
 const { t } = useI18n();
 
@@ -65,10 +60,10 @@ const deleteHandler = async (id) => {
         </div>
 
         <div class="p-4 mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
-          <div class="text-gray-400 pb-1">{{ t('dog.show.created_at') }}</div>
-          <div class="pb-3">{{ format(stringToDate(data.created_at), 'dd/MM/yyyy') }}</div>
-          <div class="text-gray-400 pb-1">{{ t('dog.show.updated_at') }}</div>
-          <div>{{ format(stringToDate(data.updated_at), 'dd/MM/yyyy') }}</div>
+          <div class="text-gray-400 pb-1">{{ $t('dog.show.created_at') }}</div>
+          <div class="pb-3">{{ stringToFormat(data.created_at) }}</div>
+          <div class="text-gray-400 pb-1">{{ $t('dog.show.updated_at') }}</div>
+          <div>{{ stringToFormat(data.updated_at) }}</div>
         </div>
       </div>
 
@@ -80,7 +75,7 @@ const deleteHandler = async (id) => {
             :class="currentTab === tab ? 'text-red-600' : 'hover:text-red-300 text-gray-400'"
             @click="currentTab = tab"
           >
-            {{ t('dog.show.tabs.' + tab) }}
+            {{ $t('dog.show.tabs.' + tab) }}
           </span>
         </nav>
       </div>
@@ -91,32 +86,32 @@ const deleteHandler = async (id) => {
         v-show="currentTab === tabs[0]"
       >
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('dog.show.file.breed.label') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('dog.show.file.breed.label') }}</div>
           <div class="">{{ data.breed }}</div>
         </div>
 
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('dog.show.file.gender.label') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('dog.show.file.gender.label') }}</div>
           <div class="">{{ gender }}</div>
         </div>
 
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('dog.show.file.age.label') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('dog.show.file.age.label') }}</div>
           <div class="">{{ data.age }}</div>
         </div>
 
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('dog.show.file.birthdate.label') }}</div>
-          <div class="">{{ format(stringToDate(data.birthdate), 'dd/MM/yyyy') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('dog.show.file.birthdate.label') }}</div>
+          <div class="">{{ stringToFormat(data.birthdate) }}</div>
         </div>
 
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('dog.show.file.veterinary.label') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('dog.show.file.veterinary.label') }}</div>
           <div class="">{{ data.veterinary }}</div>
         </div>
 
         <div class="mb-2">
-          <div class="text-gray-400 mb-2">{{ t('dog.show.file.couple.label') }}</div>
+          <div class="text-gray-400 mb-2">{{ $t('dog.show.file.couple.label') }}</div>
           <div class="">{{ data.couple.name }}</div>
         </div>
       </CardSection>

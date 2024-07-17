@@ -1,16 +1,10 @@
 <script setup>
-import { Head, Link, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification';
-import { format } from 'date-fns';
-
-import { stringToDate } from '@/Utils/date';
+import { stringToFormat } from '@/Utils/date';
 
 import { deleteRowTable } from '@/Utils/table';
-
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
-import TableList from '@/Components/Table/TableList.vue';
 
 const { t } = useI18n();
 const toast = useToast();
@@ -63,9 +57,9 @@ const deleteHandler = async (id) => {
                 :key="task.id"
             >
                 <td>{{ task.name }}</td>
-                <td>{{ t('task.form.priority.options.' + task.priority) }}</td>
+                <td>{{ $t('task.form.priority.options.' + task.priority) }}</td>
                 <td>{{ task.note }}</td>
-                <td>{{ format(stringToDate(task.updated_at), 'dd/MM/yyyy') }}</td>
+                <td>{{ stringToFormat(task.updated_at) }}</td>
                 <td>{{ task.responsible_name }}</td>
                 <td>
                   <Link :href="route('tasks.show', task.id)">
@@ -80,7 +74,7 @@ const deleteHandler = async (id) => {
             </tr>
             <tr v-if="data.data.length === 0" class="border-b hover:bg-neutral-100">
               <td :colspan="columns.length + 1" class="text-center">
-                {{ t('generics.tables.empty') }}
+                {{ $t('generics.tables.empty') }}
               </td>
             </tr>
         </TableList>

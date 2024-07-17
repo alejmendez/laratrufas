@@ -1,11 +1,6 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
-import { Link } from '@inertiajs/vue3';
-
 import BreadCrumbs from '@/Components/Crud/BreadCrumbs.vue';
 import { Button } from '@/Components/ui/button';
-
-const { t } = useI18n();
 
 const props = defineProps({
   breadcrumbs: Array,
@@ -83,7 +78,7 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
         v-if="props.form?.hrefCancel"
       >
         <Link :href="props.form?.hrefCancel">
-          {{ t('generics.buttons.cancel') }}
+          {{ $t('generics.buttons.cancel') }}
         </Link>
       </Button>
     </div>

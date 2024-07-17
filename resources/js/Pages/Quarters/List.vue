@@ -1,13 +1,9 @@
 <script setup>
-import { Head, Link, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification';
 
 import { deleteRowTable } from '@/Utils/table';
-
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
-import TableList from '@/Components/Table/TableList.vue';
 
 const { t } = useI18n();
 const toast = useToast();
@@ -75,7 +71,7 @@ const deleteHandler = async (id) => {
             </tr>
             <tr v-if="props.data.data.length === 0" class="border-b hover:bg-neutral-100">
               <td :colspan="columns.length + 1" class="text-center">
-                {{ t('generics.tables.empty') }}
+                {{ $t('generics.tables.empty') }}
               </td>
             </tr>
         </TableList>

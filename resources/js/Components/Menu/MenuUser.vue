@@ -1,11 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { Link } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
 import MenuNotification from './MenuNotification.vue';
-
-const { t } = useI18n();
 
 const root = ref(null);
 
@@ -52,9 +48,9 @@ onUnmounted(() => {
       </div>
       <div class="py-1 text-left" role="none">
         <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-        <Link :href="route('profile.edit')" class="text-gray-700 block px-4 py-2"> {{ t('menu.top.profile') }} </Link>
+        <Link :href="route('profile.edit')" class="text-gray-700 block px-4 py-2"> {{ $t('menu.top.profile') }} </Link>
         <Link :href="route('logout')" method="post" as="button" class="text-gray-700 block px-4 py-2">
-            {{ t('menu.top.logout') }}
+            {{ $t('menu.top.logout') }}
         </Link>
       </div>
     </div>

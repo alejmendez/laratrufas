@@ -1,6 +1,4 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3';
-
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import FiltersDashboard from '@/Pages/Dashboard/Components/FiltersDashboard.vue';
 import CardsDashboard from '@/Pages/Dashboard/Components/CardsDashboard.vue';

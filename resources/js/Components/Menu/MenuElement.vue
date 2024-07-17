@@ -1,6 +1,5 @@
 <script setup>
 import { useAttrs } from 'vue';
-import { Link } from '@inertiajs/vue3';
 const attrs = useAttrs();
 
 const props = defineProps({

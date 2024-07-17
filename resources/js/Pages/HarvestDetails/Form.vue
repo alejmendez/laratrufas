@@ -3,9 +3,6 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { QrcodeStream } from 'vue-qrcode-reader';
 
-import VInput from '@/Components/Form/VInput.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
-import { Button } from '@/Components/ui/button';
 import { findByCode } from '@/Services/Plant.js';
 
 const { t } = useI18n();

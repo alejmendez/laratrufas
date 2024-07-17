@@ -1,15 +1,11 @@
 <script setup>
-import { Head, Link, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification';
 import { getWeek } from 'date-fns';
 import { stringToDate } from '@/Utils/date';
 
 import { deleteRowTable } from '@/Utils/table';
-
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
-import TableList from '@/Components/Table/TableList.vue';
 
 const { t } = useI18n();
 const toast = useToast();
@@ -62,7 +58,7 @@ const deleteHandler = async (id) => {
           v-for="harvest of data.data"
           :key="harvest.id"
       >
-        <td>Semana {{ getWeek(stringToDate(harvest.date), { weekStartsOn: 1 }) }}</td>
+        <td>{{ $t('harvest.table_data.date', { week: getWeek(stringToDate(harvest.date), { weekStartsOn: 1 }) }) }}</td>
         <td>{{ harvest.batch }}</td>
         <td>{{ harvest.total_weight }}</td>
         <td class="max-w-[200px] text-balance">
@@ -85,7 +81,7 @@ const deleteHandler = async (id) => {
       </tr>
       <tr v-if="data.data.length === 0" class="border-b hover:bg-neutral-100">
         <td :colspan="columns.length + 1" class="text-center">
-          {{ t('generics.tables.empty') }}
+          {{ $t('generics.tables.empty') }}
         </td>
       </tr>
     </TableList>

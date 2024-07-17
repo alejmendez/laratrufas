@@ -1,14 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
-import { Link } from '@inertiajs/vue3';
-
-import VueMultiselect from 'vue-multiselect';
-import VInput from '@/Components/Form/VInput.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
-import CardSection from '@/Components/CardSection.vue';
-import { Label } from '@/Components/ui/label';
-import ButtonShadcn from '@/Components/ui/button/Button.vue';
 
 const { t } = useI18n();
 
@@ -60,7 +52,7 @@ const dateRenderText = (m) => {
 
       <div>
         <Label class="input-label">
-          {{ t('harvest.form.quarter_ids.label') }}
+          {{ $t('harvest.form.quarter_ids.label') }}
         </Label>
 
         <VueMultiselect
@@ -77,7 +69,7 @@ const dateRenderText = (m) => {
           track-by="value"
           :customLabel="(o) => o.text"
         >
-          <span slot="noResult">{{ t('generics.form.multiselect.not_found') }}</span>
+          <span slot="noResult">{{ $t('generics.form.multiselect.not_found') }}</span>
         </VueMultiselect>
       </div>
 
@@ -158,17 +150,17 @@ const dateRenderText = (m) => {
         </div>
       </div>
       <div class="px-6 py-3">
-        <ButtonShadcn variant="secondary" @click.prevent="add_detail">{{ t('harvest.buttons.add_detail') }}</ButtonShadcn>
+        <Button variant="secondary" @click.prevent="add_detail">{{ $t('harvest.buttons.add_detail') }}</Button>
 
-        <ButtonShadcn
+        <Button
           variant="secondary"
           as-child
           class="ms-3"
         >
           <Link :href="route('harvests.create.bulk', { id: form.id })">
-            {{ t('generics.bulk.button') }}
+            {{ $t('generics.bulk.button') }}
           </Link>
-        </ButtonShadcn>
+        </Button>
       </div>
     </CardSection>
   </form>
