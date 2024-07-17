@@ -30,7 +30,7 @@ const toggleSideBar = () => {
       <MenuUser />
     </div>
   </div>
-  <div class="w-full flex bg-gray-50 font-normal text-gray-950 antialiased">
+  <div class="w-full flex bg-[#F0F2F5] font-normal text-gray-950 antialiased">
     <div
       class="flex-none transition-all duration-200 ease-out z-10 border-r bg-[#0F172A] text-white"
       :class="{ 'lg:w-[320px] lg:opacity-100 w-[0px] opacity-0': showSide, 'lg:w-[0px] lg:opacity-0 w-full opacity-100': !showSide }"
