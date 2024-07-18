@@ -5,22 +5,37 @@ const model = defineModel();
 
 const attrs = useAttrs();
 
-const dniMask = {
-  mask: ['##.###.###-K', '#.###.###-K'],
-  tokens: {
-    '#': { pattern: /\d/ },
-    K: {
-      pattern: /[0-9kK]/,
-      transform: (v) => v.toLocaleUpperCase(),
-    },
-  },
-};
+const formatRut = (input) => {
+    let str = input.toString();
+
+    let formatted = '';
+
+    if (str.length <= 2) {
+        return str;
+    }
+
+    let dv = str.slice(-1);
+    str = str.slice(0, -1);
+
+    for (let i = str.length - 1, j = 1; i >= 0; i--, j++) {
+        formatted = str.charAt(i) + formatted;
+        if (j % 3 === 0 && i !== 0) {
+            formatted = '.' + formatted;
+        }
+    }
+
+    return formatted.length > 0 ? (formatted + '-' + dv) : dv;
+}
+
+const handlerInput = (e) => {
+  model.value = formatRut(e.target.value.replace(/\D/g, ''));
+}
 </script>
 
 <template>
   <VInput
     v-bind="attrs"
     v-model="model"
-    v-mask="dniMask"
+    @input="handlerInput"
   />
 </template>
