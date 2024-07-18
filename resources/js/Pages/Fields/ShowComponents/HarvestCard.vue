@@ -65,7 +65,7 @@ const fieldFile = [
         <div class="flex-1">
           <CardSection wrapperClass="p-5">
             <div class="text-gray-400 pb-1">Peso Total</div>
-            <div class="pb-3 text-3xl font-bold">{{ total_weight }} Kgr</div>
+            <div class="pb-3 text-3xl font-bold">{{ total_weight }} Kgs</div>
           </CardSection>
         </div>
       </div>
