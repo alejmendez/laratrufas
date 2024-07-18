@@ -39,7 +39,7 @@ export default {
         label: 'Calidad',
       },
       weight: {
-        label: 'Peso',
+        label: 'Peso (grs)',
       },
     },
     quarter_ids: {

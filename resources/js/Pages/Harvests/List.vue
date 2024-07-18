@@ -86,7 +86,7 @@ const deleteHandler = async (id) => {
       >
         <td>{{ $t('harvest.table_data.date', { week: getWeek(stringToDate(harvest.date), { weekStartsOn: 1 }) }) }}</td>
         <td>{{ harvest.batch }}</td>
-        <td>{{ harvest.total_weight }}</td>
+        <td>{{ harvest.total_weight / 100 }} Kgs</td>
         <td class="max-w-[200px] text-balance">
           {{ harvest.count_details }}
         </td>
