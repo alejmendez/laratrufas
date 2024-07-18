@@ -28,8 +28,6 @@ class FieldsController extends Controller
         $search = request('search', '');
         $fields = ListField::call($order, $search);
 
-        // dd($fields->get()->toJson());
-
         return Inertia::render('Fields/List', [
             'order' => $order,
             'search' => $search,

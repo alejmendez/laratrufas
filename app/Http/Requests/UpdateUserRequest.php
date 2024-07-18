@@ -23,7 +23,6 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        dd($this->dni);
         return [
             'name' => 'required|min:3|max:80',
             'last_name' => 'required|min:3|max:80',
