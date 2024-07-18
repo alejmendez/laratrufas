@@ -26,11 +26,16 @@ class ListHarvest
             ->leftJoin('users', 'harvests.farmer_id', '=', 'users.id')
             ->groupBy('harvests.id', 'harvests.date', 'harvests.batch', 'users.name', 'users.last_name');
 
+        if (isset($filters['field_id'])) {
+            $field_id = intval($filters['field_id']);
+            $subquery->whereRaw('quarters.field_id = ' . $field_id);
+        }
+
         $harvests = DB::table(DB::raw("({$subquery->toSql()}) as harvest"));
 
         Query::order($harvests, $order);
 
-        if ($filters['year']) {
+        if (isset($filters['year'])) {
             $start_date = $filters['year'] . '-01-01';
             $end_date = $filters['year'] . '-12-31';
             $harvests->whereBetween('date', [$start_date, $end_date]);

@@ -1,16 +1,25 @@
 <script setup>
-import { ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
 
+import FileCard from '@/Pages/Fields/ShowComponents/FileCard.vue';
+import LogbookCard from '@/Pages/Fields/ShowComponents/LogbookCard.vue';
+import HarvestCard from '@/Pages/Fields/ShowComponents/HarvestCard.vue';
+import StatisticsCard from '@/Pages/Fields/ShowComponents/StatisticsCard.vue';
+
 const { t } = useI18n();
 
 const props = defineProps({
-  data: Object,
+  field: Object,
+  harvests: Object,
+  order: String,
+  search: String,
+  current_tab: String,
 });
 
-const { data } = props.data;
+const field = props.field.data;
+const harvests = props.harvests;
 
 const tabs = [
   'file',
@@ -19,14 +28,11 @@ const tabs = [
   'statistics',
 ];
 
-const currentTab = ref(tabs[0]);
-
-const dataFile = [
-  [t('field.show.file.location'), data.location],
-  [t('field.show.file.size'), data.size],
-  [t('field.show.file.plants_count'), data.plants_count],
-  [t('field.show.file.quarters_count'), data.quarters_count],
-]
+const selectTab = (tab) => {
+  const url = new URL(window.location.href);
+  url.searchParams.set('current_tab', tab);
+  return url.href;
+};
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, () => {
@@ -45,12 +51,12 @@ const deleteHandler = async (id) => {
       >
         <Button
           variant="secondary"
-          @click="deleteHandler(data.id)"
+          @click="deleteHandler(field.id)"
         >
           {{ $t('generics.actions.delete') }}
         </Button>
         <Button as-child>
-          <Link :href="route('fields.edit', data.id)">
+          <Link :href="route('fields.edit', field.id)">
             {{ $t('generics.actions.edit') }}
           </Link>
         </Button>
@@ -58,60 +64,36 @@ const deleteHandler = async (id) => {
 
       <div class="flex place-content-center">
         <nav class="flex mb-1 rounded-lg bg-white border border-gray-200 px-4 py-1">
-          <span
+          <Link
             v-for="tab of tabs"
             class="px-4 py-2 cursor-default font-semibold"
-            :class="currentTab === tab ? 'text-red-600' : 'hover:text-red-300 text-gray-400'"
-            @click="currentTab = tab"
+            :class="props.current_tab === tab ? 'text-red-600' : 'hover:text-red-300 text-gray-400'"
+            :href="selectTab(tab)"
           >
             {{ $t('field.show.tabs.' + tab) }}
-          </span>
+          </Link>
         </nav>
       </div>
 
-      <CardSection
-        :header-text="t('field.show.file.title', {name: data.name})"
-        wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[0]"
-      >
-        <div>
-          <img
-            :src="data.blueprint"
-            class="w-full"
-            alt=""
-          >
-        </div>
-        <div>
-          <template v-for="block of dataFile">
-            <div class="text-gray-400 pb-1">
-              {{ block[0] }}
-            </div>
-            <div class="pb-3">
-              {{ block[1] }}
-            </div>
-          </template>
-        </div>
-      </CardSection>
+      <FileCard
+        :field="field"
+        v-show="props.current_tab === tabs[0]"
+      />
 
-      <CardSection
-        :header-text="t('field.show.logbook.title')"
-        wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[1]"
-      >
-      </CardSection>
+      <LogbookCard
+        v-show="props.current_tab === tabs[1]"
+      />
 
-      <CardSection
-        :header-text="t('field.show.harvest.title')"
-        wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[2]"
-      >
-      </CardSection>
+      <HarvestCard
+        :field="field"
+        :harvests="harvests"
+        :order="props.order"
+        :search="props.search"
+        v-show="props.current_tab === tabs[2]"
+      />
 
-      <CardSection
-        :header-text="t('field.show.statistics.title')"
-        wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[3]"
-      >
-      </CardSection>
+      <StatisticsCard
+        v-show="props.current_tab === tabs[3]"
+      />
     </AuthenticatedLayout>
 </template>

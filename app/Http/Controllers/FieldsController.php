@@ -10,6 +10,8 @@ use App\Services\Fields\CreateField;
 use App\Services\Fields\UpdateField;
 use App\Services\Fields\DeleteField;
 
+use App\Services\Harvests\ListHarvest;
+
 use App\Http\Resources\FieldResource;
 use App\Http\Resources\FieldCollection;
 use App\Http\Requests\StoreFieldRequest;
@@ -61,10 +63,20 @@ class FieldsController extends Controller
      */
     public function show(string $id)
     {
+        $order = request('order', '');
+        $search = request('search', '');
+        $current_tab = request('current_tab', 'file');
         $field = FindField::call($id);
+        $harvests = ListHarvest::call($order, $search, [
+            'field_id' => $id
+        ]);
 
         return Inertia::render('Fields/Show', [
-            'data' => new FieldResource($field),
+            'current_tab' => $current_tab,
+            'order' => $order,
+            'search' => $search,
+            'field' => new FieldResource($field),
+            'harvests' => $harvests->paginate()->withQueryString(),
         ]);
     }
 
