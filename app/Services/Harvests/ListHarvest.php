@@ -34,8 +34,7 @@ class ListHarvest
         $harvests = DB::table(DB::raw("({$subquery->toSql()}) as harvest"));
 
         Query::order($harvests, $order);
-
-        if (isset($filters['year'])) {
+        if (isset($filters['year']) && $filters['year'] !== '') {
             $start_date = $filters['year'] . '-01-01';
             $end_date = $filters['year'] . '-12-31';
             $harvests->whereBetween('date', [$start_date, $end_date]);
