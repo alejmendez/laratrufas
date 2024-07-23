@@ -10,7 +10,7 @@ const { t } = useI18n();
 
 const props = defineProps({
   harvests: Array,
-  id: Number,
+  id: String,
   alert: String,
   errors: Array,
 });
