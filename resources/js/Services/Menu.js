@@ -50,6 +50,10 @@ export const menuElements = (t, page) => {
       ],
     },
     {
+      text: t('menu.reports'),
+      children: [{ link: route('users.index'), text: t('menu.report1') }],
+    },
+    {
       text: t('menu.settings'),
       children: [
         // <font-awesome-icon icon="fa-solid fa-file-arrow-up" />

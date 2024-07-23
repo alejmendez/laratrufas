@@ -24,6 +24,9 @@ export default {
   tools: 'Herramientas',
   suppliers: 'Proveedores',
 
+  reports: 'Reportes',
+  report1: 'Reporte 1',
+
   settings: 'Configuraciones',
   users: 'Usuarios',
   dogs: 'Perros',
