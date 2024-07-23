@@ -74,7 +74,7 @@ const deleteHandler = async (id) => {
       </div>
 
       <CardSection
-        :header-text="t('plant.show.file.title', {name: data.name})"
+        :header-text="t('plant.show.file.title', {name: data.code})"
         wrapperClass="p-5 grid grid-cols-2 gap-4"
         v-show="currentTab === tabs[0]"
       >
