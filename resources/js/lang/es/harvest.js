@@ -10,8 +10,8 @@ export default {
     batch: 'Batch',
     weight: 'Peso',
     count_details: 'Unidades',
-    quarter: 'Cuartel',
-    field: 'Campo',
+    field: 'Campos',
+    quarter: 'Cuarteles',
     responsible: 'Responsable',
   },
   table_filters: {

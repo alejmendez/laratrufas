@@ -16,6 +16,7 @@ class ListHarvest
                 'harvests.batch',
                 DB::raw('(select SUM(harvest_details.weight) from harvest_details where harvest_id = harvests.id) as total_weight'),
                 DB::raw("(select count(*) from harvest_details where harvest_id = harvests.id) as count_details"),
+                DB::raw("STRING_AGG(DISTINCT fields.name, ', ') as field_names"),
                 DB::raw("STRING_AGG(DISTINCT quarters.name, ', ') as quarter_names"),
                 DB::raw("CONCAT(users.name, ' ', users.last_name) as farmer_name")
             )
@@ -23,10 +24,11 @@ class ListHarvest
             ->leftJoin('plants', 'harvest_details.plant_id', '=', 'plants.id')
             ->leftJoin('harvest_quarter', 'harvest_quarter.harvest_id', '=', 'harvests.id')
             ->leftJoin('quarters', 'harvest_quarter.quarter_id', '=', 'quarters.id')
+            ->leftJoin('fields', 'quarters.field_id', '=', 'fields.id')
             ->leftJoin('users', 'harvests.farmer_id', '=', 'users.id')
             ->groupBy('harvests.id', 'harvests.date', 'harvests.batch', 'users.name', 'users.last_name');
 
-        if (isset($filters['field_id'])) {
+        if (isset($filters['field_id']) && $filters['field_id'] !== '') {
             $field_id = intval($filters['field_id']);
             $subquery->whereRaw('quarters.field_id = ' . $field_id);
         }

@@ -29,9 +29,10 @@ const form = reactive({
 const columns = [
   { text: t('harvest.table.date'), data: 'date' },
   { text: t('harvest.table.batch'), data: 'batch' },
+  { text: t('harvest.table.field'), data: 'field_names' },
+  { text: t('harvest.table.quarter'), data: 'quarter_names' },
   { text: t('harvest.table.weight'), data: 'total_weight' },
   { text: t('harvest.table.count_details'), data: 'count_details' },
-  { text: t('harvest.table.quarter'), data: 'quarter_names' },
   { text: t('harvest.table.responsible'), data: 'farmer_name' },
 ];
 
@@ -76,11 +77,12 @@ const deleteHandler = async (id) => {
     >
       <td>{{ $t('harvest.table_data.date', { week: getWeek(stringToDate(harvest.date), { weekStartsOn: 1 }) }) }}</td>
       <td>{{ harvest.batch }}</td>
+      <td class="max-w-[200px] text-balance">{{ harvest.field_names }}</td>
+      <td class="max-w-[200px] text-balance">{{ harvest.quarter_names }}</td>
       <td>{{ harvest.total_weight / 1000 }} Kgs</td>
       <td class="max-w-[200px] text-balance">
         {{ harvest.count_details }}
       </td>
-      <td class="max-w-[200px] text-balance">{{ harvest.quarter_names }}</td>
       <td>{{ harvest.farmer_name }}</td>
       <td v-if="props.show_actions">
         <Link :href="route('harvests.edit', harvest.id)">
