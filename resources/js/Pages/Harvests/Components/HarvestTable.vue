@@ -11,6 +11,10 @@ const props = defineProps({
   order: String,
   search: String,
   show_filters: Boolean,
+  show_actions: {
+    type: Boolean,
+    default: true,
+  },
   filter_year: String,
   filter_year_options: Array,
   data: Object,
@@ -51,6 +55,7 @@ const deleteHandler = async (id) => {
     :meta="props.data"
     :search="props.search"
     :order="props.order"
+    :show_actions="props.show_actions"
   >
     <template v-slot:header v-if="props.show_filters">
       <div class="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
@@ -77,7 +82,7 @@ const deleteHandler = async (id) => {
       </td>
       <td class="max-w-[200px] text-balance">{{ harvest.quarter_names }}</td>
       <td>{{ harvest.farmer_name }}</td>
-      <td>
+      <td v-if="props.show_actions">
         <Link :href="route('harvests.edit', harvest.id)">
           <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
         </Link>

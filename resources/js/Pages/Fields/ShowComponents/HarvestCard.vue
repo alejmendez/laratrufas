@@ -30,9 +30,9 @@ const fieldFile = [
 <template>
   <div class="flex ">
 
-    <div class="w-1/3 mr-4">
+    <div class="w-1/4 mr-4">
       <CardSection
-        :header-text="t('field.show.file.title', {name: field.name})"
+        :header-text="t('field.show.file.title', { name: field.name })"
         wrapperClass="p-5"
       >
         <template v-for="block of fieldFile">
@@ -46,7 +46,7 @@ const fieldFile = [
       </CardSection>
     </div>
 
-    <div class="w-2/3">
+    <div class="w-3/4">
       <div class="flex space-x-4 mb-4">
         <div class="flex-1">
           <CardSection wrapperClass="p-5">
@@ -74,6 +74,7 @@ const fieldFile = [
         :order="props.order"
         :search="props.search"
         :data="props.harvests"
+        :show_actions="false"
       />
     </div>
   </div>

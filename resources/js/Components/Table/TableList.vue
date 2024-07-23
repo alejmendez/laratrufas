@@ -8,6 +8,10 @@ const props = defineProps({
   meta: Object,
   search: String,
   order: String,
+  show_actions: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const orderUrl = (col) => {
@@ -42,7 +46,7 @@ const orderUrl = (col) => {
                 <font-awesome-icon class="text-[#7B849C]" icon="sort" v-else />
               </Link>
             </th>
-            <th scope="col" class="w-[140px]">{{ $t('generics.tables.actions') }}</th>
+            <th scope="col" class="w-[140px]" v-if="props.show_actions">{{ $t('generics.tables.actions') }}</th>
           </tr>
         </thead>
 
