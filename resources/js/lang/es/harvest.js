@@ -15,6 +15,8 @@ export default {
     responsible: 'Responsable',
   },
   table_filters: {
+    field: 'Campo',
+    quarter: 'Cuartel',
     year: 'Año de cosecha',
   },
   table_data: {

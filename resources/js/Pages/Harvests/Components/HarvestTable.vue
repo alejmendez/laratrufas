@@ -17,6 +17,10 @@ const props = defineProps({
   },
   filter_year: String,
   filter_year_options: Array,
+  filter_field: String,
+  filter_field_options: Array,
+  filter_quarter: String,
+  filter_quarter_options: Array,
   data: Object,
 });
 
@@ -24,6 +28,8 @@ const { t } = useI18n();
 
 const form = reactive({
   year: props.filter_year,
+  field: props.filter_field,
+  quarter: props.filter_quarter,
 });
 
 const columns = [
@@ -39,7 +45,15 @@ const columns = [
 const filterHandler = () => {
   const url = new URL(window.location.href);
 
-  url.searchParams.set('filter_year', form.year);
+  if (form.year) {
+    url.searchParams.set('filter_year', form.year);
+  }
+  if (form.field) {
+    url.searchParams.set('filter_field', form.field);
+  }
+  if (form.quarter) {
+    url.searchParams.set('filter_quarter', form.quarter);
+  }
   router.get(url);
 }
 
@@ -60,6 +74,22 @@ const deleteHandler = async (id) => {
   >
     <template v-slot:header v-if="props.show_filters">
       <div class="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
+        <VSelect
+          id="field"
+          v-model="form.field"
+          :placeholder="t('generics.please_select')"
+          :options="props.filter_field_options"
+          :label="t('harvest.table_filters.field')"
+          @change="filterHandler"
+        />
+        <VSelect
+          id="quarter"
+          v-model="form.quarter"
+          :placeholder="t('generics.please_select')"
+          :options="props.filter_quarter_options"
+          :label="t('harvest.table_filters.quarter')"
+          @change="filterHandler"
+        />
         <VSelect
           id="year"
           v-model="form.year"

@@ -36,9 +36,16 @@ class HarvestsController extends Controller
         $order = request('order', '');
         $search = request('search', '');
         $filter_year = request('filter_year', '');
+        $filter_field = request('filter_field', '');
+        $filter_quarter = request('filter_quarter', '');
+
+        $filter_field_options = ListEntity::call('field');
+        $filter_quarter_options = ListEntity::call('quarter', $filter_field === '' ? [] : ['field_id' => $filter_field]);
 
         $harvests = ListHarvest::call($order, $search, [
             'year' => $filter_year,
+            'field_id' => $filter_field,
+            'quarter_id' => $filter_quarter,
         ]);
 
         return Inertia::render('Harvests/List', [
@@ -46,6 +53,10 @@ class HarvestsController extends Controller
             'search' => $search,
             'filter_year' => $filter_year,
             'filter_year_options' => HarvestAvailableYears::call(),
+            'filter_field' => $filter_field,
+            'filter_field_options' => $filter_field_options,
+            'filter_quarter' => $filter_quarter,
+            'filter_quarter_options' => $filter_quarter_options,
             'toast' => session('toast'),
             'data' => $harvests->paginate()->withQueryString(),
         ]);

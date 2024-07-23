@@ -13,6 +13,10 @@ const props = defineProps({
   search: String,
   filter_year: String,
   filter_year_options: Array,
+  filter_field: String,
+  filter_field_options: Array,
+  filter_quarter: String,
+  filter_quarter_options: Array,
   data: Object,
   toast: String,
 });
@@ -38,6 +42,10 @@ if (props.toast) {
       :search="props.search"
       :filter_year="props.filter_year"
       :filter_year_options="props.filter_year_options"
+      :filter_field="props.filter_field"
+      :filter_field_options="props.filter_field_options"
+      :filter_quarter="props.filter_quarter"
+      :filter_quarter_options="props.filter_quarter_options"
       :data="props.data"
     />
   </AuthenticatedLayout>

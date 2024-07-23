@@ -30,7 +30,12 @@ class ListHarvest
 
         if (isset($filters['field_id']) && $filters['field_id'] !== '') {
             $field_id = intval($filters['field_id']);
-            $subquery->whereRaw('quarters.field_id = ' . $field_id);
+            $subquery->whereRaw('fields.id = ' . $field_id);
+        }
+
+        if (isset($filters['quarter_id']) && $filters['quarter_id'] !== '') {
+            $quarter_id = intval($filters['quarter_id']);
+            $subquery->whereRaw('quarters.id = ' . $quarter_id);
         }
 
         $harvests = DB::table(DB::raw("({$subquery->toSql()}) as harvest"));
