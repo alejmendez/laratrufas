@@ -22,7 +22,6 @@ class PlantsImport implements ToModel, WithHeadingRow, WithValidation, WithEvent
 
     private $rowCount = 0;
 
-
     protected $quarter_id;
     protected $plant_types;
 
@@ -63,7 +62,7 @@ class PlantsImport implements ToModel, WithHeadingRow, WithValidation, WithEvent
     public function rules(): array
     {
         return [
-            'codigo' => ['required', 'max:12', Rule::unique('plants')],
+            'codigo' => ['required', 'max:12', Rule::unique('plants', 'code')],
             'hilera' => 'required|max:2',
             'edad' => 'required|max:3',
             'tipo_de_planta' => 'required|max:20',
@@ -75,7 +74,6 @@ class PlantsImport implements ToModel, WithHeadingRow, WithValidation, WithEvent
     public static function afterImport(AfterImport $event)
     {
         $import = $event->getConcernable();
-        // Aquí puedes acceder al contador de filas procesadas
         session(['rowCount' => $import->rowCount]);
     }
 
@@ -83,5 +81,4 @@ class PlantsImport implements ToModel, WithHeadingRow, WithValidation, WithEvent
     {
         return $this->rowCount;
     }
-
 }
