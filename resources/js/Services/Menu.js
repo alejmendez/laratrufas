@@ -33,7 +33,8 @@ export const menuElements = (t, page) => {
           icon: 'fa-solid fa-barcode',
           active: page.component.startsWith('HarvestDetails'),
         },
-        { link: route('users.index'), text: t('menu.batch'), icon: 'fa-solid fa-file-invoice-dollar' },
+        { link: route('users.index'), text: t('menu.batch'), icon: 'fa-solid fa-table-list' },
+        { link: route('users.index'), text: t('menu.liquidations'), icon: 'fa-solid fa-file-invoice-dollar' },
       ],
     },
     {
