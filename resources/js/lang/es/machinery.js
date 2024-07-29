@@ -1,8 +1,8 @@
 export default {
   titles: {
-    entity_breadcrumb: 'Equipos',
-    create: 'Crear Equipo',
-    edit: 'Editar Equipo',
+    entity_breadcrumb: 'Maquinarias',
+    create: 'Crear Maquinaria',
+    edit: 'Editar Maquinaria',
   },
   table: {
     name: 'Nombre',
