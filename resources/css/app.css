@@ -90,7 +90,7 @@
   }
 
   .input-label {
-    @apply mb-1;
+    @apply text-sm font-medium leading-none mb-1;
   }
 
   .input {}

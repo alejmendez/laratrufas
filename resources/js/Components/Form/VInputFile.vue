@@ -101,23 +101,21 @@ const selectFile = () => {
       <div class="flex max-w-md items-center">
         <div class="border p-2 grow h-[40px] truncate rounded-s" :title="filePath">{{ filePath }}</div>
         <Button
-          variant="secondary"
+          severity="secondary"
           class="bg-gray-300 text-gray-800 hover:bg-gray-300/80"
           style="border-end-start-radius:0; border-start-start-radius:0; "
           @click.prevent="selectFile"
-        >
-          {{ $t('generics.form.file.upload_file') }}
-        </Button>
+          :label="$t('generics.form.file.upload_file')"
+        />
       </div>
       <div class="text-slate-500 text-sm">Las imágenes no debe superar 5 mb</div class="">
       <Button
-        variant="secondary"
+        severity="secondary"
         v-if="props.withRemove"
         class="mt-4"
         @click.prevent="fileRemoveHandler"
-      >
-        {{ $t('generics.form.file.remove_image') }}
-      </Button>
+        :label="$t('generics.form.file.remove_image')"
+      />
     </div>
   </div>
 </template>

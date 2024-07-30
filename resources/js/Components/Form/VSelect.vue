@@ -1,7 +1,6 @@
 <script setup>
 import { useAttrs, ref, onMounted, watch } from 'vue';
-import { Label as LabelShadcn } from '@/Components/ui/label';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/Components/ui/select';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/Components/ui/select';
 
 const model = defineModel();
 
@@ -62,9 +61,9 @@ onMounted(() => {
 
 <template>
   <div :class="props.classWrapper">
-    <LabelShadcn :for="attrs.id" class="input-label" v-if="props.label !== ''">
+    <Label :for="attrs.id" v-if="props.label !== ''">
       {{ props.label }}
-    </LabelShadcn>
+    </Label>
 
     <Select
       class="input"

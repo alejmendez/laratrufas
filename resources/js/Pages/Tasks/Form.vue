@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Input as InputShadcn } from '@/Components/ui/input';
+import InputText from 'primevue/inputtext';
 
 import { getDataSelect } from '@/Services/Selects';
 
@@ -100,40 +100,47 @@ const remove_supply = (index) => {
 
 <style scoped>
 .btn-status {
-  border: none;
   margin-right: 20px;
 }
 
-.btn.btn-to_begin {
+.btn-status.btn-to_begin {
   background-color: #6C757D;
+  border-color: #6C757D;
 }
 
-.btn.btn-to_begin:hover {
+.btn-status.btn-to_begin:hover {
   background-color: #5a6168;
+  border-color: #5a6168;
 }
 
-.btn.btn-started {
+.btn-status.btn-started {
   background-color: #17A2B8;
+  border-color: #17A2B8;
 }
 
-.btn.btn-started:hover {
+.btn-status.btn-started:hover {
   background-color: #158fa1;
+  border-color: #158fa1;
 }
 
-.btn.btn-stopped {
+.btn-status.btn-stopped {
   background-color: #28A745;
+  border-color: #28A745;
 }
 
-.btn.btn-stopped:hover {
+.btn-status.btn-stopped:hover {
   background-color: #22923d;
+  border-color: #22923d;
 }
 
-.btn.btn-finished {
+.btn-status.btn-finished {
   background-color: #DC3545;
+  border-color: #DC3545;
 }
 
-.btn.btn-finished:hover {
+.btn-status.btn-finished:hover {
   background-color: #bd2d3b;
+  border-color: #bd2d3b;
 }
 </style>
 
@@ -141,20 +148,11 @@ const remove_supply = (index) => {
   <div class="mt-5">
     <Button
       v-for="state in statesValues"
-      :class="`btn btn-status btn-${state} text-l`"
+      :class="`btn-status btn-${state} text-l`"
       @click.prevent="form.status = state"
+      :label="$t(`task.form.status.options.${state}`)"
+      :icon="form.status === state ? 'pi pi-check-square' : 'pi pi-stop'"
     >
-      <font-awesome-icon
-        v-if="form.status === state"
-        class="mr-2 text-xl"
-        :icon="['far', 'square-check']"
-      />
-      <font-awesome-icon
-        class="mr-2 text-xl"
-        :icon="['far', 'square']"
-        v-else
-      />
-      {{ $t(`task.form.status.options.${state}`) }}
     </Button>
   </div>
   <form @submit.prevent="props.submitHandler">
@@ -167,14 +165,14 @@ const remove_supply = (index) => {
       />
 
       <div>
-        <LabelShadcn for="repeat_number" class="input-label">
+        <Label for="repeat_number" class="input-label">
           {{ $t('task.form.repeat_number.label') }}
-        </LabelShadcn>
+        </Label>
 
         <div class="flex">
-          <InputShadcn
+          <InputText
             id="repeat_number"
-            class="input mt-1"
+            class="w-full h-10 mt-1"
             v-model="form.repeat_number"
             type="number"
             min="1"
@@ -267,9 +265,9 @@ const remove_supply = (index) => {
     <CardSection :header-text="t('task.sections.resources')" wrapperClass="">
       <div class="p-6 grid md:grid-cols-2 gap-x-16 gap-y-4 sm:grid-cols-1">
         <div>
-          <LabelShadcn class="input-label">
+          <Label class="input-label">
             {{ $t('task.form.tools.label') }}
-          </LabelShadcn>
+          </Label>
           <VueMultiselect
             class="mt-1"
             v-model="form.tools"
@@ -286,9 +284,9 @@ const remove_supply = (index) => {
         </div>
 
         <div>
-          <LabelShadcn class="input-label">
+          <Label class="input-label">
             {{ $t('task.form.machineries.label') }}
-          </LabelShadcn>
+          </Label>
           <VueMultiselect
             class="mt-1"
             v-model="form.machineries"

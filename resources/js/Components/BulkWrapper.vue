@@ -32,13 +32,12 @@ const openErrors = ref(true);
       </p>
 
       <Button
-        variant="outline"
-        as-child
-      >
-        <a :href="route(props.downloadRoute)" target="_blank">
-          {{ $t('generics.bulk.download_template') }}
-        </a>
-      </Button>
+        severity="outline"
+        as="a"
+        :href="route(props.downloadRoute)"
+        target="_blank"
+        :label="$t('generics.bulk.download_template')"
+      />
     </div>
 
     <slot />

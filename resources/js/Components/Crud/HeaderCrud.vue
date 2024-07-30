@@ -1,6 +1,5 @@
 <script setup>
 import BreadCrumbs from '@/Components/Crud/BreadCrumbs.vue';
-import { Button } from '@/Components/ui/button';
 
 const props = defineProps({
   breadcrumbs: Array,
@@ -35,20 +34,16 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
         :key="link.text"
       >
         <template v-if="isPromise(link.to) || isFunction(link.to)">
-          <Button :variant="link.variant" @click="link.to">
-            {{ link.text }}
-          </Button>
+          <Button :severity="link.variant" @click="link.to"  />
         </template>
         <template v-else>
           <Button
+            as="Link"
             :key="link.text"
-            :variant="link.variant"
-            as-child
-          >
-            <Link :href="isLink(link.to) ? link.to : route(link.to)">
-              {{ link.text }}
-            </Link>
-          </Button>
+            :severity="link.variant"
+            :href="isLink(link.to) ? link.to : route(link.to)"
+            :label="link.text"
+          />
         </template>
       </template>
     </div>
@@ -62,25 +57,17 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
         :disabled="props.form?.instance.processing"
         @click="props.form?.submitHandler"
         v-if="props.form?.submitHandler"
-      >
-        <font-awesome-icon
-          class="animate-spin me-1"
-          :icon="['fas', 'circle-notch']"
-          v-show="props.form?.instance.processing"
-        />
-        {{ props.form?.submitText }}
-      </Button>
+        :loading="props.form?.instance.processing"
+        :label="props.form?.submitText"
+      />
 
       <Button
-        variant="secondary"
-        as-child
+        severity="secondary"
         :disabled="props.form?.instance.processing"
+        :href="props.form?.hrefCancel"
+        :label="$t('generics.buttons.cancel')"
         v-if="props.form?.hrefCancel"
-      >
-        <Link :href="props.form?.hrefCancel">
-          {{ $t('generics.buttons.cancel') }}
-        </Link>
-      </Button>
+      />
     </div>
   </header>
 </template>

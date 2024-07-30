@@ -1,8 +1,9 @@
 <script setup>
 import { useAttrs, ref, onMounted } from 'vue';
-import { Input as InputShadcn } from '@/Components/ui/input';
-import { Label as LabelShadcn } from '@/Components/ui/label';
-import { Textarea } from '@/Components/ui/textarea';
+
+import InputText from 'primevue/inputtext';
+
+import Textarea from 'primevue/textarea';
 import VInputDate from './VInputDate.vue';
 
 const model = defineModel();
@@ -59,9 +60,9 @@ onMounted(() => {
 
 <template>
   <div :class="props.classWrapper">
-    <LabelShadcn :for="attrs.id" class="input-label" v-if="props.label !== ''">
+    <Label :for="attrs.id" v-if="props.label !== ''">
       {{ props.label }}
-    </LabelShadcn>
+    </Label>
 
     <template v-if="props.type === 'date'">
       <VInputDate
@@ -77,17 +78,18 @@ onMounted(() => {
     </template>
     <template v-else-if="props.type === 'textarea'">
       <Textarea
-        class="input mt-1"
+        class="w-full mt-1"
         ref="input"
         v-bind="attrs"
         v-model="model"
         @change="emit('change', $event)"
         @blur="emit('blur', $event)"
+        rows="5"
       />
     </template>
     <template v-else>
-      <InputShadcn
-        class="input mt-1"
+      <InputText
+        class="h-10 w-full mt-1"
         ref="input"
         v-bind="attrs"
         v-model="model"

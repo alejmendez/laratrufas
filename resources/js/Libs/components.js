@@ -11,9 +11,9 @@ import CardSection from '@/Components/CardSection.vue';
 import TableList from '@/Components/Table/TableList.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
-import { Label } from '@/Components/ui/label';
-import Button from '@/Components/ui/button/Button.vue';
-import { Checkbox } from '@/Components/ui/checkbox';
+import Label from '@/Components/Form/Label.vue';
+import Button from '@/Components/Form/Button.vue';
+import Checkbox from '@/Components/Form/Checkbox.vue';
 
 export const initComponent = (app) => {
   app.component('Head', Head);
