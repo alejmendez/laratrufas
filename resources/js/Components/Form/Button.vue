@@ -6,5 +6,7 @@ const attrs = useAttrs();
 </script>
 
 <template>
-  <ButtonPrime attrs />
+  <ButtonPrime
+    v-bind="attrs"
+  />
 </template>

@@ -8,15 +8,6 @@ const model = defineModel();
 const attrs = useAttrs();
 
 const props = defineProps({
-  placeholder: {
-    type: String,
-  },
-  maxDate: {
-    type: Object,
-  },
-  minDate: {
-    type: Object,
-  },
   renderText: {
     type: Function,
     default: (m) => format(m, 'dd/MM/yyyy'),
@@ -32,10 +23,13 @@ watch(model, async (newValue, _) => {
 
 <template>
   <DatePicker
-    class="w-full h-10 mt-1"
+    class="h-10 mt-1"
     v-bind="attrs"
     v-model="model"
-    dateFormat="dd/mm/yy"
+    :dateFormat="props.dateFormat"
     :showIcon="true"
+    :pt="{
+      ptinput: { placeholder: 'asdasd' }
+    }"
   />
 </template>

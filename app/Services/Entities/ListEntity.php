@@ -46,8 +46,8 @@ class ListEntity
             ->groupBy('field.name')
             ->map(function($group, $fieldName) {
                 return [
-                    'field' => $fieldName,
-                    'quarters' => collect($group)->map(function($quarter) {
+                    'text' => $fieldName,
+                    'items' => collect($group)->map(function($quarter) {
                         return [
                             'value' => $quarter->id,
                             'text' => $quarter->name,

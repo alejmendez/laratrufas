@@ -93,25 +93,8 @@
     @apply text-sm font-medium leading-none mb-1;
   }
 
-  .input {}
-
   .input-file {
     @apply block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#CED4DA] file:text-gray-800 hover:file:bg-gray-400;
-  }
-
-  .btn.btn-primary {
-    @apply px-5 py-2 text-gray-100 transition-colors duration-150 bg-gray-900 rounded-lg hover:bg-gray-600;
-  }
-
-  .btn.btn-primary:disabled {
-    @apply bg-gray-600;
-  }
-
-  .btn.btn-secondary {
-    @apply px-5 py-2 text-gray-100 transition-colors duration-150 rounded-lg bg-white text-gray-950 hover:bg-gray-200 disabled:opacity-75 ring-1 ring-gray-950/10;
-  }
-  .btn.btn-secondary:disabled {
-    @apply bg-gray-200;
   }
 
   .pagination {
@@ -172,34 +155,16 @@
   }
 }
 
-.btn-primary {
-  background: #F06F38;
-  border: 1px solid #F06F38;
-  border-radius: 6px;
-  color: white;
+.p-button.p-component {
+  @apply text-sm font-medium transition-colors duration-150 rounded-lg disabled:opacity-75;
 }
 
-.btn-primary:hover {
-  background: #FB9773;
+.p-button.p-component {
+  @apply text-white bg-[#f06f38] hover:bg-[#fb9773];
 }
 
-.btn-primary:active {
-  background: #F06F38;
-}
-
-.btn-secondary {
-  background: #FDFDFD;
-  border: 1px solid #C7C7C7;
-  border-radius: 6px;
-  color: #ED3900;
-}
-
-.btn-secondary:hover {
-  background: #FFF1E9;
-}
-
-.btn-secondary:active {
-  background: #FED1C1;
+.p-button.p-component.p-button-secondary {
+  @apply text-[#ed3900] bg-[#fdfdfd] hover:bg-[#fff1e9] hover:text-[#ed3900] border-[#C7C7C7] hover:border-[#C7C7C7];
 }
 
 .menu-element.active {

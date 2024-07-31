@@ -3,6 +3,7 @@ import VueMultiselect from 'vue-multiselect';
 
 import VInput from '@/Components/Form/VInput.vue';
 import VSelect from '@/Components/Form/VSelect.vue';
+import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
 import VInputFile from '@/Components/Form/VInputFile.vue';
 import VInputDni from '@/Components/Form/VInputDni.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -19,6 +20,7 @@ export const initComponent = (app) => {
   app.component('Head', Head);
   app.component('Link', Link);
   app.component('VueMultiselect', VueMultiselect);
+  app.component('VSelectMultiple', VSelectMultiple);
 
   app.component('VInput', VInput);
   app.component('VSelect', VSelect);

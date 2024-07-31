@@ -23,13 +23,6 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  placeholder: {
-    type: String,
-  },
   message: {
     type: String,
   },
@@ -39,12 +32,6 @@ const props = defineProps({
   },
   renderText: {
     type: Function,
-  },
-  maxDate: {
-    type: Object,
-  },
-  minDate: {
-    type: Object,
   },
 });
 
@@ -66,22 +53,21 @@ onMounted(() => {
 
     <template v-if="props.type === 'date'">
       <VInputDate
-        @change="emit('change', $event)"
-        @blur="emit('blur', $event)"
+        v-bind="attrs"
         v-model="model"
         ref="input"
-        :placeholder="props.placeholder"
-        :renderText="props.renderText"
-        :minDate="props.minDate"
-        :maxDate="props.maxDate"
+        fluid
+        @change="emit('change', $event)"
+        @blur="emit('blur', $event)"
       />
     </template>
     <template v-else-if="props.type === 'textarea'">
       <Textarea
-        class="w-full mt-1"
+        class="mt-1"
         ref="input"
         v-bind="attrs"
         v-model="model"
+        fluid
         @change="emit('change', $event)"
         @blur="emit('blur', $event)"
         rows="5"
@@ -89,11 +75,12 @@ onMounted(() => {
     </template>
     <template v-else>
       <InputText
-        class="h-10 w-full mt-1"
+        class="h-10 mt-1"
         ref="input"
         v-bind="attrs"
         v-model="model"
         :type="props.type"
+        fluid
         @change="emit('change', $event)"
         @blur="emit('blur', $event)"
       />

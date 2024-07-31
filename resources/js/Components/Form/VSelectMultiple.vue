@@ -1,7 +1,7 @@
 <script setup>
-import { useAttrs, ref, onMounted, watch } from 'vue';
+import { useAttrs } from 'vue';
 
-import Select from 'primevue/select';
+import MultiSelect from 'primevue/multiselect';
 
 const model = defineModel();
 
@@ -23,29 +23,9 @@ const props = defineProps({
   message: {
     type: String,
   },
-  autofocus: {
-    type: Boolean,
-    default: false,
-  },
 });
-
-watch(
-  () => props.options,
-  async (newValue, _) => {
-    if (!newValue.find((v) => v.value.toString() === model.value)) {
-      model.value = '';
-    }
-  },
-);
 
 const emit = defineEmits(['change', 'blur']);
-const input = ref(null);
-
-onMounted(() => {
-  if (props.autofocus) {
-    input.value.focus();
-  }
-});
 </script>
 
 <template>
@@ -54,14 +34,21 @@ onMounted(() => {
       {{ props.label }}
     </Label>
 
-    <Select
+    <MultiSelect
       class="w-full h-10 mt-1"
-      v-bind="attrs"
       v-model="model"
-      ref="input"
-      optionLabel="text"
+      v-bind="attrs"
       :options="options"
-    />
+      filter
+      optionLabel="text"
+      :maxSelectedLabels="3"
+    >
+      <template #optiongroup="slotProps">
+        <div class="flex items-center">
+          <div>{{ slotProps.option.text }}</div>
+        </div>
+      </template>
+    </MultiSelect>
 
     <div v-show="message">
       <p class="text-sm text-red-600">

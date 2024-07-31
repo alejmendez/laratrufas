@@ -98,7 +98,7 @@ const remove_supply = (index) => {
 };
 </script>
 
-<style scoped>
+<style>
 .btn-status {
   margin-right: 20px;
 }
@@ -142,6 +142,12 @@ const remove_supply = (index) => {
   background-color: #bd2d3b;
   border-color: #bd2d3b;
 }
+
+textarea.p-textarea.comment {
+  margin-top: 0;
+  border-radius: 0;
+  border: none;
+}
 </style>
 
 <template>
@@ -152,8 +158,7 @@ const remove_supply = (index) => {
       @click.prevent="form.status = state"
       :label="$t(`task.form.status.options.${state}`)"
       :icon="form.status === state ? 'pi pi-check-square' : 'pi pi-stop'"
-    >
-    </Button>
+    />
   </div>
   <form @submit.prevent="props.submitHandler">
     <CardSection>
@@ -264,43 +269,21 @@ const remove_supply = (index) => {
 
     <CardSection :header-text="t('task.sections.resources')" wrapperClass="">
       <div class="p-6 grid md:grid-cols-2 gap-x-16 gap-y-4 sm:grid-cols-1">
-        <div>
-          <Label class="input-label">
-            {{ $t('task.form.tools.label') }}
-          </Label>
-          <VueMultiselect
-            class="mt-1"
-            v-model="form.tools"
-            :options="props.tools"
-            :multiple="true"
-            :close-on-select="false"
-            :clear-on-select="false"
-            :placeholder="t('generics.please_select')"
-            track-by="value"
-            :customLabel="(o) => o.text"
-          >
-            <span slot="noResult">{{ $t('generics.form.multiselect.not_found') }}</span>
-          </VueMultiselect>
-        </div>
+        <VSelectMultiple
+          class="mt-1"
+          v-model="form.tools"
+          :options="props.tools"
+          :label="$t('task.form.tools.label')"
+          :placeholder="t('generics.please_select')"
+        />
 
-        <div>
-          <Label class="input-label">
-            {{ $t('task.form.machineries.label') }}
-          </Label>
-          <VueMultiselect
-            class="mt-1"
-            v-model="form.machineries"
-            :options="props.machineries"
-            :multiple="true"
-            :close-on-select="false"
-            :clear-on-select="false"
-            :placeholder="t('generics.please_select')"
-            track-by="value"
-            :customLabel="(o) => o.text"
-          >
-            <span slot="noResult">{{ $t('generics.form.multiselect.not_found') }}</span>
-          </VueMultiselect>
-        </div>
+        <VSelectMultiple
+          class="mt-1"
+          v-model="form.machineries"
+          :options="props.machineries"
+          :label="$t('task.form.machineries.label')"
+          :placeholder="t('generics.please_select')"
+        />
       </div>
 
       <div
@@ -353,7 +336,7 @@ const remove_supply = (index) => {
       </div>
 
       <div class="p-6">
-        <Button class="btn btn-secondary border-gray-800" @click.prevent="add_supply">{{ $t('task.buttons.add_supply') }}</Button>
+        <Button @click.prevent="add_supply" :label="$t('task.buttons.add_supply')" />
       </div>
     </CardSection>
 
@@ -361,7 +344,7 @@ const remove_supply = (index) => {
       <VInput
         id="comments"
         type="textarea"
-        class="mt-0 min-h-36"
+        class="min-h-36 comment"
         v-model="form.comments"
         :placeholder="t('task.form.comments.placeholder')"
         :message="form.errors.comments"

@@ -48,30 +48,19 @@ const dateRenderText = (m) => {
         :renderText="dateRenderText"
         :label="t('harvest.form.date.label')"
         :message="form.errors.date"
+        dateFormat="'Semana' dd/mm/yy"
+
       />
 
-      <div>
-        <Label class="input-label">
-          {{ $t('harvest.form.quarter_ids.label') }}
-        </Label>
-
-        <VueMultiselect
-          class="mt-1"
-          v-model="form.quarter_ids"
-          :options="props.quarters"
-          :multiple="true"
-          :close-on-select="false"
-          :clear-on-select="false"
-          :placeholder="t('generics.please_select')"
-          :group-select="true"
-          group-values="quarters"
-          group-label="field"
-          track-by="value"
-          :customLabel="(o) => o.text"
-        >
-          <span slot="noResult">{{ $t('generics.form.multiselect.not_found') }}</span>
-        </VueMultiselect>
-      </div>
+      <VSelectMultiple
+        class="mt-1"
+        v-model="form.quarter_ids"
+        optionGroupLabel="text"
+        optionGroupChildren="items"
+        :options="props.quarters"
+        :label="$t('harvest.form.quarter_ids.label')"
+        :placeholder="t('generics.please_select')"
+      />
 
       <VInput
         id="batch"
