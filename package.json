@@ -6,40 +6,31 @@
         "dev": "vite",
         "format": "npx @biomejs/biome format --write ./resources/js"
     },
-    "devDependencies": {
+    "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.5.1",
         "@fortawesome/free-brands-svg-icons": "^6.5.1",
         "@fortawesome/free-regular-svg-icons": "^6.5.1",
         "@fortawesome/free-solid-svg-icons": "^6.5.1",
         "@fortawesome/vue-fontawesome": "latest-3",
         "@inertiajs/vue3": "^1.0.15",
+        "@primevue/themes": "^4.0.2",
         "@tailwindcss/forms": "^0.5.7",
         "@vitejs/plugin-vue": "^5.0.4",
-        "@vueuse/core": "^10.9.0",
         "autoprefixer": "^10.4.19",
         "axios": "^1.6.8",
-        "class-variance-authority": "^0.7.0",
-        "clsx": "^2.1.0",
+        "date-fns": "^3.6.0",
         "laravel-vite-plugin": "^1.0.2",
-        "lucide-vue-next": "^0.363.0",
         "postcss": "^8.4.38",
-        "radix-vue": "^1.6.1",
-        "sweetalert2": "^11.10.7",
-        "tailwind-merge": "^2.2.2",
-        "tailwindcss": "^3.4.3",
-        "tailwindcss-animate": "^1.0.7",
-        "v-calendar": "^3.1.2",
-        "vite": "^5.2.7",
-        "vue": "^3.4.21",
-        "vue-i18n": "^9.10.2",
-        "vue-the-mask": "^0.11.1",
-        "vue-toastification": "^2.0.0-rc.5"
-    },
-    "dependencies": {
-        "@primevue/themes": "^4.0.2",
         "primeicons": "^7.0.0",
         "primevue": "^4.0.2",
+        "sweetalert2": "^11.10.7",
+        "tailwindcss": "^3.4.3",
+        "vite": "^5.2.7",
+        "vue-i18n": "^9.10.2",
         "vue-multiselect": "^3.0.0-beta.3",
-        "vue-qrcode-reader": "^5.5.3"
+        "vue-qrcode-reader": "^5.5.3",
+        "vue-the-mask": "^0.11.1",
+        "vue-toastification": "^2.0.0-rc.5",
+        "vue": "^3.4.21"
     }
 }
