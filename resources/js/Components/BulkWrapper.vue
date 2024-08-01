@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 
-import { Button } from '@/Components/ui/button';
 import CardSection from '@/Components/CardSection.vue';
 
 const props = defineProps({
