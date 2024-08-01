@@ -63,6 +63,7 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
 
       <Button
         severity="secondary"
+        as="Link"
         :disabled="props.form?.instance.processing"
         :href="props.form?.hrefCancel"
         :label="$t('generics.buttons.cancel')"
