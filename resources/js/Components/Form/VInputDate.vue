@@ -1,5 +1,5 @@
 <script setup>
-import { useAttrs, watch } from 'vue';
+import { useAttrs } from 'vue';
 import { format } from 'date-fns';
 
 import DatePicker from 'primevue/datepicker';
@@ -14,11 +14,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['change', 'blur']);
-
-watch(model, async (newValue, _) => {
-  emit('change', newValue);
-});
+const emit = defineEmits(['change', 'input', 'focus', 'blur', 'keydown']);
 </script>
 
 <template>
@@ -28,8 +24,10 @@ watch(model, async (newValue, _) => {
     v-model="model"
     :dateFormat="props.dateFormat"
     :showIcon="true"
-    :pt="{
-      ptinput: { placeholder: 'asdasd' }
-    }"
+    @update:modelValue="emit('change', $event)"
+    @input="emit('input', $event)"
+    @focus="emit('focus', $event)"
+    @blur="emit('blur', $event)"
+    @keydown="emit('keydown', $event)"
   />
 </template>

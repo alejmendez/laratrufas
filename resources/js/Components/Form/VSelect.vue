@@ -55,9 +55,10 @@ onMounted(() => {
     </Label>
 
     <Select
-      class="w-full h-10 mt-1"
+      class="h-10 mt-1"
       v-bind="attrs"
       v-model="model"
+      fluid
       ref="input"
       optionLabel="text"
       :options="options"

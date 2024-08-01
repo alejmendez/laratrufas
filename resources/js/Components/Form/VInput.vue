@@ -35,7 +35,8 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['change', 'blur']);
+const emit = defineEmits(['change', 'input', 'click', 'focus', 'blur', 'keydown']);
+
 const input = ref(null);
 
 onMounted(() => {
@@ -58,7 +59,10 @@ onMounted(() => {
         ref="input"
         fluid
         @change="emit('change', $event)"
+        @input="emit('input', $event)"
+        @focus="emit('focus', $event)"
         @blur="emit('blur', $event)"
+        @keydown="emit('keydown', $event)"
       />
     </template>
     <template v-else-if="props.type === 'textarea'">
@@ -68,9 +72,13 @@ onMounted(() => {
         v-bind="attrs"
         v-model="model"
         fluid
-        @change="emit('change', $event)"
-        @blur="emit('blur', $event)"
         rows="5"
+        @update:modelValue="emit('change', $event)"
+        @input="emit('input', $event)"
+        @click="emit('click', $event)"
+        @focus="emit('focus', $event)"
+        @blur="emit('blur', $event)"
+        @keydown="emit('keydown', $event)"
       />
     </template>
     <template v-else>
@@ -79,10 +87,14 @@ onMounted(() => {
         ref="input"
         v-bind="attrs"
         v-model="model"
-        :type="props.type"
         fluid
-        @change="emit('change', $event)"
+        :type="props.type"
+        @update:modelValue="emit('change', $event)"
+        @input="emit('input', $event)"
+        @click="emit('click', $event)"
+        @focus="emit('focus', $event)"
         @blur="emit('blur', $event)"
+        @keydown="emit('keydown', $event)"
       />
     </template>
 
