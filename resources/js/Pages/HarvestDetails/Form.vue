@@ -81,31 +81,21 @@ const resetQr = () => {
 
     <div class="mt-20">
       <Button
-        variant="secondary"
         class="w-full text-xl h-16"
-        :disabled="form.processing || hasError"
+        severity="secondary"
+        :loading="form.processing"
+        :disabled="hasError"
         @click="props.submitAndLoadAnother"
-      >
-        <font-awesome-icon
-          class="animate-spin me-1"
-          :icon="['fas', 'circle-notch']"
-          v-show="form.processing"
-        />
-        Guardar y cargar otra
-      </Button>
+        label="Guardar y cargar otra"
+      />
 
       <Button
         class="w-full mt-3 text-xl h-16"
-        :disabled="form.processing || hasError"
+        :loading="form.processing"
+        :disabled="hasError"
         @click="props.submitHandler"
-      >
-        <font-awesome-icon
-          class="animate-spin me-1"
-          :icon="['fas', 'circle-notch']"
-          v-show="form.processing"
-        />
-        Guardar
-      </Button>
+        label="Guardar"
+      />
     </div>
   </form>
 </template>

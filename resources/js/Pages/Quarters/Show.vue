@@ -44,16 +44,15 @@ const deleteHandler = async (id) => {
         :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
       >
         <Button
-          variant="secondary"
+          severity="secondary"
           @click="deleteHandler(data.id)"
-        >
-          {{ $t('generics.actions.delete') }}
-        </Button>
-        <Button as-child>
-          <Link :href="route('quarters.edit', data.id)">
-            {{ $t('generics.actions.edit') }}
-          </Link>
-        </Button>
+          :label="$t('generics.actions.delete')"
+        />
+        <Button
+          as="Link"
+          :href="route('quarters.edit', data.id)"
+          :label="$t('generics.actions.edit')"
+        />
       </HeaderCrud>
 
       <div class="flex place-content-center">

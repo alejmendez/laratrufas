@@ -151,17 +151,19 @@ const dateRenderText = (m) => {
         </div>
       </div>
       <div class="px-6 py-3">
-        <Button variant="secondary" @click.prevent="add_detail">{{ $t('harvest.buttons.add_detail') }}</Button>
+        <Button
+          severity="secondary"
+          @click.prevent="add_detail"
+          :label="$t('harvest.buttons.add_detail')"
+        />
 
         <Button
-          variant="secondary"
-          as-child
           class="ms-3"
-        >
-          <Link :href="route('harvests.create.bulk', { id: form.id })">
-            {{ $t('generics.bulk.button') }}
-          </Link>
-        </Button>
+          as="Link"
+          severity="secondary"
+          :href="route('harvests.create.bulk', { id: form.id })"
+          :label="$t('generics.bulk.button')"
+        />
       </div>
     </CardSection>
   </form>

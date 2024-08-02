@@ -54,27 +54,20 @@ const submitHandler = generateSubmitHandler(form, route('harvests.update', data.
         :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
       >
         <Button
-          :disabled="form.processing"
+          class="btn btn-secondary border-gray-800"
+          :loading="form.processing"
+          :label="$t('generics.buttons.save_edit')"
           @click="submitHandler"
           v-if="submitHandler"
-        >
-          <font-awesome-icon
-            class="animate-spin me-1"
-            :icon="['fas', 'circle-notch']"
-            v-show="form.processing"
-          />
-          {{ $t('generics.buttons.save_edit') }}
-        </Button>
+        />
 
         <Button
-          variant="secondary"
-          as-child
+          as="Link"
+          severity="secondary"
           :disabled="form.processing"
-        >
-          <Link :href="route('harvests.index')">
-            {{ $t('generics.buttons.cancel') }}
-          </Link>
-        </Button>
+          :href="route('harvests.index')"
+          :label="$t('generics.buttons.cancel')"
+        />
       </HeaderCrud>
 
       <FormHarvest

@@ -181,7 +181,11 @@ const remove_vaccine = (index) => {
       </div>
 
       <div class="p-6">
-        <Button class="btn btn-secondary border-gray-800" @click.prevent="add_vaccine">{{ $t('dog.buttons.add_vaccine') }}</Button>
+        <Button
+          class="btn btn-secondary border-gray-800"
+          @click.prevent="add_vaccine"
+          :label="$t('dog.buttons.add_vaccine')"
+        />
       </div>
     </CardSection>
   </form>

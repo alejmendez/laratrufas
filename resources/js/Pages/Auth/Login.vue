@@ -68,14 +68,11 @@ const submit = () => {
             </div>
 
             <div class="block mt-4">
-              <Button :disabled="form.processing" class="w-full">
-                <font-awesome-icon
-                  class="animate-spin me-1"
-                  :icon="['fas', 'circle-notch']"
-                  v-show="form.processing"
-                />
-                {{ $t('auth.login.form.submit') }}
-              </Button>
+              <Button
+                class="w-full"
+                :loading="form.processing"
+                :label="$t('auth.login.form.submit')"
+              />
             </div>
 
             <div class="block mt-4 text-center">
