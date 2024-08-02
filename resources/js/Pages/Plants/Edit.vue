@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 
 import FormPlant from '@/Pages/Plants/Form.vue';
 import { stringToDate } from '@/Utils/date';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -21,26 +22,17 @@ const form = useForm({
   _method: 'PATCH',
   id: data.id,
   name: data.name,
-  plant_type_id: data.plant_type.id.toString(),
+  plant_type_id: props.types.find(a => a.value == data.plant_type.id),
   age: data.age,
   planned_at: stringToDate(data.planned_at),
   nursery_origin: data.nursery_origin,
   code: data.code,
-  field_id: data.field.id.toString(),
-  quarter_id: data.quarter.id.toString(),
+  field_id: props.fields.find(a => a.value == data.field.id),
+  quarter_id: props.quarters.find(a => a.value == data.quarter.id),
   row: data.row,
 });
 
-const submitHandler = () => {
-  form
-    .transform((data) => ({
-      ...data,
-      planned_at: format(data.planned_at, 'yyyy-MM-dd'),
-    }))
-    .post(route('plants.update', data.id), {
-      forceFormData: true,
-    });
-};
+const submitHandler = generateSubmitHandler(form, route('plants.update', data.id));
 </script>
 
 <template>

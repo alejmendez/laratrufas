@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { format } from 'date-fns';
 
 import FormPlant from '@/Pages/Plants/Form.vue';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -25,16 +26,7 @@ const form = useForm({
   row: '',
 });
 
-const submitHandler = () => {
-  form
-    .transform((data) => ({
-      ...data,
-      planned_at: format(data.planned_at, 'yyyy-MM-dd'),
-    }))
-    .post(route('plants.store'), {
-      forceFormData: true,
-    });
-};
+const submitHandler = generateSubmitHandler(form, route('plants.store'));
 </script>
 
 <template>

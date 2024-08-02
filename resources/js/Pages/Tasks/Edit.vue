@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import FormTask from '@/Pages/Tasks/Form.vue';
 
 import { stringToDate } from '@/Utils/date';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -31,10 +32,10 @@ const form = useForm({
   priority: data.priority,
   start_date: stringToDate(data.start_date),
   end_date: stringToDate(data.end_date),
-  field_id: data.field_id.toString(),
-  quarter_id: data.quarter_id.toString(),
-  plant_id: data.plant_id.toString(),
-  responsible_id: data.responsible_id.toString(),
+  field_id: props.fields.find(a => a.value == data.field_id),
+  quarter_id: props.quarters.find(a => a.value == data.quarter_id),
+  plant_id: props.plants.find(a => a.value == data.plant_id),
+  responsible_id: props.responsibles.find(a => a.value == data.responsible_id),
   note: data.note,
   comments: data.comments,
   tools: data.tools.map((t) => ({ value: t.id, text: t.name })),
@@ -42,21 +43,7 @@ const form = useForm({
   supplies: data.supplies,
 });
 
-const submitHandler = () => {
-  form
-    .transform((data) => {
-      return {
-        ...data,
-        start_date: format(data.start_date, 'yyyy-MM-dd'),
-        end_date: format(data.end_date, 'yyyy-MM-dd'),
-        tools: data.tools.map((q) => q.value),
-        machineries: data.machineries.map((q) => q.value),
-      };
-    })
-    .post(route('tasks.update', data.id), {
-      forceFormData: true,
-    });
-};
+const submitHandler = generateSubmitHandler(form, route('tasks.update', data.id));
 </script>
 
 <template>

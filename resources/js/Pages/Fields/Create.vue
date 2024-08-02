@@ -3,6 +3,7 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
 import FormField from '@/Pages/Fields/Form.vue';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -15,11 +16,7 @@ const form = useForm({
   blueprint: null,
 });
 
-const submitHandler = () => {
-  form.post(route('fields.store'), {
-    forceFormData: true,
-  });
-};
+const submitHandler = generateSubmitHandler(form, route('fields.store'));
 </script>
 
 <template>

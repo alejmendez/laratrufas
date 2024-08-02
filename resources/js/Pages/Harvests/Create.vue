@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { format } from 'date-fns';
 
 import FormHarvest from '@/Pages/Harvests/Form.vue';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -23,15 +24,7 @@ const form = useForm({
   assistant_id: '',
 });
 
-const submitHandler = () => {
-  form
-    .transform((data) => ({
-      ...data,
-      date: data.date ? format(data.date, 'yyyy-MM-dd') : null,
-      quarter_ids: data.quarter_ids.map((q) => q.value),
-    }))
-    .post(route('harvests.store'));
-};
+const submitHandler = generateSubmitHandler(form, route('harvests.store'));
 </script>
 
 <template>

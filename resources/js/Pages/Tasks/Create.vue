@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { format } from 'date-fns';
 
 import FormTask from '@/Pages/Tasks/Form.vue';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -38,19 +39,7 @@ const form = useForm({
   }],
 });
 
-const submitHandler = () => {
-  form
-    .transform((data) => ({
-      ...data,
-      start_date: format(data.start_date, 'yyyy-MM-dd'),
-      end_date: format(data.end_date, 'yyyy-MM-dd'),
-      tools: data.tools.map((q) => q.value),
-      machineries: data.machineries.map((q) => q.value),
-    }))
-    .post(route('tasks.store'), {
-      forceFormData: true,
-    });
-};
+const submitHandler = generateSubmitHandler(form, route('tasks.store'));
 </script>
 
 <template>

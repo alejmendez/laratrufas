@@ -3,7 +3,8 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { format } from 'date-fns';
 
-import FormTool from '@/Pages/Tools/Form.vue';
+import FormMachineries from '@/Pages/Machineries/Form.vue';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -16,19 +17,7 @@ const form = useForm({
   contact: null,
 });
 
-const submitHandler = () => {
-  form
-    .transform((data) => {
-      return {
-        ...data,
-        purchase_date: format(data.purchase_date, 'yyyy-MM-dd'),
-        last_maintenance: format(data.last_maintenance, 'yyyy-MM-dd'),
-      };
-    })
-    .post(route('machineries.store'), {
-      forceFormData: true,
-    });
-};
+const submitHandler = generateSubmitHandler(form, route('machineries.store'));
 </script>
 
 <template>
@@ -40,7 +29,7 @@ const submitHandler = () => {
         :breadcrumbs="[{ to: 'machineries.index', text: t('machinery.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
         :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('machineries.index') }"
       />
-      <FormTool
+      <FormMachineries
         :form="form"
         :submitHandler="submitHandler"
       />

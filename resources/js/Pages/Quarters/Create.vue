@@ -3,6 +3,7 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
 import FormQuarter from '@/Pages/Quarters/Form.vue';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -16,16 +17,12 @@ const form = useForm({
   location: null,
   area: null,
   plants_count: 0,
-  field_id: '',
-  responsible_id: '',
+  field_id: null,
+  responsible_id: null,
   blueprint: null,
 });
 
-const submitHandler = () => {
-  form.post(route('quarters.store'), {
-    forceFormData: true,
-  });
-};
+const submitHandler = generateSubmitHandler(form, route('quarters.store'));
 </script>
 
 <template>

@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import FormDog from '@/Pages/Dogs/Form.vue';
 
 import { stringToDate, getAge } from '@/Utils/date';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -32,33 +33,24 @@ const form = useForm({
   birthdate: stringToDate(data.birthdate),
   age: getAge(data.birthdate),
   veterinary: data.veterinary,
-  couple_id: data.couple.id.toString(),
+  couple_id: props.couples.find(a => a.value == data.couple.id),
   avatar: data.avatar,
   avatarRemove: false,
-  field_id: data.field.id.toString(),
-  quarter_id: data.quarter.id.toString(),
+  field_id: props.fields.find(a => a.value == data.field.id),
+  quarter_id: props.quarters.find(a => a.value == data.quarter.id),
   vaccines,
 });
 
-const submitHandler = () => {
-  form
-    .transform((data) => {
-      const birthdate = format(data.birthdate, 'yyyy-MM-dd');
-      const vaccines = data.vaccines.map((v) => ({
-        name: v.name,
-        date: format(v.date, 'yyyy-MM-dd'),
-        code: v.code,
-      }));
-      return {
-        ...data,
-        birthdate,
-        vaccines,
-      };
-    })
-    .post(route('dogs.update', data.id), {
-      forceFormData: true,
-    });
-};
+const submitHandler = generateSubmitHandler(form, route('dogs.update', data.id), (data) => {
+  return {
+    ...data,
+    vaccines: data.vaccines.map((v) => ({
+      name: v.name,
+      date: format(v.date, 'yyyy-MM-dd'),
+      code: v.code,
+    })),
+  };
+});
 </script>
 
 <template>

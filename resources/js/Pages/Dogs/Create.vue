@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { format } from 'date-fns';
 
 import FormDog from '@/Pages/Dogs/Form.vue';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -33,25 +34,16 @@ const form = useForm({
   ],
 });
 
-const submitHandler = () => {
-  form
-    .transform((data) => {
-      const birthdate = format(data.birthdate, 'yyyy-MM-dd');
-      const vaccines = data.vaccines.map((v) => ({
-        name: v.name,
-        date: format(v.date, 'yyyy-MM-dd'),
-        code: v.code,
-      }));
-      return {
-        ...data,
-        birthdate,
-        vaccines,
-      };
-    })
-    .post(route('dogs.store'), {
-      forceFormData: true,
-    });
-};
+const submitHandler = generateSubmitHandler(form, route('dogs.store'), (data) => {
+  return {
+    ...data,
+    vaccines: data.vaccines.map((v) => ({
+      name: v.name,
+      date: format(v.date, 'yyyy-MM-dd'),
+      code: v.code,
+    })),
+  };
+});
 </script>
 
 <template>

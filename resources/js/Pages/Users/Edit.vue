@@ -3,6 +3,7 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
 import FormUser from '@/Pages/Users/Form.vue';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -22,16 +23,12 @@ const form = useForm({
   email: data.email,
   phone: data.phone,
   password: data.password,
-  role: data.role.name,
+  role: props.roles.find(a => a.value == data.role.name),
   avatar: data.avatar,
   avatarRemove: false,
 });
 
-const submitHandler = () => {
-  form.post(route('users.update', data.id), {
-    forceFormData: true,
-  });
-};
+const submitHandler = generateSubmitHandler(form, route('users.update', data.id));
 </script>
 
 <template>

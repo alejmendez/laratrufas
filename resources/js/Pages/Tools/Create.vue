@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { format } from 'date-fns';
 
 import FormTool from '@/Pages/Tools/Form.vue';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -16,19 +17,7 @@ const form = useForm({
   contact: null,
 });
 
-const submitHandler = () => {
-  form
-    .transform((data) => {
-      return {
-        ...data,
-        purchase_date: format(data.purchase_date, 'yyyy-MM-dd'),
-        last_maintenance: format(data.last_maintenance, 'yyyy-MM-dd'),
-      };
-    })
-    .post(route('tools.store'), {
-      forceFormData: true,
-    });
-};
+const submitHandler = generateSubmitHandler(form, route('tools.store'));
 </script>
 
 <template>

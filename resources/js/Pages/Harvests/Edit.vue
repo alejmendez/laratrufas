@@ -6,6 +6,7 @@ import { format, getWeek } from 'date-fns';
 import FormHarvest from '@/Pages/Harvests/Form.vue';
 
 import { stringToDate } from '@/Utils/date';
+import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -26,9 +27,9 @@ const form = useForm({
   date: stringToDate(data.date),
   batch: data.batch,
   quarter_ids: data.quarters.map((q) => ({ value: q.id, text: q.name })),
-  dog_id: data.dog.id + '',
-  farmer_id: data.farmer.id + '',
-  assistant_id: data.assistant.id + '',
+  dog_id: props.dogs.find(a => a.value == data.dog.id),
+  farmer_id: props.users.find(a => a.value == data.farmer.id),
+  assistant_id: props.users.find(a => a.value == data.assistant.id),
   details: data.details.length
     ? data.details
     : [
@@ -41,15 +42,7 @@ const form = useForm({
       ],
 });
 
-const submitHandler = () => {
-  form
-    .transform((data) => ({
-      ...data,
-      date: data.date ? format(data.date, 'yyyy-MM-dd') : null,
-      quarter_ids: data.quarter_ids.map((q) => q.value),
-    }))
-    .post(route('harvests.update', data.id));
-};
+const submitHandler = generateSubmitHandler(form, route('harvests.update', data.id));
 </script>
 
 <template>
