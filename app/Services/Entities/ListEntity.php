@@ -40,13 +40,15 @@ class ListEntity
     }
 
     protected static function quarterMultiselect() {
-        return \App\Models\Quarter::with('field')
-            ->orderBy('name')
+        return \App\Models\Quarter::leftJoin('fields', 'quarters.field_id', '=', 'fields.id')
+            ->select('fields.id as field_id', 'fields.name as field_name', 'quarters.id', 'quarters.name')
+            ->orderBy('fields.name')
+            ->orderBy('quarters.name')
             ->get()
-            ->groupBy('field.name')
+            ->groupBy('field_id')
             ->map(function($group, $fieldName) {
                 return [
-                    'text' => $fieldName,
+                    'text' => $group[0]->field_name,
                     'items' => collect($group)->map(function($quarter) {
                         return [
                             'value' => $quarter->id,

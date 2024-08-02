@@ -112,7 +112,7 @@ class HarvestsController extends Controller
 
         return Inertia::render('Harvests/Edit', [
             'data' => new HarvestResource($harvest),
-            'quarters' => ListEntity::call('quarter'),
+            'quarters' => ListEntity::call('quarterMultiselect'),
             'dogs' => ListEntity::call('dog'),
             'users' => ListEntity::call('user'),
             'plant_codes' => ListEntity::call('plant'),

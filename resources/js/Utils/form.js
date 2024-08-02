@@ -1,16 +1,16 @@
 import { format } from 'date-fns';
 
-export const generateSubmitHandler = (form, url, transform) => {
+export const generateSubmitHandler = (form, url, postProcessFunction) => {
   return () => {
     form
-      .transform((data) => formTransform(data, transform))
+      .transform((data) => formTransform(data, postProcessFunction))
       .post(url, {
         forceFormData: true,
       });
   }
 };
 
-export const formTransform = (data, transform) => {
+export const formTransform = (data, postProcessFunction) => {
   const transformValue = (value) => {
     if (typeof value === 'string' || typeof value === 'number') {
       return value;
@@ -24,13 +24,13 @@ export const formTransform = (data, transform) => {
     return value; // Devuelve el valor sin cambios si no coincide con ningún caso
   };
 
-  let transformedData = Object.keys(data).reduce((acc, key) => {
+  const transformedData = Object.keys(data).reduce((acc, key) => {
     acc[key] = transformValue(data[key]);
     return acc;
   }, {});
 
-  if (transform) {
-    transformedData = transform(transform);
+  if (typeof postProcessFunction === 'function') {
+    return postProcessFunction(transformedData);
   }
 
   return transformedData;

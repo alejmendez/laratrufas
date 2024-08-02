@@ -20,14 +20,22 @@ const props = defineProps({
 });
 
 const form = props.form;
-const date_rendered = ref('');
+
+const dateRenderText = (m) => {
+  const start = format(startOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
+  const end = format(endOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
+  const week = getWeek(m, { weekStartsOn: 1 });
+  return t('harvest.form.date.renderText', { week, start, end });
+};
+
+const date_rendered = ref(form.date ? dateRenderText(form.date) : '');
 const show_modal_datepicker = ref(false);
 
 const add_detail = () => {
   form.details.push({
     id: null,
     plant_code: form.details[form.details.length - 1].plant_code,
-    quality: '',
+    quality: null,
     weight: null,
   });
 };
@@ -43,13 +51,6 @@ const handler_date_focus = () => {
 const handler_date_selected = () => {
   show_modal_datepicker.value = false;
   date_rendered.value = dateRenderText(form.date)
-};
-
-const dateRenderText = (m) => {
-  const start = format(startOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
-  const end = format(endOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
-  const week = getWeek(m, { weekStartsOn: 1 });
-  return t('harvest.form.date.renderText', { week, start, end });
 };
 </script>
 
