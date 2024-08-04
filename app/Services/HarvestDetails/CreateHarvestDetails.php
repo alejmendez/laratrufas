@@ -15,11 +15,13 @@ class CreateHarvestDetails
     {
         $plant = FindPlantByCode::call($data['plant_code']);
 
-        $data['harvest_id'] = Harvest::latest()->first()->id;
-        $data['plant_id'] = $plant->id;
-        $data['quality'] = Str::slug($data['quality']);
+        $harvest = new HarvestDetail;
+        $harvest->harvest_id = Harvest::latest()->first()->id;
+        $harvest->plant_id = $plant->id;
+        $harvest->quality = Str::slug($data['quality']);
+        $harvest->weight = $data['weight'];
+        $harvest->save();
 
-        $harvest = HarvestDetail::create($data);
         return $harvest;
     }
 }

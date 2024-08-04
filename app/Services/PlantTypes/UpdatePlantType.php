@@ -6,11 +6,14 @@ use App\Models\PlantType;
 
 class UpdatePlantType
 {
-    public static function call($id, $data): PlantType
+    public static function call($id, $name): PlantType
     {
-        unset($data['id']);
+        $slug = Str::slug($name);
+
         $type = PlantType::findOrFail($id);
-        $type->update($data);
+        $type->name = $name;
+        $type->slug = $slug;
+        $type->save();
 
         return $type;
     }

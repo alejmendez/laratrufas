@@ -8,6 +8,6 @@ class FindPlantByCode
 {
     public static function call($code)
     {
-        return Plant::where('code', trim(strtoupper($code)))->first();
+        return Plant::firstWhere('code', trim(strtoupper($code)));
     }
 }

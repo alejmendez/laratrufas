@@ -8,28 +8,32 @@ class UpdateUser
 {
     public static function call($id, $data): User
     {
-        unset($data['id']);
         $user = User::findOrFail($id);
 
-        if (!$data['avatar']) {
-            unset($data['avatar']);
+        $user->name = $data['name'];
+        $user->last_name = $data['last_name'];
+        $user->dni = $data['dni'];
+        $user->email = $data['email'];
+        $user->phone = $data['phone'];
+
+        if ($data['avatar']) {
+            $user->avatar = $data['avatar'];
         }
 
         if ($data['avatarRemove'] === '1') {
-            $data['avatar'] = null;
+            $user->avatar = null;
         }
 
-        if ($data['password'] == '') {
-            unset($data['password']);
-        } else {
-            $data['password'] = Hash::make($data['password']);
+        if ($data['password'] != '') {
+            $user->password = Hash::make($data['password']);
         }
 
         if ($user->email !== $data['email']) {
-            $data['email_verified_at'] = null;
+            $user->email_verified_at = null;
         }
 
-        $user->update($data);
+        $user->save();
+
         $role = $data['role'] ?? null;
         self::assignRole($user, $role);
 

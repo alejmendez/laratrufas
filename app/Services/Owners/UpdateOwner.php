@@ -8,10 +8,12 @@ class UpdateOwner
 {
     public static function call($id, $data): Owner
     {
-        unset($data['id']);
-        $Owner = Owner::findOrFail($id);
-        $Owner->update($data);
+        $owner = Owner::findOrFail($id);
 
-        return $Owner;
+        $owner->name = $data['name'];
+        $owner->dni = $data['dni'];
+        $owner->save();
+
+        return $owner;
     }
 }

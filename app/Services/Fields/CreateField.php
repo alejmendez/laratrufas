@@ -9,13 +9,20 @@ class CreateField
 {
     public static function call($data): Field
     {
+        $field = new Field;
+
+        $field->name = $data['name'];
+        $field->location = $data['location'];
+        $field->size = $data['size'];
+        $field->blueprint = $data['blueprint'];
+
         if (isset($data['owner_dni'])) {
             $owner = CreateOrUpdateOwner::call($data['owner_dni'], $data['owner_name']);
-            unset($data['owner_dni']);
-            unset($data['owner_name']);
-            $data['owner_id'] = $owner->id;
+            $field->owner_id = $owner->id;
         }
-        $field = Field::create($data);
+
+        $field->save();
+
         return $field;
     }
 }

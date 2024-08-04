@@ -13,7 +13,10 @@ class CreatePlantType
         $slug = Str::slug($name);
         $type = PlantType::where('slug', $slug)->first();
         if (!$type) {
-            $type = PlantType::create(['name' => $name, 'slug' => $slug]);
+            $type = new PlantType;
+            $type->name = $name;
+            $type->slug = $slug;
+            $type->save();
         }
         return $type;
     }

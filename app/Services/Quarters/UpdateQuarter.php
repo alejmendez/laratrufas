@@ -8,18 +8,22 @@ class UpdateQuarter
 {
     public static function call($id, $data): Quarter
     {
-        unset($data['id']);
         $quarter = Quarter::findOrFail($id);
 
-        if (!$data['blueprint']) {
-            unset($data['blueprint']);
+        $quarter->name = $data['name'];
+        $quarter->area = $data['area'];
+        $quarter->field_id = $data['field_id']['value'];
+        $quarter->responsible_id = $data['responsible_id']['value'];
+
+        if ($data['blueprint']) {
+            $quarter->blueprint = $data['blueprint'];
         }
 
         if ($data['blueprintRemove'] === '1') {
-            $data['blueprint'] = null;
+            $quarter->blueprint = null;
         }
 
-        $quarter->update($data);
+        $quarter->save();
 
         return $quarter;
     }

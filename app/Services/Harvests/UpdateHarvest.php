@@ -13,21 +13,24 @@ class UpdateHarvest
 {
     public static function call($id, $data): Harvest
     {
-        unset($data['id']);
-
         $harvest = Harvest::findOrFail($id);
+
+        $harvest->date = $date['date'];
+        $harvest->batch = strtoupper($data['batch']);
+        $harvest->dog_id = $date['dog_id']['value'];
+        $harvest->farmer_id = $date['farmer_id']['value'];
+        $harvest->assistant_id = $date['assistant_id']['value'];
+        $harvest->save();
+
         $harvest->quarters()->sync($data['quarter_ids']);
 
         $details = collect($data['details']);
-        unset($data['details']);
 
         $idDetails = $harvest->details()->pluck('id');
         $idDetailsToDestroy = $idDetails->filter(function ($id, int $key) use ($details) {
             return !$details->firstWhere('id', $id);
         })->toArray();
 
-        $data['batch'] = strtoupper($data['batch']);
-        $harvest->update($data);
         HarvestDetail::destroy($idDetailsToDestroy);
 
         foreach ($details as $detail) {
@@ -36,15 +39,13 @@ class UpdateHarvest
                 continue;
             }
 
-            $detail['harvest_id'] = $harvest->id;
-            $detail['plant_id'] = $plant->id;
-            $detail['quality'] = Str::slug($detail['quality']);
-            if ($detail['id'] === null) {
-                HarvestDetail::create($detail);
-            } else {
-                unset($detail['plant_code']);
-                HarvestDetail::where('id', $detail['id'])->update($detail);
-            }
+            $harvest_detail = HarvestDetail::firstOrNew('id', $detail['id']);
+
+            $harvest_detail->harvest_id = $harvest->id;
+            $harvest_detail->plant_id = $plant->id;
+            $harvest_detail->quality = Str::slug($detail['quality']);
+            $harvest_detail->quality = $detail['weight'];
+            $harvest_detail->save();
         }
 
         return $harvest;

@@ -9,9 +9,15 @@ class CreateUser
 {
     public static function call($data): User
     {
-        $data['password'] = Hash::make($data['password']);
-
-        $user = User::create($data);
+        $user = new User;
+        $user->name = $data['name'];
+        $user->last_name = $data['last_name'];
+        $user->dni = $data['dni'];
+        $user->email = $data['email'];
+        $user->phone = $data['phone'];
+        $user->avatar = $data['avatar'];
+        $user->password = Hash::make($data['password']);
+        $user->save();
 
         if ($data['role']) {
             $user->assignRole($data['role']);
