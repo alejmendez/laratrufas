@@ -1,5 +1,4 @@
 import { Link, Head } from '@inertiajs/vue3';
-import VueMultiselect from 'vue-multiselect';
 
 import VInput from '@/Components/Form/VInput.vue';
 import VSelect from '@/Components/Form/VSelect.vue';
@@ -19,7 +18,6 @@ import Checkbox from '@/Components/Form/Checkbox.vue';
 export const initComponent = (app) => {
   app.component('Head', Head);
   app.component('Link', Link);
-  app.component('VueMultiselect', VueMultiselect);
   app.component('VSelectMultiple', VSelectMultiple);
 
   app.component('VInput', VInput);

@@ -294,7 +294,7 @@ textarea.p-textarea.comment {
           :id="`supplies_name_${index}`"
           v-model="supply.name"
           :label="t('task.form.supplies.name.label')"
-          :message="form.errors.supplies? form.errors.supplies[index].name : ''"
+          :message="form.errors[`supplies.${index}.name`]"
         />
         <!-- class="col-span-4" -->
         <div class="grid grid-cols-10">
@@ -303,7 +303,7 @@ textarea.p-textarea.comment {
               :id="`supplies_brand_${index}`"
               v-model="supply.brand"
               :label="t('task.form.supplies.brand.label')"
-              :message="form.errors.supplies? form.errors.supplies[index].brand : ''"
+              :message="form.errors[`supplies.${index}.brand`]"
             />
             <VInput
               :id="`supplies_quantity_${index}`"
@@ -313,7 +313,7 @@ textarea.p-textarea.comment {
               max="2000"
               step="0.01"
               :label="t('task.form.supplies.quantity.label')"
-              :message="form.errors.supplies? form.errors.supplies[index].quantity : ''"
+              :message="form.errors[`supplies.${index}.quantity`]"
             />
 
             <VSelect
@@ -322,7 +322,7 @@ textarea.p-textarea.comment {
               :placeholder="t('generics.please_select')"
               :options="units"
               :label="t('task.form.supplies.unit.label')"
-              :message="form.errors.unit"
+              :message="form.errors[`supplies.${index}.unit`]"
             />
           </div>
           <div class="pt-8" v-if="index !== 0">

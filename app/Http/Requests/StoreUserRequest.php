@@ -30,7 +30,7 @@ class StoreUserRequest extends FormRequest
             'dni' => ['required', 'regex:/^\d?\d\.\d{3}\.\d{3}\-[\d|k|K]$/', Rule::unique('users')],
             'phone' => 'required|min:11|max:20',
             'password' => ['required', Password::min(6)],
-            'role' => ['required'],
+            'role.value' => ['required'],
             'avatar' => '',
             'avatarRemove' => 'boolean',
         ];

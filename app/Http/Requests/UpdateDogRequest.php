@@ -29,16 +29,16 @@ class UpdateDogRequest extends FormRequest
                 'required',
                 Rule::in(['M', 'F']),
             ],
-            'birthdate' => 'required|date_format:Y-m-d',
-            'quarter_id' => 'required|exists:quarters,id',
+            'birthdate' => 'required|date',
+            'quarter_id.value' => 'required|exists:quarters,id',
             'veterinary' => 'required|max:80',
-            'couple_id' => 'required|exists:users,id',
+            'couple_id.value' => 'required|exists:users,id',
             'avatar' => '',
             'avatarRemove' => 'boolean',
             'vaccines.*.id' => 'nullable',
-            'vaccines.*.name' => 'max:80|nullable',
-            'vaccines.*.date' => 'date_format:Y-m-d|nullable',
-            'vaccines.*.code' => 'max:80|nullable',
+            'vaccines.*.name' => 'max:80',
+            'vaccines.*.date' => 'date',
+            'vaccines.*.code' => 'max:80',
         ];
     }
 }

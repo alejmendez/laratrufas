@@ -114,15 +114,6 @@
   color: #F8F9FA;
 }
 
-.multiselect__tags .multiselect__tag {
-  background: #E9ECEF;
-  color: #343A40;
-  font-weight: 500;
-}
-
-.multiselect__tags .multiselect__tag i.multiselect__tag-icon::after {
-  color: #343A40;
-}
 
 .swal2-modal .swal2-actions .swal2-deny {
   color: #333 !important;

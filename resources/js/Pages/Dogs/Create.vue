@@ -37,9 +37,9 @@ const form = useForm({
 const submitHandler = generateSubmitHandler(form, route('dogs.store'), (data) => {
   return {
     ...data,
-    vaccines: data.vaccines.map((v) => ({
+    vaccines: data.vaccines.filter((v) => v.name || v.date || v.code).map((v) => ({
       name: v.name,
-      date: format(v.date, 'yyyy-MM-dd'),
+      date: v.date,
       code: v.code,
     })),
   };

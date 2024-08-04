@@ -24,8 +24,8 @@ class UpdateQuarterRequest extends FormRequest
         return [
             'name' => 'required|max:80',
             'area' => 'required|numeric|between:0,2000',
-            'field_id' => 'required|exists:fields,id',
-            'responsible_id' => 'required|exists:users,id',
+            'field_id.value' => 'required|exists:fields,id',
+            'responsible_id.value' => 'required|exists:users,id',
             'blueprint' => '',
             'blueprintRemove' => 'boolean',
         ];

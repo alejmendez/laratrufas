@@ -23,14 +23,14 @@ class UpdatePlantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'plant_type_id' => 'required|exists:plant_types,id',
+            'plant_type_id.value' => 'required|exists:plant_types,id',
             'age' => 'required|numeric|between:0,200',
-            'planned_at' => 'required|date_format:Y-m-d',
+            'planned_at' => 'required|date',
             'nursery_origin' => 'required|max:80',
             'code' => ['required', 'max:12', Rule::unique('plants')->ignore($this->id)],
             'row' => 'required|max:2',
-            'field_id' => 'required|exists:fields,id',
-            'quarter_id' => 'required|exists:quarters,id',
+            'field_id.value' => 'required|exists:fields,id',
+            'quarter_id.value' => 'required|exists:quarters,id',
         ];
     }
 }

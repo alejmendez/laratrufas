@@ -24,8 +24,8 @@ class StoreMachineryRequest extends FormRequest
     {
         return [
             'name' => 'required|max:80',
-            'purchase_date' => 'required|date_format:Y-m-d',
-            'last_maintenance' => 'required|date_format:Y-m-d',
+            'purchase_date' => 'required|date',
+            'last_maintenance' => 'required|date',
             'purchase_location' => 'required|max:80',
             'type' => 'required|max:80',
             'contact' => 'required|max:80',

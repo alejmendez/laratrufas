@@ -22,7 +22,7 @@ class BulkHarvestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'harvest_id' => 'required|exists:harvests,id',
+            'harvest_id.value' => 'required|exists:harvests,id',
             'bulk_file' => 'required',
         ];
     }

@@ -46,7 +46,7 @@ const submitHandler = generateSubmitHandler(form, route('dogs.update', data.id),
     ...data,
     vaccines: data.vaccines.map((v) => ({
       name: v.name,
-      date: format(v.date, 'yyyy-MM-dd'),
+      date: v.date,
       code: v.code,
     })),
   };

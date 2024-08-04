@@ -22,11 +22,11 @@ class UpdateHarvestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => 'required|date_format:Y-m-d',
+            'date' => 'required|date',
             'batch' => 'required|max:2',
-            'dog_id' => 'required|exists:dogs,id',
-            'farmer_id' => 'required|exists:users,id',
-            'assistant_id' => 'required|exists:users,id',
+            'dog_id.value' => 'required|exists:dogs,id',
+            'farmer_id.value' => 'required|exists:users,id',
+            'assistant_id.value' => 'required|exists:users,id',
             'quarter_ids'   => 'required|array',
             'quarter_ids.*' => 'integer',
             'details.*.id' => '',

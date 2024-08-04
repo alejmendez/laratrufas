@@ -34,6 +34,9 @@ const calculateAge = () => (form.age = getAge(form.birthdate));
 
 const quartersOptions = ref(props.quarters);
 watch(() => form.field_id, async (field_id) => {
+  console.log({
+    field_id: form.field_id,
+  })
   quartersOptions.value = await getDataSelect('quarter', { field_id });
   form.quarter_id = null;
 });
@@ -153,7 +156,7 @@ const remove_vaccine = (index) => {
           :id="`vaccines_name_${index}`"
           v-model="vaccine.name"
           :label="t('dog.form.vaccines.name.label')"
-          :message="form.errors.vaccines? form.errors.vaccines[index].name : ''"
+          :message="form.errors[`vaccines.${index}.name`]"
         />
 
         <div class="grid grid-cols-9 gap-x-16 gap-y-4">
@@ -163,7 +166,7 @@ const remove_vaccine = (index) => {
             v-model="vaccine.date"
             class="col-span-4"
             :label="t('dog.form.vaccines.date.label')"
-            :message="form.errors.vaccines? form.errors.vaccines[index].date : ''"
+            :message="form.errors[`vaccines.${index}.date`]"
             :max-date="new Date()"
           />
 
@@ -172,7 +175,7 @@ const remove_vaccine = (index) => {
             v-model="vaccine.code"
             class="col-span-4"
             :label="t('dog.form.vaccines.code.label')"
-            :message="form.errors.vaccines? form.errors.vaccines[index].code : ''"
+            :message="form.errors[`vaccines.${index}.code`]"
           />
           <div class="pt-8 text-black hover:text-red-500" v-if="index !== 0" @click="remove_vaccine(index)">
             <font-awesome-icon :icon="['fas', 'trash-can']" />

@@ -3,14 +3,14 @@ import { format } from 'date-fns';
 export const generateSubmitHandler = (form, url, postProcessFunction) => {
   return () => {
     form
-      .transform((data) => formTransform(data, postProcessFunction))
+      // .transform((data) => formTransform(data, postProcessFunction))
       .post(url, {
         forceFormData: true,
       });
   }
 };
 
-export const formTransform = (data, postProcessFunction) => {
+export const formTransform = (originalData, postProcessFunction) => {
   const transformValue = (value) => {
     if (typeof value === 'string' || typeof value === 'number') {
       return value;
@@ -23,6 +23,8 @@ export const formTransform = (data, postProcessFunction) => {
     }
     return value; // Devuelve el valor sin cambios si no coincide con ningún caso
   };
+
+  const data = JSON.parse(JSON.stringify(originalData));
 
   const transformedData = Object.keys(data).reduce((acc, key) => {
     acc[key] = transformValue(data[key]);
