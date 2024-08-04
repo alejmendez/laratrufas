@@ -32,13 +32,13 @@ const props = defineProps({
 watch(
   () => props.options,
   async (newValue, _) => {
-    if (!newValue.find((v) => v.value.toString() === model.value)) {
+    if (!newValue.find((v) => v.value === model.value.value)) {
       model.value = '';
     }
   },
 );
 
-const emit = defineEmits(['change', 'blur']);
+// const emit = defineEmits(['change', 'blur']);
 const input = ref(null);
 
 onMounted(() => {
