@@ -1,5 +1,5 @@
 <script setup>
-import { useAttrs, ref, onMounted } from 'vue';
+import { useAttrs, ref, onMounted, computed } from 'vue';
 
 import InputText from 'primevue/inputtext';
 
@@ -39,6 +39,8 @@ const emit = defineEmits(['change', 'input', 'click', 'focus', 'blur', 'keydown'
 
 const input = ref(null);
 
+const isInvalid = computed(() => props.message !== '' && props.message !== undefined)
+
 onMounted(() => {
   if (props.autofocus) {
     input.value.focus();
@@ -58,6 +60,7 @@ onMounted(() => {
         v-model="model"
         ref="input"
         fluid
+        :invalid="isInvalid"
         @change="emit('change', $event)"
         @input="emit('input', $event)"
         @focus="emit('focus', $event)"
@@ -73,6 +76,7 @@ onMounted(() => {
         v-model="model"
         fluid
         rows="5"
+        :invalid="isInvalid"
         @update:modelValue="emit('change', $event)"
         @input="emit('input', $event)"
         @click="emit('click', $event)"
@@ -89,6 +93,7 @@ onMounted(() => {
         v-model="model"
         fluid
         :type="props.type"
+        :invalid="isInvalid"
         @update:modelValue="emit('change', $event)"
         @input="emit('input', $event)"
         @click="emit('click', $event)"
@@ -98,9 +103,9 @@ onMounted(() => {
       />
     </template>
 
-    <div v-show="message">
+    <div v-show="props.message">
       <p class="text-sm text-red-600">
-        {{ message }}
+        {{ props.message }}
       </p>
     </div>
   </div>
