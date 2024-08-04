@@ -23,7 +23,7 @@ class StoreQuarterRequest extends FormRequest
     {
         return [
             'name' => 'required|max:80',
-            'area' => 'required|numeric|between:0,2000',
+            'area' => 'required|numeric|between:0,999',
             'field_id.value' => 'required|exists:fields,id',
             'responsible_id.value' => 'required|exists:users,id',
             'blueprint' => '',
