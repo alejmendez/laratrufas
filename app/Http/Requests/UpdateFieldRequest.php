@@ -24,7 +24,7 @@ class UpdateFieldRequest extends FormRequest
         return [
             'name' => 'required|max:80',
             'location' => 'required|max:100',
-            'size' => 'required|numeric|between:0,2000',
+            'size' => 'required|numeric|between:0,999',
             'owner_dni' => ['required', 'regex:/^\d?\d\.\d{3}\.\d{3}\-[\d|k|K]$/'],
             'owner_name' => 'required|max:80',
             'blueprint' => '',

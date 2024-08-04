@@ -46,7 +46,7 @@ const changeFileHandler = (e) => {
         id="area"
         type="number"
         min="0"
-        max="2000"
+        max="999"
         step="0.01"
         v-model="form.area"
         :label="t('quarter.form.area.label')"
