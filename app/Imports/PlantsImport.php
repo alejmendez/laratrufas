@@ -33,15 +33,15 @@ class PlantsImport implements ToModel, WithHeadingRow, WithValidation, WithEvent
     public function model(array $row)
     {
         $this->rowCount++;
-        return new Plant([
-            'quarter_id'     => $this->quarter_id,
-            'code'           => $row['codigo'],
-            'row'            => $row['hilera'],
-            'age'            => $row['edad'],
-            'plant_type_id'  => $this->getPlantTypeIdByName($row['tipo_de_planta']),
-            'planned_at'     => $row['fecha_de_plantacion'],
-            'nursery_origin' => $row['vivero_de_origen'],
-        ]);
+        $plant = new Plant;
+        $plant->quarter_id = $this->quarter_id;
+        $plant->code = $row['codigo'];
+        $plant->row = $row['hilera'];
+        $plant->age = $row['edad'];
+        $plant->plant_type_id = $this->getPlantTypeIdByName($row['tipo_de_planta']);
+        $plant->planned_at = $row['fecha_de_plantacion'];
+        $plant->nursery_origin = $row['vivero_de_origen'];
+        return $plant;
     }
 
     public function getPlantTypeIdByName($name)

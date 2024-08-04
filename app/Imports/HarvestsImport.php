@@ -40,12 +40,13 @@ class HarvestsImport implements ToModel, WithHeadingRow, WithEvents
 
         $this->rowCount++;
 
-        return new HarvestDetail([
-            'harvest_id' => $this->harvest_id,
-            'plant_id'   => $this->getPlantIdByCode($row['codigo_de_planta']),
-            'quality'    => Str::slug($row['calidad']),
-            'weight'     => $row['peso'],
-        ]);
+        $harvest_detail = new HarvestDetail;
+        $harvest_detail->harvest_id = $this->harvest_id;
+        $harvest_detail->plant_id = $this->getPlantIdByCode($row['codigo_de_planta']);
+        $harvest_detail->quality = Str::slug($row['calidad']);
+        $harvest_detail->weight = $row['peso'];
+
+        return $harvest_detail;
     }
 
     public function getPlantIdByCode($code)

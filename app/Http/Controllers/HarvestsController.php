@@ -158,7 +158,7 @@ class HarvestsController extends Controller
     {
         try {
             $file = request()->file('bulk_file');
-            $harvest_id = $request['harvest_id'];
+            $harvest_id = $request['harvest_id']['value'];
             $result = Excel::import(new HarvestsImport($harvest_id), $file);
             $rowCount = session('rowCount', 0);
             return redirect()

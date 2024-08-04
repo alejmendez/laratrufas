@@ -129,7 +129,7 @@ class PlantsController extends Controller
     {
         try {
             $file = request()->file('bulk_file');
-            $quarter_id = $request['quarter_id'];
+            $quarter_id = $request['quarter_id']['value'];
             $result = Excel::import(new PlantsImport($quarter_id), $file);
             $rowCount = session('rowCount', 0);
             return redirect()
