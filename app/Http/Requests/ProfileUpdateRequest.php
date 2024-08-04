@@ -26,4 +26,18 @@ class ProfileUpdateRequest extends FormRequest
             'avatarRemove' => 'boolean',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'nombre',
+            'last_name' => 'apellidos',
+            'email' => 'correo electrónico',
+            'dni' => 'rut',
+            'phone' => 'teléfono',
+            'password' => 'contraseña',
+            'avatar' => 'foto',
+            'avatarremove' => 'avatarremove',
+        ];
+    }
 }

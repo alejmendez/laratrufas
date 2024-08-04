@@ -1,5 +1,5 @@
 <script setup>
-import { useAttrs } from 'vue';
+import { useAttrs, computed } from 'vue';
 
 import MultiSelect from 'primevue/multiselect';
 
@@ -26,11 +26,16 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['change', 'blur']);
+const isInvalid = computed(() => props.message !== '' && props.message !== undefined)
 </script>
 
 <template>
   <div :class="props.classWrapper">
-    <Label :for="attrs.id" v-if="props.label !== ''">
+    <Label
+      :class="{ 'text-red-600' : isInvalid }"
+      :for="attrs.id"
+      v-if="props.label !== ''"
+    >
       {{ props.label }}
     </Label>
 
@@ -42,6 +47,7 @@ const emit = defineEmits(['change', 'blur']);
       filter
       optionLabel="text"
       :maxSelectedLabels="3"
+      :invalid="isInvalid"
     >
       <template #optiongroup="slotProps">
         <div class="flex items-center">

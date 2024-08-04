@@ -24,11 +24,26 @@ class StoreHarvestRequest extends FormRequest
         return [
             'date' => 'required|date',
             'batch' => 'required|max:2',
+            'dog_id' => 'required',
             'dog_id.value' => 'required|exists:dogs,id',
+            'farmer_id' => 'required',
             'farmer_id.value' => 'required|exists:users,id',
+            'assistant_id' => 'required',
             'assistant_id.value' => 'required|exists:users,id',
-            'quarter_ids'   => 'required|array',
+            'quarter_ids'   => 'required',
             'quarter_ids.*.value' => 'integer',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'date' => 'semana',
+            'batch' => 'batch',
+            'dog_id' => 'perro',
+            'farmer_id' => 'agricultor',
+            'assistant_id' => 'ayudante',
+            'quarter_ids' => 'cuarteles',
         ];
     }
 }

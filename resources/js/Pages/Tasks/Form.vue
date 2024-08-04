@@ -275,6 +275,7 @@ textarea.p-textarea.comment {
           :options="props.tools"
           :label="$t('task.form.tools.label')"
           :placeholder="t('generics.please_select')"
+          :message="form.errors.tools"
         />
 
         <VSelectMultiple
@@ -283,6 +284,7 @@ textarea.p-textarea.comment {
           :options="props.machineries"
           :label="$t('task.form.machineries.label')"
           :placeholder="t('generics.please_select')"
+          :message="form.errors.machineries"
         />
       </div>
 

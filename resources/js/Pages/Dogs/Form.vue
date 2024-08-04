@@ -110,6 +110,7 @@ const remove_vaccine = (index) => {
         :label="t('dog.form.age.label')"
         v-model="form.age"
         readonly
+        :message="form.errors.age"
       />
 
       <VSelect

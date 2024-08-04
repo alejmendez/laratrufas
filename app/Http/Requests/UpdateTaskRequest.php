@@ -28,9 +28,13 @@ class UpdateTaskRequest extends FormRequest
             'priority' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
+            'field_id' => 'required',
             'field_id.value' => 'required|exists:fields,id',
+            'quarter_id' => 'required',
             'quarter_id.value' => 'required|exists:quarters,id',
+            'plant_id' => 'required',
             'plant_id.value' => 'required|exists:plants,id',
+            'responsible_id' => 'required',
             'responsible_id.value' => 'required|exists:users,id',
             'note' => 'nullable|string',
             'comments' => 'nullable|string',
@@ -44,6 +48,30 @@ class UpdateTaskRequest extends FormRequest
             'supplies.*.brand' => 'required_with:supplies|string|max:255',
             'supplies.*.quantity' => 'required_with:supplies|numeric|min:0',
             'supplies.*.unit' => 'required_with:supplies|string|max:255',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'nombre',
+            'status' => 'estado',
+            'repeat_number' => 'número de repetición',
+            'repeat_type' => 'tipo de repetición',
+            'priority' => 'prioridad',
+            'start_date' => 'fecha inicio',
+            'end_date' => 'fecha fin',
+            'field_id' => 'campo',
+            'quarter_id' => 'cuartel',
+            'plant_id' => 'planta',
+            'responsible_id' => 'responsable',
+            'comments' => 'comentarios',
+            'tools' => 'herramientas',
+            'machineries' => 'maquinarias',
+            'supplies.*.name' => 'suministros.*.nombre',
+            'supplies.*.brand' => 'suministros.*.marca',
+            'supplies.*.quantity' => 'suministros.*.cantidad',
+            'supplies.*.unit' => 'suministros.*.unidad',
         ];
     }
 }

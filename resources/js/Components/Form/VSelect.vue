@@ -1,5 +1,5 @@
 <script setup>
-import { useAttrs, ref, onMounted, watch } from 'vue';
+import { useAttrs, ref, onMounted, watch, computed } from 'vue';
 
 import Select from 'primevue/select';
 
@@ -38,8 +38,8 @@ watch(
   },
 );
 
-// const emit = defineEmits(['change', 'blur']);
 const input = ref(null);
+const isInvalid = computed(() => props.message !== '' && props.message !== undefined)
 
 onMounted(() => {
   if (props.autofocus) {
@@ -50,7 +50,11 @@ onMounted(() => {
 
 <template>
   <div :class="props.classWrapper">
-    <Label :for="attrs.id" v-if="props.label !== ''">
+    <Label
+      :class="{ 'text-red-600' : isInvalid }"
+      :for="attrs.id"
+      v-if="props.label !== ''"
+    >
       {{ props.label }}
     </Label>
 
@@ -62,6 +66,7 @@ onMounted(() => {
       ref="input"
       optionLabel="text"
       :options="options"
+      :invalid="isInvalid"
     />
 
     <div v-show="message">

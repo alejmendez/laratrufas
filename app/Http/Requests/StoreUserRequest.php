@@ -30,9 +30,25 @@ class StoreUserRequest extends FormRequest
             'dni' => ['required', 'regex:/^\d?\d\.\d{3}\.\d{3}\-[\d|k|K]$/', Rule::unique('users')],
             'phone' => 'required|min:11|max:20',
             'password' => ['required', Password::min(6)],
+            'role' => 'required',
             'role.value' => ['required'],
             'avatar' => '',
             'avatarRemove' => 'boolean',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'nombre',
+            'last_name' => 'apellidos',
+            'email' => 'correo electrónico',
+            'dni' => 'rut',
+            'phone' => 'teléfono',
+            'password' => 'contraseña',
+            'role' => 'perfil',
+            'avatar' => 'foto',
+            'avatarremove' => 'avatarremove',
         ];
     }
 }

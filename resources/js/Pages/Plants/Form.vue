@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import AddPlantType from '@/Pages/Plants/AddPlantType.vue';
@@ -19,13 +19,14 @@ const form = props.form;
 const plant_types = ref(props.types);
 
 const quartersOptions = ref(props.quarters);
-watch(() => form.field_id, async (field_id) => {
-  quartersOptions.value = await getDataSelect('quarter', { field_id });
-  form.quarter_id = null;
-});
 
 const addPlantTypeCallback = (newType) => {
   plant_types.value = [...plant_types.value, { value: newType.id, text: newType.name }];
+};
+
+const handlerChangeFieldId = async () => {
+  quartersOptions.value = await getDataSelect('quarter', { field_id: form.field_id });
+  form.quarter_id = null;
 };
 </script>
 
@@ -39,6 +40,7 @@ const addPlantTypeCallback = (newType) => {
         :options="props.fields"
         :label="t('plant.form.field_id.label')"
         :message="form.errors.field_id"
+        @change="handlerChangeFieldId"
       />
 
       <VSelect
@@ -76,7 +78,7 @@ const addPlantTypeCallback = (newType) => {
           :placeholder="t('generics.please_select')"
           :options="plant_types"
           :label="t('plant.form.plant_type_id.label')"
-          :message="form.errors.type"
+          :message="form.errors.plant_type_id"
         />
         <div class="ms-2" style="margin-top: 28px;">
           <AddPlantType :callback="addPlantTypeCallback" />

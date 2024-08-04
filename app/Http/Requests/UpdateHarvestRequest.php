@@ -24,15 +24,30 @@ class UpdateHarvestRequest extends FormRequest
         return [
             'date' => 'required|date',
             'batch' => 'required|max:2',
+            'dog_id' => 'required',
             'dog_id.value' => 'required|exists:dogs,id',
+            'farmer_id' => 'required',
             'farmer_id.value' => 'required|exists:users,id',
+            'assistant_id' => 'required',
             'assistant_id.value' => 'required|exists:users,id',
-            'quarter_ids'   => 'required|array',
-            'quarter_ids.*' => 'integer',
+            'quarter_ids'   => 'required',
+            'quarter_ids.*.value' => 'integer',
             'details.*.id' => '',
             'details.*.plant_code' => 'exists:plants,code|nullable',
             'details.*.quality' => 'max:30|nullable',
             'details.*.weight' => 'numeric|between:0,99999|nullable',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'date' => 'semana',
+            'batch' => 'batch',
+            'dog_id' => 'perro',
+            'farmer_id' => 'agricultor',
+            'assistant_id' => 'ayudante',
+            'quarter_ids' => 'cuarteles',
         ];
     }
 }

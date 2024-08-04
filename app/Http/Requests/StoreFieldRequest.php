@@ -31,4 +31,16 @@ class StoreFieldRequest extends FormRequest
             'blueprintRemove' => 'boolean',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'nombre',
+            'location' => 'ubicación',
+            'size' => 'superficie',
+            'owner_dni' => 'rut del propietario',
+            'owner_name' => 'nombre del propietario',
+            'blueprint' => 'foto',
+        ];
+    }
 }

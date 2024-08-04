@@ -22,9 +22,20 @@ class BulkPlantRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'field_id' => 'required',
             'field_id.value' => 'required|exists:fields,id',
+            'quarter_id' => 'required',
             'quarter_id.value' => 'required|exists:quarters,id',
             'bulk_file' => 'required',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'field_id' => 'campo',
+            'quarter_id' => 'cuartel',
+            'bulk_file' => 'archivo',
         ];
     }
 }

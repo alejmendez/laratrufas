@@ -24,10 +24,23 @@ class UpdateQuarterRequest extends FormRequest
         return [
             'name' => 'required|max:80',
             'area' => 'required|numeric|between:0,999',
+            'field_id' => 'required',
             'field_id.value' => 'required|exists:fields,id',
+            'responsible_id' => 'required',
             'responsible_id.value' => 'required|exists:users,id',
             'blueprint' => '',
             'blueprintRemove' => 'boolean',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'nombre',
+            'area' => 'superficie',
+            'field_id' => 'campo',
+            'responsible_id' => 'responsable',
+            'blueprint' => 'foto',
         ];
     }
 }

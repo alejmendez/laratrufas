@@ -31,4 +31,16 @@ class UpdateToolRequest extends FormRequest
             'contact' => 'required|max:80',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'nombre',
+            'purchase_date' => 'fecha de compra',
+            'last_maintenance' => 'fecha de última mantención',
+            'purchase_location' => 'lugar de compra',
+            'type' => 'tipo',
+            'contact' => 'contacto',
+        ];
+    }
 }

@@ -22,8 +22,17 @@ class BulkHarvestRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'harvest_id' => 'required',
             'harvest_id.value' => 'required|exists:harvests,id',
             'bulk_file' => 'required',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'harvest_id' => 'cosecha',
+            'bulk_file' => 'archivo',
         ];
     }
 }

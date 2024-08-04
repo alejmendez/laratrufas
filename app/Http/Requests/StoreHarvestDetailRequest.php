@@ -30,4 +30,13 @@ class StoreHarvestDetailRequest extends FormRequest
             'weight' => 'numeric|between:0,99999',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'plant_code' => 'código',
+            'quality' => 'calidad',
+            'weight' => 'peso ',
+        ];
+    }
 }

@@ -73,6 +73,7 @@ const handler_date_selected = () => {
         :options="props.quarters"
         :label="$t('harvest.form.quarter_ids.label')"
         :placeholder="t('generics.please_select')"
+        :message="form.errors.quarter_ids"
       />
 
       <VInput

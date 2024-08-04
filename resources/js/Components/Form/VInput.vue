@@ -50,7 +50,11 @@ onMounted(() => {
 
 <template>
   <div :class="props.classWrapper">
-    <Label :for="attrs.id" v-if="props.label !== ''">
+    <Label
+      :class="{ 'text-red-600' : isInvalid }"
+      :for="attrs.id"
+      v-if="props.label !== ''"
+    >
       {{ props.label }}
     </Label>
 
