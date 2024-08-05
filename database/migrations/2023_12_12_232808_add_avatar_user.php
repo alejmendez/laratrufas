@@ -26,7 +26,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function($table) {
+            $table->dropColumn('dni');
+            $table->dropColumn('last_name');
+            $table->dropColumn('phone');
             $table->dropColumn('avatar');
+            $table->dropColumn('deleted_at');
         });
     }
 };
