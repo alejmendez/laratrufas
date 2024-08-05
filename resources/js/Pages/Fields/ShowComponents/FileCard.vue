@@ -14,7 +14,7 @@ const fieldFile = [
   [t('field.show.file.size'), field.size],
   [t('field.show.file.plants_count'), field.plants_count],
   [t('field.show.file.quarters_count'), field.quarters_count],
-]
+];
 </script>
 
 <template>

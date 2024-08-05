@@ -26,40 +26,35 @@ const props = defineProps({
 
 const form = props.form;
 
-const priorities = [
-  'when_possible',
-  'routine',
-  'important',
-  'urgent',
-].map(p => ({ value: p, text: t('task.form.priority.options.' + p), }));
+const priorities = ['when_possible', 'routine', 'important', 'urgent'].map((p) => ({
+  value: p,
+  text: t('task.form.priority.options.' + p),
+}));
 
-const statesValues = [
-  'to_begin',
-  'started',
-  'stopped',
-  'finished',
-];
+const statesValues = ['to_begin', 'started', 'stopped', 'finished'];
 
-const states = statesValues.map(s => ({ value: s, text: t('task.form.status.options.' + s), }));
+const states = statesValues.map((s) => ({ value: s, text: t('task.form.status.options.' + s) }));
 
-const repeat_types = [
-  'diary',
-  'weekly',
-  'monthly',
-].map(s => ({ value: s, text: t('task.form.repeat_type.options.' + s), }));
+const repeat_types = ['diary', 'weekly', 'monthly'].map((s) => ({ value: s, text: t('task.form.repeat_type.options.' + s) }));
 
 const quarters = ref(props.quarters);
 const plants = ref(props.plants);
 
-watch(() => form.field_id, async (field_id) => {
-  quarters.value = await getDataSelect('quarter', { field_id })
-  form.quarter_id = null;
-});
+watch(
+  () => form.field_id,
+  async (field_id) => {
+    quarters.value = await getDataSelect('quarter', { field_id });
+    form.quarter_id = null;
+  },
+);
 
-watch(() => form.quarter_id, async (quarter_id) => {
-  plants.value = await getDataSelect('plant', { quarter_id })
-  form.plant_id = null;
-});
+watch(
+  () => form.quarter_id,
+  async (quarter_id) => {
+    plants.value = await getDataSelect('plant', { quarter_id });
+    form.plant_id = null;
+  },
+);
 
 const units = [
   'unit',
@@ -81,7 +76,7 @@ const units = [
   'inches',
   'feet',
   'yards',
-].map(u => ({ value: u, text: t('task.form.supplies.unit.options.' + u), }));
+].map((u) => ({ value: u, text: t('task.form.supplies.unit.options.' + u) }));
 
 const add_supply = () => {
   form.supplies.push({

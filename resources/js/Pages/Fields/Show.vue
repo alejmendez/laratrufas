@@ -21,12 +21,7 @@ const props = defineProps({
 const field = props.field.data;
 const harvests = props.harvests;
 
-const tabs = [
-  'file',
-  'logbook',
-  'harvest',
-  'statistics',
-];
+const tabs = ['file', 'logbook', 'harvest', 'statistics'];
 
 const selectTab = (tab) => {
   const url = new URL(window.location.href);

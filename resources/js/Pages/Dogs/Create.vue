@@ -37,11 +37,13 @@ const form = useForm({
 const submitHandler = generateSubmitHandler(form, route('dogs.store'), (data) => {
   return {
     ...data,
-    vaccines: data.vaccines.filter((v) => v.name || v.date || v.code).map((v) => ({
-      name: v.name,
-      date: v.date,
-      code: v.code,
-    })),
+    vaccines: data.vaccines
+      .filter((v) => v.name || v.date || v.code)
+      .map((v) => ({
+        name: v.name,
+        date: v.date,
+        code: v.code,
+      })),
   };
 });
 </script>

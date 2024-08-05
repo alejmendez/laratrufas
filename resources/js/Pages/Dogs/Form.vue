@@ -33,13 +33,16 @@ const genders = [
 const calculateAge = () => (form.age = getAge(form.birthdate));
 
 const quartersOptions = ref(props.quarters);
-watch(() => form.field_id, async (field_id) => {
-  console.log({
-    field_id: form.field_id,
-  })
-  quartersOptions.value = await getDataSelect('quarter', { field_id });
-  form.quarter_id = null;
-});
+watch(
+  () => form.field_id,
+  async (field_id) => {
+    console.log({
+      field_id: form.field_id,
+    });
+    quartersOptions.value = await getDataSelect('quarter', { field_id });
+    form.quarter_id = null;
+  },
+);
 
 const changeFileHandler = (e) => {
   form.avatar = e.fileInput;

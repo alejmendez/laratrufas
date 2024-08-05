@@ -15,11 +15,7 @@ const { data } = props.data;
 
 const gender = t('dog.form.gender.options.' + (data.gender.toLowerCase() === 'm' ? 'male' : 'female'));
 
-const tabs = [
-  'file',
-  'activity',
-  'statistics',
-];
+const tabs = ['file', 'activity', 'statistics'];
 
 const currentTab = ref(tabs[0]);
 

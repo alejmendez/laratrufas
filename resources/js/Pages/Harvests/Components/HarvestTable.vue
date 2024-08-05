@@ -55,7 +55,7 @@ const filterHandler = () => {
     url.searchParams.set('filter_quarter', form.quarter);
   }
   router.get(url);
-}
+};
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, () => {

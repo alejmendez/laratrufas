@@ -31,12 +31,14 @@ const form = useForm({
   comments: null,
   tools: [],
   machineries: [],
-  supplies: [{
-    name: null,
-    brand: null,
-    quantity: null,
-    unit: '',
-  }],
+  supplies: [
+    {
+      name: null,
+      brand: null,
+      quantity: null,
+      unit: '',
+    },
+  ],
 });
 
 const submitHandler = generateSubmitHandler(form, route('tasks.store'));

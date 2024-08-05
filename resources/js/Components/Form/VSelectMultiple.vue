@@ -26,7 +26,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['change', 'blur']);
-const isInvalid = computed(() => props.message !== '' && props.message !== undefined)
+const isInvalid = computed(() => props.message !== '' && props.message !== undefined);
 </script>
 
 <template>

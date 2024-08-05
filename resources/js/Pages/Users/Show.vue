@@ -13,11 +13,7 @@ const props = defineProps({
 
 const { data } = props.data;
 
-const tabs = [
-  'file',
-  'activity',
-  'statistics',
-];
+const tabs = ['file', 'activity', 'statistics'];
 
 const currentTab = ref(tabs[0]);
 

@@ -27,11 +27,11 @@ const form = useForm({
   date: stringToDate(data.date),
   batch: data.batch,
   quarter_ids: data.quarters.map((q) => ({ text: q.name, value: q.id })),
-  dog_id: props.dogs.find(a => a.value == data.dog.id),
-  farmer_id: props.users.find(a => a.value == data.farmer.id),
-  assistant_id: props.users.find(a => a.value == data.assistant.id),
+  dog_id: props.dogs.find((a) => a.value == data.dog.id),
+  farmer_id: props.users.find((a) => a.value == data.farmer.id),
+  assistant_id: props.users.find((a) => a.value == data.assistant.id),
   details: data.details.length
-    ? data.details.map(d => ({ ...d, quality: props.qualities.find((q) => q.value == d.quality) }))
+    ? data.details.map((d) => ({ ...d, quality: props.qualities.find((q) => q.value == d.quality) }))
     : [
         {
           id: null,
@@ -45,8 +45,8 @@ const form = useForm({
 const submitHandler = generateSubmitHandler(form, route('harvests.update', data.id), (data) => {
   return {
     ...data,
-    details: data.details.map(d => ({ ...d, quality: d.quality.value})),
-  }
+    details: data.details.map((d) => ({ ...d, quality: d.quality.value })),
+  };
 });
 </script>
 

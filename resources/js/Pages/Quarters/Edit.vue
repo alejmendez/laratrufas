@@ -22,8 +22,8 @@ const form = useForm({
   location: data.location,
   area: data.area,
   plants_count: data.plants_count,
-  field_id: props.fields.find(a => a.value == data.field.id),
-  responsible_id: props.responsibles.find(a => a.value == data.responsible.id),
+  field_id: props.fields.find((a) => a.value == data.field.id),
+  responsible_id: props.responsibles.find((a) => a.value == data.responsible.id),
   blueprint: data.blueprint,
   blueprintRemove: false,
 });

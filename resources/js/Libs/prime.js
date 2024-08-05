@@ -15,7 +15,7 @@ const AppPreset = definePreset(Lara, {
       700: '{orange.700}',
       800: '{orange.800}',
       900: '{orange.900}',
-      950: '{orange.950}'
+      950: '{orange.950}',
     },
     formField: {
       height: '2.5rem',
@@ -31,8 +31,8 @@ export const initPrime = (app) => {
       options: {
         prefix: 'p',
         darkModeSelector: '.dark-mode',
-        cssLayer: false
-      }
+        cssLayer: false,
+      },
     },
     locale: {
       startsWith: 'Comienza con',
@@ -67,7 +67,20 @@ export const initPrime = (app) => {
       dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
       dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
       dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-      monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      monthNames: [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+      ],
       monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
       chooseYear: 'Elegir año',
       chooseMonth: 'Elegir mes',
@@ -151,7 +164,7 @@ export const initPrime = (app) => {
         zoomOut: 'Alejar',
         rotateRight: 'Girar a la derecha',
         rotateLeft: 'Girar a la izquierda',
-      }
-    }
+      },
+    },
   });
 };

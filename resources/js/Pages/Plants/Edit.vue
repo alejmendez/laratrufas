@@ -22,13 +22,13 @@ const form = useForm({
   _method: 'PATCH',
   id: data.id,
   name: data.name,
-  plant_type_id: props.types.find(a => a.value == data.plant_type.id),
+  plant_type_id: props.types.find((a) => a.value == data.plant_type.id),
   age: data.age,
   planned_at: stringToDate(data.planned_at),
   nursery_origin: data.nursery_origin,
   code: data.code,
-  field_id: props.fields.find(a => a.value == data.field.id),
-  quarter_id: props.quarters.find(a => a.value == data.quarter.id),
+  field_id: props.fields.find((a) => a.value == data.field.id),
+  quarter_id: props.quarters.find((a) => a.value == data.quarter.id),
   row: data.row,
 });
 

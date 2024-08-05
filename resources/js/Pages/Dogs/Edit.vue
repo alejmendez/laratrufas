@@ -33,11 +33,11 @@ const form = useForm({
   birthdate: stringToDate(data.birthdate),
   age: getAge(data.birthdate),
   veterinary: data.veterinary,
-  couple_id: props.couples.find(a => a.value == data.couple.id),
+  couple_id: props.couples.find((a) => a.value == data.couple.id),
   avatar: data.avatar,
   avatarRemove: false,
-  field_id: props.fields.find(a => a.value == data.field.id),
-  quarter_id: props.quarters.find(a => a.value == data.quarter.id),
+  field_id: props.fields.find((a) => a.value == data.field.id),
+  quarter_id: props.quarters.find((a) => a.value == data.quarter.id),
   vaccines,
 });
 

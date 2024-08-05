@@ -23,7 +23,7 @@ const form = useForm({
   email: data.email,
   phone: data.phone,
   password: data.password,
-  role: props.roles.find(a => a.value == data.role.name),
+  role: props.roles.find((a) => a.value == data.role.name),
   avatar: data.avatar,
   avatarRemove: false,
 });

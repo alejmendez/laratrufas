@@ -22,10 +22,13 @@ const form = useForm({
 });
 
 const quartersOptions = ref(props.quarters);
-watch(() => form.field_id, async (field_id) => {
-  quartersOptions.value = await getDataSelect('quarter', { field_id });
-  form.quarter_id = null;
-});
+watch(
+  () => form.field_id,
+  async (field_id) => {
+    quartersOptions.value = await getDataSelect('quarter', { field_id });
+    form.quarter_id = null;
+  },
+);
 
 const submitHandler = () => {
   if (form.field_id === '' || form.quarter_id === '' || form.bulk_file === null) {

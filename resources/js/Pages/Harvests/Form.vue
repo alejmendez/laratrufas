@@ -50,7 +50,7 @@ const handler_date_focus = () => {
 
 const handler_date_selected = () => {
   show_modal_datepicker.value = false;
-  date_rendered.value = dateRenderText(form.date)
+  date_rendered.value = dateRenderText(form.date);
 };
 </script>
 

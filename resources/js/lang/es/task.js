@@ -24,7 +24,7 @@ export default {
         diary: 'Diario',
         weekly: 'Semanalmente',
         monthly: 'Mensualmente',
-      }
+      },
     },
     priority: {
       label: 'Prioridad',
@@ -33,7 +33,7 @@ export default {
         routine: 'Rutinario',
         important: 'Importante',
         urgent: 'Urgente',
-      }
+      },
     },
     status: {
       label: 'Estado',
@@ -42,7 +42,7 @@ export default {
         started: 'Iniciada',
         stopped: 'Detenida',
         finished: 'Terminada',
-      }
+      },
     },
     start_date: {
       label: 'Fecha inicio',
@@ -100,7 +100,7 @@ export default {
           inches: 'Pulgadas (in)',
           feet: 'Pies (ft)',
           yards: 'Yardas (yd)',
-        }
+        },
       },
     },
     comments: {
@@ -119,7 +119,7 @@ export default {
           routine: 'Rutinario',
           important: 'Importante',
           urgent: 'Urgente',
-        }
+        },
       },
       status: {
         label: 'Estado',
@@ -128,7 +128,7 @@ export default {
           started: 'Iniciada',
           stopped: 'Detenida',
           finished: 'Terminada',
-        }
+        },
       },
       start_date: {
         label: 'Fecha inicio',
@@ -177,13 +177,13 @@ export default {
             inches: 'Pulgadas (in)',
             feet: 'Pies (ft)',
             yards: 'Yardas (yd)',
-          }
+          },
         },
       },
       sections: {
         resources: 'Recursos',
         comments: 'Comentarios',
-      }
+      },
     },
     tracking: {
       title: 'Seguimiento',

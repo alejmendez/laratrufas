@@ -39,7 +39,7 @@ watch(
 );
 
 const input = ref(null);
-const isInvalid = computed(() => props.message !== '' && props.message !== undefined)
+const isInvalid = computed(() => props.message !== '' && props.message !== undefined);
 
 onMounted(() => {
   if (props.autofocus) {

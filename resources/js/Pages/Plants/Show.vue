@@ -13,13 +13,7 @@ const props = defineProps({
 
 const { data } = props.data;
 
-const tabs = [
-  'file',
-  'variables',
-  'logs',
-  'harvest',
-  'statistics',
-];
+const tabs = ['file', 'variables', 'logs', 'harvest', 'statistics'];
 
 const currentTab = ref(tabs[0]);
 
@@ -30,7 +24,7 @@ const dataFile = [
   [t('plant.show.file.age'), data.age],
   [t('plant.show.file.planned_at'), stringToFormat(data.planned_at)],
   [t('plant.show.file.responsible'), data.responsible.name],
-]
+];
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, () => {
