@@ -23,6 +23,7 @@ class ToolResource extends JsonResource
             'purchase_location' => $this->purchase_location,
             'type' => $this->type,
             'contact' => $this->contact,
+            'note' => $this->note,
         ];
     }
 }

@@ -30,8 +30,12 @@ export default {
     contact: {
       label: 'Contacto',
     },
+    note: {
+      placeholder: 'Ingrese notas adicionales',
+    },
   },
   sections: {
     details: 'Detalles',
+    note: 'Nota',
   },
 };

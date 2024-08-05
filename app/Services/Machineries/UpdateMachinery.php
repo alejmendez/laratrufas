@@ -17,6 +17,7 @@ class UpdateMachinery
         $machinery->purchase_location = $data['purchase_location'];
         $machinery->type = $data['type'];
         $machinery->contact = $data['contact'];
+        $machinery->note = $data['note'];
         $machinery->save();
 
         return $machinery;

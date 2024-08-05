@@ -25,6 +25,7 @@ const form = useForm({
   purchase_location: data.purchase_location,
   type: data.type,
   contact: data.contact,
+  note: data.note,
 });
 
 const submitHandler = generateSubmitHandler(form, route('machineries.update', data.id));

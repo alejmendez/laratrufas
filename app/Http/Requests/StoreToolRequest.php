@@ -29,6 +29,7 @@ class StoreToolRequest extends FormRequest
             'purchase_location' => 'required|max:80',
             'type' => 'required|max:80',
             'contact' => 'required|max:80',
+            'note' => 'max:1000',
         ];
     }
 
@@ -41,6 +42,7 @@ class StoreToolRequest extends FormRequest
             'purchase_location' => 'lugar de compra',
             'type' => 'tipo',
             'contact' => 'contacto',
+            'note' => 'nota',
         ];
     }
 }

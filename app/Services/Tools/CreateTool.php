@@ -16,6 +16,7 @@ class CreateTool
         $tool->purchase_location = $data['purchase_location'];
         $tool->type = $data['type'];
         $tool->contact = $data['contact'];
+        $tool->note = $data['note'];
         $tool->save();
 
         return $tool;

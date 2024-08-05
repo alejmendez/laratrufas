@@ -60,5 +60,16 @@ const form = props.form;
         :message="form.errors.contact"
       />
     </CardSection>
+
+    <CardSection :header-text="t('machinery.sections.note')" wrapperClass="">
+      <VInput
+        id="note"
+        type="textarea"
+        class="min-h-36 mt-0"
+        v-model="form.note"
+        :placeholder="t('machinery.form.note.placeholder')"
+        :message="form.errors.note"
+      />
+    </CardSection>
   </form>
 </template>

@@ -15,6 +15,7 @@ const form = useForm({
   purchase_location: null,
   type: null,
   contact: null,
+  note: null,
 });
 
 const submitHandler = generateSubmitHandler(form, route('tools.store'));
