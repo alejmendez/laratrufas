@@ -72,6 +72,7 @@ const submit = () => {
                 class="w-full"
                 :loading="form.processing"
                 :label="$t('auth.login.form.submit')"
+                @click="submit"
               />
             </div>
 
