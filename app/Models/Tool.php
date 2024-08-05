@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Traits\Orderable;
-use App\Traits\Searchable;
 use App\Traits\Filterable;
 
 use Carbon\Carbon;

@@ -8,16 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use App\Traits\Orderable;
-use App\Traits\Searchable;
 use App\Traits\Filterable;
 
 class Harvest extends Model
 {
-    use HasFactory, Orderable, Searchable, Filterable;
-
-    protected $searchableColumns = [
-        'name',
-    ];
+    use HasFactory, Orderable, Filterable;
 
     public function details(): HasMany
     {

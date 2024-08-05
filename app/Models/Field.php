@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use App\Traits\Orderable;
-use App\Traits\Searchable;
 use App\Traits\Filterable;
 
 class Field extends Model

@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\Orderable;
-use App\Traits\Searchable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
@@ -15,15 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, Orderable, Searchable;
-
-    protected $searchableColumns = [
-        'name',
-        'last_name',
-        'dni',
-        'email',
-        'phone',
-    ];
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, Orderable;
 
     /**
      * The attributes that should be hidden for serialization.

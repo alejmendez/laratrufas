@@ -8,21 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Traits\Orderable;
-use App\Traits\Searchable;
 use App\Traits\Filterable;
 
 use Carbon\Carbon;
 
 class Machinery extends Model
 {
-    use HasFactory, Orderable, Searchable, Filterable;
-
-    protected $searchableColumns = [
-        'name',
-        'purchase_date',
-        'last_maintenance',
-        'purchase_location',
-        'type',
-        'contact',
-    ];
+    use HasFactory, Orderable, Filterable;
 }

@@ -9,15 +9,11 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use App\Traits\Orderable;
-use App\Traits\Searchable;
 use App\Traits\Filterable;
 
 class Plant extends Model
 {
-    use HasFactory, Orderable, Searchable, Filterable;
-
-    protected $searchableColumns = [
-    ];
+    use HasFactory, Orderable, Filterable;
 
     public function quarter(): BelongsTo
     {
