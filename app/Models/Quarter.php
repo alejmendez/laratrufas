@@ -19,16 +19,6 @@ class Quarter extends Model
         'name',
     ];
 
-    protected $fillable = [
-        'name',
-        'location',
-        'area',
-        'planned_at',
-        'blueprint',
-        'field_id',
-        'responsible_id',
-    ];
-
     public function plants(): HasMany
     {
         return $this->hasMany(Plant::class);

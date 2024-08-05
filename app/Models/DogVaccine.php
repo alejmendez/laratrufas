@@ -10,13 +10,6 @@ class DogVaccine extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'date',
-        'code',
-        'dog_id',
-    ];
-
     public function dog(): BelongsTo
     {
         return $this->belongsTo(Dog::class);

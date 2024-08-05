@@ -19,14 +19,6 @@ class Harvest extends Model
         'name',
     ];
 
-    protected $fillable = [
-        'date',
-        'batch',
-        'dog_id',
-        'farmer_id',
-        'assistant_id',
-    ];
-
     public function details(): HasMany
     {
         return $this->hasMany(HarvestDetail::class);

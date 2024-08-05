@@ -51,7 +51,11 @@ class PlantsImport implements ToModel, WithHeadingRow, WithValidation, WithEvent
         if (isset($this->plant_types[$slug])) {
             $plant_type_id = $this->plant_types[$slug];
         } else {
-            $plant_type = PlantType::create(['name' => $name, 'slug' => $slug]);
+            $plant_type = new PlantType;
+            $plant_type->name = $name;
+            $plant_type->slug = $slug;
+            $plant_type->save();
+
             $this->plant_types[$slug] = $plant_type->id;
             $plant_type_id = $plant_type->id;
         }

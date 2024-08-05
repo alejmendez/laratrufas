@@ -17,17 +17,6 @@ class Dog extends Model
 {
     use HasFactory, Orderable, Searchable, Filterable;
 
-    protected $fillable = [
-        'name',
-        'breed',
-        'gender',
-        'birthdate',
-        'veterinary',
-        'quarter_id',
-        'couple_id',
-        'avatar',
-    ];
-
     protected $searchableColumns = [
         'name',
         'breed',

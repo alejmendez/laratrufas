@@ -7,13 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class HarvestDetail extends Model
 {
-    protected $fillable = [
-        'harvest_id',
-        'plant_id',
-        'quality',
-        'weight',
-    ];
-
     public function harvest(): BelongsTo
     {
         return $this->belongsTo(Harvest::class);

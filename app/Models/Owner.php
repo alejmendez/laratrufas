@@ -14,11 +14,6 @@ class Owner extends Model
 {
     use HasFactory, Orderable, Searchable, Filterable;
 
-    protected $fillable = [
-        'name',
-        'dni',
-    ];
-
     public function fields(): HasMany
     {
         return $this->hasMany(Field::class);

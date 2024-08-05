@@ -17,22 +17,6 @@ class Task extends Model
 {
     use HasFactory, Orderable, Searchable, Filterable;
 
-    protected $fillable = [
-        'name',
-        'repeat_number',
-        'repeat_type',
-        'status',
-        'priority',
-        'start_date',
-        'end_date',
-        'field_id',
-        'quarter_id',
-        'plant_id',
-        'responsible_id',
-        'note',
-        'comments',
-    ];
-
     public function field()
     {
         return $this->belongsTo(Field::class);

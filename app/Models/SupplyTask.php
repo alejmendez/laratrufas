@@ -8,10 +8,6 @@ class SupplyTask extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name', 'brand', 'quantity', 'unit', 'task_id'
-    ];
-
     public function task()
     {
         return $this->belongsTo(Task::class);

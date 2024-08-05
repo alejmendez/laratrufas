@@ -17,14 +17,6 @@ class Field extends Model
 {
     use HasFactory, Orderable, Filterable;
 
-    protected $fillable = [
-        'name',
-        'location',
-        'size',
-        'blueprint',
-        'owner_id',
-    ];
-
     public function owner(): BelongsTo
     {
         return $this->belongsTo(Owner::class);
