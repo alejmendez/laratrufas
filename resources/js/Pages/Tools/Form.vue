@@ -11,6 +11,14 @@ const props = defineProps({
 const form = props.form;
 </script>
 
+<style>
+textarea.p-textarea.note {
+  margin-top: 0;
+  border-radius: 0;
+  border: none;
+}
+</style>
+
 <template>
   <form @submit.prevent="props.submitHandler">
     <CardSection :header-text="t('tool.sections.details')">
@@ -65,7 +73,7 @@ const form = props.form;
       <VInput
         id="note"
         type="textarea"
-        class="min-h-36 mt-0"
+        class="min-h-36 note"
         v-model="form.note"
         :placeholder="t('tool.form.note.placeholder')"
         :message="form.errors.note"
