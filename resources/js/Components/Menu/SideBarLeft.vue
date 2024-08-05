@@ -6,11 +6,11 @@ import MenuGroup from './MenuGroup.vue';
 import MenuElement from './MenuElement.vue';
 import { menuElements } from '@/Services/Menu.js';
 
-const { t } = useI18n();
-
 const page = usePage();
+const currentComponent = page.component;
+const userRoles = page.props.auth.user.roles;
 
-const menuData = menuElements(t, page);
+const menuData = menuElements(currentComponent, userRoles);
 const initialState = Array(menuData.length).fill(true);
 const menuState = JSON.parse(localStorage.getItem('menu-state')) || initialState;
 
@@ -26,7 +26,7 @@ const openHandler = (e, index) => {
     <div class="flex flex-col justify-between space-y-[10px] mt-3">
       <MenuElement
         :link="route('dashboard')"
-        :text="t('menu.dashboard')"
+        :text="$t('menu.dashboard')"
         :active="page.component.startsWith('Dashboard')"
         icon="fa-solid fa-square-poll-vertical"
       />
@@ -34,7 +34,7 @@ const openHandler = (e, index) => {
       <MenuGroup
         v-for="(menu, index) in menuData"
         :key="index"
-        :text="menu.text"
+        :text="$t(menu.text)"
         :elements="menu.children"
         :open="menuState[index]"
         @open="openHandler($event, index)"

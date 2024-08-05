@@ -35,21 +35,16 @@ class HandleInertiaRequests extends Middleware
         $user = $request->user();
         $userData = $user;
         if ($user) {
-            $userData = $user->toArray();
-            $userData['full_name'] = $user->full_name;
-            unset(
-                $userData['email_verified_at'],
-                $userData['created_at'],
-                $userData['updated_at'],
-                $userData['deleted_at'],
-                $userData['avatar']
-            );
+            $data = $user->toArray();
 
-            if ($user->avatar === null) {
-                $userData['avatar_url'] = null;
-            } else {
-                $userData['avatar_url'] = Str::startsWith($user->avatar, 'http') ? $user->avatar : Storage::url($user->avatar);
-            }
+            $userData = [
+                'id' => $user->id,
+                'full_name' => $user->full_name,
+                'avatar_url' => $user->avatar === null ? null : (Str::startsWith($user->avatar, 'http') ? $user->avatar : Storage::url($user->avatar)),
+                'dni' => $user->dni,
+                'email' => $user->email,
+                'roles' => collect($user->getRoleNames())->map(fn($role) => Str::slug($role)),
+            ];
         }
         return [
             ...parent::share($request),

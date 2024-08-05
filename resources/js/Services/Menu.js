@@ -1,72 +1,157 @@
-export const menuElements = (t, page) => {
-  return [
+const rolesAvailable = {
+  farmer: 'agricultor',
+  technician: 'tecnico',
+  administrator: 'administrador',
+  super_admin: 'super-admin',
+};
+
+export const menuElements = (currentComponent, userRoles) => {
+  const menuItems = [
     {
-      text: t('menu.management'),
+      text: 'menu.management',
       children: [
         {
           link: route('fields.index'),
-          text: t('menu.fields'),
+          text: 'menu.fields',
           icon: 'fa-solid fa-table-cells',
-          active: page.component.startsWith('Field'),
+          active: currentComponent.startsWith('Field'),
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician],
         },
         {
           link: route('quarters.index'),
-          text: t('menu.quarters'),
+          text: 'menu.quarters',
           icon: 'fa-solid fa-table-cells-large',
-          active: page.component.startsWith('Quarter'),
+          active: currentComponent.startsWith('Quarter'),
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
         },
-        { link: route('plants.index'), text: t('menu.plants'), icon: 'fa-brands fa-envira', active: page.component.startsWith('Plant') },
+        {
+          link: route('plants.index'),
+          text: 'menu.plants',
+          icon: 'fa-brands fa-envira',
+          active: currentComponent.startsWith('Plant'),
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
+        },
       ],
     },
     {
-      text: t('menu.harvest_management'),
+      text: 'menu.harvest_management',
       children: [
         {
           link: route('harvests.index'),
-          text: t('menu.harvest'),
+          text: 'menu.harvest',
           icon: 'fa-solid fa-basket-shopping',
-          active: page.component.startsWith('Harvests'),
+          active: currentComponent.startsWith('Harvests'),
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
         },
         {
           link: route('harvests.details.create'),
-          text: t('menu.harvest_details'),
+          text: 'menu.harvest_details',
           icon: 'fa-solid fa-barcode',
-          active: page.component.startsWith('HarvestDetails'),
+          active: currentComponent.startsWith('HarvestDetails'),
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
         },
-        { link: route('users.index'), text: t('menu.batch'), icon: 'fa-solid fa-table-list' },
-        { link: route('users.index'), text: t('menu.liquidations'), icon: 'fa-solid fa-file-invoice-dollar' },
+        {
+          link: route('users.index'),
+          text: 'menu.batch',
+          icon: 'fa-solid fa-table-list',
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
+        },
+        {
+          link: route('users.index'),
+          text: 'menu.liquidations',
+          icon: 'fa-solid fa-file-invoice-dollar',
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
+        },
       ],
     },
     {
-      text: t('menu.task_management'),
-      children: [{ link: route('tasks.index'), text: t('menu.tasks'), icon: 'fa-solid fa-list-check' }],
-    },
-    {
-      text: t('menu.records'),
+      text: 'menu.task_management',
       children: [
-        { link: route('machineries.index'), text: t('menu.machineries'), icon: 'fa-solid fa-tractor' },
-        { link: route('tools.index'), text: t('menu.tools'), icon: 'fa-solid fa-wrench' },
-        { link: route('users.index'), text: t('menu.suppliers'), icon: 'fa-solid fa-handshake' },
+        {
+          link: route('tasks.index'),
+          text: 'menu.tasks',
+          icon: 'fa-solid fa-list-check',
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
+        },
       ],
     },
     {
-      text: t('menu.reports'),
-      children: [{ link: route('users.index'), text: t('menu.report1') }],
+      text: 'menu.records',
+      children: [
+        {
+          link: route('machineries.index'),
+          text: 'menu.machineries',
+          icon: 'fa-solid fa-tractor',
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician],
+        },
+        {
+          link: route('tools.index'),
+          text: 'menu.tools',
+          icon: 'fa-solid fa-wrench',
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician],
+        },
+        {
+          link: route('users.index'),
+          text: 'menu.suppliers',
+          icon: 'fa-solid fa-handshake',
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician],
+        },
+      ],
     },
     {
-      text: t('menu.settings'),
+      text: 'menu.reports',
       children: [
-        // <font-awesome-icon icon="fa-solid fa-file-arrow-up" />
-        { link: route('users.index'), text: t('menu.users'), icon: 'fa-solid fa-users', active: page.component.startsWith('User') },
-        { link: route('dogs.index'), text: t('menu.dogs'), icon: 'fa-solid fa-dog', active: page.component.startsWith('Dog') },
-        { link: route('users.index'), text: t('menu.alerts'), icon: 'fa-solid fa-triangle-exclamation' },
+        {
+          link: route('users.index'),
+          text: 'menu.report1',
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
+        },
+      ],
+    },
+    {
+      text: 'menu.settings',
+      children: [
+        {
+          link: route('users.index'),
+          text: 'menu.users',
+          icon: 'fa-solid fa-users',
+          active: currentComponent.startsWith('User'),
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
+        },
+        {
+          link: route('dogs.index'),
+          text: 'menu.dogs',
+          icon: 'fa-solid fa-dog',
+          active: currentComponent.startsWith('Dog'),
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
+        },
+        {
+          link: route('users.index'),
+          text: 'menu.alerts',
+          icon: 'fa-solid fa-triangle-exclamation',
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
+        },
         {
           link: route('bulk.index'),
-          text: t('menu.bulk_uploads'),
+          text: 'menu.bulk_uploads',
           icon: 'fa-solid fa-file-arrow-up',
-          active: page.component.startsWith('Bulk'),
+          active: currentComponent.startsWith('Bulk'),
+          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
         },
       ],
     },
   ];
+
+  const menuItemsFiltered = menuItems.map((item) => {
+    const children = item.children.filter((child) => {
+      return child.roles.includes(userRoles[0]);
+    });
+
+    return {
+      ...item,
+      children,
+    };
+  }).filter((item) => item.children.length > 0);
+
+  return menuItemsFiltered;
 };
