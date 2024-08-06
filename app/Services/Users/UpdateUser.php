@@ -34,28 +34,10 @@ class UpdateUser
 
         $user->save();
 
-        $role = $data['role'] ?? null;
-        self::assignRole($user, $role);
+        if ($data['role']) {
+            $user->syncRoles([$data['role']]);
+        }
 
         return $user;
-    }
-
-    protected static function assignRole($user, $role)
-    {
-        if (!$role) {
-            return;
-        }
-
-        $user->getRoleNames()
-            ->filter(function ($name) use ($role) {
-                return $role !== $name;
-            })
-            ->map(function ($name) use ($user) {
-                $user->removeRole($name);
-            });
-
-        if (!$user->hasExactRoles($role)) {
-            $user->assignRole($role);
-        }
     }
 }

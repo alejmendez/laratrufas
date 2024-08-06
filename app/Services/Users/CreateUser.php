@@ -20,7 +20,7 @@ class CreateUser
         $user->save();
 
         if ($data['role']) {
-            $user->assignRole($data['role']);
+            $user->syncRoles([$data['role']]);
         }
 
         return $user;
