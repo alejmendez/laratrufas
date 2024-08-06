@@ -120,32 +120,54 @@ class PlantsController extends Controller
     {
         return Inertia::render('Plants/Bulk/Create', [
             'fields' => ListEntity::call('field'),
-            'alert' => session('alert'),
+            'message_success' => session('message_success', ''),
+            'unprocessed_message' => session('unprocessed_message', ''),
+            'error_message' => session('error_message', ''),
             'errors' => session('errors', []),
         ]);
     }
 
     public function store_bulk(BulkPlantRequest $request)
     {
-        try {
-            $file = request()->file('bulk_file');
-            $quarter_id = $request['quarter_id']['value'];
-            $result = Excel::import(new PlantsImport($quarter_id), $file);
-            $rowCount = session('rowCount', 0);
-            return redirect()
-                ->route('plants.create.bulk')
-                ->with('alert', "La carga de datos ha sido completada con éxito. Se han ingresado $rowCount registros de tipo de datos al sistema. ¡Buen trabajo!");
-        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-            $failures = $e->failures();
-            $errors = [];
-            foreach ($failures as $failure) {
-                foreach ($failure->errors() as $error) {
-                    $errors[] = "Linea {$failure->row()}: {$error}";
-                }
+        $file = request()->file('bulk_file');
+        $quarter_id = $request['quarter_id']['value'];
+
+        $import = new PlantsImport($quarter_id);
+        $import->import($file);
+
+        $errors = [];
+        foreach ($import->failures() as $failure) {
+            foreach ($failure->errors() as $error) {
+                $errors[] = "Linea {$failure->row()}: {$error}";
             }
-            return redirect()->route('plants.create.bulk')->with('errors', $errors);
-        } catch (Exception $e) {
-            return redirect()->route('plants.create.bulk')->with('errors', []);
         }
+
+        $rowCount = $import->getRowCount();
+        $countErrors = count($errors);
+        $numberOfUnprocessedRecords = $import->getNumberOfUnprocessedRecords();
+
+        $message_success = "";
+        if ($countErrors > 0) {
+            $message_success = "Se han ingresado $rowCount registros al sistema y se tienen $countErrors errores.";
+        } else {
+            $message_success = "La carga de datos ha sido completada con éxito. Se han ingresado $rowCount registros de tipo de datos al sistema. ¡Buen trabajo!";
+        }
+
+        $error_message = "";
+        if ($countErrors > 0) {
+            $error_message = "Hay $countErrors errores o advertencias que debes corregir. Puedes ver el detalle de los errores en el resumen de la carga.";
+        }
+
+        $unprocessed_message = "";
+        if ($numberOfUnprocessedRecords > 0) {
+            $unprocessed_message = "Hay $numberOfUnprocessedRecords que no tienen errores pero no fueron procesados porque ya existen.";
+        }
+
+        return redirect()
+            ->route('plants.create.bulk')
+            ->with('message_success', $message_success)
+            ->with('unprocessed_message', $unprocessed_message)
+            ->with('error_message', $error_message)
+            ->with('errors', $errors);
     }
 }

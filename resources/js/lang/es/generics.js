@@ -71,8 +71,5 @@ export default {
     instruction_6: '¡Listo! El sistema te mostrará un mensaje de confirmación y podrás ver los datos cargados en el sistema.',
     instruction_7:
       'Cada fila representa un registro. Respeta el formato y el tipo de datos de cada columna. No modifiques ni elimines las cabeceras ni los nombres de las columnas. No apliques ningún filtro ni orden al archivo, ya que esto puede generar errores en la carga de la información.',
-    alert: 'La carga de datos ha sido completada con éxito. Se han ingresado x registros de tipo de datos al sistema. ¡Buen trabajo!',
-    error:
-      'El sistema no ha podido procesar el archivo de excel. Hay algunos errores o advertencias que debes corregir antes de confirmar la carga. Puedes ver el detalle de los errores en el resumen de la carga.',
   },
 };

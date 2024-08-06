@@ -102,13 +102,13 @@ const selectFile = () => {
         <div class="border p-2 grow h-[40px] truncate rounded-s" :title="filePath">{{ filePath }}</div>
         <Button
           severity="secondary"
-          class="bg-gray-300 text-gray-800 hover:bg-gray-300/80"
+          class="bg-gray-300 text-gray-800 hover:bg-gray-300/80 w-[140px]"
           style="border-end-start-radius:0; border-start-start-radius:0; "
           @click.prevent="selectFile"
           :label="$t('generics.form.file.upload_file')"
         />
       </div>
-      <div class="text-slate-500 text-sm">Las imágenes no debe superar 5 mb</div class="">
+      <div class="text-slate-500 text-sm">Los archivos no debe superar 5 mb</div class="">
       <Button
         severity="secondary"
         v-if="props.withRemove"

@@ -11,7 +11,9 @@ const { t } = useI18n();
 const props = defineProps({
   fields: Array,
   quarters: Array,
-  alert: String,
+  message_success: String,
+  unprocessed_message: String,
+  error_message: String,
   errors: Array,
 });
 
@@ -56,7 +58,9 @@ const changeFileHandler = (e) => {
     />
     <form @submit.prevent="submitHandler">
       <BulkWrapper
-        :alert="props.alert"
+        :message_success="props.message_success"
+        :unprocessed_message="props.unprocessed_message"
+        :error_message="props.error_message"
         :errors="props.errors"
         :title="t('generics.bulk.section_title')"
         downloadRoute="plants.download.bulk.template"

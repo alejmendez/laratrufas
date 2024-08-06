@@ -149,51 +149,54 @@ class HarvestsController extends Controller
         return Inertia::render('Harvests/Bulk/Create', [
             'harvests' => ListEntity::call('harvest'),
             'id' => request('id'),
-            'alert' => session('alert'),
+            'message_success' => session('message_success', ''),
+            'unprocessed_message' => session('unprocessed_message', ''),
+            'error_message' => session('error_message', ''),
             'errors' => session('errors', []),
         ]);
     }
 
     public function store_bulk(BulkHarvestRequest $request)
     {
-        try {
-            $file = request()->file('bulk_file');
-            $harvest_id = $request['harvest_id']['value'];
+        $file = request()->file('bulk_file');
+        $harvest_id = $request['harvest_id']['value'];
 
-            $harvests_import = new HarvestsImport($harvest_id);
-            $harvests_import->import($file);
+        $import = new HarvestsImport($harvest_id);
+        $import->import($file);
 
-            $errors = [];
-            foreach ($harvests_import->failures() as $failure) {
-                foreach ($failure->errors() as $error) {
-                    $errors[] = "Linea {$failure->row()}: {$error}";
-                }
-           }
-
-           $rowCount = $harvests_import->getRowCount();
-           $message_success = "La carga de datos ha sido completada con éxito. Se han ingresado $rowCount registros de tipo de datos al sistema. ¡Buen trabajo!";
-
-           $countErrors = count($errors);
-           if ($countErrors > 0) {
-               $message_success = "Se han ingresado $rowCount registros al sistema y se tienen $countErrors errores.";
-           }
-
-            return redirect()
-                ->route('harvests.create.bulk')
-                ->with('alert', $message_success)
-                ->with('errors', $errors);
-        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-            $failures = $e->failures();
-
-            $errors = [];
-            foreach ($failures as $failure) {
-                foreach ($failure->errors() as $error) {
-                    $errors[] = "Linea {$failure->row()}: {$error}";
-                }
+        $errors = [];
+        foreach ($import->failures() as $failure) {
+            foreach ($failure->errors() as $error) {
+                $errors[] = "Linea {$failure->row()}: {$error}";
             }
-            return redirect()->route('harvests.create.bulk')->with('errors', $errors);
-        } catch (Exception $e) {
-            return redirect()->route('harvests.create.bulk')->with('errors', []);
         }
+
+        $rowCount = $import->getRowCount();
+        $countErrors = count($errors);
+        $numberOfUnprocessedRecords = $import->getNumberOfUnprocessedRecords();
+
+        $message_success = "";
+        if ($countErrors > 0) {
+            $message_success = "Se han ingresado $rowCount registros al sistema y se tienen $countErrors errores.";
+        } else {
+            $message_success = "La carga de datos ha sido completada con éxito. Se han ingresado $rowCount registros de tipo de datos al sistema. ¡Buen trabajo!";
+        }
+
+        $error_message = "";
+        if ($countErrors > 0) {
+            $error_message = "Hay $countErrors errores o advertencias que debes corregir. Puedes ver el detalle de los errores en el resumen de la carga.";
+        }
+
+        $unprocessed_message = "";
+        if ($numberOfUnprocessedRecords > 0) {
+            $unprocessed_message = "Hay $numberOfUnprocessedRecords que no tienen errores pero no fueron procesados porque ya existen.";
+        }
+
+        return redirect()
+            ->route('harvests.create.bulk')
+            ->with('message_success', $message_success)
+            ->with('unprocessed_message', $unprocessed_message)
+            ->with('error_message', $error_message)
+            ->with('errors', $errors);
     }
 }

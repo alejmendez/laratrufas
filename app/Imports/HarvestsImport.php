@@ -9,7 +9,6 @@ use App\Models\HarvestDetail;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
 use App\Services\Plants\FindPlantByCode;
-use Maatwebsite\Excel\Events\AfterImport;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
@@ -23,6 +22,7 @@ class HarvestsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithVal
     use Importable, SkipsFailures;
 
     protected $rowCount = 0;
+    protected $numberOfUnprocessedRecords = 0;
     protected $harvest_id;
 
     public function __construct($harvest_id) {
@@ -33,13 +33,25 @@ class HarvestsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithVal
     {
         $row['codigo_de_planta'] = strtoupper(trim($row['codigo_de_planta']));
 
-        $this->rowCount++;
-
         $harvest_detail = new HarvestDetail;
         $harvest_detail->harvest_id = $this->harvest_id;
         $harvest_detail->plant_id = $this->getPlantIdByCode($row['codigo_de_planta']);
         $harvest_detail->quality = Str::slug($row['calidad']);
         $harvest_detail->weight = $row['peso'];
+
+        $count = HarvestDetail::where([
+            'harvest_id' => $harvest_detail->harvest_id,
+            'plant_id' => $harvest_detail->plant_id,
+            'quality' => $harvest_detail->quality,
+            'weight' => $harvest_detail->weight,
+        ])->count();
+
+        if ($count > 0) {
+            $this->numberOfUnprocessedRecords++;
+            return null;
+        }
+
+        $this->rowCount++;
 
         return $harvest_detail;
     }
@@ -73,12 +85,17 @@ class HarvestsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithVal
 
     public function prepareForValidation($data, $index)
     {
-        $data['codigo_de_planta'] = strtoupper(trim($data['codigo_de_planta']));
+        $data['codigo_de_planta'] = strtoupper(trim($data['codigo_de_planta'] ?? ''));
         return $data;
     }
 
     public function getRowCount()
     {
         return $this->rowCount;
+    }
+
+    public function getNumberOfUnprocessedRecords()
+    {
+        return $this->numberOfUnprocessedRecords;
     }
 }
