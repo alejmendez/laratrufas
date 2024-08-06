@@ -27,9 +27,9 @@ const props = defineProps({
 const { t } = useI18n();
 
 const form = reactive({
-  year: props.filter_year,
-  field: props.filter_field,
-  quarter: props.filter_quarter,
+  year: props.filter_year_options.find((o) => o.value == props.filter_year),
+  field: props.filter_field_options.find((o) => o.value == props.filter_field),
+  quarter: props.filter_quarter_options.find((o) => o.value == props.filter_quarter),
 });
 
 const columns = [
@@ -46,13 +46,17 @@ const filterHandler = () => {
   const url = new URL(window.location.href);
 
   if (form.year) {
-    url.searchParams.set('filter_year', form.year);
+    url.searchParams.set('filter_year', form.year.value);
   }
   if (form.field) {
-    url.searchParams.set('filter_field', form.field);
+    url.searchParams.set('filter_field', form.field.value);
   }
   if (form.quarter) {
-    url.searchParams.set('filter_quarter', form.quarter);
+    url.searchParams.set('filter_quarter', form.quarter.value);
+  }
+
+  if (props.filter_field != form.field.value) {
+    url.searchParams.delete('filter_quarter');
   }
   router.get(url);
 };

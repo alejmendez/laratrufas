@@ -5,6 +5,8 @@ import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
 
 import Dialog from 'primevue/dialog';
 import DatePicker from 'primevue/datepicker';
+import InputText from 'primevue/inputtext';
+import InputGroup from 'primevue/inputgroup';
 
 const { t } = useI18n();
 
@@ -44,29 +46,32 @@ const remove_detail = (index) => {
   form.details.splice(index, 1);
 };
 
-const handler_date_focus = () => {
+const handler_open_datepicker = () => {
   show_modal_datepicker.value = true;
 };
 
 const handler_date_selected = () => {
-  show_modal_datepicker.value = false;
   date_rendered.value = dateRenderText(form.date);
+  show_modal_datepicker.value = false;
 };
 </script>
 
 <template>
   <form @submit.prevent="props.submitHandler">
     <CardSection>
-      <VInput
-        id="date"
-        v-model="date_rendered"
-        :label="t('harvest.form.date.label')"
-        :message="form.errors.date"
-        @focus="handler_date_focus"
-      />
+      <VElementFormWrapper :label="t('harvest.form.date.label')" :message="form.errors.date">
+        <InputGroup>
+          <InputText
+            fluid
+            v-model="date_rendered"
+            variant="filled"
+            @click="handler_open_datepicker"
+          />
+          <Button severity="secondary" icon="pi pi-calendar" @click="handler_open_datepicker" />
+        </InputGroup>
+      </VElementFormWrapper>
 
       <VSelectMultiple
-        class="mt-1"
         v-model="form.quarter_ids"
         optionGroupLabel="text"
         optionGroupChildren="items"
