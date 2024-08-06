@@ -49,17 +49,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="props.classWrapper">
-    <Label
-      :class="{ 'text-red-600' : isInvalid }"
-      :for="attrs.id"
-      v-if="props.label !== ''"
-    >
-      {{ props.label }}
-    </Label>
-
+  <VElementFormWrapper :classWrapper="props.classWrapper" :label="props.label" :message="props.message">
     <Select
-      class="h-10 mt-1"
       v-bind="attrs"
       v-model="model"
       fluid
@@ -68,11 +59,5 @@ onMounted(() => {
       :options="options"
       :invalid="isInvalid"
     />
-
-    <div v-show="message">
-      <p class="text-sm text-red-600">
-        {{ message }}
-      </p>
-    </div>
-  </div>
+  </VElementFormWrapper>
 </template>

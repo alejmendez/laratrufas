@@ -30,22 +30,14 @@ const isInvalid = computed(() => props.message !== '' && props.message !== undef
 </script>
 
 <template>
-  <div :class="props.classWrapper">
-    <Label
-      :class="{ 'text-red-600' : isInvalid }"
-      :for="attrs.id"
-      v-if="props.label !== ''"
-    >
-      {{ props.label }}
-    </Label>
-
+  <VElementFormWrapper :classWrapper="props.classWrapper" :label="props.label" :message="props.message">
     <MultiSelect
-      class="w-full h-10 mt-1"
       v-model="model"
       v-bind="attrs"
-      :options="options"
       filter
+      fluid
       optionLabel="text"
+      :options="options"
       :maxSelectedLabels="3"
       :invalid="isInvalid"
     >
@@ -55,11 +47,5 @@ const isInvalid = computed(() => props.message !== '' && props.message !== undef
         </div>
       </template>
     </MultiSelect>
-
-    <div v-show="message">
-      <p class="text-sm text-red-600">
-        {{ message }}
-      </p>
-    </div>
-  </div>
+  </VElementFormWrapper>
 </template>

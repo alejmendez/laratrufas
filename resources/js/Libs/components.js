@@ -1,5 +1,6 @@
 import { Link, Head } from '@inertiajs/vue3';
 
+import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
 import VInput from '@/Components/Form/VInput.vue';
 import VSelect from '@/Components/Form/VSelect.vue';
 import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
@@ -20,6 +21,7 @@ export const initComponent = (app) => {
   app.component('Link', Link);
   app.component('VSelectMultiple', VSelectMultiple);
 
+  app.component('VElementFormWrapper', VElementFormWrapper);
   app.component('VInput', VInput);
   app.component('VSelect', VSelect);
   app.component('VInputFile', VInputFile);

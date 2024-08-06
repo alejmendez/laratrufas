@@ -15,7 +15,7 @@
   }
 
   .input-label {
-    @apply text-sm font-medium leading-none mb-1;
+    @apply text-sm font-medium leading-none;
   }
 
   .input-file {

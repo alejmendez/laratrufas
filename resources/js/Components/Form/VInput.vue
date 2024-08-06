@@ -1,5 +1,5 @@
 <script setup>
-import { useAttrs, ref, onMounted, computed } from 'vue';
+import { useAttrs, computed } from 'vue';
 
 import InputText from 'primevue/inputtext';
 
@@ -37,27 +37,11 @@ const props = defineProps({
 
 const emit = defineEmits(['change', 'input', 'click', 'focus', 'blur', 'keydown']);
 
-const input = ref(null);
-
 const isInvalid = computed(() => props.message !== '' && props.message !== undefined);
-
-onMounted(() => {
-  if (props.autofocus) {
-    input.value.focus();
-  }
-});
 </script>
 
 <template>
-  <div :class="props.classWrapper">
-    <Label
-      :class="{ 'text-red-600' : isInvalid }"
-      :for="attrs.id"
-      v-if="props.label !== ''"
-    >
-      {{ props.label }}
-    </Label>
-
+  <VElementFormWrapper :classWrapper="props.classWrapper" :label="props.label" :message="props.message">
     <template v-if="props.type === 'date'">
       <VInputDate
         v-bind="attrs"
@@ -74,7 +58,6 @@ onMounted(() => {
     </template>
     <template v-else-if="props.type === 'textarea'">
       <Textarea
-        class="mt-1"
         ref="input"
         v-bind="attrs"
         v-model="model"
@@ -91,7 +74,6 @@ onMounted(() => {
     </template>
     <template v-else>
       <InputText
-        class="h-10 mt-1"
         ref="input"
         v-bind="attrs"
         v-model="model"
@@ -106,11 +88,5 @@ onMounted(() => {
         @keydown="emit('keydown', $event)"
       />
     </template>
-
-    <div v-show="props.message">
-      <p class="text-sm text-red-600">
-        {{ props.message }}
-      </p>
-    </div>
-  </div>
+  </VElementFormWrapper>
 </template>
