@@ -15,14 +15,18 @@ class UpdateHarvest
     {
         $harvest = Harvest::findOrFail($id);
 
-        $harvest->date = $date['date'];
+        $harvest->date = $data['date'];
         $harvest->batch = strtoupper($data['batch']);
-        $harvest->dog_id = $date['dog_id']['value'];
-        $harvest->farmer_id = $date['farmer_id']['value'];
-        $harvest->assistant_id = $date['assistant_id']['value'];
+        $harvest->dog_id = $data['dog_id']['value'];
+        $harvest->farmer_id = $data['farmer_id']['value'];
+        $harvest->assistant_id = $data['assistant_id']['value'];
         $harvest->save();
 
-        $harvest->quarters()->sync($data['quarter_ids']);
+        $quarter_ids = [];
+        foreach ($data['quarter_ids'] as $option) {
+            $quarter_ids[] = $option['value'];
+        }
+        $harvest->quarters()->attach($quarter_ids);
 
         $details = collect($data['details']);
 
@@ -39,12 +43,19 @@ class UpdateHarvest
                 continue;
             }
 
-            $harvest_detail = HarvestDetail::firstOrNew('id', $detail['id']);
+            $harvest_detail = null;
+            if ($detail['id']) {
+                $harvest_detail = HarvestDetail::find($detail['id']);
+            }
+
+            if (!$harvest_detail) {
+                $harvest_detail = new HarvestDetail;
+            }
 
             $harvest_detail->harvest_id = $harvest->id;
             $harvest_detail->plant_id = $plant->id;
-            $harvest_detail->quality = Str::slug($detail['quality']);
-            $harvest_detail->quality = $detail['weight'];
+            $harvest_detail->quality = Str::slug($detail['quality']['value']);
+            $harvest_detail->weight = $detail['weight'];
             $harvest_detail->save();
         }
 
