@@ -159,13 +159,32 @@ class HarvestsController extends Controller
         try {
             $file = request()->file('bulk_file');
             $harvest_id = $request['harvest_id']['value'];
-            $result = Excel::import(new HarvestsImport($harvest_id), $file);
-            $rowCount = session('rowCount', 0);
+
+            $harvests_import = new HarvestsImport($harvest_id);
+            $harvests_import->import($file);
+
+            $errors = [];
+            foreach ($harvests_import->failures() as $failure) {
+                foreach ($failure->errors() as $error) {
+                    $errors[] = "Linea {$failure->row()}: {$error}";
+                }
+           }
+
+           $rowCount = $harvests_import->getRowCount();
+           $message_success = "La carga de datos ha sido completada con éxito. Se han ingresado $rowCount registros de tipo de datos al sistema. ¡Buen trabajo!";
+
+           $countErrors = count($errors);
+           if ($countErrors > 0) {
+               $message_success = "Se han ingresado $rowCount registros al sistema y se tienen $countErrors errores.";
+           }
+
             return redirect()
                 ->route('harvests.create.bulk')
-                ->with('alert', "La carga de datos ha sido completada con éxito. Se han ingresado $rowCount registros de tipo de datos al sistema. ¡Buen trabajo!");
+                ->with('alert', $message_success)
+                ->with('errors', $errors);
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
             $failures = $e->failures();
+
             $errors = [];
             foreach ($failures as $failure) {
                 foreach ($failure->errors() as $error) {
