@@ -165,7 +165,7 @@ textarea.p-textarea.comment {
       />
 
       <div>
-        <Label for="repeat_number" class="input-label">
+        <Label for="repeat_number">
           {{ $t('task.form.repeat_number.label') }}
         </Label>
 

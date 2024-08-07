@@ -27,7 +27,7 @@ const harvests = props.harvests
   })
   .sort((a, b) => a.text - b.text);
 
-const harvest_id = harvests.find(h => h.value == props.id);
+const harvest_id = harvests.find((h) => h.value == props.id);
 
 const form = useForm({
   harvest_id: harvest_id,

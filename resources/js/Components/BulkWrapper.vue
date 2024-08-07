@@ -21,7 +21,7 @@ console.log({
   unprocessed_message: props.unprocessed_message,
   error_message: props.error_message,
   errors: props.errors,
-})
+});
 </script>
 
 <template>

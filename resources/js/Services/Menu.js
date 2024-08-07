@@ -142,16 +142,18 @@ export const menuElements = (currentComponent, userRoles) => {
     },
   ];
 
-  const menuItemsFiltered = menuItems.map((item) => {
-    const children = item.children.filter((child) => {
-      return child.roles.includes(userRoles[0]);
-    });
+  const menuItemsFiltered = menuItems
+    .map((item) => {
+      const children = item.children.filter((child) => {
+        return child.roles.includes(userRoles[0]);
+      });
 
-    return {
-      ...item,
-      children,
-    };
-  }).filter((item) => item.children.length > 0);
+      return {
+        ...item,
+        children,
+      };
+    })
+    .filter((item) => item.children.length > 0);
 
   return menuItemsFiltered;
 };
