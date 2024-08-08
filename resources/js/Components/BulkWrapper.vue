@@ -15,13 +15,6 @@ const props = defineProps({
 const openAlert = ref(true);
 const openErrors = ref(true);
 const openUnprocesseds = ref(true);
-
-console.log({
-  message_success: props.message_success,
-  unprocessed_message: props.unprocessed_message,
-  error_message: props.error_message,
-  errors: props.errors,
-});
 </script>
 
 <template>
