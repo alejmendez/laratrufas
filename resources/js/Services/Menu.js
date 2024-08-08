@@ -1,11 +1,6 @@
-const rolesAvailable = {
-  farmer: 'agricultor',
-  technician: 'tecnico',
-  administrator: 'administrador',
-  super_admin: 'super-admin',
-};
+import { can } from "@/Services/Auth";
 
-export const menuElements = (currentComponent, userRoles) => {
+export const menuElements = (currentComponent) => {
   const menuItems = [
     {
       text: 'menu.management',
@@ -15,21 +10,21 @@ export const menuElements = (currentComponent, userRoles) => {
           text: 'menu.fields',
           icon: 'fa-solid fa-table-cells',
           active: currentComponent.startsWith('Field'),
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician],
+          can: can('field-index'),
         },
         {
           link: route('quarters.index'),
           text: 'menu.quarters',
           icon: 'fa-solid fa-table-cells-large',
           active: currentComponent.startsWith('Quarter'),
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
+          can: can('quarter-index'),
         },
         {
           link: route('plants.index'),
           text: 'menu.plants',
           icon: 'fa-brands fa-envira',
           active: currentComponent.startsWith('Plant'),
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
+          can: can('plant-index'),
         },
       ],
     },
@@ -41,26 +36,28 @@ export const menuElements = (currentComponent, userRoles) => {
           text: 'menu.harvest',
           icon: 'fa-solid fa-basket-shopping',
           active: currentComponent.startsWith('Harvests'),
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
+          can: can('harvest-index'),
         },
         {
           link: route('harvests.details.create'),
           text: 'menu.harvest_details',
           icon: 'fa-solid fa-barcode',
           active: currentComponent.startsWith('HarvestDetails'),
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
+          can: can('harvest-create'),
         },
         {
           link: route('users.index'),
           text: 'menu.batch',
           icon: 'fa-solid fa-table-list',
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
+          active: currentComponent.startsWith('Batchs'),
+          can: can('batch-index'),
         },
         {
           link: route('users.index'),
           text: 'menu.liquidations',
           icon: 'fa-solid fa-file-invoice-dollar',
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
+          active: currentComponent.startsWith('Liquidations'),
+          can: can('liquidation-index'),
         },
       ],
     },
@@ -71,7 +68,8 @@ export const menuElements = (currentComponent, userRoles) => {
           link: route('tasks.index'),
           text: 'menu.tasks',
           icon: 'fa-solid fa-list-check',
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician, rolesAvailable.farmer],
+          active: currentComponent.startsWith('Tasks'),
+          can: can('task-index'),
         },
       ],
     },
@@ -82,19 +80,22 @@ export const menuElements = (currentComponent, userRoles) => {
           link: route('machineries.index'),
           text: 'menu.machineries',
           icon: 'fa-solid fa-tractor',
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician],
+          active: currentComponent.startsWith('Machineries'),
+          can: can('machinery-index'),
         },
         {
           link: route('tools.index'),
           text: 'menu.tools',
           icon: 'fa-solid fa-wrench',
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician],
+          active: currentComponent.startsWith('Tools'),
+          can: can('tool-index'),
         },
         {
           link: route('users.index'),
           text: 'menu.suppliers',
           icon: 'fa-solid fa-handshake',
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator, rolesAvailable.technician],
+          active: currentComponent.startsWith('Suppliers'),
+          can: can('supply-index'),
         },
       ],
     },
@@ -104,7 +105,8 @@ export const menuElements = (currentComponent, userRoles) => {
         {
           link: route('users.index'),
           text: 'menu.report1',
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
+          active: currentComponent.startsWith('Reports'),
+          can: can('report-index'),
         },
       ],
     },
@@ -116,27 +118,28 @@ export const menuElements = (currentComponent, userRoles) => {
           text: 'menu.users',
           icon: 'fa-solid fa-users',
           active: currentComponent.startsWith('User'),
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
+          can: can('user-index'),
         },
         {
           link: route('dogs.index'),
           text: 'menu.dogs',
           icon: 'fa-solid fa-dog',
           active: currentComponent.startsWith('Dog'),
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
+          can: can('dog-index'),
         },
         {
           link: route('users.index'),
           text: 'menu.alerts',
           icon: 'fa-solid fa-triangle-exclamation',
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
+          active: currentComponent.startsWith('Alerts'),
+          can: can('alert-index'),
         },
         {
           link: route('bulk.index'),
           text: 'menu.bulk_uploads',
           icon: 'fa-solid fa-file-arrow-up',
           active: currentComponent.startsWith('Bulk'),
-          roles: [rolesAvailable.super_admin, rolesAvailable.administrator],
+          can: can('plant-bulk-create') || can('harvest-bulk-create'),
         },
       ],
     },
@@ -145,7 +148,7 @@ export const menuElements = (currentComponent, userRoles) => {
   const menuItemsFiltered = menuItems
     .map((item) => {
       const children = item.children.filter((child) => {
-        return child.roles.includes(userRoles[0]);
+        return child.can;
       });
 
       return {

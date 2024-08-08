@@ -1,5 +1,4 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
 import { usePage } from '@inertiajs/vue3';
 
 import MenuGroup from './MenuGroup.vue';
@@ -8,9 +7,8 @@ import { menuElements } from '@/Services/Menu.js';
 
 const page = usePage();
 const currentComponent = page.component;
-const userRoles = page.props.auth.user.roles;
 
-const menuData = menuElements(currentComponent, userRoles);
+const menuData = menuElements(currentComponent);
 const initialState = Array(menuData.length).fill(true);
 const menuState = JSON.parse(localStorage.getItem('menu-state')) || initialState;
 
