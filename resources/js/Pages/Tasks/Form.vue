@@ -3,6 +3,8 @@ import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import InputText from 'primevue/inputtext';
 
+import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
+
 import { getDataSelect } from '@/Services/Selects';
 
 const { t } = useI18n();

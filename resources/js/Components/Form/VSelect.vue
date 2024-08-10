@@ -2,6 +2,7 @@
 import { useAttrs, ref, onMounted, watch, computed } from 'vue';
 
 import Select from 'primevue/select';
+import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
 
 const model = defineModel();
 

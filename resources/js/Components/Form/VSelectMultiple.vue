@@ -2,6 +2,7 @@
 import { useAttrs, computed } from 'vue';
 
 import MultiSelect from 'primevue/multiselect';
+import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
 
 const model = defineModel();
 

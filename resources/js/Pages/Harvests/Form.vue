@@ -8,6 +8,9 @@ import DatePicker from 'primevue/datepicker';
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
 
+import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
+import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
+
 const { t } = useI18n();
 
 const props = defineProps({

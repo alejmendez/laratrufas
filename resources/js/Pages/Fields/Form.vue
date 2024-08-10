@@ -2,6 +2,8 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import VInputDni from '@/Components/Form/VInputDni.vue';
+
 const { t } = useI18n();
 
 const props = defineProps({
