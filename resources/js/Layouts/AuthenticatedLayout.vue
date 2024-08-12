@@ -39,7 +39,7 @@ const toggleSideBar = () => {
     </div>
     <div class="grow z-20">
       <div class="min-h-[calc(100vh-64px)] bg-[#F0F2F5] pb-5">
-        <main class="py-[10px] px-[25px]">
+        <main class="py-[10px] px-[25px] w-full">
           <slot></slot>
         </main>
       </div>

@@ -5,7 +5,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <nav class="pagination" v-if="props.meta.total > 0">
+  <nav class="w-full pagination" v-if="props.meta.total > 0">
     <p>
       {{ $t('generics.tables.pagination.show') }}
       <strong>{{ props.meta.from || 0 }}</strong> -

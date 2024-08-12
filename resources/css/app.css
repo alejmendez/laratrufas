@@ -23,7 +23,7 @@
   }
 
   .pagination {
-    @apply m-5 flex items-center justify-between text-sm;
+    @apply p-5 flex items-center justify-between text-sm;
   }
 
   .pagination ul {
@@ -67,11 +67,11 @@
   }
 
   .tableContainer table {
-    @apply min-w-full text-left text-sm whitespace-nowrap border-t-2;
+    @apply text-sm border-t-2;
   }
 
   .tableContainer table th {
-    @apply px-6 py-3 cursor-default;
+    @apply px-6 py-3 cursor-default whitespace-nowrap;
     vertical-align: top;
   }
 
@@ -90,6 +90,10 @@
 
 .p-button.p-component.p-button-secondary {
   @apply text-[#ed3900] bg-[#fdfdfd] hover:bg-[#fff1e9] hover:text-[#ed3900] border-[#C7C7C7] hover:border-[#C7C7C7];
+}
+
+.p-datatable {
+  @apply mt-5;
 }
 
 .menu-element.active {
@@ -113,7 +117,6 @@
 .menu-element:hover svg{
   color: #F8F9FA;
 }
-
 
 .swal2-modal .swal2-actions .swal2-deny {
   color: #333 !important;
