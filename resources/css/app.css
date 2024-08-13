@@ -96,6 +96,10 @@
   @apply mt-5;
 }
 
+.p-datatable .p-datatable-thead .p-button {
+  @apply text-xs size-8;
+}
+
 .menu-element.active {
   background: #2C3344;
   color: #F8F9FA;
