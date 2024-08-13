@@ -14,19 +14,19 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
 </script>
 
 <template>
-  <header class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+  <header class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
     <div class="grow ">
       <BreadCrumbs :elements="props.breadcrumbs" />
 
       <h1
-        class="ftext-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
+        class="ftext-2xl font-bold tracking-tight text-gray-950 sm:text-2xl md:text-3xl"
       >
         {{ props.title }}
       </h1>
     </div>
 
     <div
-      class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
+      class="gap-3 flex flex-wrap items-center justify-start shrink-0 md:mt-[50px]"
       v-if="props.links"
     >
       <template
@@ -49,7 +49,7 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
     </div>
 
     <div
-      class="gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-[50px]"
+      class="gap-3 flex flex-wrap items-center justify-start shrink-0 md:mt-[50px]"
     >
       <slot></slot>
 
