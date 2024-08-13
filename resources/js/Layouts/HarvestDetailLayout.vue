@@ -1,14 +1,11 @@
 <script setup>
-import { ref } from 'vue';
-
+import { storeToRefs } from 'pinia'
 import SideBarLeft from '@/Components/Menu/SideBarLeft.vue';
 
-const showSide = ref((localStorage.getItem('showSide') || '1') === '1');
+import { useSideBarStore } from '@/Stores/sidebar.js';
 
-const toggleSideBar = () => {
-  showSide.value = !showSide.value;
-  localStorage.setItem('showSide', showSide.value ? '1' : '0');
-};
+const sideBarStore = useSideBarStore();
+const { show } = storeToRefs(sideBarStore)
 </script>
 
 <template>
@@ -16,7 +13,7 @@ const toggleSideBar = () => {
     <div class="w-[230px]">
       <div
       class="w-[36px] inline rounded outline-none transition duration-75 text-white hover:text-[#DD6633] focus-visible:ring-primary-600 border border-white hover:border-[#DD6633] px-3 py-1"
-        @click="toggleSideBar"
+        @click="sideBarStore.toggle"
       >
         <FontAwesomeIcon icon="fa-solid fa-bars" />
       </div>
@@ -25,7 +22,7 @@ const toggleSideBar = () => {
   <div class="w-full flex bg-[#F0F2F5] font-normal text-gray-950 antialiased">
     <div
       class="flex-none transition-all duration-200 ease-out z-10 border-r bg-[#0F172A] text-white"
-      :class="{ 'lg:w-[320px] lg:opacity-100 w-[0px] opacity-0': showSide, 'lg:w-[0px] lg:opacity-0 w-full opacity-100': !showSide }"
+      :class="{ 'lg:w-[320px] lg:opacity-100 w-[0px] opacity-0': !show, 'lg:w-[0px] lg:opacity-0 w-full opacity-100': show }"
     >
       <SideBarLeft />
     </div>

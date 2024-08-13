@@ -1,5 +1,7 @@
 <script setup>
 import { useAttrs } from 'vue';
+import { useSideBarStore } from '@/Stores/sidebar.js';
+
 const attrs = useAttrs();
 
 const props = defineProps({
@@ -14,6 +16,8 @@ const props = defineProps({
     default: false,
   },
 });
+
+const sideBarStore = useSideBarStore();
 </script>
 
 <template>
@@ -22,6 +26,7 @@ const props = defineProps({
     :href="props.link"
     class="menu-element inline-flex relative items-center py-[10px] w-full text-sm font-medium text-[#F8F9FA] rounded-md border-gray-200 transition duration-400 ease-in-out"
     :class="{ active: props.active }"
+    @click="sideBarStore.close"
   >
     <div class="w-[25px] mr-2 flex justify-center">
       <FontAwesomeIcon :icon="props.icon" class="text-xl" />
