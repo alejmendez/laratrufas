@@ -1,3 +1,6 @@
+# sudo docker compose down ; sudo docker compose up -d
+# sudo docker exec laratrufa_app php artisan app:sync-permissions
+
 docker compose down
 git pull
 
