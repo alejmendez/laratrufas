@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
+import InputGroup from 'primevue/inputgroup';
 
 const props = defineProps({
   imagePreview: {
@@ -75,10 +76,10 @@ const selectFile = () => {
 </script>
 
 <template>
-  <div class="flex flex-row gap-x-5">
-    <div v-if="props.imagePreview">
+  <div class="md:flex md:flex-row gap-x-5">
+    <div class="min-h-[150px]" v-if="props.imagePreview">
       <div
-        class="w-32 border rounded-md"
+        class="w-32 min-h-[150px] border rounded-md"
         :class="{ 'h-full': !preview }"
       >
         <img
@@ -98,15 +99,27 @@ const selectFile = () => {
         @change="changeFileHandler"
       />
 
-      <div class="flex max-w-md items-center">
-        <div class="border p-2 grow h-[40px] truncate rounded-s" :title="filePath">{{ filePath }}</div>
-        <Button
-          severity="secondary"
-          class="bg-gray-300 text-gray-800 hover:bg-gray-300/80 w-[140px]"
-          style="border-end-start-radius:0; border-start-start-radius:0; "
-          @click.prevent="selectFile"
-          :label="$t('generics.form.file.upload_file')"
-        />
+      <div class="md:w-[420px] max-w-full sm:hidden md:block">
+        <InputGroup>
+          <div class="border p-2 grow truncate rounded-s border-e-0" :title="filePath">{{ filePath }}</div>
+          <Button
+            severity="secondary"
+            class="bg-gray-300 text-gray-800 hover:bg-gray-300/80"
+            @click.prevent="selectFile"
+            :label="$t('generics.form.file.upload_file')"
+          />
+        </InputGroup>
+      </div>
+      <div class="md:w-[420px] max-w-full sm:block md:hidden">
+        <InputGroup>
+          <div class="border p-2 grow truncate rounded-s border-e-0" :title="filePath">{{ filePath }}</div>
+          <Button
+            severity="secondary"
+            class="bg-gray-300 text-gray-800 hover:bg-gray-300/80"
+            @click.prevent="selectFile"
+            icon="pi pi-cloud-upload"
+          />
+        </InputGroup>
       </div>
       <div class="text-slate-500 text-sm">Los archivos no debe superar 5 mb</div class="">
       <Button
