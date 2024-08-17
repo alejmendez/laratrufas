@@ -26,7 +26,7 @@ class UpdateHarvest
         foreach ($data['quarter_ids'] as $option) {
             $quarter_ids[] = $option['value'];
         }
-        $harvest->quarters()->attach($quarter_ids);
+        $harvest->quarters()->sync($quarter_ids);
 
         $details = collect($data['details']);
 
@@ -54,7 +54,10 @@ class UpdateHarvest
 
             $harvest_detail->harvest_id = $harvest->id;
             $harvest_detail->plant_id = $plant->id;
-            $harvest_detail->quality = Str::slug($detail['quality']['value']);
+            if (isset($detail['quality']) && isset($detail['quality']['value'])) {
+                $harvest_detail->quality = Str::slug($detail['quality']['value']);
+            }
+
             $harvest_detail->weight = $detail['weight'];
             $harvest_detail->save();
         }

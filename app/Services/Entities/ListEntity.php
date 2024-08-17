@@ -2,6 +2,7 @@
 
 namespace App\Services\Entities;
 
+use App\Services\Harvests\HarvestAvailableYears;
 use Illuminate\Support\Facades\DB;
 
 class ListEntity
@@ -19,11 +20,12 @@ class ListEntity
             'dog' => \App\Models\Dog::select('id as value', 'name as text')->orderBy('name'),
             'harvest' => \App\Models\Harvest::select('id', 'batch', 'date')->orderBy('date'),
             'role' => \Spatie\Permission\Models\Role::select('name as value', 'name as text')->orderBy('name'),
+            'harvest_available_years' => HarvestAvailableYears::call(),
             'responsible', 'couple', 'user' => \App\Models\User::select('id as value', DB::Raw("(name || ' ' || last_name) AS text"))->orderBy('name'),
             default => [],
         };
 
-        if (is_array($entityQuery)) {
+        if (is_array($entityQuery) || $entityQuery instanceof \Illuminate\Support\Collection) {
             return $entityQuery;
         }
 

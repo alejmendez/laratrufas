@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return "{$this->name} {$this->last_name}";
     }
+
+    public function harvests()
+    {
+        return$this->hasMany(Harvest::class, 'farmer_id');
+    }
 }

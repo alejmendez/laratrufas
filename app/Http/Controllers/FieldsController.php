@@ -24,15 +24,13 @@ class FieldsController extends Controller
      */
     public function index()
     {
-        $order = request('order', '');
-        $search = request('search', '');
-        $fields = ListField::call($order, $search);
+        if (request()->exists('dt_params')) {
+            $params = json_decode(request('dt_params', '[]'), true);
+            return response()->json(ListField::call($params));
+        }
 
         return Inertia::render('Fields/List', [
-            'order' => $order,
-            'search' => $search,
             'toast' => session('toast'),
-            'data' => $fields->paginate()->withQueryString(),
         ]);
     }
 
@@ -65,16 +63,10 @@ class FieldsController extends Controller
         $search = request('search', '');
         $current_tab = request('current_tab', 'file');
         $field = FindField::call($id);
-        $harvests = ListHarvest::call($order, $search, [
-            'field_id' => $id
-        ]);
 
         return Inertia::render('Fields/Show', [
             'current_tab' => $current_tab,
-            'order' => $order,
-            'search' => $search,
             'field' => new FieldResource($field),
-            'harvests' => $harvests->paginate()->withQueryString(),
         ]);
     }
 

@@ -12,6 +12,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Label from '@/Components/Form/Label.vue';
 import Button from '@/Components/Form/Button.vue';
 
+import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice';
+
 export const initComponent = (app) => {
   app.component('Head', Head);
   app.component('Link', Link);
@@ -26,4 +29,7 @@ export const initComponent = (app) => {
 
   app.component('Label', Label);
   app.component('Button', Button);
+
+  app.use(ToastService);
+  app.use(ConfirmationService);
 };

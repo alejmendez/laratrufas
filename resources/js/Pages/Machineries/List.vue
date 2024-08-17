@@ -1,7 +1,7 @@
 <script setup>
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { useToast } from 'vue-toastification';
+import { useToast } from 'primevue/usetoast';
 import { stringToFormat } from '@/Utils/date';
 
 import { deleteRowTable } from '@/Utils/table';
@@ -17,7 +17,7 @@ const props = defineProps({
 });
 
 if (props.toast) {
-  toast.success(t('generics.messages.saved_successfully'));
+  toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
 }
 
 const columns = [

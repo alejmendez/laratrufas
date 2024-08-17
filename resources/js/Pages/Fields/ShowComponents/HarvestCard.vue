@@ -2,22 +2,12 @@
 import { useI18n } from 'vue-i18n';
 import HarvestTable from '@/Pages/Harvests/Components/HarvestTable.vue';
 
-const props = defineProps({
-  field: Object,
-  harvests: Object,
-  order: String,
-  search: String,
-});
+const props = defineProps({});
 
 const { t } = useI18n();
 
-const field = props.field;
-const harvests = props.harvests.data;
-const harvests_count = harvests.length;
-const count_details = harvests.reduce((acc, cur) => acc + cur.count_details, 0);
-let total_weight = harvests.reduce((acc, cur) => acc + (cur.total_weight ? parseFloat(cur.total_weight) : 0), 0);
-total_weight = total_weight / 1000;
-total_weight = Math.round(total_weight * 100) / 100;
+const count_details = 0;
+let total_weight = 0;
 
 const fieldFile = [
   [t('field.show.file.location'), field.location],
@@ -71,9 +61,6 @@ const fieldFile = [
       </div>
       <HarvestTable
         :show_filters="false"
-        :order="props.order"
-        :search="props.search"
-        :data="props.harvests"
         :show_actions="false"
       />
     </div>

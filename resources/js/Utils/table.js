@@ -1,4 +1,4 @@
-import { useToast } from 'vue-toastification';
+import { useToast } from 'primevue/usetoast';
 import Swal from 'sweetalert2';
 
 export const deleteRowTable = async (t, handler) => {

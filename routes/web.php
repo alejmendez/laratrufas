@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/plants/types', [PlantTypesController::class, 'store'])->name('plants.types.store');
 
     Route::get('/select/{entity}', [SelectsController::class, 'index'])->name('selects');
+    Route::get('/select/multiple', [SelectsController::class, 'multiple'])->name('selects.multiple');
 
     Route::resources([
         'users' => UsersController::class,

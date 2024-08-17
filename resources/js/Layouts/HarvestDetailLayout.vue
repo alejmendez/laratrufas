@@ -1,11 +1,11 @@
 <script setup>
-import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia';
 import SideBarLeft from '@/Components/Menu/SideBarLeft.vue';
 
 import { useSideBarStore } from '@/Stores/sidebar.js';
 
 const sideBarStore = useSideBarStore();
-const { show } = storeToRefs(sideBarStore)
+const { show } = storeToRefs(sideBarStore);
 </script>
 
 <template>

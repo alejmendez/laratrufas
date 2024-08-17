@@ -1,6 +1,6 @@
-import { createPinia } from 'pinia'
+import { createPinia } from 'pinia';
 
 export const initPinia = (app) => {
-  const pinia = createPinia()
+  const pinia = createPinia();
   app.use(pinia);
 };

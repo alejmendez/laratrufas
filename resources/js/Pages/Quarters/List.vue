@@ -1,7 +1,7 @@
 <script setup>
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { useToast } from 'vue-toastification';
+import { useToast } from 'primevue/usetoast';
 
 import { deleteRowTable } from '@/Utils/table';
 
@@ -16,7 +16,7 @@ const props = defineProps({
 });
 
 if (props.toast) {
-  toast.success(t('generics.messages.saved_successfully'));
+  toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
 }
 
 const columns = [
@@ -58,7 +58,7 @@ const deleteHandler = async (id) => {
                 <td>{{ quarter.field_name }}</td>
                 <td>{{ quarter.area }} ha</td>
                 <td>{{ quarter.plants_count }}</td>
-                <td>
+                <td class="whitespace-nowrap">
                     <Link :href="route('quarters.show', quarter.id)">
                         <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
                     </Link>

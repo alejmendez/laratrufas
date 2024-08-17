@@ -25,6 +25,7 @@ export default {
       could_not_delete_the_record: 'No se pudo eliminar el registro, intentelo luego',
     },
     pagination: {
+      template: 'Mostrando del {from} al {to} de {total} registros',
       show: 'Mostrando',
       of: 'de',
     },

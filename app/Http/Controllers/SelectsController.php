@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Entities\ListEntity;
+use App\Services\Entities\ListEntities;
 
 class SelectsController extends Controller
 {
@@ -11,8 +12,11 @@ class SelectsController extends Controller
         $entity = request('entity');
         $filter = request('filter', []);
 
-        $data = ListEntity::call($entity, $filter);
+        if ($entity === 'multiple') {
+            $entities = json_decode(request('entities', '{}'));
+            return response()->json(ListEntities::call($entities));
+        }
 
-        return response()->json($data);
+        return response()->json(ListEntity::call($entity, $filter));
     }
 }

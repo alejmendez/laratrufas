@@ -36,6 +36,6 @@ class Quarter extends Model
 
     public function harvests()
     {
-        return $this->belongsToMany(Harvest::class);
+        return $this->belongsToMany(Harvest::class, 'harvest_quarter');
     }
 }
