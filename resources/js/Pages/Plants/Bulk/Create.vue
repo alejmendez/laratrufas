@@ -18,22 +18,26 @@ const props = defineProps({
 });
 
 const form = useForm({
-  field_id: '',
-  quarter_id: '',
+  field_id: [],
+  quarter_id: [],
   bulk_file: null,
 });
 
 const quartersOptions = ref(props.quarters);
+const loading_quarters = ref(false);
+
 watch(
   () => form.field_id,
   async (field_id) => {
+    loading_quarters.value = true;
     quartersOptions.value = await getDataSelect('quarter', { field_id });
-    form.quarter_id = null;
+    form.quarter_id = [];
+    loading_quarters.value = false;
   },
 );
 
 const submitHandler = () => {
-  if (form.field_id === '' || form.quarter_id === '' || form.bulk_file === null) {
+  if (form.field_id.length === 0 || form.quarter_id.length === 0 || form.bulk_file === null) {
     return;
   }
   form.post(route('plants.store.bulk'), {
@@ -83,6 +87,7 @@ const changeFileHandler = (e) => {
             :options="quartersOptions"
             :label="t('plant.bulk.form.quarter_id')"
             :message="form.errors.quarter_id"
+            :loading="loading_quarters"
             @change="() => submitHandler()"
           />
 
