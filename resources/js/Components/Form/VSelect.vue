@@ -32,8 +32,8 @@ const props = defineProps({
 
 watch(
   () => props.options,
-  async (newValue, _) => {
-    if (!newValue.find((v) => v.value === model.value.value)) {
+  (newValue, _) => {
+    if (!newValue.find((v) => v.value === model.value?.value)) {
       model.value = '';
     }
   },
