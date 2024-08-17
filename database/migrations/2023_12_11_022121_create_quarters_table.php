@@ -19,13 +19,12 @@ return new class extends Migration
             $table->string('blueprint')->nullable();
 
             $table->integer('responsible_id')->unsigned()->nullable();
-            $table->foreign('responsible_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('responsible_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('field_id')->unsigned()->nullable();
-            $table->foreign('field_id')->references('id')->on('fields')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('field_id')->references('id')->on('fields')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

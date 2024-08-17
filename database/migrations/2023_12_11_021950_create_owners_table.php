@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name', 80);
             $table->string('dni', 12)->unique();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

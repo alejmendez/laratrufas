@@ -22,13 +22,12 @@ return new class extends Migration
             $table->string('avatar', 250)->nullable();
 
             $table->integer('couple_id')->unsigned()->nullable();
-            $table->foreign('couple_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('couple_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('quarter_id')->unsigned()->nullable();
-            $table->foreign('quarter_id')->references('id')->on('quarters')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('quarter_id')->references('id')->on('quarters')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -22,16 +22,16 @@ return new class extends Migration
             $table->date('end_date');
 
             $table->integer('field_id')->unsigned()->nullable();
-            $table->foreign('field_id')->references('id')->on('fields')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('field_id')->references('id')->on('fields')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('quarter_id')->unsigned()->nullable();
-            $table->foreign('quarter_id')->references('id')->on('quarters')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('quarter_id')->references('id')->on('quarters')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('plant_id')->unsigned()->nullable();
-            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('responsible_id')->unsigned()->nullable();
-            $table->foreign('responsible_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('responsible_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->text('note')->nullable();
             $table->text('comments')->nullable();

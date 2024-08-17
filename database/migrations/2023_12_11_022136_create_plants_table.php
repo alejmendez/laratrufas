@@ -21,13 +21,12 @@ return new class extends Migration
             $table->string('blueprint')->nullable();
 
             $table->integer('quarter_id')->unsigned()->nullable();
-            $table->foreign('quarter_id')->references('id')->on('quarters')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('quarter_id')->references('id')->on('quarters')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('plant_type_id')->unsigned()->nullable();
-            $table->foreign('plant_type_id')->references('id')->on('plant_types')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('plant_type_id')->references('id')->on('plant_types')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -18,16 +18,15 @@ return new class extends Migration
             $table->string('batch', 2);
 
             $table->integer('dog_id')->unsigned()->nullable();
-            $table->foreign('dog_id')->references('id')->on('dogs')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('dog_id')->references('id')->on('dogs')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('farmer_id')->unsigned()->nullable();
-            $table->foreign('farmer_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('farmer_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('assistant_id')->unsigned()->nullable();
-            $table->foreign('assistant_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('assistant_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

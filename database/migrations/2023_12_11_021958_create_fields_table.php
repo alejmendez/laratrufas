@@ -18,11 +18,10 @@ return new class extends Migration
             $table->decimal('size', total: 5, places: 2);
 
             $table->integer('owner_id')->unsigned()->nullable();
-            $table->foreign('owner_id')->references('id')->on('owners')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('owner_id')->references('id')->on('owners')->onUpdate('cascade')->onDelete('cascade');
 
             $table->string('blueprint')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

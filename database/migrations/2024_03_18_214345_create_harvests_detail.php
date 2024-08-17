@@ -15,16 +15,15 @@ return new class extends Migration
             $table->id();
 
             $table->integer('harvest_id')->unsigned()->nullable();
-            $table->foreign('harvest_id')->references('id')->on('harvests')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('harvest_id')->references('id')->on('harvests')->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('plant_id')->unsigned()->nullable();
-            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('plant_id')->references('id')->on('plants')->onUpdate('cascade')->onDelete('cascade');
 
             $table->string('quality');
             $table->decimal('weight', total: 5, places: 2);
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
