@@ -5,6 +5,7 @@ export default {
   please_select: 'Seleccione',
   messages: {
     saved_successfully: 'Guardado satisfactoriamente',
+    deleted_successfully_summary: 'Eliminación',
     deleted_successfully: 'Eliminado satisfactoriamente',
     entity_not_found: 'Registro no encontrado, intente nuevamente',
   },
@@ -15,6 +16,7 @@ export default {
     search: 'Buscar',
     actions: 'Acciones',
     confirm: {
+      delete_header: 'Eliminar registro',
       delete: '¿Está seguro que desea eliminar el registro?',
       confirmButton: 'Aceptar',
       denyButton: 'Cancelar',
@@ -22,6 +24,7 @@ export default {
     empty: 'No se encontraron registros',
     errors: {
       searching_for_information: 'Error al buscar información',
+      could_not_delete_the_record_summary: 'Error al eliminar',
       could_not_delete_the_record: 'No se pudo eliminar el registro, intentelo luego',
     },
     pagination: {

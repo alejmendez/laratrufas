@@ -9,7 +9,6 @@ import InputText from 'primevue/inputtext';
 const props = defineProps({
   filters: Object,
   fetchHandler: Function,
-  deleteHandler: Function,
 });
 
 const attrs = useAttrs();
@@ -48,6 +47,8 @@ const loadLazyData = async () => {
   metadata.value = response;
   loading.value = false;
 };
+
+defineExpose({ loadLazyData })
 
 const onPage = (event) => {
   lazyParams.value = event;

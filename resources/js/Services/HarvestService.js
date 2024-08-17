@@ -19,7 +19,6 @@ function transformFilters(obj) {
 }
 
 const list = async (lazyParams) => {
-  console.log(JSON.stringify(transformFilters(lazyParams)))
   const response = await axios.get(route('harvests.index'), {
     params: {
       dt_params: JSON.stringify(transformFilters(lazyParams)),
@@ -30,7 +29,7 @@ const list = async (lazyParams) => {
 };
 
 const del = async (id) => {
-  await axios.get(route('harvests.destroy', id));
+  await axios.delete(route('harvests.destroy', { id }));
   return true;
 };
 

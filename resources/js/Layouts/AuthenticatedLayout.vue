@@ -1,5 +1,7 @@
 <script setup>
 import { storeToRefs } from 'pinia';
+import ConfirmDialog from 'primevue/confirmdialog';
+import Toast from 'primevue/toast';
 
 import SideBarLeft from '@/Components/Menu/SideBarLeft.vue';
 import MenuUser from '@/Components/Menu/MenuUser.vue';
@@ -42,4 +44,6 @@ const { show } = storeToRefs(sideBarStore);
       </div>
     </div>
   </div>
+  <ConfirmDialog></ConfirmDialog>
+  <Toast />
 </template>

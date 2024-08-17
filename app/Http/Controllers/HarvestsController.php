@@ -116,7 +116,7 @@ class HarvestsController extends Controller
     public function destroy(string $id)
     {
         DeleteHarvest::call($id);
-        return redirect()->route('harvests.index');
+        return response()->noContent();
     }
 
     public function download_bulk_template()

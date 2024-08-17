@@ -1,8 +1,7 @@
 <script setup>
+import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
-import ConfirmDialog from 'primevue/confirmdialog';
-import Toast from 'primevue/toast';
 
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
@@ -12,6 +11,7 @@ import { useI18n } from 'vue-i18n';
 
 import Datatable from '@/Components/Table/Datatable.vue';
 import FieldService from '@/Services/FieldService.js';
+import { deleteRowTable } from '@/Utils/table.js';
 
 const props = defineProps({
   toast: String,
@@ -20,6 +20,8 @@ const props = defineProps({
 const toast = useToast();
 const confirm = useConfirm();
 const { t } = useI18n();
+
+const datatable = ref(null);
 
 if (props.toast) {
   toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
@@ -36,29 +38,14 @@ const fetchHandler = async (params) => {
   return await FieldService.list(params);
 }
 
-const deleteHandler = async (record) => {
-  confirm.require({
-    message: 'Do you want to delete this record?',
-    header: 'Danger Zone',
-    icon: 'pi pi-info-circle',
-    rejectLabel: 'Cancel',
-    rejectProps: {
-      label: 'Cancel',
-      severity: 'secondary',
-      outlined: true
-    },
-    acceptProps: {
-      label: 'Delete',
-      severity: 'danger'
-    },
-    accept: async () => {
-      const result = await FieldService.del(record.id);
-      if (result) {
-        return toast.add({ severity: 'success', summary: 'Successful', detail: t('generics.messages.deleted_successfully'), life: 3000 });
-      }
-      toast.add({ severity: 'danger', summary: 'Successful', detail: t('generics.messages.deleted_successfully'), life: 3000 })
-    },
-    reject: () => {}
+const deleteHandler = (record) => {
+  deleteRowTable(t, confirm, async () => {
+    const result = await FieldService.del(record.id);
+    if (result) {
+      datatable.value.loadLazyData();
+      return toast.add({ severity: 'success', summary: t('generics.messages.deleted_successfully_summary'), detail: t('generics.messages.deleted_successfully'), life: 3000 });
+    }
+    toast.add({ severity: 'danger', summary: t('generics.tables.errors.could_not_delete_the_record_summary'), detail: t('generics.tables.errors.could_not_delete_the_record'), life: 3000 })
   });
 };
 </script>
@@ -73,13 +60,10 @@ const deleteHandler = async (record) => {
       :links="[{ to: 'fields.create', text: $t('generics.new') }]"
     />
 
-    <ConfirmDialog></ConfirmDialog>
-    <Toast />
-
     <Datatable
+      ref="datatable"
       :filters="filters"
       :fetchHandler="fetchHandler"
-      :deleteHandler="deleteHandler"
       sortField="name"
       :sortOrder="1"
     >
