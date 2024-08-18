@@ -64,6 +64,7 @@ class PrimevueDatatables
     {
         $this->currentPage = collect($this->params)->get("page", 0) + 1;
         $this->perPage = collect($this->params)->get("rows", 10);
+        $this->mainTableName = $this->query->getModel()->getTable();;
 
         $filters = collect($this->params)->get("filters", []);
         $this->sort = collect($this->params)->get('sortField');
@@ -107,14 +108,15 @@ class PrimevueDatatables
         foreach ($columnNames as $columnName) {
             $exploded = explode(".", $columnName);
             if (sizeof($exploded) == 2) {
-                $with->push($exploded[0]);
+                if ($this->mainTableName !== $exploded[0]) {
+                    $with->push($exploded[0]);
+                }
             } elseif (sizeof($exploded) == 3) {
                 $with->push($exploded[0] . "." . $exploded[1]);
             }
         }
         $query->with($with->toArray());
         $this->applySort($query);
-
         if ($returnQuery) {
             return $query;
         }

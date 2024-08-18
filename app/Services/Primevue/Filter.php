@@ -33,8 +33,15 @@ class Filter
     public function buildWhere(Builder &$q, ?bool $or = false)
     {
         $searchParts = explode(".", $this->field);
-        if (count($searchParts) <= 4) {
-            switch (count($searchParts)) {
+        $tableName = $q->getModel()->getTable();
+        $countSearchParts = count($searchParts);
+
+        if ($countSearchParts <= 4) {
+            if ($searchParts[0] === $tableName && $countSearchParts === 2) {
+                $this->applyWhere($q, $this->field, $or);
+                return;
+            }
+            switch ($countSearchParts) {
                 case 1:
                     $this->applyWhere($q, $searchParts[0], $or);
                     break;
