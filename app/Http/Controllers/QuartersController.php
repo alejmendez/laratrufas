@@ -24,15 +24,13 @@ class QuartersController extends Controller
      */
     public function index()
     {
-        $order = request('order', '');
-        $search = request('search', '');
-        $quarters = ListQuarter::call($order, $search);
+        if (request()->exists('dt_params')) {
+            $params = json_decode(request('dt_params', '[]'), true);
+            return response()->json(ListQuarter::call($params));
+        }
 
         return Inertia::render('Quarters/List', [
-            'order' => $order,
-            'search' => $search,
             'toast' => session('toast'),
-            'data' => $quarters->paginate()->withQueryString(),
         ]);
     }
 
@@ -105,7 +103,7 @@ class QuartersController extends Controller
     public function destroy(string $id)
     {
         DeleteQuarter::call($id);
-        return redirect()->route('quarters.index');
+        return response()->noContent();
     }
 
     protected function storeBlueprint(UpdateQuarterRequest | StoreQuarterRequest $request)
