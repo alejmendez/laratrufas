@@ -1,79 +1,131 @@
 <script setup>
-import { router } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
-import { stringToFormat } from '@/Utils/date';
+import { useConfirm } from 'primevue/useconfirm';
 
-import { deleteRowTable } from '@/Utils/table';
+import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
+import Column from 'primevue/column';
+import InputText from 'primevue/inputtext';
 
-const { t } = useI18n();
-const toast = useToast();
+import { useI18n } from 'vue-i18n';
+
+import Datatable from '@/Components/Table/Datatable.vue';
+import ToolService from '@/Services/ToolService.js';
+import { deleteRowTable } from '@/Utils/table.js';
 
 const props = defineProps({
-  order: String,
-  search: String,
-  data: Object,
   toast: String,
 });
+
+const toast = useToast();
+const confirm = useConfirm();
+const { t } = useI18n();
+
+const datatable = ref(null);
 
 if (props.toast) {
   toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
 }
 
-const columns = [
-  { text: t('tool.table.name'), data: 'name' },
-  { text: t('tool.table.purchase_date'), data: 'purchase_date' },
-  { text: t('tool.table.last_maintenance'), data: 'last_maintenance' },
-  { text: t('tool.table.purchase_location'), data: 'purchase_location' },
-  { text: t('tool.table.contact'), data: 'contact' },
-];
+const filters = {
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  purchase_date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  last_maintenance: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  purchase_location: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  contact: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+};
 
-const deleteHandler = async (id) => {
-  await deleteRowTable(t, () => {
-    router.delete(route('tools.destroy', id));
+const fetchHandler = async (params) => {
+  return await ToolService.list(params);
+}
+
+const deleteHandler = (record) => {
+  deleteRowTable(t, confirm, async () => {
+    const result = await ToolService.del(record.id);
+    if (result) {
+      datatable.value.loadLazyData();
+      return toast.add({ severity: 'success', summary: t('generics.messages.deleted_successfully_summary'), detail: t('generics.messages.deleted_successfully'), life: 3000 });
+    }
+    toast.add({ severity: 'danger', summary: t('generics.tables.errors.could_not_delete_the_record_summary'), detail: t('generics.tables.errors.could_not_delete_the_record'), life: 3000 })
   });
 };
 </script>
 
 <template>
-    <Head :title="t('tool.titles.entity_breadcrumb')" />
+  <Head :title="$t('tool.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-        <HeaderCrud
-            :title="t('tool.titles.entity_breadcrumb')"
-            :breadcrumbs="[{ to: 'tools.index', text: t('tool.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-            :links="[{ to: 'tools.create', text: t('generics.new') }]"
-        />
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="$t('tool.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'tools.index', text: $t('tool.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
+      :links="[{ to: 'tools.create', text: $t('generics.new') }]"
+    />
 
-        <TableList
-            :columns="columns"
-            :meta="data"
-            :search="search"
-            :order="order"
-        >
-            <tr
-                class="border-b hover:bg-neutral-100"
-                v-for="tool of data.data"
-                :key="tool.id"
-            >
-                <td>{{ tool.name }}</td>
-                <td>{{ stringToFormat(tool.purchase_date) }}</td>
-                <td>{{ stringToFormat(tool.last_maintenance) }}</td>
-                <td>{{ tool.purchase_location }}</td>
-                <td>{{ tool.contact }}</td>
-                <td>
-                  <Link :href="route('tools.edit', tool.id)">
-                    <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
-                  </Link>
-                  <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-red-600"
-                    @click="deleteHandler(tool.id)" />
-                </td>
-            </tr>
-            <tr v-if="data.data.length === 0" class="border-b hover:bg-neutral-100">
-              <td :colspan="columns.length + 1" class="text-center">
-                {{ $t('generics.tables.empty') }}
-              </td>
-            </tr>
-        </TableList>
-    </AuthenticatedLayout>
+    <Datatable
+      ref="datatable"
+      :filters="filters"
+      :fetchHandler="fetchHandler"
+      sortField="name"
+      :sortOrder="1"
+    >
+      <Column field="name" :header="$t('tool.table.name')" sortable frozen style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.name }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nombre" />
+        </template>
+      </Column>
+
+      <Column field="purchase_date" :header="$t('tool.table.purchase_date')" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.purchase_date }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Fecha de Compra" />
+        </template>
+      </Column>
+
+      <Column field="last_maintenance" :header="$t('tool.table.last_maintenance')" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.last_maintenance }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por última Mantención" />
+        </template>
+      </Column>
+
+      <Column field="purchase_location" :header="$t('tool.table.purchase_location')" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.purchase_location }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Lugar de Compra" />
+        </template>
+      </Column>
+
+      <Column field="contact" :header="$t('tool.table.contact')" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.contact }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Contacto" />
+        </template>
+      </Column>
+
+      <Column :exportable="false" style="min-width: 130px">
+        <template #body="slotProps">
+          <Link :href="route('tools.show', slotProps.data.id)">
+            <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
+          </Link>
+          <Link :href="route('tools.edit', slotProps.data.id)">
+            <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
+          </Link>
+          <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-red-600"
+              @click="deleteHandler(slotProps.data)" />
+        </template>
+      </Column>
+    </Datatable>
+  </AuthenticatedLayout>
 </template>

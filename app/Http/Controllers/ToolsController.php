@@ -22,15 +22,13 @@ class ToolsController extends Controller
      */
     public function index()
     {
-        $order = request('order', '');
-        $search = request('search', '');
-        $tools = ListTool::call($order, $search);
+        if (request()->exists('dt_params')) {
+            $params = json_decode(request('dt_params', '[]'), true);
+            return response()->json(ListTool::call($params));
+        }
 
         return Inertia::render('Tools/List', [
-            'order' => $order,
-            'search' => $search,
             'toast' => session('toast'),
-            'data' => $tools->paginate()->withQueryString(),
         ]);
     }
 
