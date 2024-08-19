@@ -4,37 +4,18 @@ namespace App\Services\Plants;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Plant;
+use App\Services\Primevue\PrimevueDatatables;
 
 class ListPlant
 {
-    public static function call($order = '', $search = '')
+    public static function call($params = [])
     {
-        $plants = Plant::select(
-            'plants.id',
-            'plants.code',
-            'quarters.name as quarter_name',
-            'fields.name as field_name',
-            'plant_types.name as plant_type_name',
-            'plants.age',
-            DB::raw("CONCAT(users.name, ' ', users.last_name) as responsible_name"),
-        )
-        ->join('quarters', 'plants.quarter_id', '=', 'quarters.id')
-        ->join('fields', 'quarters.field_id', '=', 'fields.id')
-        ->join('plant_types', 'plants.plant_type_id', '=', 'plant_types.id')
-        ->join('users', 'quarters.responsible_id', '=', 'users.id')
-        ->order($order);
+        $searchableColumns = ['plants.code', 'quarter.name', 'quarter.field.name', 'plant_type.name', 'plants.age', 'quarter.responsible.name', 'quarter.responsible.last_name',];
 
-        if ($search) {
-            $plants->whereAny([
-                'plants.code',
-                'quarters.name',
-                'fields.name',
-                'plant_types.name',
-                'plants.age',
-                'users.name',
-                'users.last_name',
-            ], 'ILIKE', "%{$search}%");
-        }
+        $query = Plant::query();
+
+        $datatable = new PrimevueDatatables($params, $searchableColumns);
+        $plants = $datatable->of($query)->make();
 
         return $plants;
     }
