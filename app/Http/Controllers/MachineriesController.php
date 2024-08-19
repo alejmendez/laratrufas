@@ -22,15 +22,13 @@ class MachineriesController extends Controller
      */
     public function index()
     {
-        $order = request('order', '');
-        $search = request('search', '');
-        $machineries = ListMachinery::call($order, $search);
+        if (request()->exists('dt_params')) {
+            $params = json_decode(request('dt_params', '[]'), true);
+            return response()->json(ListMachinery::call($params));
+        }
 
         return Inertia::render('Machineries/List', [
-            'order' => $order,
-            'search' => $search,
             'toast' => session('toast'),
-            'data' => $machineries->paginate()->withQueryString(),
         ]);
     }
 

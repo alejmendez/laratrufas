@@ -3,30 +3,19 @@
 namespace App\Services\Machineries;
 
 use App\Models\Machinery;
+use App\Services\Primevue\PrimevueDatatables;
 
 class ListMachinery
 {
-    public static function call($order = '', $search = '')
+    public static function call($params = [])
     {
-        $machineries = Machinery::select(
-            'id',
-            'name',
-            'purchase_date',
-            'last_maintenance',
-            'purchase_location',
-            'contact',
-        )->order($order);
+        $searchableColumns = ['name', 'purchase_date', 'last_maintenance', 'purchase_location', 'contact',];
 
-        if ($search) {
-            $machineries->whereAny([
-                'name',
-                'purchase_date',
-                'last_maintenance',
-                'purchase_location',
-                'contact',
-            ], 'ILIKE', "%{$search}%");
-        }
+        $query = Machinery::query();
 
-        return $machineries;
+        $datatable = new PrimevueDatatables($params, $searchableColumns);
+        $plants = $datatable->of($query)->make();
+
+        return $plants;
     }
 }
