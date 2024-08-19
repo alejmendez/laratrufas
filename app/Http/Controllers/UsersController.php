@@ -25,15 +25,13 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $order = request('order', '');
-        $search = request('search', '');
-        $users = ListUser::call($order, $search);
+        if (request()->exists('dt_params')) {
+            $params = json_decode(request('dt_params', '[]'), true);
+            return response()->json(ListUser::call($params));
+        }
 
         return Inertia::render('Users/List', [
-            'order' => $order,
-            'search' => $search,
             'toast' => session('toast'),
-            'data' => $users->paginate()->withQueryString(),
         ]);
     }
 
