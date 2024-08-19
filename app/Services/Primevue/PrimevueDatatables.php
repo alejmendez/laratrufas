@@ -64,7 +64,7 @@ class PrimevueDatatables
     {
         $this->currentPage = collect($this->params)->get("page", 0) + 1;
         $this->perPage = collect($this->params)->get("rows", 10);
-        $this->mainTableName = $this->query->getModel()->getTable();;
+        $this->mainTableName = $this->query->getModel()->getTable();
 
         $filters = collect($this->params)->get("filters", []);
         $this->sort = collect($this->params)->get('sortField');
