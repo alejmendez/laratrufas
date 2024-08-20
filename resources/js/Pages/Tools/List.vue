@@ -116,9 +116,6 @@ const deleteHandler = (record) => {
 
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
-          <Link :href="route('tools.show', slotProps.data.id)">
-            <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
-          </Link>
           <Link :href="route('tools.edit', slotProps.data.id)">
             <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
           </Link>
