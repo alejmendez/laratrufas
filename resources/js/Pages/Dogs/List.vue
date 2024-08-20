@@ -1,91 +1,171 @@
 <script setup>
-import { router } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
-
+import { ref, onMounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
+import { useConfirm } from 'primevue/useconfirm';
 
-import { deleteRowTable } from '@/Utils/table';
+import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
+import Column from 'primevue/column';
+import InputText from 'primevue/inputtext';
+import Select from 'primevue/select';
 
-const { t } = useI18n();
-const toast = useToast();
+import { useI18n } from 'vue-i18n';
+import { getAge } from '@/Utils/date';
+
+import Datatable from '@/Components/Table/Datatable.vue';
+import DogService from '@/Services/DogService.js';
+import { deleteRowTable } from '@/Utils/table.js';
+import { getDataSelects } from '@/Services/Selects';
 
 const props = defineProps({
-  order: String,
-  search: String,
-  data: Object,
   toast: String,
 });
 
-if (props.toast) {
-  toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
-}
+const toast = useToast();
+const confirm = useConfirm();
+const { t } = useI18n();
 
-const columns = [
-  { text: t('dog.table.name'), data: 'dogs.name' },
-  { text: t('dog.table.quarter'), data: 'quarter_name' },
-  { text: t('dog.table.gender'), data: 'gender' },
-  { text: t('dog.table.breed'), data: 'breed' },
-  { text: t('dog.table.age'), data: 'age' },
-  { text: t('dog.table.veterinary'), data: 'veterinary' },
-  { text: t('dog.table.couple'), data: 'couple_name' },
-];
+const datatable = ref(null);
+const filter_quarter_options = ref([]);
+const filter_couple_options = ref([]);
+const filter_gender_options = ref([
+  { value: 'M', text: t('dog.form.gender.options.male') },
+  { value: 'F', text: t('dog.form.gender.options.female') },
+]);
 
 const genders = {
   M: t('dog.form.gender.options.male'),
   F: t('dog.form.gender.options.female'),
 };
 
-const deleteHandler = async (id) => {
-  await deleteRowTable(t, () => {
-    router.delete(route('dogs.destroy', id));
+if (props.toast) {
+  toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
+}
+
+const filters = {
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  'quarter_id': { value: null, matchMode: FilterMatchMode.EQUALS },
+  gender: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  breed: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  veterinary: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  'couple_id':  { value: null, matchMode: FilterMatchMode.EQUALS },
+};
+
+const fetchHandler = async (params) => {
+  return await DogService.list(params);
+}
+
+const deleteHandler = (record) => {
+  deleteRowTable(t, confirm, async () => {
+    const result = await DogService.del(record.id);
+    if (result) {
+      datatable.value.loadLazyData();
+      return toast.add({ severity: 'success', summary: t('generics.messages.deleted_successfully_summary'), detail: t('generics.messages.deleted_successfully'), life: 3000 });
+    }
+    toast.add({ severity: 'danger', summary: t('generics.tables.errors.could_not_delete_the_record_summary'), detail: t('generics.tables.errors.could_not_delete_the_record'), life: 3000 })
   });
 };
+
+onMounted(async () => {
+  const data = await getDataSelects({
+    quarter: {},
+    couple: {},
+  });
+
+  filter_quarter_options.value = data.quarter;
+  filter_couple_options.value = data.couple;
+});
 </script>
 
 <template>
-    <Head :title="t('dog.titles.entity_breadcrumb')" />
+  <Head :title="$t('dog.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-        <HeaderCrud
-            :title="t('dog.titles.entity_breadcrumb')"
-            :breadcrumbs="[{ to: 'dogs.index', text: t('dog.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-            :links="[{ to: 'dogs.create', text: t('generics.new') }]"
-        />
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="$t('dog.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'dogs.index', text: $t('dog.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
+      :links="[{ to: 'dogs.create', text: $t('generics.new') }]"
+    />
 
-        <TableList
-            :columns="columns"
-            :meta="data"
-            :search="search"
-            :order="order"
-        >
-            <tr
-                class="border-b hover:bg-neutral-100"
-                v-for="dog of data.data"
-                :key="dog.id"
-            >
-                <td>{{ dog.name }}</td>
-                <td>{{ dog.quarter_name }}</td>
-                <td>{{ genders[dog.gender] }}</td>
-                <td>{{ dog.breed }}</td>
-                <td>{{ dog.age }}</td>
-                <td>{{ dog.veterinary }}</td>
-                <td>{{ dog.couple_name }}</td>
-                <td>
-                  <Link :href="route('dogs.show', dog.id)">
-                    <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
-                  </Link>
-                  <Link :href="route('dogs.edit', dog.id)">
-                    <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
-                  </Link>
-                  <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-red-600"
-                    @click="deleteHandler(dog.id)" />
-                </td>
-            </tr>
-            <tr v-if="data.data.length === 0" class="border-b hover:bg-neutral-100">
-              <td :colspan="columns.length + 1" class="text-center">
-                {{ $t('generics.tables.empty') }}
-              </td>
-            </tr>
-        </TableList>
-    </AuthenticatedLayout>
+    <Datatable
+      ref="datatable"
+      :filters="filters"
+      :fetchHandler="fetchHandler"
+      sortField="name"
+      :sortOrder="1"
+    >
+      <Column field="name" :header="$t('dog.table.name')" sortable frozen style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.name }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nombre" />
+        </template>
+      </Column>
+
+      <Column field="quarter.name" :header="$t('dog.table.quarter')" :showFilterMatchModes="false" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.quarter.name }}
+        </template>
+        <template #filter="{ filterModel }">
+          <Select v-model="filterModel.value" :options="filter_quarter_options" optionLabel="text" placeholder="Todos" />
+        </template>
+      </Column>
+
+      <Column field="gender" :header="$t('dog.table.gender')" :showFilterMatchModes="false" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ genders[data.gender] }}
+        </template>
+        <template #filter="{ filterModel }">
+          <Select v-model="filterModel.value" :options="filter_gender_options" optionLabel="text" placeholder="Todos" />
+        </template>
+      </Column>
+
+      <Column field="breed" :header="$t('dog.table.breed')" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.breed }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" :placeholder="'Buscar por ' + $t('dog.table.breed')" />
+        </template>
+      </Column>
+
+      <Column field="age" :header="$t('dog.table.age')" style="min-width: 200px">
+        <template #body="{ data }">
+          {{ getAge(data.birthdate) }}
+        </template>
+      </Column>
+
+      <Column field="veterinary" :header="$t('dog.table.veterinary')" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.veterinary }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Veterinario" />
+        </template>
+      </Column>
+
+      <Column field="couple.name" :header="$t('dog.table.couple')" :showFilterMatchModes="false" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.couple.name }} {{ data.couple.last_name }}
+        </template>
+        <template #filter="{ filterModel }">
+          <Select v-model="filterModel.value" :options="filter_couple_options" optionLabel="text" placeholder="Todos" />
+        </template>
+      </Column>
+
+      <Column :exportable="false" style="min-width: 130px">
+        <template #body="slotProps">
+          <Link :href="route('dogs.show', slotProps.data.id)">
+            <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
+          </Link>
+          <Link :href="route('dogs.edit', slotProps.data.id)">
+            <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
+          </Link>
+          <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-red-600"
+              @click="deleteHandler(slotProps.data)" />
+        </template>
+      </Column>
+    </Datatable>
+  </AuthenticatedLayout>
 </template>

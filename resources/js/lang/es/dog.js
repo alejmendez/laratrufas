@@ -7,9 +7,9 @@ export default {
   },
   table: {
     name: 'Nombre',
-    quarter: 'cuartel',
-    gender: 'genero',
-    breed: 'raza',
+    quarter: 'Cuartel',
+    gender: 'Genero',
+    breed: 'Raza',
     age: 'Edad',
     veterinary: 'Veterinario',
     couple: 'Pareja',
