@@ -125,3 +125,7 @@
 .swal2-modal .swal2-actions .swal2-deny {
   color: #333 !important;
 }
+
+.p-toast {
+  z-index: 3000;
+}
