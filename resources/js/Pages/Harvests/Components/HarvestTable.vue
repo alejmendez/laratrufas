@@ -47,8 +47,8 @@ const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   batch: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  'quarters.field_id': { value: null, matchMode: FilterMatchMode.EQUALS },
-  'quarters.quarter_id': { value: null, matchMode: FilterMatchMode.EQUALS },
+  'details.plant.quarter.field_id': { value: null, matchMode: FilterMatchMode.EQUALS },
+  'details.plant.quarter_id': { value: null, matchMode: FilterMatchMode.EQUALS },
   'farmer.id': { value: null, matchMode: FilterMatchMode.EQUALS },
 };
 
@@ -105,22 +105,6 @@ onMounted(async () => {
   <template v-if="props.show_filters">
     <div class="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
       <VSelect
-        id="field"
-        v-model="form.field"
-        :placeholder="t('generics.please_select')"
-        :options="filter_field_options"
-        :label="t('harvest.table_filters.field')"
-        @change="filterHandler"
-      />
-      <VSelect
-        id="quarter"
-        v-model="form.quarter"
-        :placeholder="t('generics.please_select')"
-        :options="filter_quarter_options"
-        :label="t('harvest.table_filters.quarter')"
-        @change="filterHandler"
-      />
-      <VSelect
         id="year"
         v-model="form.year"
         :placeholder="t('generics.please_select')"
@@ -156,7 +140,7 @@ onMounted(async () => {
       </template>
     </Column>
 
-    <Column field="field_names" filterField="quarters.field_id" :showFilterMatchModes="false" :header="$t('harvest.table.field')" sortable style="min-width: 200px">
+    <Column field="field_names" filterField="details.plant.quarter.field_id" :showFilterMatchModes="false" :header="$t('harvest.table.field')" sortable style="min-width: 200px">
       <template #body="{ data }">
         {{ data.field_names }}
       </template>
@@ -165,7 +149,7 @@ onMounted(async () => {
       </template>
     </Column>
 
-    <Column field="quarter_names" filterField="quarters.quarter_id" :showFilterMatchModes="false" :header="$t('harvest.table.quarter')" sortable style="min-width: 200px">
+    <Column field="quarter_names" filterField="details.plant.quarter_id" :showFilterMatchModes="false" :header="$t('harvest.table.quarter')" sortable style="min-width: 200px">
       <template #body="{ data }">
         {{ data.quarter_names }}
       </template>
