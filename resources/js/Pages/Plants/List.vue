@@ -79,8 +79,8 @@ onMounted(async () => {
   <AuthenticatedLayout>
     <HeaderCrud
       :title="t('plant.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'quarters.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-      :links="[{ to: 'quarters.create', text: t('generics.new') }]"
+      :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
+      :links="[{ to: 'plants.create', text: t('generics.new') }]"
     />
 
     <Datatable
