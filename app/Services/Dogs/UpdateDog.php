@@ -30,12 +30,12 @@ class UpdateDog
 
         $dog->save();
 
-        self::save_vaccines($vaccines);
+        self::save_vaccines($dog, $vaccines);
 
         return $dog;
     }
 
-    protected static function save_vaccines($data) {
+    protected static function save_vaccines($dog, $data) {
         $vaccines = collect($data);
 
         $idVaccines = $dog->vaccines()->pluck('id');
@@ -45,7 +45,7 @@ class UpdateDog
 
         DogVaccine::destroy($idVaccinesToDestroy);
         foreach ($vaccines as $vaccine) {
-            $dog_vaccine = DogVaccine::firstOrNew('id', $vaccine['id']);
+            $dog_vaccine = DogVaccine::firstOrNew(['id' => $vaccine['id']]);
             $dog_vaccine->name = $vaccine['name'];
             $dog_vaccine->date = $vaccine['date'];
             $dog_vaccine->code = $vaccine['code'];

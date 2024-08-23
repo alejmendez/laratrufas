@@ -4,6 +4,7 @@ export default {
   detail: 'Detalle',
   please_select: 'Seleccione',
   messages: {
+    saved: 'Guardado',
     saved_successfully: 'Guardado satisfactoriamente',
     deleted_successfully_summary: 'Eliminación',
     deleted_successfully: 'Eliminado satisfactoriamente',

@@ -41,16 +41,12 @@ const form = useForm({
   vaccines,
 });
 
-const submitHandler = generateSubmitHandler(form, route('dogs.update', data.id), (data) => {
-  return {
-    ...data,
-    vaccines: data.vaccines.map((v) => ({
-      name: v.name,
-      date: v.date,
-      code: v.code,
-    })),
-  };
-});
+const submitHandler = () => {
+  if (form.avatar) {
+    return form.post(route('dogs.update', data.id), { forceFormData: true });
+  }
+  form.post(route('dogs.update', data.id));
+};
 </script>
 
 <template>

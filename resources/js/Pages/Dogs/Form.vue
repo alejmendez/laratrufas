@@ -30,6 +30,8 @@ const genders = [
   },
 ];
 
+form.gender = genders.find((a) => a.value == form.gender);
+
 const calculateAge = () => (form.age = getAge(form.birthdate));
 
 const quartersOptions = ref(props.quarters);

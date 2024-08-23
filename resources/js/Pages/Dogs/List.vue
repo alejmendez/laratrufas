@@ -37,10 +37,6 @@ const genders = {
   F: t('dog.form.gender.options.female'),
 };
 
-if (props.toast) {
-  toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
-}
-
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
@@ -67,6 +63,10 @@ const deleteHandler = (record) => {
 };
 
 onMounted(async () => {
+  if (props.toast) {
+    toast.add({ severity: 'success', summary: t('dog.titles.entity_breadcrumb'), detail: t('generics.messages.saved_successfully'), life: 5000 });
+  }
+
   const data = await getDataSelects({
     quarter: {},
     couple: {},
@@ -130,7 +130,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="age" :header="$t('dog.table.age')" style="min-width: 200px">
+      <Column field="age" :header="$t('dog.table.age')" style="min-width: 100px">
         <template #body="{ data }">
           {{ getAge(data.birthdate) }}
         </template>
