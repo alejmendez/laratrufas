@@ -19,7 +19,6 @@ const props = defineProps({
 });
 
 const field = props.field.data;
-const harvests = props.harvests;
 
 const tabs = ['file', 'logbook', 'harvest', 'statistics'];
 

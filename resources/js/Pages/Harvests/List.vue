@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';
@@ -13,9 +14,11 @@ const props = defineProps({
   toast: String,
 });
 
-if (props.toast) {
-  toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
-}
+onMounted(() => {
+  if (props.toast) {
+    toast.add({ severity: 'success', summary: t('harvest.titles.entity_breadcrumb'), detail: t('generics.messages.saved_successfully'), life: 5000 });
+  }
+});
 </script>
 
 <template>

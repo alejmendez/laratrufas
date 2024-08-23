@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'primevue/usetoast';
@@ -33,6 +34,12 @@ const deleteHandler = async (id) => {
     router.delete(route('tasks.destroy', id));
   });
 };
+
+onMounted(() => {
+  if (props.toast) {
+    toast.add({ severity: 'success', summary: t('task.titles.entity_breadcrumb'), detail: t('generics.messages.saved_successfully'), life: 5000 });
+  }
+});
 </script>
 
 <template>

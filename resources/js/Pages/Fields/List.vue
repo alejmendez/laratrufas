@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
 
@@ -48,6 +48,12 @@ const deleteHandler = (record) => {
     toast.add({ severity: 'danger', summary: t('generics.tables.errors.could_not_delete_the_record_summary'), detail: t('generics.tables.errors.could_not_delete_the_record'), life: 3000 })
   });
 };
+
+onMounted(() => {
+  if (props.toast) {
+    toast.add({ severity: 'success', summary: t('field.titles.entity_breadcrumb'), detail: t('generics.messages.saved_successfully'), life: 5000 });
+  }
+});
 </script>
 
 <template>
