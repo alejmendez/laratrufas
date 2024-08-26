@@ -3,6 +3,7 @@ import { initPinia } from './pinia';
 import { initI18n } from './i18n';
 import { initMask } from './mask';
 import { initPrime } from './prime';
+import { initApexCharts } from './apexcharts';
 import { initComponent } from './components';
 
 export const initLibs = (app) => {
@@ -11,5 +12,6 @@ export const initLibs = (app) => {
   initI18n(app);
   initMask(app);
   initPrime(app);
+  initApexCharts(app);
   initComponent(app);
 };
