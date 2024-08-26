@@ -36,7 +36,7 @@ class UpdateHarvest
         })->toArray();
 
         HarvestDetail::destroy($idDetailsToDestroy);
-        dd(json_encode($details));
+        // dd(json_encode($details));
         foreach ($details as $detail) {
             $plant = FindPlantByCode::call($detail['plant_code']);
             if (!$plant) {
@@ -54,6 +54,7 @@ class UpdateHarvest
 
             $harvest_detail->harvest_id = $harvest->id;
             $harvest_detail->plant_id = $plant->id;
+            $harvest_detail->quality = '';
             if (isset($detail['quality']) && isset($detail['quality']['value'])) {
                 $harvest_detail->quality = Str::slug($detail['quality']['value']);
             }

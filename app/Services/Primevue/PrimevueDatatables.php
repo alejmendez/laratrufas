@@ -22,6 +22,7 @@ class PrimevueDatatables
      * @var int
      */
     private $perPage;
+    private $mainTableName;
     private array $filters;
     private array $params;
 

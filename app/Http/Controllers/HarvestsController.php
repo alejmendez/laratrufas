@@ -17,7 +17,7 @@ use App\Services\Dogs\ListDog;
 use App\Services\Entities\ListEntity;
 
 use App\Http\Resources\HarvestResource;
-use App\Http\Resources\HarvestCollection;
+use App\Http\Resources\HarvestListCollection;
 use App\Http\Requests\StoreHarvestRequest;
 use App\Http\Requests\UpdateHarvestRequest;
 use App\Http\Requests\BulkHarvestRequest;
@@ -34,7 +34,22 @@ class HarvestsController extends Controller
     {
         if (request()->exists('dt_params')) {
             $params = json_decode(request('dt_params', '[]'), true);
-            return response()->json(ListHarvest::call($params));
+            $paramsCollection = collect($params);
+
+            $harvests = ListHarvest::call($params);
+            $harvests->getCollection()->transform(function ($harvest) {
+                return [
+                    'id' => $harvest->id,
+                    'date' => $harvest->date,
+                    'batch' => $harvest->batch,
+                    'field_names' => $harvest->quarters->map(fn ($quarter) => $quarter->field->name)->unique()->join(', '),
+                    'quarter_names' => $harvest->quarters->map(fn ($quarter) => $quarter->name)->unique()->join(', '),
+                    'total_weight' => $harvest->details->map(fn ($detail) => $detail->weight)->sum(),
+                    'unit_count' => $harvest->details->count(),
+                    'farmer_name' => $harvest->farmer->name,
+                ];
+            });
+            return response()->json($harvests);
         }
 
         return Inertia::render('Harvests/List', [
