@@ -4,6 +4,8 @@ import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
 
+import StatisticsCard from '@/Pages/Quarters/ShowComponents/StatisticsCard.vue';
+
 const { t } = useI18n();
 
 const props = defineProps({
@@ -101,11 +103,6 @@ const deleteHandler = async (id) => {
       >
       </CardSection>
 
-      <CardSection
-        :header-text="t('quarter.show.statistics.title')"
-        wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[3]"
-      >
-      </CardSection>
+      <StatisticsCard v-show="currentTab === tabs[3]" />
     </AuthenticatedLayout>
 </template>
