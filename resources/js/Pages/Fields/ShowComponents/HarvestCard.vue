@@ -2,9 +2,13 @@
 import { useI18n } from 'vue-i18n';
 import HarvestTable from '@/Pages/Harvests/Components/HarvestTable.vue';
 
-const props = defineProps({});
+const props = defineProps({
+  field: Object,
+});
 
 const { t } = useI18n();
+
+const field = props.field;
 
 const count_details = 0;
 let total_weight = 0;

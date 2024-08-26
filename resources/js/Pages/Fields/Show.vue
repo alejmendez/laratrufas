@@ -78,6 +78,7 @@ const deleteHandler = async (id) => {
       />
 
       <HarvestCard
+        :field="field"
         v-show="props.current_tab === tabs[2]"
       />
 
