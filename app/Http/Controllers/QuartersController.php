@@ -6,6 +6,7 @@ use Inertia\Inertia;
 
 use App\Services\Quarters\FindQuarter;
 use App\Services\Quarters\ListQuarter;
+use App\Services\Quarters\ListQuarterPlants;
 use App\Services\Quarters\CreateQuarter;
 use App\Services\Quarters\UpdateQuarter;
 use App\Services\Quarters\DeleteQuarter;
@@ -104,6 +105,11 @@ class QuartersController extends Controller
     {
         DeleteQuarter::call($id);
         return response()->noContent();
+    }
+
+    public function plants(string $id)
+    {
+        return response()->json(ListQuarterPlants::call($id));
     }
 
     protected function storeBlueprint(UpdateQuarterRequest | StoreQuarterRequest $request)

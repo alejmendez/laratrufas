@@ -15,7 +15,14 @@ const del = async (id) => {
   return true;
 };
 
+const getPlants = async (id) => {
+  const response = await axios.get(route('quarters.plants', { id }));
+
+  return response.data;
+};
+
 export default {
   list,
   del,
+  getPlants,
 };

@@ -15,6 +15,8 @@ import Button from '@/Components/Form/Button.vue';
 import ToastService from 'primevue/toastservice';
 import ConfirmationService from 'primevue/confirmationservice';
 
+import Tooltip from 'primevue/tooltip';
+
 export const initComponent = (app) => {
   app.component('Head', Head);
   app.component('Link', Link);
@@ -32,4 +34,6 @@ export const initComponent = (app) => {
 
   app.use(ToastService);
   app.use(ConfirmationService);
+
+  app.directive('tooltip', Tooltip);
 };

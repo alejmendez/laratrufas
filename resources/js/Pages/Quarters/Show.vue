@@ -103,6 +103,9 @@ const deleteHandler = async (id) => {
       >
       </CardSection>
 
-      <StatisticsCard v-show="currentTab === tabs[3]" />
+      <StatisticsCard
+        :quarter="data"
+        v-show="currentTab === tabs[3]"
+      />
     </AuthenticatedLayout>
 </template>
