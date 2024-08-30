@@ -25,6 +25,11 @@ class Plant extends Model
         return $this->belongsTo(PlantType::class);
     }
 
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class);
+    }
+
     protected function code(): Attribute
     {
         return Attribute::make(

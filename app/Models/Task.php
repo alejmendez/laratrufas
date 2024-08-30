@@ -16,6 +16,10 @@ class Task extends Model
 {
     use HasFactory, Orderable, Filterable;
 
+    protected $casts = [
+        'rows' => 'array',
+    ];
+
     public function field()
     {
         return $this->belongsTo(Field::class);
@@ -54,5 +58,15 @@ class Task extends Model
     public function comments()
     {
         return $this->belongsToMany(Comment::class, 'comment_task');
+    }
+
+    public function quarters()
+    {
+        return $this->belongsToMany(Quarter::class);
+    }
+
+    public function plants()
+    {
+        return $this->belongsToMany(Plant::class);
     }
 }
