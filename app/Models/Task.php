@@ -25,16 +25,6 @@ class Task extends Model
         return $this->belongsTo(Field::class);
     }
 
-    public function quarter()
-    {
-        return $this->belongsTo(Quarter::class);
-    }
-
-    public function plant()
-    {
-        return $this->belongsTo(Plant::class);
-    }
-
     public function responsible()
     {
         return $this->belongsTo(User::class, 'responsible_id');

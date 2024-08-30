@@ -11,27 +11,40 @@ class CreateTask
     {
         $task = new Task;
         $task->name = $data['name'];
-        $task->status = $data['status'];
+        $task->status = $data['status']['value'];
         $task->repeat_number = $data['repeat_number'];
         $task->repeat_type = $data['repeat_type']['value'];
-        $task->priority = $data['priority'];
+        $task->priority = $data['priority']['value'];
         $task->start_date = $data['start_date'];
         $task->end_date = $data['end_date'];
         $task->field_id = $data['field_id']['value'];
-        $task->quarter_id = $data['quarter_id']['value'];
-        $task->plant_id = $data['plant_id']['value'];
+        $task->rows = collect($data['rows'])->map(fn($q) => $q['value'])->toArray();
         $task->responsible_id = $data['responsible_id']['value'];
         $task->comments = $data['comments'];
         $task->save();
 
+        // Asignar cuarteles
+        if (!empty($data['quarter_id'])) {
+            $quarter_ids = collect($data['quarter_id'])->map(fn($q) => $q['value'])->toArray();
+            $task->quarters()->sync($quarter_ids);
+        }
+
+        // Asignar plantas
+        if (!empty($data['plant_id'])) {
+            $plant_ids = collect($data['plant_id'])->map(fn($q) => $q['value'])->toArray();
+            $task->plants()->sync($plant_ids);
+        }
+
         // Asignar herramientas
         if (!empty($data['tools'])) {
-            $task->tools()->sync($data['tools']);
+            $tool_ids = collect($data['tools'])->map(fn($q) => $q['value'])->toArray();
+            $task->tools()->sync($tool_ids);
         }
 
         // Asignar equipos
         if (!empty($data['machineries'])) {
-            $task->machineries()->sync($data['machineries']);
+            $machinery_ids = collect($data['machineries'])->map(fn($q) => $q['value'])->toArray();
+            $task->machineries()->sync($machinery_ids);
         }
 
         // Crear suministros

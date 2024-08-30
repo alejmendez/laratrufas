@@ -51,13 +51,16 @@ export default {
       label: 'Fecha fin',
     },
     field_id: {
-      label: 'Nombre del campo',
+      label: 'Campo',
     },
     quarter_id: {
-      label: 'Nombre del cuartel',
+      label: 'Cuartel(es)',
     },
     plant_id: {
-      label: 'Nombre de la planta',
+      label: 'Planta(s)',
+    },
+    rows: {
+      label: 'Hilera(s)',
     },
     responsible_id: {
       label: 'Responsable',

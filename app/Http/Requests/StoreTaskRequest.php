@@ -24,18 +24,23 @@ class StoreTaskRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'status' => 'required|string|max:255',
+            'status' => 'required',
+            'status.value' => 'required|string',
             'repeat_number' => 'required',
             'repeat_type' => 'required',
-            'priority' => 'required|string|max:255',
+            'repeat_type.value' => 'required|string',
+            'priority' => 'required',
+            'priority.value' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'field_id' => 'required',
             'field_id.value' => 'required|exists:fields,id',
             'quarter_id' => 'required',
-            'quarter_id.value' => 'required|exists:quarters,id',
+            'quarter_ids.*.value' => 'integer|exists:quarters,id',
             'plant_id' => 'required',
-            'plant_id.value' => 'required|exists:plants,id',
+            'plant_id.*.value' => 'integer|exists:plants,id',
+            'rows' => 'required',
+            'rows.*.value' => 'string',
             'responsible_id' => 'required',
             'responsible_id.value' => 'required|exists:users,id',
             'comments' => 'nullable|string',
@@ -48,7 +53,8 @@ class StoreTaskRequest extends FormRequest
             'supplies.*.name' => 'required_with:supplies|string|max:255',
             'supplies.*.brand' => 'required_with:supplies|string|max:255',
             'supplies.*.quantity' => 'required_with:supplies|numeric|min:0',
-            'supplies.*.unit' => 'required_with:supplies|string|max:255',
+            'supplies.*.unit' => 'required_with:supplies',
+            'supplies.*.unit.value' => 'string',
         ];
     }
 

@@ -2,6 +2,8 @@
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import InputText from 'primevue/inputtext';
+import Select from 'primevue/select';
+import InputGroup from 'primevue/inputgroup';
 
 import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
 
@@ -58,6 +60,8 @@ watch(
   },
 );
 
+const rows = generateLetterArray().map((r) => ({ value: r, text: r }));
+
 const units = [
   'unit',
   'package',
@@ -93,49 +97,65 @@ const add_supply = () => {
 const remove_supply = (index) => {
   form.supplies.splice(index, 1);
 };
+
+function generateLetterArray() {
+  const letters = [];
+
+  for (let i = 0; i < 26; i++) {
+    letters.push(String.fromCharCode(65 + i));
+  }
+
+  for (let i = 0; i < 1; i++) {
+    for (let j = 0; j < 26; j++) {
+      letters.push(String.fromCharCode(65 + i) + String.fromCharCode(65 + j));
+    }
+  }
+
+  return letters;
+}
 </script>
 
 <style>
-.btn-status {
+.p-button.btn-status {
   margin-right: 20px;
 }
 
-.btn-status.btn-to_begin {
+.p-button.btn-status.btn-to_begin {
   background-color: #6C757D;
   border-color: #6C757D;
 }
 
-.btn-status.btn-to_begin:hover {
+.p-button.btn-status.btn-to_begin:hover {
   background-color: #5a6168;
   border-color: #5a6168;
 }
 
-.btn-status.btn-started {
+.p-button.btn-status.btn-started {
   background-color: #17A2B8;
   border-color: #17A2B8;
 }
 
-.btn-status.btn-started:hover {
+.p-button.btn-status.btn-started:hover {
   background-color: #158fa1;
   border-color: #158fa1;
 }
 
-.btn-status.btn-stopped {
+.p-button.btn-status.btn-stopped {
   background-color: #28A745;
   border-color: #28A745;
 }
 
-.btn-status.btn-stopped:hover {
+.p-button.btn-status.btn-stopped:hover {
   background-color: #22923d;
   border-color: #22923d;
 }
 
-.btn-status.btn-finished {
+.p-button.btn-status.btn-finished {
   background-color: #DC3545;
   border-color: #DC3545;
 }
 
-.btn-status.btn-finished:hover {
+.p-button.btn-status.btn-finished:hover {
   background-color: #bd2d3b;
   border-color: #bd2d3b;
 }
@@ -150,11 +170,11 @@ textarea.p-textarea.comment {
 <template>
   <div class="mt-5">
     <Button
-      v-for="state in statesValues"
-      :class="`btn-status btn-${state} text-l`"
+      v-for="state in states"
+      :class="`btn-status btn-${state.value} text-l`"
       @click.prevent="form.status = state"
-      :label="$t(`task.form.status.options.${state}`)"
-      :icon="form.status === state ? 'pi pi-check-square' : 'pi pi-stop'"
+      :label="$t(`task.form.status.options.${state.value}`)"
+      :icon="form.status.value === state.value ? 'pi pi-check-square' : 'pi pi-stop'"
     />
   </div>
   <form @submit.prevent="props.submitHandler">
@@ -171,10 +191,9 @@ textarea.p-textarea.comment {
           {{ $t('task.form.repeat_number.label') }}
         </Label>
 
-        <div class="flex">
+        <InputGroup>
           <InputText
             id="repeat_number"
-            class="w-full h-10 mt-1"
             v-model="form.repeat_number"
             type="number"
             min="1"
@@ -182,13 +201,15 @@ textarea.p-textarea.comment {
             step="1"
             :message="form.errors.repeat_number"
           />
-          <VSelect
+          <Select
             id="repeat_type"
             v-model="form.repeat_type"
             :placeholder="t('generics.please_select')"
             :options="repeat_types"
+            optionLabel="text"
+            style="max-width: 160px;"
           />
-        </div>
+        </InputGroup>
       </div>
 
       <VSelect
@@ -236,7 +257,7 @@ textarea.p-textarea.comment {
         :message="form.errors.field_id"
       />
 
-      <VSelect
+      <VSelectMultiple
         id="quarter_id"
         v-model="form.quarter_id"
         :placeholder="t('generics.please_select')"
@@ -245,11 +266,22 @@ textarea.p-textarea.comment {
         :message="form.errors.quarter_id"
       />
 
-      <VSelect
+      <VSelectMultiple
+        id="rows"
+        v-model="form.rows"
+        :placeholder="t('generics.please_select')"
+        :options="rows"
+        :virtualScrollerOptions="{ itemSize: 44 }"
+        :label="t('task.form.rows.label')"
+        :message="form.errors.rows"
+      />
+
+      <VSelectMultiple
         id="plant_id"
         v-model="form.plant_id"
         :placeholder="t('generics.please_select')"
         :options="plants"
+        :virtualScrollerOptions="{ itemSize: 44 }"
         :label="t('task.form.plant_id.label')"
         :message="form.errors.plant_id"
       />
