@@ -105,7 +105,7 @@ onMounted(async () => {
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nombre" />
         </template>
       </Column>
-      <Column field="priority" filterField="priority" :header="$t('task.table.priority')" sortable frozen style="min-width: 200px">
+      <Column field="priority" filterField="priority" :header="$t('task.table.priority')" sortable style="min-width: 200px">
         <template #body="{ data }">
           <Tag :severity="prioritiesSeverities[data.priority]" :value="t('task.form.priority.options.' + data.priority)"></Tag>
 
@@ -114,7 +114,7 @@ onMounted(async () => {
           <Select v-model="filterModel.value" :options="filter_priorities_options" optionLabel="text" placeholder="Todos" />
         </template>
       </Column>
-      <Column field="note" filterField="note" :header="$t('task.table.note')" sortable frozen style="min-width: 200px">
+      <Column field="note" filterField="note" :header="$t('task.table.note')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.note }}
         </template>
@@ -122,7 +122,7 @@ onMounted(async () => {
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nota" />
         </template>
       </Column>
-      <Column field="updated_at" filterField="updated_at" :header="$t('task.table.updated_at')" sortable frozen style="min-width: 200px">
+      <Column field="updated_at" filterField="updated_at" :header="$t('task.table.updated_at')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ dateToString(data.updated_at) }}
         </template>
