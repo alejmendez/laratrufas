@@ -1,89 +1,156 @@
 <script setup>
-import { onMounted } from 'vue';
-import { router } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { ref, onMounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
-import { stringToFormat } from '@/Utils/date';
+import { useConfirm } from 'primevue/useconfirm';
+import Tag from 'primevue/tag';
 
-import { deleteRowTable } from '@/Utils/table';
+import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
+import Column from 'primevue/column';
+import InputText from 'primevue/inputtext';
+import Select from 'primevue/select';
 
-const { t } = useI18n();
-const toast = useToast();
+import { useI18n } from 'vue-i18n';
+
+import Datatable from '@/Components/Table/Datatable.vue';
+import TaskService from '@/Services/TaskService.js';
+import { dateToString } from '@/Utils/date.js';
+import { getDataSelects } from '@/Services/Selects';
 
 const props = defineProps({
-  order: String,
-  search: String,
-  data: Object,
   toast: String,
 });
+
+const toast = useToast();
+const confirm = useConfirm();
+const { t } = useI18n();
+
+const datatable = ref(null);
+const filter_responsible_options = ref([]);
 
 if (props.toast) {
   toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
 }
 
-const columns = [
-  { text: t('task.table.name'), data: 'name' },
-  { text: t('task.table.priority'), data: 'priority' },
-  { text: t('task.table.note'), data: 'note' },
-  { text: t('task.table.updated_at'), data: 'updated_at' },
-  { text: t('task.table.responsible'), data: 'responsible_name' },
-];
+const filters = {
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  'priority': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  'note': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  'updated_at': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  'responsible_id': { value: null, matchMode: FilterMatchMode.EQUALS },
+};
 
-const deleteHandler = async (id) => {
-  await deleteRowTable(t, () => {
-    router.delete(route('tasks.destroy', id));
+const priorities = ['when_possible', 'routine', 'important', 'urgent']
+const filter_priorities_options = priorities.map((p) => ({
+  value: p,
+  text: t('task.form.priority.options.' + p),
+}));
+const prioritiesSeverities = {
+  'when_possible': 'success',
+  'routine': 'info',
+  'important': 'warn',
+  'urgent': 'danger',
+}
+
+const fetchHandler = async (params) => {
+  return await TaskService.list(params);
+}
+
+const deleteHandler = (record) => {
+  deleteRowTable(t, confirm, async () => {
+    const result = await TaskService.del(record.id);
+    if (result) {
+      datatable.value.loadLazyData();
+      return toast.add({ severity: 'success', summary: t('generics.messages.deleted_successfully_summary'), detail: t('generics.messages.deleted_successfully'), life: 3000 });
+    }
+    toast.add({ severity: 'danger', summary: t('generics.tables.errors.could_not_delete_the_record_summary'), detail: t('generics.tables.errors.could_not_delete_the_record'), life: 3000 })
   });
 };
 
-onMounted(() => {
+onMounted(async () => {
   if (props.toast) {
     toast.add({ severity: 'success', summary: t('task.titles.entity_breadcrumb'), detail: t('generics.messages.saved_successfully'), life: 5000 });
   }
+
+  const data = await getDataSelects({
+    responsible: {},
+  });
+
+  filter_responsible_options.value = data.responsible;
 });
 </script>
 
 <template>
-    <Head :title="t('task.titles.entity_breadcrumb')" />
+  <Head :title="t('task.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-        <HeaderCrud
-            :title="t('task.titles.entity_breadcrumb')"
-            :breadcrumbs="[{ to: 'tasks.index', text: t('task.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-            :links="[{ to: 'tasks.create', text: t('generics.new') }]"
-        />
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('task.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'tasks.index', text: t('task.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
+      :links="[{ to: 'tasks.create', text: t('generics.new') }]"
+    />
 
-        <TableList
-            :columns="columns"
-            :meta="props.data"
-            :search="props.search"
-            :order="props.order"
-        >
-            <tr
-                class="border-b hover:bg-neutral-100"
-                v-for="task of data.data"
-                :key="task.id"
-            >
-                <td>{{ task.name }}</td>
-                <td>{{ $t('task.form.priority.options.' + task.priority) }}</td>
-                <td>{{ task.note }}</td>
-                <td>{{ stringToFormat(task.updated_at) }}</td>
-                <td>{{ task.responsible_name }}</td>
-                <td>
-                  <Link :href="route('tasks.show', task.id)">
-                    <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
-                  </Link>
-                  <Link :href="route('tasks.edit', task.id)">
-                    <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
-                  </Link>
-                  <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-red-600"
-                    @click="deleteHandler(task.id)" />
-                </td>
-            </tr>
-            <tr v-if="data.data.length === 0" class="border-b hover:bg-neutral-100">
-              <td :colspan="columns.length + 1" class="text-center">
-                {{ $t('generics.tables.empty') }}
-              </td>
-            </tr>
-        </TableList>
-    </AuthenticatedLayout>
+    <Datatable
+      ref="datatable"
+      :filters="filters"
+      :fetchHandler="fetchHandler"
+      sortField="name"
+      :sortOrder="1"
+    >
+      <Column field="name" filterField="name" :header="$t('task.table.name')" sortable frozen style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.name }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nombre" />
+        </template>
+      </Column>
+      <Column field="priority" filterField="priority" :header="$t('task.table.priority')" sortable frozen style="min-width: 200px">
+        <template #body="{ data }">
+          <Tag :severity="prioritiesSeverities[data.priority]" :value="t('task.form.priority.options.' + data.priority)"></Tag>
+
+        </template>
+        <template #filter="{ filterModel }">
+          <Select v-model="filterModel.value" :options="filter_priorities_options" optionLabel="text" placeholder="Todos" />
+        </template>
+      </Column>
+      <Column field="note" filterField="note" :header="$t('task.table.note')" sortable frozen style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.note }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nota" />
+        </template>
+      </Column>
+      <Column field="updated_at" filterField="updated_at" :header="$t('task.table.updated_at')" sortable frozen style="min-width: 200px">
+        <template #body="{ data }">
+          {{ dateToString(data.updated_at) }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por fecha de actualización" />
+        </template>
+      </Column>
+      <Column field="responsible.name" filterField="responsible_id" :showFilterMatchModes="false" :header="$t('plant.table.manager')" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.responsible.name }} {{ data.responsible.last_name }}
+        </template>
+        <template #filter="{ filterModel }">
+          <Select v-model="filterModel.value" :options="filter_responsible_options" optionLabel="text" placeholder="Todos" />
+        </template>
+      </Column>
+
+      <Column :exportable="false" style="min-width: 130px">
+        <template #body="slotProps">
+          <Link :href="route('tasks.show', slotProps.data.id)">
+            <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
+          </Link>
+          <Link :href="route('tasks.edit', slotProps.data.id)">
+            <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
+          </Link>
+          <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-red-600"
+              @click="deleteHandler(slotProps.data)" />
+        </template>
+      </Column>
+    </Datatable>
+  </AuthenticatedLayout>
 </template>

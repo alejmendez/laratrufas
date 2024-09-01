@@ -35,7 +35,11 @@ class ListEntity
     protected static function applyFilter($query, $filter)
     {
         foreach ($filter as $field => $value) {
-            $query->where($field, $value);
+            if (is_array($value)) {
+                $query->whereIn($field, $value);
+            } else {
+                $query->where($field, $value);
+            }
         }
 
         return $query;

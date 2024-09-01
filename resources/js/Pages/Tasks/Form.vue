@@ -29,7 +29,6 @@ const props = defineProps({
 });
 
 const form = props.form;
-
 const priorities = ['when_possible', 'routine', 'important', 'urgent'].map((p) => ({
   value: p,
   text: t('task.form.priority.options.' + p),

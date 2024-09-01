@@ -10,6 +10,7 @@ class CreateTask
     public static function call($data): Task
     {
         $task = new Task;
+
         $task->name = $data['name'];
         $task->status = $data['status']['value'];
         $task->repeat_number = $data['repeat_number'];
@@ -23,44 +24,35 @@ class CreateTask
         $task->comments = $data['comments'];
         $task->save();
 
-        // Asignar cuarteles
-        if (!empty($data['quarter_id'])) {
-            $quarter_ids = collect($data['quarter_id'])->map(fn($q) => $q['value'])->toArray();
-            $task->quarters()->sync($quarter_ids);
-        }
+        self::syncRelationship($task, 'quarters', $data['quarter_id'] ?? []);
+        self::syncRelationship($task, 'plants', $data['plant_id'] ?? []);
+        self::syncRelationship($task, 'tools', $data['tools'] ?? []);
+        self::syncRelationship($task, 'machineries', $data['machineries'] ?? []);
 
-        // Asignar plantas
-        if (!empty($data['plant_id'])) {
-            $plant_ids = collect($data['plant_id'])->map(fn($q) => $q['value'])->toArray();
-            $task->plants()->sync($plant_ids);
-        }
-
-        // Asignar herramientas
-        if (!empty($data['tools'])) {
-            $tool_ids = collect($data['tools'])->map(fn($q) => $q['value'])->toArray();
-            $task->tools()->sync($tool_ids);
-        }
-
-        // Asignar equipos
-        if (!empty($data['machineries'])) {
-            $machinery_ids = collect($data['machineries'])->map(fn($q) => $q['value'])->toArray();
-            $task->machineries()->sync($machinery_ids);
-        }
-
-        // Crear suministros
-        if (!empty($data['supplies'])) {
-            foreach ($data['supplies'] as $supply) {
-                $supply_task = new SupplyTask;
-                $supply_task->name = $supply['name'];
-                $supply_task->brand = $supply['brand'];
-                $supply_task->quantity = $supply['quantity'];
-                $supply_task->unit = $supply['unit']['value'];
-                $supply_task->task_id = $task->id;
-
-                $supply_task->save();
-            }
-        }
+        self::saveSupplies($task, $data['supplies'] ?? []);
 
         return $task;
+    }
+
+    protected static function syncRelationship($task, $relation, $data)
+    {
+        if (!empty($data)) {
+            $ids = collect($data)->map(fn($q) => $q['value'])->toArray();
+            $task->{$relation}()->sync($ids);
+        }
+    }
+
+    protected static function saveSupplies($task, $data)
+    {
+        foreach ($data as $supplyData) {
+            $supply = new SupplyTask;
+            $supply->name = $supplyData['name'];
+            $supply->brand = $supplyData['brand'];
+            $supply->quantity = $supplyData['quantity'];
+            $supply->unit = $supplyData['unit']['value'];
+            $supply->task_id = $task->id;
+
+            $supply->save();
+        }
     }
 }

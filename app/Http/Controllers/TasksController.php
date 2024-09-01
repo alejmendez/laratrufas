@@ -24,15 +24,13 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $order = request('order', '');
-        $search = request('search', '');
-        $tasks = ListTask::call($order, $search);
+        if (request()->exists('dt_params')) {
+            $params = json_decode(request('dt_params', '[]'), true);
+            return response()->json(ListTask::call($params));
+        }
 
         return Inertia::render('Tasks/List', [
-            'order' => $order,
-            'search' => $search,
             'toast' => session('toast'),
-            'data' => $tasks->paginate()->withQueryString(),
         ]);
     }
 
@@ -82,7 +80,7 @@ class TasksController extends Controller
             'data' => new TaskResource($task),
             'fields' => ListEntity::call('field'),
             'quarters' => ListEntity::call('quarter', ['field_id' => $task->field_id]),
-            'plants' => ListEntity::call('plant', ['quarter_id' => $task->quarter_id]),
+            'plants' => ListEntity::call('plant', ['quarter_id' => $task->quarters->map(fn($q) => $q->id)->toArray()]),
             'responsibles' => ListEntity::call('responsible'),
             'tools' => ListEntity::call('tool'),
             'machineries' => ListEntity::call('machinery'),

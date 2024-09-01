@@ -27,20 +27,24 @@ const form = useForm({
   id: data.id,
   name: data.name,
   repeat_number: data.repeat_number,
-  repeat_type: data.repeat_type,
-  status: data.status,
-  priority: data.priority,
+  repeat_type: { value: data.repeat_type, text: t('task.form.repeat_type.options.' + data.repeat_type) },
+  status: { value: data.status, text: t('task.form.status.options.' + data.status) },
+  priority: { value: data.priority, text: t('task.form.priority.options.' + data.priority) },
   start_date: stringToDate(data.start_date),
   end_date: stringToDate(data.end_date),
-  field_id: props.fields.find((a) => a.value == data.field_id),
-  quarter_id: props.quarters.find((a) => a.value == data.quarter_id),
-  plant_id: props.plants.find((a) => a.value == data.plant_id),
+  field_id: data.field,
+  quarter_id: props.quarters.filter((a) => data.quarters.includes(a.value)),
+  rows: data.rows.map(a => ({ value: a, text: a })),
+  plant_id: props.plants.filter((a) => data.plants.includes(a.value)),
   responsible_id: props.responsibles.find((a) => a.value == data.responsible_id),
   note: data.note,
   comments: data.comments,
-  tools: data.tools.map((t) => ({ value: t.id, text: t.name })),
-  machineries: data.machineries.map((m) => ({ value: m.id, text: m.name })),
-  supplies: data.supplies,
+  tools: data.tools,
+  machineries: data.machineries,
+  supplies: data.supplies.map(a => {
+    a.unit = { value: a.unit, text: t('task.form.supplies.unit.options.' + a.unit) };
+    return a;
+  }),
 });
 
 const submitHandler = generateSubmitHandler(form, route('tasks.update', data.id));
@@ -58,11 +62,11 @@ const submitHandler = generateSubmitHandler(form, route('tasks.update', data.id)
       <FormTask
         :form="form"
         :fields="props.fields"
+        :quarters="props.quarters"
+        :plants="props.plants"
         :responsibles="props.responsibles"
         :tools="props.tools"
         :machineries="props.machineries"
-        :quarters="props.quarters"
-        :plants="props.plants"
         :submitHandler="submitHandler"
       />
     </AuthenticatedLayout>
