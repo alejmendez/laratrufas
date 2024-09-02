@@ -35,6 +35,7 @@ class SyncPermissions extends Command
         'task',
         'tool',
         'user',
+        'batch',
     ];
 
     protected $defaultActions = [

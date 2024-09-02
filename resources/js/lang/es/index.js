@@ -13,6 +13,7 @@ import harvest from './harvest';
 import tool from './tool';
 import machinery from './machinery';
 import task from './task';
+import batch from './batch';
 
 export default {
   brand: {
@@ -33,4 +34,5 @@ export default {
   tool,
   machinery,
   task,
+  batch,
 };

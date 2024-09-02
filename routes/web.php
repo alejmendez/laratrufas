@@ -14,6 +14,7 @@ use App\Http\Controllers\BulksController;
 use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\MachineriesController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\BatchesController;
 use App\Http\Controllers\SelectsController;
 
 use Illuminate\Foundation\Application;
@@ -76,6 +77,7 @@ Route::middleware('auth')->group(function () {
         'tools' => ToolsController::class,
         'machineries' => MachineriesController::class,
         'tasks' => TasksController::class,
+        'batches' => BatchesController::class,
     ]);
 });
 

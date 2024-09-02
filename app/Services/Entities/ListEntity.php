@@ -21,6 +21,7 @@ class ListEntity
             'harvest' => \App\Models\Harvest::select('id', 'batch', 'date')->orderBy('date'),
             'role' => \Spatie\Permission\Models\Role::select('name as value', 'name as text')->orderBy('name'),
             'harvest_available_years' => HarvestAvailableYears::call(),
+            'importer' => \App\Models\Importer::select('id as value', 'name as text')->orderBy('name'),
             'responsible', 'couple', 'user' => \App\Models\User::select('id as value', DB::Raw("(name || ' ' || last_name) AS text"))->orderBy('name'),
             default => [],
         };

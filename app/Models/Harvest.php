@@ -39,4 +39,9 @@ class Harvest extends Model
     {
         return $this->belongsToMany(Quarter::class, 'harvest_quarter');
     }
+
+    public function batches()
+    {
+        return $this->belongsToMany(Batch::class, 'batch_harvest');
+    }
 }

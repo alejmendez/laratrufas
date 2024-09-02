@@ -46,10 +46,10 @@ export const menuElements = (currentComponent) => {
           can: can('harvest-create'),
         },
         {
-          link: route('users.index'),
+          link: route('batches.index'),
           text: 'menu.batch',
           icon: 'fa-solid fa-table-list',
-          active: currentComponent.startsWith('Batchs'),
+          active: currentComponent.startsWith('Batches'),
           can: can('batch-index'),
         },
         {
