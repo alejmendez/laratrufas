@@ -1,8 +1,8 @@
 import PrimeVue from 'primevue/config';
 import { definePreset } from '@primevue/themes';
-import Lara from '@primevue/themes/lara';
+import Aura from '@primevue/themes/aura';
 
-const AppPreset = definePreset(Lara, {
+const AppPreset = definePreset(Aura, {
   semantic: {
     primary: {
       50: '{orange.50}',
