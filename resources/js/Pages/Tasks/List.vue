@@ -34,11 +34,20 @@ if (props.toast) {
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  'priority': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  'note': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  'status': { value: null, matchMode: FilterMatchMode.EQUALS },
+  'priority': { value: null, matchMode: FilterMatchMode.EQUALS },
   'updated_at': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   'responsible_id': { value: null, matchMode: FilterMatchMode.EQUALS },
 };
+
+const statesValues = ['to_begin', 'started', 'stopped', 'finished'];
+const filter_states_options = statesValues.map((s) => ({ value: s, text: t('task.form.status.options.' + s) }));
+const statesSeverities = {
+  'to_begin': 'warn',
+  'started': 'info',
+  'stopped': 'danger',
+  'finished': 'success',
+}
 
 const priorities = ['when_possible', 'routine', 'important', 'urgent']
 const filter_priorities_options = priorities.map((p) => ({
@@ -105,21 +114,20 @@ onMounted(async () => {
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nombre" />
         </template>
       </Column>
-      <Column field="priority" filterField="priority" :header="$t('task.table.priority')" sortable style="min-width: 200px">
+      <Column field="status" filterField="status" :showFilterMatchModes="false" :header="$t('task.table.status')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          <Tag :severity="prioritiesSeverities[data.priority]" :value="t('task.form.priority.options.' + data.priority)"></Tag>
-
+          <Tag :severity="statesSeverities[data.status]" :value="t('task.form.status.options.' + data.status)"></Tag>
+        </template>
+        <template #filter="{ filterModel }">
+          <Select v-model="filterModel.value" :options="filter_states_options" optionLabel="text" placeholder="Todos" />
+        </template>
+      </Column>
+      <Column field="priority" filterField="priority" :showFilterMatchModes="false" :header="$t('task.table.priority')" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ t('task.form.priority.options.' + data.priority) }}
         </template>
         <template #filter="{ filterModel }">
           <Select v-model="filterModel.value" :options="filter_priorities_options" optionLabel="text" placeholder="Todos" />
-        </template>
-      </Column>
-      <Column field="note" filterField="note" :header="$t('task.table.note')" sortable style="min-width: 200px">
-        <template #body="{ data }">
-          {{ data.note }}
-        </template>
-        <template #filter="{ filterModel }">
-          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nota" />
         </template>
       </Column>
       <Column field="updated_at" filterField="updated_at" :header="$t('task.table.updated_at')" sortable style="min-width: 200px">

@@ -8,7 +8,7 @@ export default {
   table: {
     name: 'Tarea',
     priority: 'Prioridad',
-    note: 'Nota',
+    status: 'Estado',
     updated_at: 'Actualización',
     responsible: 'Responsable',
   },
