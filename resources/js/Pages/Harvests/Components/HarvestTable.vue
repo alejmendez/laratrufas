@@ -61,30 +61,25 @@ const form = reactive({
 });
 
 const fetchHandler = async (params) => {
-  const year = form.year.value
+  const year = form.year.value;
   if (year) {
     const filter_date_range = [`${year}-01-01`, `${year}-12-31`];
-    if (params.filters) {
-      params = JSON.parse(JSON.stringify(params))
-      params.filters.date.constraints.push({ value: filter_date_range, matchMode: FilterMatchMode.BETWEEN});
+    if (params.filters?.date) {
+      params = JSON.parse(JSON.stringify(params));
+      params.filters.date.constraints.push({ value: filter_date_range, matchMode: FilterMatchMode.BETWEEN });
     } else {
       params.filters = {
         date: {
           operator: FilterOperator.AND,
-          constraints: [{ value: filter_date_range, matchMode: FilterMatchMode.BETWEEN }]
-        }
-      }
+          constraints: [{ value: filter_date_range, matchMode: FilterMatchMode.BETWEEN }],
+        },
+      };
     }
   }
-  return await HarvestService.list({...params});
-}
+  return await HarvestService.list({ ...params });
+};
 
 const filterHandler = async () => {
-  // if (isset($filters['year']) && $filters['year'] !== '') {
-  //   $start_date = $filters['year'] . '-01-01';
-  //   $end_date = $filters['year'] . '-12-31';
-  //   $harvests->whereBetween('date', [$start_date, $end_date]);
-  // }
   datatable.value.loadLazyData();
 };
 
@@ -117,7 +112,10 @@ onMounted(async () => {
     user: {},
   });
 
-  filter_year_options.value = data.harvest_available_years;
+  const year_value_default = { value: null, text: 'Todos' };
+  filter_year_options.value = [year_value_default, ...data.harvest_available_years];
+  form.year = year_value_default;
+
   filter_field_options.value = data.field;
   filter_quarter_options.value = data.quarter;
   filter_user_options.value = data.user;
