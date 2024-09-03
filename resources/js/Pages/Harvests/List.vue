@@ -16,7 +16,12 @@ const props = defineProps({
 
 onMounted(() => {
   if (props.toast) {
-    toast.add({ severity: 'success', summary: t('harvest.titles.entity_breadcrumb'), detail: t('generics.messages.saved_successfully'), life: 5000 });
+    toast.add({
+      severity: 'success',
+      summary: t('harvest.titles.entity_breadcrumb'),
+      detail: t('generics.messages.saved_successfully'),
+      life: 5000,
+    });
   }
 });
 </script>

@@ -33,28 +33,43 @@ if (props.toast) {
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   'quarters.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  'field_id': { value: null, matchMode: FilterMatchMode.EQUALS },
-  'area': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  field_id: { value: null, matchMode: FilterMatchMode.EQUALS },
+  area: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
 };
 
 const fetchHandler = async (params) => {
   return await QuarterService.list(params);
-}
+};
 
 const deleteHandler = (record) => {
   deleteRowTable(t, confirm, async () => {
     const result = await QuarterService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();
-      return toast.add({ severity: 'success', summary: t('generics.messages.deleted_successfully_summary'), detail: t('generics.messages.deleted_successfully'), life: 3000 });
+      return toast.add({
+        severity: 'success',
+        summary: t('generics.messages.deleted_successfully_summary'),
+        detail: t('generics.messages.deleted_successfully'),
+        life: 3000,
+      });
     }
-    toast.add({ severity: 'danger', summary: t('generics.tables.errors.could_not_delete_the_record_summary'), detail: t('generics.tables.errors.could_not_delete_the_record'), life: 3000 })
+    toast.add({
+      severity: 'danger',
+      summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
+      detail: t('generics.tables.errors.could_not_delete_the_record'),
+      life: 3000,
+    });
   });
 };
 
 onMounted(async () => {
   if (props.toast) {
-    toast.add({ severity: 'success', summary: t('quarter.titles.entity_breadcrumb'), detail: t('generics.messages.saved_successfully'), life: 5000 });
+    toast.add({
+      severity: 'success',
+      summary: t('quarter.titles.entity_breadcrumb'),
+      detail: t('generics.messages.saved_successfully'),
+      life: 5000,
+    });
   }
 
   const data = await getDataSelects({

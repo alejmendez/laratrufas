@@ -33,52 +33,67 @@ if (props.toast) {
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  'status': { value: null, matchMode: FilterMatchMode.EQUALS },
-  'priority': { value: null, matchMode: FilterMatchMode.EQUALS },
-  'updated_at': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  'responsible_id': { value: null, matchMode: FilterMatchMode.EQUALS },
+  name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  status: { value: null, matchMode: FilterMatchMode.EQUALS },
+  priority: { value: null, matchMode: FilterMatchMode.EQUALS },
+  updated_at: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  responsible_id: { value: null, matchMode: FilterMatchMode.EQUALS },
 };
 
 const statesValues = ['to_begin', 'started', 'stopped', 'finished'];
 const filter_states_options = statesValues.map((s) => ({ value: s, text: t('task.form.status.options.' + s) }));
 const statesSeverities = {
-  'to_begin': 'warn',
-  'started': 'info',
-  'stopped': 'danger',
-  'finished': 'success',
-}
+  to_begin: 'warn',
+  started: 'info',
+  stopped: 'danger',
+  finished: 'success',
+};
 
-const priorities = ['when_possible', 'routine', 'important', 'urgent']
+const priorities = ['when_possible', 'routine', 'important', 'urgent'];
 const filter_priorities_options = priorities.map((p) => ({
   value: p,
   text: t('task.form.priority.options.' + p),
 }));
 const prioritiesSeverities = {
-  'when_possible': 'success',
-  'routine': 'info',
-  'important': 'warn',
-  'urgent': 'danger',
-}
+  when_possible: 'success',
+  routine: 'info',
+  important: 'warn',
+  urgent: 'danger',
+};
 
 const fetchHandler = async (params) => {
   return await TaskService.list(params);
-}
+};
 
 const deleteHandler = (record) => {
   deleteRowTable(t, confirm, async () => {
     const result = await TaskService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();
-      return toast.add({ severity: 'success', summary: t('generics.messages.deleted_successfully_summary'), detail: t('generics.messages.deleted_successfully'), life: 3000 });
+      return toast.add({
+        severity: 'success',
+        summary: t('generics.messages.deleted_successfully_summary'),
+        detail: t('generics.messages.deleted_successfully'),
+        life: 3000,
+      });
     }
-    toast.add({ severity: 'danger', summary: t('generics.tables.errors.could_not_delete_the_record_summary'), detail: t('generics.tables.errors.could_not_delete_the_record'), life: 3000 })
+    toast.add({
+      severity: 'danger',
+      summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
+      detail: t('generics.tables.errors.could_not_delete_the_record'),
+      life: 3000,
+    });
   });
 };
 
 onMounted(async () => {
   if (props.toast) {
-    toast.add({ severity: 'success', summary: t('task.titles.entity_breadcrumb'), detail: t('generics.messages.saved_successfully'), life: 5000 });
+    toast.add({
+      severity: 'success',
+      summary: t('task.titles.entity_breadcrumb'),
+      detail: t('generics.messages.saved_successfully'),
+      life: 5000,
+    });
   }
 
   const data = await getDataSelects({

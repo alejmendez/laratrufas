@@ -16,7 +16,7 @@ onMounted(async () => {
 
   const plantsByCols = Object.groupBy(response, ({ row }) => row);
   const cols = Object.keys(plantsByCols);
-  const maxRows = Object.values(plantsByCols).reduce((acc, cur) => cur.length > acc ? cur.length : acc, 0);
+  const maxRows = Object.values(plantsByCols).reduce((acc, cur) => (cur.length > acc ? cur.length : acc), 0);
   const data = [];
 
   for (let i = 0; i < maxRows; i++) {
@@ -27,7 +27,7 @@ onMounted(async () => {
         continue;
       }
       const plant = plantsByCols[col][i];
-      plant.number = plant.code
+      plant.number = plant.code;
 
       const numbers = plant.code.match(/\d+/g);
       plant.position = numbers[numbers.length - 1];

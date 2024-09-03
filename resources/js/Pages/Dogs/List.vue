@@ -40,31 +40,46 @@ const genders = {
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  'quarter_id': { value: null, matchMode: FilterMatchMode.EQUALS },
+  quarter_id: { value: null, matchMode: FilterMatchMode.EQUALS },
   gender: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   breed: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   veterinary: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  'couple_id':  { value: null, matchMode: FilterMatchMode.EQUALS },
+  couple_id: { value: null, matchMode: FilterMatchMode.EQUALS },
 };
 
 const fetchHandler = async (params) => {
   return await DogService.list(params);
-}
+};
 
 const deleteHandler = (record) => {
   deleteRowTable(t, confirm, async () => {
     const result = await DogService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();
-      return toast.add({ severity: 'success', summary: t('generics.messages.deleted_successfully_summary'), detail: t('generics.messages.deleted_successfully'), life: 3000 });
+      return toast.add({
+        severity: 'success',
+        summary: t('generics.messages.deleted_successfully_summary'),
+        detail: t('generics.messages.deleted_successfully'),
+        life: 3000,
+      });
     }
-    toast.add({ severity: 'danger', summary: t('generics.tables.errors.could_not_delete_the_record_summary'), detail: t('generics.tables.errors.could_not_delete_the_record'), life: 3000 })
+    toast.add({
+      severity: 'danger',
+      summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
+      detail: t('generics.tables.errors.could_not_delete_the_record'),
+      life: 3000,
+    });
   });
 };
 
 onMounted(async () => {
   if (props.toast) {
-    toast.add({ severity: 'success', summary: t('dog.titles.entity_breadcrumb'), detail: t('generics.messages.saved_successfully'), life: 5000 });
+    toast.add({
+      severity: 'success',
+      summary: t('dog.titles.entity_breadcrumb'),
+      detail: t('generics.messages.saved_successfully'),
+      life: 5000,
+    });
   }
 
   const data = await getDataSelects({

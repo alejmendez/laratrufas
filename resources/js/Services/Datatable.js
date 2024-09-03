@@ -4,11 +4,11 @@ function transformFilters(obj) {
   let newObj = JSON.parse(JSON.stringify(obj));
 
   for (let key in newObj.filters) {
-      let filter = newObj.filters[key];
+    let filter = newObj.filters[key];
 
-      if (filter.value && typeof filter.value === 'object' && filter.value !== null) {
-          filter.value = filter.value.value;
-      }
+    if (filter.value && typeof filter.value === 'object' && filter.value !== null) {
+      filter.value = filter.value.value;
+    }
   }
 
   return newObj;

@@ -18,7 +18,7 @@ const props = defineProps({
 const form = useForm({
   name: null,
   repeat_number: '1',
-  repeat_type: { value: 'diary', text: t('task.form.repeat_type.options.diary' ) },
+  repeat_type: { value: 'diary', text: t('task.form.repeat_type.options.diary') },
   status: { value: 'to_begin', text: t('task.form.status.options.to_begin') },
   priority: { value: 'when_possible', text: t('task.form.priority.options.when_possible') },
   start_date: null,

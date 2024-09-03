@@ -34,14 +34,14 @@ const form = useForm({
   end_date: stringToDate(data.end_date),
   field_id: data.field,
   quarter_id: props.quarters.filter((a) => data.quarters.includes(a.value)),
-  rows: data.rows.map(a => ({ value: a, text: a })),
+  rows: data.rows.map((a) => ({ value: a, text: a })),
   plant_id: props.plants.filter((a) => data.plants.includes(a.value)),
   responsible_id: props.responsibles.find((a) => a.value == data.responsible_id),
   note: data.note,
   comments: data.comments,
   tools: data.tools,
   machineries: data.machineries,
-  supplies: data.supplies.map(a => {
+  supplies: data.supplies.map((a) => {
     a.unit = { value: a.unit, text: t('task.form.supplies.unit.options.' + a.unit) };
     return a;
   }),

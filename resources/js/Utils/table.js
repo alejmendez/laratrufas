@@ -7,13 +7,13 @@ export const deleteRowTable = async (t, confirm, accept) => {
     rejectProps: {
       label: t('generics.tables.confirm.denyButton'),
       severity: 'secondary',
-      outlined: true
+      outlined: true,
     },
     acceptProps: {
       label: t('generics.tables.confirm.confirmButton'),
-      severity: 'danger'
+      severity: 'danger',
     },
     accept,
-    reject: () => {}
+    reject: () => {},
   });
 };

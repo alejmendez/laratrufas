@@ -13,7 +13,7 @@ const props = defineProps({
 
 const attrs = useAttrs();
 
-const filters = ref({...props.filters});
+const filters = ref({ ...props.filters });
 
 const loading = ref(true);
 
@@ -48,7 +48,7 @@ const loadLazyData = async () => {
   loading.value = false;
 };
 
-defineExpose({ loadLazyData })
+defineExpose({ loadLazyData });
 
 const onPage = (event) => {
   lazyParams.value = event;

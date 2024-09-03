@@ -54,7 +54,7 @@ watch(
 watch(
   () => form.quarter_id,
   async (quarter_id) => {
-    plants.value = await getDataSelect('plant', { quarter_id: quarter_id.map(a => a.value) });
+    plants.value = await getDataSelect('plant', { quarter_id: quarter_id.map((a) => a.value) });
     form.plant_id = null;
   },
 );
