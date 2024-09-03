@@ -9,6 +9,7 @@ import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
+import DatePicker from 'primevue/datepicker';
 
 import { useI18n } from 'vue-i18n';
 
@@ -19,7 +20,7 @@ import { deleteRowTable } from '@/Utils/table.js';
 import { getWeek } from 'date-fns';
 
 import { stringToDate } from '@/Utils/date';
-import { getDataSelect, getDataSelects } from '@/Services/Selects';
+import { getDataSelects } from '@/Services/Selects';
 
 const toast = useToast();
 const confirm = useConfirm();
@@ -45,7 +46,7 @@ const filter_user_options = ref([]);
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_BEFORE }] },
   batch: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   'details.plant.quarter.field_id': { value: null, matchMode: FilterMatchMode.EQUALS },
   'details.plant.quarter_id': { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -59,17 +60,32 @@ const form = reactive({
   quarter: [],
 });
 
-const fetchHandler = async (params) => await HarvestService.list(params);
+const fetchHandler = async (params) => {
+  const year = form.year.value
+  if (year) {
+    const filter_date_range = [`${year}-01-01`, `${year}-12-31`];
+    if (params.filters) {
+      params = JSON.parse(JSON.stringify(params))
+      params.filters.date.constraints.push({ value: filter_date_range, matchMode: FilterMatchMode.BETWEEN});
+    } else {
+      params.filters = {
+        date: {
+          operator: FilterOperator.AND,
+          constraints: [{ value: filter_date_range, matchMode: FilterMatchMode.BETWEEN }]
+        }
+      }
+    }
+  }
+  return await HarvestService.list({...params});
+}
 
 const filterHandler = async () => {
-  if (form.last_field != form.field) {
-    form.last_field = form.field;
-    const data = await getDataSelect('quarter', {
-      field_id: form.field,
-    });
-
-    filter_quarter_options.value = data;
-  }
+  // if (isset($filters['year']) && $filters['year'] !== '') {
+  //   $start_date = $filters['year'] . '-01-01';
+  //   $end_date = $filters['year'] . '-12-31';
+  //   $harvests->whereBetween('date', [$start_date, $end_date]);
+  // }
+  datatable.value.loadLazyData();
 };
 
 const deleteHandler = (record) => {
@@ -113,7 +129,7 @@ onMounted(async () => {
   <Toast />
 
   <template v-if="props.show_filters">
-    <div class="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
+    <CardSection wrapperClass="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
       <VSelect
         id="year"
         v-model="form.year"
@@ -122,7 +138,7 @@ onMounted(async () => {
         :label="t('harvest.table_filters.year')"
         @change="filterHandler"
       />
-    </div>
+    </CardSection>
   </template>
 
   <Datatable
@@ -132,12 +148,12 @@ onMounted(async () => {
     sortField="date"
     :sortOrder="1"
   >
-    <Column field="date" :header="$t('harvest.table.date')" sortable frozen style="min-width: 200px">
+    <Column field="date" :header="$t('harvest.table.date')" dataType="date" sortable frozen style="min-width: 200px">
       <template #body="{ data }">
         {{ $t('harvest.table_data.date', { week: getWeek(stringToDate(data.date), { weekStartsOn: 1 }) }) }}
       </template>
       <template #filter="{ filterModel }">
-        <InputText v-model="filterModel.value" type="text" placeholder="Buscar por date" />
+        <DatePicker v-model="filterModel.value" dateFormat="mm/dd/yy" placeholder="Buscar por date" />
       </template>
     </Column>
 
