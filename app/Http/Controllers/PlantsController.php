@@ -120,6 +120,7 @@ class PlantsController extends Controller
             'fields' => ListEntity::call('field'),
             'message_success' => session('message_success', ''),
             'unprocessed_message' => session('unprocessed_message', ''),
+            'unprocessed_details' => session('unprocessed_details', []),
             'error_message' => session('error_message', ''),
             'errors' => session('errors', []),
         ]);
@@ -142,6 +143,7 @@ class PlantsController extends Controller
 
         $rowCount = $import->getRowCount();
         $countErrors = count($errors);
+        $unprocessedRecords = $import->getUnprocessedRecords();
         $numberOfUnprocessedRecords = $import->getNumberOfUnprocessedRecords();
 
         $message_success = "";
@@ -157,14 +159,21 @@ class PlantsController extends Controller
         }
 
         $unprocessed_message = "";
+        $unprocessed_details = [];
         if ($numberOfUnprocessedRecords > 0) {
             $unprocessed_message = "Hay $numberOfUnprocessedRecords que no tienen errores pero no fueron procesados porque ya existen.";
+            foreach ($unprocessedRecords as $record) {
+                $line = $record['line'];
+                $code = $record['code'];
+                $unprocessed_details[] = "Linea: $line, Codigo: $code";
+            }
         }
 
         return redirect()
             ->route('plants.create.bulk')
             ->with('message_success', $message_success)
             ->with('unprocessed_message', $unprocessed_message)
+            ->with('unprocessed_details', $unprocessed_details)
             ->with('error_message', $error_message)
             ->with('errors', $errors);
     }

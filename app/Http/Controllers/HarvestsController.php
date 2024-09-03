@@ -146,6 +146,7 @@ class HarvestsController extends Controller
             'id' => request('id'),
             'message_success' => session('message_success', ''),
             'unprocessed_message' => session('unprocessed_message', ''),
+            'unprocessed_details' => session('unprocessed_details', []),
             'error_message' => session('error_message', ''),
             'errors' => session('errors', []),
         ]);
@@ -168,6 +169,7 @@ class HarvestsController extends Controller
 
         $rowCount = $import->getRowCount();
         $countErrors = count($errors);
+        $unprocessedRecords = $import->getUnprocessedRecords();
         $numberOfUnprocessedRecords = $import->getNumberOfUnprocessedRecords();
 
         $message_success = "";
@@ -183,14 +185,23 @@ class HarvestsController extends Controller
         }
 
         $unprocessed_message = "";
+        $unprocessed_details = [];
         if ($numberOfUnprocessedRecords > 0) {
             $unprocessed_message = "Hay $numberOfUnprocessedRecords que no tienen errores pero no fueron procesados porque ya existen.";
+            foreach ($unprocessedRecords as $record) {
+                $line = $record['line'];
+                $code = $record['code'];
+                $quality = $record['quality'];
+                $weight = $record['weight'];
+                $unprocessed_details[] = "Linea: $line, Codigo: $code, Calidad: $quality, Peso: $weight";
+            }
         }
 
         return redirect()
             ->route('harvests.create.bulk')
             ->with('message_success', $message_success)
             ->with('unprocessed_message', $unprocessed_message)
+            ->with('unprocessed_details', $unprocessed_details)
             ->with('error_message', $error_message)
             ->with('errors', $errors);
     }

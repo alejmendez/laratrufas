@@ -6,6 +6,7 @@ import CardSection from '@/Components/CardSection.vue';
 const props = defineProps({
   message_success: String,
   unprocessed_message: String,
+  unprocessed_details: Array,
   error_message: String,
   errors: Array,
   title: String,
@@ -57,6 +58,9 @@ const openUnprocesseds = ref(true);
         <font-awesome-icon :icon="['fas', 'triangle-exclamation']" class="me-1" />
         {{ props.unprocessed_message }}
         <font-awesome-icon :icon="['fas', 'xmark']" class="float-right text-lg" @click="openUnprocesseds = !openUnprocesseds" />
+        <ul class="list-disc ps-5">
+          <li v-for="detail in unprocessed_details" v-text="detail" />
+        </ul>
       </div>
     </div>
 

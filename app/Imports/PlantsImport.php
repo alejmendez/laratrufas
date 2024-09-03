@@ -19,8 +19,9 @@ class PlantsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValid
 {
     use Importable, SkipsFailures;
 
+    protected $line = 0;
     private $rowCount = 0;
-    protected $numberOfUnprocessedRecords = 0;
+    protected $unprocessedRecords = [];
 
     protected $quarter_id;
     protected $plant_types;
@@ -32,6 +33,7 @@ class PlantsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValid
 
     public function model(array $row)
     {
+        $this->line++;
         $plant = new Plant;
 
         $plant->quarter_id = $this->quarter_id;
@@ -53,7 +55,10 @@ class PlantsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValid
         ])->count();
 
         if ($count > 0) {
-            $this->numberOfUnprocessedRecords++;
+            $this->unprocessedRecords[] = [
+                'line' => $this->line,
+                'code' => $row['codigo'],
+            ];
             return null;
         }
 
@@ -116,8 +121,13 @@ class PlantsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValid
         return $this->rowCount;
     }
 
+    public function getUnprocessedRecords()
+    {
+        return $this->unprocessedRecords;
+    }
+
     public function getNumberOfUnprocessedRecords()
     {
-        return $this->numberOfUnprocessedRecords;
+        return count($this->unprocessedRecords);
     }
 }

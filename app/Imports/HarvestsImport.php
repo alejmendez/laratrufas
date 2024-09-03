@@ -21,8 +21,9 @@ class HarvestsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithVal
 {
     use Importable, SkipsFailures;
 
+    protected $line = 0;
     protected $rowCount = 0;
-    protected $numberOfUnprocessedRecords = 0;
+    protected $unprocessedRecords = [];
     protected $harvest_id;
 
     public function __construct($harvest_id) {
@@ -31,6 +32,7 @@ class HarvestsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithVal
 
     public function model(array $row)
     {
+        $this->line++;
         $row['codigo_de_planta'] = strtoupper(trim($row['codigo_de_planta']));
 
         $harvest_detail = new HarvestDetail;
@@ -47,7 +49,12 @@ class HarvestsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithVal
         ])->count();
 
         if ($count > 0) {
-            $this->numberOfUnprocessedRecords++;
+            $this->unprocessedRecords[] = [
+                'line' => $this->line,
+                'code' => $row['codigo_de_planta'],
+                'quality' => $row['calidad'],
+                'weight' => $row['peso'],
+            ];
             return null;
         }
 
@@ -94,8 +101,13 @@ class HarvestsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithVal
         return $this->rowCount;
     }
 
+    public function getUnprocessedRecords()
+    {
+        return $this->unprocessedRecords;
+    }
+
     public function getNumberOfUnprocessedRecords()
     {
-        return $this->numberOfUnprocessedRecords;
+        return count($this->unprocessedRecords);
     }
 }

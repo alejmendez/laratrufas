@@ -13,6 +13,7 @@ const props = defineProps({
   quarters: Array,
   message_success: String,
   unprocessed_message: String,
+  unprocessed_details: Array,
   error_message: String,
   errors: Array,
 });
@@ -64,6 +65,7 @@ const changeFileHandler = (e) => {
       <BulkWrapper
         :message_success="props.message_success"
         :unprocessed_message="props.unprocessed_message"
+        :unprocessed_details="props.unprocessed_details"
         :error_message="props.error_message"
         :errors="props.errors"
         :title="t('generics.bulk.section_title')"
