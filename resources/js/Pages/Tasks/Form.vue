@@ -46,7 +46,7 @@ const plants = ref(props.plants);
 watch(
   () => form.field_id,
   async (field_id) => {
-    quarters.value = await getDataSelect('quarter', { field_id });
+    quarters.value = await getDataSelect('quarter', { field_id: field_id.value });
     form.quarter_id = null;
   },
 );
@@ -54,7 +54,7 @@ watch(
 watch(
   () => form.quarter_id,
   async (quarter_id) => {
-    plants.value = await getDataSelect('plant', { quarter_id });
+    plants.value = await getDataSelect('plant', { quarter_id: quarter_id.map(a => a.value) });
     form.plant_id = null;
   },
 );
