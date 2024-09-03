@@ -34,7 +34,7 @@ const priorities = ['when_possible', 'routine', 'important', 'urgent'].map((p) =
   text: t('task.form.priority.options.' + p),
 }));
 
-const statesValues = ['to_begin', 'started', 'stopped', 'finished'];
+const statesValues = ['to_begin', 'started', 'finished', 'stopped'];
 
 const states = statesValues.map((s) => ({ value: s, text: t('task.form.status.options.' + s) }));
 
@@ -139,22 +139,22 @@ function generateLetterArray() {
   border-color: #158fa1;
 }
 
-.p-button.btn-status.btn-stopped {
+.p-button.btn-status.btn-finished {
   background-color: #28A745;
   border-color: #28A745;
 }
 
-.p-button.btn-status.btn-stopped:hover {
+.p-button.btn-status.btn-finished:hover {
   background-color: #22923d;
   border-color: #22923d;
 }
 
-.p-button.btn-status.btn-finished {
+.p-button.btn-status.btn-stopped {
   background-color: #DC3545;
   border-color: #DC3545;
 }
 
-.p-button.btn-status.btn-finished:hover {
+.p-button.btn-status.btn-stopped:hover {
   background-color: #bd2d3b;
   border-color: #bd2d3b;
 }
