@@ -1,9 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import InputText from 'primevue/inputtext';
-import Select from 'primevue/select';
-import InputGroup from 'primevue/inputgroup';
 
 import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
 
@@ -37,8 +34,6 @@ const priorities = ['when_possible', 'routine', 'important', 'urgent'].map((p) =
 const statesValues = ['to_begin', 'started', 'finished', 'stopped'];
 
 const states = statesValues.map((s) => ({ value: s, text: t('task.form.status.options.' + s) }));
-
-const repeat_types = ['diary', 'weekly', 'monthly'].map((s) => ({ value: s, text: t('task.form.repeat_type.options.' + s) }));
 
 const quarters = ref(props.quarters);
 const plants = ref(props.plants);
@@ -181,35 +176,10 @@ textarea.p-textarea.comment {
       <VInput
         id="name"
         v-model="form.name"
+        classWrapper="col-span-2"
         :label="t('task.form.name.label')"
         :message="form.errors.name"
       />
-
-      <div>
-        <Label for="repeat_number">
-          {{ $t('task.form.repeat_number.label') }}
-        </Label>
-
-        <InputGroup>
-          <InputText
-            id="repeat_number"
-            v-model="form.repeat_number"
-            type="number"
-            min="1"
-            max="2000"
-            step="1"
-            :message="form.errors.repeat_number"
-          />
-          <Select
-            id="repeat_type"
-            v-model="form.repeat_type"
-            :placeholder="t('generics.please_select')"
-            :options="repeat_types"
-            optionLabel="text"
-            style="max-width: 160px;"
-          />
-        </InputGroup>
-      </div>
 
       <VSelect
         id="priority"

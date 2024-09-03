@@ -13,8 +13,8 @@ class UpdateTask
 
         $task->name = $data['name'];
         $task->status = $data['status']['value'];
-        $task->repeat_number = $data['repeat_number'];
-        $task->repeat_type = $data['repeat_type']['value'];
+        $task->repeat_number = '0';
+        $task->repeat_type = '';
         $task->priority = $data['priority']['value'];
         $task->start_date = $data['start_date'];
         $task->end_date = $data['end_date'];
