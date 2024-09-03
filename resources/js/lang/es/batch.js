@@ -5,13 +5,13 @@ export default {
     edit: 'Editar Entrega',
   },
   table: {
-    batch_number: 'Batch N°',
+    batch_number: 'Lote',
     delivery_date: 'Fecha de entrega',
     importer_id: 'Importador',
   },
   form: {
     batch_number: {
-      label: 'Batch N°',
+      label: 'Lote',
     },
     delivery_date: {
       label: 'Fecha de entrega',
