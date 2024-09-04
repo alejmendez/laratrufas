@@ -61,7 +61,7 @@ class ProfileController extends Controller
 
     protected function storeAvatar(ProfileUpdateRequest $request)
     {
-        if ($request->hasFile('avatar') != null) {
+        if ($request->file('avatar') != null) {
             return null;
         }
 
