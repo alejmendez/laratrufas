@@ -47,6 +47,7 @@ services:
     volumes:
       - .:/var/www
       - ./.docker/nginx/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf
+      - ./.docker/php/docker-php.ini:/usr/local/etc/php/conf.d/uploads.ini
     depends_on:
       - nginx-proxy
       - letsencrypt
