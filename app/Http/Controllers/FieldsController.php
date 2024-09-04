@@ -105,7 +105,7 @@ class FieldsController extends Controller
 
     protected function storeBlueprint(UpdateFieldRequest | StoreFieldRequest $request)
     {
-        if ($request->file('blueprint') != null) {
+        if ($request->file('blueprint') == null) {
             return null;
         }
 
