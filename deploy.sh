@@ -2,6 +2,7 @@
 # sudo docker exec laratrufa_app php artisan app:sync-permissions
 
 docker compose down
+git reset --hard
 git pull
 
 npm install -g npm@latest
