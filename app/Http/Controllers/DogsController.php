@@ -107,7 +107,7 @@ class DogsController extends Controller
 
     protected function storeAvatar(UpdateDogRequest | StoreDogRequest $request)
     {
-        if (!$request->hasFile('avatar')) {
+        if ($request->hasFile('avatar') != null) {
             return null;
         }
 

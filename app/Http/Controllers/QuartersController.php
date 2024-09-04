@@ -114,7 +114,7 @@ class QuartersController extends Controller
 
     protected function storeBlueprint(UpdateQuarterRequest | StoreQuarterRequest $request)
     {
-        if (!$request->hasFile('blueprint')) {
+        if ($request->hasFile('blueprint') != null) {
             return null;
         }
 

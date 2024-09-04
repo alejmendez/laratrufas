@@ -105,7 +105,7 @@ class UsersController extends Controller
 
     protected function storeAvatar(UpdateUserRequest | StoreUserRequest $request)
     {
-        if (!$request->hasFile('avatar')) {
+        if ($request->hasFile('avatar') != null) {
             return null;
         }
 
