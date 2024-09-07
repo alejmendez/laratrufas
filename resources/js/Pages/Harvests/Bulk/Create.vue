@@ -1,7 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { getWeek } from 'date-fns';
 import { stringToDate } from '@/Utils/date';
 
 import BulkWrapper from '@/Components/BulkWrapper.vue';
@@ -20,10 +19,9 @@ const props = defineProps({
 
 const harvests = props.harvests
   .map((h) => {
-    const week = getWeek(stringToDate(h.date), { weekStartsOn: 1 });
     return {
       value: h.id,
-      text: `Semana ${week} Batch ${h.batch}`,
+      text: `Semana ${h.week} Batch ${h.batch}`,
     };
   })
   .sort((a, b) => a.text - b.text);

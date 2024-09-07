@@ -18,6 +18,8 @@ class HarvestResource extends JsonResource
         return [
             'id' => $this->id,
             'date' => $this->date,
+            'year' => $this->year,
+            'week' => $this->week,
             'batch' => $this->batch,
             'dog' => [
                 'id' => $this->dog->id,

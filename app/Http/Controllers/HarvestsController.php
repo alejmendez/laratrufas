@@ -41,6 +41,8 @@ class HarvestsController extends Controller
                 return [
                     'id' => $harvest->id,
                     'date' => $harvest->date,
+                    'year' => $harvest->year,
+                    'week' => $harvest->week,
                     'batch' => $harvest->batch,
                     'field_names' => $harvest->quarters->map(fn ($quarter) => $quarter->field->name)->unique()->join(', '),
                     'quarter_names' => $harvest->quarters->map(fn ($quarter) => $quarter->name)->unique()->join(', '),

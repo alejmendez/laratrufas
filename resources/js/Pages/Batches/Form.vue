@@ -1,7 +1,5 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
-import { getWeek } from 'date-fns';
-import { stringToDate } from '@/Utils/date';
 
 import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
 
@@ -18,10 +16,9 @@ const form = props.form;
 
 const harvests = props.harvests
   .map((h) => {
-    const week = getWeek(stringToDate(h.date), { weekStartsOn: 1 });
     return {
       value: h.id,
-      text: `Semana ${week} Batch ${h.batch}`,
+      text: `Semana ${h.week} Batch ${h.batch}`,
     };
   })
   .sort((a, b) => a.text - b.text);

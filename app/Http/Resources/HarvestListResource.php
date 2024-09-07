@@ -18,6 +18,8 @@ class HarvestListResource extends JsonResource
         return [
             'id' => $this->id,
             'date' => $this->date,
+            'year' => $harvest->year,
+            'week' => $harvest->week,
             'batch' => $this->batch,
             'field_names' => $this->quarters->map(fn ($quarter) => $quarter->field->name)->unique()->join(', '),
             'quarter_names' => $this->quarters->map(fn ($quarter) => $quarter->name)->unique()->join(', '),

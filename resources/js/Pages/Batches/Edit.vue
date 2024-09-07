@@ -2,8 +2,6 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import { getWeek } from 'date-fns';
-
 import FormBatch from '@/Pages/Batches/Form.vue';
 import { generateSubmitHandler } from '@/Utils/form.js';
 
@@ -21,10 +19,9 @@ const { data } = props.data;
 
 const harvest_options = props.harvests
   .map((h) => {
-    const week = getWeek(stringToDate(h.date), { weekStartsOn: 1 });
     return {
       value: h.id,
-      text: `Semana ${week} Batch ${h.batch}`,
+      text: `Semana ${h.week} Batch ${h.batch}`,
     };
   })
   .sort((a, b) => a.text - b.text);

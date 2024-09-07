@@ -1,7 +1,7 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { format, getWeek } from 'date-fns';
+import { getWeek } from 'date-fns';
 
 import FormHarvest from '@/Pages/Harvests/Form.vue';
 

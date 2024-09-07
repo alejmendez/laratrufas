@@ -17,8 +17,6 @@ import Datatable from '@/Components/Table/Datatable.vue';
 import HarvestService from '@/Services/HarvestService.js';
 import { deleteRowTable } from '@/Utils/table.js';
 
-import { getWeek } from 'date-fns';
-
 import { stringToDate } from '@/Utils/date';
 import { getDataSelects } from '@/Services/Selects';
 
@@ -148,7 +146,7 @@ onMounted(async () => {
   >
     <Column field="date" :header="$t('harvest.table.date')" dataType="date" sortable frozen style="min-width: 200px">
       <template #body="{ data }">
-        {{ $t('harvest.table_data.date', { week: getWeek(stringToDate(data.date), { weekStartsOn: 1 }) }) }}
+        {{ $t('harvest.table_data.date', { week: data.week }) }}
       </template>
       <template #filter="{ filterModel }">
         <DatePicker v-model="filterModel.value" dateFormat="mm/dd/yy" placeholder="Buscar por date" />

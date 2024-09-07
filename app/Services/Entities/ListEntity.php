@@ -19,7 +19,7 @@ class ListEntity
             'tool' => \App\Models\Tool::select('id as value', 'name as text')->orderBy('name'),
             'machinery' => \App\Models\Machinery::select('id as value', 'name as text')->orderBy('name'),
             'dog' => \App\Models\Dog::select('id as value', 'name as text')->orderBy('name'),
-            'harvest' => \App\Models\Harvest::select('id', 'batch', 'date')->orderBy('date'),
+            'harvest' => \App\Models\Harvest::select('id', 'week', 'batch')->orderBy('date'),
             'role' => \Spatie\Permission\Models\Role::select('name as value', 'name as text')->orderBy('name'),
             'harvest_available_years' => HarvestAvailableYears::call(),
             'importer' => \App\Models\Importer::select('id as value', 'name as text')->orderBy('name'),

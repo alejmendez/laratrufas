@@ -19,7 +19,9 @@ class Harvest extends Model
     protected static function booted()
     {
         static::saving(function ($harvest) {
-            $harvest->year = Carbon::parse($harvest->date)->year;
+            $date = Carbon::parse($harvest->date);
+            $harvest->year = $date->year;
+            $harvest->week = $date->weekOfYear;
         });
     }
 
