@@ -97,12 +97,12 @@ onMounted(async () => {
       ref="datatable"
       :filters="filters"
       :fetchHandler="fetchHandler"
-      sortField="name"
+      sortField="full_name"
       :sortOrder="1"
     >
-      <Column field="name" :header="$t('user.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="full_name" :header="$t('user.table.name')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.name }}
+          {{ data.full_name }}
         </template>
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nombre" />

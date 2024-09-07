@@ -155,7 +155,7 @@ onMounted(async () => {
       </Column>
       <Column field="responsible.name" filterField="responsible_id" :showFilterMatchModes="false" :header="$t('plant.table.manager')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.responsible.name }} {{ data.responsible.last_name }}
+          {{ data.responsible.full_name }}
         </template>
         <template #filter="{ filterModel }">
           <Select v-model="filterModel.value" :options="filter_responsible_options" optionLabel="text" placeholder="Todos" />

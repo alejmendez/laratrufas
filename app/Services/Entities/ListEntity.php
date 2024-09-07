@@ -3,6 +3,7 @@
 namespace App\Services\Entities;
 
 use App\Services\Harvests\HarvestAvailableYears;
+use App\Services\Users\ListUserSelect;
 use Illuminate\Support\Facades\DB;
 
 class ListEntity
@@ -22,7 +23,7 @@ class ListEntity
             'role' => \Spatie\Permission\Models\Role::select('name as value', 'name as text')->orderBy('name'),
             'harvest_available_years' => HarvestAvailableYears::call(),
             'importer' => \App\Models\Importer::select('id as value', 'name as text')->orderBy('name'),
-            'responsible', 'couple', 'user' => \App\Models\User::select('id as value', DB::Raw("(name || ' ' || last_name) AS text"))->orderBy('name'),
+            'responsible', 'couple', 'user' => \App\Models\User::select('id as value', 'full_name as text')->orderBy('full_name'),
             default => [],
         };
 

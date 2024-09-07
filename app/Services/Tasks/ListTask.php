@@ -9,7 +9,7 @@ class ListTask
 {
     public static function call($params)
     {
-        $searchableColumns = ['name', 'status', 'priority', 'updated_at', 'responsible.name', 'responsible.last_name',];
+        $searchableColumns = ['name', 'status', 'priority', 'updated_at', 'responsible.full_name',];
 
         $query = Task::query();
 

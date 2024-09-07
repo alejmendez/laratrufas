@@ -14,7 +14,7 @@ class ListHarvest
     {
         $query = Harvest::with('details.plant.quarter.field', 'farmer');
 
-        $searchableColumns = ['date', 'batch', 'details.plant.quarter.field.name', 'details.plant.quarter.name', 'farmer.name', 'farmer.last_name'];
+        $searchableColumns = ['date', 'batch', 'details.plant.quarter.field.name', 'details.plant.quarter.name', 'farmer.full_name'];
         $datatable = new PrimevueDatatables($params, $searchableColumns);
         $harvests = $datatable->of($query)->make();
 

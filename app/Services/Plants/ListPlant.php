@@ -10,7 +10,7 @@ class ListPlant
 {
     public static function call($params = [])
     {
-        $searchableColumns = ['plants.code', 'quarter.name', 'quarter.field.name', 'plant_type.name', 'plants.age', 'quarter.responsible.name', 'quarter.responsible.last_name',];
+        $searchableColumns = ['plants.code', 'quarter.name', 'quarter.field.name', 'plant_type.name', 'plants.age', 'quarter.responsible.full_name',];
 
         $query = Plant::query();
 

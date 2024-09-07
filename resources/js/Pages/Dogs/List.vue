@@ -162,7 +162,7 @@ onMounted(async () => {
 
       <Column field="couple.name" :header="$t('dog.table.couple')" :showFilterMatchModes="false" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.couple.name }} {{ data.couple.last_name }}
+          {{ data.couple.full_name }}
         </template>
         <template #filter="{ filterModel }">
           <Select v-model="filterModel.value" :options="filter_couple_options" optionLabel="text" placeholder="Todos" />

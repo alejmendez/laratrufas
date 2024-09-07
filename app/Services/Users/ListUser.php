@@ -10,7 +10,7 @@ class ListUser
 {
     public static function call($params = [])
     {
-        $searchableColumns = ['name', 'last_name', 'dni', 'phone', 'roles.name', 'email',];
+        $searchableColumns = ['full_name', 'dni', 'phone', 'roles.name', 'email',];
 
         $query = User::query();
 

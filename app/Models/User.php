@@ -36,6 +36,14 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected static function booted()
+    {
+        static::saving(function ($user) {
+            $user->full_name = "{$user->name} {$user->last_name}";
+        });
+    }
+
+
     public function getAvatarUrlAttribute(): ?string
     {
         if ($this->avatar == null) {
@@ -43,11 +51,6 @@ class User extends Authenticatable
         }
 
         return Storage::url($this->avatar);
-    }
-
-    public function getFullNameAttribute(): string
-    {
-        return "{$this->name} {$this->last_name}";
     }
 
     public function harvests()

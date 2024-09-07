@@ -10,7 +10,7 @@ class ListDog
 {
     public static function call($params = [])
     {
-        $searchableColumns = ['name', 'birthdate', 'quarter.name', 'gender', 'breed', 'veterinary', 'couple.name', 'couple.last_name',];
+        $searchableColumns = ['name', 'birthdate', 'quarter.name', 'gender', 'breed', 'veterinary', 'couple.full_name',];
 
         $query = Dog::query();
 
