@@ -46,6 +46,7 @@ const filter_user_options = ref([]);
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  year: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
   date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_BEFORE }] },
   batch: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   'details.plant.quarter.field_id': { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -63,15 +64,14 @@ const form = reactive({
 const fetchHandler = async (params) => {
   const year = form.year.value;
   if (year) {
-    const filter_date_range = [`${year}-01-01`, `${year}-12-31`];
-    if (params.filters?.date) {
+    if (params.filters?.year) {
       params = JSON.parse(JSON.stringify(params));
-      params.filters.date.constraints.push({ value: filter_date_range, matchMode: FilterMatchMode.BETWEEN });
+      params.filters.year.constraints.push({ value: year, matchMode: FilterMatchMode.EQUALS });
     } else {
       params.filters = {
-        date: {
+        year: {
           operator: FilterOperator.AND,
-          constraints: [{ value: filter_date_range, matchMode: FilterMatchMode.BETWEEN }],
+          constraints: [{ value: year, matchMode: FilterMatchMode.EQUALS }],
         },
       };
     }
