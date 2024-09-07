@@ -29,7 +29,6 @@ return new class extends Migration
             $table->dropColumn('last_name');
             $table->dropColumn('phone');
             $table->dropColumn('avatar');
-            $table->dropColumn('deleted_at');
         });
     }
 };
