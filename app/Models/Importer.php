@@ -9,11 +9,6 @@ class Importer extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-    ];
-
-    // Relación con Batches (Uno a Muchos)
     public function batches()
     {
         return $this->hasMany(Batch::class);
