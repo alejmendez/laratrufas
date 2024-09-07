@@ -22,7 +22,7 @@ class UpdateBatchRequest extends FormRequest
     public function rules()
     {
         return [
-            'batch_number' => 'required|string|max:255|unique:batches,batch_number,' . $this->route('batch'),
+            'batch_number' => 'required|string|max:255|unique:batches,batch_number,'.$this->route('batch'),
             'delivery_date' => 'required|date',
             'importer_id' => 'required',
             'importer_id.value' => 'required|exists:importers,id',

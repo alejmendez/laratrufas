@@ -4,10 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class SyncPermissions extends Command
 {
@@ -49,6 +47,7 @@ class SyncPermissions extends Command
     ];
 
     protected $permissions = [];
+
     protected $roles = [];
 
     /**
@@ -96,7 +95,7 @@ class SyncPermissions extends Command
             'quarter show',
             'plant index',
             'plant show',
-            ...collect($this->permissions['harvest'])->filter(fn($p) => !Str::contains($p, 'destroy'))->toArray(),
+            ...collect($this->permissions['harvest'])->filter(fn ($p) => ! Str::contains($p, 'destroy'))->toArray(),
             ...$this->permissions['harvestdetail'],
             ...$this->permissions['task'],
             ...$this->permissions['machinery'],
@@ -108,7 +107,7 @@ class SyncPermissions extends Command
             'quarter show',
             'plant index',
             'plant show',
-            ...collect($this->permissions['harvest'])->filter(fn($p) => !Str::contains($p, 'destroy'))->toArray(),
+            ...collect($this->permissions['harvest'])->filter(fn ($p) => ! Str::contains($p, 'destroy'))->toArray(),
             ...$this->permissions['harvestdetail'],
             ...$this->permissions['task'],
         ]);
@@ -125,7 +124,7 @@ class SyncPermissions extends Command
 
         foreach ($this->roles as $key => $name) {
             $rol = Role::where('name', $name)->first();
-            if (!$rol) {
+            if (! $rol) {
                 $rol = Role::create(['name' => $name]);
             }
             $this->roles[$key] = $rol;
@@ -134,15 +133,15 @@ class SyncPermissions extends Command
 
     public function create_permission($entity, $action)
     {
-        $permission = $entity . ' ' . $action;
+        $permission = $entity.' '.$action;
 
-        if (!isset($this->permissions[$entity])) {
+        if (! isset($this->permissions[$entity])) {
             $this->permissions[$entity] = [];
         }
 
         $this->permissions[$entity][] = $permission;
 
-        if (!Permission::where('name', $permission)->exists()) {
+        if (! Permission::where('name', $permission)->exists()) {
             Permission::create(['name' => $permission]);
         }
     }

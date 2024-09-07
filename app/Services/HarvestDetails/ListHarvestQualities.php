@@ -2,8 +2,6 @@
 
 namespace App\Services\HarvestDetails;
 
-use App\Models\HarvestDetails;
-
 use Illuminate\Support\Str;
 
 class ListHarvestQualities
@@ -20,14 +18,14 @@ class ListHarvestQualities
         'Industrial',
     ];
 
-    public static function call($format): Array
+    public static function call($format): array
     {
         if ($format === 'values') {
-            return array_map(fn($quality) => Str::slug($quality), self::QUALITIES);
+            return array_map(fn ($quality) => Str::slug($quality), self::QUALITIES);
         }
 
         if ($format === 'select') {
-            return array_map(fn($quality) => [ 'value' => Str::slug($quality), 'text' => $quality ], self::QUALITIES);
+            return array_map(fn ($quality) => ['value' => Str::slug($quality), 'text' => $quality], self::QUALITIES);
         }
 
         return [];

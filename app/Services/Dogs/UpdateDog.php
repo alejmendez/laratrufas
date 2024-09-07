@@ -35,12 +35,13 @@ class UpdateDog
         return $dog;
     }
 
-    protected static function save_vaccines($dog, $data) {
+    protected static function save_vaccines($dog, $data)
+    {
         $vaccines = collect($data);
 
         $idVaccines = $dog->vaccines()->pluck('id');
         $idVaccinesToDestroy = $idVaccines->filter(function ($id, int $key) use ($vaccines) {
-            return !$vaccines->firstWhere('id', $id);
+            return ! $vaccines->firstWhere('id', $id);
         })->toArray();
 
         DogVaccine::destroy($idVaccinesToDestroy);

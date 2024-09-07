@@ -4,7 +4,6 @@ namespace App\Services\Roles;
 
 use Spatie\Permission\Models\Role;
 
-
 class ListRole
 {
     public static function call()

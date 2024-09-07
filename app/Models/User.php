@@ -4,17 +4,16 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\Orderable;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Support\Facades\Storage;
-
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, Orderable;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable, Orderable;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,7 +42,6 @@ class User extends Authenticatable
         });
     }
 
-
     public function getAvatarUrlAttribute(): ?string
     {
         if ($this->avatar == null) {
@@ -55,6 +53,6 @@ class User extends Authenticatable
 
     public function harvests()
     {
-        return$this->hasMany(Harvest::class, 'farmer_id');
+        return $this->hasMany(Harvest::class, 'farmer_id');
     }
 }

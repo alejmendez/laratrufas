@@ -3,7 +3,6 @@
 namespace App\Services\Harvests;
 
 use App\Models\Harvest;
-use App\Models\HarvestDetail;
 
 class CreateHarvest
 {
@@ -23,6 +22,7 @@ class CreateHarvest
             $quarter_ids[] = $option['value'];
         }
         $harvest->quarters()->attach($quarter_ids);
+
         return $harvest;
     }
 }

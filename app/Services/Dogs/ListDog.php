@@ -2,7 +2,6 @@
 
 namespace App\Services\Dogs;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\Dog;
 use App\Services\Primevue\PrimevueDatatables;
 
@@ -10,7 +9,7 @@ class ListDog
 {
     public static function call($params = [])
     {
-        $searchableColumns = ['name', 'birthdate', 'quarter.name', 'gender', 'breed', 'veterinary', 'couple.full_name',];
+        $searchableColumns = ['name', 'birthdate', 'quarter.name', 'gender', 'breed', 'veterinary', 'couple.full_name'];
 
         $query = Dog::query();
 

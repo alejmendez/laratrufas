@@ -10,7 +10,7 @@ class HarvestsTemplateExport implements FromArray
     {
         return [
             ['Código de planta', 'Calidad', 'Peso'],
-            ['FL01AA12', 'Regular', '3']
+            ['FL01AA12', 'Regular', '3'],
         ];
     }
 }

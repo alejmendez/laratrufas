@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait Filterable
 {
-
-    public function scopeFilter(Builder $query, Array $filters = []): void
+    public function scopeFilter(Builder $query, array $filters = []): void
     {
         if (count($filters) === 0) {
             return;

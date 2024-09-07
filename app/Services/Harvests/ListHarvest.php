@@ -2,9 +2,6 @@
 
 namespace App\Services\Harvests;
 
-
-use Illuminate\Support\Facades\DB;
-
 use App\Models\Harvest;
 use App\Services\Primevue\PrimevueDatatables;
 

@@ -2,8 +2,6 @@
 
 namespace App\Services\Entities;
 
-use Illuminate\Support\Facades\DB;
-
 class ListEntities
 {
     public static function call($entities)

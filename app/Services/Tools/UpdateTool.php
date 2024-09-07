@@ -3,7 +3,6 @@
 namespace App\Services\Tools;
 
 use App\Models\Tool;
-use App\Models\ToolVaccine;
 
 class UpdateTool
 {

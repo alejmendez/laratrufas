@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-
-use App\Services\Fields\FindField;
-use App\Services\Fields\ListField;
-use App\Services\Fields\CreateField;
-use App\Services\Fields\UpdateField;
-use App\Services\Fields\DeleteField;
-
-use App\Services\Harvests\ListHarvest;
-
-use App\Http\Resources\FieldResource;
-use App\Http\Resources\FieldCollection;
 use App\Http\Requests\StoreFieldRequest;
 use App\Http\Requests\UpdateFieldRequest;
+use App\Http\Resources\FieldResource;
+use App\Services\Fields\CreateField;
+use App\Services\Fields\DeleteField;
+use App\Services\Fields\FindField;
+use App\Services\Fields\ListField;
+use App\Services\Fields\UpdateField;
+use Inertia\Inertia;
 
 class FieldsController extends Controller
 {
@@ -26,6 +21,7 @@ class FieldsController extends Controller
     {
         if (request()->exists('dt_params')) {
             $params = json_decode(request('dt_params', '[]'), true);
+
             return response()->json(ListField::call($params));
         }
 
@@ -100,10 +96,11 @@ class FieldsController extends Controller
     public function destroy(string $id)
     {
         DeleteField::call($id);
+
         return response()->noContent();
     }
 
-    protected function storeBlueprint(UpdateFieldRequest | StoreFieldRequest $request)
+    protected function storeBlueprint(UpdateFieldRequest|StoreFieldRequest $request)
     {
         if ($request->file('blueprint') == null) {
             return null;

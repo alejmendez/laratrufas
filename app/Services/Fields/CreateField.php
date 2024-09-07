@@ -2,8 +2,8 @@
 
 namespace App\Services\Fields;
 
-use App\Services\Owners\CreateOrUpdateOwner;
 use App\Models\Field;
+use App\Services\Owners\CreateOrUpdateOwner;
 
 class CreateField
 {

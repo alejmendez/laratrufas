@@ -3,7 +3,6 @@
 namespace App\Services\Batches;
 
 use App\Models\Batch;
-use App\Models\BatchVaccine;
 
 class UpdateBatch
 {
@@ -15,7 +14,7 @@ class UpdateBatch
         $batch->importer_id = $data['importer_id']['value'];
         $batch->save();
 
-        $harvests_ids = collect($data['harvests'] ?? [])->map(fn($q) => $q['value'])->toArray();
+        $harvests_ids = collect($data['harvests'] ?? [])->map(fn ($q) => $q['value'])->toArray();
         $batch->harvests()->sync($harvests_ids);
 
         return $batch;

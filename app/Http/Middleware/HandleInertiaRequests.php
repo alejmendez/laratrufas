@@ -3,10 +3,9 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Inertia\Middleware;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-
+use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -20,7 +19,7 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      */
-    public function version(Request $request): string|null
+    public function version(Request $request): ?string
     {
         return parent::version($request);
     }
@@ -43,10 +42,11 @@ class HandleInertiaRequests extends Middleware
                 'avatar_url' => $user->avatar === null ? null : (Str::startsWith($user->avatar, 'http') ? $user->avatar : Storage::url($user->avatar)),
                 'dni' => $user->dni,
                 'email' => $user->email,
-                'roles' => collect($user->getRoleNames())->map(fn($role) => Str::slug($role)),
-                'permissions' => $user->getAllPermissions()->pluck('name')->map(fn($user) => Str::slug($user)),
+                'roles' => collect($user->getRoleNames())->map(fn ($role) => Str::slug($role)),
+                'permissions' => $user->getAllPermissions()->pluck('name')->map(fn ($user) => Str::slug($user)),
             ];
         }
+
         return [
             ...parent::share($request),
             'auth' => [

@@ -4,29 +4,32 @@ namespace App\Imports;
 
 use App\Models\Plant;
 use App\Models\PlantType;
-
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
+use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
-class PlantsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValidation, SkipsOnFailure
+class PlantsImport implements SkipsEmptyRows, SkipsOnFailure, ToModel, WithHeadingRow, WithValidation
 {
     use Importable, SkipsFailures;
 
     protected $line = 0;
+
     private $rowCount = 0;
+
     protected $unprocessedRecords = [];
 
     protected $quarter_id;
+
     protected $plant_types;
 
-    public function __construct($quarter_id) {
+    public function __construct($quarter_id)
+    {
         $this->quarter_id = $quarter_id;
         $this->plant_types = PlantType::all()->pluck('id', 'slug')->toArray();
     }
@@ -59,6 +62,7 @@ class PlantsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValid
                 'line' => $this->line,
                 'code' => $row['codigo'],
             ];
+
             return null;
         }
 
@@ -113,6 +117,7 @@ class PlantsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValid
     public function prepareForValidation($data, $index)
     {
         $data['codigo'] = strtoupper(trim($data['codigo'] ?? ''));
+
         return $data;
     }
 

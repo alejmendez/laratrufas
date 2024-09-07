@@ -12,6 +12,7 @@ class CreateOrUpdateOwner
             ['dni' => $dni],
             ['name' => $name]
         );
+
         return $owner;
     }
 }

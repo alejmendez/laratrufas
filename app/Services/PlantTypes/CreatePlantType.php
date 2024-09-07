@@ -2,9 +2,8 @@
 
 namespace App\Services\PlantTypes;
 
-use Illuminate\Support\Str;
-
 use App\Models\PlantType;
+use Illuminate\Support\Str;
 
 class CreatePlantType
 {
@@ -12,12 +11,13 @@ class CreatePlantType
     {
         $slug = Str::slug($name);
         $type = PlantType::where('slug', $slug)->first();
-        if (!$type) {
+        if (! $type) {
             $type = new PlantType;
             $type->name = $name;
             $type->slug = $slug;
             $type->save();
         }
+
         return $type;
     }
 }

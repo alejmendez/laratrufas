@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class TaskResource extends JsonResource
 {
@@ -43,7 +42,7 @@ class TaskResource extends JsonResource
                 'value' => $machinery->id,
                 'text' => $machinery->name,
             ]),
-            'supplies' =>  $this->supplies->map(fn ($supply) => [
+            'supplies' => $this->supplies->map(fn ($supply) => [
                 'id' => $supply->id,
                 'name' => $supply->name,
                 'brand' => $supply->brand,

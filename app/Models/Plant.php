@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
+use App\Traits\Filterable;
+use App\Traits\Orderable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-use App\Traits\Orderable;
-use App\Traits\Filterable;
 
 class Plant extends Model
 {
-    use HasFactory, Orderable, Filterable;
+    use Filterable, HasFactory, Orderable;
 
     public function quarter(): BelongsTo
     {
@@ -37,5 +35,4 @@ class Plant extends Model
             set: fn (string $value) => strtoupper(trim($value)),
         );
     }
-
 }

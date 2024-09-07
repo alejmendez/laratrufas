@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use App\Models\Plant;
 use App\Models\PlantType;
 use App\Models\Quarter;
-use App\Models\Plant;
+use Illuminate\Database\Seeder;
 
 class PlantsSeeder extends Seeder
 {

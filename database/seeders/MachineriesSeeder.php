@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Machinery;
+use Illuminate\Database\Seeder;
 
 class MachineriesSeeder extends Seeder
 {

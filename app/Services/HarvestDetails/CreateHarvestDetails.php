@@ -2,11 +2,9 @@
 
 namespace App\Services\HarvestDetails;
 
-use App\Models\HarvestDetail;
 use App\Models\Harvest;
-use App\Models\Plant;
+use App\Models\HarvestDetail;
 use App\Services\Plants\FindPlantByCode;
-
 use Illuminate\Support\Str;
 
 class CreateHarvestDetails

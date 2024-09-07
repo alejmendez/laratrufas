@@ -2,31 +2,33 @@
 
 namespace App\Imports;
 
-use App\Models\Plant;
-use Illuminate\Support\Str;
-
 use App\Models\HarvestDetail;
-use Illuminate\Validation\Rule;
-use Maatwebsite\Excel\Concerns\ToModel;
+use App\Models\Plant;
 use App\Services\Plants\FindPlantByCode;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
-use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
+use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
-
-class HarvestsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValidation, SkipsOnFailure
+class HarvestsImport implements SkipsEmptyRows, SkipsOnFailure, ToModel, WithHeadingRow, WithValidation
 {
     use Importable, SkipsFailures;
 
     protected $line = 0;
+
     protected $rowCount = 0;
+
     protected $unprocessedRecords = [];
+
     protected $harvest_id;
 
-    public function __construct($harvest_id) {
+    public function __construct($harvest_id)
+    {
         $this->harvest_id = intval($harvest_id);
     }
 
@@ -55,6 +57,7 @@ class HarvestsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithVal
                 'quality' => $row['calidad'],
                 'weight' => $row['peso'],
             ];
+
             return null;
         }
 
@@ -73,7 +76,7 @@ class HarvestsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithVal
         return [
             'codigo_de_planta' => [
                 'required',
-                Rule::exists('plants', 'code')
+                Rule::exists('plants', 'code'),
             ],
             'calidad' => 'max:30|nullable',
             'peso' => 'required|numeric|between:0,99999',
@@ -93,6 +96,7 @@ class HarvestsImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithVal
     public function prepareForValidation($data, $index)
     {
         $data['codigo_de_planta'] = strtoupper(trim($data['codigo_de_planta'] ?? ''));
+
         return $data;
     }
 

@@ -2,21 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-
-use App\Services\Users\FindUser;
-use App\Services\Users\ListUser;
-use App\Services\Users\CreateUser;
-use App\Services\Users\UpdateUser;
-use App\Services\Users\DeleteUser;
-
-use App\Services\Roles\ListRole;
-use App\Services\Entities\ListEntity;
-
-use App\Http\Resources\UserResource;
-use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\UserResource;
+use App\Services\Entities\ListEntity;
+use App\Services\Users\CreateUser;
+use App\Services\Users\DeleteUser;
+use App\Services\Users\FindUser;
+use App\Services\Users\ListUser;
+use App\Services\Users\UpdateUser;
+use Inertia\Inertia;
 
 class UsersController extends Controller
 {
@@ -27,6 +22,7 @@ class UsersController extends Controller
     {
         if (request()->exists('dt_params')) {
             $params = json_decode(request('dt_params', '[]'), true);
+
             return response()->json(ListUser::call($params));
         }
 
@@ -100,10 +96,11 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         DeleteUser::call($id);
+
         return redirect()->route('users.index');
     }
 
-    protected function storeAvatar(UpdateUserRequest | StoreUserRequest $request)
+    protected function storeAvatar(UpdateUserRequest|StoreUserRequest $request)
     {
         if ($request->file('avatar') == null) {
             return null;

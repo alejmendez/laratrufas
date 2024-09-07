@@ -2,26 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use Maatwebsite\Excel\Facades\Excel;
-
-use App\Services\Plants\FindPlant;
-use App\Services\Plants\ListPlant;
-use App\Services\Plants\CreatePlant;
-use App\Services\Plants\UpdatePlant;
-use App\Services\Plants\DeletePlant;
-use App\Services\Fields\ListField;
-use App\Services\Quarters\ListQuarter;
-use App\Services\Entities\ListEntity;
-
-use App\Http\Resources\PlantResource;
-use App\Http\Resources\PlantCollection;
+use App\Exports\PlantsTemplateExport;
+use App\Http\Requests\BulkPlantRequest;
 use App\Http\Requests\StorePlantRequest;
 use App\Http\Requests\UpdatePlantRequest;
-use App\Http\Requests\BulkPlantRequest;
-
+use App\Http\Resources\PlantResource;
 use App\Imports\PlantsImport;
-use App\Exports\PlantsTemplateExport;
+use App\Services\Entities\ListEntity;
+use App\Services\Plants\CreatePlant;
+use App\Services\Plants\DeletePlant;
+use App\Services\Plants\FindPlant;
+use App\Services\Plants\ListPlant;
+use App\Services\Plants\UpdatePlant;
+use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PlantsController extends Controller
 {
@@ -32,6 +26,7 @@ class PlantsController extends Controller
     {
         if (request()->exists('dt_params')) {
             $params = json_decode(request('dt_params', '[]'), true);
+
             return response()->json(ListPlant::call($params));
         }
 
@@ -106,12 +101,13 @@ class PlantsController extends Controller
     public function destroy(string $id)
     {
         DeletePlant::call($id);
+
         return redirect()->route('plants.index');
     }
 
     public function download_bulk_template()
     {
-        return Excel::download(new PlantsTemplateExport(), 'carga_masiva_plantas.xlsx');
+        return Excel::download(new PlantsTemplateExport, 'carga_masiva_plantas.xlsx');
     }
 
     public function create_bulk()
@@ -146,19 +142,19 @@ class PlantsController extends Controller
         $unprocessedRecords = $import->getUnprocessedRecords();
         $numberOfUnprocessedRecords = $import->getNumberOfUnprocessedRecords();
 
-        $message_success = "";
+        $message_success = '';
         if ($countErrors > 0) {
             $message_success = "Se han ingresado $rowCount registros al sistema y se tienen $countErrors errores.";
         } else {
             $message_success = "La carga de datos ha sido completada con éxito. Se han ingresado $rowCount registros de tipo de datos al sistema. ¡Buen trabajo!";
         }
 
-        $error_message = "";
+        $error_message = '';
         if ($countErrors > 0) {
             $error_message = "Hay $countErrors errores o advertencias que debes corregir. Puedes ver el detalle de los errores en el resumen de la carga.";
         }
 
-        $unprocessed_message = "";
+        $unprocessed_message = '';
         $unprocessed_details = [];
         if ($numberOfUnprocessedRecords > 0) {
             $unprocessed_message = "Hay $numberOfUnprocessedRecords que no tienen errores pero no fueron procesados porque ya existen.";

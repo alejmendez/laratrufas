@@ -28,6 +28,6 @@ class HarvestListCollection extends ResourceCollection
             'to' => $this->to,
             'total' => $this->total,
             'links' => $this->links,
-        ];;
+        ];
     }
 }

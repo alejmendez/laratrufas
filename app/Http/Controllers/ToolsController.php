@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-
-use App\Services\Tools\FindTool;
-use App\Services\Tools\ListTool;
-use App\Services\Tools\CreateTool;
-use App\Services\Tools\UpdateTool;
-use App\Services\Tools\DeleteTool;
-
-use App\Http\Resources\ToolResource;
-use App\Http\Resources\ToolCollection;
 use App\Http\Requests\StoreToolRequest;
 use App\Http\Requests\UpdateToolRequest;
+use App\Http\Resources\ToolResource;
+use App\Services\Tools\CreateTool;
+use App\Services\Tools\DeleteTool;
+use App\Services\Tools\FindTool;
+use App\Services\Tools\ListTool;
+use App\Services\Tools\UpdateTool;
+use Inertia\Inertia;
 
 class ToolsController extends Controller
 {
@@ -24,6 +21,7 @@ class ToolsController extends Controller
     {
         if (request()->exists('dt_params')) {
             $params = json_decode(request('dt_params', '[]'), true);
+
             return response()->json(ListTool::call($params));
         }
 
@@ -90,6 +88,7 @@ class ToolsController extends Controller
     public function destroy(string $id)
     {
         DeleteTool::call($id);
+
         return redirect()->route('tools.index');
     }
 }

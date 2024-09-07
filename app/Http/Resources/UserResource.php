@@ -4,8 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserResource extends JsonResource
 {
@@ -23,6 +23,7 @@ class UserResource extends JsonResource
                 'name' => $this->roles[0]->name,
             ];
         }
+
         return [
             'id' => $this->id,
             'name' => $this->name,

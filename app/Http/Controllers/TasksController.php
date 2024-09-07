@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-
-use App\Services\Tasks\FindTask;
-use App\Services\Tasks\ListTask;
-use App\Services\Tasks\CreateTask;
-use App\Services\Tasks\UpdateTask;
-use App\Services\Tasks\DeleteTask;
-use App\Services\Fields\ListField;
-use App\Services\Entities\ListEntity;
-
-use App\Http\Resources\TaskResource;
-use App\Http\Resources\TaskCollection;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Resources\TaskResource;
+use App\Services\Entities\ListEntity;
+use App\Services\Tasks\CreateTask;
+use App\Services\Tasks\DeleteTask;
+use App\Services\Tasks\FindTask;
+use App\Services\Tasks\ListTask;
+use App\Services\Tasks\UpdateTask;
+use Inertia\Inertia;
 
 class TasksController extends Controller
 {
@@ -26,6 +22,7 @@ class TasksController extends Controller
     {
         if (request()->exists('dt_params')) {
             $params = json_decode(request('dt_params', '[]'), true);
+
             return response()->json(ListTask::call($params));
         }
 
@@ -80,7 +77,7 @@ class TasksController extends Controller
             'data' => new TaskResource($task),
             'fields' => ListEntity::call('field'),
             'quarters' => ListEntity::call('quarter', ['field_id' => $task->field_id]),
-            'plants' => ListEntity::call('plant', ['quarter_id' => $task->quarters->map(fn($q) => $q->id)->toArray()]),
+            'plants' => ListEntity::call('plant', ['quarter_id' => $task->quarters->map(fn ($q) => $q->id)->toArray()]),
             'responsibles' => ListEntity::call('responsible'),
             'tools' => ListEntity::call('tool'),
             'machineries' => ListEntity::call('machinery'),
@@ -103,6 +100,7 @@ class TasksController extends Controller
     public function destroy(string $id)
     {
         DeleteTask::call($id);
+
         return redirect()->route('tasks.index');
     }
 }

@@ -20,7 +20,7 @@ class PlantFactory extends Factory
             'planned_at' => fake()->date(),
             'nursery_origin' => fake()->name(),
             'code' => strtoupper(fake()->lexify('??-??-??')),
-            'row' => strtoupper(fake()->randomLetter() . fake()->randomLetter()),
+            'row' => strtoupper(fake()->randomLetter().fake()->randomLetter()),
             'age' => fake()->numerify('###'),
         ];
     }

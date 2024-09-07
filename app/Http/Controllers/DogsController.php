@@ -2,21 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-
-use App\Services\Dogs\FindDog;
-use App\Services\Dogs\ListDog;
-use App\Services\Dogs\CreateDog;
-use App\Services\Dogs\UpdateDog;
-use App\Services\Dogs\DeleteDog;
-use App\Services\Fields\ListField;
-use App\Services\Quarters\ListQuarter;
-use App\Services\Entities\ListEntity;
-
-use App\Http\Resources\DogResource;
-use App\Http\Resources\DogCollection;
 use App\Http\Requests\StoreDogRequest;
 use App\Http\Requests\UpdateDogRequest;
+use App\Http\Resources\DogResource;
+use App\Services\Dogs\CreateDog;
+use App\Services\Dogs\DeleteDog;
+use App\Services\Dogs\FindDog;
+use App\Services\Dogs\ListDog;
+use App\Services\Dogs\UpdateDog;
+use App\Services\Entities\ListEntity;
+use Inertia\Inertia;
 
 class DogsController extends Controller
 {
@@ -27,6 +22,7 @@ class DogsController extends Controller
     {
         if (request()->exists('dt_params')) {
             $params = json_decode(request('dt_params', '[]'), true);
+
             return response()->json(ListDog::call($params));
         }
 
@@ -64,6 +60,7 @@ class DogsController extends Controller
     public function show(string $id)
     {
         $dog = FindDog::call($id);
+
         return Inertia::render('Dogs/Show', [
             'data' => new DogResource($dog),
         ]);
@@ -102,10 +99,11 @@ class DogsController extends Controller
     public function destroy(string $id)
     {
         DeleteDog::call($id);
+
         return redirect()->route('dogs.index');
     }
 
-    protected function storeAvatar(UpdateDogRequest | StoreDogRequest $request)
+    protected function storeAvatar(UpdateDogRequest|StoreDogRequest $request)
     {
         if ($request->file('avatar') == null) {
             return null;

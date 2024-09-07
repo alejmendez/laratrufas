@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Entities\ListEntity;
 use App\Services\Entities\ListEntities;
+use App\Services\Entities\ListEntity;
 
 class SelectsController extends Controller
 {
@@ -14,6 +14,7 @@ class SelectsController extends Controller
 
         if ($entity === 'multiple') {
             $entities = json_decode(request('entities', '{}'));
+
             return response()->json(ListEntities::call($entities));
         }
 

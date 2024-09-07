@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Services\HarvestDetails\ListHarvestQualities;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-
-use App\Services\HarvestDetails\ListHarvestQualities;
 
 class StoreHarvestDetailRequest extends FormRequest
 {

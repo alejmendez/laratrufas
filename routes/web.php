@@ -1,25 +1,23 @@
 <?php
 
+use App\Http\Controllers\BatchesController;
+use App\Http\Controllers\BulksController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\DogsController;
 use App\Http\Controllers\FieldsController;
-use App\Http\Controllers\QuartersController;
+use App\Http\Controllers\HarvestDetailsController;
+use App\Http\Controllers\HarvestsController;
+use App\Http\Controllers\MachineriesController;
 use App\Http\Controllers\PlantsController;
 use App\Http\Controllers\PlantTypesController;
-use App\Http\Controllers\DogsController;
-use App\Http\Controllers\HarvestsController;
-use App\Http\Controllers\HarvestDetailsController;
-use App\Http\Controllers\BulksController;
-use App\Http\Controllers\ToolsController;
-use App\Http\Controllers\MachineriesController;
-use App\Http\Controllers\TasksController;
-use App\Http\Controllers\BatchesController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuartersController;
 use App\Http\Controllers\SelectsController;
-
+use App\Http\Controllers\TasksController;
+use App\Http\Controllers\ToolsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +37,6 @@ Route::get('/', function () {
 
     return redirect()->route('login');
 });
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['verified'])->name('dashboard');

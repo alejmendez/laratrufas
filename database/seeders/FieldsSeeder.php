@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Field;
+use Illuminate\Database\Seeder;
 
 class FieldsSeeder extends Seeder
 {

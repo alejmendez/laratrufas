@@ -2,21 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-
-use App\Services\Batches\FindBatch;
-use App\Services\Batches\ListBatch;
-use App\Services\Batches\CreateBatch;
-use App\Services\Batches\UpdateBatch;
-use App\Services\Batches\DeleteBatch;
-use App\Services\Entities\ListEntity;
-
-use App\Http\Resources\BatchResource;
-use App\Http\Resources\BatchCollection;
 use App\Http\Requests\StoreBatchRequest;
 use App\Http\Requests\UpdateBatchRequest;
-
-use Illuminate\Http\Request;
+use App\Http\Resources\BatchResource;
+use App\Services\Batches\CreateBatch;
+use App\Services\Batches\DeleteBatch;
+use App\Services\Batches\FindBatch;
+use App\Services\Batches\ListBatch;
+use App\Services\Batches\UpdateBatch;
+use App\Services\Entities\ListEntity;
+use Inertia\Inertia;
 
 class BatchesController extends Controller
 {
@@ -27,6 +22,7 @@ class BatchesController extends Controller
     {
         if (request()->exists('dt_params')) {
             $params = json_decode(request('dt_params', '[]'), true);
+
             return response()->json(ListBatch::call($params));
         }
 
@@ -62,6 +58,7 @@ class BatchesController extends Controller
     public function show(string $id)
     {
         $batch = FindBatch::call($id);
+
         return Inertia::render('Batches/Show', [
             'importers' => ListEntity::call('importer'),
             'harvests' => ListEntity::call('harvest'),
@@ -98,6 +95,7 @@ class BatchesController extends Controller
     public function destroy(string $id)
     {
         DeleteBatch::call($id);
+
         return redirect()->route('batches.index');
     }
 }

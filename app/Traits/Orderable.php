@@ -2,13 +2,12 @@
 
 namespace App\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
 use App\Utils\Query;
+use Illuminate\Database\Eloquent\Builder;
 
 trait Orderable
 {
-
-    public function scopeOrder(Builder $query, String $order = ''): void
+    public function scopeOrder(Builder $query, string $order = ''): void
     {
         Query::order($query, $order);
     }

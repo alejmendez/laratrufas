@@ -2,8 +2,8 @@
 
 namespace App\Services\Tasks;
 
-use App\Models\Task;
 use App\Models\SupplyTask;
+use App\Models\Task;
 
 class UpdateTask
 {
@@ -19,7 +19,7 @@ class UpdateTask
         $task->start_date = $data['start_date'];
         $task->end_date = $data['end_date'];
         $task->field_id = $data['field_id']['value'];
-        $task->rows = collect($data['rows'])->map(fn($q) => $q['value'])->toArray();
+        $task->rows = collect($data['rows'])->map(fn ($q) => $q['value'])->toArray();
         $task->responsible_id = $data['responsible_id']['value'];
         $task->comments = $data['comments'];
 
@@ -37,7 +37,7 @@ class UpdateTask
 
     protected static function syncRelationship($task, $relation, $data)
     {
-        $ids = collect($data)->map(fn($d) => $d['value'])->toArray();
+        $ids = collect($data)->map(fn ($d) => $d['value'])->toArray();
         $task->{$relation}()->sync($ids);
     }
 

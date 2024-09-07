@@ -36,12 +36,12 @@ class DogResource extends JsonResource
                 'id' => $this->couple->id,
                 'name' => $this->couple->full_name,
             ],
-            'vaccines' => $this->vaccines->map(function($v) {
+            'vaccines' => $this->vaccines->map(function ($v) {
                 return [
                     'id' => $v['id'],
                     'name' => $v['name'],
                     'date' => $v['date'],
-                    'code' => $v['code']
+                    'code' => $v['code'],
                 ];
             }),
             'created_at' => $this->created_at,

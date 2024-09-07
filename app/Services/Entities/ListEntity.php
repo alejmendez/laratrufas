@@ -3,8 +3,6 @@
 namespace App\Services\Entities;
 
 use App\Services\Harvests\HarvestAvailableYears;
-use App\Services\Users\ListUserSelect;
-use Illuminate\Support\Facades\DB;
 
 class ListEntity
 {
@@ -47,17 +45,18 @@ class ListEntity
         return $query;
     }
 
-    protected static function quarterMultiselect() {
+    protected static function quarterMultiselect()
+    {
         return \App\Models\Quarter::leftJoin('fields', 'quarters.field_id', '=', 'fields.id')
             ->select('fields.id as field_id', 'fields.name as field_name', 'quarters.id', 'quarters.name')
             ->orderBy('fields.name')
             ->orderBy('quarters.name')
             ->get()
             ->groupBy('field_id')
-            ->map(function($group, $fieldName) {
+            ->map(function ($group, $fieldName) {
                 return [
                     'text' => $group[0]->field_name,
-                    'items' => collect($group)->map(function($quarter) {
+                    'items' => collect($group)->map(function ($quarter) {
                         return [
                             'value' => $quarter->id,
                             'text' => $quarter->name,

@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-
+use App\Http\Requests\StoreQuarterRequest;
+use App\Http\Requests\UpdateQuarterRequest;
+use App\Http\Resources\QuarterResource;
+use App\Services\Entities\ListEntity;
+use App\Services\Quarters\CreateQuarter;
+use App\Services\Quarters\DeleteQuarter;
 use App\Services\Quarters\FindQuarter;
 use App\Services\Quarters\ListQuarter;
 use App\Services\Quarters\ListQuarterPlants;
-use App\Services\Quarters\CreateQuarter;
 use App\Services\Quarters\UpdateQuarter;
-use App\Services\Quarters\DeleteQuarter;
-use App\Services\Fields\ListField;
-use App\Services\Entities\ListEntity;
-
-use App\Http\Resources\QuarterResource;
-use App\Http\Resources\QuarterCollection;
-use App\Http\Requests\StoreQuarterRequest;
-use App\Http\Requests\UpdateQuarterRequest;
+use Inertia\Inertia;
 
 class QuartersController extends Controller
 {
@@ -27,6 +23,7 @@ class QuartersController extends Controller
     {
         if (request()->exists('dt_params')) {
             $params = json_decode(request('dt_params', '[]'), true);
+
             return response()->json(ListQuarter::call($params));
         }
 
@@ -104,6 +101,7 @@ class QuartersController extends Controller
     public function destroy(string $id)
     {
         DeleteQuarter::call($id);
+
         return response()->noContent();
     }
 
@@ -112,7 +110,7 @@ class QuartersController extends Controller
         return response()->json(ListQuarterPlants::call($id));
     }
 
-    protected function storeBlueprint(UpdateQuarterRequest | StoreQuarterRequest $request)
+    protected function storeBlueprint(UpdateQuarterRequest|StoreQuarterRequest $request)
     {
         if ($request->file('blueprint') == null) {
             return null;

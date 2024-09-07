@@ -9,7 +9,7 @@ class ListTool
 {
     public static function call($params = [])
     {
-        $searchableColumns = ['name', 'purchase_date', 'last_maintenance', 'purchase_location', 'contact',];
+        $searchableColumns = ['name', 'purchase_date', 'last_maintenance', 'purchase_location', 'contact'];
 
         $query = Tool::query();
 

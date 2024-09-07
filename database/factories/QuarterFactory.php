@@ -17,7 +17,7 @@ class QuarterFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'quarter ' . fake()->name(),
+            'name' => 'quarter '.fake()->name(),
             'area' => fake()->numerify('##.###'),
         ];
     }

@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-
-use App\Services\Machineries\FindMachinery;
-use App\Services\Machineries\ListMachinery;
-use App\Services\Machineries\CreateMachinery;
-use App\Services\Machineries\UpdateMachinery;
-use App\Services\Machineries\DeleteMachinery;
-
-use App\Http\Resources\MachineryResource;
-use App\Http\Resources\MachineryCollection;
 use App\Http\Requests\StoreMachineryRequest;
 use App\Http\Requests\UpdateMachineryRequest;
+use App\Http\Resources\MachineryResource;
+use App\Services\Machineries\CreateMachinery;
+use App\Services\Machineries\DeleteMachinery;
+use App\Services\Machineries\FindMachinery;
+use App\Services\Machineries\ListMachinery;
+use App\Services\Machineries\UpdateMachinery;
+use Inertia\Inertia;
 
 class MachineriesController extends Controller
 {
@@ -24,6 +21,7 @@ class MachineriesController extends Controller
     {
         if (request()->exists('dt_params')) {
             $params = json_decode(request('dt_params', '[]'), true);
+
             return response()->json(ListMachinery::call($params));
         }
 
@@ -90,6 +88,7 @@ class MachineriesController extends Controller
     public function destroy(string $id)
     {
         DeleteMachinery::call($id);
+
         return redirect()->route('machineries.index');
     }
 }

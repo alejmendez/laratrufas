@@ -2,8 +2,8 @@
 
 namespace App\Services\Users;
 
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class CreateUser
 {

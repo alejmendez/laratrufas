@@ -2,11 +2,9 @@
 
 namespace App\Services\Harvests;
 
-use App\Models\Plant;
 use App\Models\Harvest;
 use App\Models\HarvestDetail;
 use App\Services\Plants\FindPlantByCode;
-
 use Illuminate\Support\Str;
 
 class UpdateHarvest
@@ -32,14 +30,14 @@ class UpdateHarvest
 
         $idDetails = $harvest->details()->pluck('id');
         $idDetailsToDestroy = $idDetails->filter(function ($id, int $key) use ($details) {
-            return !$details->firstWhere('id', $id);
+            return ! $details->firstWhere('id', $id);
         })->toArray();
 
         HarvestDetail::destroy($idDetailsToDestroy);
         // dd(json_encode($details));
         foreach ($details as $detail) {
             $plant = FindPlantByCode::call($detail['plant_code']);
-            if (!$plant) {
+            if (! $plant) {
                 continue;
             }
 
@@ -48,7 +46,7 @@ class UpdateHarvest
                 $harvest_detail = HarvestDetail::find($detail['id']);
             }
 
-            if (!$harvest_detail) {
+            if (! $harvest_detail) {
                 $harvest_detail = new HarvestDetail;
             }
 

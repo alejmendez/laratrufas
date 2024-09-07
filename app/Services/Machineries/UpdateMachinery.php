@@ -3,7 +3,6 @@
 namespace App\Services\Machineries;
 
 use App\Models\Machinery;
-use App\Models\MachineryVaccine;
 
 class UpdateMachinery
 {

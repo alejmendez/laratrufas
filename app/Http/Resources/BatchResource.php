@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class BatchResource extends JsonResource
 {
@@ -19,7 +18,7 @@ class BatchResource extends JsonResource
             'id' => $this->id,
             'batch_number' => $this->batch_number,
             'delivery_date' => $this->delivery_date,
-            'importer_id' =>  [
+            'importer_id' => [
                 'value' => $this->importer->id,
                 'text' => $this->importer->name,
             ],

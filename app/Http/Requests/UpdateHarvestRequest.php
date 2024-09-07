@@ -30,7 +30,7 @@ class UpdateHarvestRequest extends FormRequest
             'farmer_id.value' => 'required|exists:users,id',
             'assistant_id' => 'required',
             'assistant_id.value' => 'required|exists:users,id',
-            'quarter_ids'   => 'required',
+            'quarter_ids' => 'required',
             'quarter_ids.*.value' => 'integer',
             'details.*.id' => '',
             'details.*.plant_code' => 'exists:plants,code|nullable',

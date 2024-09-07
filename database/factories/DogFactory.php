@@ -17,8 +17,9 @@ class DogFactory extends Factory
     public function definition(): array
     {
         $genders = ['M', 'F'];
+
         return [
-            'name' => 'dog ' . fake()->name(),
+            'name' => 'dog '.fake()->name(),
             'breed' => fake()->name(),
             'gender' => $genders[rand(0, 1)],
             'birthdate' => fake()->date(),

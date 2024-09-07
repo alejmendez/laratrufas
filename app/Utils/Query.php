@@ -4,7 +4,7 @@ namespace App\Utils;
 
 class Query
 {
-    static public function order($query, String $order = ''): void
+    public static function order($query, string $order = ''): void
     {
         if ($order === '') {
             return;

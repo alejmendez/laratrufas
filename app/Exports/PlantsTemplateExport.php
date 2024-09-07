@@ -10,7 +10,7 @@ class PlantsTemplateExport implements FromArray
     {
         return [
             ['Código', 'Hilera', 'Tipo de Planta', 'Fecha de plantación', 'Edad', 'Vivero de origen'],
-            ['FL01AA12', 'A', 'Encina', date('Y-m-d'), '1', 'Jane Cooper']
+            ['FL01AA12', 'A', 'Encina', date('Y-m-d'), '1', 'Jane Cooper'],
         ];
     }
 }

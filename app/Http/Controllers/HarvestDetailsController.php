@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-
-use App\Services\Harvests\ListHarvest;
+use App\Http\Requests\StoreHarvestDetailRequest;
 use App\Services\HarvestDetails\CreateHarvestDetails;
 use App\Services\HarvestDetails\ListHarvestQualities;
 use App\Services\Plants\FindPlantByCode;
-
-use App\Http\Requests\StoreHarvestDetailRequest;
+use Inertia\Inertia;
 
 class HarvestDetailsController extends Controller
 {
@@ -37,6 +34,7 @@ class HarvestDetailsController extends Controller
         }
 
     }
+
     public function find_by_code()
     {
         return [

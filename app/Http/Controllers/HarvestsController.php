@@ -2,28 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use Maatwebsite\Excel\Facades\Excel;
-
-use App\Services\Harvests\FindHarvest;
-use App\Services\Harvests\ListHarvest;
-use App\Services\Harvests\CreateHarvest;
-use App\Services\Harvests\UpdateHarvest;
-use App\Services\Harvests\DeleteHarvest;
-use App\Services\HarvestDetails\ListHarvestQualities;
-
-use App\Services\Quarters\ListQuarter;
-use App\Services\Dogs\ListDog;
-use App\Services\Entities\ListEntity;
-
-use App\Http\Resources\HarvestResource;
-use App\Http\Resources\HarvestListCollection;
+use App\Exports\HarvestsTemplateExport;
+use App\Http\Requests\BulkHarvestRequest;
 use App\Http\Requests\StoreHarvestRequest;
 use App\Http\Requests\UpdateHarvestRequest;
-use App\Http\Requests\BulkHarvestRequest;
-
+use App\Http\Resources\HarvestResource;
 use App\Imports\HarvestsImport;
-use App\Exports\HarvestsTemplateExport;
+use App\Services\Entities\ListEntity;
+use App\Services\HarvestDetails\ListHarvestQualities;
+use App\Services\Harvests\CreateHarvest;
+use App\Services\Harvests\DeleteHarvest;
+use App\Services\Harvests\FindHarvest;
+use App\Services\Harvests\ListHarvest;
+use App\Services\Harvests\UpdateHarvest;
+use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HarvestsController extends Controller
 {
@@ -51,6 +44,7 @@ class HarvestsController extends Controller
                     'farmer_name' => $harvest->farmer->name,
                 ];
             });
+
             return response()->json($harvests);
         }
 
@@ -133,12 +127,13 @@ class HarvestsController extends Controller
     public function destroy(string $id)
     {
         DeleteHarvest::call($id);
+
         return response()->noContent();
     }
 
     public function download_bulk_template()
     {
-        return Excel::download(new HarvestsTemplateExport(), 'carga_masiva_cosecha.xlsx');
+        return Excel::download(new HarvestsTemplateExport, 'carga_masiva_cosecha.xlsx');
     }
 
     public function create_bulk()
@@ -174,19 +169,19 @@ class HarvestsController extends Controller
         $unprocessedRecords = $import->getUnprocessedRecords();
         $numberOfUnprocessedRecords = $import->getNumberOfUnprocessedRecords();
 
-        $message_success = "";
+        $message_success = '';
         if ($countErrors > 0) {
             $message_success = "Se han ingresado $rowCount registros al sistema y se tienen $countErrors errores.";
         } else {
             $message_success = "La carga de datos ha sido completada con éxito. Se han ingresado $rowCount registros de tipo de datos al sistema. ¡Buen trabajo!";
         }
 
-        $error_message = "";
+        $error_message = '';
         if ($countErrors > 0) {
             $error_message = "Hay $countErrors errores o advertencias que debes corregir. Puedes ver el detalle de los errores en el resumen de la carga.";
         }
 
-        $unprocessed_message = "";
+        $unprocessed_message = '';
         $unprocessed_details = [];
         if ($numberOfUnprocessedRecords > 0) {
             $unprocessed_message = "Hay $numberOfUnprocessedRecords que no tienen errores pero no fueron procesados porque ya existen.";

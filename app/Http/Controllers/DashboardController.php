@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-
 use App\Services\Entities\ListEntity;
+use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
