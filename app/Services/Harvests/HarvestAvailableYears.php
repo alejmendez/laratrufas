@@ -10,14 +10,12 @@ class HarvestAvailableYears
 {
     public static function call()
     {
-        $subquery = DB::table('harvests')
-            ->select(DB::raw('extract(year from date) as years'));
-
-        $years = DB::table(DB::raw("({$subquery->toSql()}) as harvest_years"))
-            ->select('years as value', 'years as text')
-            ->groupBy('years')
-            ->get();
-
-        return $years;
+        return DB::table('harvests')
+            ->select('year')
+            ->distinct()
+            ->get()
+            ->map(function ($row) {
+                return ['value' => $row->year, 'text' => $row->year];
+            });
     }
 }

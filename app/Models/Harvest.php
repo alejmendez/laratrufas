@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
 
 use App\Traits\Orderable;
 use App\Traits\Filterable;
@@ -14,6 +15,13 @@ use App\Traits\Filterable;
 class Harvest extends Model
 {
     use HasFactory, Orderable, Filterable;
+
+    protected static function booted()
+    {
+        static::saving(function ($harvest) {
+            $harvest->year = Carbon::parse($harvest->date)->year;
+        });
+    }
 
     public function details(): HasMany
     {
