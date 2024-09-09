@@ -97,7 +97,7 @@ class UsersController extends Controller
     {
         DeleteUser::call($id);
 
-        return redirect()->route('users.index');
+        return response()->noContent();
     }
 
     protected function storeAvatar(UpdateUserRequest|StoreUserRequest $request)

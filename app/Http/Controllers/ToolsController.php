@@ -89,6 +89,6 @@ class ToolsController extends Controller
     {
         DeleteTool::call($id);
 
-        return redirect()->route('tools.index');
+        return response()->noContent();
     }
 }

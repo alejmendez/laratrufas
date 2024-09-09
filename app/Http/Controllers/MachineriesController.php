@@ -89,6 +89,6 @@ class MachineriesController extends Controller
     {
         DeleteMachinery::call($id);
 
-        return redirect()->route('machineries.index');
+        return response()->noContent();
     }
 }

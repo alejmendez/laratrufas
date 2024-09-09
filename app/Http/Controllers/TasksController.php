@@ -101,6 +101,6 @@ class TasksController extends Controller
     {
         DeleteTask::call($id);
 
-        return redirect()->route('tasks.index');
+        return response()->noContent();
     }
 }

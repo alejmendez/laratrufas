@@ -96,6 +96,6 @@ class BatchesController extends Controller
     {
         DeleteBatch::call($id);
 
-        return redirect()->route('batches.index');
+        return response()->noContent();
     }
 }

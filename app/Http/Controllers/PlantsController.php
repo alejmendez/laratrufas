@@ -102,7 +102,7 @@ class PlantsController extends Controller
     {
         DeletePlant::call($id);
 
-        return redirect()->route('plants.index');
+        return response()->noContent();
     }
 
     public function download_bulk_template()

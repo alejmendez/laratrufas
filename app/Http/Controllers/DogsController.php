@@ -100,7 +100,7 @@ class DogsController extends Controller
     {
         DeleteDog::call($id);
 
-        return redirect()->route('dogs.index');
+        return response()->noContent();
     }
 
     protected function storeAvatar(UpdateDogRequest|StoreDogRequest $request)

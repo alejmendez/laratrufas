@@ -96,6 +96,6 @@ class LiquidationsController extends Controller
     {
         DeleteLiquidation::call($id);
 
-        return redirect()->route('liquidations.index');
+        return response()->noContent();
     }
 }
