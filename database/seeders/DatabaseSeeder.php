@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $seeders = [
             RolesSeeder::class,
             UserSeeder::class,
+            CategoryProductSeeder::class,
         ];
 
         if (app()->isLocal()) {

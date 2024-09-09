@@ -14,6 +14,7 @@ import tool from './tool';
 import machinery from './machinery';
 import task from './task';
 import batch from './batch';
+import liquidation from './liquidation';
 
 export default {
   brand: {
@@ -35,4 +36,5 @@ export default {
   machinery,
   task,
   batch,
+  liquidation,
 };

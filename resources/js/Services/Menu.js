@@ -53,7 +53,7 @@ export const menuElements = (currentComponent) => {
           can: can('batch-index'),
         },
         {
-          link: route('users.index'),
+          link: route('liquidations.index'),
           text: 'menu.liquidations',
           icon: 'fa-solid fa-file-invoice-dollar',
           active: currentComponent.startsWith('Liquidations'),

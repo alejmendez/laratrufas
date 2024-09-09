@@ -34,6 +34,7 @@ class SyncPermissions extends Command
         'tool',
         'user',
         'batch',
+        'liquidation',
     ];
 
     protected $defaultActions = [

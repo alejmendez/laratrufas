@@ -7,6 +7,7 @@ use App\Http\Controllers\DogsController;
 use App\Http\Controllers\FieldsController;
 use App\Http\Controllers\HarvestDetailsController;
 use App\Http\Controllers\HarvestsController;
+use App\Http\Controllers\LiquidationsController;
 use App\Http\Controllers\MachineriesController;
 use App\Http\Controllers\PlantsController;
 use App\Http\Controllers\PlantTypesController;
@@ -75,6 +76,7 @@ Route::middleware('auth')->group(function () {
         'machineries' => MachineriesController::class,
         'tasks' => TasksController::class,
         'batches' => BatchesController::class,
+        'liquidations' => LiquidationsController::class,
     ]);
 });
 
