@@ -38,6 +38,7 @@ const props = defineProps({
 const datatable = ref(null);
 
 const filter_year_options = ref([]);
+const harvest_available_weeks = ref([]);
 const filter_field_options = ref([]);
 const filter_quarter_options = ref([]);
 const filter_user_options = ref([]);
@@ -45,7 +46,7 @@ const filter_user_options = ref([]);
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   year: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-  date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_BEFORE }] },
+  week: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
   batch: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   'details.plant.quarter.field_id': { value: null, matchMode: FilterMatchMode.EQUALS },
   'details.plant.quarter_id': { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -105,6 +106,7 @@ const deleteHandler = (record) => {
 onMounted(async () => {
   const data = await getDataSelects({
     harvest_available_years: {},
+    harvest_available_weeks: {},
     field: {},
     quarter: {},
     user: {},
@@ -114,6 +116,7 @@ onMounted(async () => {
   filter_year_options.value = [year_value_default, ...data.harvest_available_years];
   form.year = year_value_default;
 
+  harvest_available_weeks.value = data.harvest_available_weeks;
   filter_field_options.value = data.field;
   filter_quarter_options.value = data.quarter;
   filter_user_options.value = data.user;
@@ -144,12 +147,12 @@ onMounted(async () => {
     sortField="date"
     :sortOrder="1"
   >
-    <Column field="date" :header="$t('harvest.table.date')" dataType="date" sortable frozen style="min-width: 200px">
+    <Column field="week" :header="$t('harvest.table.date')" :showFilterMatchModes="false" sortable frozen style="min-width: 200px">
       <template #body="{ data }">
         {{ $t('harvest.table_data.date', { week: data.week }) }}
       </template>
       <template #filter="{ filterModel }">
-        <DatePicker v-model="filterModel.value" dateFormat="mm/dd/yy" placeholder="Buscar por date" />
+        <Select v-model="filterModel.value" :options="harvest_available_weeks" optionLabel="text" placeholder="Todos" />
       </template>
     </Column>
 
