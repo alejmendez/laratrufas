@@ -30,20 +30,6 @@ class HarvestsController extends Controller
             $paramsCollection = collect($params);
 
             $harvests = ListHarvest::call($params);
-            $harvests->getCollection()->transform(function ($harvest) {
-                return [
-                    'id' => $harvest->id,
-                    'date' => $harvest->date,
-                    'year' => $harvest->year,
-                    'week' => $harvest->week,
-                    'batch' => $harvest->batch,
-                    'field_names' => $harvest->quarters->map(fn ($quarter) => $quarter->field->name)->unique()->join(', '),
-                    'quarter_names' => $harvest->quarters->map(fn ($quarter) => $quarter->name)->unique()->join(', '),
-                    'total_weight' => $harvest->details->map(fn ($detail) => $detail->weight)->sum(),
-                    'unit_count' => $harvest->details->count(),
-                    'farmer_name' => $harvest->farmer->name,
-                ];
-            });
 
             return response()->json($harvests);
         }

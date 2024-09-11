@@ -16,4 +16,9 @@ class HarvestDetail extends Model
     {
         return $this->belongsTo(Plant::class);
     }
+
+    public function quarter(): BelongsTo
+    {
+        return $this->belongsTo(Quarter::class);
+    }
 }

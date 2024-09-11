@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
+import { ref, computed, reactive, onMounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
 import ConfirmDialog from 'primevue/confirmdialog';
@@ -7,9 +7,10 @@ import Toast from 'primevue/toast';
 
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
+import ColumnGroup from 'primevue/columngroup';
+import Row from 'primevue/row';
 import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
-import DatePicker from 'primevue/datepicker';
 
 import { useI18n } from 'vue-i18n';
 
@@ -17,7 +18,6 @@ import Datatable from '@/Components/Table/Datatable.vue';
 import HarvestService from '@/Services/HarvestService.js';
 import { deleteRowTable } from '@/Utils/table.js';
 
-import { stringToDate } from '@/Utils/date';
 import { getDataSelects } from '@/Services/Selects';
 
 const toast = useToast();
@@ -48,8 +48,8 @@ const filters = {
   year: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
   week: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
   batch: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  'details.plant.quarter.field_id': { value: null, matchMode: FilterMatchMode.EQUALS },
-  'details.plant.quarter_id': { value: null, matchMode: FilterMatchMode.EQUALS },
+  'details.quarter.field_id': { value: null, matchMode: FilterMatchMode.EQUALS },
+  'details.quarter_id': { value: null, matchMode: FilterMatchMode.EQUALS },
   'farmer.id': { value: null, matchMode: FilterMatchMode.EQUALS },
 };
 
@@ -102,6 +102,33 @@ const deleteHandler = (record) => {
     });
   });
 };
+
+const weightTotal = computed(() => {
+    let total = 0;
+    if (!datatable.value) {
+      return total;
+    }
+    const { records } = datatable.value;
+    for(let record of records) {
+      total += record.total_weight;
+    }
+
+    return `${total / 1000} Kgs`;
+});
+
+const unitCountTotal = computed(() => {
+    let total = 0;
+    if (!datatable.value) {
+      return total;
+    }
+
+    const { records } = datatable.value;
+    for(let record of records) {
+      total += record.unit_count;
+    }
+
+    return total;
+});
 
 onMounted(async () => {
   const data = await getDataSelects({
@@ -165,7 +192,7 @@ onMounted(async () => {
       </template>
     </Column>
 
-    <Column field="field_names" filterField="details.plant.quarter.field_id" :showFilterMatchModes="false" :header="$t('harvest.table.field')" sortable style="min-width: 200px">
+    <Column field="field_names" filterField="details.quarter.field_id" :showFilterMatchModes="false" :header="$t('harvest.table.field')" sortable style="min-width: 200px">
       <template #body="{ data }">
         {{ data.field_names }}
       </template>
@@ -174,7 +201,7 @@ onMounted(async () => {
       </template>
     </Column>
 
-    <Column field="quarter_names" filterField="details.plant.quarter_id" :showFilterMatchModes="false" :header="$t('harvest.table.quarter')" sortable style="min-width: 200px">
+    <Column field="quarter_names" filterField="details.quarter_id" :showFilterMatchModes="false" :header="$t('harvest.table.quarter')" sortable style="min-width: 200px">
       <template #body="{ data }">
         {{ data.quarter_names }}
       </template>
@@ -213,5 +240,13 @@ onMounted(async () => {
           @click="deleteHandler(slotProps.data)" />
       </template>
     </Column>
+
+    <ColumnGroup type="footer">
+      <Row>
+        <Column footer="Totals:" :colspan="4" footerStyle="text-align:right"/>
+        <Column :footer="weightTotal" />
+        <Column :footer="unitCountTotal" :colspan="3" />
+      </Row>
+    </ColumnGroup>
   </Datatable>
 </template>

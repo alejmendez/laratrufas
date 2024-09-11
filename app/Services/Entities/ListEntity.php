@@ -2,8 +2,8 @@
 
 namespace App\Services\Entities;
 
-use App\Services\Harvests\HarvestAvailableYears;
 use App\Services\Harvests\HarvestAvailableWeeks;
+use App\Services\Harvests\HarvestAvailableYears;
 
 class ListEntity
 {

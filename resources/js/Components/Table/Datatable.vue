@@ -48,7 +48,7 @@ const loadLazyData = async () => {
   loading.value = false;
 };
 
-defineExpose({ loadLazyData });
+defineExpose({ loadLazyData, records });
 
 const onPage = (event) => {
   lazyParams.value = event;
