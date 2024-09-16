@@ -11,6 +11,7 @@ import { useI18n } from 'vue-i18n';
 
 import Datatable from '@/Components/Table/Datatable.vue';
 import ToolService from '@/Services/ToolService.js';
+import { stringToFormat } from '@/Utils/date';
 import { deleteRowTable } from '@/Utils/table.js';
 
 const props = defineProps({
@@ -101,7 +102,7 @@ onMounted(() => {
 
       <Column field="purchase_date" :header="$t('tool.table.purchase_date')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.purchase_date }}
+          {{ stringToFormat(data.purchase_date) }}
         </template>
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Fecha de Compra" />
@@ -110,7 +111,7 @@ onMounted(() => {
 
       <Column field="last_maintenance" :header="$t('tool.table.last_maintenance')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.last_maintenance }}
+          {{ stringToFormat(data.last_maintenance) }}
         </template>
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por última Mantención" />
