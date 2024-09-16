@@ -53,7 +53,7 @@ export default {
     },
     tabs: {
       file: 'Ficha',
-      logbook: 'Historial',
+      logbook: 'Bitácora',
       harvest: 'Cosecha',
       statistics: 'Estadísticas',
     },
