@@ -11,6 +11,7 @@ import menu from './menu';
 import bulk from './bulk';
 import harvest from './harvest';
 import tool from './tool';
+import security_equipment from './security_equipment';
 import machinery from './machinery';
 import task from './task';
 import batch from './batch';
@@ -33,6 +34,7 @@ export default {
   bulk,
   harvest,
   tool,
+  security_equipment,
   machinery,
   task,
   batch,

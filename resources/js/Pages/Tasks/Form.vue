@@ -22,6 +22,7 @@ const props = defineProps({
   },
   responsibles: Array,
   tools: Array,
+  security_equipments: Array,
   machineries: Array,
 });
 
@@ -274,7 +275,7 @@ textarea.p-textarea.comment {
     </CardSection>
 
     <CardSection :header-text="t('task.sections.resources')" wrapperClass="">
-      <div class="p-6 grid md:grid-cols-2 gap-x-16 gap-y-4 sm:grid-cols-1">
+      <div class="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
         <VSelectMultiple
           class="mt-1"
           v-model="form.tools"
@@ -291,6 +292,15 @@ textarea.p-textarea.comment {
           :label="$t('task.form.machineries.label')"
           :placeholder="t('generics.please_select')"
           :message="form.errors.machineries"
+        />
+
+        <VSelectMultiple
+          class="mt-1"
+          v-model="form.security_equipments"
+          :options="props.security_equipments"
+          :label="$t('task.form.security_equipments.label')"
+          :placeholder="t('generics.please_select')"
+          :message="form.errors.security_equipments"
         />
       </div>
 

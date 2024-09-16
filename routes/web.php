@@ -16,6 +16,7 @@ use App\Http\Controllers\QuartersController;
 use App\Http\Controllers\SelectsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\ToolsController;
+use App\Http\Controllers\SecurityEquipmentsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -77,6 +78,7 @@ Route::middleware('auth')->group(function () {
         'tasks' => TasksController::class,
         'batches' => BatchesController::class,
         'liquidations' => LiquidationsController::class,
+        'security_equipments' => SecurityEquipmentsController::class,
     ]);
 });
 

@@ -17,6 +17,7 @@ const props = defineProps({
   quarters: Array,
   plants: Array,
   tools: Array,
+  security_equipments: Array,
   machineries: Array,
 });
 
@@ -40,6 +41,7 @@ const form = useForm({
   note: data.note,
   comments: data.comments,
   tools: data.tools,
+  security_equipments: data.security_equipments,
   machineries: data.machineries,
   supplies: data.supplies.map((a) => {
     a.unit = { value: a.unit, text: t('task.form.supplies.unit.options.' + a.unit) };
@@ -66,6 +68,7 @@ const submitHandler = generateSubmitHandler(form, route('tasks.update', data.id)
         :plants="props.plants"
         :responsibles="props.responsibles"
         :tools="props.tools"
+        :security_equipments="props.security_equipments"
         :machineries="props.machineries"
         :submitHandler="submitHandler"
       />

@@ -40,6 +40,7 @@ class TasksController extends Controller
             'fields' => ListEntity::call('field'),
             'responsibles' => ListEntity::call('responsible'),
             'tools' => ListEntity::call('tool'),
+            'security_equipments' => ListEntity::call('security_equipment'),
             'machineries' => ListEntity::call('machinery'),
         ]);
     }
@@ -80,6 +81,7 @@ class TasksController extends Controller
             'plants' => ListEntity::call('plant', ['quarter_id' => $task->quarters->map(fn ($q) => $q->id)->toArray()]),
             'responsibles' => ListEntity::call('responsible'),
             'tools' => ListEntity::call('tool'),
+            'security_equipments' => ListEntity::call('security_equipment'),
             'machineries' => ListEntity::call('machinery'),
         ]);
     }

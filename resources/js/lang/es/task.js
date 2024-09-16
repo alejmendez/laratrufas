@@ -68,6 +68,9 @@ export default {
     tools: {
       label: 'Herramientas',
     },
+    security_equipments: {
+      label: 'Equipos de seguridad',
+    },
     machineries: {
       label: 'Maquinarias',
     },
@@ -144,6 +147,9 @@ export default {
       },
       tools: {
         label: 'Herramientas',
+      },
+      security_equipments: {
+        label: 'Equipos de seguridad',
       },
       machineries: {
         label: 'Maquinarias',

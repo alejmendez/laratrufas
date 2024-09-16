@@ -91,6 +91,13 @@ export const menuElements = (currentComponent) => {
           can: can('tool-index'),
         },
         {
+          link: route('security_equipments.index'),
+          text: 'menu.security_equipments',
+          icon: 'fa-solid fa-shield-heart',
+          active: currentComponent.startsWith('SecurityEquipments'),
+          can: can('security-equipment-index'),
+        },
+        {
           link: route('users.index'),
           text: 'menu.suppliers',
           icon: 'fa-solid fa-handshake',

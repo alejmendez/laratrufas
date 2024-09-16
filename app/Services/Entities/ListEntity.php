@@ -16,6 +16,7 @@ class ListEntity
             'plant' => \App\Models\Plant::select('id as value', 'code as text')->orderBy('code'),
             'plant_type' => \App\Models\PlantType::select('id as value', 'name as text')->orderBy('name'),
             'tool' => \App\Models\Tool::select('id as value', 'name as text')->orderBy('name'),
+            'security_equipment' => \App\Models\SecurityEquipment::select('id as value', 'name as text')->orderBy('name'),
             'machinery' => \App\Models\Machinery::select('id as value', 'name as text')->orderBy('name'),
             'dog' => \App\Models\Dog::select('id as value', 'name as text')->orderBy('name'),
             'harvest' => \App\Models\Harvest::select('id', 'week', 'batch')->orderBy('date'),

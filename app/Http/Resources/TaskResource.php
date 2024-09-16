@@ -38,6 +38,10 @@ class TaskResource extends JsonResource
                 'value' => $tool->id,
                 'text' => $tool->name,
             ]),
+            'security_equipments' => $this->security_equipments->map(fn ($security_equipment) => [
+                'value' => $security_equipment->id,
+                'text' => $security_equipment->name,
+            ]),
             'machineries' => $this->machineries->map(fn ($machinery) => [
                 'value' => $machinery->id,
                 'text' => $machinery->name,

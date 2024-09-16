@@ -28,6 +28,7 @@ class UpdateTask
         self::syncRelationship($task, 'quarters', $data['quarter_id'] ?? []);
         self::syncRelationship($task, 'plants', $data['plant_id'] ?? []);
         self::syncRelationship($task, 'tools', $data['tools'] ?? []);
+        self::syncRelationship($task, 'security_equipments', $data['security_equipments'] ?? []);
         self::syncRelationship($task, 'machineries', $data['machineries'] ?? []);
 
         self::saveSupplies($task, $data['supplies'] ?? []);

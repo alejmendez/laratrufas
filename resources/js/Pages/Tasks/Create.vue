@@ -12,6 +12,7 @@ const props = defineProps({
   fields: Array,
   responsibles: Array,
   tools: Array,
+  security_equipments: Array,
   machineries: Array,
 });
 
@@ -31,6 +32,7 @@ const form = useForm({
   note: null,
   comments: null,
   tools: [],
+  security_equipments: [],
   machineries: [],
   supplies: [
     {
@@ -59,6 +61,7 @@ const submitHandler = generateSubmitHandler(form, route('tasks.store'));
         :fields="props.fields"
         :responsibles="props.responsibles"
         :tools="props.tools"
+        :security_equipments="props.security_equipments"
         :machineries="props.machineries"
         :submitHandler="submitHandler"
       />

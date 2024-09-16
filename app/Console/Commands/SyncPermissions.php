@@ -32,6 +32,7 @@ class SyncPermissions extends Command
         'quarter',
         'task',
         'tool',
+        'security_equipment',
         'user',
         'batch',
         'liquidation',
@@ -101,6 +102,7 @@ class SyncPermissions extends Command
             ...$this->permissions['task'],
             ...$this->permissions['machinery'],
             ...$this->permissions['tool'],
+            ...$this->permissions['security_equipment'],
         ]);
 
         $this->roles['farmer']->syncPermissions([

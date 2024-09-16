@@ -30,6 +30,11 @@ class Task extends Model
         return $this->belongsToMany(Tool::class, 'task_tool');
     }
 
+    public function security_equipments()
+    {
+        return $this->belongsToMany(SecurityEquipment::class, 'security_equipment_task');
+    }
+
     public function machineries()
     {
         return $this->belongsToMany(Machinery::class, 'machineries_task');

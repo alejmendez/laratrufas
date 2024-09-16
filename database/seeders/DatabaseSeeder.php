@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
                 DogSeeder::class,
                 ToolsSeeder::class,
                 MachineriesSeeder::class,
+                SecurityEquipmentsSeeder::class,
                 // OwnersSeeder::class,
                 // HarvestsSeeder::class,
             ];

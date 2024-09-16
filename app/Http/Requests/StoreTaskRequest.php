@@ -43,6 +43,8 @@ class StoreTaskRequest extends FormRequest
             // Additional validation rules for related tables
             'tools' => 'nullable|array',
             'tools.*.value' => 'exists:tools,id',
+            'security_equipments' => 'nullable|array',
+            'security_equipments.*.value' => 'exists:security_equipments,id',
             'machineries' => 'nullable|array',
             'machineries.*.value' => 'exists:machineries,id',
             'supplies' => 'nullable|array',
@@ -70,6 +72,7 @@ class StoreTaskRequest extends FormRequest
             'responsible_id' => 'responsable',
             'comments' => 'comentarios',
             'tools' => 'herramientas',
+            'security_equipments' => 'equipos de seguridad',
             'machineries' => 'maquinarias',
             'supplies.*.name' => 'suministros.*.nombre',
             'supplies.*.brand' => 'suministros.*.marca',
