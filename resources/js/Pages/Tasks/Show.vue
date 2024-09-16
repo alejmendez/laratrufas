@@ -103,7 +103,7 @@ const deleteHandler = async (id) => {
                   class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
                   v-for="tool of data.tools"
                 >
-                  {{ tool.name }}
+                  {{ tool.text }}
                 </span>
               </div>
             </div>
@@ -116,7 +116,7 @@ const deleteHandler = async (id) => {
                   class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
                   v-for="machinery of data.machineries"
                 >
-                  {{ machinery.name }}
+                  {{ machinery.text }}
                 </span>
               </div>
             </div>
@@ -130,7 +130,7 @@ const deleteHandler = async (id) => {
                   class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
                   v-for="security_equipment of data.security_equipments"
                 >
-                  {{ security_equipment.name }}
+                  {{ security_equipment.text }}
                 </span>
               </div>
             </div>
