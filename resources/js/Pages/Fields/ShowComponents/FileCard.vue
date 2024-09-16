@@ -19,7 +19,6 @@ const fieldFile = [
 
 <template>
   <CardSection
-    :header-text="t('field.show.file.title', {name: field.name})"
     wrapperClass="p-5 grid grid-cols-2 gap-4"
   >
     <div>

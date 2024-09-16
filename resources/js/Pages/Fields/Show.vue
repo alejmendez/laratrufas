@@ -36,11 +36,11 @@ const deleteHandler = async (id) => {
 </script>
 
 <template>
-    <Head :title="t('field.titles.show')" />
+    <Head :title="t('field.titles.show', { name: field.name })" />
 
     <AuthenticatedLayout>
       <HeaderCrud
-        :title="t('field.titles.show')"
+        :title="t('field.titles.show', { name: field.name })"
         :breadcrumbs="[{ to: 'fields.index', text: t('field.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
       >
         <Button
