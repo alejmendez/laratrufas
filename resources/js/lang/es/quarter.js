@@ -3,7 +3,7 @@ export default {
     entity_breadcrumb: 'Cuarteles',
     create: 'Crear Cuartel',
     edit: 'Editar Cuartel',
-    show: 'Detalle del Cuartel',
+    show: 'Detalle del Cuartel: {name}',
   },
   table: {
     name: 'cuartel',
@@ -40,7 +40,6 @@ export default {
   },
   show: {
     file: {
-      title: 'Cuartel: {name}',
       field: 'Perteneciente al campo',
       area: 'Superficie del cuartel (hectáreas)',
       plants_count: 'Cantidad de arboles',
@@ -49,8 +48,8 @@ export default {
     documentation: {
       title: 'Documentación',
     },
-    activity: {
-      title: 'Actividad',
+    logbook: {
+      title: 'Bitácora',
     },
     statistics: {
       title: 'Estadísticas',
@@ -58,7 +57,7 @@ export default {
     tabs: {
       file: 'Ficha',
       documentation: 'Documentación',
-      activity: 'Actividad',
+      logbook: 'Bitácora',
       statistics: 'Estadísticas',
     },
   },

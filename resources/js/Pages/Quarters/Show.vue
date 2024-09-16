@@ -14,7 +14,7 @@ const props = defineProps({
 
 const { data } = props.data;
 
-const tabs = ['file', 'documentation', 'activity', 'statistics'];
+const tabs = ['file', 'documentation', 'logbook', 'statistics'];
 
 const currentTab = ref(tabs[0]);
 
@@ -33,11 +33,11 @@ const deleteHandler = async (id) => {
 </script>
 
 <template>
-    <Head :title="t('quarter.titles.show')" />
+    <Head :title="t('quarter.titles.show', {name: data.name})" />
 
     <AuthenticatedLayout>
       <HeaderCrud
-        :title="t('quarter.titles.show')"
+        :title="t('quarter.titles.show', {name: data.name})"
         :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
       >
         <Button
@@ -66,7 +66,6 @@ const deleteHandler = async (id) => {
       </div>
 
       <CardSection
-        :header-text="t('quarter.show.file.title', {name: data.name})"
         wrapperClass="p-5 grid grid-cols-2 gap-4"
         v-show="currentTab === tabs[0]"
       >
@@ -97,7 +96,7 @@ const deleteHandler = async (id) => {
       </CardSection>
 
       <CardSection
-        :header-text="t('quarter.show.activity.title')"
+        :header-text="t('quarter.show.logbook.title')"
         wrapperClass="p-5 grid grid-cols-2 gap-4"
         v-show="currentTab === tabs[2]"
       >
