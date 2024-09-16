@@ -4,7 +4,7 @@ export default {
     create: 'Crear Planta',
     edit: 'Editar Planta',
     bulk: 'Nuevo carga masiva de plantas',
-    show: 'Detalle de la Planta',
+    show: 'Detalle de la Planta: {name}',
   },
   table: {
     name: 'planta',
@@ -49,16 +49,12 @@ export default {
   },
   show: {
     file: {
-      title: 'Planta: {name}',
       field: 'Perteneciente al campo',
       quarter: 'Perteneciente al cuartel',
       plant_type: 'Tipo de planta',
       age: 'Edad',
       planned_at: 'Fecha de plantación',
       responsible: 'Responsable',
-    },
-    variables: {
-      title: 'Variables',
     },
     logs: {
       title: 'Bitácora',
@@ -71,8 +67,7 @@ export default {
     },
     tabs: {
       file: 'Ficha',
-      variables: 'Variables',
-      logs: 'Bitácoras',
+      logs: 'Bitácora',
       harvest: 'Cosecha',
       statistics: 'Estadísticas',
     },

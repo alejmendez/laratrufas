@@ -13,7 +13,7 @@ const props = defineProps({
 
 const { data } = props.data;
 
-const tabs = ['file', 'variables', 'logs', 'harvest', 'statistics'];
+const tabs = ['file', 'logs', 'harvest', 'statistics'];
 
 const currentTab = ref(tabs[0]);
 
@@ -34,11 +34,11 @@ const deleteHandler = async (id) => {
 </script>
 
 <template>
-    <Head :title="t('plant.titles.show')" />
+    <Head :title="t('plant.titles.show', {name: data.code})" />
 
     <AuthenticatedLayout>
       <HeaderCrud
-        :title="t('plant.titles.show')"
+        :title="t('plant.titles.show', {name: data.code})"
         :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
       >
         <Button
@@ -67,7 +67,6 @@ const deleteHandler = async (id) => {
       </div>
 
       <CardSection
-        :header-text="t('plant.show.file.title', {name: data.code})"
         wrapperClass="p-5 grid grid-cols-2 gap-4"
         v-show="currentTab === tabs[0]"
       >
@@ -91,29 +90,22 @@ const deleteHandler = async (id) => {
       </CardSection>
 
       <CardSection
-        :header-text="t('plant.show.variables.title')"
+        :header-text="t('plant.show.logs.title')"
         wrapperClass="p-5 grid grid-cols-2 gap-4"
         v-show="currentTab === tabs[1]"
       >
       </CardSection>
 
       <CardSection
-        :header-text="t('plant.show.logs.title')"
-        wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[2]"
-      >
-      </CardSection>
-
-      <CardSection
         :header-text="t('plant.show.harvest.title')"
         wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[3]"
+        v-show="currentTab === tabs[2]"
       >
       </CardSection>
       <CardSection
         :header-text="t('plant.show.statistics.title')"
         wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[4]"
+        v-show="currentTab === tabs[3]"
       >
       </CardSection>
     </AuthenticatedLayout>
