@@ -25,10 +25,6 @@ const confirm = useConfirm();
 const { t } = useI18n();
 
 const props = defineProps({
-  show_filters: {
-    type: Boolean,
-    default: true,
-  },
   show_actions: {
     type: Boolean,
     default: true,
@@ -104,30 +100,22 @@ const deleteHandler = (record) => {
 };
 
 const weightTotal = computed(() => {
-    let total = 0;
-    if (!datatable.value) {
-      return total;
-    }
-    const { records } = datatable.value;
-    for(let record of records) {
-      total += record.total_weight;
+    let total = datatable.value?.metadata?.details_sum_weight / 1000;
+
+    if (isNaN(total)) {
+      total = 0;
     }
 
-    return `${total / 1000} Kgs`;
+    return `${number_format(total)} Kgs`;
 });
 
 const unitCountTotal = computed(() => {
-    let total = 0;
-    if (!datatable.value) {
-      return total;
+    let total = datatable.value?.metadata?.details_count;
+    if (isNaN(total)) {
+      total = 0;
     }
 
-    const { records } = datatable.value;
-    for(let record of records) {
-      total += record.unit_count;
-    }
-
-    return total;
+    return number_format(total);
 });
 
 onMounted(async () => {
@@ -148,24 +136,39 @@ onMounted(async () => {
   filter_quarter_options.value = data.quarter;
   filter_user_options.value = data.user;
 });
+
+const number_format = (n) => {
+  return new Intl.NumberFormat('es-CL', { maximumFractionDigits: 2 }).format(n);
+};
 </script>
 
 <template>
   <ConfirmDialog></ConfirmDialog>
   <Toast />
 
-  <template v-if="props.show_filters">
-    <CardSection wrapperClass="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
+  <div class="flex space-x-4 items-stretch mb-4">
+    <CardSection sectionClass="flex-1 mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5" wrapperClass="p-5">
+      <div class="text-gray-400 pb-1">{{ t('harvest.table_filters.year') }}</div>
       <VSelect
         id="year"
         v-model="form.year"
         :placeholder="t('generics.please_select')"
         :options="filter_year_options"
-        :label="t('harvest.table_filters.year')"
         @change="filterHandler"
       />
     </CardSection>
-  </template>
+
+    <CardSection sectionClass="flex-1 mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5" wrapperClass="p-5">
+      <div class="text-gray-400 pb-1">Unidades</div>
+      <div class="pb-3 text-3xl font-bold">{{ unitCountTotal }}</div>
+    </CardSection>
+
+
+    <CardSection sectionClass="flex-1 mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5" wrapperClass="p-5">
+      <div class="text-gray-400 pb-1">Peso Total</div>
+      <div class="pb-3 text-3xl font-bold">{{ weightTotal }}</div>
+    </CardSection>
+  </div>
 
   <Datatable
     ref="datatable"
@@ -212,13 +215,13 @@ onMounted(async () => {
 
     <Column field="total_weight" :header="$t('harvest.table.weight')" sortable style="min-width: 200px">
       <template #body="{ data }">
-        {{ data.total_weight / 1000 }} Kgs
+        {{ number_format(data.total_weight / 1000) }} Kgs
       </template>
     </Column>
 
     <Column field="unit_count" :header="$t('harvest.table.count_details')" sortable style="min-width: 200px">
       <template #body="{ data }">
-        {{ data.unit_count }}
+        {{ number_format(data.unit_count) }}
       </template>
     </Column>
 

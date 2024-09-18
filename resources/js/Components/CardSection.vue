@@ -5,11 +5,15 @@ const props = defineProps({
     type: String,
     default: 'p-6 grid md:grid-cols-2 gap-x-16 gap-y-4 sm:grid-cols-1',
   },
+  sectionClass: {
+    type: String,
+    default: 'mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5',
+  },
 });
 </script>
 
 <template>
-  <section class="mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5">
+  <section :class="props.sectionClass">
     <header class="flex items-center gap-x-3 overflow-hidden px-6 py-4" v-if="props.headerText">
       <h3 class="text-xl font-bold leading-6 text-gray-950">
         {{ props.headerText }}

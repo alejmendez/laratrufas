@@ -15,6 +15,10 @@ class ListHarvest
 
         $special_sort = false;
         $paramsCollection = collect($params);
+
+        $perPage = $paramsCollection->get('rows', 10);
+        $currentPage = $paramsCollection->get('page', 0) + 1;
+
         $filters = collect($paramsCollection->get('filters', []));
         $sort = $paramsCollection->get('sortField');
         $sortDirection = $paramsCollection->get('sortOrder') == 1 ? 'asc' : 'desc';
@@ -25,7 +29,13 @@ class ListHarvest
         }
 
         $datatable = new PrimevueDatatables($params, $searchableColumns);
-        $harvests = $datatable->of($query)->make();
+        $harvestsQuery = $datatable->of($query)->make(true);
+        $harvestsTotal = $harvestsQuery->clone()->reorder()->get();
+        $details_count = $harvestsTotal->sum('details_count');
+        $details_sum_weight = $harvestsTotal->sum('details_sum_weight');
+
+        $harvests = $harvestsQuery->paginate($perPage, page: $currentPage);
+
         $harvestsCollection = $harvests->getCollection();
 
         $harvestsCollection->transform(function ($harvest) use ($filters) {
@@ -65,6 +75,9 @@ class ListHarvest
             $harvestsArray['data'] = $data->values();
             // dd($harvestsArray['data']);
         }
+
+        $harvestsArray['details_count'] = $details_count;
+        $harvestsArray['details_sum_weight'] = $details_sum_weight;
 
         return $harvestsArray;
     }
