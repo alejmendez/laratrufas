@@ -3,7 +3,6 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
 import FormLiquidation from '@/Pages/Liquidations/Form.vue';
-import { generateSubmitHandler } from '@/Utils/form.js';
 import { stringToDate } from '@/Utils/date';
 
 const { t } = useI18n();
@@ -29,7 +28,7 @@ const form = useForm({
   products: data.products,
 });
 
-const submitHandler = generateSubmitHandler(form, route('liquidations.update', data.id));
+const submitHandler = () => form.post(route('liquidations.update', data.id));
 </script>
 
 <template>

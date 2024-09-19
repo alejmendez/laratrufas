@@ -1,10 +1,8 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { format } from 'date-fns';
 
 import FormTool from '@/Pages/Tools/Form.vue';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -18,7 +16,7 @@ const form = useForm({
   note: null,
 });
 
-const submitHandler = generateSubmitHandler(form, route('tools.store'));
+const submitHandler = () => form.post(route('tools.store'));
 </script>
 
 <template>

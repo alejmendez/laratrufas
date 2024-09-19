@@ -3,7 +3,6 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
 import FormBatch from '@/Pages/Batches/Form.vue';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 import { stringToDate } from '@/Utils/date';
 
@@ -35,7 +34,7 @@ const form = useForm({
   harvests: harvest_options.filter((a) => data.harvests.includes(a.value)),
 });
 
-const submitHandler = generateSubmitHandler(form, route('batches.update', data.id));
+const submitHandler = () => form.post(route('batches.update', data.id));
 </script>
 
 <template>

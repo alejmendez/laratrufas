@@ -4,7 +4,6 @@ import { useI18n } from 'vue-i18n';
 import { useToast } from 'primevue/usetoast';
 
 import FormUser from '@/Pages/Users/Form.vue';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 const toast = useToast();
@@ -35,7 +34,7 @@ const form = useForm({
   avatarRemove: false,
 });
 
-const submitHandler = generateSubmitHandler(form, route('profile.update', data.id));
+const submitHandler = () => form.post(route('profile.store'), form.avatar ? { forceFormData: true } : {});
 </script>
 
 <template>

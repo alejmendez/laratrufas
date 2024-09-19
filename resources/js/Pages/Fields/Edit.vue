@@ -3,7 +3,6 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
 import FormField from '@/Pages/Fields/Form.vue';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -26,7 +25,7 @@ const form = useForm({
   blueprintRemove: false,
 });
 
-const submitHandler = generateSubmitHandler(form, route('fields.update', data.id));
+const submitHandler = () => form.post(route('fields.update', data.id), form.blueprint ? { forceFormData: true } : {});
 </script>
 
 <template>

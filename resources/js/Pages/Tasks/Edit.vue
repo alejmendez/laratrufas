@@ -1,12 +1,10 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { format } from 'date-fns';
 
 import FormTask from '@/Pages/Tasks/Form.vue';
 
 import { stringToDate } from '@/Utils/date';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -49,7 +47,7 @@ const form = useForm({
   }),
 });
 
-const submitHandler = generateSubmitHandler(form, route('tasks.update', data.id));
+const submitHandler = () => form.post(route('tasks.update', data.id));
 </script>
 
 <template>

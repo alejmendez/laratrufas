@@ -1,10 +1,8 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { format } from 'date-fns';
 
 import FormHarvest from '@/Pages/Harvests/Form.vue';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -24,7 +22,14 @@ const form = useForm({
   assistant_id: '',
 });
 
-const submitHandler = generateSubmitHandler(form, route('harvests.store'));
+const submitHandler = () => {
+  form
+    .transform((data) => ({
+      ...data,
+      details: data.details.map((d) => ({ ...d, quality: d.quality.value })),
+    }))
+    .post(route('harvests.store'));
+}
 </script>
 
 <template>

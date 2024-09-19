@@ -1,12 +1,10 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { format } from 'date-fns';
 
 import FormDog from '@/Pages/Dogs/Form.vue';
 
 import { stringToDate, getAge } from '@/Utils/date';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -41,12 +39,7 @@ const form = useForm({
   vaccines,
 });
 
-const submitHandler = () => {
-  if (form.avatar) {
-    return form.post(route('dogs.update', data.id), { forceFormData: true });
-  }
-  form.post(route('dogs.update', data.id));
-};
+const submitHandler = () => form.post(route('dogs.update', data.id), form.avatar ? { forceFormData: true } : {});
 </script>
 
 <template>

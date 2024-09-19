@@ -1,10 +1,8 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { format } from 'date-fns';
 
 import FormSecurityEquipment from '@/Pages/SecurityEquipments/Form.vue';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 import { stringToDate } from '@/Utils/date';
 
@@ -28,7 +26,7 @@ const form = useForm({
   note: data.note,
 });
 
-const submitHandler = generateSubmitHandler(form, route('security_equipments.update', data.id));
+const submitHandler = () => form.post(route('security_equipments.update', data.id));
 </script>
 
 <template>

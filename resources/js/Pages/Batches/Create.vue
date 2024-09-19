@@ -3,7 +3,6 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
 import FormBatch from '@/Pages/Batches/Form.vue';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -19,7 +18,7 @@ const form = useForm({
   harvests: [],
 });
 
-const submitHandler = generateSubmitHandler(form, route('batches.store'));
+const submitHandler = () => form.post(route('batches.store'));
 </script>
 
 <template>

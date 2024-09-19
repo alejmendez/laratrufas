@@ -1,7 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { format } from 'date-fns';
 
 import FormDog from '@/Pages/Dogs/Form.vue';
 
@@ -33,12 +32,7 @@ const form = useForm({
   ],
 });
 
-const submitHandler = () => {
-  if (form.avatar) {
-    return form.post(route('dogs.store'), { forceFormData: true });
-  }
-  form.post(route('dogs.store'));
-};
+const submitHandler = () => form.post(route('dogs.store'), form.avatar ? { forceFormData: true } : {});
 </script>
 
 <template>

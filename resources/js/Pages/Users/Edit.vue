@@ -3,7 +3,6 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
 import FormUser from '@/Pages/Users/Form.vue';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -28,7 +27,7 @@ const form = useForm({
   avatarRemove: false,
 });
 
-const submitHandler = generateSubmitHandler(form, route('users.update', data.id));
+const submitHandler = () => form.post(route('users.update', data.id), form.avatar ? { forceFormData: true } : {});
 </script>
 
 <template>

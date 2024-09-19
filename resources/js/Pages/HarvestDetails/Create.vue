@@ -4,7 +4,6 @@ import { useI18n } from 'vue-i18n';
 
 import HarvestDetailLayout from '@/Layouts/HarvestDetailLayout.vue';
 import FormHarvestDetails from '@/Pages/HarvestDetails/Form.vue';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -20,7 +19,7 @@ const form = useForm({
   keep_plant_code: false,
 });
 
-const submitHandler = generateSubmitHandler(form, route('harvests.details.store'));
+const submitHandler = () => form.post(route('harvests.details.store'));
 
 const submitAndLoadAnother = () => {
   form.keep_plant_code = true;

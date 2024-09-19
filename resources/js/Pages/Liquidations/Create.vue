@@ -3,7 +3,6 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
 import FormLiquidation from '@/Pages/Liquidations/Form.vue';
-import { generateSubmitHandler } from '@/Utils/form.js';
 
 const { t } = useI18n();
 
@@ -23,7 +22,7 @@ const form = useForm({
   products: props.category_products.reduce((a, v) => ({ ...a, [v.id]: { ...v, category_product_id: v.id, price: 0, weight: 0 } }), {}),
 });
 
-const submitHandler = generateSubmitHandler(form, route('liquidations.store'));
+const submitHandler = () => form.post(route('liquidations.store'));
 </script>
 
 <template>
