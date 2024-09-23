@@ -1,96 +1,115 @@
 sudo apt update
-sudo apt-get install software-properties-common -y
+sudo apt upgrade -y
 
-# install git
-sudo apt install git -y
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt update
+sudo apt install postgresql-16 -y
 
-# install curl and node version manager
-sudo apt install curl -y
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
-source ~/.bashrc
-nvm install node
-
-# install php and extensions
 sudo add-apt-repository ppa:ondrej/php -y
-sudo apt-get install php8.3 php8.3-cli php8.3-{common,mbstring,gettext,zip,fpm,curl,gd,sqlite3,xml,redis,bcmath,imagick,bz2,intl,pdo,pdo-pgsql,fpm} -y
+sudo apt update
+sudo apt install php8.3 php8.3-cli php8.3-fpm php8.3-pgsql php8.3-gd php8.3-curl php8.3-mbstring php8.3-xml php8.3-zip php8.3-bcmath -y
 
-# install composer
-curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
-HASH=`curl -sS https://composer.github.io/installer.sig`
-echo $HASH
-php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
 
-# install nginx
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install nodejs -y
+
 sudo apt install nginx -y
 
-# install nginx
-sudo apt install postgresql -y
+sudo apt install certbot php8.3-cli -y
 
-# config nginx
-sudo nano /etc/nginx/sites-available/default
+git clone https://github.com/alejmendez/laratrufas.git laratrufas
+cd laratrufas
+
+composer install --no-dev --optimize-autoloader
+cp .env.example .env
+php artisan key:generate
+
+npm install
+npm run build
+
+php artisan optimize
+php artisan storage:link
+
+sudo nano /etc/nginx/sites-available/agricolafrayleon.app
+
+# Redirige todo el tráfico HTTP a HTTPS
 server {
     listen 80;
-    listen [::]:80;
-    # server_name 18.224.22.139;
-    root /home/ubuntu/www/trufas/public;
+    server_name agricolafrayleon.app *.agricolafrayleon.app;
+    return 301 https://$host$request_uri;
+}
 
-    add_header X-Frame-Options "SAMEORIGIN";
-    add_header X-XSS-Protection "1; mode=block";
-    add_header X-Content-Type-Options "nosniff";
+# Bloque HTTPS
+server {
+    listen 443 ssl;
+    server_name agricolafrayleon.app *.agricolafrayleon.app;
+    root /home/ubuntu/laratrufas/public;
 
-    index index.php;
+    # Certificados SSL
+    ssl_certificate /etc/letsencrypt/live/agricolafrayleon.app/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/agricolafrayleon.app/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers HIGH:!aNULL:!MD5;
 
-    charset utf-8;
+    index index.php index.html index.htm;
 
     location / {
-        try_files $uri $uri/ /index.php?$query_string;
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
     }
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
-
-    error_page 404 /index.php;
 
     location ~ \.php$ {
-        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
+        fastcgi_index index.php;
         include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
     }
 
-    location ~ /\.(?!well-known).* {
+    location ~ /\.ht {
         deny all;
     }
 }
 
-sudo systemctl restart php8.3-fpm
-sudo systemctl restart nginx
-
-sudo adduser www-data ubuntu
-
-mkdir /home/ubuntu/www
-cd /home/ubuntu/www
-git clone https://github.com/alejmendez/laratrufas.git trufas
-cd /home/ubuntu/www/trufas
-sudo chmod 0777 -R /home/ubuntu/www/trufas
-#sudo chown www-data:www-data -R /home/ubuntu/www/trufas
-sudo chown www-data:www-data -R /home/ubuntu/www/trufas
-
-cd /home/ubuntu/www/trufas
-npm install -g npm@latest
-npm install
-composer install
-npm run build
-cp .env.example .env
-php artisan key:generate
-php artisan storage:link
-php artisan migrate --seed --force
-composer install --optimize-autoloader --no-dev
-chmod -R ugo+rw storage/logs ; mkdir -p storage/framework/{sessions,views,cache} ; chmod -R ugo+rw storage/framework
-php artisan config:cache ; php artisan event:cache ; php artisan route:cache ; php artisan view:cache
-
+sudo ln -s /etc/nginx/sites-available/agricolafrayleon.app /etc/nginx/sites-enabled/
 sudo nginx -t
-sudo service nginx restart
+sudo systemctl reload nginx
 
-cd /home/ubuntu/www/trufas
-alias update_app="git pull ; composer install --optimize-autoloader --no-dev ; npm install -g npm@latest; npm run build ; php artisan config:cache ; php artisan event:cache ; php artisan route:cache ; php artisan view:cache"
+sudo nano /etc/systemd/system/octane.service
+
+[Unit]
+Description=Laravel Octane Server
+After=network.target
+
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/laratrufas
+ExecStart=/usr/bin/php artisan octane:start --server=frankenphp --host=127.0.0.1 --port=8000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl enable octane
+sudo systemctl restart octane
+
+sudo apt install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d agricolafrayleon.app -d *.agricolafrayleon.app --agree-tos --email alejmendez.87@gmail.com --non-interactive
+sudo certbot --nginx --preferred-challenges=dns --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d agricolafrayleon.app -d *.agricolafrayleon.app --email alejmendez.87@gmail.com --non-interactive
+
+
+sudo -u postgres psql
+ALTER USER postgres WITH PASSWORD 'postgres';
+CREATE DATABASE laratrufas;
+
+
+echo 'alias update_app="git pull ; composer install --optimize-autoloader --no-dev ; npm run build ; php artisan optimize"' >> ~/.bashrc
+source ~/.bashrc
