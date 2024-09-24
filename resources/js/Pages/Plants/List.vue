@@ -106,10 +106,10 @@ onMounted(async () => {
       ref="datatable"
       :filters="filters"
       :fetchHandler="fetchHandler"
-      sortField="plants.code"
+      sortField="code"
       :sortOrder="1"
     >
-      <Column field="code" filterField="plants.name" :header="$t('plant.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="code" filterField="code" :header="$t('plant.table.name')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
           {{ data.code }}
         </template>
