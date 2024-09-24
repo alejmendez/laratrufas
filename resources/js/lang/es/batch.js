@@ -7,7 +7,7 @@ export default {
   table: {
     batch_number: 'Lote',
     delivery_date: 'Fecha de entrega',
-    importer_id: 'Importador',
+    importer_id: 'Exportador',
   },
   form: {
     batch_number: {
@@ -17,7 +17,7 @@ export default {
       label: 'Fecha de entrega',
     },
     importer_id: {
-      label: 'Importador',
+      label: 'Exportador',
     },
     harvests: {
       label: 'Batch',

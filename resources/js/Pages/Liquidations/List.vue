@@ -120,7 +120,7 @@ onMounted(async () => {
           {{ data.importer.name }}
         </template>
         <template #filter="{ filterModel }">
-          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Importador" />
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Exportador" />
         </template>
       </Column>
 

@@ -7,7 +7,7 @@ export default {
   table: {
     week: 'Semana',
     delivery_date: 'Fecha de entrega',
-    importer_id: 'Importador',
+    importer_id: 'Exportador',
   },
   weight_unit: 'Kg',
   currency_unit: '$',
@@ -16,7 +16,7 @@ export default {
       label: 'Semana',
     },
     importer_id: {
-      label: 'Importador',
+      label: 'Exportador',
     },
     delivery_date: {
       label: 'Fecha de entrega',
