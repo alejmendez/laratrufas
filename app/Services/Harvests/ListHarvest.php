@@ -9,7 +9,7 @@ class ListHarvest
 {
     public static function call($params = [])
     {
-        $query = Harvest::with('details', 'details.quarter', 'details.quarter.field', 'farmer')->withSum('details', 'weight')->withCount('details');
+        $query = Harvest::with('details', 'details.quarter', 'details.quarter.field', 'farmer');
 
         $searchableColumns = ['year', 'batch', 'details.quarter.field.name', 'details.quarter.name', 'farmer.full_name'];
 
@@ -31,8 +31,24 @@ class ListHarvest
         $datatable = new PrimevueDatatables($params, $searchableColumns);
         $harvestsQuery = $datatable->of($query)->make(true);
         $harvestsTotal = $harvestsQuery->clone()->reorder()->get();
-        $details_count = $harvestsTotal->sum('details_count');
-        $details_sum_weight = $harvestsTotal->sum('details_sum_weight');
+
+        $quarterFilter = collect($filters->get('details.quarter_id', []));
+        $quarterId = $quarterFilter->get('value');
+
+        $detailsTotal = [];
+        $details_count = 0;
+        $details_sum_weight = 0;
+        foreach ($harvestsTotal as $harvest) {
+            $detailsTotal = $harvest->details;
+            if ($quarterId) {
+                $detailsTotal = $harvest->details->filter(function($detail) use ($quarterId) {
+                    return $detail->quarter_id === $quarterId;
+                });
+            }
+
+            $details_count += $detailsTotal->count();
+            $details_sum_weight += $detailsTotal->sum('weight');
+        }
 
         $harvests = $harvestsQuery->paginate($perPage, page: $currentPage);
 
@@ -47,8 +63,6 @@ class ListHarvest
                 $details = $details->where('quarter_id', $quarterId);
             }
 
-            $quarterNames = $details->map(fn ($detail) => $detail->quarter->name)->unique()->join(', ');
-            // dd($quarterId);
             return [
                 'id' => $harvest->id,
                 'date' => $harvest->date,
@@ -73,7 +87,6 @@ class ListHarvest
                 $data = $data->sortByDesc($sort);
             }
             $harvestsArray['data'] = $data->values();
-            // dd($harvestsArray['data']);
         }
 
         $harvestsArray['details_count'] = $details_count;
