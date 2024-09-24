@@ -1,8 +1,8 @@
 export default {
   titles: {
-    entity_breadcrumb: 'Equipos de seguridad',
-    create: 'Crear Equipo de seguridad',
-    edit: 'Editar Equipo de seguridad',
+    entity_breadcrumb: 'Elementos de seguridad',
+    create: 'Crear Elemento de seguridad',
+    edit: 'Editar Elemento de seguridad',
   },
   table: {
     name: 'Nombre',

@@ -69,7 +69,7 @@ export default {
       label: 'Herramientas',
     },
     security_equipments: {
-      label: 'Equipos de seguridad',
+      label: 'Elementos de seguridad',
     },
     machineries: {
       label: 'Maquinarias',
@@ -149,7 +149,7 @@ export default {
         label: 'Herramientas',
       },
       security_equipments: {
-        label: 'Equipos de seguridad',
+        label: 'Elementos de seguridad',
       },
       machineries: {
         label: 'Maquinarias',

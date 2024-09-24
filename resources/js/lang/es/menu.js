@@ -22,7 +22,7 @@ export default {
   records: 'Registros',
   machineries: 'Maquinarias',
   tools: 'Herramientas',
-  security_equipments: 'Equipos de seguridad',
+  security_equipments: 'Elementos de seguridad',
   suppliers: 'Proveedores',
 
   reports: 'Reportes',
