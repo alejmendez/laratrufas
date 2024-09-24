@@ -13,7 +13,7 @@ export default {
   harvest_management: 'Gestión de Cosecha',
   harvest: 'Cosecha',
   harvest_details: 'Registrar Cosecha',
-  batch: 'Batch',
+  batch: 'Lotes de Entrega',
   liquidations: 'Liquidaciones',
 
   task_management: 'Gestión de tareas',

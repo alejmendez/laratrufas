@@ -1,8 +1,8 @@
 export default {
   titles: {
-    entity_breadcrumb: 'Entregas',
-    create: 'Crear Entrega',
-    edit: 'Editar Entrega',
+    entity_breadcrumb: 'Lotes de Entrega',
+    create: 'Crear Lote de Entrega',
+    edit: 'Editar Lote de Entrega',
   },
   table: {
     batch_number: 'Lote',
