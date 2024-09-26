@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import AddPlantType from '@/Pages/Plants/AddPlantType.vue';
+import AddPlantType from '@/Components/Form/AddPlantType.vue';
 import { getDataSelect } from '@/Services/Selects';
 
 const { t } = useI18n();
