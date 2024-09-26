@@ -124,6 +124,24 @@ onMounted(async () => {
         </template>
       </Column>
 
+      <Column field="total_commercial" :header="$t('liquidation.table.total_commercial')" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.total_commercial }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Exportador" />
+        </template>
+      </Column>
+
+      <Column field="total_not_commercial" :header="$t('liquidation.table.total_not_commercial')" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.total_not_commercial }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Exportador" />
+        </template>
+      </Column>
+
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
           <Link :href="route('liquidations.edit', slotProps.data.id)">

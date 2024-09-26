@@ -8,9 +8,12 @@ export default {
     week: 'Semana',
     delivery_date: 'Fecha de entrega',
     importer_id: 'Exportador',
+    total_commercial: 'KGS Comerciales',
+    total_not_commercial: 'KGS Rechazo',
   },
   weight_unit: 'Kg',
   currency_unit: '$',
+  total: 'Total',
   form: {
     date: {
       label: 'Semana',
