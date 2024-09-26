@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
 
@@ -43,6 +43,22 @@ const handler_date_selected = () => {
   date_rendered.value = dateRenderText(form.date);
   show_modal_datepicker.value = false;
 };
+
+const total_categories_commercial = computed(() => {
+  const products = Object.values(form.products);
+  const productsFiltered = products.filter(a => props.category_products.find(b => b.id === a.category_product_id).is_commercial);
+  const sum = productsFiltered.reduce((acc, curr) => acc + parseFloat(curr.weight), 0);
+  const sumRounded = Math.round(sum * 100) / 100
+  return `${sumRounded} Kg`;
+})
+
+const total_categories_not_commercial = computed(() => {
+  const products = Object.values(form.products);
+  const productsFiltered = products.filter(a => !props.category_products.find(b => b.id === a.category_product_id).is_commercial);
+  const sum = productsFiltered.reduce((acc, curr) => acc + parseFloat(curr.weight), 0);
+  const sumRounded = Math.round(sum * 100) / 100
+  return `${sumRounded} Kg`;
+})
 </script>
 
 <template>
@@ -164,6 +180,15 @@ const handler_date_selected = () => {
           />
         </div>
       </template>
+
+      <div class="col-span-10 border-t mt-[2px]"></div>
+      <div class="col-span-4 pt-3"></div>
+      <div class="col-span-3 pt-3 text-right font-bold">
+        {{ t('liquidation.total') }}:
+      </div>
+      <div class="col-span-3 pt-3 font-bold">
+        {{ total_categories_commercial }}
+      </div>
     </CardSection>
     <CardSection :headerText="t('liquidation.sections.rejected_categories')" wrapperClass="p-4 grid md:grid-cols-10 sm:grid-cols-1 gap-x-2 gap-y-1">
       <div class="col-span-7 font-semibold">
@@ -188,6 +213,13 @@ const handler_date_selected = () => {
           />
         </div>
       </template>
+      <div class="col-span-10 border-t mt-[2px]"></div>
+      <div class="col-span-7 pt-3 text-right font-bold">
+        {{ t('liquidation.total') }}:
+      </div>
+      <div class="col-span-3 pt-3 font-bold">
+        {{ total_categories_not_commercial }}
+      </div>
     </CardSection>
   </form>
 
