@@ -10,6 +10,7 @@ import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 
 import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
+import AddImporter from '@/Components/Form/AddImporter.vue';
 
 const { t } = useI18n();
 
@@ -21,6 +22,7 @@ const props = defineProps({
 });
 
 const form = props.form;
+const importers = ref(props.importers);
 
 const categories_commercial = props.category_products.filter((a) => a.is_commercial);
 const categories_not_commercial = props.category_products.filter((a) => !a.is_commercial);
@@ -42,6 +44,10 @@ const handler_open_datepicker = () => {
 const handler_date_selected = () => {
   date_rendered.value = dateRenderText(form.date);
   show_modal_datepicker.value = false;
+};
+
+const addImporterCallback = (newType) => {
+  importers.value = [...importers.value, { value: newType.id, text: newType.name }];
 };
 
 const total_categories_commercial = computed(() => {
@@ -76,14 +82,20 @@ const total_categories_not_commercial = computed(() => {
         </InputGroup>
       </VElementFormWrapper>
 
-      <VSelect
-        id="importer_id"
-        v-model="form.importer_id"
-        :placeholder="t('generics.please_select')"
-        :options="props.importers"
-        :label="t('liquidation.form.importer_id.label')"
-        :message="form.errors.importer_id"
-      />
+      <div class="grid grid-cols-12">
+        <VSelect
+          id="importer_id"
+          v-model="form.importer_id"
+          classWrapper="col-span-11"
+          :placeholder="t('generics.please_select')"
+          :options="importers"
+          :label="t('liquidation.form.importer_id.label')"
+          :message="form.errors.importer_id"
+        />
+        <div class="ms-2" style="margin-top: 28px;">
+          <AddImporter :callback="addImporterCallback" />
+        </div>
+      </div>
 
       <VInput
         id="delivery_date"

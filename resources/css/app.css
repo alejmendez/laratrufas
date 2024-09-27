@@ -129,3 +129,7 @@
 .p-toast {
   z-index: 3000;
 }
+
+.p-dialog-title {
+  margin-right: 40px;
+}

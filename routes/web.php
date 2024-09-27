@@ -18,6 +18,7 @@ use App\Http\Controllers\TasksController;
 use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\SecurityEquipmentsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ImportersController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/harvests/details/{code}', [HarvestDetailsController::class, 'find_by_code'])->name('harvests.details.find_by_code');
 
     Route::post('/plants/types', [PlantTypesController::class, 'store'])->name('plants.types.store');
+    Route::post('/importers', [ImportersController::class, 'store'])->name('importers.store');
 
     Route::get('/select/{entity}', [SelectsController::class, 'index'])->name('selects');
     Route::get('/select/multiple', [SelectsController::class, 'multiple'])->name('selects.multiple');
