@@ -21,8 +21,17 @@ const getPlants = async (id) => {
   return response.data;
 };
 
+const updatePlantsPosition = async (id, data) => {
+  const response = await axios.put(route('quarters.plants.update.position', { id }), {
+    data
+  });
+
+  return response.data;
+};
+
 export default {
   list,
   del,
   getPlants,
+  updatePlantsPosition,
 };

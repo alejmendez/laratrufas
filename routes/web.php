@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/select/{entity}', [SelectsController::class, 'index'])->name('selects');
     Route::get('/select/multiple', [SelectsController::class, 'multiple'])->name('selects.multiple');
     Route::get('/quarter/{id}/plants', [QuartersController::class, 'plants'])->name('quarters.plants');
+    Route::put('/quarter/{id}/plants/position', [QuartersController::class, 'plants_update_position'])->name('quarters.plants.update.position');
 
     Route::resources([
         'users' => UsersController::class,
