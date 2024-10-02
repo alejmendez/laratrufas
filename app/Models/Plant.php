@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use App\Traits\Filterable;
+use App\Models\Quarter;
+use App\Models\PlantType;
 use App\Traits\Orderable;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Plant extends Model
 {
@@ -26,6 +29,11 @@ class Plant extends Model
     public function tasks()
     {
         return $this->belongsToMany(Task::class);
+    }
+
+    public function harvest_details(): HasMany
+    {
+        return $this->hasMany(HarvestDetail::class);
     }
 
     protected function code(): Attribute
