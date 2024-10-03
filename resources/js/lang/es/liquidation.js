@@ -22,10 +22,10 @@ export default {
       label: 'Exportador',
     },
     delivery_date: {
-      label: 'Fecha de entrega',
+      label: 'Fecha de entrega y recepción',
     },
     reception_date: {
-      label: 'Fecha de recepción',
+      label: 'Fecha de exportación',
     },
     weight_with_earth: {
       label: 'Peso con tierra (Kg)',
