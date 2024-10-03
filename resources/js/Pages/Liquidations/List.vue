@@ -38,6 +38,9 @@ const filters = {
 };
 
 const fetchHandler = async (params) => {
+  if (!params.rows) {
+    params.rows = 25;
+  }
   return await LiquidationService.list(params);
 };
 
@@ -94,8 +97,9 @@ onMounted(async () => {
       ref="datatable"
       :filters="filters"
       :fetchHandler="fetchHandler"
-      sortField="week"
       :sortOrder="1"
+      scrollHeight="800px"
+      sortField="week"
     >
       <Column field="week" :header="$t('liquidation.table.week')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">

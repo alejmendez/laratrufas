@@ -9,6 +9,10 @@ import InputText from 'primevue/inputtext';
 const props = defineProps({
   filters: Object,
   fetchHandler: Function,
+  scrollHeight: {
+    type: String,
+    default: '500px',
+  },
 });
 
 const attrs = useAttrs();
@@ -85,7 +89,7 @@ onMounted(() => {
       paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
       v-model:filters="filters"
       scrollable
-      scrollHeight="500px"
+      :scrollHeight="props.scrollHeight"
       tableStyle="min-width: 100px"
       v-bind="attrs"
       :value="records"
