@@ -60,6 +60,7 @@ class LiquidationsController extends Controller
         $liquidation = FindLiquidation::call($id);
 
         return Inertia::render('Liquidations/Show', [
+            'data' => new LiquidationResource($liquidation),
             'importers' => ListEntity::call('importer'),
             'category_products' => ListEntity::call('category_products'),
         ]);

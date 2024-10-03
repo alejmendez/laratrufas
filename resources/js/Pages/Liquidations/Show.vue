@@ -1,0 +1,167 @@
+<script setup>
+import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+import { stringToDate, stringToFormat } from '@/Utils/date';
+import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
+
+import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
+
+const { t } = useI18n();
+
+const props = defineProps({
+  data: Object,
+  importers: Array,
+  category_products: Array,
+});
+
+const dataBase = props.data.data;
+
+const data = {
+  date: stringToDate(dataBase.date),
+  delivery_date: stringToFormat(dataBase.delivery_date),
+  reception_date: stringToFormat(dataBase.reception_date),
+  importer_id: dataBase.importer_id.text,
+  weight_with_earth: dataBase.weight_with_earth,
+  weight_washed: dataBase.weight_washed,
+  dollar_value: dataBase.dollar_value,
+  products: dataBase.products,
+};
+
+const categories_commercial = props.category_products.filter((a) => a.is_commercial);
+const categories_not_commercial = props.category_products.filter((a) => !a.is_commercial);
+
+const dateRenderText = (m) => {
+  const start = format(startOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
+  const end = format(endOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
+  const week = getWeek(m, { weekStartsOn: 1 });
+  return t('harvest.form.date.renderText', { week, start, end });
+};
+
+const date_rendered = ref(data.date ? dateRenderText(data.date) : '');
+
+const total_categories_commercial = computed(() => {
+  const products = Object.values(data.products);
+  const productsFiltered = products.filter(a => props.category_products.find(b => b.id === a.category_product_id).is_commercial);
+  const sum = productsFiltered.reduce((acc, curr) => acc + parseFloat(curr.weight), 0);
+  const sumRounded = Math.round(sum * 100) / 100
+  return `${sumRounded} Kg`;
+})
+
+const total_categories_not_commercial = computed(() => {
+  const products = Object.values(data.products);
+  const productsFiltered = products.filter(a => !props.category_products.find(b => b.id === a.category_product_id).is_commercial);
+  const sum = productsFiltered.reduce((acc, curr) => acc + parseFloat(curr.weight), 0);
+  const sumRounded = Math.round(sum * 100) / 100
+  return `${sumRounded} Kg`;
+})
+</script>
+
+<template>
+    <Head :title="t('liquidation.titles.entity_breadcrumb')" />
+
+    <AuthenticatedLayout>
+      <HeaderCrud
+        :title="t('liquidation.titles.edit')"
+        :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
+      />
+      <CardSection>
+        <VElementFormWrapper :label="t('liquidation.form.date.label')">
+          <div>
+            {{ date_rendered }}
+          </div>
+        </VElementFormWrapper>
+
+        <VElementFormWrapper :label="t('liquidation.form.importer_id.label')">
+          <div>
+            {{ data.importer_id }}
+          </div>
+        </VElementFormWrapper>
+
+        <VElementFormWrapper :label="t('liquidation.form.delivery_date.label')">
+          <div>
+            {{ data.delivery_date }}
+          </div>
+        </VElementFormWrapper>
+
+        <VElementFormWrapper :label="t('liquidation.form.reception_date.label')">
+          <div>
+            {{ data.reception_date }}
+          </div>
+        </VElementFormWrapper>
+      </CardSection>
+      <CardSection>
+        <VElementFormWrapper :label="t('liquidation.form.weight_with_earth.label')">
+          <div>
+            {{ data.weight_with_earth }}
+          </div>
+        </VElementFormWrapper>
+        <VElementFormWrapper :label="t('liquidation.form.weight_washed.label')">
+          <div>
+            {{ data.weight_washed }}
+          </div>
+        </VElementFormWrapper>
+        <VElementFormWrapper :label="t('liquidation.form.dollar_value.label')">
+          <div>
+            {{ data.dollar_value }}
+          </div>
+        </VElementFormWrapper>
+      </CardSection>
+      <CardSection :headerText="t('liquidation.sections.commercial_categories')" wrapperClass="p-4 grid md:grid-cols-10 sm:grid-cols-1 gap-x-2 gap-y-1">
+        <div class="col-span-4 font-semibold">
+          {{ t('liquidation.form.commercial_categories.labels.name') }}
+        </div>
+        <div class="col-span-3 font-semibold">
+          {{ t('liquidation.form.commercial_categories.labels.price') }}
+        </div>
+        <div class="col-span-3 font-semibold">
+          {{ t('liquidation.form.commercial_categories.labels.weight') }}
+        </div>
+        <template v-for="(commercial, index) in categories_commercial">
+          <div class="col-span-10 border-t mt-[2px]"></div>
+          <div class="col-span-4 pt-3">
+            {{ data.products[commercial.id].name }}
+          </div>
+          <div class="col-span-3">
+            {{ data.products[commercial.id].price }}
+          </div>
+          <div class="col-span-3">
+            {{ data.products[commercial.id].weight }}
+          </div>
+        </template>
+
+        <div class="col-span-10 border-t mt-[2px]"></div>
+        <div class="col-span-4 pt-3"></div>
+        <div class="col-span-3 pt-3 text-right font-bold">
+          {{ t('liquidation.total') }}:
+        </div>
+        <div class="col-span-3 pt-3 font-bold">
+          {{ total_categories_commercial }}
+        </div>
+      </CardSection>
+      <CardSection :headerText="t('liquidation.sections.rejected_categories')" wrapperClass="p-4 grid md:grid-cols-10 sm:grid-cols-1 gap-x-2 gap-y-1">
+        <div class="col-span-7 font-semibold">
+          {{ t('liquidation.form.commercial_categories.labels.name') }}
+        </div>
+        <div class="col-span-3 font-semibold">
+          {{ t('liquidation.form.commercial_categories.labels.weight') }}
+        </div>
+        <template v-for="(commercial, index) in categories_not_commercial">
+          <div class="col-span-10 border-t mt-[2px]"></div>
+          <div class="col-span-7 pt-3">
+            {{ data.products[commercial.id].name }}
+          </div>
+          <div class="col-span-3">
+            {{ data.products[commercial.id].weight }}
+          </div>
+        </template>
+        <div class="col-span-10 border-t mt-[2px]"></div>
+        <div class="col-span-7 pt-3 text-right font-bold">
+          {{ t('liquidation.total') }}:
+        </div>
+        <div class="col-span-3 pt-3 font-bold">
+          {{ total_categories_not_commercial }}
+        </div>
+      </CardSection>
+    </AuthenticatedLayout>
+</template>
