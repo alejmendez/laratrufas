@@ -17,6 +17,19 @@ const props = defineProps({
 
 const dataBase = props.data.data;
 
+const products = props.category_products.reduce((a, v) => {
+  let product = dataBase.products.find(a => a.category_product_id === v.id) || {
+    ...v,
+    category_product_id: v.id,
+    price: 0,
+    weight: 0
+  };
+  return {
+    ...a,
+    [v.id]: product
+  };
+}, {});
+
 const data = {
   date: stringToDate(dataBase.date),
   delivery_date: stringToFormat(dataBase.delivery_date),
@@ -25,7 +38,7 @@ const data = {
   weight_with_earth: dataBase.weight_with_earth,
   weight_washed: dataBase.weight_washed,
   dollar_value: dataBase.dollar_value,
-  products: dataBase.products,
+  products,
 };
 
 const categories_commercial = props.category_products.filter((a) => a.is_commercial);

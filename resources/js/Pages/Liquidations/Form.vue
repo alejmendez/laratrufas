@@ -24,6 +24,8 @@ const props = defineProps({
 const form = props.form;
 const importers = ref(props.importers);
 
+console.log(form.products);
+
 const categories_commercial = props.category_products.filter((a) => a.is_commercial);
 const categories_not_commercial = props.category_products.filter((a) => !a.is_commercial);
 

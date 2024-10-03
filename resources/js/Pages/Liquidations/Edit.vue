@@ -15,6 +15,19 @@ const props = defineProps({
 
 const { data } = props.data;
 
+const products = props.category_products.reduce((a, v) => {
+  let product = data.products.find(a => a.category_product_id === v.id) || {
+    ...v,
+    category_product_id: v.id,
+    price: 0,
+    weight: 0
+  };
+  return {
+    ...a,
+    [v.id]: product
+  };
+}, {});
+
 const form = useForm({
   _method: 'PATCH',
   id: data.id,
@@ -25,7 +38,7 @@ const form = useForm({
   weight_with_earth: data.weight_with_earth,
   weight_washed: data.weight_washed,
   dollar_value: data.dollar_value,
-  products: data.products,
+  products,
 });
 
 const submitHandler = () => form.post(route('liquidations.update', data.id));

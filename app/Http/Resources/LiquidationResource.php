@@ -28,15 +28,15 @@ class LiquidationResource extends JsonResource
                 'value' => $this->importer->id,
                 'text' => $this->importer->name,
             ],
-            'products' => $this->liquidationProducts->mapWithKeys(function ($liquidationProduct, $key) {
-                return [$liquidationProduct->id => [
+            'products' => $this->liquidationProducts->map(function ($liquidationProduct, $key) {
+                return [
                     'id' => $liquidationProduct->id,
                     'key' => $liquidationProduct->category_product_id,
                     'category_product_id' => $liquidationProduct->category_product_id,
                     'name' => $liquidationProduct->categoryProduct->name,
                     'price' => $liquidationProduct->price,
                     'weight' => $liquidationProduct->weight,
-                ]];
+                ];
             }),
         ];
     }
