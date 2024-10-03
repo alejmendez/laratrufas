@@ -6,7 +6,7 @@ export default {
   },
   table: {
     week: 'Semana',
-    delivery_date: 'Fecha de entrega',
+    delivery_date: 'Fecha de entrega y recepción',
     importer_id: 'Exportador',
     total_commercial: 'KGS Comerciales',
     total_not_commercial: 'KGS Rechazo',
