@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
 
@@ -25,6 +25,11 @@ const { t } = useI18n();
 
 const datatable = ref(null);
 const filter_importer_options = ref([]);
+const filter_year_options = ref([]);
+
+const form = reactive({
+  year: [],
+});
 
 if (props.toast) {
   toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
@@ -32,6 +37,7 @@ if (props.toast) {
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  year: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
   liquidation_number: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   delivery_date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   importer_id: { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -40,6 +46,19 @@ const filters = {
 const fetchHandler = async (params) => {
   if (!params.rows) {
     params.rows = 25;
+  }
+
+  const year = form.year.value;
+  if (year) {
+    params.filters = {
+      ...params.filters,
+      year: {
+        operator: FilterOperator.AND,
+        constraints: [{ value: year, matchMode: FilterMatchMode.EQUALS }],
+      },
+    };
+  } else if (params.filters?.year) {
+    delete params.filters.year;
   }
   return await LiquidationService.list(params);
 };
@@ -65,6 +84,10 @@ const deleteHandler = (record) => {
   });
 };
 
+const filterHandler = async () => {
+  datatable.value.loadLazyData();
+};
+
 onMounted(async () => {
   if (props.toast) {
     toast.add({
@@ -77,9 +100,13 @@ onMounted(async () => {
 
   const data = await getDataSelects({
     importer: {},
+    liquidation_available_years: {},
   });
 
   filter_importer_options.value = data.importer;
+  const year_value_default = { value: null, text: 'Todos' };
+  filter_year_options.value = [year_value_default, ...data.liquidation_available_years];
+  form.year = year_value_default;
 });
 </script>
 
@@ -92,6 +119,19 @@ onMounted(async () => {
       :breadcrumbs="[{ to: 'liquidations.index', text: $t('liquidation.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
       :links="[{ to: 'liquidations.create', text: $t('generics.new') }]"
     />
+
+    <CardSection wrapperClass="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
+      <div>
+        <div class="text-gray-400 pb-1">{{ t('harvest.table_filters.year') }}</div>
+        <VSelect
+          id="year"
+          v-model="form.year"
+          :placeholder="t('generics.please_select')"
+          :options="filter_year_options"
+          @change="filterHandler"
+        />
+      </div>
+    </CardSection>
 
     <Datatable
       ref="datatable"

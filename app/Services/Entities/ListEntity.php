@@ -2,6 +2,20 @@
 
 namespace App\Services\Entities;
 
+use App\Models\Dog;
+use App\Models\Tool;
+use App\Models\User;
+use App\Models\Field;
+use App\Models\Plant;
+use App\Models\Harvest;
+use App\Models\Quarter;
+use App\Models\Importer;
+use App\Models\Machinery;
+use App\Models\PlantType;
+use App\Models\CategoryProduct;
+use App\Models\SecurityEquipment;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use App\Services\Harvests\HarvestAvailableWeeks;
 use App\Services\Harvests\HarvestAvailableYears;
 
@@ -10,22 +24,29 @@ class ListEntity
     public static function call($entity, $filter = [])
     {
         $entityQuery = match ($entity) {
-            'field' => \App\Models\Field::select('id as value', 'name as text')->orderBy('name'),
-            'quarter' => \App\Models\Quarter::select('id as value', 'name as text')->orderBy('name'),
+            'field' => Field::select('id as value', 'name as text')->orderBy('name'),
+            'quarter' => Quarter::select('id as value', 'name as text')->orderBy('name'),
             'quarterMultiselect' => self::quarterMultiselect(),
-            'plant' => \App\Models\Plant::select('id as value', 'code as text')->orderBy('code'),
-            'plant_type' => \App\Models\PlantType::select('id as value', 'name as text')->orderBy('name'),
-            'tool' => \App\Models\Tool::select('id as value', 'name as text')->orderBy('name'),
-            'security_equipment' => \App\Models\SecurityEquipment::select('id as value', 'name as text')->orderBy('name'),
-            'machinery' => \App\Models\Machinery::select('id as value', 'name as text')->orderBy('name'),
-            'dog' => \App\Models\Dog::select('id as value', 'name as text')->orderBy('name'),
-            'harvest' => \App\Models\Harvest::select('id', 'week', 'batch')->orderBy('date'),
+            'plant' => Plant::select('id as value', 'code as text')->orderBy('code'),
+            'plant_type' => PlantType::select('id as value', 'name as text')->orderBy('name'),
+            'tool' => Tool::select('id as value', 'name as text')->orderBy('name'),
+            'security_equipment' => SecurityEquipment::select('id as value', 'name as text')->orderBy('name'),
+            'machinery' => Machinery::select('id as value', 'name as text')->orderBy('name'),
+            'dog' => Dog::select('id as value', 'name as text')->orderBy('name'),
+            'harvest' => Harvest::select('id', 'week', 'batch')->orderBy('date'),
             'role' => \Spatie\Permission\Models\Role::select('name as value', 'name as text')->orderBy('name'),
             'harvest_available_years' => HarvestAvailableYears::call(),
             'harvest_available_weeks' => HarvestAvailableWeeks::call(),
-            'importer' => \App\Models\Importer::select('id as value', 'name as text')->orderBy('name'),
-            'category_products' => \App\Models\CategoryProduct::select('id', 'name', 'is_commercial'),
-            'responsible', 'couple', 'user' => \App\Models\User::select('id as value', 'full_name as text')->orderBy('full_name'),
+            'liquidation_available_years' => DB::table('liquidations')
+                ->select('year')
+                ->distinct()
+                ->get()
+                ->map(function ($row) {
+                    return ['value' => $row->year, 'text' => $row->year];
+                }),
+            'importer' => Importer::select('id as value', 'name as text')->orderBy('name'),
+            'category_products' => CategoryProduct::select('id', 'name', 'is_commercial'),
+            'responsible', 'couple', 'user' => User::select('id as value', 'full_name as text')->orderBy('full_name'),
             default => [],
         };
 
@@ -51,7 +72,7 @@ class ListEntity
 
     protected static function quarterMultiselect()
     {
-        return \App\Models\Quarter::leftJoin('fields', 'quarters.field_id', '=', 'fields.id')
+        return Quarter::leftJoin('fields', 'quarters.field_id', '=', 'fields.id')
             ->select('fields.id as field_id', 'fields.name as field_name', 'quarters.id', 'quarters.name')
             ->orderBy('fields.name')
             ->orderBy('quarters.name')
