@@ -25,7 +25,7 @@ const addPlantTypeCallback = (newType) => {
 };
 
 const handlerChangeFieldId = async () => {
-  quartersOptions.value = await getDataSelect('quarter', { field_id: form.field_id });
+  quartersOptions.value = await getDataSelect('quarter', { field_id: form.field_id.value });
   form.quarter_id = null;
 };
 </script>

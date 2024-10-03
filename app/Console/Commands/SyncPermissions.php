@@ -72,10 +72,12 @@ class SyncPermissions extends Command
         $this->create_permission('harvest', 'download_bulk_template');
         $this->create_permission('harvest', 'create_bulk');
         $this->create_permission('harvest', 'store_bulk');
+        $this->create_permission('harvest', 'bulk_create');
 
         $this->create_permission('plant', 'download_bulk_template');
         $this->create_permission('plant', 'create_bulk');
         $this->create_permission('plant', 'store_bulk');
+        $this->create_permission('plant', 'bulk_create');
 
         $this->create_permission('planttype', 'store');
 

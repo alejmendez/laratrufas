@@ -38,7 +38,7 @@ const quartersOptions = ref(props.quarters);
 watch(
   () => form.field_id,
   async (field_id) => {
-    quartersOptions.value = await getDataSelect('quarter', { field_id });
+    quartersOptions.value = await getDataSelect('quarter', { field_id: field_id.value });
     form.quarter_id = null;
   },
 );

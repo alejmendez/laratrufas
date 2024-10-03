@@ -31,7 +31,7 @@ watch(
   () => form.field_id,
   async (field_id) => {
     loading_quarters.value = true;
-    quartersOptions.value = await getDataSelect('quarter', { field_id });
+    quartersOptions.value = await getDataSelect('quarter', { field_id: field_id.value });
     form.quarter_id = [];
     loading_quarters.value = false;
   },
