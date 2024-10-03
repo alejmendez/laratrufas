@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use App\Models\Task;
 use App\Models\Quarter;
 use App\Models\PlantType;
 use App\Traits\Orderable;
 use App\Traits\Filterable;
+use App\Models\HarvestDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -42,5 +45,26 @@ class Plant extends Model
             get: fn (string $value) => strtoupper(trim($value)),
             set: fn (string $value) => strtoupper(trim($value)),
         );
+    }
+
+    public function age(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->calculateAgeWithDecimals($this->planned_at),
+        );
+    }
+
+    protected function calculateAgeWithDecimals($birthDate)
+    {
+        $birthDate = Carbon::parse($birthDate);
+        $currentDate = Carbon::now();
+
+        $yearsDifference = $currentDate->diffInYears($birthDate);
+        $monthsDifference = $currentDate->diffInMonths($birthDate) % 12;
+        $daysDifference = $currentDate->diffInDays($birthDate->copy()->addYears($yearsDifference)->addMonths($monthsDifference));
+
+        $age = $yearsDifference + ($monthsDifference / 12) + ($daysDifference / 365.25);
+
+        return round($age, 2);
     }
 }

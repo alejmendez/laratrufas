@@ -14,7 +14,7 @@ class CreatePlant
         $plant->code = $data['code'];
         $plant->row = $data['row'];
         $plant->plant_type_id = $data['plant_type_id']['value'];
-        $plant->age = $data['age'];
+        $plant->age = 0;
         $plant->planned_at = $data['planned_at'];
         $plant->nursery_origin = $data['nursery_origin'];
 

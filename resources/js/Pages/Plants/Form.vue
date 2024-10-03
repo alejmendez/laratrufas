@@ -86,17 +86,6 @@ const handlerChangeFieldId = async () => {
       </div>
 
       <VInput
-        id="age"
-        type="number"
-        min="0"
-        max="200"
-        step="0.1"
-        v-model="form.age"
-        :label="t('plant.form.age.label')"
-        :message="form.errors.age"
-      />
-
-      <VInput
         id="planned_at"
         type="date"
         v-model="form.planned_at"
