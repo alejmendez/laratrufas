@@ -57,6 +57,12 @@ const handler_date_selected = () => {
   date_rendered.value = dateRenderText(form.date);
   show_modal_datepicker.value = false;
 };
+
+const handler_input_batch = (e) => {
+  const filteredValue = e.target.value.replace(/[^a-zA-Z]/g, "").toUpperCase();
+  e.target.value = filteredValue;
+  form.batch = filteredValue;
+};
 </script>
 
 <template>
@@ -88,7 +94,7 @@ const handler_date_selected = () => {
         id="batch"
         v-model="form.batch"
         maxlength="2"
-        v-mask="'AA'"
+        @input="handler_input_batch"
         :label="t('harvest.form.batch.label')"
         :message="form.errors.batch"
       />

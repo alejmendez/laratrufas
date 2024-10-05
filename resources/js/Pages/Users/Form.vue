@@ -2,7 +2,9 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
 import VInputDni from '@/Components/Form/VInputDni.vue';
+import InputMask from 'primevue/inputmask';
 
 const { t } = useI18n();
 
@@ -66,13 +68,13 @@ const changeFileHandler = (e) => {
         :message="form.errors.email"
       />
 
-      <VInput
-        id="phone"
-        v-model="form.phone"
-        v-mask="'(+##) # #### ####'"
-        :label="t('user.form.phone.label')"
-        :message="form.errors.phone"
-      />
+      <VElementFormWrapper :classWrapper="props.classWrapper" :label="t('user.form.phone.label')" :message="form.errors.phone">
+        <InputMask
+          v-model="form.phone"
+          mask="(+99) 9 9999 9999"
+          fluid
+        />
+      </VElementFormWrapper>
 
       <VInput
         id="password"

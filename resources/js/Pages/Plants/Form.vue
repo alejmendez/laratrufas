@@ -28,6 +28,12 @@ const handlerChangeFieldId = async () => {
   quartersOptions.value = await getDataSelect('quarter', { field_id: form.field_id.value });
   form.quarter_id = null;
 };
+
+const handler_input_row = (e) => {
+  const filteredValue = e.target.value.replace(/[^a-zA-Z]/g, "").toUpperCase();
+  e.target.value = filteredValue;
+  form.row = filteredValue;
+};
 </script>
 
 <template>
@@ -56,7 +62,7 @@ const handlerChangeFieldId = async () => {
         id="row"
         maxlength="2"
         v-model="form.row"
-        v-mask="'AA'"
+        @input="handler_input_row"
         :label="t('plant.form.row.label')"
         :message="form.errors.row"
       />
