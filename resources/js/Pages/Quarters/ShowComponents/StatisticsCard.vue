@@ -56,7 +56,8 @@ const changeDistribution = () => {
   plants.value = distributionData;
 }
 
-const generatePlantsDispositionWithPosition = (plantsPositions) => {
+const generatePlantsDispositionWithPosition = (dataPlants) => {
+  const plantsPositions = dataPlants.filter(a => a.position != null)
   const plantsByCols = Object.groupBy(plantsPositions, ({ row }) => row);
   const plantsByPosition = plantsPositions.filter(a => a.position != null).reduce((acc, curr) => (acc[curr.position] = curr, acc), {});
   const cols = Object.keys(plantsByCols);
