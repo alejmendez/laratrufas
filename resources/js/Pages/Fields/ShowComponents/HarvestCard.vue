@@ -13,7 +13,6 @@ const { t } = useI18n();
 <template>
   <div>
     <HarvestTable
-      :show_filters="false"
       :show_actions="false"
     />
   </div>

@@ -83,6 +83,7 @@ const deleteHandler = async (id) => {
       />
 
       <StatisticsCard
+        :field="field"
         v-show="props.current_tab === tabs[3]"
       />
     </AuthenticatedLayout>

@@ -1,13 +1,171 @@
 <script setup>
+import { onMounted, ref, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { getGraph } from '@/Services/Graphs';
+
+const props = defineProps({
+  field: Object,
+});
+
+const field = props.field;
+
 const { t } = useI18n();
+
+const types_graphs = ref([
+  { value: 'field-on-demand-production', text: 'Producción por demana', type: 'area' },
+  { value: 'field-sales-vs-shrinkage', text: 'Ventas vs merma', type: 'area' },
+  { value: 'field-shrinkage-detail', text: 'Detalle de merma', type: 'pie' },
+  { value: 'field-type-of-shrinkage', text: 'Tipo de merma', type: 'bar_percent' },
+  { value: 'field-average-sales-value-per-kilogram', text: 'Valor promedio de venta por KGS', type: 'bar_percent' },
+]);
+
+const type_graph = ref(types_graphs.value[0]);
+
+const loading = ref(true);
+const series = ref([]);
+
+const chartOptions = {
+  area: {
+    chart: {
+      type: 'area',
+      zoom: {
+        enabled: false,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: 'straight',
+    },
+    title: {
+      text: '',
+      align: 'left',
+    },
+    labels: [],
+    xaxis: {
+      type: 'string',
+    },
+    yaxis: {
+      opposite: false,
+    },
+    legend: {
+      horizontalAlign: 'left',
+    },
+  },
+  pie: {
+    chart: {
+      type: 'pie',
+      zoom: {
+        enabled: false,
+      },
+    },
+    title: {
+      text: '',
+      align: 'left',
+    },
+    labels: [],
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        chart: {
+          width: 200
+        },
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }]
+  },
+  bar_percent: {
+    chart: {
+      type: 'bar',
+      stacked: true,
+      stackType: '100%',
+      zoom: {
+        enabled: false,
+      },
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+      },
+    },
+    stroke: {
+      width: 1,
+      colors: ['#fff']
+    },
+    xaxis: {
+      categories: [],
+      convertedCatToNumeric: false,
+    },
+    fill: {
+      opacity: 1
+    },
+    legend: {
+      position: 'top',
+      horizontalAlign: 'left',
+      offsetX: 40
+    },
+    title: {
+      text: '',
+      align: 'left',
+    },
+  }
+};
+
+const chartOption = ref(types_graphs.value[0].type);
+
+const filterHandler = async () => {
+  loading.value = true;
+  const response = await getGraph(field.id, type_graph.value.value);
+  const _chartOption = {...chartOptions[type_graph.value.type]};
+
+  _chartOption.title.text = response.title;
+
+  if (type_graph.value.type == 'bar_percent')
+    _chartOption.xaxis.categories = response.labels;
+  else {
+    _chartOption.labels = response.labels;
+  }
+
+  chartOption.value = {..._chartOption}
+  series.value = response.series;
+  loading.value = false;
+};
+
+onMounted(async () => {
+  await filterHandler();
+})
 </script>
 
 <template>
-  <CardSection
-    :header-text="t('field.show.statistics.title')"
-    wrapperClass="p-5 grid grid-cols-2 gap-4"
-  >
-  </CardSection>
+  <div>
+    <CardSection wrapperClass="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
+      <div>
+        <div class="text-gray-400 pb-1">Tipo de gráfica</div>
+        <VSelect
+          v-model="type_graph"
+          :placeholder="t('generics.please_select')"
+          :options="types_graphs"
+          @change="filterHandler"
+        />
+      </div>
+    </CardSection>
+
+    <CardSection
+      :header-text="type_graph.text"
+      wrapperClass="p-5 grid grid-cols-2 gap-4"
+    >
+      <div class="animate-pulse" v-if="loading">
+        <div class="h-[20px] w-[300px] mb-[10px] bg-slate-200 rounded"></div>
+        <div class="h-[380px] w-[1300px] mb-[10px] bg-slate-200 rounded"></div>
+        <div class="h-[20px] w-[1300px] bg-slate-200 rounded"></div>
+      </div>
+      <div v-else>
+        <apexchart width="1300" height="450" :options="chartOption" :series="series"></apexchart>
+      </div>
+    </CardSection>
+  </div>
 </template>

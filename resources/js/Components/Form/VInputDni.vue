@@ -28,7 +28,10 @@ const formatRut = (input) => {
 };
 
 const handlerInput = (e) => {
-  model.value = formatRut(e.target.value.replace(/\D/g, ''));
+  const rutValue = e.target.value.replace(/\D/g, '');
+  const rutFormated = formatRut(rutValue);
+  e.target.value = rutFormated
+  model.value = rutFormated;
 };
 </script>
 
