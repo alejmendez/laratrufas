@@ -16,7 +16,7 @@ const { data } = props.data;
 
 const tabs = ['file', 'documentation', 'logbook', 'statistics'];
 
-const currentTab = ref(tabs[3]);
+const currentTab = ref(tabs[0]);
 
 const dataFile = [
   [t('quarter.show.file.field'), data.field.name],

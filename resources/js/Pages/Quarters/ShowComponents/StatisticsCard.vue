@@ -11,179 +11,115 @@ const props = defineProps({
 const { t } = useI18n();
 const plants = ref([]);
 const tableCols = ref([]);
-
 const dataPlantsPosition = ref([]);
 const dataHarvests = ref([]);
 const open = ref(false);
 const loading = ref(false);
 const distributionPlants = ref('');
 const current_plant = ref({});
+const detail_current_plant = ref({});
+
+const processDistribution = (distribution) => distribution
+  .split("\n")
+  .filter(row => row.trim())
+  .map(row => row.split('\t'));
 
 const changeDistribution = () => {
-  const distribution = distributionPlants.value.split("\n").map((c) => {
-    return c.split('\t');
-  });
+  const distribution = processDistribution(distributionPlants.value);
+  const data = Object.fromEntries(toRaw(dataPlantsPosition.value).map(item => [item.code, item]));
 
-  const data = toRaw(dataPlantsPosition.value).reduce((acc, curr) => (acc[curr.code] = curr, acc), {});
   const distributionData = [];
   const dataToSave = [];
+
   for (let i = 0; i < distribution.length; i++) {
     const row = distribution[i];
-
-    if (row.length === 1 && row[0] === '') continue;
-
-    if (row.length != distribution[0].length) {
-      console.error("No se puede procesar");
+    if (row.length !== distribution[0].length) {
+      console.error("Invalid row length");
       return;
     }
 
-    const rowData = [];
-    for (let j = 0; j < row.length; j++) {
-      const ele = row[j];
-      if (ele === '' || ele === undefined || data[ele] === undefined) {
-        rowData.push('');
-        continue;
-      }
+    const rowData = row.map((ele, j) => {
+      const plant = data[ele];
+      if (plant) dataToSave.push([ele, i, j]);
+      return plant || '';
+    });
 
-      rowData.push(data[ele]);
-      dataToSave.push([ele, i, j]);
-    }
     distributionData.push(rowData);
   }
 
   QuarterService.updatePlantsPosition(props.quarter.id, dataToSave);
-
   plants.value = distributionData;
-}
+};
 
 const generatePlantsDispositionWithPosition = (dataPlants) => {
-  const plantsPositions = dataPlants.filter(a => a.position != null)
-  const plantsByCols = Object.groupBy(plantsPositions, ({ row }) => row);
-  const plantsByPosition = plantsPositions.filter(a => a.position != null).reduce((acc, curr) => (acc[curr.position] = curr, acc), {});
+  const plantsByPosition = Object.fromEntries(dataPlants.filter(p => p.position).map(p => [p.position, p]));
+  const plantsByCols = Object.groupBy(dataPlants, p => p.row);
   const cols = Object.keys(plantsByCols);
 
   const maxRows = Math.max(
-    Object.values(plantsByCols).reduce((acc, cur) => (cur.length > acc ? cur.length : acc), 0),
-    plantsPositions.reduce((acc, cur) => {
-      const posy = parseInt(cur.position.split(',')[0]);
-      return posy > acc ? posy : acc
-    }, 0)
+    ...dataPlants.map(p => parseInt(p.position?.split(',')[0], 10) || 0),
+    Object.values(plantsByCols).reduce((max, col) => Math.max(max, col.length), 0)
   ) + 1;
-  const data = [];
 
-  for (let i = 0; i < maxRows; i++) {
-    const row = [];
-    let j = 0;
-    for (const col of cols) {
-      const pos = `${i},${j++}`;
-      if (!plantsByPosition[pos]) {
-        row.push(null);
-        continue;
-      }
+  const data = Array.from({ length: maxRows }, (_, i) =>
+    cols.map((_, j) => {
+      const pos = `${i},${j}`;
       const plant = plantsByPosition[pos];
-      plant.number = plant.code;
-
-      const numbers = plant.code.match(/\d+/g);
-      plant.position = numbers[numbers.length - 1];
-      let scale = 0;
-      if (plant.data) {
-        const harvestDetails = Object.values(plant.data);
-        const scales = harvestDetails.map(detail => detail.map(d => d.scale)).flat();
-        scale = (scales.reduce((a, b) => a + b, 0) / scales.length).toFixed(2);
+      if (plant) {
+        plant.number = plant.code;
+        const [_, position] = plant.code.match(/\d+/g);
+        plant.position = position;
+        plant.scale = calculatePlantScale(plant);
+        plant.color = generarColorPorPorcentaje(plant.scale);
       }
-
-      plant.scale = scale;
-      plant.color = generarColorPorPorcentaje(scale);
-
-      row.push(plant);
-    }
-    data.push(row);
-  }
+      return plant || null;
+    })
+  );
 
   tableCols.value = cols;
   plants.value = data;
-}
+};
 
-const generatePlantsDisposition = (plantsPositions) => {
-  const hasPosition = plantsPositions.some(a => a.position);
-  if (hasPosition) return generatePlantsDispositionWithPosition(plantsPositions);
-  const plantsByCols = Object.groupBy(plantsPositions, ({ row }) => row);
-  const cols = Object.keys(plantsByCols);
-  const maxRows = Object.values(plantsByCols).reduce((acc, cur) => (cur.length > acc ? cur.length : acc), 0);
-  const data = [];
+const calculatePlantScale = (plant) => {
+  if (!plant.data) return 0;
+  const scales = Object.values(plant.data).flatMap(details => details.map(d => d.scale));
+  return scales.length ? (scales.reduce((a, b) => a + b, 0) / scales.length).toFixed(2) : 0;
+};
 
-  for (let i = 0; i < maxRows; i++) {
-    const row = [];
-    for (const col of cols) {
-      if (!plantsByCols[col][i]) {
-        row.push(null);
-        continue;
-      }
-      const plant = plantsByCols[col][i];
-      plant.number = plant.code;
+const generarColorPorPorcentaje = (porcentaje, colorFin = '#F06F38') => {
+  const colorInicio = { r: 255, g: 255, b: 255 };
+  const hexToRgb = (hex) => {
+    const bigint = parseInt(hex.slice(1), 16);
+    return { r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255 };
+  };
 
-      const numbers = plant.code.match(/\d+/g);
-      plant.position = numbers[numbers.length - 1];
+  const colorFinal = hexToRgb(colorFin);
+  const factor = Math.max(0, Math.min(100, porcentaje)) / 100;
+  const interpolate = (start, end) => Math.round(start + (end - start) * factor);
 
-      row.push(plant);
-    }
-    data.push(row);
-  }
+  const r = interpolate(colorInicio.r, colorFinal.r);
+  const g = interpolate(colorInicio.g, colorFinal.g);
+  const b = interpolate(colorInicio.b, colorFinal.b);
 
-  tableCols.value = cols;
-  plants.value = data;
-}
+  return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+};
 
-function generarColorPorPorcentaje(porcentaje, colorFin = '#F06F38') {
-    // Aseguramos que el porcentaje esté entre 0 y 100
-    porcentaje = Math.max(0, Math.min(100, porcentaje));
+const getHarvestById = (id) => dataHarvests.value.find(harvest => harvest.id === id);
 
-    // Color blanco (RGB)
-    const colorInicio = { r: 255, g: 255, b: 255 };
+const getHarvestDetailFromPlant = (plant) => {
+  return plant?.data ? Object.values(plant.data).flat() : [];
+};
 
-    // Convierte el color final hexadecimal a RGB
-    const hexToRgb = (hex) => {
-        const bigint = parseInt(hex.slice(1), 16);
-        return {
-            r: (bigint >> 16) & 255,
-            g: (bigint >> 8) & 255,
-            b: bigint & 255,
-        };
-    };
-
-    const colorFinal = hexToRgb(colorFin);
-
-    // Interpolación lineal entre dos valores
-    const interpolate = (start, end, factor) => Math.round(start + (end - start) * factor);
-
-    const factor = porcentaje / 100;
-
-    const r = interpolate(colorInicio.r, colorFinal.r, factor);
-    const g = interpolate(colorInicio.g, colorFinal.g, factor);
-    const b = interpolate(colorInicio.b, colorFinal.b, factor);
-
-    // Convierte de nuevo a formato hexadecimal
-    const rgbToHex = (r, g, b) => `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
-
-    return rgbToHex(r, g, b);
-}
-
-function getHarvestById(id) {
-  return dataHarvests.value.find(a => a.id === id)
-}
-
-function getHarvestDetailFromPlant(plant) {
-  if (!plant || !plant?.data) {
-    return [];
-  }
-  return Object.values(plant.data).flat();
-}
+const setCurrentPlant = (plant) => {
+  current_plant.value = plant?.code ? plant : current_plant.value
+  detail_current_plant.value = getHarvestDetailFromPlant(current_plant.value)
+};
 
 onMounted(async () => {
-  const response = await QuarterService.getPlants(props.quarter.id);
-  dataPlantsPosition.value = response.plants;
-  dataHarvests.value = response.harvests;
-  generatePlantsDisposition(dataPlantsPosition.value);
+  const { plants: plantData, harvests } = await QuarterService.getPlants(props.quarter.id);
+  dataPlantsPosition.value = plantData;
+  dataHarvests.value = harvests;
+  generatePlantsDispositionWithPosition(plantData);
 });
 </script>
 
@@ -226,13 +162,14 @@ table tbody tr td {
       <table class="table-heat-map lg:col-span-3 md:col-span-2">
         <thead>
           <tr>
-            <th v-for="col in tableCols" v-text="col" />
+            <th v-for="col in tableCols" :key="col" v-text="col" />
           </tr>
         </thead>
         <tbody>
-          <tr v-for="plantRow in plants">
+          <tr v-for="plantRow in plants" :key="plantRow">
             <td
               v-for="plant in plantRow"
+              :key="plant?.code || 'empty'"
               v-html="'&nbsp;'"
               :style="{
                 backgroundColor: plant?.color,
@@ -240,22 +177,19 @@ table tbody tr td {
                 borderLeft: plant?.code ? 'solid 1px #ccc' : 'solid 1px #ddd',
               }"
               v-tooltip.top="plant?.code"
-              @click="current_plant = plant?.code ? plant : current_plant"
+              @click="setCurrentPlant(plant)"
             />
           </tr>
         </tbody>
       </table>
       <div v-if="current_plant?.code">
         <div class="text-xl">{{ current_plant.code }}</div>
-        <div class="">Valor: {{ current_plant.scale }} %</div>
-        <div class="">Hilera: {{ current_plant.row }}</div>
-        <div class="">
-          <ul>
-            <li v-for="harvest_details in getHarvestDetailFromPlant(current_plant)">
-              Semana: {{ getHarvestById(harvest_details.harvest_id)?.week }} {{ getHarvestById(harvest_details.harvest_id)?.batch }}
-              Peso: {{ harvest_details.weight }}
-            </li>
-          </ul>
+        <div>Total cosecha (grs).: {{ detail_current_plant.reduce((a, b) => a + b.weight, 0) }}</div>
+        <div>Unidades: {{ detail_current_plant.length }}</div>
+        <div>
+          <Link :href="route('plants.show', current_plant.id)">
+            Ir a ficha de planta <font-awesome-icon :icon="['fas', 'up-right-from-square']" />
+          </Link>
         </div>
       </div>
     </div>
