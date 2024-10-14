@@ -29,6 +29,11 @@ class Field extends Model
         return $this->hasManyThrough(Plant::class, Quarter::class);
     }
 
+    public function harvests(): HasManyThrough
+    {
+        return $this->hasManyThrough(Harvest::class, Quarter::class);
+    }
+
     public function getCountPlantsAttribute(): int
     {
         return $this->plants->count();

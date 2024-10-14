@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Entities\ListEntity;
 use Inertia\Inertia;
+
+use App\Http\Controllers\Controller;
+use App\Services\Dashboard\ShowDashboard;
 
 class DashboardController extends Controller
 {
@@ -12,8 +14,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Dashboard/Index', [
-            'fields' => ListEntity::call('field'),
-        ]);
+        return Inertia::render('Dashboard/Index', ShowDashboard::call());
     }
 }

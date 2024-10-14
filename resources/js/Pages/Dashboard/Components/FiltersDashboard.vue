@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
   fields: Array,
+  field: Object,
 });
 
 const { t } = useI18n();
@@ -28,31 +29,13 @@ const form = useForm({
         </div>
       </div>
     </div>
-    <div>
+    <div class="col-end-5">
       <VSelect
         id="field"
         v-model="form.field_id"
         :placeholder="t('generics.please_select')"
         :options="props.fields"
         :label="t('dashboard.form.field_id.label')"
-      />
-    </div>
-    <div>
-      <VInput
-        id="start_date"
-        type="date"
-        v-model="form.start_date"
-        :label="t('dashboard.form.start_date.label')"
-        :message="form.errors.start_date"
-      />
-    </div>
-    <div>
-      <VInput
-        id="end_date"
-        type="date"
-        v-model="form.end_date"
-        :label="t('dashboard.form.end_date.label')"
-        :message="form.errors.end_date"
       />
     </div>
   </section>
