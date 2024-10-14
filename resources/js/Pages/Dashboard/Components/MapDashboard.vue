@@ -4,7 +4,6 @@ const props = defineProps({
 });
 
 const field = props.field.data
-console.log(field)
 </script>
 
 <template>

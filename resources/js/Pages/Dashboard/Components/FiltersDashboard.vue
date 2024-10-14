@@ -10,9 +10,7 @@ const props = defineProps({
 const { t } = useI18n();
 
 const form = useForm({
-  field_id: '',
-  start_date: '',
-  end_date: '',
+  field_id: props.fields.find(a => a.value === props.field.data.id),
 });
 </script>
 
