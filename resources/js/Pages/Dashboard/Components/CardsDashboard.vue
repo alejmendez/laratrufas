@@ -22,7 +22,7 @@ function getPorcent(total, num) {
 <template>
   <section class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
     <div class="mt-5 p-5 rounded-xl bg-white shadow-sm border border-gray-200 ">
-      <div class="text-gray-500 font-bold">Ultima cosecha:</div>
+      <div class="text-gray-500 font-bold">Temporada {{ harvest_data.years_variation[0] }}:</div>
       <div class="text-3xl font-bold mb-2">{{ harvest_data.total_weight_of_last_harvest }} kgs</div>
       <div class="text-sm">
         Promedio: {{ harvest_data.average_weight_per_plant }} gr por planta

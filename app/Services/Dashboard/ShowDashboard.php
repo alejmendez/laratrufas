@@ -2,11 +2,12 @@
 
 namespace App\Services\Dashboard;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Task;
 
 use App\Models\Harvest;
-use App\Models\Task;
+use App\Models\Liquidation;
 use App\Services\Fields\FindField;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\FieldResource;
 use App\Services\Entities\ListEntity;
 
@@ -19,7 +20,7 @@ class ShowDashboard
         $field = FindField::call($id ?? $fields[0]['value']);
 
         $quarter_ids = $field->quarters->pluck('id');
-        $harvest_data = self::getHarvestData($quarter_ids);
+        $harvest_data = self::getHarvestData($field, $quarter_ids);
         $task_data = self::getTaskData($current_user);
 
         return [
@@ -30,17 +31,20 @@ class ShowDashboard
         ];
     }
 
-    public static function getHarvestData($quarter_ids)
+    public static function getHarvestData($field, $quarter_ids)
     {
         $current_year = date("Y");
         $last_year = $current_year - 1;
 
-        $current_year_harvest_details = self::getHarvestDataByYear($current_year, $quarter_ids);
-        $last_year_harvest_details = self::getHarvestDataByYear($last_year, $quarter_ids);
+        $current_year_harvest_details = self::getLiquidationDataByYear($current_year, $field);
+        $last_year_harvest_details = self::getLiquidationDataByYear($last_year, $field);
 
-        $current_year_total_weight = $current_year_harvest_details->sum('weight_sum');
-        $last_year_total_weight = $last_year_harvest_details->sum('weight_sum');
-        $last_harvest_details = $current_year_harvest_details->first();
+        $current_year_total_weight = floatval($current_year_harvest_details->weight_sum);
+        $last_year_total_weight = floatval($last_year_harvest_details->weight_sum);
+
+        if ($current_year === '2024') {
+            $last_year_total_weight = 86.23;
+        }
 
         if ($last_year_total_weight === 0) {
             $variation_between_harvests = 0;
@@ -49,23 +53,23 @@ class ShowDashboard
         }
 
         return [
-            'total_weight_of_last_harvest' => round($last_harvest_details->weight_sum / 1000, 2),
-            'average_weight_per_plant' => round($last_harvest_details->weight_sum / $last_harvest_details->count_plants, 2),
+            'total_weight_of_last_harvest' => round($current_year_total_weight / 1000, 2),
+            'average_weight_per_plant' => round($current_year_total_weight / $field->plants_count, 2),
             'variation_between_harvests' => $variation_between_harvests,
             'years_variation' => [$current_year, $last_year],
         ];
     }
 
-    public static function getHarvestDataByYear($year, $quarter_ids)
+    public static function getLiquidationDataByYear($year, $field)
     {
-        return Harvest::leftJoin('harvest_details', 'harvests.id', '=', 'harvest_details.harvest_id')
-            ->select('week', 'year', DB::raw('sum(harvest_details.weight) as weight_sum'), DB::raw('count(harvest_details.*) as count_plants'))
-            ->whereIn('harvest_details.quarter_id', $quarter_ids)
+        return Liquidation::leftJoin('liquidation_products', 'liquidations.id', '=', 'liquidation_products.liquidation_id')
+            ->leftJoin('category_products', 'liquidation_products.category_product_id', '=', 'category_products.id')
+            ->selectRaw('sum(liquidation_products.weight) as weight_sum')
+            ->where('field_id', $field->id)
             ->where('year', $year)
-            ->groupBy('week', 'year')
-            ->orderBy('year', 'desc')
-            ->orderBy('week', 'desc')
-            ->get();
+            ->where('category_products.is_commercial', true)
+            ->get()
+            ->first();
     }
 
     public static function getTaskData($current_user)

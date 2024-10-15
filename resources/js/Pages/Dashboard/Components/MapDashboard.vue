@@ -28,11 +28,11 @@ const field = props.field.data
           </div>
         </div>
         <div class="min-h-10" title="Tamaño">
-          <div class="border border-gray-200 w-8 h-8 px-2 py-1 me-2 rounded text-red-500 float-left">
-            <span>m</span><sup>2</sup>
+          <div class="border border-gray-200 w-8 h-8 px-2 py-1 me-2 rounded text-red-500 float-left" style="padding-left: 0.30rem; padding-top: 0.15rem;">
+            <span class="text-xs">HAS</span>
           </div>
           <div class="pt-1">
-            {{ field.size }}
+            {{ Math.round((parseFloat(field.size) + Number.EPSILON) * 10) / 10 }}
           </div>
         </div>
         <div class="min-h-10" title="Cantidad de Cuarteles">
