@@ -53,8 +53,8 @@ class ShowDashboard
         }
 
         return [
-            'total_weight_of_last_harvest' => round($current_year_total_weight / 1000, 2),
-            'average_weight_per_plant' => round($current_year_total_weight / $field->plants_count, 2),
+            'total_weight_of_last_harvest' => round($current_year_total_weight, 2),
+            'average_weight_per_plant' => round($current_year_total_weight * 1000 / $field->plants_count, 2),
             'variation_between_harvests' => $variation_between_harvests,
             'years_variation' => [$current_year, $last_year],
         ];
