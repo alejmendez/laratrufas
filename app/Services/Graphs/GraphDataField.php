@@ -112,7 +112,6 @@ class GraphDataField
             ->leftJoin('category_products', 'liquidation_products.category_product_id', '=', 'category_products.id')
             ->select(
                 'is_commercial',
-                DB::raw('sum(weight_with_earth) as weight_with_earth'),
                 DB::raw('sum(liquidation_products.weight) as weight_sum')
             )
             ->where('field_id', $field->id)
@@ -121,9 +120,9 @@ class GraphDataField
             ->get();
 
         $labels = [
-            'KGS Tierra',
             'KGS Comerciales',
             'KGS Merma',
+            'KGS Tierra',
         ];
 
         $data_grouped = $liquidations->keyBy('is_commercial');
@@ -135,17 +134,17 @@ class GraphDataField
         $weight_not_comercial = round($data_not_comercial->weight_sum, 2);
 
 
-        $weight_with_earth_query = Liquidation::select(DB::raw('sum(weight_with_earth) as weight_with_earth'))
+        $weight_earth_query = Liquidation::select(DB::raw('sum(weight_with_earth) - sum(weight_washed) as weight_earth'))
             ->where('field_id', $field->id)
             ->where('year', $year)
             ->first();
 
-        $weight_with_earth = round($weight_with_earth_query->weight_with_earth, 2);
+        $weight_earth = round($weight_earth_query->weight_earth, 2);
 
         $data = [
-            $weight_with_earth,
             $weight_comercial,
             $weight_not_comercial,
+            $weight_earth,
         ];
 
         return [
