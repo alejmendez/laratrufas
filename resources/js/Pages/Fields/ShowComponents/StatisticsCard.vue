@@ -13,9 +13,9 @@ const field = props.field;
 const { t } = useI18n();
 
 const types_graphs = ref([
-  { value: 'field-on-demand-production', text: 'Producción por demana', type: 'area' },
+  { value: 'field-shrinkage-detail', text: 'Resumen de liquidaciones', type: 'pie' },
+  { value: 'field-on-demand-production', text: 'Cosecha por semana', type: 'area' },
   { value: 'field-sales-vs-shrinkage', text: 'Ventas vs merma', type: 'area' },
-  { value: 'field-shrinkage-detail', text: 'Detalle de merma', type: 'pie' },
   { value: 'field-type-of-shrinkage', text: 'Tipo de merma', type: 'bar_percent' },
   { value: 'field-average-sales-value-per-kilogram', text: 'Valor promedio de venta por KGS', type: 'bar_percent' },
 ]);

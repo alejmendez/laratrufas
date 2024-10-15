@@ -86,11 +86,11 @@ const calculatePlantScale = (plant) => {
   return scales.length ? (scales.reduce((a, b) => a + b, 0) / scales.length).toFixed(2) : 0;
 };
 
-const generarColorPorPorcentaje = (porcentaje, colorFin = '#F06F38') => {
-  const colorInicio = { r: 255, g: 255, b: 255 };
+const generarColorPorPorcentaje = (porcentaje, colorFin = '#ED4302') => {
+  const colorInicio = { r: 246, g: 246, b: 246 };
   const hexToRgb = (hex) => {
     const bigint = parseInt(hex.slice(1), 16);
-    return { r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255 };
+    return { r: (bigint >> 16) & 246, g: (bigint >> 8) & 246, b: bigint & 246 };
   };
 
   const colorFinal = hexToRgb(colorFin);
@@ -138,7 +138,7 @@ table tbody tr td {
   height: 15px;
   width: 35px;
   line-height: 0.5;
-  background-color: #f6f6f6;
+  background-color: #9a9bbb;
   cursor: pointer;
 }
 </style>

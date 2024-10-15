@@ -10,15 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class GraphDataField
 {
-    public static function call($id, $type, $filters)
+    public static function call($id, $year, $type, $filters)
     {
         $field = Field::findOrFail($id);
         $typeQuery = match ($type) {
-            'field-on-demand-production' => self::onDemandProduction($field),
-            'field-sales-vs-shrinkage' => self::salesVsShrinkage($field),
-            'field-shrinkage-detail' => self::shrinkageDetail($field),
-            'field-type-of-shrinkage' => self::typeOfShrinkage($field),
-            'field-average-sales-value-per-kilogram' => self::averageSalesValuePerKilogram($field),
+            'field-on-demand-production' => self::onDemandProduction($field, $year),
+            'field-sales-vs-shrinkage' => self::salesVsShrinkage($field, $year),
+            'field-shrinkage-detail' => self::shrinkageDetail($field, $year),
+            'field-type-of-shrinkage' => self::typeOfShrinkage($field, $year),
+            'field-average-sales-value-per-kilogram' => self::averageSalesValuePerKilogram($field, $year),
             default => [],
         };
 
@@ -29,12 +29,13 @@ class GraphDataField
         return self::applyFilter($typeQuery, $filter)->get();
     }
 
-    protected static function onDemandProduction($field)
+    protected static function onDemandProduction($field, $year)
     {
         $quarter_ids = $field->quarters->pluck('id');
         $details = Harvest::leftJoin('harvest_details', 'harvests.id', '=', 'harvest_details.harvest_id')
             ->select('week', 'year')
             ->selectRaw('sum(harvest_details.weight) as weight_sum')
+            ->where('year', $year)
             ->whereIn('harvest_details.quarter_id', $quarter_ids)
             ->groupBy('week', 'year')
             ->orderBy('year', 'desc')
@@ -49,24 +50,25 @@ class GraphDataField
             return round(floatval($d->weight_sum / 1000), 2);
         });
         return [
-            'title' => 'Total de Kg por Semana',
+            'title' => 'Total de Kg por Semana Año ' . $year,
             'labels' => $labels,
             'series' => [
                 [
-                    'name' => "STOCK ABC",
+                    'name' => "Kg",
                     'data' => $data,
                 ]
             ],
         ];
     }
 
-    protected static function salesVsShrinkage($field)
+    protected static function salesVsShrinkage($field, $year)
     {
         $liquidations = Liquidation::leftJoin('liquidation_products', 'liquidations.id', '=', 'liquidation_products.liquidation_id')
             ->leftJoin('category_products', 'liquidation_products.category_product_id', '=', 'category_products.id')
             ->select('week', 'year', 'category_products.is_commercial')
             ->selectRaw('sum(liquidation_products.weight) as weight_sum')
             ->where('field_id', $field->id)
+            ->where('year', $year)
             ->groupBy('week', 'year', 'category_products.is_commercial')
             ->orderBy('year', 'desc')
             ->orderBy('week', 'asc')
@@ -89,7 +91,7 @@ class GraphDataField
         })->values();
 
         return [
-            'title' => 'KGS. VENTA vs KGS. MERMA',
+            'title' => 'KGS. Venta vs KGS. Merma Año ' . $year,
             'labels' => $labels,
             'series' => [
                 [
@@ -104,7 +106,7 @@ class GraphDataField
         ];
     }
 
-    protected static function shrinkageDetail($field)
+    protected static function shrinkageDetail($field, $year)
     {
         $liquidations = Liquidation::leftJoin('liquidation_products', 'liquidations.id', '=', 'liquidation_products.liquidation_id')
             ->leftJoin('category_products', 'liquidation_products.category_product_id', '=', 'category_products.id')
@@ -114,6 +116,7 @@ class GraphDataField
                 DB::raw('sum(liquidation_products.weight) as weight_sum')
             )
             ->where('field_id', $field->id)
+            ->where('year', $year)
             ->groupBy('category_products.is_commercial')
             ->get();
 
@@ -134,6 +137,7 @@ class GraphDataField
 
         $weight_with_earth_query = Liquidation::select(DB::raw('sum(weight_with_earth) as weight_with_earth'))
             ->where('field_id', $field->id)
+            ->where('year', $year)
             ->first();
 
         $weight_with_earth = round($weight_with_earth_query->weight_with_earth, 2);
@@ -145,19 +149,20 @@ class GraphDataField
         ];
 
         return [
-            'title' => 'COSECHA 2024',
+            'title' => 'Cosecha Año ' . $year,
             'labels' => $labels,
             'series' => $data,
         ];
     }
 
-    protected static function typeOfShrinkage($field)
+    protected static function typeOfShrinkage($field, $year)
     {
         $liquidations = Liquidation::leftJoin('liquidation_products', 'liquidations.id', '=', 'liquidation_products.liquidation_id')
             ->leftJoin('category_products', 'liquidation_products.category_product_id', '=', 'category_products.id')
             ->select('week', 'year', 'category_products.name')
             ->selectRaw('sum(liquidation_products.weight) as weight_sum')
             ->where('field_id', $field->id)
+            ->where('year', $year)
             ->where('category_products.is_commercial', false)
             ->groupBy('week', 'year', 'category_products.name')
             ->orderBy('year', 'desc')
@@ -179,19 +184,20 @@ class GraphDataField
         })->values();
 
         return [
-            'title' => 'MERMA POR TIPO (%)',
+            'title' => 'Merma por Tipo (%) Año ' . $year,
             'labels' => $labels,
             'series' => $series,
         ];
     }
 
-    protected static function averageSalesValuePerKilogram($field)
+    protected static function averageSalesValuePerKilogram($field, $year)
     {
         $liquidations = Liquidation::leftJoin('liquidation_products', 'liquidations.id', '=', 'liquidation_products.liquidation_id')
             ->leftJoin('category_products', 'liquidation_products.category_product_id', '=', 'category_products.id')
             ->select('week', 'year', 'category_products.is_commercial')
             ->selectRaw('sum(liquidation_products.weight) as weight_sum')
             ->where('field_id', $field->id)
+            ->where('year', $year)
             ->groupBy('week', 'year', 'category_products.is_commercial')
             ->orderBy('year', 'desc')
             ->orderBy('week', 'asc')
@@ -214,7 +220,7 @@ class GraphDataField
         })->values();
 
         return [
-            'title' => 'VENTA vs MERMA (%)',
+            'title' => 'Venta vs Merma (%) Año ' . $year,
             'labels' => $labels,
             'series' => [
                 [

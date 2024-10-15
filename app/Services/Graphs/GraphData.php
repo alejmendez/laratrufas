@@ -6,14 +6,14 @@ use Illuminate\Support\Str;
 
 class GraphData
 {
-    public static function call($id, $type, $filters)
+    public static function call($id, $year, $type, $filters)
     {
         $typeStr = Str::of($type);
 
         if ($typeStr->startsWith('field-')) {
-            return GraphDataField::call($id, $type, $filters);
+            return GraphDataField::call($id, $year, $type, $filters);
         } elseif ($typeStr->startsWith('quarter-')) {
-            return GraphDataField::call($id, $type, $filters);
+            return GraphDataField::call($id, $year, $type, $filters);
         }
     }
 }
