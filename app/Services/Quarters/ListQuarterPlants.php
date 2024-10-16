@@ -28,7 +28,9 @@ class ListQuarterPlants
                 $plant->data = [];
 
                 $detail = $harvestDetailsByPlantId->get($plant->id);
+                $plant->scale = 0;
                 if ($detail) {
+                    $plant->scale = round($detail->sum('weight') * 100 / $maxWeight, 2);
                     $detail = $detail->map(fn ($a) => $a->only(['id', 'harvest_id', 'quality', 'weight']))
                         ->map(function ($a) use ($maxWeight) {
                             $a['weight'] = floatval($a['weight']);

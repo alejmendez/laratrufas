@@ -69,7 +69,6 @@ const generatePlantsDispositionWithPosition = (dataPlants) => {
         plant.number = plant.code;
         const [_, position] = plant.code.match(/\d+/g);
         plant.position = position;
-        plant.scale = calculatePlantScale(plant);
         plant.color = generarColorPorPorcentaje(plant.scale);
       }
       return plant || null;
@@ -78,12 +77,6 @@ const generatePlantsDispositionWithPosition = (dataPlants) => {
 
   tableCols.value = cols;
   plants.value = data;
-};
-
-const calculatePlantScale = (plant) => {
-  if (!plant.data) return 0;
-  const scales = Object.values(plant.data).flatMap(details => details.map(d => d.scale));
-  return scales.length ? (scales.reduce((a, b) => a + b, 0) / scales.length).toFixed(2) : 0;
 };
 
 const generarColorPorPorcentaje = (porcentaje, colorFin = '#ED4302') => {
