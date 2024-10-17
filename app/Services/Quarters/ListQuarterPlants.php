@@ -5,6 +5,7 @@ namespace App\Services\Quarters;
 use App\Models\Plant;
 use App\Models\Harvest;
 use App\Models\HarvestDetail;
+use Illuminate\Support\Facades\DB;
 
 class ListQuarterPlants
 {
@@ -17,7 +18,14 @@ class ListQuarterPlants
             ->map(fn ($a) => $a->only(['id', 'year', 'week', 'date', 'batch']));
 
         $harvestDetails = HarvestDetail::with('harvest')->where('quarter_id', $id)->get();
-        $maxWeight = floatval($harvestDetails->max('weight'));
+        $maxWeight = HarvestDetail::where('quarter_id', $id)
+            ->groupBy('plant_id')
+            ->select(DB::raw('sum(weight) as weight'))
+            ->get()
+            ->max('weight');
+
+        $maxWeight = floatval($maxWeight);
+
         $harvestDetailsByPlantId = $harvestDetails->groupBy('plant_id');
 
         $plants = Plant::select('id', 'code', 'row', 'position')

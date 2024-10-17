@@ -79,7 +79,7 @@ const generatePlantsDispositionWithPosition = (dataPlants) => {
   plants.value = data;
 };
 
-const generarColorPorPorcentaje = (porcentaje, colorFin = '#ED4302') => {
+const generarColorPorPorcentaje = (porcentaje, colorFin = '#008FFB') => {
   const colorInicio = { r: 246, g: 246, b: 246 };
   const hexToRgb = (hex) => {
     const bigint = parseInt(hex.slice(1), 16);
@@ -131,7 +131,7 @@ table tbody tr td {
   height: 15px;
   width: 35px;
   line-height: 0.5;
-  background-color: #9a9bbb;
+  background-color: #d1d1d1;
   cursor: pointer;
 }
 </style>
