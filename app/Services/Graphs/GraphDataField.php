@@ -18,7 +18,7 @@ class GraphDataField
             'field-sales-vs-shrinkage' => self::salesVsShrinkage($field, $year),
             'field-shrinkage-detail' => self::shrinkageDetail($field, $year),
             'field-type-of-shrinkage' => self::typeOfShrinkage($field, $year),
-            'field-average-sales-value-per-kilogram' => self::averageSalesValuePerKilogram($field, $year),
+            'field-comparative-of-selling-price-x-kgs' => self::comparativeOfSellingPriceXKgs($field, $year),
             default => [],
         };
 
@@ -189,46 +189,60 @@ class GraphDataField
         ];
     }
 
-    protected static function averageSalesValuePerKilogram($field, $year)
+    protected static function comparativeOfSellingPriceXKgs($field, $year)
     {
+        /*
+        - valor del dolar de la liquidacion
+        - peso neto de cada tipo de trufa / total $ ento
+            - total $ ento = peso de cat * dolar de cat - Gastos Exportador USD (20%) - Comisión USD (10%)
+        */
         $liquidations = Liquidation::leftJoin('liquidation_products', 'liquidations.id', '=', 'liquidation_products.liquidation_id')
             ->leftJoin('category_products', 'liquidation_products.category_product_id', '=', 'category_products.id')
-            ->select('week', 'year', 'category_products.is_commercial')
-            ->selectRaw('sum(liquidation_products.weight) as weight_sum')
+            ->select('week', 'year', 'liquidation_products.price', 'liquidation_products.weight')
             ->where('field_id', $field->id)
             ->where('year', $year)
-            ->groupBy('week', 'year', 'category_products.is_commercial')
+            ->where('category_products.is_commercial', true)
+            ->where('liquidation_products.price', '!=', 0)
             ->orderBy('year', 'desc')
             ->orderBy('week', 'asc')
             ->get();
 
-        $labels = $liquidations->map(function ($l) {
-            return "Sem " . $l->week;
-        })->unique()->values();
+        $groupedData = $liquidations->groupBy('week');
 
-        $data_commercial = $liquidations->filter(function ($l) {
-            return $l->is_commercial;
-        })->map(function ($l) {
-            return round($l->weight_sum, 2);
-        })->values();
+        $labels = [];
+        $usd_avg_exporter = [];
+        $usd_avg_field = [];
 
-        $data_not_commercial = $liquidations->filter(function ($l) {
-            return !$l->is_commercial;
-        })->map(function ($l) {
-            return round($l->weight_sum, 2);
-        })->values();
+        // Recorrer cada grupo por semana
+        foreach ($groupedData as $week => $items) {
+            $items = collect($items)->map(function($item) {
+                $item['weight'] = floatval($item['weight']);
+                $item['price'] = floatval($item['price']);
+                return $item;
+            });
+            $labels[] = "Sem " . $week;
+
+            $avgPrice = $items->avg('price');
+            $sumWeight = $items->sum('weight');
+            $usd_avg_exporter[] = round((float) $avgPrice, 2);
+
+            $avg_field = $items->reduce(function ($carry, $item) {
+                return $carry + $item['weight'] * $item['price'] * 0.7;
+            }, 0);
+            $usd_avg_field[] = round($avg_field / $sumWeight, 2);
+        }
 
         return [
             'title' => 'Venta vs Merma (%) Año ' . $year,
             'labels' => $labels,
             'series' => [
                 [
-                    'name' => "KGS Comerciales",
-                    'data' => $data_commercial,
+                    'name' => "USD promedio Exportador",
+                    'data' => $usd_avg_exporter,
                 ],
                 [
-                    'name' => "KGS Merma",
-                    'data' => $data_not_commercial,
+                    'name' => "USD promedio Campo",
+                    'data' => $usd_avg_field,
                 ],
             ],
         ];
