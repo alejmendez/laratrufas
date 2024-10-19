@@ -191,11 +191,6 @@ class GraphDataField
 
     protected static function comparativeOfSellingPriceXKgs($field, $year)
     {
-        /*
-        - valor del dolar de la liquidacion
-        - peso neto de cada tipo de trufa / total $ ento
-            - total $ ento = peso de cat * dolar de cat - Gastos Exportador USD (20%) - Comisión USD (10%)
-        */
         $liquidations = Liquidation::leftJoin('liquidation_products', 'liquidations.id', '=', 'liquidation_products.liquidation_id')
             ->leftJoin('category_products', 'liquidation_products.category_product_id', '=', 'category_products.id')
             ->select('week', 'year', 'liquidation_products.price', 'liquidation_products.weight')
@@ -233,7 +228,7 @@ class GraphDataField
         }
 
         return [
-            'title' => 'Venta vs Merma (%) Año ' . $year,
+            'title' => 'Comparativo de precio de venta x Kgs Año ' . $year,
             'labels' => $labels,
             'series' => [
                 [
