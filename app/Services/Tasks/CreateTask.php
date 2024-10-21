@@ -37,7 +37,7 @@ class CreateTask
 
     protected static function syncRelationship($task, $relation, $data)
     {
-        if (! empty($data)) {
+        if (!empty($data)) {
             $ids = collect($data)->map(fn ($q) => $q['value'])->toArray();
             $task->{$relation}()->sync($ids);
         }
@@ -46,6 +46,9 @@ class CreateTask
     protected static function saveSupplies($task, $data)
     {
         foreach ($data as $supplyData) {
+            if ($supplyData['name'] == null && $supplyData['brand'] == null && $supplyData['quantity'] == null && $supplyData['unit'] == null) {
+                continue;
+            }
             $supply = new SupplyTask;
             $supply->name = $supplyData['name'];
             $supply->brand = $supplyData['brand'];

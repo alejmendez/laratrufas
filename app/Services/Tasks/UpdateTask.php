@@ -22,7 +22,6 @@ class UpdateTask
         $task->rows = collect($data['rows'])->map(fn ($q) => $q['value'])->toArray();
         $task->responsible_id = $data['responsible_id']['value'];
         $task->comments = $data['comments'];
-
         $task->save();
 
         self::syncRelationship($task, 'quarters', $data['quarter_id'] ?? []);
@@ -53,6 +52,11 @@ class UpdateTask
 
         foreach ($supplies as $supplyData) {
             $supply = SupplyTask::find($supplyData['id'] ?? null) ?? new SupplyTask;
+
+            if ($supplyData['name'] == null && $supplyData['brand'] == null && $supplyData['quantity'] == null && $supplyData['unit'] == null) {
+                continue;
+            }
+
             $supply->name = $supplyData['name'];
             $supply->brand = $supplyData['brand'];
             $supply->quantity = $supplyData['quantity'];

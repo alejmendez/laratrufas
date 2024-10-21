@@ -21,6 +21,22 @@ const props = defineProps({
 
 const { data } = props.data;
 
+let supplies = data.supplies.map((a) => {
+  a.unit = { value: a.unit, text: t('task.form.supplies.unit.options.' + a.unit) };
+  return a;
+});
+
+if (supplies.length === 0) {
+  supplies = [
+    {
+      name: null,
+      brand: null,
+      quantity: null,
+      unit: '',
+    },
+  ];
+}
+
 const form = useForm({
   _method: 'PATCH',
   id: data.id,
@@ -41,10 +57,7 @@ const form = useForm({
   tools: data.tools,
   security_equipments: data.security_equipments,
   machineries: data.machineries,
-  supplies: data.supplies.map((a) => {
-    a.unit = { value: a.unit, text: t('task.form.supplies.unit.options.' + a.unit) };
-    return a;
-  }),
+  supplies,
 });
 
 const submitHandler = () => form.post(route('tasks.update', data.id));
