@@ -119,6 +119,7 @@ onMounted(async () => {
 <style scoped>
 table {
   text-align: center;
+  border: solid 10px #D1D1D1;
 }
 table thead tr th {
   background-color: #ddd;
