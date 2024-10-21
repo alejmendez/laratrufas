@@ -31,32 +31,51 @@ class GraphDataField
 
     protected static function onDemandProduction($field, $year)
     {
-        $quarter_ids = $field->quarters->pluck('id');
-        $details = Harvest::leftJoin('harvest_details', 'harvests.id', '=', 'harvest_details.harvest_id')
-            ->select('week', 'year')
-            ->selectRaw('sum(harvest_details.weight) as weight_sum')
+        $liquidations = Liquidation::leftJoin('liquidation_products', 'liquidations.id', '=', 'liquidation_products.liquidation_id')
+            ->leftJoin('category_products', 'liquidation_products.category_product_id', '=', 'category_products.id')
+            ->select('week', 'year', 'weight_with_earth', 'weight_washed', 'category_products.is_commercial')
+            ->selectRaw('sum(liquidation_products.weight) as weight_sum')
+            ->where('field_id', $field->id)
             ->where('year', $year)
-            ->whereIn('harvest_details.quarter_id', $quarter_ids)
-            ->groupBy('week', 'year')
+            ->groupBy('week', 'year', 'weight_with_earth', 'weight_washed', 'category_products.is_commercial')
             ->orderBy('year', 'desc')
             ->orderBy('week', 'asc')
             ->get();
 
-        $labels = $details->map(function ($d) {
-            return "Sem " . $d->week;
+        $labels = $liquidations->map(function ($l) {
+            return "Sem " . $l->week;
         })->unique()->values();
 
-        $data = $details->map(function ($d) {
-            return round(floatval($d->weight_sum / 1000), 2);
-        });
+        $data_not_commercial = $liquidations->filter(function ($l) {
+            return !$l->is_commercial;
+        })->map(function ($l) {
+            return round($l->weight_sum, 2);
+        })->values();
+
+        $data_total = $liquidations->map(function ($l) {
+            return $l->weight_with_earth;
+        })->unique()->values();
+
+        $data_tierra = $liquidations->map(function ($l) {
+            return round($l->weight_with_earth - $l->weight_washed, 2);
+        })->unique()->values();
+
         return [
-            'title' => 'Total de Kg por Semana Año ' . $year,
+            'title' => 'KGS. Venta vs KGS. Merma Año ' . $year,
             'labels' => $labels,
             'series' => [
                 [
-                    'name' => "Kg",
-                    'data' => $data,
-                ]
+                    'name' => "KGS total",
+                    'data' => $data_total,
+                ],
+                [
+                    'name' => "KGS Merma",
+                    'data' => $data_not_commercial,
+                ],
+                [
+                    'name' => "KGS tierra",
+                    'data' => $data_tierra,
+                ],
             ],
         ];
     }
