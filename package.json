@@ -32,7 +32,8 @@
         "vue-i18n": "^10.0.1",
         "vue-qrcode-reader": "^5.5.10",
         "vue-toastification": "^2.0.0-rc.5",
-        "vue3-apexcharts": "^1.6.0"
+        "vue3-apexcharts": "^1.6.0",
+        "ziggy-js": "^2.3.1"
     },
     "devDependencies": {
         "@types/qs": "^6.9.16"
