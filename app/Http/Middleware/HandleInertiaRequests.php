@@ -44,6 +44,7 @@ class HandleInertiaRequests extends Middleware
                 'email' => $user->email,
                 'roles' => collect($user->getRoleNames())->map(fn ($role) => Str::slug($role)),
                 'permissions' => $user->getAllPermissions()->pluck('name')->map(fn ($user) => Str::slug($user)),
+                'unread_notifications' => $user->unreadNotifications,
             ];
         }
 

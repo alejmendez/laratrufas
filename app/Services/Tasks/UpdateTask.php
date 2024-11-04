@@ -2,8 +2,10 @@
 
 namespace App\Services\Tasks;
 
-use App\Models\SupplyTask;
 use App\Models\Task;
+use App\Models\User;
+use App\Models\SupplyTask;
+use App\Notifications\TaskNotification;
 
 class UpdateTask
 {
@@ -31,6 +33,8 @@ class UpdateTask
         self::syncRelationship($task, 'machineries', $data['machineries'] ?? []);
 
         self::saveSupplies($task, $data['supplies'] ?? []);
+
+        self::notify($task);
 
         return $task;
     }
@@ -65,5 +69,15 @@ class UpdateTask
 
             $supply->save();
         }
+    }
+
+    protected static function notify($task)
+    {
+        $user = User::find($task->responsible_id);
+        if (!$user) {
+            return;
+        }
+
+        $user->notify(new TaskNotification($task));
     }
 }

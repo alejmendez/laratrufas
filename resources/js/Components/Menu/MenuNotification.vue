@@ -1,11 +1,14 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 
 const root = ref(null);
+const page = usePage();
+const unread_notifications = page.props.auth.user.unread_notifications;
 
 const showDropDown = ref(false);
 
-const numberOfNotifications = ref(0);
+const numberOfNotifications = ref(unread_notifications.length);
 
 const toggleDrop = () => {
   showDropDown.value = !showDropDown.value;
@@ -53,8 +56,14 @@ onUnmounted(() => {
         🥳 No tienes notificaciones pendientes
       </div>
       <div v-else>
-        <font-awesome-icon :icon="['fas', 'triangle-exclamation']" class="text-orange-700" />
-        Riego con fertilizantes cambió de estado.
+        <ul>
+          <li v-for="notification in unread_notifications">
+            <font-awesome-icon :icon="['fas', 'circle-info']" class="text-sky-600" />
+            <Link :href="route('tasks.show', notification.data.task_id)">
+              Hay una actualizacion en la tarea {{ notification.data.task_name }}
+            </Link>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

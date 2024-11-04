@@ -2,8 +2,10 @@
 
 namespace App\Services\Tasks;
 
-use App\Models\SupplyTask;
 use App\Models\Task;
+use App\Models\User;
+use App\Models\SupplyTask;
+use App\Notifications\TaskNotification;
 
 class CreateTask
 {
@@ -32,6 +34,8 @@ class CreateTask
 
         self::saveSupplies($task, $data['supplies'] ?? []);
 
+        self::notify($task);
+
         return $task;
     }
 
@@ -58,5 +62,15 @@ class CreateTask
 
             $supply->save();
         }
+    }
+
+    protected static function notify($task)
+    {
+        $user = User::find($task->responsible_id);
+        if (!$user) {
+            return;
+        }
+
+        $user->notify(new TaskNotification($task));
     }
 }
