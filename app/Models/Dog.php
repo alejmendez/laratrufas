@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\Filterable;
-use App\Traits\Orderable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Dog extends Model
 {
-    use Filterable, HasFactory, Orderable;
+    use HasFactory;
 
     public function quarter(): BelongsTo
     {

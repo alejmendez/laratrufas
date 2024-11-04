@@ -55,8 +55,6 @@ class FieldsController extends Controller
      */
     public function show(string $id)
     {
-        $order = request('order', '');
-        $search = request('search', '');
         $current_tab = request('current_tab', 'file');
         $field = FindField::call($id);
 

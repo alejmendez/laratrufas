@@ -6,8 +6,6 @@ use Carbon\Carbon;
 use App\Models\Task;
 use App\Models\Quarter;
 use App\Models\PlantType;
-use App\Traits\Orderable;
-use App\Traits\Filterable;
 use App\Models\HarvestDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -17,7 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Plant extends Model
 {
-    use Filterable, HasFactory, Orderable;
+    use HasFactory;
 
     public function quarter(): BelongsTo
     {
