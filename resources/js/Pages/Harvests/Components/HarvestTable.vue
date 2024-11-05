@@ -25,6 +25,12 @@ const confirm = useConfirm();
 const { t } = useI18n();
 
 const props = defineProps({
+  field_id: {
+    type: Number,
+  },
+  quarter_id: {
+    type: Number,
+  },
   show_actions: {
     type: Boolean,
     default: true,
@@ -58,19 +64,36 @@ const form = reactive({
 
 const fetchHandler = async (params) => {
   const year = form.year.value;
+  if (!params.filters) {
+    params.filters = {};
+  }
+
   if (year) {
     if (params.filters?.year) {
       params = JSON.parse(JSON.stringify(params));
       params.filters.year.constraints.push({ value: year, matchMode: FilterMatchMode.EQUALS });
     } else {
-      params.filters = {
-        year: {
-          operator: FilterOperator.AND,
-          constraints: [{ value: year, matchMode: FilterMatchMode.EQUALS }],
-        },
+      params.filters.year = {
+        operator: FilterOperator.AND,
+        constraints: [{ value: year, matchMode: FilterMatchMode.EQUALS }],
       };
     }
   }
+
+  if (props.field_id) {
+    params.filters['details.quarter.field_id'] = {
+      value: { value: props.field_id },
+      matchMode: FilterMatchMode.EQUALS,
+    };
+  }
+
+  if (props.quarter_id) {
+    params.filters['details.quarter_id'] = {
+      value: { value: props.quarter_id },
+      matchMode: FilterMatchMode.EQUALS,
+    };
+  }
+
   return await HarvestService.list({ ...params });
 };
 
@@ -195,7 +218,15 @@ const number_format = (n) => {
       </template>
     </Column>
 
-    <Column field="field_names" filterField="details.quarter.field_id" :showFilterMatchModes="false" :header="$t('harvest.table.field')" sortable style="min-width: 200px">
+    <Column
+      field="field_names"
+      filterField="details.quarter.field_id"
+      :showFilterMatchModes="false"
+      :header="$t('harvest.table.field')"
+      sortable
+      style="min-width: 200px"
+      v-if="props.field_id === undefined && props.quarter_id === undefined"
+    >
       <template #body="{ data }">
         {{ data.field_names }}
       </template>
@@ -204,7 +235,15 @@ const number_format = (n) => {
       </template>
     </Column>
 
-    <Column field="quarter_names" filterField="details.quarter_id" :showFilterMatchModes="false" :header="$t('harvest.table.quarter')" sortable style="min-width: 200px">
+    <Column
+      field="quarter_names"
+      filterField="details.quarter_id"
+      :showFilterMatchModes="false"
+      :header="$t('harvest.table.quarter')"
+      sortable
+      style="min-width: 200px"
+      v-if="props.quarter_id === undefined"
+    >
       <template #body="{ data }">
         {{ data.quarter_names }}
       </template>
@@ -246,7 +285,7 @@ const number_format = (n) => {
 
     <ColumnGroup type="footer">
       <Row>
-        <Column footer="Totals:" :colspan="4" footerStyle="text-align:right"/>
+        <Column footer="Totals:" :colspan="props.quarter_id ? 2 : (props.field_id ? 3 : 4)" footerStyle="text-align:right"/>
         <Column :footer="weightTotal" />
         <Column :footer="unitCountTotal" :colspan="3" />
       </Row>

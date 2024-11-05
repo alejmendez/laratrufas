@@ -7,6 +7,7 @@ import FileCard from '@/Pages/Fields/ShowComponents/FileCard.vue';
 import LogbookCard from '@/Pages/Fields/ShowComponents/LogbookCard.vue';
 import HarvestCard from '@/Pages/Fields/ShowComponents/HarvestCard.vue';
 import StatisticsCard from '@/Pages/Fields/ShowComponents/StatisticsCard.vue';
+import DocumentationCard from '@/Pages/Fields/ShowComponents/DocumentationCard.vue';
 
 const { t } = useI18n();
 
@@ -20,7 +21,7 @@ const props = defineProps({
 
 const field = props.field.data;
 
-const tabs = ['file', 'logbook', 'harvest', 'statistics'];
+const tabs = ['file', 'logbook', 'harvest', 'statistics', 'documentation'];
 
 const selectTab = (tab) => {
   const url = new URL(window.location.href);
@@ -78,13 +79,18 @@ const deleteHandler = async (id) => {
       />
 
       <HarvestCard
-        :field="field"
+        :field_id="field.id"
         v-show="props.current_tab === tabs[2]"
       />
 
       <StatisticsCard
         :field="field"
         v-show="props.current_tab === tabs[3]"
+      />
+
+      <DocumentationCard
+        :field="field"
+        v-show="props.current_tab === tabs[4]"
       />
     </AuthenticatedLayout>
 </template>

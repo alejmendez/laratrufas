@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreQuarterRequest;
-use App\Http\Requests\UpdateQuarterRequest;
-use App\Http\Resources\QuarterResource;
+use Inertia\Inertia;
+use App\Http\Controllers\Controller;
 use App\Services\Entities\ListEntity;
-use App\Services\Quarters\CreateQuarter;
-use App\Services\Quarters\DeleteQuarter;
 use App\Services\Quarters\FindQuarter;
 use App\Services\Quarters\ListQuarter;
+use App\Http\Resources\QuarterResource;
+use App\Services\Quarters\CreateQuarter;
+use App\Services\Quarters\DeleteQuarter;
+use App\Services\Quarters\UpdateQuarter;
+use App\Http\Requests\StoreQuarterRequest;
+use App\Http\Requests\UpdateQuarterRequest;
 use App\Services\Quarters\ListQuarterPlants;
 use App\Services\Quarters\PlantsUpdatePositionQuarter;
-use App\Services\Quarters\UpdateQuarter;
-use Inertia\Inertia;
 
 class QuartersController extends Controller
 {
@@ -65,8 +66,6 @@ class QuartersController extends Controller
 
         return Inertia::render('Quarters/Show', [
             'data' => new QuarterResource($quarter),
-            'fields' => ListEntity::call('field'),
-            'responsibles' => ListEntity::call('responsible'),
         ]);
     }
 

@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
 
 import StatisticsCard from '@/Pages/Quarters/ShowComponents/StatisticsCard.vue';
+import HarvestCard from '@/Pages/Quarters/ShowComponents/HarvestCard.vue';
 
 const { t } = useI18n();
 
@@ -12,17 +13,17 @@ const props = defineProps({
   data: Object,
 });
 
-const { data } = props.data;
+const { data: quarter } = props.data;
 
-const tabs = ['file', 'documentation', 'logbook', 'statistics'];
+const tabs = ['file', 'logbook', 'harvest', 'statistics'];
 
 const currentTab = ref(tabs[0]);
 
 const dataFile = [
-  [t('quarter.show.file.field'), data.field.name],
-  [t('quarter.show.file.area'), data.area],
-  [t('quarter.show.file.plants_count'), data.plants_count],
-  [t('quarter.show.file.responsible'), data.responsible.name],
+  [t('quarter.show.file.field'), quarter.field.name],
+  [t('quarter.show.file.area'), quarter.area],
+  [t('quarter.show.file.plants_count'), quarter.plants_count],
+  [t('quarter.show.file.responsible'), quarter.responsible.name],
 ];
 
 const deleteHandler = async (id) => {
@@ -33,21 +34,21 @@ const deleteHandler = async (id) => {
 </script>
 
 <template>
-    <Head :title="t('quarter.titles.show', {name: data.name})" />
+    <Head :title="t('quarter.titles.show', {name: quarter.name})" />
 
     <AuthenticatedLayout>
       <HeaderCrud
-        :title="t('quarter.titles.show', {name: data.name})"
+        :title="t('quarter.titles.show', {name: quarter.name})"
         :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
       >
         <Button
           severity="secondary"
-          @click="deleteHandler(data.id)"
+          @click="deleteHandler(quarter.id)"
           :label="$t('generics.actions.delete')"
         />
         <Button
           as="Link"
-          :href="route('quarters.edit', data.id)"
+          :href="route('quarters.edit', quarter.id)"
           :label="$t('generics.actions.edit')"
         />
       </HeaderCrud>
@@ -71,7 +72,7 @@ const deleteHandler = async (id) => {
       >
         <div>
           <img
-            :src="data.blueprint"
+            :src="quarter.blueprint"
             class="w-full"
             alt=""
           >
@@ -89,21 +90,19 @@ const deleteHandler = async (id) => {
       </CardSection>
 
       <CardSection
-        :header-text="t('quarter.show.documentation.title')"
+        :header-text="t('quarter.show.logbook.title')"
         wrapperClass="p-5 grid grid-cols-2 gap-4"
         v-show="currentTab === tabs[1]"
       >
       </CardSection>
 
-      <CardSection
-        :header-text="t('quarter.show.logbook.title')"
-        wrapperClass="p-5 grid grid-cols-2 gap-4"
+      <HarvestCard
+        :quarter_id="quarter.id"
         v-show="currentTab === tabs[2]"
-      >
-      </CardSection>
+      />
 
       <StatisticsCard
-        :quarter="data"
+        :quarter="quarter"
         v-show="currentTab === tabs[3]"
       />
     </AuthenticatedLayout>

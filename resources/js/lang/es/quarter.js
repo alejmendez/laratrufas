@@ -45,8 +45,8 @@ export default {
       plants_count: 'Cantidad de arboles',
       responsible: 'Responsable',
     },
-    documentation: {
-      title: 'Documentación',
+    harvest: {
+      title: 'Cosecha',
     },
     logbook: {
       title: 'Bitácora',
@@ -56,7 +56,7 @@ export default {
     },
     tabs: {
       file: 'Ficha',
-      documentation: 'Documentación',
+      harvest: 'Cosecha',
       logbook: 'Bitácora',
       statistics: 'Estadísticas',
     },
