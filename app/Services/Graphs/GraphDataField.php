@@ -61,7 +61,7 @@ class GraphDataField
         })->unique()->values();
 
         return [
-            'title' => 'KGS. Venta vs KGS. Merma Año ' . $year,
+            'title' => 'Liquidacion por semana Año ' . $year,
             'labels' => $labels,
             'series' => [
                 [
@@ -241,7 +241,7 @@ class GraphDataField
             $usd_avg_exporter[] = round((float) $avgPrice, 2);
 
             $avg_field = $items->reduce(function ($carry, $item) {
-                return $carry + $item['weight'] * $item['price'] * 0.7;
+                return $carry + $item['weight'] * $item['price'];
             }, 0);
             $usd_avg_field[] = round($avg_field / $sumWeight, 2);
         }
