@@ -59,9 +59,6 @@ export default {
     logs: {
       title: 'Bitácora',
     },
-    harvest: {
-      title: 'Cosecha',
-    },
     statistics: {
       title: 'Estadísticas',
     },

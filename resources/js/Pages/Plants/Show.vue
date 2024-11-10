@@ -13,7 +13,7 @@ const props = defineProps({
 
 const { data } = props.data;
 
-const tabs = ['file', 'logs', 'harvest', 'statistics'];
+const tabs = ['file', 'logs', 'statistics'];
 
 const currentTab = ref(tabs[0]);
 
@@ -97,15 +97,9 @@ const deleteHandler = async (id) => {
       </CardSection>
 
       <CardSection
-        :header-text="t('plant.show.harvest.title')"
-        wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[2]"
-      >
-      </CardSection>
-      <CardSection
         :header-text="t('plant.show.statistics.title')"
         wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[3]"
+        v-show="currentTab === tabs[2]"
       >
       </CardSection>
     </AuthenticatedLayout>
