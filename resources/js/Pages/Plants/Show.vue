@@ -3,7 +3,10 @@ import { ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
-import { stringToFormat } from '@/Utils/date';
+
+import FileCard from '@/Pages/Plants/ShowComponents/FileCard.vue';
+import LogsCard from '@/Pages/Plants/ShowComponents/LogsCard.vue';
+import StatisticsCard from '@/Pages/Plants/ShowComponents/StatisticsCard.vue';
 
 const { t } = useI18n();
 
@@ -16,15 +19,6 @@ const { data } = props.data;
 const tabs = ['file', 'logs', 'statistics'];
 
 const currentTab = ref(tabs[0]);
-
-const dataFile = [
-  [t('plant.show.file.field'), data.field.name],
-  [t('plant.show.file.quarter'), data.quarter.name],
-  [t('plant.show.file.plant_type'), data.plant_type.name],
-  [t('plant.show.file.age'), data.age],
-  [t('plant.show.file.planned_at'), stringToFormat(data.planned_at)],
-  [t('plant.show.file.responsible'), data.responsible.name],
-];
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, () => {
@@ -66,41 +60,8 @@ const deleteHandler = async (id) => {
         </nav>
       </div>
 
-      <CardSection
-        wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[0]"
-      >
-        <div>
-          <img
-            :src="data.blueprint"
-            class="w-full"
-            alt=""
-          >
-        </div>
-        <div>
-          <template v-for="block of dataFile">
-            <div class="text-gray-400 pb-1">
-              {{ block[0] }}
-            </div>
-            <div class="pb-3">
-              {{ block[1] }}
-            </div>
-          </template>
-        </div>
-      </CardSection>
-
-      <CardSection
-        :header-text="t('plant.show.logs.title')"
-        wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[1]"
-      >
-      </CardSection>
-
-      <CardSection
-        :header-text="t('plant.show.statistics.title')"
-        wrapperClass="p-5 grid grid-cols-2 gap-4"
-        v-show="currentTab === tabs[2]"
-      >
-      </CardSection>
+      <FileCard :data="data" v-show="currentTab === tabs[0]" />
+      <LogsCard :data="data" v-show="currentTab === tabs[1]" />
+      <StatisticsCard :data="data" v-show="currentTab === tabs[2]" />
     </AuthenticatedLayout>
 </template>
