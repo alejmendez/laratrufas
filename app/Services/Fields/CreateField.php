@@ -3,26 +3,47 @@
 namespace App\Services\Fields;
 
 use App\Models\Field;
+use App\Models\File;
 use App\Services\Owners\CreateOrUpdateOwner;
+use Illuminate\Support\Facades\DB;
 
 class CreateField
 {
     public static function call($data): Field
     {
-        $field = new Field;
+        DB::beginTransaction();
 
-        $field->name = $data['name'];
-        $field->location = $data['location'];
-        $field->size = $data['size'];
-        $field->blueprint = $data['blueprint'];
+        try {
+            $field = new Field;
 
-        if (isset($data['owner_dni'])) {
-            $owner = CreateOrUpdateOwner::call($data['owner_dni'], $data['owner_name']);
-            $field->owner_id = $owner->id;
+            $field->name = $data['name'];
+            $field->location = $data['location'];
+            $field->size = $data['size'];
+            $field->blueprint = $data['blueprint'];
+
+            if (isset($data['owner_dni'])) {
+                $owner = CreateOrUpdateOwner::call($data['owner_dni'], $data['owner_name']);
+                $field->owner_id = $owner->id;
+            }
+
+            $field->save();
+
+            if (isset($data['documents']) && is_array($data['documents'])) {
+                foreach ($data['documents'] as $documentPath) {
+                    $field->documents()->create([
+                        'path' => $documentPath['path'],
+                        'type' => $documentPath['type'],
+                        'name' => $documentPath['name'],
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return $field;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
-
-        $field->save();
-
-        return $field;
     }
 }

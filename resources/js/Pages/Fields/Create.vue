@@ -13,9 +13,11 @@ const form = useForm({
   owner_dni: null,
   owner_name: null,
   blueprint: null,
+  documents: null,
+  documentsRemove: [],
 });
 
-const submitHandler = () => form.post(route('fields.store'), form.blueprint ? { forceFormData: true } : {});
+const submitHandler = () => form.post(route('fields.store'), form.blueprint || form.documents ? { forceFormData: true } : {});
 </script>
 
 <template>

@@ -12,12 +12,18 @@ const props = defineProps({
 });
 
 const form = props.form;
+const documents = [...form.documents];
 
 const blueprintPreview = ref(form.blueprint);
 
 const changeFileHandler = (e) => {
   form.blueprint = e.fileInput;
   form.blueprintRemove = e.fileRemove;
+};
+
+const changeDocumentsHandler = (e) => {
+  form.documents = e.fileInput;
+  form.documentsRemove = e.fileRemove;
 };
 </script>
 
@@ -82,6 +88,18 @@ const changeFileHandler = (e) => {
           :imagePreview="true"
           :label="t('field.form.blueprint.label')"
           @change="changeFileHandler"
+        />
+      </div>
+    </CardSection>
+
+    <CardSection :header-text="t('field.sections.documents')">
+      <div class="form-text col-span-2 form-text-type">
+        <VInputFile
+          :files="documents"
+          :imagePreview="false"
+          :multiple="true"
+          :label="t('field.form.documents.label')"
+          @change="changeDocumentsHandler"
         />
       </div>
     </CardSection>

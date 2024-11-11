@@ -29,6 +29,8 @@ class UpdateFieldRequest extends FormRequest
             'owner_name' => 'required|max:80',
             'blueprint' => '',
             'blueprintRemove' => 'boolean',
+            'documents' => '',
+            'documentsRemove' => '',
         ];
     }
 
@@ -41,6 +43,7 @@ class UpdateFieldRequest extends FormRequest
             'owner_dni' => 'rut del propietario',
             'owner_name' => 'nombre del propietario',
             'blueprint' => 'foto',
+            'documents' => 'documentos',
         ];
     }
 }

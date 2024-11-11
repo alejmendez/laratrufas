@@ -21,11 +21,13 @@ const form = useForm({
   plants_count: data.plants_count,
   owner_dni: data.owner.dni,
   owner_name: data.owner.name,
+  documents: data.documents,
+  documentsRemove: [],
   blueprint: data.blueprint,
   blueprintRemove: false,
 });
 
-const submitHandler = () => form.post(route('fields.update', data.id), form.blueprint ? { forceFormData: true } : {});
+const submitHandler = () => form.post(route('fields.update', data.id), form.blueprint || form.documents ? { forceFormData: true } : {});
 </script>
 
 <template>

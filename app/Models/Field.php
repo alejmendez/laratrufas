@@ -41,4 +41,9 @@ class Field extends Model
     {
         return $this->quarters->count();
     }
+
+    public function documents()
+    {
+        return $this->morphMany(File::class, 'fileable');
+    }
 }

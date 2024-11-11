@@ -4,32 +4,56 @@ namespace App\Services\Fields;
 
 use App\Models\Field;
 use App\Services\Owners\CreateOrUpdateOwner;
+use Illuminate\Support\Facades\DB;
 
 class UpdateField
 {
     public static function call($id, $data): Field
     {
-        $field = Field::findOrFail($id);
+        DB::beginTransaction();
 
-        $field->name = $data['name'];
-        $field->location = $data['location'];
-        $field->size = $data['size'];
+        try {
+            $field = Field::findOrFail($id);
 
-        if (isset($data['owner_dni'])) {
-            $owner = CreateOrUpdateOwner::call($data['owner_dni'], $data['owner_name']);
-            $field->owner_id = $owner->id;
+            $field->name = $data['name'];
+            $field->location = $data['location'];
+            $field->size = $data['size'];
+
+            if (isset($data['owner_dni'])) {
+                $owner = CreateOrUpdateOwner::call($data['owner_dni'], $data['owner_name']);
+                $field->owner_id = $owner->id;
+            }
+
+            if ($data['blueprint']) {
+                $field->blueprint = $data['blueprint'];
+            }
+
+            if ($data['blueprintRemove'] === '1') {
+                $field->blueprint = null;
+            }
+
+            $field->save();
+
+            if (isset($data['documentsRemove']) && is_array($data['documentsRemove'])) {
+                $field->documents()->whereIn('id', $data['documentsRemove'])->delete();
+            }
+
+            if (isset($data['documents']) && is_array($data['documents'])) {
+                foreach ($data['documents'] as $documentPath) {
+                    $field->documents()->create([
+                        'path' => $documentPath['path'],
+                        'type' => $documentPath['type'],
+                        'name' => $documentPath['name'],
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return $field;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
-
-        if ($data['blueprint']) {
-            $field->blueprint = $data['blueprint'];
-        }
-
-        if ($data['blueprintRemove'] === '1') {
-            $field->blueprint = null;
-        }
-
-        $field->save();
-
-        return $field;
     }
 }

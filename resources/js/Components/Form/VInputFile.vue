@@ -3,6 +3,14 @@ import { ref, computed } from 'vue';
 import InputGroup from 'primevue/inputgroup';
 
 const props = defineProps({
+  multiple: {
+    type: Boolean,
+    default: false,
+  },
+  files: {
+    type: Array,
+    default: [],
+  },
   imagePreview: {
     type: Boolean,
     default: false,
@@ -35,6 +43,9 @@ const fileInput = ref(null);
 const fileRemove = ref(false);
 const filePreview = ref(null);
 const filePath = ref('');
+const fileList = ref([]);
+const fileListRemove = ref([]);
+const filesServer = ref(props.files);
 
 const preview = computed(() => {
   if (fileRemove.value) {
@@ -47,16 +58,35 @@ const preview = computed(() => {
   return props.image;
 });
 
+const changeMultipleFileHandler = (e) => {
+  const { files } = e.target;
+
+  fileList.value = files;
+
+  emit('change', {
+    fileRemove: fileListRemove,
+    fileInput: fileList,
+  });
+}
+
 const changeFileHandler = (e) => {
-  const [file] = e.target.files;
+  if (props.multiple) {
+    changeMultipleFileHandler(e);
+    return;
+  }
+
+  const { files } = e.target;
+  const firstFile = files[0];
+
   emit('change', {
     fileRemove: false,
-    fileInput: file,
+    fileInput: firstFile,
   });
-  if (file) {
+
+  if (firstFile) {
     fileRemove.value = false;
-    filePreview.value = URL.createObjectURL(file);
-    filePath.value = file.name;
+    filePreview.value = URL.createObjectURL(firstFile);
+    filePath.value = firstFile.name;
   }
 };
 
@@ -72,6 +102,20 @@ const fileRemoveHandler = () => {
 
 const selectFile = () => {
   fileInput.value.click();
+};
+
+
+const remove_element = (id) => {
+  const index = filesServer.value.findIndex(item => item.id === id);
+  if (index !== -1) {
+    filesServer.value.splice(index, 1);
+  }
+
+  fileListRemove.value.push(id);
+  emit('change', {
+    fileRemove: fileListRemove,
+    fileInput: fileList,
+  });
 };
 </script>
 
@@ -89,16 +133,43 @@ const selectFile = () => {
         />
       </div>
     </div>
-    <div class="w-full">
+    <input
+      ref="fileInput"
+      type="file"
+      class="hidden"
+      :accept="accept"
+      :multiple="multiple"
+      @change="changeFileHandler"
+    />
+    <div class="w-full" v-if="multiple">
       <div class="mb-2 w-full">{{ props.label }}</div>
-      <input
-        ref="fileInput"
-        type="file"
-        class="hidden"
-        :accept="accept"
-        @change="changeFileHandler"
+
+      <Button
+        severity="secondary"
+        class="bg-gray-300 text-gray-800 hover:bg-gray-300/80"
+        @click.prevent="selectFile"
+        :label="$t('generics.form.file.upload_file')"
       />
 
+      <div class="max-w-full mt-2" :title="file.name" v-for="file in filesServer">
+        <font-awesome-icon
+          :icon="['fas', 'trash-can']"
+          class="me-1 text-black hover:text-red-500"
+          @click="remove_element(file.id)"
+        />
+        <a :href="file.url" target="_blank">
+          {{ file.name }}
+        </a>
+      </div>
+
+      <div class="max-w-full mt-2" :title="file.name" v-for="file in fileList">
+        {{ file.name }}
+      </div>
+
+      <div class="text-slate-500 text-sm mt-2">Los archivos no debe superar 5 mb</div>
+    </div>
+    <div class="w-full" v-else>
+      <div class="mb-2 w-full">{{ props.label }}</div>
       <div class="md:w-[420px] max-w-full sm:hidden md:block">
         <InputGroup>
           <div class="border p-2 grow truncate rounded-s border-e-0" :title="filePath">{{ filePath }}</div>
@@ -121,7 +192,7 @@ const selectFile = () => {
           />
         </InputGroup>
       </div>
-      <div class="text-slate-500 text-sm">Los archivos no debe superar 5 mb</div class="">
+      <div class="text-slate-500 text-sm">Los archivos no debe superar 5 mb</div>
       <Button
         severity="secondary"
         v-if="props.withRemove"

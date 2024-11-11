@@ -45,6 +45,7 @@ class FieldsController extends Controller
     {
         $data = $request->validated();
         $data['blueprint'] = $this->storeBlueprint($request);
+        $data['documents'] = $this->storeDocuments($request);
         CreateField::call($data);
 
         return redirect()->route('fields.index')->with('toast', 'Field created.');
@@ -83,6 +84,7 @@ class FieldsController extends Controller
     {
         $data = $request->validated();
         $data['blueprint'] = $this->storeBlueprint($request);
+        $data['documents'] = $this->storeDocuments($request);
         UpdateField::call($id, $data);
 
         return redirect()->route('fields.index')->with('toast', 'Field updated.');
@@ -105,5 +107,24 @@ class FieldsController extends Controller
         }
 
         return $request->file('blueprint')->storePublicly('public/blueprints');
+    }
+
+    protected function storeDocuments(UpdateFieldRequest|StoreFieldRequest $request)
+    {
+        if ($request->file('documents') == null) {
+            return null;
+        }
+
+        $documents = $request->file('documents');
+        $documentStore = [];
+        foreach ($documents as $document) {
+            $documentStore[] = [
+                'path' => $document->storePublicly('public/documents'),
+                'name' => $document->getClientOriginalName(),
+                'type' => $document->getClientMimeType(),
+            ];
+        }
+
+        return $documentStore;
     }
 }

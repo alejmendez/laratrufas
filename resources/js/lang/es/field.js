@@ -33,6 +33,9 @@ export default {
     blueprint: {
       label: 'Seleccione sus planos',
     },
+    documents: {
+      label: 'Seleccione sus documentos',
+    },
   },
   show: {
     file: {
@@ -51,14 +54,19 @@ export default {
     statistics: {
       title: 'Estadísticas',
     },
+    documentation: {
+      title: 'Documentación',
+    },
     tabs: {
       file: 'Ficha',
       logbook: 'Bitácora',
       harvest: 'Cosecha',
       statistics: 'Estadísticas',
+      documentation: 'Documentación',
     },
   },
   sections: {
     blueprint: 'Planos',
+    documents: 'Documentos',
   },
 };
