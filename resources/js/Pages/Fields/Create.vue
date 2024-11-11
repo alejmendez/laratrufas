@@ -13,7 +13,7 @@ const form = useForm({
   owner_dni: null,
   owner_name: null,
   blueprint: null,
-  documents: null,
+  documents: [],
   documentsRemove: [],
 });
 
