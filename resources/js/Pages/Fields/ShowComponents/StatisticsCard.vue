@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, reactive } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { getGraph } from '@/Services/Graphs';
@@ -23,6 +23,7 @@ const types_graphs = ref([
 const type_graph = ref(types_graphs.value[0]);
 
 const loading = ref(true);
+const dataNotFound = ref(false);
 const series = ref([]);
 
 const chartOptions = {
@@ -119,7 +120,15 @@ const chartOption = ref(types_graphs.value[0].type);
 
 const filterHandler = async () => {
   loading.value = true;
+  dataNotFound.value = false;
   const response = await getGraph(field.id, type_graph.value.value);
+
+  if (response.length === 0) {
+    dataNotFound.value = true;
+    loading.value = false;
+    return;
+  }
+
   const _chartOption = {...chartOptions[type_graph.value.type]};
 
   _chartOption.title.text = response.title;
@@ -158,7 +167,10 @@ onMounted(async () => {
       :header-text="type_graph.text"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
     >
-      <div class="animate-pulse" v-if="loading">
+      <div v-if="dataNotFound">
+        Datos no encontrados
+      </div>
+      <div class="animate-pulse" v-else-if="loading">
         <div class="h-[20px] w-[300px] mb-[10px] bg-slate-200 rounded"></div>
         <div class="h-[380px] w-[1300px] mb-[10px] bg-slate-200 rounded"></div>
         <div class="h-[20px] w-[1300px] bg-slate-200 rounded"></div>

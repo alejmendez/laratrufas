@@ -42,6 +42,10 @@ class GraphDataField
             ->orderBy('week', 'asc')
             ->get();
 
+        if (count($liquidations) === 0) {
+            return [];
+        }
+
         $labels = $liquidations->map(function ($l) {
             return "Sem " . $l->week;
         })->unique()->values();
@@ -93,6 +97,10 @@ class GraphDataField
             ->orderBy('week', 'asc')
             ->get();
 
+        if (count($liquidations) === 0) {
+            return [];
+        }
+
         $labels = $liquidations->map(function ($l) {
             return "Sem " . $l->week;
         })->unique()->values();
@@ -137,6 +145,10 @@ class GraphDataField
             ->where('year', $year)
             ->groupBy('category_products.is_commercial')
             ->get();
+
+        if (count($liquidations) === 0) {
+            return [];
+        }
 
         $labels = [
             'KGS Comerciales',
@@ -187,6 +199,10 @@ class GraphDataField
             ->orderBy('week', 'asc')
             ->get();
 
+        if (count($liquidations) === 0) {
+            return [];
+        }
+
         $labels = $liquidations->map(function ($l) {
             return "Sem " . $l->week;
         })->unique()->values();
@@ -220,6 +236,10 @@ class GraphDataField
             ->orderBy('year', 'desc')
             ->orderBy('week', 'asc')
             ->get();
+
+        if (count($liquidations) === 0) {
+            return [];
+        }
 
         $groupedData = $liquidations->groupBy('week');
 
