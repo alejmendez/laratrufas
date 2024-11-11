@@ -1,6 +1,7 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
   fields: Array,
@@ -12,6 +13,12 @@ const { t } = useI18n();
 const form = useForm({
   field_id: props.fields.find(a => a.value === props.field.data.id),
 });
+
+const fieldChangeHandler = () => {
+  const url = new URL(window.location.href);
+  url.searchParams.set('field_id', form.field_id.value);
+  router.get(url);
+};
 </script>
 
 <template>
@@ -34,6 +41,7 @@ const form = useForm({
         :placeholder="t('generics.please_select')"
         :options="props.fields"
         :label="t('dashboard.form.field_id.label')"
+        @change="fieldChangeHandler"
       />
     </div>
   </section>

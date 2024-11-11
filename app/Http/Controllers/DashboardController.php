@@ -14,6 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Dashboard/Index', ShowDashboard::call());
+        $field_id = request('field_id');
+        return Inertia::render('Dashboard/Index', ShowDashboard::call($field_id));
     }
 }

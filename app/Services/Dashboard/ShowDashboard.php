@@ -52,9 +52,15 @@ class ShowDashboard
             $variation_between_harvests = round(($current_year_total_weight * 100 / $last_year_total_weight) - 100, 2);
         }
 
+        $average_weight_per_plant = 0;
+
+        if ($field->plants_count > 0) {
+            $average_weight_per_plant = round($current_year_total_weight * 1000 / $field->plants_count, 2);
+        }
+
         return [
             'total_weight_of_last_harvest' => round($current_year_total_weight, 2),
-            'average_weight_per_plant' => round($current_year_total_weight * 1000 / $field->plants_count, 2),
+            'average_weight_per_plant' => $average_weight_per_plant,
             'variation_between_harvests' => $variation_between_harvests,
             'years_variation' => [$current_year, $last_year],
         ];
