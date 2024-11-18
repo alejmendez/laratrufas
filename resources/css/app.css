@@ -4,7 +4,6 @@
 
 @layer base {
   body {
-    @apply bg-gray-50;
     overflow-x: hidden;
     overflow-y: auto;
     margin-bottom: 0 !important;
@@ -16,6 +15,11 @@
 
   .input-label {
     @apply text-sm font-medium leading-none;
+    color: #212529;
+  }
+
+  .dark .input-label {
+    color: #BCC5DD;
   }
 
   .input-file {
@@ -78,58 +82,116 @@
   .tableContainer table td {
     @apply px-6 py-3;
   }
-}
+  .p-button.p-component {
+    @apply text-sm font-medium transition-colors duration-150 rounded-lg disabled:opacity-75;
+  }
 
-.p-button.p-component {
-  @apply text-sm font-medium transition-colors duration-150 rounded-lg disabled:opacity-75;
-}
+  .p-button.p-component {
+    @apply text-white bg-[#f06f38] hover:bg-[#fb9773];
+  }
 
-.p-button.p-component {
-  @apply text-white bg-[#f06f38] hover:bg-[#fb9773];
-}
+  .p-button.p-component.p-button-secondary {
+    @apply text-[#ed3900] bg-[#fdfdfd] hover:bg-[#fff1e9] hover:text-[#ed3900] border-[#C7C7C7] hover:border-[#C7C7C7];
+  }
 
-.p-button.p-component.p-button-secondary {
-  @apply text-[#ed3900] bg-[#fdfdfd] hover:bg-[#fff1e9] hover:text-[#ed3900] border-[#C7C7C7] hover:border-[#C7C7C7];
-}
+  .p-datatable {
+    @apply mt-5;
+  }
 
-.p-datatable {
-  @apply mt-5;
-}
+  .p-datatable .p-datatable-thead .p-button {
+    @apply text-xs size-8;
+  }
 
-.p-datatable .p-datatable-thead .p-button {
-  @apply text-xs size-8;
-}
+  .menu-group {
+    @apply cursor-pointer text-[#212529]
+  }
 
-.menu-element.active {
-  background: #2C3344;
-  color: #F8F9FA;
-}
+  .menu-group svg {
+    color: var(--p-primary-color);
+  }
 
-.menu-element svg{
-  color: #7B849C;
-}
+  .menu-element {
+    @apply inline-flex relative items-center py-[10px] w-full text-sm font-medium rounded-md transition duration-400 ease-in-out ps-2;
+    color: #212529;
+  }
 
-.menu-element.active svg{
-  color: #F8F9FA;
-}
+  .menu-element:hover {
+    background: #E9ECEF;
+  }
 
-.menu-element:hover {
-  background: #2C3344;
-  color: #F8F9FA;
-}
+  .menu-element.active {
+    background: var(--p-primary-color);
+    color: #F9F9FF;
+  }
 
-.menu-element:hover svg{
-  color: #F8F9FA;
-}
+  .menu-element svg{
+    color: var(--p-primary-color);
+  }
 
-.swal2-modal .swal2-actions .swal2-deny {
-  color: #333 !important;
-}
+  .menu-element.active svg{
+    color: #F9F9FF;
+  }
+  .menu-element.active:hover svg{
+    color: #F9F9FF;
+  }
 
-.p-toast {
-  z-index: 3000;
-}
+  .menu-element:hover svg{
+    color: var(--p-primary-color);
+  }
 
-.p-dialog-title {
-  margin-right: 40px;
+  .dark .menu-group {
+    @apply cursor-pointer text-[#BCC5DD]
+  }
+
+  .dark .menu-group svg {
+    color: var(--p-primary-color);
+  }
+
+  .dark .menu-element {
+    color: #BCC5DD;
+  }
+
+  .dark .menu-element:hover {
+    background: #54586D;
+  }
+
+  .dark .menu-element.active {
+    background: var(--p-primary-color);
+    color: #F9F9FF;
+  }
+
+  .dark .menu-element svg{
+    color: var(--p-primary-color);
+  }
+
+  .dark .menu-element.active svg{
+    color: #F9F9FF;
+  }
+  .dark .menu-element.active:hover svg{
+    color: #F9F9FF;
+  }
+
+  .dark .menu-element:hover svg{
+    color: var(--p-primary-color);
+  }
+
+  .card-section {
+    background: #F8F9FA;
+  }
+
+  .dark .card-section {
+    background: #2F3349;
+  }
+
+  .swal2-modal .swal2-actions .swal2-deny {
+    color: #333 !important;
+  }
+
+  .p-toast {
+    z-index: 3000;
+  }
+
+  .p-dialog-title {
+    margin-right: 40px;
+  }
 }

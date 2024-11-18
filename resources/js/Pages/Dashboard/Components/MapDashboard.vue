@@ -7,9 +7,9 @@ const field = props.field.data
 </script>
 
 <template>
-  <div class="lg:col-span-3 rounded-xl bg-white shadow-sm border border-gray-200">
-    <header class="flex items-center overflow-hidden border-b">
-      <h3 class="px-4 py-3 text-base font-semibold leading-6 text-gray-950">
+  <div class="lg:col-span-3 rounded-xl bg-white dark:bg-[#2F3349] shadow-sm border text-[#212529] dark:text-gray-100 border-gray-200 dark:border-[#2F3349]">
+    <header class="flex items-center overflow-hidden border-b dark:border-[#1D2132]">
+      <h3 class="px-4 py-3 text-base font-semibold leading-6 text-gray-900 dark:text-gray-100">
         Campo: {{ field.name }}
       </h3>
     </header>
@@ -18,9 +18,9 @@ const field = props.field.data
         <img :src="field.blueprint" class="w-full" alt="">
       </div>
       <div>
-        <div class="text-gray-500 font-bold mb-3">Ciclo: Siembra</div>
+        <div class="text-gray-500 dark:text-gray-100 font-bold mb-3">Ciclo: Siembra</div>
         <div class="min-h-10">
-          <div class="border border-gray-200 w-8 h-8 px-2 py-1 me-2 rounded text-green-500 float-left" title="Ubicación">
+          <div class="w-8 h-8 px-2 py-1 me-2 rounded text-green-500 float-left" title="Ubicación">
             <font-awesome-icon :icon="['fas', 'location-dot']" />
           </div>
           <div class="pt-1 truncate" :title="field.location">
@@ -28,7 +28,7 @@ const field = props.field.data
           </div>
         </div>
         <div class="min-h-10" title="Tamaño">
-          <div class="border border-gray-200 w-8 h-8 px-2 py-1 me-2 rounded text-red-500 float-left" style="padding-left: 0.30rem; padding-top: 0.15rem;">
+          <div class="w-8 h-8 px-2 py-1 me-2 rounded text-red-500 float-left" style="padding-left: 0.30rem; padding-top: 0.15rem;">
             <span class="text-xs">HAS</span>
           </div>
           <div class="pt-1">
@@ -36,7 +36,7 @@ const field = props.field.data
           </div>
         </div>
         <div class="min-h-10" title="Cantidad de Cuarteles">
-          <div class="border border-gray-200 w-8 h-8 px-2 py-1 me-2 rounded text-yellow-500 float-left">
+          <div class="w-8 h-8 px-2 py-1 me-2 rounded text-yellow-500 float-left">
             <font-awesome-icon :icon="['fas', 'vector-square']" />
           </div>
           <div class="pt-1">
@@ -44,7 +44,7 @@ const field = props.field.data
           </div>
         </div>
         <div class="min-h-10" title="Cantidad de Arboles">
-          <div class="border border-gray-200 w-8 h-8 px-2 py-1 me-2 rounded text-yellow-500 float-left">
+          <div class="w-8 h-8 px-2 py-1 me-2 rounded text-yellow-500 float-left">
             <font-awesome-icon :icon="['fas', 'tree']" />
           </div>
           <div class="pt-1">

@@ -19,7 +19,7 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
       <BreadCrumbs :elements="props.breadcrumbs" />
 
       <h1
-        class="ftext-2xl font-bold tracking-tight text-gray-950 sm:text-2xl md:text-3xl"
+        class="mt-4 mb-5 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-2xl md:text-3xl"
       >
         {{ props.title }}
       </h1>

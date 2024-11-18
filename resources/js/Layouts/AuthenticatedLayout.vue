@@ -12,13 +12,10 @@ const { show } = storeToRefs(sideBarStore);
 </script>
 
 <template>
-  <div class="flex items-center w-full h-[64px] bg-[#0F172A] text-white px-[20px] py-[10px] z-30">
+  <div class="flex items-center w-full h-[64px] bg-[#F8F9FA] dark:bg-[#2F3349] text-white px-[20px] py-[10px] z-30">
     <div class="w-[230px]">
-      <h3 class="font-bold text-xl hidden md:inline me-3">
-        SW Agricola
-      </h3>
       <div
-        class="w-[36px] inline rounded outline-none transition duration-75 text-white hover:text-[#DD6633] focus-visible:ring-primary-600 border border-white hover:border-[#DD6633] px-3 py-1"
+        class="w-[36px] inline rounded outline-none transition duration-75 text-white hover:text-[color:--p-primary-color] focus-visible:ring-primary-600 border border-white hover:border-[color:--p-primary-color] px-3 py-1"
         @click="sideBarStore.toggle"
       >
         <FontAwesomeIcon icon="fa-solid fa-bars" />
@@ -29,15 +26,19 @@ const { show } = storeToRefs(sideBarStore);
       <MenuUser />
     </div>
   </div>
-  <div class="w-full flex bg-[#F0F2F5] font-normal text-gray-950 antialiased">
+  <div class="w-full flex font-normal text-gray-900 antialiased">
     <div
-      class="flex-none transition-all duration-200 ease-out z-10 border-r bg-[#0F172A] text-white"
+      class="flex-none transition-all duration-200 ease-out z-10 bg-[#F8F9FA] dark:bg-[#2F3349] text-white"
       :class="{ 'lg:w-[320px] lg:opacity-100 w-[0px] opacity-0': !show, 'lg:w-[0px] lg:opacity-0 w-full opacity-100': show }"
     >
+      <h3 class="font-bold text-xl inline ms-6 mt-4">
+        <span class="text-[color:--p-primary-color]">SW </span>
+        <span class="text-gray-900 dark:text-gray-50">Agricola</span>
+      </h3>
       <SideBarLeft />
     </div>
-    <div class="grow z-20">
-      <div class="min-h-[calc(100vh-64px)] bg-[#F0F2F5] pb-5">
+    <div class="grow z-20 bg-[#F0F2F5] dark:bg-[#1D2132]">
+      <div class="min-h-[calc(100vh-64px)] pb-5">
         <main class="py-[10px] px-[25px] w-full">
           <Toast />
           <slot></slot>

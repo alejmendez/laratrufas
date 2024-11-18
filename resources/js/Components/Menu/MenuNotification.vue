@@ -32,7 +32,7 @@ onUnmounted(() => {
 <template>
   <div class="relative me-3" ref="root">
     <div
-      class="text-lg w-[43px] h-[43px] hover:bg-gray-300 pt-2 ps-3 rounded-full transition-all ease-out duration-300"
+      class="text-lg w-[43px] h-[43px] hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 pt-2 ps-3 rounded-full transition-all ease-out duration-300"
       @click="toggleDrop"
     >
       <font-awesome-icon :icon="['far', 'bell']" />
@@ -46,7 +46,7 @@ onUnmounted(() => {
   </div>
   <div
     v-show="showDropDown"
-    class="absolute right-[60px] z-50 mt-12 w-96 origin-top-right rounded-md text-black bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+    class="absolute right-[60px] z-50 mt-12 w-96 origin-top-right rounded-md text-black dark:text-gray-100 bg-white dark:bg-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
     tabindex="-1"
   >
     <div class="font-semibold text-left block px-4 py-2">

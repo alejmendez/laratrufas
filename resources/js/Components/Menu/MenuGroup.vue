@@ -23,7 +23,7 @@ const clickHandler = () => {
 <template>
   <div>
     <div
-      class="cursor-pointer text-[#DD6633]"
+      class="menu-group"
       @click="clickHandler"
     >
       {{ props.text }}

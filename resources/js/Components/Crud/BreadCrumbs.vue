@@ -8,7 +8,7 @@ const props = defineProps({
   <div class="breadcrumbs py-4 flex items-center flex-wrap text-gray-500 text-sm font-medium">
     <ul class="flex items-center">
       <li class="inline-flex items-center" v-for="(ele, index) in props.elements" :key="index">
-        <Link :href="route(ele.to)" class="text-gray-600 hover:text-blue-500" v-if="ele.to">
+        <Link :href="route(ele.to)" class="text-gray-600 hover:text-blue-500 dark:text-gray-100" v-if="ele.to">
           {{ ele.text }}
         </Link>
         <div v-else class="text-gray-600">

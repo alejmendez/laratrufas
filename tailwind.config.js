@@ -18,6 +18,11 @@ export default {
       ...defaultTheme.screens,
       'sm': '375px',
     },
+    extend: {
+      transitionDuration: {
+        '400': '400ms',
+      }
+    }
   },
   plugins: [],
 }

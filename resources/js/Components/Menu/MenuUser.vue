@@ -1,5 +1,12 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import SelectButton from 'primevue/selectbutton';
+
+const darkModeValue = ref(null);
+const darkMode = ref([
+    { icon: 'pi pi-moon', value: 'dark' },
+    { icon: 'pi pi-sun', value: 'light' },
+]);
 
 import MenuNotification from './MenuNotification.vue';
 
@@ -17,6 +24,22 @@ const closeDropDown = (e) => {
   }
 };
 
+const toggleTheme = (isDark) => {
+  localStorage.theme = isDark ? 'dark' : 'light';
+  darkModeValue.value = darkMode.value[isDark ? 0 : 1];
+  document.documentElement.classList.toggle('dark', isDark);
+}
+
+const changeHandlerDarkMode = () => {
+  toggleTheme(darkModeValue.value.value === 'dark');
+}
+
+if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  toggleTheme(true);
+} else {
+  toggleTheme(false);
+}
+
 onMounted(() => {
   document.addEventListener('click', closeDropDown);
 });
@@ -25,6 +48,12 @@ onUnmounted(() => {
   document.removeEventListener('click', closeDropDown);
 });
 </script>
+
+<style>
+.select-mode .p-selectbutton .p-togglebutton {
+  width: 50%;
+}
+</style>
 
 <template>
   <MenuNotification />
@@ -37,19 +66,35 @@ onUnmounted(() => {
     <!-- Drop down -->
     <div
       v-show="showDropDown"
-      class="absolute right-[10px] z-50 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+      class="absolute right-[10px] z-50 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-[#26293C] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="menu-button"
       tabindex="-1"
     >
-      <div class="text-black font-semibold text-left block px-4 py-2">
+      <div class="text-black dark:text-gray-100 font-semibold text-left block px-4 py-2">
         <div>{{ $page.props.auth.user.full_name }}</div>
+      </div>
+      <div class="text-black font-semibold text-left block px-4 py-2 select-mode">
+        <SelectButton
+          class="w-full"
+          v-model="darkModeValue"
+          optionLabel="value"
+          dataKey="value"
+          aria-labelledby="custom"
+          :options="darkMode"
+          :allowEmpty="false"
+          @change="changeHandlerDarkMode"
+        >
+          <template #option="slotProps">
+            <i :class="slotProps.option.icon"></i>
+          </template>
+        </SelectButton>
       </div>
       <div class="py-1 text-left" role="none">
         <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-        <Link :href="route('profile.edit')" class="text-gray-700 block px-4 py-2"> {{ $t('menu.top.profile') }} </Link>
-        <Link :href="route('logout')" method="post" as="button" class="text-gray-700 block px-4 py-2">
+        <Link :href="route('profile.edit')" class="text-gray-700 dark:text-gray-100 block px-4 py-2"> {{ $t('menu.top.profile') }} </Link>
+        <Link :href="route('logout')" method="post" as="button" class="text-gray-700 dark:text-gray-100 block px-4 py-2">
             {{ $t('menu.top.logout') }}
         </Link>
       </div>

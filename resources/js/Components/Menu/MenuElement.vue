@@ -1,8 +1,13 @@
 <script setup>
 import { useAttrs } from 'vue';
+import { $dt } from '@primevue/themes';
+
 import { useSideBarStore } from '@/Stores/sidebar.js';
 
 const attrs = useAttrs();
+
+const primaryColor = $dt('primary.color');
+console.log(primaryColor);
 
 const props = defineProps({
   link: String,
@@ -24,7 +29,7 @@ const sideBarStore = useSideBarStore();
   <Link
     v-bind="attrs"
     :href="props.link"
-    class="menu-element inline-flex relative items-center py-[10px] w-full text-sm font-medium text-[#F8F9FA] rounded-md border-gray-200 transition duration-400 ease-in-out"
+    class="menu-element"
     :class="{ active: props.active }"
     @click="sideBarStore.close"
   >
