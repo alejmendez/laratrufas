@@ -1,6 +1,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import { usePreset } from '@primevue/themes';
 import SelectButton from 'primevue/selectbutton';
+
+import Presents from '@/Libs/PrimePresents';
 
 const darkModeValue = ref(null);
 const darkMode = ref([
@@ -14,6 +17,14 @@ const root = ref(null);
 
 const showDropDown = ref(false);
 
+const themes = [
+  { name: 'Apple', class: 'bg-[#28A745]', },
+  { name: 'Cobalt', class: 'bg-[#2846A7]', },
+  { name: 'DodgerBlue', class: 'bg-[#2C8EFF]', },
+  { name: 'Vulcan', class: 'bg-[#10121D]', },
+  { name: 'CarrotOrange', class: 'bg-[#F39108]', },
+];
+
 const toggleDrop = () => {
   showDropDown.value = !showDropDown.value;
 };
@@ -25,7 +36,7 @@ const closeDropDown = (e) => {
 };
 
 const toggleTheme = (isDark) => {
-  localStorage.theme = isDark ? 'dark' : 'light';
+  localStorage.themeType = isDark ? 'dark' : 'light';
   darkModeValue.value = darkMode.value[isDark ? 0 : 1];
   document.documentElement.classList.toggle('dark', isDark);
 }
@@ -34,10 +45,15 @@ const changeHandlerDarkMode = () => {
   toggleTheme(darkModeValue.value.value === 'dark');
 }
 
-if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+if (localStorage.themeType === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
   toggleTheme(true);
 } else {
   toggleTheme(false);
+}
+
+const setTheme = (theme) => {
+  localStorage.setItem('theme', theme.name)
+  usePreset(Presents[theme.name]);
 }
 
 onMounted(() => {
@@ -91,8 +107,10 @@ onUnmounted(() => {
           </template>
         </SelectButton>
       </div>
+      <div class="px-4 py-2 mb-4">
+        <div :class="`${theme.class} rounded-full w-4 h-4 float-left me-2`" v-for="theme in themes" @click="setTheme(theme)"></div>
+      </div>
       <div class="py-1 text-left" role="none">
-        <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
         <Link :href="route('profile.edit')" class="text-gray-700 dark:text-gray-100 block px-4 py-2"> {{ $t('menu.top.profile') }} </Link>
         <Link :href="route('logout')" method="post" as="button" class="text-gray-700 dark:text-gray-100 block px-4 py-2">
             {{ $t('menu.top.logout') }}

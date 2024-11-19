@@ -146,7 +146,6 @@ const remove_element = (id) => {
 
       <Button
         severity="secondary"
-        class="bg-gray-300 text-gray-800 hover:bg-gray-300/80"
         @click.prevent="selectFile"
         :label="$t('generics.form.file.upload_file')"
       />
@@ -175,7 +174,6 @@ const remove_element = (id) => {
           <div class="border p-2 grow truncate rounded-s border-e-0" :title="filePath">{{ filePath }}</div>
           <Button
             severity="secondary"
-            class="bg-gray-300 text-gray-800 hover:bg-gray-300/80"
             @click.prevent="selectFile"
             :label="$t('generics.form.file.upload_file')"
           />
@@ -186,7 +184,6 @@ const remove_element = (id) => {
           <div class="border p-2 grow truncate rounded-s border-e-0" :title="filePath">{{ filePath }}</div>
           <Button
             severity="secondary"
-            class="bg-gray-300 text-gray-800 hover:bg-gray-300/80"
             @click.prevent="selectFile"
             icon="pi pi-cloud-upload"
           />

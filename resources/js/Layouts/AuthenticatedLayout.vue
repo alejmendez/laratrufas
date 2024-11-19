@@ -15,7 +15,7 @@ const { show } = storeToRefs(sideBarStore);
   <div class="flex items-center w-full h-[64px] bg-[#F8F9FA] dark:bg-[#2F3349] text-white px-[20px] py-[10px] z-30">
     <div class="w-[230px]">
       <div
-        class="w-[36px] inline rounded outline-none transition duration-75 text-white hover:text-[color:--p-primary-color] focus-visible:ring-primary-600 border border-white hover:border-[color:--p-primary-color] px-3 py-1"
+        class="w-[36px] inline rounded outline-none transition duration-75 text-[color:--p-primary-500] hover:text-[color:--p-primary-700] focus-visible:ring-primary-600 border border-[color:--p-primary-500] hover:border-[color:--p-primary-700] px-3 py-1"
         @click="sideBarStore.toggle"
       >
         <FontAwesomeIcon icon="fa-solid fa-bars" />

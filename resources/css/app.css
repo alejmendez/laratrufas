@@ -86,12 +86,8 @@
     @apply text-sm font-medium transition-colors duration-150 rounded-lg disabled:opacity-75;
   }
 
-  .p-button.p-component {
-    @apply text-white bg-[#f06f38] hover:bg-[#fb9773];
-  }
-
   .p-button.p-component.p-button-secondary {
-    @apply text-[#ed3900] bg-[#fdfdfd] hover:bg-[#fff1e9] hover:text-[#ed3900] border-[#C7C7C7] hover:border-[#C7C7C7];
+    @apply text-[--p-primary-500] hover:text-[--p-primary-700] bg-[#F8F9FA] hover:bg-[#f4f5f7] border-[#CED4DA] hover:border-[#bfc5ca] dark:text-gray-100 dark:hover:text-gray-100 dark:bg-[#54586D] dark:hover:bg-[#515569] dark:border-[#54586D] dark:hover:border-[#515569];
   }
 
   .p-datatable {

@@ -115,7 +115,6 @@ onMounted(() => {
               type="button"
               icon="pi pi-filter-slash"
               label="Limpiar"
-              outlined
               @click="clearFilter"
             />
           </div>

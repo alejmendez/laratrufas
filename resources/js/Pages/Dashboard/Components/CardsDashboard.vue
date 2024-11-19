@@ -8,7 +8,7 @@ const props = defineProps({
 const task_data = props.task_data;
 
 const percent_pending_tasks = getPorcent(task_data.tasks_totals, task_data.pending_tasks);
-const percent_tasks_in_progress = 10; // getPorcent(task_data.tasks_totals, task_data.tasks_in_progress);
+const percent_tasks_in_progress = getPorcent(task_data.tasks_totals, task_data.tasks_in_progress);
 
 function getPorcent(total, num) {
   if (total === 0) {

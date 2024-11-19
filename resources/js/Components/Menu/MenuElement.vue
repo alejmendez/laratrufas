@@ -1,13 +1,9 @@
 <script setup>
 import { useAttrs } from 'vue';
-import { $dt } from '@primevue/themes';
 
 import { useSideBarStore } from '@/Stores/sidebar.js';
 
 const attrs = useAttrs();
-
-const primaryColor = $dt('primary.color');
-console.log(primaryColor);
 
 const props = defineProps({
   link: String,
