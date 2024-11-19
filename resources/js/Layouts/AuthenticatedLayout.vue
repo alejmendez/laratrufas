@@ -37,7 +37,7 @@ const { show } = storeToRefs(sideBarStore);
       </h3>
       <SideBarLeft />
     </div>
-    <div class="grow z-20 bg-[#F0F2F5] dark:bg-[#1D2132]">
+    <div class="grow z-20 bg-[#DEE2E6] dark:bg-[#1D2132]">
       <div class="min-h-[calc(100vh-64px)] pb-5">
         <main class="py-[10px] px-[25px] w-full">
           <Toast />
