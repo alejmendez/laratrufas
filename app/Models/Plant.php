@@ -57,9 +57,9 @@ class Plant extends Model
         $birthDate = Carbon::parse($birthDate);
         $currentDate = Carbon::now();
 
-        $yearsDifference = $currentDate->diffInYears($birthDate);
-        $monthsDifference = $currentDate->diffInMonths($birthDate) % 12;
-        $daysDifference = $currentDate->diffInDays($birthDate->copy()->addYears($yearsDifference)->addMonths($monthsDifference));
+        $yearsDifference = abs($currentDate->diffInYears($birthDate));
+        $monthsDifference = abs($currentDate->diffInMonths($birthDate) % 12);
+        $daysDifference = abs($currentDate->diffInDays($birthDate->copy()->addYears($yearsDifference)->addMonths($monthsDifference)));
 
         $age = $yearsDifference + ($monthsDifference / 12) + ($daysDifference / 365.25);
 
