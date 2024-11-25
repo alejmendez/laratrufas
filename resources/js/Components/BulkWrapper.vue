@@ -46,7 +46,7 @@ const openUnprocesseds = ref(true);
     <slot />
 
     <div class="px-6 pb-6" v-if="props.message_success != '' && props.message_success != undefined && openAlert">
-      <div class="p-4 rounded-lg bg-[#D7EAE1] border border-[#89C1A7] text-[#2E5342]">
+      <div class="p-4 rounded-lg bg-neutral-200 border border-slate-400 text-gray-700">
         <font-awesome-icon :icon="['fas', 'triangle-exclamation']" class="me-1" />
         {{ props.message_success }}
         <font-awesome-icon :icon="['fas', 'xmark']" class="float-right text-lg" @click="openAlert = !openAlert" />
@@ -54,7 +54,7 @@ const openUnprocesseds = ref(true);
     </div>
 
     <div class="px-6 pb-6" v-if="props.unprocessed_message != '' && props.unprocessed_message != undefined && openUnprocesseds">
-      <div class="p-4 rounded-lg bg-[#f0d8a6] border border-[#9c7624] text-[#633a14]">
+      <div class="p-4 rounded-lg bg-orange-200 border border-yellow-700 text-yellow-900">
         <font-awesome-icon :icon="['fas', 'triangle-exclamation']" class="me-1" />
         {{ props.unprocessed_message }}
         <font-awesome-icon :icon="['fas', 'xmark']" class="float-right text-lg" @click="openUnprocesseds = !openUnprocesseds" />
@@ -65,7 +65,7 @@ const openUnprocesseds = ref(true);
     </div>
 
     <div class="px-6 pb-6" v-if="props.error_message != '' && props.error_message != undefined && openErrors">
-      <div class="p-4 rounded-lg bg-[#F8DCDF] border border-[#EC979F] text-[#926065]">
+      <div class="p-4 rounded-lg bg-red-100 border border-red-300 text-stone-500">
         <font-awesome-icon :icon="['fas', 'triangle-exclamation']" class="me-1" />
         {{ props.error_message }}
         <font-awesome-icon :icon="['fas', 'xmark']" class="float-right text-lg" @click="openErrors = !openErrors" />

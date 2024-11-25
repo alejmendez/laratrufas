@@ -10,20 +10,19 @@
   }
 
   .router-link-active {
-    background-color: #6b7280;
+    @apply bg-gray-500
   }
 
   .input-label {
-    @apply text-sm font-medium leading-none;
-    color: #212529;
+    @apply text-sm font-medium leading-none text-neutral-800;
   }
 
   .dark .input-label {
-    color: #BCC5DD;
+    @apply text-slate-300
   }
 
   .input-file {
-    @apply block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#CED4DA] file:text-gray-800 hover:file:bg-gray-400;
+    @apply block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-300 file:text-gray-800 hover:file:bg-gray-400;
   }
 
   .pagination {
@@ -50,16 +49,16 @@
   }
 
   .role.agricultor {
-    @apply border-[#E9E9EA] text-[#495057] bg-[#F8F9FA];
+    @apply border-gray-200 text-zinc-600 bg-gray-50;
   }
 
   .role.tecnico {
-    @apply border-[#DAF4E3] text-[#16A34A] bg-[#F0FDF4];
+    @apply border-green-100 text-green-600 bg-green-50;
   }
 
   .role.administrador,
   .role.super-admin {
-    @apply border-[#DDEEF6] text-[#0B88A0] bg-[#E8F7FF];
+    @apply border-blue-100 text-cyan-600 bg-blue-50;
   }
 
   .tableContainer {
@@ -87,7 +86,7 @@
   }
 
   .p-button.p-component.p-button-secondary {
-    @apply text-[--p-primary-500] hover:text-[--p-primary-700] bg-[#F8F9FA] hover:bg-[#f4f5f7] border-[#CED4DA] hover:border-[#bfc5ca] dark:text-gray-100 dark:hover:text-gray-100 dark:bg-[#54586D] dark:hover:bg-[#515569] dark:border-[#54586D] dark:hover:border-[#515569];
+    @apply text-[--p-primary-500] hover:text-[--p-primary-700] bg-gray-50 hover:bg-gray-100 border-gray-300 hover:border-neutral-300 dark:text-gray-100 dark:hover:text-gray-100 dark:bg-gray-600 dark:hover:bg-gray-700 dark:border-gray-600 dark:hover:border-gray-700;
   }
 
   .p-datatable {
@@ -99,7 +98,7 @@
   }
 
   .menu-group {
-    @apply cursor-pointer text-[#212529]
+    @apply cursor-pointer text-neutral-800
   }
 
   .menu-group svg {
@@ -107,80 +106,77 @@
   }
 
   .menu-element {
-    @apply inline-flex relative items-center py-[10px] w-full text-sm font-medium rounded-md transition duration-400 ease-in-out ps-2;
-    color: #212529;
+    @apply text-neutral-800 inline-flex relative items-center py-[10px] w-full text-sm font-medium rounded-md transition duration-400 ease-in-out ps-2;
   }
 
   .menu-element:hover {
-    background: #E9ECEF;
+    @apply bg-gray-200;
   }
 
   .menu-element.active {
-    background: var(--p-primary-color);
-    color: #F9F9FF;
+    @apply text-slate-50 bg-[--p-primary-color];
   }
 
   .menu-element svg{
-    color: var(--p-primary-color);
+    @apply text-[--p-primary-color];
   }
 
   .menu-element.active svg{
-    color: #F9F9FF;
+    @apply text-slate-50;
   }
   .menu-element.active:hover svg{
-    color: #F9F9FF;
+    @apply text-slate-50;
   }
 
   .menu-element:hover svg{
-    color: var(--p-primary-color);
+    @apply text-[--p-primary-color];
   }
 
   .dark .menu-group {
-    @apply cursor-pointer text-[#BCC5DD]
+    @apply cursor-pointer text-slate-300
   }
 
   .dark .menu-group svg {
-    color: var(--p-primary-color);
+    @apply text-[--p-primary-color];
   }
 
   .dark .menu-element {
-    color: #BCC5DD;
+    @apply text-slate-300
   }
 
   .dark .menu-element:hover {
-    background: #54586D;
+    @apply bg-gray-600
   }
 
   .dark .menu-element.active {
-    background: var(--p-primary-color);
-    color: #F9F9FF;
+    @apply text-slate-50 bg-[--p-primary-color];
   }
 
   .dark .menu-element svg{
-    color: var(--p-primary-color);
+    @apply text-[--p-primary-color];
   }
 
   .dark .menu-element.active svg{
-    color: #F9F9FF;
+    @apply text-slate-50
   }
   .dark .menu-element.active:hover svg{
-    color: #F9F9FF;
+    @apply text-slate-50
   }
 
   .dark .menu-element:hover svg{
-    color: var(--p-primary-color);
+    @apply text-[--p-primary-color];
   }
 
   .card-section {
-    background: #F8F9FA;
+    @apply bg-gray-50 text-gray-900
   }
 
   .dark .card-section {
-    background: #2F3349;
+    @apply bg-[#2F3349] text-gray-100
   }
 
   .swal2-modal .swal2-actions .swal2-deny {
-    color: #333 !important;
+    @apply !text-zinc-800
   }
 
   .p-toast {

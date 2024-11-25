@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import HarvestDetailLayout from '@/Layouts/HarvestDetailLayout.vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import FormHarvestDetails from '@/Pages/HarvestDetails/Form.vue';
 
 const { t } = useI18n();
@@ -30,11 +30,11 @@ const submitAndLoadAnother = () => {
 <template>
     <Head :title="t('harvest.titles.entity_breadcrumb')" />
 
-    <HarvestDetailLayout>
+    <AuthenticatedLayout>
       <HeaderCrud
         :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }]"
       />
-      <h3 class="text-2xl mb-3">
+      <h3 class="text-2xl mb-3 input-label">
         Planta {{ form.plant_code }}
       </h3>
       <FormHarvestDetails
@@ -43,5 +43,5 @@ const submitAndLoadAnother = () => {
         :submitHandler="submitHandler"
         :submitAndLoadAnother="submitAndLoadAnother"
       />
-    </HarvestDetailLayout>
+    </AuthenticatedLayout>
 </template>

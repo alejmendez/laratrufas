@@ -49,7 +49,7 @@ const messages = [
 </script>
 
 <template>
-  <div class="p-5 rounded-xl bg-white dark:bg-[#2F3349] shadow-sm border text-[#212529] dark:text-gray-100 border-gray-200 dark:border-[#2F3349]">
+  <div class="p-5 rounded-xl bg-white dark:bg-gray-700 shadow-sm border text-neutral-800 dark:text-gray-100 border-gray-200 dark:border-gray-700">
     <h5 class="font-bold">Mensajes</h5>
 
     <div class="mt-5" v-for="message in messages" :key="message.id">

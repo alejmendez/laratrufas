@@ -64,11 +64,11 @@ const deleteHandler = async (id) => {
       </div>
 
       <div class="flex place-content-center mt-5">
-        <nav class="flex mb-1 rounded-lg bg-white border border-gray-200 px-4 py-1">
+        <nav class="flex mb-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-700 px-4 py-1">
           <span
             v-for="tab of tabs"
             class="px-4 py-2 cursor-default font-semibold"
-            :class="currentTab === tab ? 'text-red-600' : 'hover:text-red-300 text-gray-400'"
+            :class="currentTab === tab ? 'text-[--p-primary-500]' : 'hover:text-[--p-primary-300] dark:hover:text-[--p-primary-600] text-gray-400'"
             @click="currentTab = tab"
           >
             {{ $t('dog.show.tabs.' + tab) }}

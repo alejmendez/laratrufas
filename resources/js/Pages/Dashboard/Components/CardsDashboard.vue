@@ -21,14 +21,14 @@ function getPorcent(total, num) {
 
 <template>
   <section class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
-    <div class="mt-5 p-5 rounded-xl bg-white dark:bg-[#2F3349] shadow-sm border border-gray-200 dark:border-[#2F3349] dark:text-gray-100">
+    <div class="mt-5 p-5 rounded-xl bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-700 dark:text-gray-100">
       <div class="text-gray-500 dark:text-gray-100 font-bold">Temporada {{ harvest_data.years_variation[0] }}:</div>
       <div class="text-3xl font-bold mb-2">{{ harvest_data.total_weight_of_last_harvest }} kgs</div>
       <div class="text-sm">
         Promedio: {{ harvest_data.average_weight_per_plant }} gr por planta
       </div>
     </div>
-    <div class="mt-5 p-5 rounded-xl bg-white dark:bg-[#2F3349] shadow-sm border border-gray-200 dark:border-[#2F3349] dark:text-gray-100">
+    <div class="mt-5 p-5 rounded-xl bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-700 dark:text-gray-100">
       <div class="text-gray-500 dark:text-gray-100 font-bold">Cosecha {{ harvest_data.years_variation[1] }} - {{ harvest_data.years_variation[0] }}</div>
       <div class="text-3xl font-bold mb-2">{{ harvest_data.variation_between_harvests }} %</div>
       <div
@@ -43,18 +43,18 @@ function getPorcent(total, num) {
       </div>
     </div>
 
-    <div class="mt-5 p-5 rounded-xl bg-[--p-primary-500] shadow-sm text-[#F8F9FA]">
+    <div class="mt-5 p-5 rounded-xl bg-[--p-primary-500] shadow-sm text-gray-50">
       <span class="text-3xl font-bold mr-2">{{ task_data.pending_tasks }}</span> Tareas Pendientes
       <div class="flex justify-between mt-3">
         <div>{{ task_data.tasks_totals }} Tareas</div>
         <div>{{ percent_pending_tasks }}%</div>
       </div>
       <div class="h-2 bg-[--p-primary-300] mt-2 rounded">
-        <div class="bg-[#F8F9FA] h-full rounded" :style="`width: ${percent_pending_tasks}%;`"></div>
+        <div class="bg-gray-50 h-full rounded" :style="`width: ${percent_pending_tasks}%;`"></div>
       </div>
     </div>
 
-    <div class="mt-5 p-5 rounded-xl bg-[#F9F9FF] dark:bg-[#2F3349] shadow-sm text-[#0B0B0E] dark:text-[--p-primary-500] border-gray-200 dark:border-[#2F3349] border">
+    <div class="mt-5 p-5 rounded-xl bg-slate-50 dark:bg-gray-700 shadow-sm text-zinc-950 dark:text-[--p-primary-500] border-gray-200 dark:border-gray-700 border">
       <span class="text-3xl font-bold mr-2">{{ task_data.tasks_in_progress }}</span> Tareas en curso
       <div class="flex justify-between mt-3">
         <div>{{ task_data.tasks_totals }} Tareas</div>

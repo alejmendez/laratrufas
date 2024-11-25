@@ -37,7 +37,7 @@ onUnmounted(() => {
     >
       <font-awesome-icon :icon="['far', 'bell']" />
       <span
-        class="text-xs bg-orange-700 text-white rounded-full px-1 py-0 absolute top-2 right-2"
+        class="text-xs bg-orange-700 text-gray-100 rounded-full px-1 py-0 absolute top-2 right-2"
         v-if="numberOfNotifications > 0"
       >
         {{ numberOfNotifications }}

@@ -22,7 +22,7 @@ const fieldChangeHandler = () => {
 </script>
 
 <template>
-  <section class="mt-5 p-5 rounded-xl bg-white dark:bg-[#2F3349] shadow-sm border border-gray-200 dark:border-[#2F3349] grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-x-16 gap-y-4">
+  <section class="mt-5 p-5 rounded-xl bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-700 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-x-16 gap-y-4">
     <div class="flex">
       <img class="object-cover object-center w-[72px] h-[72px] rounded-full border-2 border-gray-50" :src="$page.props.auth.user.avatar_url || 'https://i.pravatar.cc/150?img=3'" alt="" />
       <div class="pt-3 ps-2 dark:text-gray-100">

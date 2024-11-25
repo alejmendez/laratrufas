@@ -120,7 +120,7 @@ onMounted(async () => {
       :links="[{ to: 'liquidations.create', text: $t('generics.new') }]"
     />
 
-    <CardSection wrapperClass="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
+    <CardSection wrapperClass="p-6 mb-5 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
       <div>
         <div class="text-gray-400 pb-1">{{ t('harvest.table_filters.year') }}</div>
         <VSelect
@@ -189,12 +189,12 @@ onMounted(async () => {
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
           <Link :href="route('liquidations.show', slotProps.data.id)">
-            <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-gray-600" />
+            <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-gray-600" />
           </Link>
           <Link :href="route('liquidations.edit', slotProps.data.id)">
-            <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
+            <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
           </Link>
-          <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-red-600"
+          <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
               @click="deleteHandler(slotProps.data)" />
         </template>
       </Column>

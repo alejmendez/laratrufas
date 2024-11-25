@@ -119,10 +119,10 @@ onMounted(async () => {
 <style scoped>
 table {
   text-align: center;
-  border: solid 10px #D1D1D1;
+  border: solid 10px var(--p-neutral-300);
 }
 table thead tr th {
-  background-color: #ddd;
+  background-color: var(--p-zinc-300);
   padding: 0;
   font-weight: normal;
   font-size: 10px;
@@ -132,7 +132,7 @@ table tbody tr td {
   height: 15px;
   width: 35px;
   line-height: 0.5;
-  background-color: #d1d1d1;
+  background-color: var(--p-neutral-300);
   cursor: pointer;
 }
 </style>

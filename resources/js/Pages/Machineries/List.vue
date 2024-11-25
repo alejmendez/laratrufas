@@ -138,9 +138,9 @@ onMounted(() => {
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
           <Link :href="route('machineries.edit', slotProps.data.id)">
-            <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
+            <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
           </Link>
-          <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-red-600"
+          <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
               @click="deleteHandler(slotProps.data)" />
         </template>
       </Column>

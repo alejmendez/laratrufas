@@ -36,7 +36,7 @@ const dataFile = [
         <div class="text-gray-400 pb-1">
           {{ block[0] }}
         </div>
-        <div class="pb-3">
+        <div class="pb-3 dark:text-gray-50">
           {{ block[1] }}
         </div>
       </template>

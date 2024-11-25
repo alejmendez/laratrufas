@@ -7,8 +7,8 @@ const field = props.field.data
 </script>
 
 <template>
-  <div class="lg:col-span-3 rounded-xl bg-white dark:bg-[#2F3349] shadow-sm border text-[#212529] dark:text-gray-100 border-gray-200 dark:border-[#2F3349]">
-    <header class="flex items-center overflow-hidden border-b dark:border-[#1D2132]">
+  <div class="lg:col-span-3 rounded-xl bg-white dark:bg-gray-700 shadow-sm border text-neutral-800 dark:text-gray-100 border-gray-200 dark:border-gray-700">
+    <header class="flex items-center overflow-hidden border-b dark:border-gray-800">
       <h3 class="px-4 py-3 text-base font-semibold leading-6 text-gray-900 dark:text-gray-100">
         Campo: {{ field.name }}
       </h3>

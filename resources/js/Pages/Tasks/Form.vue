@@ -124,43 +124,43 @@ function generateLetterArray() {
 }
 
 .p-button.btn-status.btn-to_begin {
-  background-color: #6C757D;
-  border-color: #6C757D;
+  background-color: var(--p-gray-500);
+  border-color: var(--p-gray-500);
 }
 
 .p-button.btn-status.btn-to_begin:hover {
-  background-color: #5a6168;
-  border-color: #5a6168;
+  background-color: var(--p-gray-600);
+  border-color: var(--p-gray-600);
 }
 
 .p-button.btn-status.btn-started {
-  background-color: #17A2B8;
-  border-color: #17A2B8;
+  background-color: var(--p-cyan-600);
+  border-color: var(--p-cyan-600);
 }
 
 .p-button.btn-status.btn-started:hover {
-  background-color: #158fa1;
-  border-color: #158fa1;
+  background-color: var(--p-cyan-700);
+  border-color: var(--p-cyan-700);
 }
 
 .p-button.btn-status.btn-finished {
-  background-color: #28A745;
-  border-color: #28A745;
+  background-color: var(--p-green-600);
+  border-color: var(--p-green-600);
 }
 
 .p-button.btn-status.btn-finished:hover {
-  background-color: #22923d;
-  border-color: #22923d;
+  background-color: var(--p-green-700);
+  border-color: var(--p-green-700);
 }
 
 .p-button.btn-status.btn-stopped {
-  background-color: #DC3545;
-  border-color: #DC3545;
+  background-color: var(--p-red-500);
+  border-color: var(--p-red-500);
 }
 
 .p-button.btn-status.btn-stopped:hover {
-  background-color: #bd2d3b;
-  border-color: #bd2d3b;
+  background-color: var(--p-red-600);
+  border-color: var(--p-red-600);
 }
 
 textarea.p-textarea.comment {

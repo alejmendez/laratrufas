@@ -183,13 +183,13 @@ const number_format = (n) => {
 
     <CardSection sectionClass="flex-1 mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5" wrapperClass="p-5">
       <div class="text-gray-400 pb-1">Unidades</div>
-      <div class="pb-3 text-3xl font-bold">{{ unitCountTotal }}</div>
+      <div class="pb-3 text-3xl font-bold dark:text-gray-100">{{ unitCountTotal }}</div>
     </CardSection>
 
 
     <CardSection sectionClass="flex-1 mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5" wrapperClass="p-5">
       <div class="text-gray-400 pb-1">Peso Total</div>
-      <div class="pb-3 text-3xl font-bold">{{ weightTotal }}</div>
+      <div class="pb-3 text-3xl font-bold dark:text-gray-100">{{ weightTotal }}</div>
     </CardSection>
   </div>
 
@@ -276,9 +276,9 @@ const number_format = (n) => {
     <Column :exportable="false" style="min-width: 130px" v-if="props.show_actions">
       <template #body="slotProps">
         <Link :href="route('harvests.edit', slotProps.data.id)">
-          <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-lime-600" />
+          <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
         </Link>
-        <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-[#7B849C] hover:text-red-600"
+        <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
           @click="deleteHandler(slotProps.data)" />
       </template>
     </Column>

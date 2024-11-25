@@ -18,11 +18,11 @@ const root = ref(null);
 const showDropDown = ref(false);
 
 const themes = [
-  { name: 'Apple', class: 'bg-[#28A745]', },
-  { name: 'Cobalt', class: 'bg-[#2846A7]', },
-  { name: 'DodgerBlue', class: 'bg-[#2C8EFF]', },
-  { name: 'Vulcan', class: 'bg-[#10121D]', },
-  { name: 'CarrotOrange', class: 'bg-[#F39108]', },
+  { name: 'Apple', class: 'bg-green-600', },
+  { name: 'Cobalt', class: 'bg-blue-800', },
+  { name: 'DodgerBlue', class: 'bg-blue-500', },
+  { name: 'Vulcan', class: 'bg-zinc-900', },
+  { name: 'CarrotOrange', class: 'bg-amber-500', },
 ];
 
 const toggleDrop = () => {
@@ -82,7 +82,7 @@ onUnmounted(() => {
     <!-- Drop down -->
     <div
       v-show="showDropDown"
-      class="absolute right-[10px] z-50 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-[#26293C] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+      class="absolute right-[10px] z-50 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="menu-button"
