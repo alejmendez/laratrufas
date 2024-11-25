@@ -169,7 +169,7 @@ const number_format = (n) => {
   <ConfirmDialog></ConfirmDialog>
   <Toast />
 
-  <div class="flex space-x-4 items-stretch mb-4">
+  <div class="grid md:grid-cols-3 sm:grid-cols-1 gap-4 items-stretch mb-4">
     <CardSection sectionClass="flex-1 mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5" wrapperClass="p-5">
       <div class="text-gray-400 pb-1">{{ t('harvest.table_filters.year') }}</div>
       <VSelect

@@ -80,7 +80,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="overflow-x-auto sm:w-[calc(100vw-65px)] md:w-[calc(100vw-65px)] lg:w-full">
+  <div class="overflow-x-auto sm:w-[calc(100vw-65px)] md:w-[calc(100vw-65px)] lg:w-[calc(100vw-380px)]">
     <DataTable
       class="w-full"
       lazy
