@@ -40,7 +40,7 @@ class HarvestResource extends JsonResource
                 'id' => $quarter->id,
                 'name' => $quarter->name,
             ]),
-            'details' => $this->details->map(fn ($detail) => [
+            'details' => $this->details->filter(fn ($detail) => $detail->plant)->map(fn ($detail) => [
                 'id' => $detail->id,
                 'plant_id' => $detail->plant->id,
                 'plant_code' => $detail->plant->code,
