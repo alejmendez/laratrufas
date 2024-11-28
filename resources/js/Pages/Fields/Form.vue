@@ -48,9 +48,9 @@ const changeDocumentsHandler = (e) => {
       <VInput
         id="size"
         type="number"
-        min="0"
-        max="999"
-        step="0.01"
+        :min="0"
+        :max="999"
+        :step="0.01"
         v-model="form.size"
         :label="t('field.form.size.label')"
         :message="form.errors.size"

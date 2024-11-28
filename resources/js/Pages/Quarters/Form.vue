@@ -45,10 +45,10 @@ const changeFileHandler = (e) => {
       <VInput
         id="area"
         type="number"
-        min="0"
-        max="999"
-        step="0.01"
         v-model="form.area"
+        :min="0"
+        :max="999"
+        :step="0.01"
         :label="t('quarter.form.area.label')"
         :message="form.errors.area"
       />

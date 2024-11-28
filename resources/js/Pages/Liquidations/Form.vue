@@ -122,9 +122,9 @@ const total_categories_not_commercial = computed(() => {
             fluid
             v-model="form.weight_with_earth"
             type="number"
-            min="0"
-            max="200000"
-            step="0.1"
+            :min="0"
+            :max="200000"
+            :step="0.1"
           />
           <InputGroupAddon>{{ t('liquidation.weight_unit') }}</InputGroupAddon>
         </InputGroup>
@@ -135,9 +135,9 @@ const total_categories_not_commercial = computed(() => {
             fluid
             v-model="form.weight_washed"
             type="number"
-            min="0"
-            max="200000"
-            step="0.1"
+            :min="0"
+            :max="200000"
+            :step="0.1"
           />
           <InputGroupAddon>{{ t('liquidation.weight_unit') }}</InputGroupAddon>
         </InputGroup>
@@ -148,9 +148,9 @@ const total_categories_not_commercial = computed(() => {
             fluid
             v-model="form.dollar_value"
             type="number"
-            min="0"
-            max="200000"
-            step="0.1"
+            :min="0"
+            :max="200000"
+            :step="0.1"
           />
           <InputGroupAddon>{{ t('liquidation.currency_unit') }}</InputGroupAddon>
         </InputGroup>
@@ -176,9 +176,9 @@ const total_categories_not_commercial = computed(() => {
             v-model="form.products[commercial.id].price"
             :message="form.errors[`products.${index}.price`]"
             type="number"
-            min="0"
-            max="200000"
-            step="0.1"
+            :min="0"
+            :max="200000"
+            :step="0.1"
           />
         </div>
         <div class="col-span-3">
@@ -186,9 +186,9 @@ const total_categories_not_commercial = computed(() => {
             v-model="form.products[commercial.id].weight"
             :message="form.errors[`products.${index}.weight`]"
             type="number"
-            min="0"
-            max="200000"
-            step="0.1"
+            :min="0"
+            :max="200000"
+            :step="0.1"
           />
         </div>
       </template>
@@ -219,9 +219,9 @@ const total_categories_not_commercial = computed(() => {
             v-model="form.products[commercial.id].weight"
             :message="form.errors[`products.${index}.weight`]"
             type="number"
-            min="0"
-            max="200000"
-            step="0.1"
+            :min="0"
+            :max="200000"
+            :step="0.1"
           />
         </div>
       </template>

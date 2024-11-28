@@ -327,9 +327,9 @@ textarea.p-textarea.comment {
               :id="`supplies_quantity_${index}`"
               v-model="supply.quantity"
               type="number"
-              min="0"
-              max="2000"
-              step="0.01"
+              :min="0"
+              :max="2000"
+              :step="0.01"
               :label="t('task.form.supplies.quantity.label')"
               :message="form.errors[`supplies.${index}.quantity`]"
             />

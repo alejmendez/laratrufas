@@ -153,11 +153,11 @@ const handler_input_batch = (e) => {
           <VInput
             :id="`details_weight_${index}`"
             type="number"
-            min="0"
-            max="20000"
-            step="1"
             class="col-span-4"
             v-model="detail.weight"
+            :min="0"
+            :max="20000"
+            :step="1"
             :label="t('harvest.form.details.weight.label')"
             :message="form.errors[`details.${index}.weight`]"
           />
