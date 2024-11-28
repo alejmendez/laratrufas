@@ -30,7 +30,7 @@ const form = useForm({
   farmer_id: props.users.find((a) => a.value == data.farmer.id),
   assistant_id: props.users.find((a) => a.value == data.assistant.id),
   details: data.details.length
-    ? data.details.map((d) => ({ ...d, quality: props.qualities.find((q) => q.value == d.quality) }))
+    ? data.details.map((d) => ({ ...d, weight: parseFloat(d.weight), quality: props.qualities.find((q) => q.value == d.quality) }))
     : [
         {
           id: null,
@@ -45,7 +45,7 @@ const submitHandler = () => {
   form
     .transform((data) => ({
       ...data,
-      details: data.details.map((d) => ({ ...d, quality: d.quality.value })),
+      details: data.details.map((d) => ({ ...d, quality: d.quality?.value })),
     }))
     .post(route('harvests.update', data.id));
 }
