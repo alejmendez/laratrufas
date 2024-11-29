@@ -25,7 +25,7 @@ class StoreHarvestDetailRequest extends FormRequest
     {
         return [
             'plant_code' => 'exists:plants,code',
-            'quality' => Rule::in(ListHarvestQualities::call('values')),
+            // 'quality' => Rule::in(ListHarvestQualities::call('values')),
             'weight' => 'numeric|between:0,99999',
         ];
     }
@@ -34,7 +34,7 @@ class StoreHarvestDetailRequest extends FormRequest
     {
         return [
             'plant_code' => 'código',
-            'quality' => 'calidad',
+            // 'quality' => 'calidad',
             'weight' => 'peso ',
         ];
     }

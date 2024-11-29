@@ -37,8 +37,10 @@ class HarvestDetailsController extends Controller
 
     public function find_by_code()
     {
+        $plant = FindPlantByCode::call(request('code', ''));
         return [
-            'plant' => FindPlantByCode::call(request('code', '')),
+            'plant' => $plant,
+            'details' => $plant->activeDetails()->pluck('value', 'type'),
         ];
     }
 }

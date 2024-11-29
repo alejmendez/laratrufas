@@ -37,6 +37,21 @@ class Plant extends Model
         return $this->hasMany(HarvestDetail::class);
     }
 
+    public function details()
+    {
+        return $this->hasMany(PlantDetail::class);
+    }
+
+    public function activeDetails()
+    {
+        return $this->hasMany(PlantDetail::class)->active();
+    }
+
+    public function getActiveDetailsAsArray()
+    {
+        return $this->activeDetails->pluck('value', 'type')->toArray();
+    }
+
     protected function code(): Attribute
     {
         return Attribute::make(

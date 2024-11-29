@@ -10,6 +10,7 @@ import dog from './dog';
 import menu from './menu';
 import bulk from './bulk';
 import harvest from './harvest';
+import harvest_details from './harvest_details';
 import tool from './tool';
 import security_equipment from './security_equipment';
 import machinery from './machinery';
@@ -33,6 +34,7 @@ export default {
   menu,
   bulk,
   harvest,
+  harvest_details,
   tool,
   security_equipment,
   machinery,

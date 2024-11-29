@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DogsController;
 use App\Http\Controllers\FieldsController;
 use App\Http\Controllers\HarvestDetailsController;
+use App\Http\Controllers\PlantDetailsController;
 use App\Http\Controllers\HarvestsController;
 use App\Http\Controllers\LiquidationsController;
 use App\Http\Controllers\MachineriesController;
@@ -61,6 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/harvests/details', [HarvestDetailsController::class, 'create'])->name('harvests.details.create');
     Route::post('/harvests/details', [HarvestDetailsController::class, 'store'])->name('harvests.details.store');
     Route::get('/harvests/details/{code}', [HarvestDetailsController::class, 'find_by_code'])->name('harvests.details.find_by_code');
+    Route::post('/plants/details', [PlantDetailsController::class, 'store'])->name('plant.details.store');
 
     Route::post('/plants/types', [PlantTypesController::class, 'store'])->name('plants.types.store');
     Route::post('/importers', [ImportersController::class, 'store'])->name('importers.store');
