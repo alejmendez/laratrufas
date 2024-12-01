@@ -123,22 +123,22 @@ const deleteHandler = (record) => {
 };
 
 const weightTotal = computed(() => {
-    let total = datatable.value?.metadata?.details_sum_weight / 1000;
+  let total = datatable.value?.metadata?.details_sum_weight / 1000;
 
-    if (isNaN(total)) {
-      total = 0;
-    }
+  if (isNaN(total)) {
+    total = 0;
+  }
 
-    return `${number_format(total)} Kgs`;
+  return `${number_format(total)} Kgs`;
 });
 
 const unitCountTotal = computed(() => {
-    let total = datatable.value?.metadata?.details_count;
-    if (isNaN(total)) {
-      total = 0;
-    }
+  let total = datatable.value?.metadata?.details_count;
+  if (isNaN(total)) {
+    total = 0;
+  }
 
-    return number_format(total);
+  return number_format(total);
 });
 
 onMounted(async () => {

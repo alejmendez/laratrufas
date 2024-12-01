@@ -19,14 +19,15 @@ const distributionPlants = ref('');
 const current_plant = ref({});
 const detail_current_plant = ref({});
 
-const processDistribution = (distribution) => distribution
-  .split("\n")
-  .filter(row => row.trim())
-  .map(row => row.split('\t'));
+const processDistribution = (distribution) =>
+  distribution
+    .split('\n')
+    .filter((row) => row.trim())
+    .map((row) => row.split('\t'));
 
 const changeDistribution = () => {
   const distribution = processDistribution(distributionPlants.value);
-  const data = Object.fromEntries(toRaw(dataPlantsPosition.value).map(item => [item.code, item]));
+  const data = Object.fromEntries(toRaw(dataPlantsPosition.value).map((item) => [item.code, item]));
 
   const distributionData = [];
   const dataToSave = [];
@@ -34,7 +35,7 @@ const changeDistribution = () => {
   for (let i = 0; i < distribution.length; i++) {
     const row = distribution[i];
     if (row.length !== distribution[0].length) {
-      console.error("Invalid row length");
+      console.error('Invalid row length');
       return;
     }
 
@@ -52,14 +53,15 @@ const changeDistribution = () => {
 };
 
 const generatePlantsDispositionWithPosition = (dataPlants) => {
-  const plantsByPosition = Object.fromEntries(dataPlants.filter(p => p.position).map(p => [p.position, p]));
-  const plantsByCols = Object.groupBy(dataPlants, p => p.row);
+  const plantsByPosition = Object.fromEntries(dataPlants.filter((p) => p.position).map((p) => [p.position, p]));
+  const plantsByCols = Object.groupBy(dataPlants, (p) => p.row);
   const cols = Object.keys(plantsByCols);
 
-  const maxRows = Math.max(
-    ...dataPlants.map(p => parseInt(p.position?.split(',')[0], 10) || 0),
-    Object.values(plantsByCols).reduce((max, col) => Math.max(max, col.length), 0)
-  ) + 1;
+  const maxRows =
+    Math.max(
+      ...dataPlants.map((p) => parseInt(p.position?.split(',')[0], 10) || 0),
+      Object.values(plantsByCols).reduce((max, col) => Math.max(max, col.length), 0),
+    ) + 1;
 
   const data = Array.from({ length: maxRows }, (_, i) =>
     cols.map((_, j) => {
@@ -72,7 +74,7 @@ const generatePlantsDispositionWithPosition = (dataPlants) => {
         plant.color = generarColorPorPorcentaje(plant.scale);
       }
       return plant || null;
-    })
+    }),
   );
 
   tableCols.value = cols;
@@ -97,15 +99,15 @@ const generarColorPorPorcentaje = (porcentaje, colorFin = '#008FFB') => {
   return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
 };
 
-const getHarvestById = (id) => dataHarvests.value.find(harvest => harvest.id === id);
+const getHarvestById = (id) => dataHarvests.value.find((harvest) => harvest.id === id);
 
 const getHarvestDetailFromPlant = (plant) => {
   return plant?.data ? Object.values(plant.data).flat() : [];
 };
 
 const setCurrentPlant = (plant) => {
-  current_plant.value = plant?.code ? plant : current_plant.value
-  detail_current_plant.value = getHarvestDetailFromPlant(current_plant.value)
+  current_plant.value = plant?.code ? plant : current_plant.value;
+  detail_current_plant.value = getHarvestDetailFromPlant(current_plant.value);
 };
 
 onMounted(async () => {

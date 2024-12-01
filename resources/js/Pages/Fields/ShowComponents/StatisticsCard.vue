@@ -67,17 +67,19 @@ const chartOptions = {
       align: 'left',
     },
     labels: [],
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        chart: {
-          width: 200
+    responsive: [
+      {
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200,
+          },
+          legend: {
+            position: 'bottom',
+          },
         },
-        legend: {
-          position: 'bottom'
-        }
-      }
-    }]
+      },
+    ],
   },
   bar_percent: {
     chart: {
@@ -95,25 +97,25 @@ const chartOptions = {
     },
     stroke: {
       width: 1,
-      colors: ['#fff']
+      colors: ['#fff'],
     },
     xaxis: {
       categories: [],
       convertedCatToNumeric: false,
     },
     fill: {
-      opacity: 1
+      opacity: 1,
     },
     legend: {
       position: 'top',
       horizontalAlign: 'left',
-      offsetX: 40
+      offsetX: 40,
     },
     title: {
       text: '',
       align: 'left',
     },
-  }
+  },
 };
 
 const chartOption = ref(types_graphs.value[0].type);
@@ -129,24 +131,23 @@ const filterHandler = async () => {
     return;
   }
 
-  const _chartOption = {...chartOptions[type_graph.value.type]};
+  const _chartOption = { ...chartOptions[type_graph.value.type] };
 
   _chartOption.title.text = response.title;
 
-  if (type_graph.value.type == 'bar_percent')
-    _chartOption.xaxis.categories = response.labels;
+  if (type_graph.value.type == 'bar_percent') _chartOption.xaxis.categories = response.labels;
   else {
     _chartOption.labels = response.labels;
   }
 
-  chartOption.value = {..._chartOption}
+  chartOption.value = { ..._chartOption };
   series.value = response.series;
   loading.value = false;
 };
 
 onMounted(async () => {
   await filterHandler();
-})
+});
 </script>
 
 <template>

@@ -23,7 +23,7 @@ const getPlants = async (id) => {
 
 const updatePlantsPosition = async (id, data) => {
   const response = await axios.put(route('quarters.plants.update.position', { id }), {
-    data
+    data,
   });
 
   return response.data;

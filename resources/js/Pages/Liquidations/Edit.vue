@@ -16,15 +16,15 @@ const props = defineProps({
 const { data } = props.data;
 
 const products = props.category_products.reduce((a, v) => {
-  let product = data.products.find(a => a.category_product_id === v.id) || {
+  let product = data.products.find((a) => a.category_product_id === v.id) || {
     ...v,
     category_product_id: v.id,
     price: 0,
-    weight: 0
+    weight: 0,
   };
   return {
     ...a,
-    [v.id]: product
+    [v.id]: product,
   };
 }, {});
 

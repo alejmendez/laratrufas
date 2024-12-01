@@ -40,12 +40,7 @@ const form = useForm({
 
 const DEFAULT_OPTION_VIEW = 'main';
 
-const optionViews = [
-  'harvest',
-  'variables',
-  'logbook',
-  'location',
-];
+const optionViews = ['harvest', 'variables', 'logbook', 'location'];
 
 const plantCodeToFind = ref('');
 const optionView = ref(props.plant_code === null ? '' : optionViews[0]);
@@ -61,7 +56,7 @@ const _submitHandler = (keep_plant_code) => {
 
   if (optionView.value === optionViews[1]) {
     const options = {};
-    if ([form.foliage_sanitation_photo, form.trunk_sanitation_photo, form.soil_sanitation_photo].some(d => d != null)) {
+    if ([form.foliage_sanitation_photo, form.trunk_sanitation_photo, form.soil_sanitation_photo].some((d) => d != null)) {
       options.forceFormData = true;
     }
     form.post(route('plant.details.store'), options);
@@ -84,7 +79,7 @@ const findPlantByCode = async (plant_code) => {
   hasError.value = false;
   form.plant_code = plant_code;
   plantCodeToFind.value = plant_code;
-  const { plant, details} = await findByCode(form.plant_code);
+  const { plant, details } = await findByCode(form.plant_code);
   if (!plant) {
     optionView.value = '';
     hasError.value = true;

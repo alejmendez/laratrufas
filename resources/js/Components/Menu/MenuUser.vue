@@ -7,8 +7,8 @@ import Presents from '@/Libs/PrimePresents';
 
 const darkModeValue = ref(null);
 const darkMode = ref([
-    { icon: 'pi pi-moon', value: 'dark' },
-    { icon: 'pi pi-sun', value: 'light' },
+  { icon: 'pi pi-moon', value: 'dark' },
+  { icon: 'pi pi-sun', value: 'light' },
 ]);
 
 import MenuNotification from './MenuNotification.vue';
@@ -18,11 +18,11 @@ const root = ref(null);
 const showDropDown = ref(false);
 
 const themes = [
-  { name: 'Apple', class: 'bg-green-600', },
-  { name: 'Cobalt', class: 'bg-blue-800', },
-  { name: 'DodgerBlue', class: 'bg-blue-500', },
-  { name: 'Vulcan', class: 'bg-zinc-900', },
-  { name: 'CarrotOrange', class: 'bg-amber-500', },
+  { name: 'Apple', class: 'bg-green-600' },
+  { name: 'Cobalt', class: 'bg-blue-800' },
+  { name: 'DodgerBlue', class: 'bg-blue-500' },
+  { name: 'Vulcan', class: 'bg-zinc-900' },
+  { name: 'CarrotOrange', class: 'bg-amber-500' },
 ];
 
 const toggleDrop = () => {
@@ -39,11 +39,11 @@ const toggleTheme = (isDark) => {
   localStorage.themeType = isDark ? 'dark' : 'light';
   darkModeValue.value = darkMode.value[isDark ? 0 : 1];
   document.documentElement.classList.toggle('dark', isDark);
-}
+};
 
 const changeHandlerDarkMode = () => {
   toggleTheme(darkModeValue.value.value === 'dark');
-}
+};
 
 if (localStorage.themeType === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
   toggleTheme(true);
@@ -52,9 +52,9 @@ if (localStorage.themeType === 'dark' || (!('theme' in localStorage) && window.m
 }
 
 const setTheme = (theme) => {
-  localStorage.setItem('theme', theme.name)
+  localStorage.setItem('theme', theme.name);
   usePreset(Presents[theme.name]);
-}
+};
 
 onMounted(() => {
   document.addEventListener('click', closeDropDown);

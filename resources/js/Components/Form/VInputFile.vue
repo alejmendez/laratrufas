@@ -67,7 +67,7 @@ const changeMultipleFileHandler = (e) => {
     fileRemove: fileListRemove,
     fileInput: fileList,
   });
-}
+};
 
 const changeFileHandler = (e) => {
   if (props.multiple) {
@@ -104,9 +104,8 @@ const selectFile = () => {
   fileInput.value.click();
 };
 
-
 const remove_element = (id) => {
-  const index = filesServer.value.findIndex(item => item.id === id);
+  const index = filesServer.value.findIndex((item) => item.id === id);
   if (index !== -1) {
     filesServer.value.splice(index, 1);
   }

@@ -10,10 +10,10 @@ export default {
   },
   form: {
     plant_code_to_find: {
-      label: 'O ingresa el código de forma manual'
+      label: 'O ingresa el código de forma manual',
     },
     height: {
-      label: 'Altura'
+      label: 'Altura',
     },
     crown_diameter: {
       label: 'Diámetro de copa',
@@ -39,5 +39,5 @@ export default {
     irrigation_system: {
       label: 'Riego / Aspersor',
     },
-  }
+  },
 };

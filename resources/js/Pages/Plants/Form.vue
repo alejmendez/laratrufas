@@ -30,7 +30,7 @@ const handlerChangeFieldId = async () => {
 };
 
 const handler_input_row = (e) => {
-  const filteredValue = e.target.value.replace(/[^a-zA-Z]/g, "").toUpperCase();
+  const filteredValue = e.target.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
   e.target.value = filteredValue;
   form.row = filteredValue;
 };

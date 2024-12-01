@@ -59,7 +59,7 @@ const handler_date_selected = () => {
 };
 
 const handler_input_batch = (e) => {
-  const filteredValue = e.target.value.replace(/[^a-zA-Z]/g, "").toUpperCase();
+  const filteredValue = e.target.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
   e.target.value = filteredValue;
   form.batch = filteredValue;
 };

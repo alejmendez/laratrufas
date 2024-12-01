@@ -52,19 +52,19 @@ const addImporterCallback = (newType) => {
 
 const total_categories_commercial = computed(() => {
   const products = Object.values(form.products);
-  const productsFiltered = products.filter(a => props.category_products.find(b => b.id === a.category_product_id).is_commercial);
+  const productsFiltered = products.filter((a) => props.category_products.find((b) => b.id === a.category_product_id).is_commercial);
   const sum = productsFiltered.reduce((acc, curr) => acc + parseFloat(curr.weight), 0);
-  const sumRounded = Math.round(sum * 100) / 100
+  const sumRounded = Math.round(sum * 100) / 100;
   return `${sumRounded} Kg`;
-})
+});
 
 const total_categories_not_commercial = computed(() => {
   const products = Object.values(form.products);
-  const productsFiltered = products.filter(a => !props.category_products.find(b => b.id === a.category_product_id).is_commercial);
+  const productsFiltered = products.filter((a) => !props.category_products.find((b) => b.id === a.category_product_id).is_commercial);
   const sum = productsFiltered.reduce((acc, curr) => acc + parseFloat(curr.weight), 0);
-  const sumRounded = Math.round(sum * 100) / 100
+  const sumRounded = Math.round(sum * 100) / 100;
   return `${sumRounded} Kg`;
-})
+});
 </script>
 
 <template>

@@ -24,7 +24,7 @@ export default {
   },
   buttons: {
     add_detail: 'Añadir otro',
-    change_distribution : 'Cambiar distribución',
+    change_distribution: 'Cambiar distribución',
   },
   form: {
     date: {

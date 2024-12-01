@@ -3,7 +3,7 @@ const props = defineProps({
   field: Object,
 });
 
-const field = props.field.data
+const field = props.field.data;
 </script>
 
 <template>

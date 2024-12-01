@@ -29,7 +29,7 @@ const submitHandler = () => {
       details: data.details.map((d) => ({ ...d, quality: d.quality.value })),
     }))
     .post(route('harvests.store'));
-}
+};
 </script>
 
 <template>

@@ -10,4 +10,4 @@ export default {
   Cobalt: CobaltTheme,
   DodgerBlue: DodgerBlueTheme,
   Vulcan: VulcanTheme,
-}
+};
