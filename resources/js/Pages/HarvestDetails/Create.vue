@@ -147,8 +147,9 @@ const resetQr = () => {
           <InputText
             class="text-center"
             v-model="plantCodeToFind"
+            size="large"
           />
-          <ButtonPrime icon="pi pi-search" @click="findPlantByCode(plantCodeToFind)" />
+          <ButtonPrime icon="pi pi-search" class="!w-[60px]" @click="findPlantByCode(plantCodeToFind)" />
         </InputGroup>
       </div>
       <div v-show="form.errors.plant_code">
