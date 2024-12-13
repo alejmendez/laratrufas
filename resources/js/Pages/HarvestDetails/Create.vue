@@ -86,16 +86,6 @@ const findPlantByCode = async (plant_code) => {
     return;
   }
 
-  form.height = details.height;
-  form.crown_diameter = details.crown_diameter;
-  form.invasion_radius = details.invasion_radius;
-  form.trunk_diameter = details.trunk_diameter;
-  form.root_diameter = details.root_diameter;
-  form.foliage_sanitation = details.foliage_sanitation;
-  form.trunk_sanitation = details.trunk_sanitation;
-  form.soil_sanitation = details.soil_sanitation;
-  form.irrigation_system = details.irrigation_system;
-
   optionView.value = DEFAULT_OPTION_VIEW;
 };
 

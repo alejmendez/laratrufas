@@ -41,10 +41,6 @@ class CreatePlantDetails
                 continue;
             }
 
-            if (isset($activeDetails[$type]) && $activeDetails[$type]->value == $data[$type]) {
-                continue;
-            }
-
             if (isset($activeDetails[$type])) {
                 $typesToDeactivate[] = $activeDetails[$type]->id;
             }

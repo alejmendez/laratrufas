@@ -7,6 +7,7 @@ use App\Http\Requests\BulkPlantRequest;
 use App\Http\Requests\StorePlantRequest;
 use App\Http\Requests\UpdatePlantRequest;
 use App\Http\Resources\PlantResource;
+use App\Http\Resources\PlantDetailCollection;
 use App\Imports\PlantsImport;
 use App\Services\Entities\ListEntity;
 use App\Services\Plants\CreatePlant;
@@ -66,6 +67,7 @@ class PlantsController extends Controller
 
         return Inertia::render('Plants/Show', [
             'data' => new PlantResource($plant),
+            'details' => new PlantDetailCollection($plant->details),
         ]);
     }
 

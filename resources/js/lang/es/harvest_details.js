@@ -8,6 +8,10 @@ export default {
     logbook: 'Bitácora de la Planta',
     location: 'Ubicación',
   },
+  no_data: 'No hay datos para mostrar',
+  no_data_description: 'La planta no tiene datos para mostrar',
+  all_categories: 'Todos',
+  selected: 'Seleccionados {size}',
   form: {
     plant_code_to_find: {
       label: 'O ingresa el código de forma manual',

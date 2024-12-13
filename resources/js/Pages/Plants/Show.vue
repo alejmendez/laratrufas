@@ -12,11 +12,16 @@ const { t } = useI18n();
 
 const props = defineProps({
   data: Object,
+  details: Object,
 });
 
 const { data } = props.data;
 
-const tabs = ['file', 'logs', 'statistics'];
+const tabs = [
+  'file',
+  'logs',
+  // 'statistics',
+];
 
 const currentTab = ref(tabs[0]);
 
@@ -61,7 +66,7 @@ const deleteHandler = async (id) => {
       </div>
 
       <FileCard :data="data" v-show="currentTab === tabs[0]" />
-      <LogsCard :data="data" v-show="currentTab === tabs[1]" />
-      <StatisticsCard :data="data" v-show="currentTab === tabs[2]" />
+      <LogsCard :details="details.data" v-show="currentTab === tabs[1]" />
+      <!-- <StatisticsCard :data="data" v-show="currentTab === tabs[2]" /> -->
     </AuthenticatedLayout>
 </template>
