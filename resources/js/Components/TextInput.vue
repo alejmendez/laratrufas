@@ -18,9 +18,9 @@ defineExpose({ focus: () => input.value.focus() });
 </script>
 
 <template>
-    <input
-        class="input"
-        v-model="model"
-        ref="input"
-    />
+  <input
+    class="input"
+    v-model="model"
+    ref="input"
+  />
 </template>
