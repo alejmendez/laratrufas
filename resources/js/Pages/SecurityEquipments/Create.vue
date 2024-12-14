@@ -20,17 +20,17 @@ const submitHandler = () => form.post(route('security_equipments.store'));
 </script>
 
 <template>
-    <Head :title="t('security_equipment.titles.entity_breadcrumb')" />
+  <Head :title="t('security_equipment.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('security_equipment.titles.create')"
-        :breadcrumbs="[{ to: 'security_equipments.index', text: t('security_equipment.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('security_equipments.index') }"
-      />
-      <FormSecurityEquipment
-        :form="form"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('security_equipment.titles.create')"
+      :breadcrumbs="[{ to: 'security_equipments.index', text: t('security_equipment.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('security_equipments.index') }"
+    />
+    <FormSecurityEquipment
+      :form="form"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

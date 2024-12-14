@@ -30,17 +30,17 @@ const submitHandler = () => form.post(route('machineries.update', data.id));
 </script>
 
 <template>
-    <Head :title="t('machinery.titles.entity_breadcrumb')" />
+  <Head :title="t('machinery.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('machinery.titles.edit')"
-        :breadcrumbs="[{ to: 'machineries.index', text: t('machinery.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('machineries.index') }"
-      />
-      <FormMachineries
-        :form="form"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('machinery.titles.edit')"
+      :breadcrumbs="[{ to: 'machineries.index', text: t('machinery.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('machineries.index') }"
+    />
+    <FormMachineries
+      :form="form"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

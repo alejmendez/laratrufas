@@ -31,19 +31,19 @@ const submitHandler = () => form.post(route('quarters.update', data.id), form.bl
 </script>
 
 <template>
-    <Head :title="t('quarter.titles.entity_breadcrumb')" />
+  <Head :title="t('quarter.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('quarter.titles.edit')"
-        :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('quarters.index') }"
-      />
-      <FormQuarter
-        :form="form"
-        :fields="props.fields"
-        :responsibles="props.responsibles"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('quarter.titles.edit')"
+      :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('quarters.index') }"
+    />
+    <FormQuarter
+      :form="form"
+      :fields="props.fields"
+      :responsibles="props.responsibles"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

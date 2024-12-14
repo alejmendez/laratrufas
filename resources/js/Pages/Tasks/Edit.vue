@@ -64,24 +64,24 @@ const submitHandler = () => form.post(route('tasks.update', data.id));
 </script>
 
 <template>
-    <Head :title="t('task.titles.entity_breadcrumb')" />
+  <Head :title="t('task.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('task.titles.edit')"
-        :breadcrumbs="[{ to: 'tasks.index', text: t('task.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('tasks.index') }"
-      />
-      <FormTask
-        :form="form"
-        :fields="props.fields"
-        :quarters="props.quarters"
-        :plants="props.plants"
-        :responsibles="props.responsibles"
-        :tools="props.tools"
-        :security_equipments="props.security_equipments"
-        :machineries="props.machineries"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('task.titles.edit')"
+      :breadcrumbs="[{ to: 'tasks.index', text: t('task.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('tasks.index') }"
+    />
+    <FormTask
+      :form="form"
+      :fields="props.fields"
+      :quarters="props.quarters"
+      :plants="props.plants"
+      :responsibles="props.responsibles"
+      :tools="props.tools"
+      :security_equipments="props.security_equipments"
+      :machineries="props.machineries"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

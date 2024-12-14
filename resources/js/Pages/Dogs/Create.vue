@@ -36,20 +36,20 @@ const submitHandler = () => form.post(route('dogs.store'), form.avatar ? { force
 </script>
 
 <template>
-    <Head :title="t('dog.titles.entity_breadcrumb')" />
+  <Head :title="t('dog.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('dog.titles.create')"
-        :breadcrumbs="[{ to: 'dogs.index', text: t('dog.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('dogs.index') }"
-      />
-      <FormDog
-        :form="form"
-        :fields="props.fields"
-        :quarters="props.quarters"
-        :couples="props.couples"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('dog.titles.create')"
+      :breadcrumbs="[{ to: 'dogs.index', text: t('dog.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('dogs.index') }"
+    />
+    <FormDog
+      :form="form"
+      :fields="props.fields"
+      :quarters="props.quarters"
+      :couples="props.couples"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

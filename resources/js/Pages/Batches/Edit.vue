@@ -38,19 +38,19 @@ const submitHandler = () => form.post(route('batches.update', data.id));
 </script>
 
 <template>
-    <Head :title="t('batch.titles.entity_breadcrumb')" />
+  <Head :title="t('batch.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('batch.titles.edit')"
-        :breadcrumbs="[{ to: 'batches.index', text: t('batch.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('batches.index') }"
-      />
-      <FormBatch
-        :form="form"
-        :importers="importers"
-        :harvests="harvests"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('batch.titles.edit')"
+      :breadcrumbs="[{ to: 'batches.index', text: t('batch.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('batches.index') }"
+    />
+    <FormBatch
+      :form="form"
+      :importers="importers"
+      :harvests="harvests"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

@@ -52,39 +52,39 @@ const submitHandler = () => {
 </script>
 
 <template>
-    <Head :title="t('harvest.titles.entity_breadcrumb')" />
+  <Head :title="t('harvest.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('harvest.titles.edit', { batch: form.batch.toUpperCase(), week: getWeek(form.date, { weekStartsOn: 1 })})"
-        :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-      >
-        <Button
-          class="btn btn-secondary border-gray-800"
-          :loading="form.processing"
-          :label="$t('generics.buttons.save_edit')"
-          @click="submitHandler"
-          v-if="submitHandler"
-        />
-
-        <Button
-          as="Link"
-          severity="secondary"
-          :disabled="form.processing"
-          :href="route('harvests.index')"
-          :label="$t('generics.buttons.cancel')"
-        />
-      </HeaderCrud>
-
-      <FormHarvest
-        :form="form"
-        :quarters="props.quarters"
-        :dogs="props.dogs"
-        :users="props.users"
-        :plant_codes="props.plant_codes"
-        :qualities="props.qualities"
-        :details="true"
-        :submitHandler="submitHandler"
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('harvest.titles.edit', { batch: form.batch.toUpperCase(), week: getWeek(form.date, { weekStartsOn: 1 })})"
+      :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
+    >
+      <Button
+        class="btn btn-secondary border-gray-800"
+        :loading="form.processing"
+        :label="$t('generics.buttons.save_edit')"
+        @click="submitHandler"
+        v-if="submitHandler"
       />
-    </AuthenticatedLayout>
+
+      <Button
+        as="Link"
+        severity="secondary"
+        :disabled="form.processing"
+        :href="route('harvests.index')"
+        :label="$t('generics.buttons.cancel')"
+      />
+    </HeaderCrud>
+
+    <FormHarvest
+      :form="form"
+      :quarters="props.quarters"
+      :dogs="props.dogs"
+      :users="props.users"
+      :plant_codes="props.plant_codes"
+      :qualities="props.qualities"
+      :details="true"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

@@ -21,17 +21,17 @@ const submitHandler = () => form.post(route('fields.store'), form.blueprint || f
 </script>
 
 <template>
-    <Head :title="t('field.titles.entity_breadcrumb')" />
+  <Head :title="t('field.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('field.titles.create')"
-        :breadcrumbs="[{ to: 'fields.index', text: t('field.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('fields.index') }"
-      />
-      <FormField
-        :form="form"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('field.titles.create')"
+      :breadcrumbs="[{ to: 'fields.index', text: t('field.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('fields.index') }"
+    />
+    <FormField
+      :form="form"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

@@ -26,19 +26,19 @@ const submitHandler = () => form.post(route('liquidations.store'));
 </script>
 
 <template>
-    <Head :title="t('liquidation.titles.entity_breadcrumb')" />
+  <Head :title="t('liquidation.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('liquidation.titles.create')"
-        :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('liquidations.index') }"
-      />
-      <FormLiquidation
-        :form="form"
-        :importers="importers"
-        :category_products="category_products"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('liquidation.titles.create')"
+      :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('liquidations.index') }"
+    />
+    <FormLiquidation
+      :form="form"
+      :importers="importers"
+      :category_products="category_products"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

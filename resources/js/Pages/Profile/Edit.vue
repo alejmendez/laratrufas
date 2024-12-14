@@ -38,19 +38,19 @@ const submitHandler = () => form.post(route('profile.store'), form.avatar ? { fo
 </script>
 
 <template>
-    <Head :title="t('profile.titles.entity_breadcrumb')" />
+  <Head :title="t('profile.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('profile.titles.edit')"
-        :breadcrumbs="[{ text: t('profile.titles.entity_breadcrumb') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('dashboard') }"
-      />
-      <FormUser
-        :form="form"
-        :roles="props.roles"
-        :submitHandler="submitHandler"
-        :showRole="false"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('profile.titles.edit')"
+      :breadcrumbs="[{ text: t('profile.titles.entity_breadcrumb') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('dashboard') }"
+    />
+    <FormUser
+      :form="form"
+      :roles="props.roles"
+      :submitHandler="submitHandler"
+      :showRole="false"
+    />
+  </AuthenticatedLayout>
 </template>

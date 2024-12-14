@@ -30,17 +30,17 @@ const submitHandler = () => form.post(route('security_equipments.update', data.i
 </script>
 
 <template>
-    <Head :title="t('security_equipment.titles.entity_breadcrumb')" />
+  <Head :title="t('security_equipment.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('security_equipment.titles.edit')"
-        :breadcrumbs="[{ to: 'security_equipments.index', text: t('security_equipment.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('security_equipments.index') }"
-      />
-      <FormSecurityEquipment
-        :form="form"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('security_equipment.titles.edit')"
+      :breadcrumbs="[{ to: 'security_equipments.index', text: t('security_equipment.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('security_equipments.index') }"
+    />
+    <FormSecurityEquipment
+      :form="form"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

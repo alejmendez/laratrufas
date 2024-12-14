@@ -20,17 +20,17 @@ const submitHandler = () => form.post(route('tools.store'));
 </script>
 
 <template>
-    <Head :title="t('tool.titles.entity_breadcrumb')" />
+  <Head :title="t('tool.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('tool.titles.create')"
-        :breadcrumbs="[{ to: 'tools.index', text: t('tool.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('tools.index') }"
-      />
-      <FormTool
-        :form="form"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('tool.titles.create')"
+      :breadcrumbs="[{ to: 'tools.index', text: t('tool.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('tools.index') }"
+    />
+    <FormTool
+      :form="form"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

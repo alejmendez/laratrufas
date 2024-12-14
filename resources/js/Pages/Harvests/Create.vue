@@ -33,22 +33,22 @@ const submitHandler = () => {
 </script>
 
 <template>
-    <Head :title="t('harvest.titles.entity_breadcrumb')" />
+  <Head :title="t('harvest.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('harvest.titles.create')"
-        :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('harvests.index') }"
-      />
-      <FormHarvest
-        :form="form"
-        :quarters="props.quarters"
-        :dogs="props.dogs"
-        :users="props.users"
-        :plant_codes="props.plant_codes"
-        :details="false"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('harvest.titles.create')"
+      :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('harvests.index') }"
+    />
+    <FormHarvest
+      :form="form"
+      :quarters="props.quarters"
+      :dogs="props.dogs"
+      :users="props.users"
+      :plant_codes="props.plant_codes"
+      :details="false"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

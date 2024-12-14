@@ -45,19 +45,19 @@ const submitHandler = () => form.post(route('liquidations.update', data.id));
 </script>
 
 <template>
-    <Head :title="t('liquidation.titles.entity_breadcrumb')" />
+  <Head :title="t('liquidation.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('liquidation.titles.edit')"
-        :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('liquidations.index') }"
-      />
-      <FormLiquidation
-        :form="form"
-        :importers="importers"
-        :category_products="category_products"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('liquidation.titles.edit')"
+      :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('liquidations.index') }"
+    />
+    <FormLiquidation
+      :form="form"
+      :importers="importers"
+      :category_products="category_products"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>

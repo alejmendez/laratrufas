@@ -71,110 +71,110 @@ const total_categories_not_commercial = computed(() => {
 </script>
 
 <template>
-    <Head :title="t('liquidation.titles.entity_breadcrumb')" />
+  <Head :title="t('liquidation.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('liquidation.titles.edit')"
-        :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-      />
-      <CardSection>
-        <VElementFormWrapper :label="t('liquidation.form.date.label')">
-          <div>
-            {{ date_rendered }}
-          </div>
-        </VElementFormWrapper>
-
-        <VElementFormWrapper :label="t('liquidation.form.importer_id.label')">
-          <div>
-            {{ data.importer_id }}
-          </div>
-        </VElementFormWrapper>
-
-        <VElementFormWrapper :label="t('liquidation.form.delivery_date.label')">
-          <div>
-            {{ data.delivery_date }}
-          </div>
-        </VElementFormWrapper>
-
-        <VElementFormWrapper :label="t('liquidation.form.reception_date.label')">
-          <div>
-            {{ data.reception_date }}
-          </div>
-        </VElementFormWrapper>
-      </CardSection>
-      <CardSection>
-        <VElementFormWrapper :label="t('liquidation.form.weight_with_earth.label')">
-          <div>
-            {{ data.weight_with_earth }}
-          </div>
-        </VElementFormWrapper>
-        <VElementFormWrapper :label="t('liquidation.form.weight_washed.label')">
-          <div>
-            {{ data.weight_washed }}
-          </div>
-        </VElementFormWrapper>
-        <VElementFormWrapper :label="t('liquidation.form.dollar_value.label')">
-          <div>
-            {{ data.dollar_value }}
-          </div>
-        </VElementFormWrapper>
-      </CardSection>
-      <CardSection :headerText="t('liquidation.sections.commercial_categories')" wrapperClass="p-4 grid md:grid-cols-10 sm:grid-cols-1 gap-x-2 gap-y-1">
-        <div class="col-span-4 font-semibold">
-          {{ t('liquidation.form.commercial_categories.labels.name') }}
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('liquidation.titles.edit')"
+      :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
+    />
+    <CardSection>
+      <VElementFormWrapper :label="t('liquidation.form.date.label')">
+        <div>
+          {{ date_rendered }}
         </div>
-        <div class="col-span-3 font-semibold">
-          {{ t('liquidation.form.commercial_categories.labels.price') }}
-        </div>
-        <div class="col-span-3 font-semibold">
-          {{ t('liquidation.form.commercial_categories.labels.weight') }}
-        </div>
-        <template v-for="(commercial, index) in categories_commercial">
-          <div class="col-span-10 border-t mt-[2px]"></div>
-          <div class="col-span-4 pt-3">
-            {{ data.products[commercial.id].name }}
-          </div>
-          <div class="col-span-3">
-            {{ data.products[commercial.id].price }}
-          </div>
-          <div class="col-span-3">
-            {{ data.products[commercial.id].weight }}
-          </div>
-        </template>
+      </VElementFormWrapper>
 
+      <VElementFormWrapper :label="t('liquidation.form.importer_id.label')">
+        <div>
+          {{ data.importer_id }}
+        </div>
+      </VElementFormWrapper>
+
+      <VElementFormWrapper :label="t('liquidation.form.delivery_date.label')">
+        <div>
+          {{ data.delivery_date }}
+        </div>
+      </VElementFormWrapper>
+
+      <VElementFormWrapper :label="t('liquidation.form.reception_date.label')">
+        <div>
+          {{ data.reception_date }}
+        </div>
+      </VElementFormWrapper>
+    </CardSection>
+    <CardSection>
+      <VElementFormWrapper :label="t('liquidation.form.weight_with_earth.label')">
+        <div>
+          {{ data.weight_with_earth }}
+        </div>
+      </VElementFormWrapper>
+      <VElementFormWrapper :label="t('liquidation.form.weight_washed.label')">
+        <div>
+          {{ data.weight_washed }}
+        </div>
+      </VElementFormWrapper>
+      <VElementFormWrapper :label="t('liquidation.form.dollar_value.label')">
+        <div>
+          {{ data.dollar_value }}
+        </div>
+      </VElementFormWrapper>
+    </CardSection>
+    <CardSection :headerText="t('liquidation.sections.commercial_categories')" wrapperClass="p-4 grid md:grid-cols-10 sm:grid-cols-1 gap-x-2 gap-y-1">
+      <div class="col-span-4 font-semibold">
+        {{ t('liquidation.form.commercial_categories.labels.name') }}
+      </div>
+      <div class="col-span-3 font-semibold">
+        {{ t('liquidation.form.commercial_categories.labels.price') }}
+      </div>
+      <div class="col-span-3 font-semibold">
+        {{ t('liquidation.form.commercial_categories.labels.weight') }}
+      </div>
+      <template v-for="(commercial, index) in categories_commercial">
         <div class="col-span-10 border-t mt-[2px]"></div>
-        <div class="col-span-4 pt-3"></div>
-        <div class="col-span-3 pt-3 text-right font-bold">
-          {{ t('liquidation.total') }}:
+        <div class="col-span-4 pt-3">
+          {{ data.products[commercial.id].name }}
         </div>
-        <div class="col-span-3 pt-3 font-bold">
-          {{ total_categories_commercial }}
+        <div class="col-span-3">
+          {{ data.products[commercial.id].price }}
         </div>
-      </CardSection>
-      <CardSection :headerText="t('liquidation.sections.rejected_categories')" wrapperClass="p-4 grid md:grid-cols-10 sm:grid-cols-1 gap-x-2 gap-y-1">
-        <div class="col-span-7 font-semibold">
-          {{ t('liquidation.form.commercial_categories.labels.name') }}
+        <div class="col-span-3">
+          {{ data.products[commercial.id].weight }}
         </div>
-        <div class="col-span-3 font-semibold">
-          {{ t('liquidation.form.commercial_categories.labels.weight') }}
-        </div>
-        <template v-for="(commercial, index) in categories_not_commercial">
-          <div class="col-span-10 border-t mt-[2px]"></div>
-          <div class="col-span-7 pt-3">
-            {{ data.products[commercial.id].name }}
-          </div>
-          <div class="col-span-3">
-            {{ data.products[commercial.id].weight }}
-          </div>
-        </template>
+      </template>
+
+      <div class="col-span-10 border-t mt-[2px]"></div>
+      <div class="col-span-4 pt-3"></div>
+      <div class="col-span-3 pt-3 text-right font-bold">
+        {{ t('liquidation.total') }}:
+      </div>
+      <div class="col-span-3 pt-3 font-bold">
+        {{ total_categories_commercial }}
+      </div>
+    </CardSection>
+    <CardSection :headerText="t('liquidation.sections.rejected_categories')" wrapperClass="p-4 grid md:grid-cols-10 sm:grid-cols-1 gap-x-2 gap-y-1">
+      <div class="col-span-7 font-semibold">
+        {{ t('liquidation.form.commercial_categories.labels.name') }}
+      </div>
+      <div class="col-span-3 font-semibold">
+        {{ t('liquidation.form.commercial_categories.labels.weight') }}
+      </div>
+      <template v-for="(commercial, index) in categories_not_commercial">
         <div class="col-span-10 border-t mt-[2px]"></div>
-        <div class="col-span-7 pt-3 text-right font-bold">
-          {{ t('liquidation.total') }}:
+        <div class="col-span-7 pt-3">
+          {{ data.products[commercial.id].name }}
         </div>
-        <div class="col-span-3 pt-3 font-bold">
-          {{ total_categories_not_commercial }}
+        <div class="col-span-3">
+          {{ data.products[commercial.id].weight }}
         </div>
-      </CardSection>
-    </AuthenticatedLayout>
+      </template>
+      <div class="col-span-10 border-t mt-[2px]"></div>
+      <div class="col-span-7 pt-3 text-right font-bold">
+        {{ t('liquidation.total') }}:
+      </div>
+      <div class="col-span-3 pt-3 font-bold">
+        {{ total_categories_not_commercial }}
+      </div>
+    </CardSection>
+  </AuthenticatedLayout>
 </template>

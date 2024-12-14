@@ -25,19 +25,19 @@ const submitHandler = () => form.post(route('quarters.store'), form.blueprint ? 
 </script>
 
 <template>
-    <Head :title="t('quarter.titles.entity_breadcrumb')" />
+  <Head :title="t('quarter.titles.entity_breadcrumb')" />
 
-    <AuthenticatedLayout>
-      <HeaderCrud
-        :title="t('quarter.titles.create')"
-        :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-        :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('quarters.index') }"
-      />
-      <FormQuarter
-        :form="form"
-        :fields="props.fields"
-        :responsibles="props.responsibles"
-        :submitHandler="submitHandler"
-      />
-    </AuthenticatedLayout>
+  <AuthenticatedLayout>
+    <HeaderCrud
+      :title="t('quarter.titles.create')"
+      :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('quarters.index') }"
+    />
+    <FormQuarter
+      :form="form"
+      :fields="props.fields"
+      :responsibles="props.responsibles"
+      :submitHandler="submitHandler"
+    />
+  </AuthenticatedLayout>
 </template>
