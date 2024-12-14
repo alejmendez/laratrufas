@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, nextTick } from "vue";
+import { ref, computed, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import Timeline from 'primevue/timeline';
@@ -13,23 +13,23 @@ const props = defineProps({
 });
 
 const categories = ref([
-  {name: "height", key: "height"},
-  {name: "crown_diameter", key: "crown_diameter"},
-  {name: "trunk_diameter", key: "trunk_diameter"},
-  {name: "root_diameter", key: "root_diameter"},
-  {name: "invasion_radius", key: "invasion_radius"},
-  {name: "foliage_sanitation", key: "foliage_sanitation"},
-  {name: "trunk_sanitation", key: "trunk_sanitation"},
-  {name: "soil_sanitation", key: "soil_sanitation"},
-  {name: "irrigation_system", key: "irrigation_system"},
+  { name: 'height', key: 'height' },
+  { name: 'crown_diameter', key: 'crown_diameter' },
+  { name: 'trunk_diameter', key: 'trunk_diameter' },
+  { name: 'root_diameter', key: 'root_diameter' },
+  { name: 'invasion_radius', key: 'invasion_radius' },
+  { name: 'foliage_sanitation', key: 'foliage_sanitation' },
+  { name: 'trunk_sanitation', key: 'trunk_sanitation' },
+  { name: 'soil_sanitation', key: 'soil_sanitation' },
+  { name: 'irrigation_system', key: 'irrigation_system' },
 ]);
 
-const selectedCategories = ref(categories.value.map(category => category.name));
+const selectedCategories = ref(categories.value.map((category) => category.name));
 const selectAll = ref(['all']);
 const selectAllHandler = async () => {
   await nextTick();
   if (selectAll.value.includes('all')) {
-    selectedCategories.value = categories.value.map(category => category.name);
+    selectedCategories.value = categories.value.map((category) => category.name);
   } else {
     selectedCategories.value = [];
   }
@@ -53,11 +53,11 @@ const colors = {
   foliage_sanitation: '#00FFFF',
   trunk_sanitation: '#FF1493',
   soil_sanitation: '#00FF00',
-  irrigation_system: '#FF6600'
+  irrigation_system: '#FF6600',
 };
 
 const detailsFiltered = computed(() => {
-  return props.details.filter(detail => selectedCategories.value.includes(detail.type));
+  return props.details.filter((detail) => selectedCategories.value.includes(detail.type));
 });
 
 // mostrar bitacora - pre-filtrar por cosecha y por año cuando viene desde el heatmap del cuartel
