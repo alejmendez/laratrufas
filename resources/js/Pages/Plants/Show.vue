@@ -6,7 +6,7 @@ import { deleteRowTable } from '@/Utils/table';
 
 import FileCard from '@/Pages/Plants/ShowComponents/FileCard.vue';
 import LogsCard from '@/Pages/Plants/ShowComponents/LogsCard.vue';
-import StatisticsCard from '@/Pages/Plants/ShowComponents/StatisticsCard.vue';
+// import StatisticsCard from '@/Pages/Plants/ShowComponents/StatisticsCard.vue';
 
 const { t } = useI18n();
 
@@ -66,7 +66,7 @@ const deleteHandler = async (id) => {
     </div>
 
     <FileCard :data="data" v-show="currentTab === tabs[0]" />
-    <LogsCard :details="details.data" v-show="currentTab === tabs[1]" />
+    <LogsCard :plant_id="data.id" v-show="currentTab === tabs[1]" />
     <!-- <StatisticsCard :data="data" v-show="currentTab === tabs[2]" /> -->
   </AuthenticatedLayout>
 </template>

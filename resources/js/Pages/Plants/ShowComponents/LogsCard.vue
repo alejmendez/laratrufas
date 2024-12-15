@@ -1,16 +1,34 @@
 <script setup>
-import { ref, computed, nextTick } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import Timeline from 'primevue/timeline';
 import Checkbox from 'primevue/checkbox';
+import ProgressSpinner from 'primevue/progressspinner';
 
 import { stringToFormat } from '@/Utils/date';
+
+import PlantDetailService from '@/Services/PlantDetailService';
+
 const { t } = useI18n();
 
 const props = defineProps({
-  details: Array,
+  plant_id: {
+    type: Number,
+    default: null,
+  },
+  quarter_id: {
+    type: Number,
+    default: null,
+  },
+  field_id: {
+    type: Number,
+    default: null,
+  },
 });
+
+const loading = ref(true);
+const details = ref([]);
 
 const categories = ref([
   { name: 'harvest', key: 'harvest', },
@@ -28,25 +46,27 @@ const categories = ref([
 const selectedCategories = ref(categories.value.map((category) => category.name));
 const selectAll = ref(['all']);
 const selectAllHandler = async () => {
-  await nextTick();
-  if (selectAll.value.includes('all')) {
-    selectedCategories.value = categories.value.map((category) => category.name);
-  } else {
-    selectedCategories.value = [];
-  }
+  selectedCategories.value = selectAll.value.includes('all') ? categories.value.map((category) => category.name) : [];
 };
 
 const selectHandler = async () => {
-  await nextTick();
-  if (selectedCategories.value.length === categories.value.length) {
-    selectAll.value = ['all'];
-  } else {
-    selectAll.value = [];
-  }
+  selectAll.value = selectedCategories.value.length === categories.value.length ? ['all'] : [];
 };
 
 const detailsFiltered = computed(() => {
-  return props.details.filter((detail) => selectedCategories.value.includes(detail.type));
+  return details.value.filter((detail) => selectedCategories.value.includes(detail.type));
+});
+
+onMounted(async () => {
+  if (props.plant_id) {
+    details.value = await PlantDetailService.listByPlantId(props.plant_id);
+  } else if (props.quarter_id) {
+    details.value = await PlantDetailService.listByQuarterId(props.quarter_id);
+  } else if (props.field_id) {
+    details.value = await PlantDetailService.listByFieldId(props.field_id);
+  }
+
+  loading.value = false;
 });
 
 // mostrar bitacora - pre-filtrar por cosecha y por año cuando viene desde el heatmap del cuartel
@@ -81,7 +101,18 @@ const detailsFiltered = computed(() => {
       wrapperClass="p-5"
       sectionClass="mt-5 col-span-3 rounded-xl shadow-sm ring-1 ring-gray-950/5"
     >
-      <div v-if="detailsFiltered.length > 0">
+      <div v-if="loading">
+        <div class="flex justify-center items-center h-screen">
+          <ProgressSpinner
+            style="width: 50px; height: 50px"
+            strokeWidth="8"
+            fill="transparent"
+            animationDuration=".5s"
+            aria-label="Progress Spinner"
+          />
+        </div>
+      </div>
+      <div v-else-if="detailsFiltered.length > 0">
         <Timeline :value="detailsFiltered">
           <template #marker="slotProps">
             <span
@@ -104,9 +135,6 @@ const detailsFiltered = computed(() => {
       <div v-else class="my-20">
         <p class="text-center text-surface-500 dark:text-surface-400">
           {{ t('harvest_details.no_data') }}
-        </p>
-        <p class="text-center text-surface-500 dark:text-surface-400">
-          {{ t('harvest_details.no_data_description') }}
         </p>
       </div>
     </CardSection>

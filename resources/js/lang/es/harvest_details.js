@@ -9,7 +9,6 @@ export default {
     location: 'Ubicación',
   },
   no_data: 'No hay datos para mostrar',
-  no_data_description: 'La planta no tiene datos para mostrar',
   all_categories: 'Todos',
   selected: 'Seleccionados {size}',
   form: {

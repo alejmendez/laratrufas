@@ -67,7 +67,6 @@ class PlantsController extends Controller
 
         return Inertia::render('Plants/Show', [
             'data' => new PlantResource($plant),
-            'details' => new PlantDetailCollection($plant->details),
         ]);
     }
 

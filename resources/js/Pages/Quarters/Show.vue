@@ -6,6 +6,7 @@ import { deleteRowTable } from '@/Utils/table';
 
 import StatisticsCard from '@/Pages/Quarters/ShowComponents/StatisticsCard.vue';
 import HarvestCard from '@/Pages/Quarters/ShowComponents/HarvestCard.vue';
+import LogbookCard from '@/Pages/Quarters/ShowComponents/LogbookCard.vue';
 
 const { t } = useI18n();
 
@@ -89,12 +90,10 @@ const deleteHandler = async (id) => {
       </div>
     </CardSection>
 
-    <CardSection
-      :header-text="t('quarter.show.logbook.title')"
-      wrapperClass="p-5 grid grid-cols-2 gap-4"
+    <LogbookCard
+      :quarter_id="quarter.field.id"
       v-show="currentTab === tabs[1]"
-    >
-    </CardSection>
+    />
 
     <HarvestCard
       :quarter_id="quarter.id"

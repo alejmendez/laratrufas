@@ -75,6 +75,7 @@ const deleteHandler = async (id) => {
     />
 
     <LogbookCard
+      :field_id="field.id"
       v-show="props.current_tab === tabs[1]"
     />
 
