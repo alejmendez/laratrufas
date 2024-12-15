@@ -13,15 +13,16 @@ const props = defineProps({
 });
 
 const categories = ref([
-  { name: 'height', key: 'height' },
-  { name: 'crown_diameter', key: 'crown_diameter' },
-  { name: 'trunk_diameter', key: 'trunk_diameter' },
-  { name: 'root_diameter', key: 'root_diameter' },
-  { name: 'invasion_radius', key: 'invasion_radius' },
-  { name: 'foliage_sanitation', key: 'foliage_sanitation' },
-  { name: 'trunk_sanitation', key: 'trunk_sanitation' },
-  { name: 'soil_sanitation', key: 'soil_sanitation' },
-  { name: 'irrigation_system', key: 'irrigation_system' },
+  { name: 'harvest', key: 'harvest', },
+  { name: 'height', key: 'height', },
+  { name: 'crown_diameter', key: 'crown_diameter', },
+  { name: 'trunk_diameter', key: 'trunk_diameter', },
+  { name: 'root_diameter', key: 'root_diameter', },
+  { name: 'invasion_radius', key: 'invasion_radius', },
+  { name: 'foliage_sanitation', key: 'foliage_sanitation', },
+  { name: 'trunk_sanitation', key: 'trunk_sanitation', },
+  { name: 'soil_sanitation', key: 'soil_sanitation', },
+  { name: 'irrigation_system', key: 'irrigation_system', },
 ]);
 
 const selectedCategories = ref(categories.value.map((category) => category.name));
@@ -42,18 +43,6 @@ const selectHandler = async () => {
   } else {
     selectAll.value = [];
   }
-};
-
-const colors = {
-  height: '#39FF14',
-  crown_diameter: '#FF0000',
-  trunk_diameter: '#0066FF',
-  root_diameter: '#FF00FF',
-  invasion_radius: '#FFFF00',
-  foliage_sanitation: '#00FFFF',
-  trunk_sanitation: '#FF1493',
-  soil_sanitation: '#00FF00',
-  irrigation_system: '#FF6600',
 };
 
 const detailsFiltered = computed(() => {
@@ -79,7 +68,10 @@ const detailsFiltered = computed(() => {
           <label :for="category.key">
             {{ t(`harvest_details.form.${category.name}.label`) }}
             <!--
-              <div class="w-4 h-4 mt-1 ms-2 border-2 border-gray-500 rounded-full float-end" :style="{ backgroundColor: colors[category.name] }"></div>
+            <div
+              class="w-4 h-4 mt-1 ms-2 border-2 border-gray-500 rounded-full float-end"
+              :style="{ backgroundColor: t(`harvest_details.form.${category.name}.color`) }"
+            ></div>
             -->
           </label>
         </div>
@@ -92,7 +84,10 @@ const detailsFiltered = computed(() => {
       <div v-if="detailsFiltered.length > 0">
         <Timeline :value="detailsFiltered">
           <template #marker="slotProps">
-            <span class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm" :style="{ backgroundColor: colors[slotProps.item.type] }">
+            <span
+              class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm"
+              :style="{ backgroundColor: t(`harvest_details.form.${slotProps.item.type}.color`) }"
+            >
               <i class="pi pi-circle-fill"></i>
             </span>
           </template>
@@ -102,6 +97,7 @@ const detailsFiltered = computed(() => {
           <template #content="slotProps">
             {{ t(`harvest_details.form.${slotProps.item.type}.label`) }} <br />
             {{ slotProps.item.value }}
+            {{ t(`harvest_details.form.${slotProps.item.type}.unit`) }}
           </template>
         </Timeline>
       </div>

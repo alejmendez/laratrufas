@@ -39,7 +39,7 @@ class Plant extends Model
 
     public function details()
     {
-        return $this->hasMany(PlantDetail::class)->orderBy('updated_at');
+        return $this->hasMany(PlantDetail::class)->orderBy('updated_at', 'desc');
     }
 
     public function activeDetails()
