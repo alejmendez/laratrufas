@@ -29,10 +29,6 @@ const filter_quarter_options = ref([]);
 const filter_plant_type_options = ref([]);
 const filter_responsible_options = ref([]);
 
-if (props.toast) {
-  toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
-}
-
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   code: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },

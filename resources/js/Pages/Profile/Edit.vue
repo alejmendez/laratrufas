@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'primevue/usetoast';
@@ -13,10 +14,6 @@ const props = defineProps({
   roles: Array,
   toast: String,
 });
-
-if (props.toast) {
-  toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
-}
 
 const { data } = props.data;
 
@@ -35,6 +32,17 @@ const form = useForm({
 });
 
 const submitHandler = () => form.post(route('profile.store'), form.avatar ? { forceFormData: true } : {});
+
+onMounted(async () => {
+  if (props.toast) {
+    toast.add({
+      severity: 'success',
+      summary: t('profile.titles.entity_breadcrumb'),
+      detail: t('generics.messages.saved_successfully'),
+      life: 5000,
+    });
+  }
+});
 </script>
 
 <template>

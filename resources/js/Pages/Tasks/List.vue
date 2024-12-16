@@ -27,10 +27,6 @@ const { t } = useI18n();
 const datatable = ref(null);
 const filter_responsible_options = ref([]);
 
-if (props.toast) {
-  toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
-}
-
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
@@ -54,12 +50,6 @@ const filter_priorities_options = priorities.map((p) => ({
   value: p,
   text: t('task.form.priority.options.' + p),
 }));
-const prioritiesSeverities = {
-  when_possible: 'success',
-  routine: 'info',
-  important: 'warn',
-  urgent: 'danger',
-};
 
 const fetchHandler = async (params) => {
   return await TaskService.list(params);

@@ -26,10 +26,6 @@ const { t } = useI18n();
 const datatable = ref(null);
 const filter_importer_options = ref([]);
 
-if (props.toast) {
-  toast.add({ severity: 'success', detail: t('generics.messages.saved_successfully'), life: 3000 });
-}
-
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   batch_number: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },

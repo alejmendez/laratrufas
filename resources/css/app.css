@@ -178,12 +178,8 @@
   .swal2-modal .swal2-actions .swal2-deny {
     @apply !text-zinc-800
   }
+}
 
-  .p-toast {
-    z-index: 3000;
-  }
-
-  .p-dialog-title {
-    margin-right: 40px;
-  }
+.p-toast {
+  z-index: 300000;
 }
