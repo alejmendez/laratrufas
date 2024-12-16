@@ -1,14 +1,15 @@
 <script setup>
-import { useAttrs, computed } from 'vue';
+import { useAttrs } from 'vue';
 
 import InputText from 'primevue/inputtext';
-import InputNumber from 'primevue/inputnumber';
+
+import VInputDate from '@/Components/Form/VInputDate.vue';
+import VTextarea from '@/Components/Form/VTextarea.vue';
+import VInputNumber from '@/Components/Form/VInputNumber.vue';
 
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 
-import Textarea from 'primevue/textarea';
-import VInputDate from '@/Components/Form/VInputDate.vue';
 import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
 
 const model = defineModel();
@@ -31,10 +32,6 @@ const props = defineProps({
   message: {
     type: String,
   },
-  autofocus: {
-    type: Boolean,
-    default: false,
-  },
   prefix: {
     type: String,
     default: '',
@@ -43,74 +40,83 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  renderText: {
-    type: Function,
-  },
 });
 
 const emit = defineEmits(['change', 'input', 'click', 'focus', 'blur', 'keydown']);
 
-const isInvalid = computed(() => props.message !== '' && props.message !== undefined);
+const isInvalid = props.message !== '' && props.message !== undefined;
 </script>
 
 <template>
   <VElementFormWrapper :classWrapper="props.classWrapper" :label="props.label" :message="props.message">
-    <InputGroup>
-      <InputGroupAddon v-if="props.prefix">{{ props.prefix }}</InputGroupAddon>
-      <template v-if="props.type === 'date'">
-        <VInputDate
-          v-bind="attrs"
-          v-model="model"
-          ref="input"
-          fluid
-          :invalid="isInvalid"
-          @change="emit('change', $event)"
-          @input="emit('input', $event)"
-          @focus="emit('focus', $event)"
-          @blur="emit('blur', $event)"
-          @keydown="emit('keydown', $event)"
-        />
-      </template>
-      <template v-else-if="props.type === 'textarea'">
-        <Textarea
-          ref="input"
-          v-bind="attrs"
-          v-model="model"
-          fluid
-          rows="5"
-          :invalid="isInvalid"
-          @update:modelValue="emit('change', $event)"
-          @input="emit('input', $event)"
-          @click="emit('click', $event)"
-          @focus="emit('focus', $event)"
-          @blur="emit('blur', $event)"
-          @keydown="emit('keydown', $event)"
-        />
-      </template>
-      <template v-if="props.type === 'number'">
-        <InputNumber
-          ref="input"
-          v-bind="attrs"
-          v-model="model"
-          fluid
-          showButtons
-          :type="props.type"
-          :invalid="isInvalid"
-          @update:modelValue="emit('change', $event)"
-          @input="emit('input', $event)"
-          @click="emit('click', $event)"
-          @focus="emit('focus', $event)"
-          @blur="emit('blur', $event)"
-          @keydown="emit('keydown', $event)"
-        />
+    <template v-if="props.type === 'date'">
+      <VInputDate
+        v-bind="attrs"
+        v-model="model"
+        fluid
+        :invalid="isInvalid"
+        :showIcon="true"
+        @change="emit('change', $event)"
+        @input="emit('input', $event)"
+        @focus="emit('focus', $event)"
+        @blur="emit('blur', $event)"
+        @keydown="emit('keydown', $event)"
+      />
+    </template>
+    <template v-else-if="props.type === 'textarea'">
+      <VTextarea
+        v-bind="attrs"
+        v-model="model"
+        fluid
+        rows="5"
+        :invalid="isInvalid"
+        @change="emit('change', $event)"
+        @input="emit('input', $event)"
+        @click="emit('click', $event)"
+        @focus="emit('focus', $event)"
+        @blur="emit('blur', $event)"
+        @keydown="emit('keydown', $event)"
+      />
+    </template>
+    <template v-else-if="props.type === 'number'">
+      <VInputNumber
+        v-bind="attrs"
+        v-model="model"
+        fluid
+        showButtons
+        :invalid="isInvalid"
+        @change="emit('change', $event)"
+        @input="emit('input', $event)"
+        @click="emit('click', $event)"
+        @focus="emit('focus', $event)"
+        @blur="emit('blur', $event)"
+        @keydown="emit('keydown', $event)"
+      />
+    </template>
+    <template v-else>
+      <template v-if="props.prefix || props.sufix">
+        <InputGroup>
+          <InputGroupAddon v-if="props.prefix">{{ props.prefix }}</InputGroupAddon>
+          <InputText
+            v-bind="attrs"
+            v-model="model"
+            fluid
+            :invalid="isInvalid"
+            @change="emit('change', $event)"
+            @input="emit('input', $event)"
+            @click="emit('click', $event)"
+            @focus="emit('focus', $event)"
+            @blur="emit('blur', $event)"
+            @keydown="emit('keydown', $event)"
+          />
+          <InputGroupAddon v-if="props.sufix">{{ props.sufix }}</InputGroupAddon>
+        </InputGroup>
       </template>
       <template v-else>
         <InputText
-          ref="input"
           v-bind="attrs"
           v-model="model"
           fluid
-          :type="props.type"
           :invalid="isInvalid"
           @update:modelValue="emit('change', $event)"
           @input="emit('input', $event)"
@@ -120,7 +126,6 @@ const isInvalid = computed(() => props.message !== '' && props.message !== undef
           @keydown="emit('keydown', $event)"
         />
       </template>
-      <InputGroupAddon v-if="props.sufix">{{ props.sufix }}</InputGroupAddon>
-    </InputGroup>
+    </template>
   </VElementFormWrapper>
 </template>

@@ -1,7 +1,7 @@
 <script setup>
 import { useAttrs } from 'vue';
 
-import DatePicker from 'primevue/datepicker';
+import InputNumber from 'primevue/inputnumber';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 
@@ -17,12 +17,12 @@ const emit = defineEmits(['change', 'input', 'focus', 'blur', 'keydown']);
   <template v-if="props.prefix || props.sufix">
     <InputGroup>
       <InputGroupAddon v-if="props.prefix">{{ props.prefix }}</InputGroupAddon>
-      <DatePicker
-        class="h-10 mt-1"
+      <InputNumber
         v-bind="attrs"
         v-model="model"
         @update:modelValue="emit('change', $event)"
         @input="emit('input', $event)"
+        @click="emit('click', $event)"
         @focus="emit('focus', $event)"
         @blur="emit('blur', $event)"
         @keydown="emit('keydown', $event)"
@@ -31,12 +31,12 @@ const emit = defineEmits(['change', 'input', 'focus', 'blur', 'keydown']);
     </InputGroup>
   </template>
   <template v-else>
-    <DatePicker
-      class="h-10 mt-1"
+    <InputNumber
       v-bind="attrs"
       v-model="model"
       @update:modelValue="emit('change', $event)"
       @input="emit('input', $event)"
+      @click="emit('click', $event)"
       @focus="emit('focus', $event)"
       @blur="emit('blur', $event)"
       @keydown="emit('keydown', $event)"
