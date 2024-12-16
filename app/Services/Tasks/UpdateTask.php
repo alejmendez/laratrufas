@@ -73,11 +73,18 @@ class UpdateTask
 
     protected static function notify($task)
     {
-        $user = User::find($task->responsible_id);
-        if (!$user) {
-            return;
-        }
+        $userIds = self::get_user_ids_from_comments($task->comments);
+        $userIds[] = $task->responsible_id;
+        $users = User::whereIn('id', array_unique($userIds))->get();
 
-        $user->notify(new TaskNotification($task));
+        foreach ($users as $user) {
+            $user->notify(new TaskNotification($task));
+        }
+    }
+
+    protected static function get_user_ids_from_comments($comments)
+    {
+        preg_match_all('/<span class="mention"[^>]*data-id="(\d+)"[^>]*>/', $comments, $matches);
+        return $matches[1];
     }
 }

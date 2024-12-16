@@ -178,6 +178,54 @@
   .swal2-modal .swal2-actions .swal2-deny {
     @apply !text-zinc-800
   }
+
+  .p-dialog-title {
+    margin-right: 40px;
+  }
+
+  .p-button.btn-status {
+    margin-right: 20px;
+  }
+
+  .p-button.btn-status.btn-to_begin {
+    background-color: var(--p-gray-500);
+    border-color: var(--p-gray-500);
+  }
+
+  .p-button.btn-status.btn-to_begin:hover {
+    background-color: var(--p-gray-600);
+    border-color: var(--p-gray-600);
+  }
+
+  .p-button.btn-status.btn-started {
+    background-color: var(--p-cyan-600);
+    border-color: var(--p-cyan-600);
+  }
+
+  .p-button.btn-status.btn-started:hover {
+    background-color: var(--p-cyan-700);
+    border-color: var(--p-cyan-700);
+  }
+
+  .p-button.btn-status.btn-finished {
+    background-color: var(--p-green-600);
+    border-color: var(--p-green-600);
+  }
+
+  .p-button.btn-status.btn-finished:hover {
+    background-color: var(--p-green-700);
+    border-color: var(--p-green-700);
+  }
+
+  .p-button.btn-status.btn-stopped {
+    background-color: var(--p-red-500);
+    border-color: var(--p-red-500);
+  }
+
+  .p-button.btn-status.btn-stopped:hover {
+    background-color: var(--p-red-600);
+    border-color: var(--p-red-600);
+  }
 }
 
 .p-toast {

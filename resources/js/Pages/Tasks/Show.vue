@@ -98,7 +98,7 @@ const deleteHandler = async (id) => {
             {{ $t('task.show.detail.tools.label') }}
           </div>
           <div class="mb-4">
-            <div class="py-1 ps-3 border rounded-md bg-white ring-1 ring-gray-950/5">
+            <div class="py-1 ps-3 min-h-10 border rounded-md bg-white ring-1 ring-gray-950/5">
               <span
                 class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
                 v-for="tool of data.tools"
@@ -111,7 +111,7 @@ const deleteHandler = async (id) => {
             {{ $t('task.show.detail.machineries.label') }}
           </div>
           <div class="mb-4">
-            <div class="py-1 ps-3 border rounded-md bg-white ring-1 ring-gray-950/5">
+            <div class="py-1 ps-3 min-h-10 border rounded-md bg-white ring-1 ring-gray-950/5">
               <span
                 class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
                 v-for="machinery of data.machineries"
@@ -125,7 +125,7 @@ const deleteHandler = async (id) => {
             {{ $t('task.show.detail.security_equipments.label') }}
           </div>
           <div class="mb-4">
-            <div class="py-1 ps-3 border rounded-md bg-white ring-1 ring-gray-950/5">
+            <div class="py-1 ps-3 min-h-10 border rounded-md bg-white ring-1 ring-gray-950/5">
               <span
                 class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
                 v-for="security_equipment of data.security_equipments"
@@ -159,7 +159,7 @@ const deleteHandler = async (id) => {
           :header-text="t('task.show.detail.sections.comments')"
           wrapperClass="p-5"
         >
-          {{ data.comments }}
+          <div v-html="data.comments"></div>
         </CardSection>
       </div>
     </div>
