@@ -6,9 +6,9 @@ export default {
   },
   table: {
     name: 'Nombre',
-    purchase_date: 'Fecha de Compra',
-    last_maintenance: 'última Mantención',
-    purchase_location: 'Lugar de Compra',
+    purchase_date: 'Fecha de compra',
+    last_maintenance: 'Última mantención',
+    purchase_location: 'Lugar de compra',
     contact: 'Contacto',
   },
   form: {

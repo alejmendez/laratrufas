@@ -7,13 +7,13 @@ export default {
     show: 'Detalle de la Planta: {name}',
   },
   table: {
-    name: 'planta',
-    quarter_id: 'cuartel',
-    field_id: 'campo',
+    name: 'Planta',
+    quarter_id: 'Cuartel',
+    field_id: 'Campo',
     location: 'Ubicación',
-    type: 'tipo de planta',
-    age: 'edad',
-    manager: 'responsable',
+    type: 'Tipo de planta',
+    age: 'Edad',
+    manager: 'Responsable',
   },
   form: {
     name: {

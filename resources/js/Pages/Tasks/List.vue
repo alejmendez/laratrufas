@@ -143,7 +143,7 @@ onMounted(async () => {
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por fecha de actualización" />
         </template>
       </Column>
-      <Column field="responsible.name" filterField="responsible_id" :showFilterMatchModes="false" :header="$t('plant.table.manager')" sortable style="min-width: 200px">
+      <Column field="responsible.name" filterField="responsible_id" :showFilterMatchModes="false" :header="$t('task.table.responsible')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.responsible.full_name }}
         </template>

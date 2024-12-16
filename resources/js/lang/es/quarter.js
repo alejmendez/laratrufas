@@ -6,11 +6,11 @@ export default {
     show: 'Detalle del Cuartel: {name}',
   },
   table: {
-    name: 'cuartel',
-    field_id: 'campo',
-    planned_at: 'f. plantación',
-    area: 'superficie',
-    plants_count: 'arboles',
+    name: 'Cuartel',
+    field_id: 'Campo',
+    planned_at: 'F. plantación',
+    area: 'Superficie',
+    plants_count: 'Arboles',
   },
   form: {
     name: {
