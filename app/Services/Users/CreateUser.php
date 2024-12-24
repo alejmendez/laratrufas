@@ -5,6 +5,8 @@ namespace App\Services\Users;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
+use App\Services\Caches\CacheService;
+
 class CreateUser
 {
     public static function call($data): User
@@ -22,6 +24,8 @@ class CreateUser
         if ($data['role']) {
             $user->syncRoles([$data['role']]);
         }
+
+        CacheService::clearUserCache($user);
 
         return $user;
     }

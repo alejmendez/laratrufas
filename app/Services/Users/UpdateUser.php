@@ -3,6 +3,7 @@
 namespace App\Services\Users;
 
 use App\Models\User;
+use App\Services\Caches\CacheService;
 
 class UpdateUser
 {
@@ -37,6 +38,8 @@ class UpdateUser
         if ($data['role']) {
             $user->syncRoles([$data['role']]);
         }
+
+        CacheService::clearUserCache($user);
 
         return $user;
     }

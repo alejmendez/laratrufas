@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Inertia\Middleware;
+
+use App\Services\Caches\CacheService;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -39,12 +39,12 @@ class HandleInertiaRequests extends Middleware
             $userData = [
                 'id' => $user->id,
                 'full_name' => $user->full_name,
-                'avatar_url' => $user->avatar === null ? null : (Str::startsWith($user->avatar, 'http') ? $user->avatar : Storage::url($user->avatar)),
+                'avatar_url' => CacheService::getUserAvatar($user),
                 'dni' => $user->dni,
                 'email' => $user->email,
-                'roles' => collect($user->getRoleNames())->map(fn ($role) => Str::slug($role)),
-                'permissions' => $user->getAllPermissions()->pluck('name')->map(fn ($user) => Str::slug($user)),
-                'unread_notifications' => $user->unreadNotifications,
+                'roles' => CacheService::getUserRoles($user),
+                'permissions' => CacheService::getUserPermissions($user),
+                'unread_notifications' => CacheService::getUserUnreadNotifications($user),
             ];
         }
 
