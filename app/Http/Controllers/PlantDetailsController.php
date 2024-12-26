@@ -21,19 +21,22 @@ class PlantDetailsController extends Controller
 
     public function index(int $id)
     {
-        $plant_details = FindPlantDetails::get_by_plant_id($id);
+        $show_harvests = request('show_harvests') === 'true';
+        $plant_details = FindPlantDetails::get_by_plant_id($id, $show_harvests);
         return new PlantDetailCollection($plant_details);
     }
 
     public function index_by_quarter(int $id)
     {
-        $plant_details = FindPlantDetails::get_by_quarter_id($id);
+        $show_harvests = request('show_harvests') === 'true';
+        $plant_details = FindPlantDetails::get_by_quarter_id($id, $show_harvests);
         return new PlantDetailCollection($plant_details);
     }
 
     public function index_by_field(int $id)
     {
-        $plant_details = FindPlantDetails::get_by_field_id($id);
+        $show_harvests = request('show_harvests') === 'true';
+        $plant_details = FindPlantDetails::get_by_field_id($id, $show_harvests);
         return new PlantDetailCollection($plant_details);
     }
 }

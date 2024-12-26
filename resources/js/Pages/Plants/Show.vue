@@ -6,7 +6,7 @@ import { deleteRowTable } from '@/Utils/table';
 
 import FileCard from '@/Pages/Plants/ShowComponents/FileCard.vue';
 import LogsCard from '@/Pages/Plants/ShowComponents/LogsCard.vue';
-// import StatisticsCard from '@/Pages/Plants/ShowComponents/StatisticsCard.vue';
+import StatisticsCard from '@/Pages/Plants/ShowComponents/StatisticsCard.vue';
 
 const { t } = useI18n();
 
@@ -20,10 +20,13 @@ const { data } = props.data;
 const tabs = [
   'file',
   'logs',
-  // 'statistics',
+  'statistics',
 ];
 
-const currentTab = ref(tabs[0]);
+const urlParams = new URLSearchParams(window.location.search);
+const tabSelected = urlParams.get('tab');
+
+const currentTab = ref(tabs.includes(tabSelected) ? tabSelected : tabs[0]);
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, () => {
@@ -66,7 +69,7 @@ const deleteHandler = async (id) => {
     </div>
 
     <FileCard :data="data" v-show="currentTab === tabs[0]" />
-    <LogsCard :plant_id="data.id" v-show="currentTab === tabs[1]" />
-    <!-- <StatisticsCard :data="data" v-show="currentTab === tabs[2]" /> -->
+    <LogsCard :plant_id="data.id" :show_harvests="true" v-show="currentTab === tabs[1]" />
+    <StatisticsCard :data="data" v-show="currentTab === tabs[2]" />
   </AuthenticatedLayout>
 </template>

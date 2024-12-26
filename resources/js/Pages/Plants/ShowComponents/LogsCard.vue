@@ -25,13 +25,17 @@ const props = defineProps({
     type: Number,
     default: null,
   },
+  show_harvests: {
+    type: Number,
+    default: false,
+  },
 });
 
 const loading = ref(true);
 const details = ref([]);
 
 const categories = ref([
-  // { name: 'harvest', key: 'harvest', },
+  { name: 'harvest', key: 'harvest', },
   { name: 'height', key: 'height', },
   { name: 'crown_diameter', key: 'crown_diameter', },
   { name: 'trunk_diameter', key: 'trunk_diameter', },
@@ -59,11 +63,11 @@ const detailsFiltered = computed(() => {
 
 onMounted(async () => {
   if (props.plant_id) {
-    details.value = await PlantDetailService.listByPlantId(props.plant_id);
+    details.value = await PlantDetailService.listByPlantId(props.plant_id, props.show_harvests);
   } else if (props.quarter_id) {
-    details.value = await PlantDetailService.listByQuarterId(props.quarter_id);
+    details.value = await PlantDetailService.listByQuarterId(props.quarter_id, props.show_harvests);
   } else if (props.field_id) {
-    details.value = await PlantDetailService.listByFieldId(props.field_id);
+    details.value = await PlantDetailService.listByFieldId(props.field_id, props.show_harvests);
   }
 
   loading.value = false;

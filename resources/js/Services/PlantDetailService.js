@@ -1,20 +1,24 @@
 import axios from 'axios';
 
-const list = async (route) => {
-  const response = await axios.get(route);
+const list = async (route, show_harvests) => {
+  const response = await axios.get(route, {
+    params: {
+      show_harvests,
+    }
+  });
   return response.data.data;
 };
 
-const listByPlantId = async (id) => {
-  return await list(route('plants.details', { id }));
+const listByPlantId = async (id, show_harvests) => {
+  return await list(route('plants.details', { id }), show_harvests);
 };
 
-const listByQuarterId = async (id) => {
-  return await list(route('plants.details.by_quarter', { id }));
+const listByQuarterId = async (id, show_harvests) => {
+  return await list(route('plants.details.by_quarter', { id }), show_harvests);
 };
 
-const listByFieldId = async (id) => {
-  return await list(route('plants.details.by_field', { id }));
+const listByFieldId = async (id, show_harvests) => {
+  return await list(route('plants.details.by_field', { id }), show_harvests);
 };
 
 export default {
