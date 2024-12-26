@@ -2,6 +2,7 @@
 import { ref, toRaw, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Dialog from 'primevue/dialog';
+import ProgressSpinner from 'primevue/progressspinner';
 import QuarterService from '@/Services/QuarterService.js';
 
 const props = defineProps({
@@ -14,7 +15,7 @@ const tableCols = ref([]);
 const dataPlantsPosition = ref([]);
 const dataHarvests = ref([]);
 const open = ref(false);
-const loading = ref(false);
+const loading = ref(true);
 const distributionPlants = ref('');
 const current_plant = ref({});
 const detail_current_plant = ref({});
@@ -99,8 +100,6 @@ const generarColorPorPorcentaje = (porcentaje, colorFin = '#008FFB') => {
   return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
 };
 
-const getHarvestById = (id) => dataHarvests.value.find((harvest) => harvest.id === id);
-
 const getHarvestDetailFromPlant = (plant) => {
   return plant?.data ? Object.values(plant.data).flat() : [];
 };
@@ -115,6 +114,8 @@ onMounted(async () => {
   dataPlantsPosition.value = plantData;
   dataHarvests.value = harvests;
   generatePlantsDispositionWithPosition(plantData);
+
+  loading.value = false;
 });
 </script>
 
@@ -150,11 +151,22 @@ table tbody tr td {
           </div>
         </div>
         <div class="flex justify-end">
-          <Button type="submit" @click="changeDistribution" :label="$t('generics.actions.create')" :loading="loading" />
+          <Button type="submit" @click="changeDistribution" :label="$t('generics.actions.create')" />
         </div>
       </Dialog>
     </div>
-    <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4">
+
+    <div v-show="loading" class="text-center mt-5">
+      <ProgressSpinner
+        style="width: 50px; height: 50px"
+        strokeWidth="8"
+        fill="transparent"
+        animationDuration=".5s"
+        aria-label="Progress Spinner"
+      />
+    </div>
+
+    <div v-show="!loading" class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4">
       <table class="table-heat-map lg:col-span-3 md:col-span-2">
         <thead>
           <tr>
@@ -183,7 +195,7 @@ table tbody tr td {
         <div>Total cosecha (grs).: {{ detail_current_plant.reduce((a, b) => a + b.weight, 0) }}</div>
         <div>Unidades: {{ detail_current_plant.length }}</div>
         <div>
-          <Link :href="route('plants.show', current_plant.id)">
+          <Link :href="route('plants.show', current_plant.id) + '?tab=logs'">
             Ir a ficha de planta <font-awesome-icon :icon="['fas', 'up-right-from-square']" />
           </Link>
         </div>
