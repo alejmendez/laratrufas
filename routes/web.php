@@ -21,6 +21,7 @@ use App\Http\Controllers\SecurityEquipmentsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ImportersController;
 use App\Http\Controllers\GraphsController;
+use App\Http\Controllers\NotificationsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
@@ -75,6 +76,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/quarter/{id}/plants', [QuartersController::class, 'plants'])->name('quarters.plants');
     Route::put('/quarter/{id}/plants/position', [QuartersController::class, 'plants_update_position'])->name('quarters.plants.update.position');
     Route::get('/graphs/{id}/{type}', [GraphsController::class, 'index'])->name('graphs');
+
+    Route::get('/notifications/{type}/unread', [NotificationsController::class, 'unread'])->name('notifications.unread');
 
     Route::resources([
         'users' => UsersController::class,

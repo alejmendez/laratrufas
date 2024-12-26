@@ -14,7 +14,7 @@ class CacheService
     public static function getUserAvatar(User $user)
     {
         return cache()->remember('user_' . $user->id . '_avatar', self::$userDataTtl, function () use ($user) {
-            return $user->avatar === null ? null : (Str::startsWith($user->avatar, 'http') ? $user->avatar : Storage::url($user->avatar));
+            return $user->avatar_url;
         });
     }
 

@@ -1,63 +1,75 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+import ProgressSpinner from 'primevue/progressspinner';
+
+import { listUnread } from '@/Services/TaskNotificationService';
+import { stringToDate, relativeTimeDifference } from '@/Utils/date';
+
 const props = defineProps({
   tasks: Array,
 });
-const messages = [
-  {
-    id: 1,
-    img: 'https://i.pravatar.cc/35?img=1',
-    text: 'Riego con fertilizantes cambió de estado a terminado',
-    dateRelative: 'Hoy',
-  },
-  {
-    id: 2,
-    img: 'https://i.pravatar.cc/35?img=1',
-    text: 'Riego con fertilizantes cambió de estado a terminado',
-    dateRelative: '23/02/24',
-  },
-  {
-    id: 3,
-    img: 'https://i.pravatar.cc/35?img=2',
-    text: 'Tarea de insumos esta vencida',
-    dateRelative: '23/02/24',
-  },
-  {
-    id: 4,
-    img: 'https://i.pravatar.cc/35?img=3',
-    text: 'Tarea de insumos esta vencida',
-    dateRelative: '23/02/24',
-  },
-  {
-    id: 5,
-    img: 'https://i.pravatar.cc/35?img=4',
-    text: 'Riego con fertilizantes cambió de estado a terminado',
-    dateRelative: '20/02/24',
-  },
-  {
-    id: 6,
-    img: 'https://i.pravatar.cc/35?img=5',
-    text: 'Riego con fertilizantes cambió de estado a terminado',
-    dateRelative: '20/02/24',
-  },
-  {
-    id: 7,
-    img: 'https://i.pravatar.cc/35?img=6',
-    text: 'Riego con fertilizantes cambió de estado a terminado',
-    dateRelative: '20/02/24',
-  },
-];
+
+const { t } = useI18n();
+const messages = ref([]);
+const today = new Date();
+const countMessagesUnRead = ref(0);
+const loading = ref(true);
+
+const messagesRelativeTimeDifference = (message) => {
+  return relativeTimeDifference(t, today, stringToDate(message.created_at));
+}
+
+onMounted(async () => {
+  const response = await listUnread();
+  messages.value = response.messages;
+  countMessagesUnRead.value = response.countMessagesUnRead;
+  loading.value = false;
+});
 </script>
 
 <template>
   <div class="p-5 rounded-xl bg-white dark:bg-gray-700 shadow-sm border text-neutral-800 dark:text-gray-100 border-gray-200 dark:border-gray-700">
-    <h5 class="font-bold">Mensajes</h5>
-
-    <div class="mt-5" v-for="message in messages" :key="message.id">
-      <img class="w-[35px] rounded-full border-2 border-gray-50 float-left me-2" :src="message.img" alt="" />
-      <div>
-        <span class="text-gray-500 font-bold text-[12px] float-right">{{ message.dateRelative }}</span>
-        {{ message.text }}
+    <div class="flex justify-between">
+      <div class="font-bold">
+        {{ t('dashboard.messages') }}
+        <span
+          v-show="countMessagesUnRead > 0"
+          class="text-xs bg-orange-700 text-gray-100 rounded-full px-1">
+          {{ countMessagesUnRead }}
+        </span>
       </div>
+
+      <div class="flex" v-show="!loading">
+        <div class="me-5" v-show="messages.prev_page_url != null">
+          <i class="pi pi-arrow-left hover:text-gray-500 dark:hover:text-gray-300"></i>
+        </div>
+        <div v-show="messages.next_page_url != null">
+          <i class="pi pi-arrow-right hover:text-gray-500 dark:hover:text-gray-300"></i>
+        </div>
+      </div>
+    </div>
+
+    <div v-show="loading" class="text-center mt-5">
+      <ProgressSpinner
+        style="width: 50px; height: 50px"
+        strokeWidth="8"
+        fill="transparent"
+        animationDuration=".5s"
+        aria-label="Progress Spinner"
+      />
+    </div>
+
+    <div class="mt-5" v-show="!loading" v-for="message in messages.data" :key="message.id">
+      <Link :href="route('tasks.show', { id: message.task_id })" >
+        <img class="w-[35px] rounded-full border-2 border-gray-50 float-left me-2 mt-2" :src="message.notifier_user_avatar" alt="" />
+        <div>
+          <span class="text-gray-500 font-bold text-[12px] float-right" :class="{ 'font-bold': message.read_at === null }">{{ messagesRelativeTimeDifference(message) }}</span>
+          <div class="line-clamp-2" :title="message.description">
+            {{ message.description }}
+          </div>
+        </div>
+      </Link>
     </div>
   </div>
 </template>

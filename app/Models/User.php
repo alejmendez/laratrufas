@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Str;
 
 use App\Observers\UserObserver;
 
@@ -46,11 +47,7 @@ class User extends Authenticatable
 
     public function getAvatarUrlAttribute(): ?string
     {
-        if ($this->avatar == null) {
-            return '';
-        }
-
-        return Storage::url($this->avatar);
+        return $this->avatar === null ? null : (Str::startsWith($this->avatar, 'http') ? $this->avatar : Storage::url($this->avatar));
     }
 
     public function harvests()

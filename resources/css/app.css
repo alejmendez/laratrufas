@@ -167,6 +167,10 @@
     @apply text-[--p-primary-color];
   }
 
+  .dark .mention {
+    @apply text-slate-300 bg-gray-500;
+  }
+
   .card-section {
     @apply bg-gray-50 text-gray-900
   }

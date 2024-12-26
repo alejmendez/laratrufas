@@ -66,11 +66,24 @@ class CreateTask
 
     protected static function notify($task)
     {
-        $user = User::find($task->responsible_id);
-        if (!$user) {
-            return;
-        }
+        $current_user_id = auth()->id();
+        $userIds = self::get_user_ids_from_comments($task->comments);
+        $userIds[] = $task->responsible_id;
+        $users = User::whereIn('id', array_unique($userIds))->get();
 
-        $user->notify(new TaskNotification($task));
+        foreach ($users as $user) {
+            $user->notify(new TaskNotification([
+                'task_id' => $task->id,
+                'task_name' => $task->name,
+                'task_comment' => strip_tags($task->comments),
+                'notifier_user_id' => $current_user_id,
+            ]));
+        }
+    }
+
+    protected static function get_user_ids_from_comments($comments)
+    {
+        preg_match_all('/<span class="mention"[^>]*data-id="(\d+)"[^>]*>/', $comments, $matches);
+        return $matches[1];
     }
 }

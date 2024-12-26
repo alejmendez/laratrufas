@@ -11,6 +11,7 @@ use App\Services\Tasks\DeleteTask;
 use App\Services\Tasks\FindTask;
 use App\Services\Tasks\ListTask;
 use App\Services\Tasks\UpdateTask;
+use App\Services\Notifications\MarkTaskNotificationAsRead;
 use Inertia\Inertia;
 
 class TasksController extends Controller
@@ -61,6 +62,8 @@ class TasksController extends Controller
     public function show(string $id)
     {
         $task = FindTask::call($id);
+        $current_user = auth()->user();
+        MarkTaskNotificationAsRead::call($task, $current_user);
 
         return Inertia::render('Tasks/Show', [
             'data' => new TaskResource($task),

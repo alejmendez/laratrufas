@@ -1,4 +1,5 @@
 export default {
+  messages: 'Mensajes',
   form: {
     field_id: {
       label: 'Campo',

@@ -10,9 +10,10 @@ class TaskNotification extends Notification
 {
     use Queueable;
 
-    public function __construct()
+    protected $task_data;
+    public function __construct($task_data)
     {
-        //
+        $this->task_data = $task_data;
     }
 
     public function via(object $notifiable): array
@@ -20,11 +21,8 @@ class TaskNotification extends Notification
         return ['database'];
     }
 
-    public function toArray(object $task): array
+    public function toArray(object $user): array
     {
-        return [
-            'task_id' => $task->id,
-            'task_name' => $task->name,
-        ];
+        return $this->task_data;
     }
 }
