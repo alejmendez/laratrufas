@@ -1,5 +1,6 @@
 export default {
   messages: 'Mensajes',
+  no_messages: 'No tienes mensajes',
   form: {
     field_id: {
       label: 'Campo',

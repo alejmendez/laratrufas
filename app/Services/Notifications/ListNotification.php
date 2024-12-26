@@ -19,7 +19,7 @@ class ListNotification
         $notifications = Notification::where('notifiable_id', $user_id)
             ->where('notifiable_type', 'App\Models\User')
             ->where('type', self::$types[$type] ?? '')
-            ->simplePaginate(self::$per_page);
+            ->paginate(self::$per_page);
 
         return [
             'messages' => self::formatData($notifications),

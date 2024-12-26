@@ -60,6 +60,12 @@ onMounted(async () => {
       />
     </div>
 
+    <div class="mt-5" v-show="!loading && messages.total == 0">
+      <div class="text-center">
+        {{ t('dashboard.no_messages') }}
+      </div>
+    </div>
+
     <div class="mt-5" v-show="!loading" v-for="message in messages.data" :key="message.id">
       <Link :href="route('tasks.show', { id: message.task_id })" >
         <img class="w-[35px] rounded-full border-2 border-gray-50 float-left me-2 mt-2" :src="message.notifier_user_avatar" alt="" />
