@@ -31,7 +31,7 @@ const loading = ref(true);
 const details = ref([]);
 
 const categories = ref([
-  { name: 'harvest', key: 'harvest', },
+  // { name: 'harvest', key: 'harvest', },
   { name: 'height', key: 'height', },
   { name: 'crown_diameter', key: 'crown_diameter', },
   { name: 'trunk_diameter', key: 'trunk_diameter', },
