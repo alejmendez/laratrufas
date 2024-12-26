@@ -230,6 +230,18 @@
     background-color: var(--p-red-600);
     border-color: var(--p-red-600);
   }
+
+  .dark .ql-mention-list-container {
+    @apply bg-gray-700 text-gray-100 border-gray-800;
+  }
+
+  .dark .ql-mention-list-container .selected {
+    @apply bg-gray-600 text-gray-100;
+  }
+
+  .dark .mention {
+    @apply bg-gray-600 text-gray-100;
+  }
 }
 
 .p-toast {
