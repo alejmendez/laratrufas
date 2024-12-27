@@ -13,7 +13,9 @@ class GraphData
         if ($typeStr->startsWith('field-')) {
             return GraphDataField::call($id, $year, $type, $filters);
         } elseif ($typeStr->startsWith('quarter-')) {
-            return GraphDataField::call($id, $year, $type, $filters);
+            return GraphDataQuarter::call($id, $year, $type, $filters);
+        } elseif ($typeStr->startsWith('plant-')) {
+            return GraphDataPlant::call($id, $year, $type, $filters);
         }
     }
 }

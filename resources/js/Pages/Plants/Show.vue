@@ -70,6 +70,6 @@ const deleteHandler = async (id) => {
 
     <FileCard :data="data" v-show="currentTab === tabs[0]" />
     <LogsCard :plant_id="data.id" :show_harvests="true" v-show="currentTab === tabs[1]" />
-    <StatisticsCard :data="data" v-show="currentTab === tabs[2]" />
+    <StatisticsCard :plant="data" v-show="currentTab === tabs[2]" />
   </AuthenticatedLayout>
 </template>
