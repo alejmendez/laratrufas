@@ -137,6 +137,34 @@ table tbody tr td {
   line-height: 0.5;
   background-color: var(--p-neutral-300);
   cursor: pointer;
+  border-left: solid 1px #ddd;
+}
+
+table tbody tr td.border_cell {
+  border: solid 1px #ccc;
+}
+
+table tbody tr td.border_cell_left {
+  border-left: solid 1px #ccc;
+}
+
+.dark table {
+  border: solid 2px var(--p-gray-800);
+}
+.dark table thead tr th {
+  background-color: var(--p-gray-500);
+}
+
+.dark table tbody tr td {
+  background-color: var(--p-gray-500);
+}
+
+.dark table tbody tr td.border_cell {
+  border: solid 1px #ccc;
+}
+
+.dark table tbody tr td.border_cell_left {
+  border-left: solid 1px #ccc;
 }
 </style>
 
@@ -179,10 +207,12 @@ table tbody tr td {
               v-for="plant in plantRow"
               :key="plant?.code || 'empty'"
               v-html="'&nbsp;'"
+              :class="{
+                border_cell: plant?.code,
+                border_cell_left: plant?.code,
+              }"
               :style="{
                 backgroundColor: plant?.color,
-                border: plant?.code ? 'solid 1px #ccc' : '',
-                borderLeft: plant?.code ? 'solid 1px #ccc' : 'solid 1px #ddd',
               }"
               v-tooltip.top="plant?.code"
               @click="setCurrentPlant(plant)"
