@@ -18,6 +18,7 @@ const types_graphs = ref([
   { value: 'field-sales-vs-shrinkage', text: 'Ventas vs merma', type: 'area' },
   { value: 'field-type-of-shrinkage', text: 'Tipo de merma', type: 'bar_percent' },
   { value: 'field-comparative-of-selling-price-x-kgs', text: 'Comparativo de precio de venta x Kgs', type: 'area' },
+  { value: 'quarter-on-demand-production', text: 'Cosecha de cuarteles por semana', type: 'area' },
 ]);
 
 const type_graph = ref(types_graphs.value[0]);
@@ -131,7 +132,12 @@ const filterHandler = async () => {
     return;
   }
 
-  const _chartOption = { ...chartOptions[type_graph.value.type] };
+  const _chartOption = {
+    ...chartOptions[type_graph.value.type],
+    theme: {
+      mode: localStorage.themeType,
+    }
+  };
 
   _chartOption.title.text = response.title;
 
