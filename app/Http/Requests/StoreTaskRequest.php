@@ -39,7 +39,7 @@ class StoreTaskRequest extends FormRequest
             'rows.*.value' => 'nullable|string',
             'responsible_id' => 'required',
             'responsible_id.value' => 'required|exists:users,id',
-            'comments' => 'nullable|string',
+            'comment' => 'nullable|string',
             // Additional validation rules for related tables
             'tools' => 'nullable|array',
             'tools.*.value' => 'exists:tools,id',

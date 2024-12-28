@@ -23,7 +23,6 @@ class UpdateTask
         $task->field_id = $data['field_id']['value'];
         $task->rows = collect($data['rows'])->map(fn ($q) => $q['value'])->toArray();
         $task->responsible_id = $data['responsible_id']['value'];
-        $task->comments = $data['comments'];
         $task->save();
 
         self::syncRelationship($task, 'quarters', $data['quarter_id'] ?? []);
@@ -33,8 +32,6 @@ class UpdateTask
         self::syncRelationship($task, 'machineries', $data['machineries'] ?? []);
 
         self::saveSupplies($task, $data['supplies'] ?? []);
-
-        self::notify($task);
 
         return $task;
     }
@@ -69,28 +66,5 @@ class UpdateTask
 
             $supply->save();
         }
-    }
-
-    protected static function notify($task)
-    {
-        $current_user_id = auth()->id();
-        $userIds = self::get_user_ids_from_comments($task->comments);
-        $userIds[] = $task->responsible_id;
-        $users = User::whereIn('id', array_unique($userIds))->get();
-
-        foreach ($users as $user) {
-            $user->notify(new TaskNotification([
-                'task_id' => $task->id,
-                'task_name' => $task->name,
-                'task_comment' => strip_tags($task->comments),
-                'notifier_user_id' => $current_user_id,
-            ]));
-        }
-    }
-
-    protected static function get_user_ids_from_comments($comments)
-    {
-        preg_match_all('/<span class="mention"[^>]*data-id="(\d+)"[^>]*>/', $comments, $matches);
-        return $matches[1];
     }
 }

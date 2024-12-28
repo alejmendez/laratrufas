@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('task_comments', function (Blueprint $table) {
             $table->id();
-            $table->text('comments')->nullable();
+            $table->text('comment')->nullable();
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
@@ -27,7 +27,7 @@ return new class extends Migration
         $tasks = DB::table('tasks')->whereNotNull('comments')->get();
         foreach ($tasks as $task) {
             DB::table('task_comments')->insert([
-                'comments' => $task->comments,
+                'comment' => $task->comments,
                 'user_id' => $task->responsible_id,
                 'task_id' => $task->id,
                 'created_at' => $task->created_at,

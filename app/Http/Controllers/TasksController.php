@@ -51,7 +51,9 @@ class TasksController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        CreateTask::call($request->validated());
+        $data = $request->validated();
+        $task = CreateTask::call($data);
+        NotifyTaskComment::call($task, $data['comment'], auth()->user());
 
         return redirect()->route('tasks.index')->with('toast', 'Task created.');
     }

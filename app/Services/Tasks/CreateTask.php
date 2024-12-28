@@ -5,6 +5,7 @@ namespace App\Services\Tasks;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\SupplyTask;
+use App\Models\TaskComment;
 use App\Notifications\TaskNotification;
 
 class CreateTask
@@ -23,8 +24,15 @@ class CreateTask
         $task->field_id = $data['field_id']['value'];
         $task->rows = collect($data['rows'])->map(fn ($q) => $q['value'])->toArray();
         $task->responsible_id = $data['responsible_id']['value'];
-        $task->comments = $data['comments'];
         $task->save();
+
+        if (!empty($data['comment'])) {
+            $comment = new TaskComment();
+            $comment->comment = $data['comment'];
+            $comment->user_id = auth()->id();
+            $comment->task_id = $task->id;
+            $comment->save();
+        }
 
         self::syncRelationship($task, 'quarters', $data['quarter_id'] ?? []);
         self::syncRelationship($task, 'plants', $data['plant_id'] ?? []);
@@ -34,7 +42,7 @@ class CreateTask
 
         self::saveSupplies($task, $data['supplies'] ?? []);
 
-        self::notify($task);
+        self::notify($task, $data['comment'] ?? '');
 
         return $task;
     }
@@ -64,10 +72,10 @@ class CreateTask
         }
     }
 
-    protected static function notify($task)
+    protected static function notify($task, $comment)
     {
         $current_user_id = auth()->id();
-        $userIds = self::get_user_ids_from_comments($task->comments);
+        $userIds = self::get_user_ids_from_comment($comment);
         $userIds[] = $task->responsible_id;
         $users = User::whereIn('id', array_unique($userIds))->get();
 
@@ -75,15 +83,15 @@ class CreateTask
             $user->notify(new TaskNotification([
                 'task_id' => $task->id,
                 'task_name' => $task->name,
-                'task_comment' => strip_tags($task->comments),
+                'task_comment' => strip_tags($comment),
                 'notifier_user_id' => $current_user_id,
             ]));
         }
     }
 
-    protected static function get_user_ids_from_comments($comments)
+    protected static function get_user_ids_from_comment($comment)
     {
-        preg_match_all('/<span class="mention"[^>]*data-id="(\d+)"[^>]*>/', $comments, $matches);
+        preg_match_all('/<span class="mention"[^>]*data-id="(\d+)"[^>]*>/', $comment, $matches);
         return $matches[1];
     }
 }

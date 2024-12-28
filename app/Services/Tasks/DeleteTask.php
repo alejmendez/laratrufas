@@ -8,6 +8,11 @@ class DeleteTask
 {
     public static function call($id): void
     {
-        Task::destroy($id);
+        $task = Task::find($id);
+
+        if ($task) {
+            $task->comments()->delete();
+            $task->delete();
+        }
     }
 }
