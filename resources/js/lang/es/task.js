@@ -21,7 +21,7 @@ export default {
     },
     repeat_type: {
       options: {
-        diary: 'Diario',
+        daily: 'Diario',
         weekly: 'Semanalmente',
         monthly: 'Mensualmente',
       },
@@ -110,7 +110,13 @@ export default {
       },
     },
     comments: {
+      entity: 'comentario',
       placeholder: 'Ingrese comentarios adicionales',
+      edit: 'Editar',
+      delete: 'Eliminar',
+      save: 'Guardar',
+      cancel: 'Cancelar',
+      new_comment: 'Agregar nuevo comentario',
     },
   },
   show: {

@@ -16,6 +16,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuartersController;
 use App\Http\Controllers\SelectsController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\TaskCommentsController;
 use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\SecurityEquipmentsController;
 use App\Http\Controllers\UsersController;
@@ -78,6 +79,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/graphs/{id}/{type}', [GraphsController::class, 'index'])->name('graphs');
 
     Route::get('/notifications/{type}/unread', [NotificationsController::class, 'unread'])->name('notifications.unread');
+
+    Route::post('/task/comments', [TaskCommentsController::class, 'store'])->name('task.comments.store');
+    Route::put('/task/comments/{id}', [TaskCommentsController::class, 'update'])->name('task.comments.update');
+    Route::delete('/task/comments/{id}', [TaskCommentsController::class, 'destroy'])->name('task.comments.destroy');
 
     Route::resources([
         'users' => UsersController::class,

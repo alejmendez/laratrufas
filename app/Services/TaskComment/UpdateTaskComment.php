@@ -17,7 +17,7 @@ class UpdateTaskComment
             );
         }
 
-        $taskComment->comment = $data['comment'];
+        $taskComment->comment = preg_replace('/<p><br><\/p>(\s*<p><br><\/p>)*$/', '', $data['comment']);
         $taskComment->save();
 
         return $taskComment->fresh();

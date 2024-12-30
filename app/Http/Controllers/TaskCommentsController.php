@@ -4,7 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaskCommentRequest;
 use App\Http\Requests\UpdateTaskCommentRequest;
+
+use App\Services\TaskComment\CreateTaskComment;
+use App\Services\TaskComment\DeleteTaskComment;
+use App\Services\TaskComment\UpdateTaskComment;
 use App\Services\TaskComment\NotifyTaskComment;
+
+use App\Http\Resources\TaskCommentResource;
 use Inertia\Inertia;
 
 class TaskCommentsController extends Controller
@@ -15,10 +21,9 @@ class TaskCommentsController extends Controller
         $taskComment = CreateTaskComment::call($data, auth()->user());
         NotifyTaskComment::call($taskComment->task, $data['comment'], auth()->user());
 
-        return [
-            'status' => 'success',
-            'message' => 'Task comment created.',
-        ];
+        return response()->json([
+            'data' => new TaskCommentResource($taskComment),
+        ]);
     }
 
     /**
@@ -30,10 +35,9 @@ class TaskCommentsController extends Controller
         $taskComment = UpdateTaskComment::call($id, $data);
         NotifyTaskComment::call($taskComment->task, $data['comment'], auth()->user());
 
-        return [
-            'status' => 'success',
-            'message' => 'Task comment updated.',
-        ];
+        return response()->json([
+            'data' => new TaskCommentResource($taskComment),
+        ]);
     }
 
     /**

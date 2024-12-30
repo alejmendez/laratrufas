@@ -47,6 +47,12 @@ watch(
 watch(
   () => form.quarter_id,
   async (quarter_id) => {
+    if (quarter_id === null) {
+      plants.value = [];
+      form.plant_id = null;
+      return;
+    }
+
     plants.value = await getDataSelect('plant', { quarter_id: quarter_id.map((a) => a.value), row: form.rows.map((a) => a.value) });
     form.plant_id = null;
   },

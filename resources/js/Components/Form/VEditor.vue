@@ -3,19 +3,12 @@ import { useAttrs } from 'vue';
 
 import Editor from 'primevue/editor';
 
-import Quill from 'quill';
-import { Mention, MentionBlot } from 'quill-mention';
-
-Quill.register({ 'blots/mention': MentionBlot, 'modules/mention': Mention });
-
 const model = defineModel();
 const attrs = useAttrs();
 
 const props = defineProps({
   options: Array,
 });
-
-console.log(props.options);
 
 const emit = defineEmits(['change', 'input', 'focus', 'blur', 'keydown']);
 

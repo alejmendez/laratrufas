@@ -11,6 +11,7 @@ use App\Services\Tasks\DeleteTask;
 use App\Services\Tasks\FindTask;
 use App\Services\Tasks\ListTask;
 use App\Services\Tasks\UpdateTask;
+use App\Services\TaskComment\NotifyTaskComment;
 use App\Services\Notifications\MarkTaskNotificationAsRead;
 use Inertia\Inertia;
 
@@ -69,6 +70,13 @@ class TasksController extends Controller
 
         return Inertia::render('Tasks/Show', [
             'data' => new TaskResource($task),
+            'fields' => ListEntity::call('field'),
+            'quarters' => ListEntity::call('quarter', ['field_id' => $task->field_id]),
+            'plants' => ListEntity::call('plant', ['quarter_id' => $task->quarters->map(fn ($q) => $q->id)->toArray()]),
+            'responsibles' => ListEntity::call('responsible'),
+            'tools' => ListEntity::call('tool'),
+            'security_equipments' => ListEntity::call('security_equipment'),
+            'machineries' => ListEntity::call('machinery'),
         ]);
     }
 

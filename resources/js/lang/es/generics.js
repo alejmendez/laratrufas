@@ -16,9 +16,10 @@ export default {
   tables: {
     search: 'Buscar',
     actions: 'Acciones',
+    entity: 'registro',
     confirm: {
-      delete_header: 'Eliminar registro',
-      delete: '¿Está seguro que desea eliminar el registro?',
+      delete_header: 'Eliminar {entity}',
+      delete: '¿Está seguro que desea eliminar el {entity}?',
       confirmButton: 'Aceptar',
       denyButton: 'Cancelar',
     },

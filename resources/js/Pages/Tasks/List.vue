@@ -14,6 +14,7 @@ import { useI18n } from 'vue-i18n';
 import Datatable from '@/Components/Table/Datatable.vue';
 import TaskService from '@/Services/TaskService.js';
 import { dateToString } from '@/Utils/date.js';
+import { deleteRowTable } from '@/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
 
 const props = defineProps({

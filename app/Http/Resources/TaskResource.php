@@ -32,7 +32,14 @@ class TaskResource extends JsonResource
             'plants' => $this->plants->pluck('id'),
             'responsible_id' => $this->responsible->id,
             'note' => $this->note,
-            'comments' => $this->comments,
+            'comments' => $this->comments->sortBy('created_at')->map(fn ($comment) => [
+                'id' => $comment->id,
+                'comment' => $comment->comment,
+                'user_id' => $comment->user->id,
+                'user_name' => $comment->user->full_name,
+                'user_avatar' => $comment->user->avatar_url,
+                'created_at' => $comment->created_at,
+            ])->toArray(),
             // Additional validation rules for related tables
             'tools' => $this->tools->map(fn ($tool) => [
                 'value' => $tool->id,

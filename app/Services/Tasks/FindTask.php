@@ -9,12 +9,11 @@ class FindTask
 {
     public static function call($id)
     {
-        $task = Task::findOrFail($id);
+        $task = Task::with('comments', 'responsible')->findOrFail($id);
 
-        $user = User::find($task->responsible_id);
         $current_user = auth()->user();
-        if ($user && $user->id === $current_user->id) {
-            $unreadNotifications = $user->unreadNotifications;
+        if ($task->responsible && $task->responsible->id === $current_user->id) {
+            $unreadNotifications = $task->responsible->unreadNotifications;
             $taskCurrentUserUnreadNotifications = $unreadNotifications->where('data.task_id', $current_user->id);
             foreach ($taskCurrentUserUnreadNotifications as $notification) {
                 $notification->markAsRead();

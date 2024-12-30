@@ -45,7 +45,7 @@ class Task extends Model
 
     public function comments()
     {
-        return $this->belongsToMany(Comment::class, 'comment_task');
+        return $this->hasMany(TaskComment::class);
     }
 
     public function quarters()

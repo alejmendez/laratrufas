@@ -9,9 +9,13 @@ use App\Notifications\TaskNotification;
 
 class NotifyTaskComment
 {
-    public static function call(Task $task, TaskComment $taskComment, User $commentator)
+    public static function call(Task $task, String | null $taskComment, User $commentator)
     {
-        $userIds = self::get_user_ids_from_comment($taskComment->comment);
+        if (!$taskComment) {
+            return;
+        }
+
+        $userIds = self::get_user_ids_from_comment($taskComment);
         $userIds[] = $task->responsible_id;
         $users = User::whereIn('id', array_unique($userIds))->get();
 
@@ -19,7 +23,7 @@ class NotifyTaskComment
             $user->notify(new TaskNotification([
                 'task_id' => $task->id,
                 'task_name' => $task->name,
-                'task_comment' => strip_tags($taskComment->comment),
+                'task_comment' => strip_tags($taskComment),
                 'notifier_user_id' => $commentator->id,
             ]));
         }

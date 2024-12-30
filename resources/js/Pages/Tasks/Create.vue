@@ -15,9 +15,10 @@ const props = defineProps({
 });
 
 const form = useForm({
+  id: null,
   name: null,
   repeat_number: '1',
-  repeat_type: { value: 'diary', text: t('task.form.repeat_type.options.diary') },
+  repeat_type: { value: 'daily', text: t('task.form.repeat_type.options.daily') },
   status: { value: 'to_begin', text: t('task.form.status.options.to_begin') },
   priority: { value: 'when_possible', text: t('task.form.priority.options.when_possible') },
   start_date: null,
@@ -28,7 +29,17 @@ const form = useForm({
   rows: [],
   responsible_id: [],
   note: null,
-  comments: null,
+  comment: null,
+  comments: [
+    {
+      id: null,
+      comment: null,
+      user_id: null,
+      user_name: null,
+      user_avatar: null,
+      created_at: null,
+    },
+  ],
   tools: [],
   security_equipments: [],
   machineries: [],
