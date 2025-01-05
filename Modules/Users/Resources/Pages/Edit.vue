@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import FormUser from '@/Pages/Users/Form.vue';
+import FormUser from '@Users/Components/Form.vue';
 
 const { t } = useI18n();
 

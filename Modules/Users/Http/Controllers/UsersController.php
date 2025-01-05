@@ -27,7 +27,7 @@ class UsersController extends Controller
             return response()->json(ListUser::call($params));
         }
 
-        return Inertia::render('Users/List', [
+        return Inertia::render('Users::List', [
             'toast' => session('toast'),
         ]);
     }
@@ -37,7 +37,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Users/Create', [
+        return Inertia::render('Users::Create', [
             'roles' => ListEntity::call('role'),
         ]);
     }
@@ -61,7 +61,7 @@ class UsersController extends Controller
     {
         $user = FindUser::call($id);
 
-        return Inertia::render('Users/Show', [
+        return Inertia::render('Users::Show', [
             'data' => new UserResource($user),
         ]);
     }
@@ -73,7 +73,7 @@ class UsersController extends Controller
     {
         $user = FindUser::call($id);
 
-        return Inertia::render('Users/Edit', [
+        return Inertia::render('Users::Edit', [
             'data' => new UserResource($user),
             'roles' => ListEntity::call('role'),
         ]);
