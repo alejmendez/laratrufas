@@ -117,6 +117,7 @@ const isInvalid = props.message !== '' && props.message !== undefined;
           v-bind="attrs"
           v-model="model"
           fluid
+          :type="props.type"
           :invalid="isInvalid"
           @update:modelValue="emit('change', $event)"
           @input="emit('input', $event)"

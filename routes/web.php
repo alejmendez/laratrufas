@@ -98,5 +98,5 @@ Route::middleware('auth')->group(function () {
     ]);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__.'/../Modules/Auth/Routes/web.php';
 require __DIR__.'/../Modules/Users/Routes/web.php';
