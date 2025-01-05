@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Users;
+namespace Modules\Users\Services;
 
-use App\Models\User;
+use Modules\Users\Models\User;
 use App\Services\Caches\CacheService;
 
 class UpdateUser

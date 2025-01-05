@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         Auth::provider('cached-auth-user', function ($app) {
             return new CachedAuthUserProvider(
                 $app['hash'],
-                App\Models\User::class
+                Modules\Users\Models\User::class
             );
         });
     }

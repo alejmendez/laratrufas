@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Field;
 use App\Models\Quarter;
-use App\Models\User;
+use Modules\Users\Models\User;
 use Illuminate\Database\Seeder;
 
 class QuartersSeeder extends Seeder

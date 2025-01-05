@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace Modules\Users\Observers;
 
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Cache;

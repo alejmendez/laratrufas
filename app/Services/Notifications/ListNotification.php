@@ -2,7 +2,7 @@
 
 namespace App\Services\Notifications;
 
-use App\Models\User;
+use Modules\Users\Models\User;
 use App\Models\Notification;
 
 class ListNotification
@@ -17,7 +17,7 @@ class ListNotification
     {
         $user_id = auth()->id();
         $notifications = Notification::where('notifiable_id', $user_id)
-            ->where('notifiable_type', 'App\Models\User')
+            ->where('notifiable_type', 'Modules\Users\Models\User')
             ->where('type', self::$types[$type] ?? '')
             ->paginate(self::$per_page);
 

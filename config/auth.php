@@ -62,7 +62,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'cached-auth-user',
-            'model' => App\Models\User::class,
+            'model' => Modules\Users\Models\User::class,
         ],
 
         // 'users' => [

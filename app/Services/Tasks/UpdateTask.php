@@ -3,7 +3,7 @@
 namespace App\Services\Tasks;
 
 use App\Models\Task;
-use App\Models\User;
+use Modules\Users\Models\User;
 use App\Models\SupplyTask;
 use App\Notifications\TaskNotification;
 

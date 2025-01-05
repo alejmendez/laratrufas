@@ -2,7 +2,7 @@
 
 namespace App\Services\TaskComment;
 
-use App\Models\User;
+use Modules\Users\Models\User;
 use App\Models\Task;
 use App\Models\TaskComment;
 use App\Notifications\TaskNotification;

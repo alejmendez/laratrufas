@@ -3,7 +3,7 @@
 namespace App\Services\TaskComment;
 
 use App\Models\TaskComment;
-use App\Models\User;
+use Modules\Users\Models\User;
 
 class CreateTaskComment
 {

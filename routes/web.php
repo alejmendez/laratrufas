@@ -19,7 +19,6 @@ use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TaskCommentsController;
 use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\SecurityEquipmentsController;
-use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ImportersController;
 use App\Http\Controllers\GraphsController;
 use App\Http\Controllers\NotificationsController;
@@ -85,7 +84,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/task/comments/{id}', [TaskCommentsController::class, 'destroy'])->name('task.comments.destroy');
 
     Route::resources([
-        'users' => UsersController::class,
         'fields' => FieldsController::class,
         'quarters' => QuartersController::class,
         'plants' => PlantsController::class,
@@ -101,3 +99,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/../Modules/Users/Routes/web.php';

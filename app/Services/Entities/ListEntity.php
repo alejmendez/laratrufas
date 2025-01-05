@@ -4,7 +4,7 @@ namespace App\Services\Entities;
 
 use App\Models\Dog;
 use App\Models\Tool;
-use App\Models\User;
+use Modules\Users\Models\User;
 use App\Models\Field;
 use App\Models\Plant;
 use App\Models\Harvest;

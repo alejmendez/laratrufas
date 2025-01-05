@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Users\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Controllers\Controller;
+use Modules\Users\Http\Requests\StoreUserRequest;
+use Modules\Users\Http\Requests\UpdateUserRequest;
+use Modules\Users\Http\Resources\UserResource;
 use App\Services\Entities\ListEntity;
-use App\Services\Users\CreateUser;
-use App\Services\Users\DeleteUser;
-use App\Services\Users\FindUser;
-use App\Services\Users\ListUser;
-use App\Services\Users\UpdateUser;
+use Modules\Users\Services\CreateUser;
+use Modules\Users\Services\DeleteUser;
+use Modules\Users\Services\FindUser;
+use Modules\Users\Services\ListUser;
+use Modules\Users\Services\UpdateUser;
 use Inertia\Inertia;
 
 class UsersController extends Controller

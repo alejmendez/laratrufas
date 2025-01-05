@@ -4,7 +4,7 @@ namespace App\Services\Caches;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use App\Models\User;
+use Modules\Users\Models\User;
 
 class CacheService
 {

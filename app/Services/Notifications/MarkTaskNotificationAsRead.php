@@ -2,7 +2,7 @@
 
 namespace App\Services\Notifications;
 
-use App\Models\User;
+use Modules\Users\Models\User;
 
 class MarkTaskNotificationAsRead
 {
