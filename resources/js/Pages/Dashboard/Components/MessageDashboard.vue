@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import ProgressSpinner from 'primevue/progressspinner';
 
-import { listUnread } from '@/Services/TaskNotificationService';
+import { listUnread } from '@Tasks/Services/TaskNotificationService';
 import { stringToDate, relativeTimeDifference } from '@/Utils/date';
 
 const props = defineProps({

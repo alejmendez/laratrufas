@@ -2,7 +2,7 @@
 
 namespace App\Services\Dashboard;
 
-use App\Models\Task;
+use Modules\Tasks\Models\Task;
 
 use App\Models\Harvest;
 use App\Models\Liquidation;

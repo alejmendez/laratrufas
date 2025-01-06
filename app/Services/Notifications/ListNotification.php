@@ -10,7 +10,7 @@ class ListNotification
     protected static $per_page = 4;
 
     protected static $types = [
-        'task' => 'App\Notifications\TaskNotification',
+        'task' => 'Modules\Tasks\Notifications\TaskNotification',
     ];
 
     public static function call($user, $type)

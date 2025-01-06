@@ -15,8 +15,6 @@ use App\Http\Controllers\PlantTypesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuartersController;
 use App\Http\Controllers\SelectsController;
-use App\Http\Controllers\TasksController;
-use App\Http\Controllers\TaskCommentsController;
 use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\SecurityEquipmentsController;
 use App\Http\Controllers\ImportersController;
@@ -79,10 +77,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/notifications/{type}/unread', [NotificationsController::class, 'unread'])->name('notifications.unread');
 
-    Route::post('/task/comments', [TaskCommentsController::class, 'store'])->name('task.comments.store');
-    Route::put('/task/comments/{id}', [TaskCommentsController::class, 'update'])->name('task.comments.update');
-    Route::delete('/task/comments/{id}', [TaskCommentsController::class, 'destroy'])->name('task.comments.destroy');
-
     Route::resources([
         'fields' => FieldsController::class,
         'quarters' => QuartersController::class,
@@ -91,7 +85,6 @@ Route::middleware('auth')->group(function () {
         'harvests' => HarvestsController::class,
         'tools' => ToolsController::class,
         'machineries' => MachineriesController::class,
-        'tasks' => TasksController::class,
         'batches' => BatchesController::class,
         'liquidations' => LiquidationsController::class,
         'security_equipments' => SecurityEquipmentsController::class,
@@ -100,3 +93,4 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/../Modules/Auth/Routes/web.php';
 require __DIR__.'/../Modules/Users/Routes/web.php';
+require __DIR__.'/../Modules/Tasks/Routes/web.php';

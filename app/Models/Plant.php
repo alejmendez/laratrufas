@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use App\Models\Task;
+use Modules\Tasks\Models\Task;
 use App\Models\Quarter;
 use App\Models\PlantType;
 use App\Models\HarvestDetail;

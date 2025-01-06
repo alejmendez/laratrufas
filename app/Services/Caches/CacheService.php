@@ -35,7 +35,7 @@ class CacheService
     public static function getUserUnreadNotifications(User $user)
     {
         return cache()->remember('user_' . $user->id . '_unreadnotifications', self::$unreadNotificationsTtl, function () use ($user) {
-            return $user->unreadNotifications->where('type', '!=', 'App\Notifications\TaskNotification');
+            return $user->unreadNotifications->where('type', '!=', 'Modules\Tasks\Notifications\TaskNotification');
         });
     }
 
