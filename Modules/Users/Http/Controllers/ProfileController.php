@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Users\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use App\Http\Resources\UserResource;
+use Modules\Users\Http\Requests\ProfileUpdateRequest;
+use Modules\Users\Http\Resources\UserResource;
 use App\Services\Entities\ListEntity;
-use App\Services\Users\DeleteUser;
-use App\Services\Users\UpdateUser;
+use Modules\Users\Services\DeleteUser;
+use Modules\Users\Services\UpdateUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
