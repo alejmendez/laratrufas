@@ -29,9 +29,20 @@ class ShowDashboard
         ];
     }
 
+    public static function getLastYearsHarvest($field, $quarter_ids)
+    {
+        return cache()->remember('last_years_harvest_' . $field->id, now()->addDay(), function() use ($quarter_ids) {
+            $current_year = (int) date('Y');
+            $year = Harvest::join('harvest_details', 'harvests.id', '=', 'harvest_details.harvest_id')
+                ->whereIn('harvest_details.quarter_id', $quarter_ids)
+                ->max('harvests.year');
+            return $year > $current_year ? $current_year : $year;
+        });
+    }
+
     public static function getHarvestData($field, $quarter_ids)
     {
-        $current_year = date("Y");
+        $current_year = self::getLastYearsHarvest($field, $quarter_ids);
         $last_year = $current_year - 1;
 
         $current_year_harvest_details = self::getLiquidationDataByYear($current_year, $field);
@@ -40,11 +51,11 @@ class ShowDashboard
         $current_year_total_weight = floatval($current_year_harvest_details->weight_sum);
         $last_year_total_weight = floatval($last_year_harvest_details->weight_sum);
 
-        if ($current_year === '2024') {
+        if ($current_year === 2024) {
             $last_year_total_weight = 86.23;
         }
 
-        if ($last_year_total_weight === 0) {
+        if ($last_year_total_weight == 0) {
             $variation_between_harvests = 0;
         } else {
             $variation_between_harvests = round(($current_year_total_weight * 100 / $last_year_total_weight) - 100, 2);
