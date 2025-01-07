@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Caches;
+namespace Modules\Core\Services;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Tool;
+use Modules\Fields\Models\Tool;
 use Illuminate\Database\Seeder;
 
 class ToolsSeeder extends Seeder

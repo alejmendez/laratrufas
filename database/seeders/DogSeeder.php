@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Dog;
-use App\Models\Quarter;
+use Modules\Fields\Models\Dog;
+use Modules\Fields\Models\Quarter;
 use Modules\Users\Models\User;
 use Illuminate\Database\Seeder;
 

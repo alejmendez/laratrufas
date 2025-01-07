@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Plant;
-use App\Models\PlantType;
-use App\Models\Quarter;
+use Modules\Fields\Models\Plant;
+use Modules\Fields\Models\PlantType;
+use Modules\Fields\Models\Quarter;
 use Illuminate\Database\Seeder;
 
 class PlantsSeeder extends Seeder

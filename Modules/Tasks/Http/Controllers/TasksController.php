@@ -3,7 +3,7 @@
 namespace Modules\Tasks\Http\Controllers;
 
 use Modules\Core\Http\Controllers\Controller;
-use App\Services\Entities\ListEntity;
+use Modules\Core\Services\ListEntity;
 use Modules\Tasks\Http\Requests\StoreTaskRequest;
 use Modules\Tasks\Http\Requests\UpdateTaskRequest;
 use Modules\Tasks\Http\Resources\TaskResource;

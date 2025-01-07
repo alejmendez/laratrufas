@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Machinery;
+use Modules\Fields\Models\Machinery;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class MachineryFactory extends Factory

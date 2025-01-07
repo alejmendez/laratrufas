@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Users\Models\User;
 use Modules\Tasks\Models\TaskComment;
 
-use App\Models\Field;
-use App\Models\Tool;
-use App\Models\SecurityEquipment;
-use App\Models\Machinery;
-use App\Models\SupplyTask;
-use App\Models\Quarter;
-use App\Models\Plant;
+use Modules\Fields\Models\Field;
+use Modules\Fields\Models\Tool;
+use Modules\Fields\Models\SecurityEquipment;
+use Modules\Fields\Models\Machinery;
+use Modules\Fields\Models\SupplyTask;
+use Modules\Fields\Models\Quarter;
+use Modules\Fields\Models\Plant;
 
 class Task extends Model
 {

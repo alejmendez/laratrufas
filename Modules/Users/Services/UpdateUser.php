@@ -3,7 +3,7 @@
 namespace Modules\Users\Services;
 
 use Modules\Users\Models\User;
-use App\Services\Caches\CacheService;
+use Modules\Core\Services\CacheService;
 
 class UpdateUser
 {

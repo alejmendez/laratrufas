@@ -4,7 +4,7 @@ namespace Modules\Tasks\Services;
 
 use Modules\Tasks\Models\Task;
 use Modules\Users\Models\User;
-use App\Models\SupplyTask;
+use Modules\Tasks\Models\SupplyTask;
 use Modules\Tasks\Notifications\TaskNotification;
 
 class UpdateTask

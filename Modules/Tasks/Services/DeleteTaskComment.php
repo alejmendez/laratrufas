@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\TaskComment;
+namespace Modules\Tasks\Services\TaskComment;
 
-use App\Models\TaskComment;
+use Modules\Tasks\Models\TaskComment;
 
 class DeleteTaskComment
 {

@@ -20,8 +20,8 @@
             "@Core/*": [
                 "./Modules/Core/Resources/*"
             ],
-            "@Field/*": [
-                "./Modules/Field/Resources/*"
+            "@Fields/*": [
+                "./Modules/Fields/Resources/*"
             ]
         }
     },

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Tool;
+use Modules\Fields\Models\Tool;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ToolFactory extends Factory

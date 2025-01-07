@@ -2,9 +2,10 @@
 
 namespace Modules\Users\Http\Controllers;
 
+use Modules\Core\Http\Controllers\Controller;
 use Modules\Users\Http\Requests\ProfileUpdateRequest;
 use Modules\Users\Http\Resources\UserResource;
-use App\Services\Entities\ListEntity;
+use Modules\Core\Services\ListEntity;
 use Modules\Users\Services\DeleteUser;
 use Modules\Users\Services\UpdateUser;
 use Illuminate\Http\RedirectResponse;

@@ -24,11 +24,9 @@ export default defineConfig({
             '@Users': path.resolve(__dirname, './Modules/Users/Resources'),
             '@Tasks': path.resolve(__dirname, './Modules/Tasks/Resources'),
             '@Dashboard': path.resolve(__dirname, './Modules/Dashboard/Resources'),
-            'ziggy-js': path.resolve(__dirname, './vendor/tightenco/ziggy'),
-        
             '@Core': path.resolve(__dirname, './Modules/Core/Resources'),
-        
-            '@Field': path.resolve(__dirname, './Modules/Field/Resources'),
+            '@Fields': path.resolve(__dirname, './Modules/Fields/Resources'),
+            'ziggy-js': path.resolve(__dirname, './vendor/tightenco/ziggy'),
         },
     },
 });

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Machinery;
+use Modules\Fields\Models\Machinery;
 use Illuminate\Database\Seeder;
 
 class MachineriesSeeder extends Seeder

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\SecurityEquipment;
+use Modules\Fields\Models\SecurityEquipment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SecurityEquipmentFactory extends Factory

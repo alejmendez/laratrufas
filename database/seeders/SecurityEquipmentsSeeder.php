@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\SecurityEquipment;
+use Modules\Fields\Models\SecurityEquipment;
 use Illuminate\Database\Seeder;
 
 class SecurityEquipmentsSeeder extends Seeder

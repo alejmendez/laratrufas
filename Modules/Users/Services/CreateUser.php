@@ -5,7 +5,7 @@ namespace Modules\Users\Services;
 use Modules\Users\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-use App\Services\Caches\CacheService;
+use Modules\Core\Services\CacheService;
 
 class CreateUser
 {

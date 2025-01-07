@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
-use App\Services\Caches\CacheService;
+use Modules\Core\Services\CacheService;
 
 class HandleInertiaRequests extends Middleware
 {

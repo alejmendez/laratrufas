@@ -4,10 +4,10 @@ namespace Modules\Dashboard\Services;
 
 use Modules\Tasks\Models\Task;
 
-use App\Models\Harvest;
-use App\Models\Liquidation;
-use App\Services\Fields\FindField;
-use App\Services\Entities\ListEntity;
+use Modules\Fields\Models\Harvest;
+use Modules\Fields\Models\Liquidation;
+use Modules\Fields\Services\Fields\FindField;
+use Modules\Core\Services\ListEntity;
 
 class ShowDashboard
 {

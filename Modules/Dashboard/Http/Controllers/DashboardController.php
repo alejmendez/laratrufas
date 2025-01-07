@@ -5,7 +5,7 @@ namespace Modules\Dashboard\Http\Controllers;
 use Inertia\Inertia;
 
 use Modules\Core\Http\Controllers\Controller;
-use App\Http\Resources\FieldResource;
+use Modules\Fields\Http\Resources\FieldResource;
 use Modules\Dashboard\Services\ShowDashboard;
 
 class DashboardController extends Controller

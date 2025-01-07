@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Owner;
+use Modules\Fields\Models\Owner;
 use Illuminate\Database\Seeder;
 
 class OwnersSeeder extends Seeder

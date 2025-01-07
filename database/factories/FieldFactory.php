@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Owner;
+use Modules\Fields\Models\Owner;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\fields>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\Fields\Models\Field>
  */
 class FieldFactory extends Factory
 {

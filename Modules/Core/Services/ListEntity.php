@@ -2,22 +2,22 @@
 
 namespace Modules\Core\Services;
 
-use Modules\Field\Models\Dog;
-use Modules\Field\Models\Tool;
+use Modules\Fields\Models\Dog;
+use Modules\Fields\Models\Tool;
 use Modules\Users\Models\User;
-use Modules\Field\Models\Field;
-use Modules\Field\Models\Plant;
-use Modules\Field\Models\Harvest;
-use Modules\Field\Models\Quarter;
-use Modules\Field\Models\Importer;
-use Modules\Field\Models\Machinery;
-use Modules\Field\Models\PlantType;
-use Modules\Field\Models\CategoryProduct;
-use Modules\Field\Models\SecurityEquipment;
+use Modules\Fields\Models\Field;
+use Modules\Fields\Models\Plant;
+use Modules\Fields\Models\Harvest;
+use Modules\Fields\Models\Quarter;
+use Modules\Fields\Models\Importer;
+use Modules\Fields\Models\Machinery;
+use Modules\Fields\Models\PlantType;
+use Modules\Fields\Models\CategoryProduct;
+use Modules\Fields\Models\SecurityEquipment;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
-use Modules\Field\Services\Harvests\HarvestAvailableWeeks;
-use Modules\Field\Services\Harvests\HarvestAvailableYears;
+use Modules\Fields\Services\Harvests\HarvestAvailableWeeks;
+use Modules\Fields\Services\Harvests\HarvestAvailableYears;
 
 class ListEntity
 {

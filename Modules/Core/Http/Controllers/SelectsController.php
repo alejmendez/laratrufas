@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Core\Http\Controllers;
 
-use App\Services\Entities\ListEntities;
-use App\Services\Entities\ListEntity;
+use Modules\Core\Services\ListEntities;
+use Modules\Core\Services\ListEntity;
 
 class SelectsController extends Controller
 {

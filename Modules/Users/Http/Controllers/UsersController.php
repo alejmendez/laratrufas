@@ -6,7 +6,7 @@ use Modules\Core\Http\Controllers\Controller;
 use Modules\Users\Http\Requests\StoreUserRequest;
 use Modules\Users\Http\Requests\UpdateUserRequest;
 use Modules\Users\Http\Resources\UserResource;
-use App\Services\Entities\ListEntity;
+use Modules\Core\Services\ListEntity;
 use Modules\Users\Services\CreateUser;
 use Modules\Users\Services\DeleteUser;
 use Modules\Users\Services\FindUser;

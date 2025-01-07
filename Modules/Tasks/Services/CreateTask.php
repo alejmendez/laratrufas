@@ -5,7 +5,7 @@ namespace Modules\Tasks\Services;
 use Modules\Tasks\Models\Task;
 use Modules\Tasks\Models\TaskComment;
 use Modules\Users\Models\User;
-use App\Models\SupplyTask;
+use Modules\Fields\Models\SupplyTask;
 use Modules\Tasks\Notifications\TaskNotification;
 
 class CreateTask

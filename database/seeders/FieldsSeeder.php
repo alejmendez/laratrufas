@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Field;
+use Modules\Fields\Models\Field;
 use Illuminate\Database\Seeder;
 
 class FieldsSeeder extends Seeder
