@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Services\Entities;
+namespace Modules\Core\Services;
+
+use Modules\Core\Services\ListEntity;
 
 class ListEntities
 {

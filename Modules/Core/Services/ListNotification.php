@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\Notifications;
+namespace Modules\Core\Services;
 
 use Modules\Users\Models\User;
-use App\Models\Notification;
+use Modules\Core\Models\Notification;
 
 class ListNotification
 {

@@ -3,7 +3,7 @@
 namespace Modules\Tasks\Services;
 
 use Modules\Tasks\Models\Task;
-use App\Services\Primevue\PrimevueDatatables;
+use Modules\Core\Services\PrimevueDatatables;
 
 class ListTask
 {

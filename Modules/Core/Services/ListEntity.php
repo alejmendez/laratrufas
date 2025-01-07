@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Services\Entities;
+namespace Modules\Core\Services;
 
-use App\Models\Dog;
-use App\Models\Tool;
+use Modules\Field\Models\Dog;
+use Modules\Field\Models\Tool;
 use Modules\Users\Models\User;
-use App\Models\Field;
-use App\Models\Plant;
-use App\Models\Harvest;
-use App\Models\Quarter;
-use App\Models\Importer;
-use App\Models\Machinery;
-use App\Models\PlantType;
-use App\Models\CategoryProduct;
-use App\Models\SecurityEquipment;
+use Modules\Field\Models\Field;
+use Modules\Field\Models\Plant;
+use Modules\Field\Models\Harvest;
+use Modules\Field\Models\Quarter;
+use Modules\Field\Models\Importer;
+use Modules\Field\Models\Machinery;
+use Modules\Field\Models\PlantType;
+use Modules\Field\Models\CategoryProduct;
+use Modules\Field\Models\SecurityEquipment;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
-use App\Services\Harvests\HarvestAvailableWeeks;
-use App\Services\Harvests\HarvestAvailableYears;
+use Modules\Field\Services\Harvests\HarvestAvailableWeeks;
+use Modules\Field\Services\Harvests\HarvestAvailableYears;
 
 class ListEntity
 {

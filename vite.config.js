@@ -27,6 +27,8 @@ export default defineConfig({
             'ziggy-js': path.resolve(__dirname, './vendor/tightenco/ziggy'),
         
             '@Core': path.resolve(__dirname, './Modules/Core/Resources'),
+        
+            '@Field': path.resolve(__dirname, './Modules/Field/Resources'),
         },
     },
 });

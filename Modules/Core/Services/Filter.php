@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Primevue;
+namespace Modules\Core\Services;
 
 use Illuminate\Database\Eloquent\Builder;
 

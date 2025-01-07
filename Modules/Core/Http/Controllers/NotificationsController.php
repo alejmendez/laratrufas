@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Core\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Services\Notifications\ListNotification;
+use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Services\ListNotification;
 
 class NotificationsController extends Controller
 {
