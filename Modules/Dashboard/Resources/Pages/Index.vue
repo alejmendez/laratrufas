@@ -1,9 +1,9 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import FiltersDashboard from '@/Pages/Dashboard/Components/FiltersDashboard.vue';
-import CardsDashboard from '@/Pages/Dashboard/Components/CardsDashboard.vue';
-import MapDashboard from '@/Pages/Dashboard/Components/MapDashboard.vue';
-import MessageDashboard from '@/Pages/Dashboard/Components/MessageDashboard.vue';
+import FiltersDashboard from '@Dashboard/Components/FiltersDashboard.vue';
+import CardsDashboard from '@Dashboard/Components/CardsDashboard.vue';
+import MapDashboard from '@Dashboard/Components/MapDashboard.vue';
+import MessageDashboard from '@Dashboard/Components/MessageDashboard.vue';
 
 const props = defineProps({
   fields: Array,

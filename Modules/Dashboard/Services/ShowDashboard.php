@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Services\Dashboard;
+namespace Modules\Dashboard\Services;
 
 use Modules\Tasks\Models\Task;
 
 use App\Models\Harvest;
 use App\Models\Liquidation;
 use App\Services\Fields\FindField;
-use Illuminate\Support\Facades\DB;
-use App\Http\Resources\FieldResource;
 use App\Services\Entities\ListEntity;
 
 class ShowDashboard
@@ -25,7 +23,7 @@ class ShowDashboard
 
         return [
             'fields' => $fields,
-            'field' => new FieldResource($field),
+            'field' => $field,
             'harvest_data' => $harvest_data,
             'task_data' => $task_data,
         ];

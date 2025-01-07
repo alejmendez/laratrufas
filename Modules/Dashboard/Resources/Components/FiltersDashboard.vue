@@ -1,7 +1,6 @@
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import { useForm, router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
   fields: Array,

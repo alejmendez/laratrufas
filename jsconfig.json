@@ -2,11 +2,25 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@/*": ["resources/js/*"],
-            "@Users/*": ["./Modules/Users/Resources/*"],
-            "@Tasks/*": ["./Modules/Tasks/Resources/*"],
-            "ziggy-js": ["./vendor/tightenco/ziggy"]
+            "@/*": [
+                "resources/js/*"
+            ],
+            "@Users/*": [
+                "./Modules/Users/Resources/*"
+            ],
+            "@Tasks/*": [
+                "./Modules/Tasks/Resources/*"
+            ],
+            "ziggy-js": [
+                "./vendor/tightenco/ziggy"
+            ],
+            "@Dashboard/*": [
+                "./Modules/Dashboard/Resources/*"
+            ]
         }
     },
-    "exclude": ["node_modules", "public"]
+    "exclude": [
+        "node_modules",
+        "public"
+    ]
 }

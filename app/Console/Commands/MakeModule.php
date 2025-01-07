@@ -29,6 +29,16 @@ class MakeModule extends Command
     public function handle()
     {
         $module = $this->argument('module');
+        $this->createDirectories($module);
+
+        // Crear archivos base
+        $this->createBaseFiles($module);
+
+        $this->updateConfigFiles($module);
+    }
+
+    private function createDirectories($module)
+    {
         $directories = [
             "Modules/{$module}/Http/Controllers",
             "Modules/{$module}/Http/Resources",
@@ -48,7 +58,10 @@ class MakeModule extends Command
                 $this->info("Directorio creado: {$directory}");
             }
         }
+    }
 
+    private function createBaseFiles($module)
+    {
         // Crear archivos base
         $files = [
             "Modules/{$module}/Routes/web.php" => "<?php\n\nuse Illuminate\Support\Facades\Route;\n",
@@ -64,6 +77,41 @@ class MakeModule extends Command
             if (!file_exists($path)) {
                 file_put_contents($path, $content);
                 $this->info("Archivo creado: {$path}");
+            }
+        }
+    }
+
+    private function updateConfigFiles($module)
+    {
+        // Actualizar jsconfig.json
+        $jsconfigPath = base_path('jsconfig.json');
+        if (file_exists($jsconfigPath)) {
+            $jsconfig = json_decode(file_get_contents($jsconfigPath), true);
+            $jsconfig['compilerOptions']['paths']["@{$module}/*"] = ["./Modules/{$module}/Resources/*"];
+            file_put_contents($jsconfigPath, json_encode($jsconfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+            $this->info("jsconfig.json actualizado con el nuevo módulo");
+        }
+
+        // Actualizar vite.config.js
+        $vitePath = base_path('vite.config.js');
+        if (file_exists($vitePath)) {
+            $viteContent = file_get_contents($vitePath);
+            $aliasPattern = "/alias\s*:\s*{([^}]*)}/";
+
+            if (preg_match($aliasPattern, $viteContent, $matches)) {
+                $currentAliases = $matches[1];
+                $newAlias = "\n            '@{$module}': path.resolve(__dirname, './Modules/{$module}/Resources'),";
+
+                if (!str_contains($currentAliases, "@{$module}")) {
+                    $newContent = str_replace(
+                        $matches[0],
+                        "alias: {{$currentAliases}{$newAlias}\n        }",
+                        $viteContent
+                    );
+
+                    file_put_contents($vitePath, $newContent);
+                    $this->info("vite.config.js actualizado con el nuevo módulo");
+                }
             }
         }
     }
