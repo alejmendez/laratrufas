@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\BatchesController;
 use App\Http\Controllers\BulksController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DogsController;
 use App\Http\Controllers\FieldsController;
 use App\Http\Controllers\HarvestDetailsController;
@@ -12,41 +11,14 @@ use App\Http\Controllers\LiquidationsController;
 use App\Http\Controllers\MachineriesController;
 use App\Http\Controllers\PlantsController;
 use App\Http\Controllers\PlantTypesController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuartersController;
-use App\Http\Controllers\SelectsController;
 use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\SecurityEquipmentsController;
 use App\Http\Controllers\ImportersController;
 use App\Http\Controllers\GraphsController;
-use App\Http\Controllers\NotificationsController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect()->route('dashboard');
-    }
-
-    return redirect()->route('login');
-});
-
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     Route::get('/bulk', [BulksController::class, 'index'])->name('bulk.index');
 
     Route::get('/plants/bulk', [PlantsController::class, 'create_bulk'])->name('plants.create.bulk');
@@ -68,13 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/plants/types', [PlantTypesController::class, 'store'])->name('plants.types.store');
     Route::post('/importers', [ImportersController::class, 'store'])->name('importers.store');
 
-    Route::get('/select/{entity}', [SelectsController::class, 'index'])->name('selects');
-    Route::get('/select/multiple', [SelectsController::class, 'multiple'])->name('selects.multiple');
     Route::get('/quarter/{id}/plants', [QuartersController::class, 'plants'])->name('quarters.plants');
     Route::put('/quarter/{id}/plants/position', [QuartersController::class, 'plants_update_position'])->name('quarters.plants.update.position');
     Route::get('/graphs/{id}/{type}', [GraphsController::class, 'index'])->name('graphs');
-
-    Route::get('/notifications/{type}/unread', [NotificationsController::class, 'unread'])->name('notifications.unread');
 
     Route::resources([
         'fields' => FieldsController::class,
@@ -89,6 +57,8 @@ Route::middleware('auth')->group(function () {
         'security_equipments' => SecurityEquipmentsController::class,
     ]);
 });
+
+require __DIR__.'/../Modules/Core/Routes/web.php';
 
 require __DIR__.'/../Modules/Auth/Routes/web.php';
 require __DIR__.'/../Modules/Dashboard/Routes/web.php';

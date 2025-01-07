@@ -16,6 +16,9 @@
             ],
             "@Dashboard/*": [
                 "./Modules/Dashboard/Resources/*"
+            ],
+            "@Core/*": [
+                "./Modules/Core/Resources/*"
             ]
         }
     },

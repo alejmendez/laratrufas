@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Modules\Core\Http\Controllers\Controller;
 use App\Http\Requests\StoreToolRequest;
 use App\Http\Requests\UpdateToolRequest;
 use App\Http\Resources\ToolResource;

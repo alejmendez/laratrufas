@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Modules\Core\Http\Controllers\Controller;
 use App\Http\Requests\StoreLiquidationRequest;
 use App\Http\Requests\UpdateLiquidationRequest;
 use App\Http\Resources\LiquidationResource;

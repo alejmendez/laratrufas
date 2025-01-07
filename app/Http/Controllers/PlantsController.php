@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Modules\Core\Http\Controllers\Controller;
 use App\Exports\PlantsTemplateExport;
 use App\Http\Requests\BulkPlantRequest;
 use App\Http\Requests\StorePlantRequest;

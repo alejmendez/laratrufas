@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Modules\Core\Http\Controllers\Controller;
 use App\Services\Graphs\GraphData;
 
 class GraphsController extends Controller

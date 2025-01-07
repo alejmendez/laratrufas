@@ -25,6 +25,8 @@ export default defineConfig({
             '@Tasks': path.resolve(__dirname, './Modules/Tasks/Resources'),
             '@Dashboard': path.resolve(__dirname, './Modules/Dashboard/Resources'),
             'ziggy-js': path.resolve(__dirname, './vendor/tightenco/ziggy'),
+        
+            '@Core': path.resolve(__dirname, './Modules/Core/Resources'),
         },
     },
 });

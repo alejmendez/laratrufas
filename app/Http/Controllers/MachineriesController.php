@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Modules\Core\Http\Controllers\Controller;
 use App\Http\Requests\StoreMachineryRequest;
 use App\Http\Requests\UpdateMachineryRequest;
 use App\Http\Resources\MachineryResource;

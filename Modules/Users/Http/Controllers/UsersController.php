@@ -2,7 +2,7 @@
 
 namespace Modules\Users\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Modules\Core\Http\Controllers\Controller;
 use Modules\Users\Http\Requests\StoreUserRequest;
 use Modules\Users\Http\Requests\UpdateUserRequest;
 use Modules\Users\Http\Resources\UserResource;

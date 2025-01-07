@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Modules\Core\Http\Controllers\Controller;
 use App\Exports\HarvestsTemplateExport;
 use App\Http\Requests\BulkHarvestRequest;
 use App\Http\Requests\StoreHarvestRequest;

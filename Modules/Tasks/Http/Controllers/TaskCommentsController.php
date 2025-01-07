@@ -2,7 +2,7 @@
 
 namespace Modules\Tasks\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Modules\Core\Http\Controllers\Controller;
 use Modules\Tasks\Http\Requests\StoreTaskCommentRequest;
 use Modules\Tasks\Http\Requests\UpdateTaskCommentRequest;
 

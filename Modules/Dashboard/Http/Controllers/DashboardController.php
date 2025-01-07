@@ -4,7 +4,7 @@ namespace Modules\Dashboard\Http\Controllers;
 
 use Inertia\Inertia;
 
-use App\Http\Controllers\Controller;
+use Modules\Core\Http\Controllers\Controller;
 use App\Http\Resources\FieldResource;
 use Modules\Dashboard\Services\ShowDashboard;
 

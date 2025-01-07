@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use App\Http\Controllers\Controller;
+use Modules\Core\Http\Controllers\Controller;
 use App\Services\Entities\ListEntity;
 use App\Services\Quarters\FindQuarter;
 use App\Services\Quarters\ListQuarter;

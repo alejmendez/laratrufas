@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Modules\Core\Http\Controllers\Controller;
 use App\Http\Requests\StoreSecurityEquipmentRequest;
 use App\Http\Requests\UpdateSecurityEquipmentRequest;
 use App\Http\Resources\SecurityEquipmentResource;

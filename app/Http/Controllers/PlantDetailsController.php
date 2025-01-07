@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Modules\Core\Http\Controllers\Controller;
 use App\Http\Requests\StorePlantDetailRequest;
 use App\Http\Resources\PlantDetailCollection;
 
