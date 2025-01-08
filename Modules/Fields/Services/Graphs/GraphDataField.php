@@ -7,12 +7,16 @@ use Modules\Fields\Models\Harvest;
 use Modules\Fields\Models\Liquidation;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Modules\Fields\Services\Harvests\HarvestAvailableLastYear;
 
 class GraphDataField
 {
     public static function call($id, $year, $type, $filters)
     {
         $field = Field::findOrFail($id);
+        $harvest_available_last_year = HarvestAvailableLastYear::call($field);
+        $year = $year ?? $harvest_available_last_year;
+
         $typeQuery = match ($type) {
             'field-on-demand-production' => self::onDemandProduction($field, $year),
             'field-sales-vs-shrinkage' => self::salesVsShrinkage($field, $year),

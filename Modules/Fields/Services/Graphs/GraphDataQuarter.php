@@ -6,6 +6,7 @@ use Modules\Fields\Models\Quarter;
 use Modules\Fields\Models\Harvest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Modules\Fields\Services\Harvests\HarvestAvailableLastYear;
 
 class GraphDataQuarter
 {
@@ -14,6 +15,9 @@ class GraphDataQuarter
     public static function call($id, $year, $type, $filters)
     {
         $quarter = Quarter::findOrFail($id);
+        $harvest_available_last_year = HarvestAvailableLastYear::call($quarter->field);
+        $year = $year ?? $harvest_available_last_year;
+
         $typeQuery = match ($type) {
             'quarter-on-demand-production' => self::onDemandProduction($quarter, $year),
             default => [],
