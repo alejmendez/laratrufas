@@ -56,6 +56,7 @@ export default {
     },
     documentation: {
       title: 'Documentación',
+      no_documents: 'El campo no tiene documentos cargados',
     },
     tabs: {
       file: 'Ficha',
