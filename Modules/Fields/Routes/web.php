@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/plants/details/quarter/{id}', [PlantDetailsController::class, 'index_by_quarter'])->name('plants.details.by_quarter');
     Route::get('/plants/details/field/{id}', [PlantDetailsController::class, 'index_by_field'])->name('plants.details.by_field');
     Route::get('/plants/details/{id}', [PlantDetailsController::class, 'index'])->name('plants.details');
+    Route::post('/plants/types', [PlantTypesController::class, 'store'])->name('plants.types.store');
 
     Route::get('/harvests/bulk/{id?}', [HarvestsController::class, 'create_bulk'])->name('harvests.create.bulk');
     Route::post('/harvests/bulk', [HarvestsController::class, 'store_bulk'])->name('harvests.store.bulk');
@@ -38,7 +39,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/harvests/details', [HarvestDetailsController::class, 'store'])->name('harvests.details.store');
     Route::get('/harvests/details/{code}', [HarvestDetailsController::class, 'find_by_code'])->name('harvests.details.find_by_code');
 
-    Route::post('/plants/types', [PlantTypesController::class, 'store'])->name('plants.types.store');
     Route::post('/importers', [ImportersController::class, 'store'])->name('importers.store');
 
     Route::get('/quarter/{id}/plants', [QuartersController::class, 'plants'])->name('quarters.plants');
