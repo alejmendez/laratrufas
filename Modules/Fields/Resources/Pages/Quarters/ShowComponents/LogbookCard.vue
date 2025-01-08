@@ -2,10 +2,12 @@
 import LogsCard from '@Fields/Pages/Plants/ShowComponents/LogsCard.vue';
 
 const props = defineProps({
-  field_id: Number,
+  quarter_id: Number,
 });
+
+console.log(props.quarter_id);
 </script>
 
 <template>
-  <LogsCard :field_id="props.field_id" />
+  <LogsCard :quarter_id="props.quarter_id" />
 </template>

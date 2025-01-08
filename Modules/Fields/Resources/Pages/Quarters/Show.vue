@@ -91,7 +91,7 @@ const deleteHandler = async (id) => {
     </CardSection>
 
     <LogbookCard
-      :quarter_id="quarter.field.id"
+      :quarter_id="quarter.id"
       v-show="currentTab === tabs[1]"
     />
 
