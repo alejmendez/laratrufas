@@ -10,7 +10,7 @@ use Modules\Fields\Http\Requests\UpdatePlantRequest;
 use Modules\Fields\Http\Resources\PlantResource;
 use Modules\Fields\Http\Resources\PlantDetailCollection;
 use Modules\Fields\Imports\PlantsImport;
-use Modules\Core\Services\Entities\ListEntity;
+use Modules\Core\Services\ListEntity;
 use Modules\Fields\Services\Plants\CreatePlant;
 use Modules\Fields\Services\Plants\DeletePlant;
 use Modules\Fields\Services\Plants\FindPlant;

@@ -9,7 +9,7 @@ use Modules\Fields\Http\Requests\StoreHarvestRequest;
 use Modules\Fields\Http\Requests\UpdateHarvestRequest;
 use Modules\Fields\Http\Resources\HarvestResource;
 use Modules\Fields\Imports\HarvestsImport;
-use Modules\Core\Services\Entities\ListEntity;
+use Modules\Core\Services\ListEntity;
 use Modules\Fields\Services\HarvestDetails\ListHarvestQualities;
 use Modules\Fields\Services\Harvests\CreateHarvest;
 use Modules\Fields\Services\Harvests\DeleteHarvest;

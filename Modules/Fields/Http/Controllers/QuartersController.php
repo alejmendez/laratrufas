@@ -4,7 +4,7 @@ namespace Modules\Fields\Http\Controllers;
 
 use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
-use Modules\Core\Services\Entities\ListEntity;
+use Modules\Core\Services\ListEntity;
 use Modules\Fields\Services\Quarters\FindQuarter;
 use Modules\Fields\Services\Quarters\ListQuarter;
 use Modules\Fields\Http\Resources\QuarterResource;

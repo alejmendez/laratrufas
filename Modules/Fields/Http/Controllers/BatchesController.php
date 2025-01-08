@@ -11,7 +11,7 @@ use Modules\Fields\Services\Batches\DeleteBatch;
 use Modules\Fields\Services\Batches\FindBatch;
 use Modules\Fields\Services\Batches\ListBatch;
 use Modules\Fields\Services\Batches\UpdateBatch;
-use Modules\Core\Services\Entities\ListEntity;
+use Modules\Core\Services\ListEntity;
 use Inertia\Inertia;
 
 class BatchesController extends Controller

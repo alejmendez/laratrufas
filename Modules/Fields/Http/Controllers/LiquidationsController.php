@@ -6,7 +6,7 @@ use Modules\Core\Http\Controllers\Controller;
 use Modules\Fields\Http\Requests\StoreLiquidationRequest;
 use Modules\Fields\Http\Requests\UpdateLiquidationRequest;
 use Modules\Fields\Http\Resources\LiquidationResource;
-use Modules\Core\Services\Entities\ListEntity;
+use Modules\Core\Services\ListEntity;
 use Modules\Fields\Services\Liquidations\CreateLiquidation;
 use Modules\Fields\Services\Liquidations\DeleteLiquidation;
 use Modules\Fields\Services\Liquidations\FindLiquidation;

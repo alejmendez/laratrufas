@@ -11,7 +11,7 @@ use Modules\Fields\Services\Dogs\DeleteDog;
 use Modules\Fields\Services\Dogs\FindDog;
 use Modules\Fields\Services\Dogs\ListDog;
 use Modules\Fields\Services\Dogs\UpdateDog;
-use Modules\Core\Services\Entities\ListEntity;
+use Modules\Core\Services\ListEntity;
 use Inertia\Inertia;
 
 class DogsController extends Controller
