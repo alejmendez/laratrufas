@@ -37,7 +37,7 @@ const addPlantType = async () => {
         <VInput
           id="plant_type_name"
           v-model="plant_type_name"
-          :label="t('plant.form.name.label')"
+          :label="t('plant.form.plant_type_id.label')"
         />
       </div>
     </div>
