@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import FormSecurityEquipment from '@/Pages/SecurityEquipments/Form.vue';
+import FormSecurityEquipment from '@Fields/Pages/SecurityEquipments/Form.vue';
 
 const { t } = useI18n();
 

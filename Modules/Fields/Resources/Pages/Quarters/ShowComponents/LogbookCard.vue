@@ -1,5 +1,5 @@
 <script setup>
-import LogsCard from '@/Pages/Plants/ShowComponents/LogsCard.vue';
+import LogsCard from '@Fields/Pages/Plants/ShowComponents/LogsCard.vue';
 
 const props = defineProps({
   field_id: Number,

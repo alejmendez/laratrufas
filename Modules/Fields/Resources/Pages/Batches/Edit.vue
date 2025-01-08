@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import FormBatch from '@/Pages/Batches/Form.vue';
+import FormBatch from '@Fields/Pages/Batches/Form.vue';
 
 import { stringToDate } from '@/Utils/date';
 

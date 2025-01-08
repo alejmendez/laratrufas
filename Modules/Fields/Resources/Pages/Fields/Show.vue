@@ -3,11 +3,11 @@ import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
 
-import FileCard from '@/Pages/Fields/ShowComponents/FileCard.vue';
-import LogbookCard from '@/Pages/Fields/ShowComponents/LogbookCard.vue';
-import HarvestCard from '@/Pages/Fields/ShowComponents/HarvestCard.vue';
-import StatisticsCard from '@/Pages/Fields/ShowComponents/StatisticsCard.vue';
-import DocumentationCard from '@/Pages/Fields/ShowComponents/DocumentationCard.vue';
+import FileCard from '@Fields/Pages/Fields/ShowComponents/FileCard.vue';
+import LogbookCard from '@Fields/Pages/Fields/ShowComponents/LogbookCard.vue';
+import HarvestCard from '@Fields/Pages/Fields/ShowComponents/HarvestCard.vue';
+import StatisticsCard from '@Fields/Pages/Fields/ShowComponents/StatisticsCard.vue';
+import DocumentationCard from '@Fields/Pages/Fields/ShowComponents/DocumentationCard.vue';
 
 const { t } = useI18n();
 

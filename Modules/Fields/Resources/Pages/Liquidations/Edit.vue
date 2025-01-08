@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import FormLiquidation from '@/Pages/Liquidations/Form.vue';
+import FormLiquidation from '@Fields/Pages/Liquidations/Form.vue';
 import { stringToDate } from '@/Utils/date';
 
 const { t } = useI18n();

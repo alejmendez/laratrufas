@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import FormQuarter from '@/Pages/Quarters/Form.vue';
+import FormQuarter from '@Fields/Pages/Quarters/Form.vue';
 
 const { t } = useI18n();
 

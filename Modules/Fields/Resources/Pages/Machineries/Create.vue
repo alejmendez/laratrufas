@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import FormMachineries from '@/Pages/Machineries/Form.vue';
+import FormMachineries from '@Fields/Pages/Machineries/Form.vue';
 
 const { t } = useI18n();
 

@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import FormDog from '@/Pages/Dogs/Form.vue';
+import FormDog from '@Fields/Pages/Dogs/Form.vue';
 
 import { stringToDate, getAge } from '@/Utils/date';
 

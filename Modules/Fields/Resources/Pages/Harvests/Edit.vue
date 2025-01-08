@@ -3,7 +3,7 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { getWeek } from 'date-fns';
 
-import FormHarvest from '@/Pages/Harvests/Form.vue';
+import FormHarvest from '@Fields/Pages/Harvests/Form.vue';
 
 import { stringToDate } from '@/Utils/date';
 

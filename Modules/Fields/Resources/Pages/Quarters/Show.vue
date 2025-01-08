@@ -4,9 +4,9 @@ import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
 
-import StatisticsCard from '@/Pages/Quarters/ShowComponents/StatisticsCard.vue';
-import HarvestCard from '@/Pages/Quarters/ShowComponents/HarvestCard.vue';
-import LogbookCard from '@/Pages/Quarters/ShowComponents/LogbookCard.vue';
+import StatisticsCard from '@Fields/Pages/Quarters/ShowComponents/StatisticsCard.vue';
+import HarvestCard from '@Fields/Pages/Quarters/ShowComponents/HarvestCard.vue';
+import LogbookCard from '@Fields/Pages/Quarters/ShowComponents/LogbookCard.vue';
 
 const { t } = useI18n();
 

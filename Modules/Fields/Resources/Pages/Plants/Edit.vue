@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import FormPlant from '@/Pages/Plants/Form.vue';
+import FormPlant from '@Fields/Pages/Plants/Form.vue';
 import { stringToDate } from '@/Utils/date';
 
 const { t } = useI18n();

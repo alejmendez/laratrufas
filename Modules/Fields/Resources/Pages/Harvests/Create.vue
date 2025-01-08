@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import FormHarvest from '@/Pages/Harvests/Form.vue';
+import FormHarvest from '@Fields/Pages/Harvests/Form.vue';
 
 const { t } = useI18n();
 
