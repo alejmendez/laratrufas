@@ -8,7 +8,7 @@ use Modules\Fields\Models\Harvest;
 use Modules\Fields\Models\Liquidation;
 use Modules\Fields\Services\Fields\FindField;
 use Modules\Core\Services\ListEntity;
-
+use Modules\Fields\Services\Harvests\HarvestAvailableLastYear;
 class ShowDashboard
 {
     public static function call($id = null)
@@ -29,20 +29,9 @@ class ShowDashboard
         ];
     }
 
-    public static function getLastYearsHarvest($field, $quarter_ids)
-    {
-        return cache()->remember('last_years_harvest_' . $field->id, now()->addDay(), function() use ($quarter_ids) {
-            $current_year = (int) date('Y');
-            $year = Harvest::join('harvest_details', 'harvests.id', '=', 'harvest_details.harvest_id')
-                ->whereIn('harvest_details.quarter_id', $quarter_ids)
-                ->max('harvests.year');
-            return $year > $current_year ? $current_year : $year;
-        });
-    }
-
     public static function getHarvestData($field, $quarter_ids)
     {
-        $current_year = self::getLastYearsHarvest($field, $quarter_ids);
+        $current_year = HarvestAvailableLastYear::call($field);
         $last_year = $current_year - 1;
 
         $current_year_harvest_details = self::getLiquidationDataByYear($current_year, $field);
