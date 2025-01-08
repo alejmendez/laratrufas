@@ -25,6 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/plants/bulk', [PlantsController::class, 'create_bulk'])->name('plants.create.bulk');
     Route::post('/plants/bulk', [PlantsController::class, 'store_bulk'])->name('plants.store.bulk');
     Route::get('/plants/download/bulk/template', [PlantsController::class, 'download_bulk_template'])->name('plants.download.bulk.template');
+    Route::post('/plants/details', [PlantDetailsController::class, 'store'])->name('plant.details.store');
+    Route::get('/plants/details/quarter/{id}', [PlantDetailsController::class, 'index_by_quarter'])->name('plants.details.by_quarter');
+    Route::get('/plants/details/field/{id}', [PlantDetailsController::class, 'index_by_field'])->name('plants.details.by_field');
+    Route::get('/plants/details/{id}', [PlantDetailsController::class, 'index'])->name('plants.details');
 
     Route::get('/harvests/bulk/{id?}', [HarvestsController::class, 'create_bulk'])->name('harvests.create.bulk');
     Route::post('/harvests/bulk', [HarvestsController::class, 'store_bulk'])->name('harvests.store.bulk');
@@ -33,10 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/harvests/details', [HarvestDetailsController::class, 'create'])->name('harvests.details.create');
     Route::post('/harvests/details', [HarvestDetailsController::class, 'store'])->name('harvests.details.store');
     Route::get('/harvests/details/{code}', [HarvestDetailsController::class, 'find_by_code'])->name('harvests.details.find_by_code');
-    Route::post('/plants/details', [PlantDetailsController::class, 'store'])->name('plant.details.store');
-    Route::get('/plants/details/{id}', [PlantDetailsController::class, 'index'])->name('plants.details');
-    Route::get('/plants/details/quarter/{id}', [PlantDetailsController::class, 'index_by_quarter'])->name('plants.details.by_quarter');
-    Route::get('/plants/details/field/{id}', [PlantDetailsController::class, 'index_by_field'])->name('plants.details.by_field');
 
     Route::post('/plants/types', [PlantTypesController::class, 'store'])->name('plants.types.store');
     Route::post('/importers', [ImportersController::class, 'store'])->name('importers.store');
