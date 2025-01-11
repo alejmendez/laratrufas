@@ -19,6 +19,7 @@ const props = defineProps({
   importers: Array,
   category_products: Array,
   submitHandler: Function,
+  fields: Array,
 });
 
 const form = props.form;
@@ -113,6 +114,15 @@ const total_categories_not_commercial = computed(() => {
         :label="t('liquidation.form.reception_date.label')"
         :message="form.errors.reception_date"
         :maxDate="new Date()"
+      />
+
+      <VSelect
+        id="field_id"
+        v-model="form.field_id"
+        :placeholder="t('generics.please_select')"
+        :options="props.fields"
+        :label="t('liquidation.form.field_id.label')"
+        :message="form.errors.field_id"
       />
     </CardSection>
     <CardSection>

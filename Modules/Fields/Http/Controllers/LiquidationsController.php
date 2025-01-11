@@ -39,6 +39,7 @@ class LiquidationsController extends Controller
     {
         return Inertia::render('Fields::Liquidations/Create', [
             'importers' => ListEntity::call('importer'),
+            'fields' => ListEntity::call('field'),
             'category_products' => ListEntity::call('category_products'),
         ]);
     }
@@ -63,6 +64,7 @@ class LiquidationsController extends Controller
         return Inertia::render('Fields::Liquidations/Show', [
             'data' => new LiquidationResource($liquidation),
             'importers' => ListEntity::call('importer'),
+            'fields' => ListEntity::call('field'),
             'category_products' => ListEntity::call('category_products'),
         ]);
     }
@@ -77,6 +79,7 @@ class LiquidationsController extends Controller
         return Inertia::render('Fields::Liquidations/Edit', [
             'data' => new LiquidationResource($liquidation),
             'importers' => ListEntity::call('importer'),
+            'fields' => ListEntity::call('field'),
             'category_products' => ListEntity::call('category_products'),
         ]);
     }

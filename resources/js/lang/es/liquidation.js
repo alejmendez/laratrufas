@@ -27,6 +27,9 @@ export default {
     reception_date: {
       label: 'Fecha de exportación',
     },
+    field_id: {
+      label: 'Campo',
+    },
     weight_with_earth: {
       label: 'Peso con tierra (Kg)',
     },

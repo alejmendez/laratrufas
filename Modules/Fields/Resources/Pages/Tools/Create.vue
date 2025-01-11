@@ -2,7 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import FormTool from '@Field/Pages/Tools/Form.vue';
+import FormTool from '@Fields/Pages/Tools/Form.vue';
 
 const { t } = useI18n();
 

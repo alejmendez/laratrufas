@@ -11,6 +11,7 @@ class UpdateLiquidation
     {
         $liquidation = Liquidation::findOrFail($id);
         $liquidation->date = $data['date'];
+        $liquidation->field_id = $data['field_id']['value'];
         $liquidation->delivery_date = $data['delivery_date'];
         $liquidation->reception_date = $data['reception_date'];
         $liquidation->weight_with_earth = $data['weight_with_earth'];

@@ -24,6 +24,10 @@ class LiquidationResource extends JsonResource
             'weight_with_earth' => $this->weight_with_earth,
             'weight_washed' => $this->weight_washed,
             'dollar_value' => $this->dollar_value,
+            'field_id' => [
+                'value' => $this->field->id,
+                'text' => $this->field->name,
+            ],
             'importer_id' => [
                 'value' => $this->importer->id,
                 'text' => $this->importer->name,

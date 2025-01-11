@@ -9,6 +9,7 @@ const { t } = useI18n();
 const props = defineProps({
   importers: Array,
   category_products: Array,
+  fields: Array,
 });
 
 const form = useForm({
@@ -19,6 +20,7 @@ const form = useForm({
   weight_with_earth: 0,
   weight_washed: 0,
   dollar_value: 0,
+  field_id: [],
   products: props.category_products.reduce((a, v) => ({ ...a, [v.id]: { ...v, category_product_id: v.id, price: 0, weight: 0 } }), {}),
 });
 
@@ -38,6 +40,7 @@ const submitHandler = () => form.post(route('liquidations.store'));
       :form="form"
       :importers="importers"
       :category_products="category_products"
+      :fields="fields"
       :submitHandler="submitHandler"
     />
   </AuthenticatedLayout>

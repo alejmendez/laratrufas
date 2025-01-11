@@ -29,6 +29,8 @@ class UpdateLiquidationRequest extends FormRequest
             'weight_washed' => ['required', 'numeric'],
             'dollar_value' => ['required', 'numeric'],
             'importer_id.value' => ['required', 'exists:importers,id'],
+            'field_id' => 'required',
+            'field_id.value' => 'required|exists:fields,id',
             'products' => ['required', 'array'],
             'products.*.id' => ['nullable', 'exists:liquidation_products,id'],
             'products.*.category_product_id' => ['required', 'exists:category_products,id'],
@@ -43,7 +45,8 @@ class UpdateLiquidationRequest extends FormRequest
             'batch_number' => 'batch n°',
             'delivery_date' => 'Fecha de entrega',
             'importer_id' => 'Importador',
-            'harvests' => 'cosechas',
+            'field_id' => 'campo',
+            'products' => 'productos',
         ];
     }
 }

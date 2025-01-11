@@ -13,6 +13,7 @@ const props = defineProps({
   data: Object,
   importers: Array,
   category_products: Array,
+  fields: Array,
 });
 
 const dataBase = props.data.data;
@@ -38,6 +39,7 @@ const data = {
   weight_with_earth: dataBase.weight_with_earth,
   weight_washed: dataBase.weight_washed,
   dollar_value: dataBase.dollar_value,
+  fields: dataBase.fields,
   products,
 };
 

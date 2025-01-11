@@ -33,4 +33,9 @@ class Liquidation extends Model
     {
         return $this->hasManyThrough(CategoryProduct::class, LiquidationProduct::class);
     }
+
+    public function field()
+    {
+        return $this->belongsTo(Field::class);
+    }
 }

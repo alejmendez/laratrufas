@@ -34,7 +34,6 @@ class UpdateHarvest
         })->toArray();
 
         HarvestDetail::destroy($idDetailsToDestroy);
-        // dd(json_encode($details));
         foreach ($details as $detail) {
             $plant = FindPlantByCode::call($detail['plant_code']);
             if (! $plant) {

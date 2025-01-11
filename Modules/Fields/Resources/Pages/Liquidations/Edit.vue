@@ -11,6 +11,7 @@ const props = defineProps({
   data: Object,
   importers: Array,
   category_products: Array,
+  fields: Array,
 });
 
 const { data } = props.data;
@@ -38,6 +39,7 @@ const form = useForm({
   weight_with_earth: data.weight_with_earth,
   weight_washed: data.weight_washed,
   dollar_value: data.dollar_value,
+  field_id: props.fields.find((a) => a.value == data.field_id.value),
   products,
 });
 
@@ -57,6 +59,7 @@ const submitHandler = () => form.post(route('liquidations.update', data.id));
       :form="form"
       :importers="importers"
       :category_products="category_products"
+      :fields="fields"
       :submitHandler="submitHandler"
     />
   </AuthenticatedLayout>
