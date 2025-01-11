@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Tasks\Services\TaskComment;
+namespace Modules\Tasks\Services;
 
 use Modules\Tasks\Models\TaskComment;
 use Modules\Users\Models\User;
