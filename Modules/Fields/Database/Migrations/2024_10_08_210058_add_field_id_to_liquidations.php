@@ -19,7 +19,9 @@ return new class extends Migration
         });
 
         $field = DB::table('fields')->first();
-        DB::table('liquidations')->update(['field_id' => $field->id]);
+        if ($field) {
+            DB::table('liquidations')->update(['field_id' => $field->id]);
+        }
 
         Schema::table('liquidations', function (Blueprint $table) {
             $table->integer('field_id')->unsigned()->nullable(false)->change();
