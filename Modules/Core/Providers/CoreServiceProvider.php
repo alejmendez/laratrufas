@@ -4,7 +4,7 @@ namespace Modules\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Illuminate\Support\Facades\Route;
 class CoreServiceProvider extends ServiceProvider
 {
     public function register(): void
@@ -17,6 +17,9 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        Route::middleware('web')->group(base_path('Modules/Core/Routes/web.php'));
+
         if ($this->app->runningInConsole()) {
             Factory::guessFactoryNamesUsing(function (string $modelName) {
                 if (strpos($modelName, 'Modules\\') === 0) {

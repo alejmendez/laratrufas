@@ -3,6 +3,7 @@
 namespace Modules\Dashboard\Providers;
 
 use Modules\Core\Providers\CoreServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class DashboardServiceProvider extends CoreServiceProvider
 {
@@ -19,6 +20,7 @@ class DashboardServiceProvider extends CoreServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadMigrationDirectories('Modules/Dashboard/Database/Migrations');
+        // $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        Route::middleware('web')->group(base_path('Modules/Dashboard/Routes/web.php'));
     }
 }
