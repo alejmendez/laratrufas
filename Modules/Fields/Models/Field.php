@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Modules\Fields\Database\Factories\FieldFactory;
 
 class Field extends Model
 {
     use HasFactory;
+
+    protected static function newFactory()
+    {
+        return FieldFactory::new();
+    }
 
     public function owner(): BelongsTo
     {

@@ -32,7 +32,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('quarter_task');
 
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::table('tasks', function (Blueprint $table) {
             $table->integer('quarter_id')->unsigned()->nullable();
             $table->foreign('quarter_id')->references('id')->on('quarters')->onUpdate('cascade')->onDelete('cascade');
         });

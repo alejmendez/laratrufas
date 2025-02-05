@@ -6,6 +6,19 @@ namespace Database\Seeders;
 use Modules\Users\Models\User;
 use Illuminate\Database\Seeder;
 
+use Modules\Users\Database\Seeders\RolSeeder;
+use Modules\Users\Database\Seeders\UserSeeder;
+use Modules\Fields\Database\Seeders\CategoryProductSeeder;
+use Modules\Fields\Database\Seeders\FieldSeeder;
+use Modules\Fields\Database\Seeders\QuarterSeeder;
+use Modules\Fields\Database\Seeders\PlantSeeder;
+use Modules\Fields\Database\Seeders\DogSeeder;
+use Modules\Fields\Database\Seeders\ToolSeeder;
+use Modules\Fields\Database\Seeders\MachinerySeeder;
+use Modules\Fields\Database\Seeders\SecurityEquipmentSeeder;
+use Modules\Fields\Database\Seeders\OwnerSeeder;
+use Modules\Fields\Database\Seeders\HarvestSeeder;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,24 +31,25 @@ class DatabaseSeeder extends Seeder
         }
 
         $seeders = [
-            RolesSeeder::class,
+            RolSeeder::class,
             UserSeeder::class,
             CategoryProductSeeder::class,
         ];
 
         if (app()->isLocal()) {
             $seeders = [
-                RolesSeeder::class,
+                RolSeeder::class,
                 UserSeeder::class,
-                FieldsSeeder::class,
-                QuartersSeeder::class,
-                PlantsSeeder::class,
+                CategoryProductSeeder::class,
+                FieldSeeder::class,
+                QuarterSeeder::class,
+                PlantSeeder::class,
                 DogSeeder::class,
-                ToolsSeeder::class,
-                MachineriesSeeder::class,
-                SecurityEquipmentsSeeder::class,
-                // OwnersSeeder::class,
-                // HarvestsSeeder::class,
+                ToolSeeder::class,
+                MachinerySeeder::class,
+                SecurityEquipmentSeeder::class,
+                // OwnerSeeder::class,
+                // HarvestSeeder::class,
             ];
         }
         $this->call($seeders);

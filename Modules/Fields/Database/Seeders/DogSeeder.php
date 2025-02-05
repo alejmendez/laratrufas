@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Modules\Fields\Database\Seeders;
 
 use Modules\Fields\Models\Dog;
 use Modules\Fields\Models\Quarter;

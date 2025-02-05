@@ -1,14 +1,17 @@
 <?php
 
-namespace Database\Factories;
+namespace Modules\Fields\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Fields\Models\Plant;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\Fields\Models\Plant>
  */
 class PlantFactory extends Factory
 {
+    protected $model = Plant::class;
+
     /**
      * Define the model's default state.
      *

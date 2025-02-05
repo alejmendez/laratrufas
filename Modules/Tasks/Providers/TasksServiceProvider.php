@@ -19,6 +19,6 @@ class TasksServiceProvider extends CoreServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationDirectories('Modules/Tasks/Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 }

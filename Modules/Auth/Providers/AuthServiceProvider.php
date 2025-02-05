@@ -19,6 +19,6 @@ class AuthServiceProvider extends CoreServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationDirectories('Modules/Auth/Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 }

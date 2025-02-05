@@ -3,6 +3,7 @@
 namespace Modules\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -16,14 +17,16 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadMigrationDirectories('Modules/Core/Database/Migrations');
-    }
+        if ($this->app->runningInConsole()) {
+            Factory::guessFactoryNamesUsing(function (string $modelName) {
+                if (strpos($modelName, 'Modules\\') === 0) {
+                    $parts = explode('\\', $modelName);
+                    $moduleName = $parts[1];
+                    return "Modules\\{$moduleName}\\Database\\Factories\\" . class_basename($modelName) . 'Factory';
+                }
 
-    public function loadMigrationDirectories($path): void
-    {
-        $migrationPath = base_path($path);
-        $migrations = glob($migrationPath . '/*', GLOB_ONLYDIR);
-        $paths = array_merge($migrations, [$migrationPath]);
-        $this->loadMigrationsFrom($paths);
+                return 'Database\\Factories\\' . class_basename($modelName) . 'Factory';
+            });
+        }
     }
 }

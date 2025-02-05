@@ -19,6 +19,6 @@ class FieldsServiceProvider extends CoreServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationDirectories('Modules/Fields/Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Modules\Fields\Database\Seeders;
 
 use Modules\Fields\Models\Owner;
 use Illuminate\Database\Seeder;
 
-class OwnersSeeder extends Seeder
+class OwnerSeeder extends Seeder
 {
     /**
      * Run the database seeds.

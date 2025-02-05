@@ -1,15 +1,18 @@
 <?php
 
-namespace Database\Factories;
+namespace Modules\Fields\Database\Factories;
 
-use Modules\Fields\Models\Owner;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Fields\Models\Owner;
+use Modules\Fields\Models\Field;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\Fields\Models\Field>
  */
 class FieldFactory extends Factory
 {
+    protected $model = Field::class;
+
     /**
      * Define the model's default state.
      *
@@ -22,7 +25,7 @@ class FieldFactory extends Factory
         return [
             'name' => 'field '.fake()->name(),
             'location' => fake()->numerify('##.######, -##.######'), // 41.191374, -95.394946
-            'size' => fake()->numerify('###'), // 	123 m²
+            'size' => fake()->numerify('###'), // 123 m²
             'owner_id' => $owner->first()->id,
         ];
     }

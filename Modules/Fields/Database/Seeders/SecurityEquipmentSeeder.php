@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Modules\Fields\Database\Seeders;
 
 use Modules\Fields\Models\SecurityEquipment;
 use Illuminate\Database\Seeder;
 
-class SecurityEquipmentsSeeder extends Seeder
+class SecurityEquipmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.

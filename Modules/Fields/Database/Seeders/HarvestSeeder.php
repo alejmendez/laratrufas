@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Seeders;
+namespace Modules\Fields\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class HarvestsSeeder extends Seeder
+class HarvestSeeder extends Seeder
 {
     /**
      * Run the database seeds.

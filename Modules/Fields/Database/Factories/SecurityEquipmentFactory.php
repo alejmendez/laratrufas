@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Modules\Fields\Database\Factories;
 
 use Modules\Fields\Models\SecurityEquipment;
 use Illuminate\Database\Eloquent\Factories\Factory;

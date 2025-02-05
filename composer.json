@@ -38,7 +38,8 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "Modules\\": "Modules/"
+            "Modules\\": "Modules/",
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "scripts": {

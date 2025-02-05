@@ -19,6 +19,6 @@ class UsersServiceProvider extends CoreServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationDirectories('Modules/Users/Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 }

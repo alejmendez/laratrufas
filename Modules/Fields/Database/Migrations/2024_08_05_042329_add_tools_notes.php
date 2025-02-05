@@ -21,7 +21,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('tools', function ($table) {
-            $table->dropColumn('notes');
+            $table->dropColumn('note');
         });
     }
 };

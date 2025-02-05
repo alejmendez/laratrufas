@@ -1,13 +1,13 @@
 <?php
 
-namespace Database\Seeders;
+namespace Modules\Fields\Database\Seeders;
 
 use Modules\Fields\Models\Plant;
 use Modules\Fields\Models\PlantType;
 use Modules\Fields\Models\Quarter;
 use Illuminate\Database\Seeder;
 
-class PlantsSeeder extends Seeder
+class PlantSeeder extends Seeder
 {
     /**
      * Run the database seeds.
