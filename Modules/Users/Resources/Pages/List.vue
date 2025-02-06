@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
+import { usePage } from '@inertiajs/vue3';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
@@ -22,6 +23,9 @@ const props = defineProps({
 const toast = useToast();
 const confirm = useConfirm();
 const { t } = useI18n();
+
+const page = usePage();
+const current_user_id = page.props.auth.user.id;
 
 const datatable = ref(null);
 const filter_role_options = ref([]);
@@ -146,8 +150,12 @@ onMounted(async () => {
           <Link :href="route('users.edit', slotProps.data.id)">
             <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
           </Link>
-          <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
-              @click="deleteHandler(slotProps.data)" />
+          <font-awesome-icon
+            :icon="['fas', 'trash-can']"
+            class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
+            @click="deleteHandler(slotProps.data)"
+            v-if="slotProps.data.id !== current_user_id"
+          />
         </template>
       </Column>
     </Datatable>
