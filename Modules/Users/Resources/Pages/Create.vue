@@ -1,10 +1,7 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
 import FormUser from '@Users/Components/Form.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   roles: Array,
@@ -25,13 +22,13 @@ const submitHandler = () => form.post(route('users.store'), form.avatar ? { forc
 </script>
 
 <template>
-  <Head :title="t('user.titles.entity_breadcrumb')" />
+  <Head :title="$t('user.titles.entity_breadcrumb')" />
 
   <AuthenticatedLayout>
     <HeaderCrud
-      :title="t('user.titles.create')"
-      :breadcrumbs="[{ to: 'users.index', text: t('user.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('users.index') }"
+      :title="$t('user.titles.create')"
+      :breadcrumbs="[{ to: 'users.index', text: $t('user.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('users.index') }"
     />
     <FormUser
       :form="form"

@@ -25,15 +25,15 @@ const deleteHandler = async (id) => {
 </script>
 
 <template>
-  <Head :title="t('user.titles.show')" />
+  <Head :title="$t('user.titles.show')" />
 
   <AuthenticatedLayout>
     <HeaderCrud
-      :title="t('user.titles.show')"
-      :breadcrumbs="[{ to: 'users.index', text: t('user.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
+      :title="$t('user.titles.show')"
+      :breadcrumbs="[{ to: 'users.index', text: $t('user.titles.entity_breadcrumb') }, { text: $t('generics.detail') }]"
       :links="[
-        { to: () => deleteHandler(data.id), variant: 'secondary', text: t('generics.actions.delete') },
-        { to: route('users.edit', data.id), text: t('generics.actions.edit') }
+        { to: () => deleteHandler(data.id), variant: 'secondary', text: $t('generics.actions.delete') },
+        { to: route('users.edit', data.id), text: $t('generics.actions.edit') }
       ]"
     />
 
@@ -75,7 +75,7 @@ const deleteHandler = async (id) => {
     </div>
 
     <CardSection
-      :header-text="t('user.show.file.title')"
+      :header-text="$t('user.show.file.title')"
       wrapperClass="p-5 grid grid-cols-3 gap-4"
       v-show="currentTab === tabs[0]"
     >
@@ -111,13 +111,13 @@ const deleteHandler = async (id) => {
     </CardSection>
 
     <CardSection
-      :header-text="t('user.show.activity.title')"
+      :header-text="$t('user.show.activity.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
       v-show="currentTab === tabs[1]"
     >
     </CardSection>
     <CardSection
-      :header-text="t('user.show.statistics.title')"
+      :header-text="$t('user.show.statistics.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
       v-show="currentTab === tabs[2]"
     >

@@ -28,6 +28,8 @@ export default {
       searching_for_information: 'Error al buscar información',
       could_not_delete_the_record_summary: 'Error al eliminar',
       could_not_delete_the_record: 'No se pudo eliminar el registro, intentelo luego',
+      could_not_load_the_data_summary: 'Error al cargar los datos',
+      could_not_load_the_data: 'No se pudo cargar los datos, intentelo luego',
     },
     pagination: {
       template: 'Mostrando del {from} al {to} de {total} registros',

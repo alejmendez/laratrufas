@@ -2,7 +2,6 @@
 import { ref, onMounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
-
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
@@ -13,7 +12,7 @@ import slugify from '@/Utils/slugify';
 
 import Datatable from '@/Components/Table/Datatable.vue';
 import UserService from '@/Services/UserService.js';
-import { deleteRowTable } from '@/Utils/table.js';
+import { deleteRowDatatable } from '@/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
 
 const props = defineProps({
@@ -40,25 +39,17 @@ const fetchHandler = async (params) => {
   return await UserService.list(params);
 };
 
-const deleteHandler = (record) => {
-  deleteRowTable(t, confirm, async () => {
-    const result = await UserService.del(record.id);
-    if (result) {
-      datatable.value.loadLazyData();
-      return toast.add({
-        severity: 'success',
-        summary: t('generics.messages.deleted_successfully_summary'),
-        detail: t('generics.messages.deleted_successfully'),
-        life: 3000,
-      });
-    }
-    toast.add({
-      severity: 'danger',
-      summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
-      detail: t('generics.tables.errors.could_not_delete_the_record'),
-      life: 3000,
-    });
-  });
+const deleteHandler = async (record) => {
+  const options = {
+    datatable,
+    confirm,
+    toast,
+    t,
+    entity: t('user.titles.entity_breadcrumb'),
+    handler: () => UserService.del(record.id),
+  };
+
+  deleteRowDatatable(options);
 };
 
 onMounted(async () => {

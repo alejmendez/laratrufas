@@ -5,6 +5,12 @@ import DataTable from 'primevue/datatable';
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import InputText from 'primevue/inputtext';
+import { useToast } from 'primevue/usetoast';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
+const toast = useToast();
 
 const props = defineProps({
   filters: Object,
@@ -32,20 +38,34 @@ if (attrs.sortOrder) {
 
 const lazyParams = ref(initLazyParams);
 const records = ref([]);
-const metadata = ref({
+const metadataInitial = {
   total: 1,
   from: 1,
   to: 1,
   current_page: 1,
   last_page: 1,
   per_page: 10,
-});
+};
+const metadata = ref(metadataInitial);
 
 const loadLazyData = async () => {
   loading.value = true;
   lazyParams.value = { ...lazyParams.value };
 
   const response = await props.fetchHandler(lazyParams.value);
+
+  if (!response) {
+    toast.add({
+      severity: 'danger',
+      summary: t('generics.tables.errors.could_not_load_the_data_summary'),
+      detail: t('generics.tables.errors.could_not_load_the_data'),
+    });
+
+    records.value = [];
+    metadata.value = metadataInitial;
+    loading.value = false;
+    return;
+  }
 
   records.value = response.data;
   metadata.value = response;
