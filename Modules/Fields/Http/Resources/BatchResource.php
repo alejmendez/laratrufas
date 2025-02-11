@@ -19,8 +19,8 @@ class BatchResource extends JsonResource
             'batch_number' => $this->batch_number,
             'delivery_date' => $this->delivery_date,
             'importer_id' => [
-                'value' => $this->importer->id,
-                'text' => $this->importer->name,
+                'value' => optional($this->importer)->id,
+                'text' => optional($this->importer)->name,
             ],
             'harvests' => $this->harvests->pluck('id'),
         ];

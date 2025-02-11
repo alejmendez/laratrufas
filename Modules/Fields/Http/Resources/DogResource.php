@@ -25,16 +25,16 @@ class DogResource extends JsonResource
             'veterinary' => $this->veterinary,
             'avatar' => $this->avatar ? Storage::url($this->avatar) : '',
             'field' => [
-                'id' => $this->quarter->field->id,
-                'name' => $this->quarter->field->name,
+                'id' => optional($this->quarter->field)->id,
+                'name' => optional($this->quarter->field)->name,
             ],
             'quarter' => [
-                'id' => $this->quarter->id,
-                'name' => $this->quarter->name,
+                'id' => optional($this->quarter)->id,
+                'name' => optional($this->quarter)->name,
             ],
             'couple' => [
-                'id' => $this->couple->id,
-                'name' => $this->couple->full_name,
+                'id' => optional($this->couple)->id,
+                'name' => optional($this->couple)->full_name,
             ],
             'vaccines' => $this->vaccines->map(function ($v) {
                 return [

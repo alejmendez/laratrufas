@@ -19,8 +19,8 @@ class PlantResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'plant_type' => [
-                'id' => $this->plant_type->id,
-                'name' => $this->plant_type->name,
+                'id' => optional($this->plant_type)->id,
+                'name' => optional($this->plant_type)->name,
             ],
             'age' => $this->age,
             'planned_at' => $this->planned_at,
@@ -29,16 +29,16 @@ class PlantResource extends JsonResource
             'row' => $this->row,
             'blueprint' => $this->blueprint ? Storage::url($this->blueprint) : '',
             'field' => [
-                'id' => $this->quarter->field->id,
-                'name' => $this->quarter->field->name,
+                'id' => optional($this->quarter->field)->id,
+                'name' => optional($this->quarter->field)->name,
             ],
             'quarter' => [
-                'id' => $this->quarter->id,
-                'name' => $this->quarter->name,
+                'id' => optional($this->quarter)->id,
+                'name' => optional($this->quarter)->name,
             ],
             'responsible' => [
-                'id' => $this->quarter->responsible->id,
-                'name' => $this->quarter->responsible->full_name,
+                'id' => optional($this->quarter->responsible)->id,
+                'name' => optional($this->quarter->responsible)->full_name,
             ],
         ];
     }

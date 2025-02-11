@@ -25,19 +25,19 @@ class LiquidationResource extends JsonResource
             'weight_washed' => $this->weight_washed,
             'dollar_value' => $this->dollar_value,
             'field_id' => [
-                'value' => $this->field->id,
-                'text' => $this->field->name,
+                'value' => optional($this->field)->id,
+                'text' => optional($this->field)->name,
             ],
             'importer_id' => [
-                'value' => $this->importer->id,
-                'text' => $this->importer->name,
+                'value' => optional($this->importer)->id,
+                'text' => optional($this->importer)->name,
             ],
             'products' => $this->liquidationProducts->map(function ($liquidationProduct, $key) {
                 return [
                     'id' => $liquidationProduct->id,
                     'key' => $liquidationProduct->category_product_id,
                     'category_product_id' => $liquidationProduct->category_product_id,
-                    'name' => $liquidationProduct->categoryProduct->name,
+                    'name' => optional($liquidationProduct->categoryProduct)->name,
                     'price' => $liquidationProduct->price,
                     'weight' => $liquidationProduct->weight,
                 ];
