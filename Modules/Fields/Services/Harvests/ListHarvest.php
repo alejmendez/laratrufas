@@ -73,7 +73,7 @@ class ListHarvest
                 'quarter_names' => $details->map(fn ($detail) => $detail->quarter?->name)->unique()->join(', '),
                 'total_weight' => $details->map(fn ($detail) => $detail->weight)->sum(),
                 'unit_count' => $details->count(),
-                'farmer_name' => $harvest->farmer->name,
+                'farmer_name' => optional($harvest->farmer)->name,
             ];
         });
 
