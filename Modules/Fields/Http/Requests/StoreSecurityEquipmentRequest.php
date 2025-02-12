@@ -24,7 +24,7 @@ class StoreSecurityEquipmentRequest extends FormRequest
         return [
             'name' => 'required|max:80',
             'purchase_date' => 'required|date',
-            'last_maintenance' => 'required|date',
+            'last_maintenance' => 'nullable|date',
             'purchase_location' => 'required|max:80',
             'type' => 'required|max:80',
             'contact' => 'required|max:80',

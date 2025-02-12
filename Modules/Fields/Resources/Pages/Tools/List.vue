@@ -107,7 +107,7 @@ onMounted(() => {
 
       <Column field="last_maintenance" :header="$t('tool.table.last_maintenance')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ stringToFormat(data.last_maintenance) }}
+          {{ data.last_maintenance ? stringToFormat(data.last_maintenance) : 's/i' }}
         </template>
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por última Mantención" />
