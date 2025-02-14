@@ -2,12 +2,13 @@
 import { ref } from 'vue';
 import { router, useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+import { useConfirm } from 'primevue/useconfirm';
 import { deleteRowTable } from '@/Utils/table';
 import { stringToFormat, stringToDate } from '@/Utils/date';
 import FormComments from '@Tasks/Components/Comments.vue';
 
 const { t } = useI18n();
-
+const confirm = useConfirm();
 const props = defineProps({
   data: Object,
   fields: Array,
@@ -66,7 +67,7 @@ const tabs = ['detail', 'tracking', 'logbook', 'statistics'];
 const currentTab = ref(tabs[0]);
 
 const deleteHandler = async (id) => {
-  await deleteRowTable(t, () => {
+  await deleteRowTable(t, confirm, () => {
     router.delete(route('tasks.destroy', id));
   });
 };

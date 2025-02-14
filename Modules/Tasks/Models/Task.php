@@ -12,7 +12,6 @@ use Modules\Fields\Models\Field;
 use Modules\Fields\Models\Tool;
 use Modules\Fields\Models\SecurityEquipment;
 use Modules\Fields\Models\Machinery;
-use Modules\Fields\Models\SupplyTask;
 use Modules\Fields\Models\Quarter;
 use Modules\Fields\Models\Plant;
 

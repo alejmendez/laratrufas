@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+import { useConfirm } from 'primevue/useconfirm';
 import { deleteRowTable } from '@/Utils/table';
 
 import StatisticsCard from '@Fields/Pages/Quarters/ShowComponents/StatisticsCard.vue';
@@ -9,6 +10,7 @@ import HarvestCard from '@Fields/Pages/Quarters/ShowComponents/HarvestCard.vue';
 import LogbookCard from '@Fields/Pages/Quarters/ShowComponents/LogbookCard.vue';
 
 const { t } = useI18n();
+const confirm = useConfirm();
 
 const props = defineProps({
   data: Object,
@@ -28,7 +30,7 @@ const dataFile = [
 ];
 
 const deleteHandler = async (id) => {
-  await deleteRowTable(t, () => {
+  await deleteRowTable(t, confirm, () => {
     router.delete(route('quarters.destroy', id));
   });
 };

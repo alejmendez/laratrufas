@@ -2,7 +2,7 @@
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
-
+import { useConfirm } from 'primevue/useconfirm';
 import FileCard from '@Fields/Pages/Fields/ShowComponents/FileCard.vue';
 import LogbookCard from '@Fields/Pages/Fields/ShowComponents/LogbookCard.vue';
 import HarvestCard from '@Fields/Pages/Fields/ShowComponents/HarvestCard.vue';
@@ -20,6 +20,7 @@ const props = defineProps({
 });
 
 const field = props.field.data;
+const confirm = useConfirm();
 
 const tabs = ['file', 'logbook', 'harvest', 'statistics', 'documentation'];
 
@@ -30,7 +31,7 @@ const selectTab = (tab) => {
 };
 
 const deleteHandler = async (id) => {
-  await deleteRowTable(t, () => {
+  await deleteRowTable(t, confirm, () => {
     router.delete(route('fields.destroy', id));
   });
 };

@@ -24,15 +24,15 @@ class TaskResource extends JsonResource
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'field' => [
-                'value' => $this->field->id,
-                'text' => $this->field->name,
+                'value' => optional($this->field)->id,
+                'text' => optional($this->field)->name,
             ],
-            'quarters' => $this->quarters->pluck('id'),
+            'quarters' => optional($this->quarters)->pluck('id'),
             'rows' => $this->rows,
-            'plants' => $this->plants->pluck('id'),
-            'responsible_id' => $this->responsible->id,
+            'plants' => optional($this->plants)->pluck('id'),
+            'responsible_id' => optional($this->responsible)->id,
             'note' => $this->note,
-            'comments' => $this->comments->sortBy('created_at')->map(fn ($comment) => [
+            'comments' => optional($this->comments)->sortBy('created_at')->map(fn ($comment) => [
                 'id' => $comment->id,
                 'comment' => $comment->comment,
                 'user_id' => $comment->user->id,
@@ -41,19 +41,19 @@ class TaskResource extends JsonResource
                 'created_at' => $comment->created_at,
             ])->toArray(),
             // Additional validation rules for related tables
-            'tools' => $this->tools->map(fn ($tool) => [
+            'tools' => optional($this->tools)->map(fn ($tool) => [
                 'value' => $tool->id,
                 'text' => $tool->name,
             ]),
-            'security_equipments' => $this->security_equipments->map(fn ($security_equipment) => [
+            'security_equipments' => optional($this->security_equipments)->map(fn ($security_equipment) => [
                 'value' => $security_equipment->id,
                 'text' => $security_equipment->name,
             ]),
-            'machineries' => $this->machineries->map(fn ($machinery) => [
+            'machineries' => optional($this->machineries)->map(fn ($machinery) => [
                 'value' => $machinery->id,
                 'text' => $machinery->name,
             ]),
-            'supplies' => $this->supplies->map(fn ($supply) => [
+            'supplies' => optional($this->supplies)->map(fn ($supply) => [
                 'id' => $supply->id,
                 'name' => $supply->name,
                 'brand' => $supply->brand,

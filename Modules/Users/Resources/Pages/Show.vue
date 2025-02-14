@@ -2,10 +2,12 @@
 import { ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+import { useConfirm } from 'primevue/useconfirm';
 import { deleteRowTable } from '@/Utils/table';
 import { stringToFormat } from '@/Utils/date';
 
 const { t } = useI18n();
+const confirm = useConfirm();
 
 const props = defineProps({
   data: Object,
@@ -18,7 +20,7 @@ const tabs = ['file', 'activity', 'statistics'];
 const currentTab = ref(tabs[0]);
 
 const deleteHandler = async (id) => {
-  await deleteRowTable(t, () => {
+  await deleteRowTable(t, confirm, () => {
     router.delete(route('users.destroy', id));
   });
 };
