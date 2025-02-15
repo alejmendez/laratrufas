@@ -19,6 +19,10 @@ import { getDataSelects } from '@/Services/Selects';
 
 const props = defineProps({
   toast: String,
+  status: {
+    type: String,
+    default: null,
+  },
 });
 
 const toast = useToast();
@@ -27,15 +31,6 @@ const { t } = useI18n();
 
 const datatable = ref(null);
 const filter_responsible_options = ref([]);
-
-const filters = {
-  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  status: { value: null, matchMode: FilterMatchMode.EQUALS },
-  priority: { value: null, matchMode: FilterMatchMode.EQUALS },
-  updated_at: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  responsible_id: { value: null, matchMode: FilterMatchMode.EQUALS },
-};
 
 const statesValues = ['to_begin', 'started', 'stopped', 'finished'];
 const filter_states_options = statesValues.map((s) => ({ value: s, text: t('task.form.status.options.' + s) }));
@@ -52,7 +47,26 @@ const filter_priorities_options = priorities.map((p) => ({
   text: t('task.form.priority.options.' + p),
 }));
 
+const filters = {
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  status: { value: filter_states_options.find((s) => s.value === props.status), matchMode: FilterMatchMode.EQUALS },
+  priority: { value: null, matchMode: FilterMatchMode.EQUALS },
+  updated_at: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  responsible_id: { value: null, matchMode: FilterMatchMode.EQUALS },
+};
+
 const fetchHandler = async (params) => {
+  if (!params.filters) {
+    params.filters = {};
+  }
+
+  if (props.status) {
+    params.filters.status = {
+      value: filter_states_options.find((s) => s.value === props.status),
+      matchMode: FilterMatchMode.EQUALS,
+    };
+  }
   return await TaskService.list(params);
 };
 

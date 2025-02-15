@@ -1,4 +1,6 @@
 <script setup>
+import { router } from '@inertiajs/vue3';
+
 const props = defineProps({
   field: Object,
   harvest_data: Object,
@@ -9,6 +11,10 @@ const task_data = props.task_data;
 
 const percent_pending_tasks = getPorcent(task_data.tasks_totals, task_data.pending_tasks);
 const percent_tasks_in_progress = getPorcent(task_data.tasks_totals, task_data.tasks_in_progress);
+
+const navigateToTasks = (queryParams) => {
+  router.get(route('tasks.index') + '?' + queryParams);
+};
 
 function getPorcent(total, num) {
   if (total === 0) {
@@ -28,6 +34,7 @@ function getPorcent(total, num) {
         Promedio: {{ harvest_data.average_weight_per_plant }} gr por planta
       </div>
     </div>
+
     <div class="mt-5 p-5 rounded-xl bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-700 dark:text-gray-100">
       <div class="text-gray-500 dark:text-gray-100 font-bold">Cosecha {{ harvest_data.years_variation[1] }} - {{ harvest_data.years_variation[0] }}</div>
       <div class="text-3xl font-bold mb-2">{{ harvest_data.variation_between_harvests }} %</div>
@@ -43,7 +50,10 @@ function getPorcent(total, num) {
       </div>
     </div>
 
-    <div class="mt-5 p-5 rounded-xl bg-[--p-primary-500] shadow-sm text-gray-50">
+    <div
+      class="mt-5 p-5 rounded-xl bg-[--p-primary-500] shadow-sm text-gray-50 cursor-pointer"
+      @click="navigateToTasks('status=to_begin')"
+    >
       <span class="text-3xl font-bold mr-2">{{ task_data.pending_tasks }}</span> Tareas Pendientes
       <div class="flex justify-between mt-3">
         <div>{{ task_data.tasks_totals }} Tareas</div>
@@ -54,7 +64,10 @@ function getPorcent(total, num) {
       </div>
     </div>
 
-    <div class="mt-5 p-5 rounded-xl bg-slate-50 dark:bg-gray-700 shadow-sm text-zinc-950 dark:text-[--p-primary-500] border-gray-200 dark:border-gray-700 border">
+    <div
+      class="mt-5 p-5 rounded-xl bg-slate-50 dark:bg-gray-700 shadow-sm text-zinc-950 dark:text-[--p-primary-500] border-gray-200 dark:border-gray-700 border cursor-pointer"
+      @click="navigateToTasks('status=started')"
+    >
       <span class="text-3xl font-bold mr-2">{{ task_data.tasks_in_progress }}</span> Tareas en curso
       <div class="flex justify-between mt-3">
         <div>{{ task_data.tasks_totals }} Tareas</div>

@@ -31,6 +31,7 @@ class TasksController extends Controller
 
         return Inertia::render('Tasks::List', [
             'toast' => session('toast'),
+            'status' => request('status'),
         ]);
     }
 
