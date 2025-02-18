@@ -55,6 +55,9 @@ server {
     ssl_prefer_server_ciphers on;
     ssl_ciphers HIGH:!aNULL:!MD5;
 
+    # Limitar el tamaño máximo de carga de archivos a 5MB
+    client_max_body_size 20M;
+
     index index.php index.html index.htm;
 
     location / {
