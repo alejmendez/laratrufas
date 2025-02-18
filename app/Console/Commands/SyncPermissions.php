@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Modules\Users\Models\User;
+use Modules\Core\Services\CacheService;
 
 class SyncPermissions extends Command
 {
@@ -23,6 +25,8 @@ class SyncPermissions extends Command
      */
     protected $description = 'Command description';
 
+    protected $defaultGuard = 'web';
+
     protected $entities = [
         'dog',
         'field',
@@ -36,6 +40,10 @@ class SyncPermissions extends Command
         'user',
         'batch',
         'liquidation',
+        'owner',
+        'importer',
+        'category_product',
+        'plant_type',
     ];
 
     protected $defaultActions = [
@@ -116,6 +124,11 @@ class SyncPermissions extends Command
             ...$this->permissions['harvestdetail'],
             ...$this->permissions['task'],
         ]);
+
+        $users = User::all();
+        foreach ($users as $user) {
+            CacheService::clearUserCache($user);
+        }
     }
 
     public function create_roles()
@@ -145,9 +158,28 @@ class SyncPermissions extends Command
         }
 
         $this->permissions[$entity][] = $permission;
+    }
 
-        if (! Permission::where('name', $permission)->exists()) {
-            Permission::create(['name' => $permission]);
+    public function save_permissions()
+    {
+        $existingPermissions = Permission::pluck('name')->toArray();
+        $permissionToCreate = [];
+        $now = now()->toDateTimeString();
+        foreach ($this->permissions as $entity => $permissions) {
+            foreach ($permissions as $permission) {
+                if (!in_array($permission, $existingPermissions)) {
+                    $permissionToCreate[] = [
+                        'name' => $permission,
+                        'guard_name' => $this->defaultGuard,
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ];
+                }
+            }
+        }
+
+        if (count($permissionToCreate) > 0) {
+            Permission::insert($permissionToCreate);
         }
     }
 }
