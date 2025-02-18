@@ -8,9 +8,13 @@ import InputText from 'primevue/inputtext';
 import { useToast } from 'primevue/usetoast';
 import { useI18n } from 'vue-i18n';
 
+import { useSideBarStore } from '@/Stores/sidebar';
+
 const { t } = useI18n();
 
 const toast = useToast();
+
+const sideBarStore = useSideBarStore();
 
 const props = defineProps({
   filters: Object,
@@ -100,7 +104,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="overflow-x-auto sm:w-[calc(100vw-65px)] md:w-[calc(100vw-65px)] lg:w-[calc(100vw-380px)]">
+  <div
+    class="overflow-x-auto"
+    :class="{ 'sm:w-[calc(100vw-65px)] md:w-full ': sideBarStore.show, 'sm:w-[calc(100vw-65px)] md:w-[calc(100vw-65px)] lg:w-[calc(100vw-380px)]': !sideBarStore.show }"
+  >
     <DataTable
       class="w-full"
       lazy
