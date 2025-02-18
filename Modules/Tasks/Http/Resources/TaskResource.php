@@ -31,6 +31,7 @@ class TaskResource extends JsonResource
             'rows' => $this->rows,
             'plants' => optional($this->plants)->pluck('id'),
             'responsible_id' => optional($this->responsible)->id,
+            'responsible_name' => optional($this->responsible)->full_name,
             'note' => $this->note,
             'comments' => optional($this->comments)->sortBy('created_at')->map(fn ($comment) => [
                 'id' => $comment->id,
