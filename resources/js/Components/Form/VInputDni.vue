@@ -2,20 +2,20 @@
 import { useAttrs } from 'vue';
 
 const model = defineModel();
-
 const attrs = useAttrs();
 
 const formatRut = (input) => {
-  let str = input.toString();
+  if (!input) return '';
 
+  let str = input.toString();
   let formatted = '';
 
-  if (str.length <= 2) {
-    return str;
-  }
-
-  let dv = str.slice(-1);
+  let dv = str.slice(-1).toLowerCase();
   str = str.slice(0, -1);
+
+  if (str.length <= 2) {
+    return str + (dv ? '-' + dv : '');
+  }
 
   for (let i = str.length - 1, j = 1; i >= 0; i--, j++) {
     formatted = str.charAt(i) + formatted;
@@ -24,14 +24,33 @@ const formatRut = (input) => {
     }
   }
 
-  return formatted.length > 0 ? formatted + '-' + dv : dv;
+  return formatted + '-' + dv;
 };
 
 const handlerInput = (e) => {
-  const rutValue = e.target.value.replace(/\D/g, '');
+  let value = e.target.value;
+
+  const hasK = value.includes('-k') || value.includes('-K');
+
+  let rutValue = value.replace(/[^\dk]/gi, '');
+  if (hasK) {
+    rutValue = rutValue.slice(0, -1) + 'k';
+  }
+
   const rutFormated = formatRut(rutValue);
+
   e.target.value = rutFormated;
   model.value = rutFormated;
+};
+
+const handlerKeyPress = (e) => {
+  const char = String.fromCharCode(e.keyCode);
+  const currentValue = e.target.value;
+
+  // Permitir números y 'k' solo después del guión
+  if (!/[\d]/.test(char) && !(currentValue.includes('-') && /[kK]/.test(char))) {
+    e.preventDefault();
+  }
 };
 </script>
 
@@ -40,5 +59,6 @@ const handlerInput = (e) => {
     v-bind="attrs"
     v-model="model"
     @input="handlerInput"
+    @keypress="handlerKeyPress"
   />
 </template>
