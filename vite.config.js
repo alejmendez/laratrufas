@@ -21,6 +21,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': '/resources/js',
+            '@Auth': path.resolve(__dirname, './Modules/Auth/Resources'),
             '@Users': path.resolve(__dirname, './Modules/Users/Resources'),
             '@Tasks': path.resolve(__dirname, './Modules/Tasks/Resources'),
             '@Dashboard': path.resolve(__dirname, './Modules/Dashboard/Resources'),

@@ -1,22 +1,23 @@
-import generics from './generics';
-import auth from './auth';
-import profile from './profile';
-import dashboard from './dashboard';
-import user from './user';
-import field from './field';
-import quarter from './quarter';
-import plant from './plant';
-import dog from './dog';
-import menu from './menu';
-import bulk from './bulk';
-import harvest from './harvest';
-import harvest_details from './harvest_details';
-import tool from './tool';
-import security_equipment from './security_equipment';
-import machinery from './machinery';
-import task from './task';
-import batch from './batch';
-import liquidation from './liquidation';
+import generics from '@Core/Lang/es/generics';
+import menu from '@Core/Lang/es/menu';
+import auth from '@Auth/Lang/es/auth';
+import profile from '@Users/Lang/es/profile';
+import user from '@Users/Lang/es/user';
+import dashboard from '@Dashboard/Lang/es/dashboard';
+import field from '@Fields/Lang/es/field';
+import quarter from '@Fields/Lang/es/quarter';
+import plant from '@Fields/Lang/es/plant';
+import dog from '@Fields/Lang/es/dog';
+import bulk from '@Fields/Lang/es/bulk';
+import harvest from '@Fields/Lang/es/harvest';
+import harvest_details from '@Fields/Lang/es/harvest_details';
+import tool from '@Fields/Lang/es/tool';
+import security_equipment from '@Fields/Lang/es/security_equipment';
+import machinery from '@Fields/Lang/es/machinery';
+import batch from '@Fields/Lang/es/batch';
+import liquidation from '@Fields/Lang/es/liquidation';
+import owner from '@Fields/Lang/es/owner';
+import task from '@Tasks/Lang/es/task';
 
 export default {
   brand: {
@@ -41,4 +42,5 @@ export default {
   task,
   batch,
   liquidation,
+  owner,
 };

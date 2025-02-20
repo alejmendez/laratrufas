@@ -3,6 +3,12 @@ export default {
     profile: 'Perfil',
     logout: 'Cerrar Sesión',
   },
+  right: {
+    category_product: 'Categoría de Producto',
+    importer: 'Exportadores',
+    owner: 'Propietarios',
+    plant_type: 'Tipo de Planta',
+  },
   dashboard: 'Escritorio',
 
   management: 'Gestión',

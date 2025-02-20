@@ -12,6 +12,7 @@ export default {
   },
   errors: {
     trying_to_save: 'Error al intentar guardar',
+    trying_to_delete: 'Error al intentar eliminar',
   },
   tables: {
     search: 'Buscar',
