@@ -7,13 +7,13 @@ use Illuminate\Support\Str;
 
 class CreatePlantType
 {
-    public static function call($name): PlantType
+    public static function call($data): PlantType
     {
-        $slug = Str::slug($name);
+        $slug = Str::slug($data['name']);
         $type = PlantType::where('slug', $slug)->first();
-        if (! $type) {
+        if (!$type) {
             $type = new PlantType;
-            $type->name = $name;
+            $type->name = $data['name'];
             $type->slug = $slug;
             $type->save();
         }

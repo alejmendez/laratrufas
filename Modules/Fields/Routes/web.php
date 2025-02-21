@@ -12,12 +12,15 @@ use Modules\Fields\Http\Controllers\HarvestsController;
 use Modules\Fields\Http\Controllers\LiquidationsController;
 use Modules\Fields\Http\Controllers\MachineriesController;
 use Modules\Fields\Http\Controllers\PlantsController;
-use Modules\Fields\Http\Controllers\PlantTypesController;
 use Modules\Fields\Http\Controllers\QuartersController;
 use Modules\Fields\Http\Controllers\ToolsController;
 use Modules\Fields\Http\Controllers\SecurityEquipmentsController;
-use Modules\Fields\Http\Controllers\ImportersController;
 use Modules\Fields\Http\Controllers\GraphsController;
+
+use Modules\Fields\Http\Controllers\CategoryProductsController;
+use Modules\Fields\Http\Controllers\ImportersController;
+use Modules\Fields\Http\Controllers\OwnersController;
+use Modules\Fields\Http\Controllers\PlantTypesController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/bulk', [BulksController::class, 'index'])->name('bulk.index');
@@ -56,5 +59,10 @@ Route::middleware('auth')->group(function () {
         'batches' => BatchesController::class,
         'liquidations' => LiquidationsController::class,
         'security_equipments' => SecurityEquipmentsController::class,
+
+        'category_products' => CategoryProductsController::class,
+        'importers' => ImportersController::class,
+        'owners' => OwnersController::class,
+        'plant_types' => PlantTypesController::class,
     ]);
 });

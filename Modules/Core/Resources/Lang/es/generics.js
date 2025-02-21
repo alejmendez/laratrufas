@@ -3,6 +3,9 @@ export default {
   new: 'Nuevo',
   detail: 'Detalle',
   please_select: 'Seleccione',
+  yes: 'Si',
+  no: 'No',
+  all: 'Todos',
   messages: {
     saved: 'Guardado',
     saved_successfully: 'Guardado satisfactoriamente',

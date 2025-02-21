@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\Fields\Services\PlantTypes;
+namespace Modules\Fields\Services\Importers;
 
-use Modules\Fields\Models\PlantType;
+use Modules\Fields\Models\Importer;
 use Illuminate\Support\Str;
 
-class UpdatePlantType
+class UpdateImporter
 {
-    public static function call($id, $data): PlantType
+    public static function call($id, $data): Importer
     {
         $slug = Str::slug($data['name']);
 
-        $type = PlantType::findOrFail($id);
+        $type = Importer::findOrFail($id);
         $type->name = $data['name'];
         $type->slug = $slug;
         $type->save();

@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { create } from '@/Services/PlantType.js';
+import { create } from '@/Services/PlantTypeService.js';
 
 import Dialog from 'primevue/dialog';
 
@@ -18,10 +18,12 @@ const loading = ref(false);
 
 const addPlantType = async () => {
   loading.value = true;
-  const newType = await create(plant_type_name.value);
+  const response = await create({ name: plant_type_name.value });
+  const newType = response.data.type;
   loading.value = false;
   open.value = false;
   props.callback(newType);
+  plant_type_name.value = '';
 };
 </script>
 

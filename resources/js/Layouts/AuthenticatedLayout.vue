@@ -1,14 +1,26 @@
 <script setup>
+import { usePage } from '@inertiajs/vue3';
 import { storeToRefs } from 'pinia';
 import ConfirmDialog from 'primevue/confirmdialog';
 import Toast from 'primevue/toast';
+import Drawer from 'primevue/drawer';
 
 import SideBarLeft from '@/Components/Menu/SideBarLeft.vue';
 import MenuUser from '@/Components/Menu/MenuUser.vue';
 import { useSideBarStore } from '@/Stores/sidebar.js';
+import { useDrawerRightMenuStore } from '@/Stores/sidebar.js';
+import { menuElementsRight } from '@/Services/Menu';
+
+const page = usePage();
+const currentComponent = page.component;
 
 const sideBarStore = useSideBarStore();
-const { show } = storeToRefs(sideBarStore);
+const { show: showSideBar } = storeToRefs(sideBarStore);
+
+const drawerRightMenuStore = useDrawerRightMenuStore();
+const { show: showDrawerRightMenu } = storeToRefs(drawerRightMenuStore);
+
+const menuRightItems = menuElementsRight(currentComponent);
 </script>
 
 <template>
@@ -29,7 +41,7 @@ const { show } = storeToRefs(sideBarStore);
   <div class="w-full flex font-normal text-gray-900 antialiased">
     <div
       class="flex-none transition-all duration-200 ease-out z-10 bg-gray-50 dark:bg-[#2F3349] text-gray-100"
-      :class="{ 'lg:w-[320px] lg:opacity-100 w-[0px] opacity-0': !show, 'lg:w-[0px] lg:opacity-0 w-full opacity-100': show }"
+      :class="{ 'lg:w-[320px] lg:opacity-100 w-[0px] opacity-0': !showSideBar, 'lg:w-[0px] lg:opacity-0 w-full opacity-100': showSideBar }"
     >
       <h3 class="font-bold text-xl inline ms-6 mt-4">
         <span class="text-[color:--p-primary-color]">SW </span>
@@ -46,5 +58,27 @@ const { show } = storeToRefs(sideBarStore);
       </div>
     </div>
   </div>
+  <Drawer
+    v-model:visible="showDrawerRightMenu"
+    header="Administrar"
+    position="right"
+    @hide="drawerRightMenuStore.close"
+  >
+    <div class="">
+      <ul class="space-y-1">
+        <li v-for="item in menuRightItems" :key="item.link">
+          <Link
+            :href="item.link"
+            class="flex items-center py-2 px-2 border-s-4 border-[--p-primary-color] hover:border-primary-500 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-100 hover:text-primary-500 transition-colors"
+            @click="drawerRightMenuStore.close"
+          >
+            <font-awesome-icon :icon="item.icon" class="mr-3" v-if="item.icon" />
+            {{ $t(item.text) }}
+          </Link>
+        </li>
+      </ul>
+    </div>
+  </Drawer>
+
   <ConfirmDialog></ConfirmDialog>
 </template>

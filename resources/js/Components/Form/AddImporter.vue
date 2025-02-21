@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { create } from '@/Services/Importers';
+import { create } from '@/Services/ImporterService';
 
 import Dialog from 'primevue/dialog';
 
@@ -16,12 +16,13 @@ const importer_name = ref('');
 const open = ref(false);
 const loading = ref(false);
 
-const addPlantType = async () => {
+const addImporter = async () => {
   loading.value = true;
-  const newType = await create(importer_name.value);
+  const response = await create({ name: importer_name.value });
+  const newImporter = response.data.importer;
   loading.value = false;
   open.value = false;
-  props.callback(newType);
+  props.callback(newImporter);
   importer_name.value = '';
 };
 </script>
@@ -43,7 +44,7 @@ const addPlantType = async () => {
       </div>
     </div>
     <div class="flex justify-end">
-      <Button type="submit" @click="addPlantType" :label="$t('generics.actions.create')" :loading="loading" />
+      <Button type="submit" @click="addImporter" :label="$t('generics.actions.create')" :loading="loading" />
     </div>
   </Dialog>
 </template>

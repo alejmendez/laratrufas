@@ -167,3 +167,45 @@ export const menuElements = (currentComponent) => {
 
   return menuItemsFiltered;
 };
+
+export const menuElementsRight = (currentComponent) => {
+  const menuItems = [
+    {
+      link: route('category_products.index'),
+      text: 'menu.right.category_product',
+      icon: '',
+      active: currentComponent.startsWith('Fields::CategoryProducts'),
+      can: can('category-product-index'),
+    },
+    {
+      link: route('importers.index'),
+      text: 'menu.right.importer',
+      icon: '',
+      active: currentComponent.startsWith('Fields::Importer'),
+      can: can('importer-index'),
+    },
+    {
+      link: route('owners.index'),
+      text: 'menu.right.owner',
+      icon: '',
+      active: currentComponent.startsWith('Fields::Owner'),
+      can: can('owner-index'),
+    },
+    {
+      link: route('plant_types.index'),
+      text: 'menu.right.plant_type',
+      icon: '',
+      active: currentComponent.startsWith('Fields::PlantType'),
+      can: can('plant-type-index'),
+    },
+  ];
+
+  const menuItemsFiltered = menuItems
+    .filter((item) => item.can)
+    .map((item) => ({
+      ...item,
+      can: can(item.can),
+    }));
+
+  return menuItemsFiltered;
+};

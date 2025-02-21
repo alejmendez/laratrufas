@@ -7,17 +7,16 @@ use Illuminate\Support\Str;
 
 class CreateImporter
 {
-    public static function call($name): Importer
+    public static function call($data): Importer
     {
-        $slug = Str::slug($name);
+        $slug = Str::slug($data['name']);
         $importer = Importer::where('slug', $slug)->first();
         if (!$importer) {
             $importer = new Importer;
+            $importer->name = $data['name'];
+            $importer->slug = $slug;
+            $importer->save();
         }
-
-        $importer->name = $name;
-        $importer->slug = $slug;
-        $importer->save();
 
         return $importer;
     }

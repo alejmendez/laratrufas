@@ -1,5 +1,6 @@
 <script setup>
 import { useAttrs } from 'vue';
+import Checkbox from 'primevue/checkbox';
 
 const model = defineModel({ default: false });
 
@@ -30,27 +31,25 @@ const emit = defineEmits(['click']);
 <template>
   <div :class="props.classWrapper">
     <template v-if="props.label === ''">
-      <input
+      <Checkbox
         v-bind="attrs"
-        class="checkbox"
-        type="checkbox"
         :disabled="props.disabled"
         @click="emit('click', $event)"
         v-model="model"
+        binary
       />
     </template>
     <template v-else>
-      <label class="text-sm text-gray-800">
-        <input
+      <Label>
+        <Checkbox
           v-bind="attrs"
-          type="checkbox"
-          class="checkbox"
           :disabled="props.disabled"
           @click="emit('click', $event)"
           v-model="model"
+          binary
         />
         {{ props.label }}
-      </label>
+      </Label>
     </template>
   </div>
 </template>

@@ -1,9 +1,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import { storeToRefs } from 'pinia';
 import { usePreset } from '@primevue/themes';
 import SelectButton from 'primevue/selectbutton';
-
 import Presents from '@/Libs/PrimePresents';
+import { useDrawerRightMenuStore } from '@/Stores/sidebar.js';
+import { canShowRightMenu } from '@/Services/Auth';
 
 const darkModeValue = ref(null);
 const darkMode = ref([
@@ -14,8 +16,10 @@ const darkMode = ref([
 import MenuNotification from './MenuNotification.vue';
 
 const root = ref(null);
+const drawerRightMenuStore = useDrawerRightMenuStore();
 
 const showDropDown = ref(false);
+const showRightMenu = ref(canShowRightMenu());
 
 const themes = [
   { name: 'Apple', class: 'bg-green-600' },
@@ -24,6 +28,10 @@ const themes = [
   { name: 'Vulcan', class: 'bg-zinc-900' },
   { name: 'CarrotOrange', class: 'bg-amber-500' },
 ];
+
+const toggleDropMenu = () => {
+  drawerRightMenuStore.toggle();
+};
 
 const toggleDrop = () => {
   showDropDown.value = !showDropDown.value;
@@ -72,6 +80,15 @@ onUnmounted(() => {
 </style>
 
 <template>
+  <div class="relative me-3" ref="root" v-if="showRightMenu">
+    <div
+      class="text-lg w-[43px] h-[43px] hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 pt-2 ps-3 rounded-full transition-all ease-out duration-300"
+      @click="toggleDropMenu"
+    >
+      <font-awesome-icon icon="fa-solid fa-gear" />
+    </div>
+  </div>
+
   <MenuNotification />
 
   <div class="w-[40px]" ref="root">

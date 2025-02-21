@@ -23,7 +23,7 @@ class SyncPermissions extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Sync permissions';
 
     protected $defaultGuard = 'web';
 
@@ -36,13 +36,13 @@ class SyncPermissions extends Command
         'quarter',
         'task',
         'tool',
-        'security_equipment',
+        'security-equipment',
         'user',
         'batch',
         'liquidation',
         'owner',
         'importer',
-        'category_product',
+        'category-product',
         'plant_type',
     ];
 
@@ -93,6 +93,8 @@ class SyncPermissions extends Command
         $this->create_permission('harvestdetail', 'store');
         $this->create_permission('harvestdetail', 'find_by_code');
 
+        $this->save_permissions();
+
         $this->permissions = collect($this->permissions);
 
         $allPermissions = $this->permissions->flatten();
@@ -101,12 +103,12 @@ class SyncPermissions extends Command
         $this->roles['administrator']->syncPermissions($allPermissions->toArray());
 
         $this->roles['technician']->syncPermissions([
-            'field index',
-            'field show',
-            'quarter index',
-            'quarter show',
-            'plant index',
-            'plant show',
+            'field-index',
+            'field-show',
+            'quarter-index',
+            'quarter-show',
+            'plant-index',
+            'plant-show',
             ...collect($this->permissions['harvest'])->filter(fn ($p) => ! Str::contains($p, 'destroy'))->toArray(),
             ...$this->permissions['harvestdetail'],
             ...$this->permissions['task'],
@@ -116,10 +118,10 @@ class SyncPermissions extends Command
         ]);
 
         $this->roles['farmer']->syncPermissions([
-            'quarter index',
-            'quarter show',
-            'plant index',
-            'plant show',
+            'quarter-index',
+            'quarter-show',
+            'plant-index',
+            'plant-show',
             ...collect($this->permissions['harvest'])->filter(fn ($p) => ! Str::contains($p, 'destroy'))->toArray(),
             ...$this->permissions['harvestdetail'],
             ...$this->permissions['task'],
@@ -151,7 +153,7 @@ class SyncPermissions extends Command
 
     public function create_permission($entity, $action)
     {
-        $permission = $entity.' '.$action;
+        $permission = $entity.'-'.$action;
 
         if (! isset($this->permissions[$entity])) {
             $this->permissions[$entity] = [];
