@@ -28,11 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/plants/bulk', [PlantsController::class, 'create_bulk'])->name('plants.create.bulk');
     Route::post('/plants/bulk', [PlantsController::class, 'store_bulk'])->name('plants.store.bulk');
     Route::get('/plants/download/bulk/template', [PlantsController::class, 'download_bulk_template'])->name('plants.download.bulk.template');
-    Route::post('/plants/details', [PlantDetailsController::class, 'store'])->name('plant.details.store');
+    Route::post('/plants/details', [PlantDetailsController::class, 'store'])->name('plants.details.store');
     Route::get('/plants/details/quarter/{id}', [PlantDetailsController::class, 'index_by_quarter'])->name('plants.details.by_quarter');
     Route::get('/plants/details/field/{id}', [PlantDetailsController::class, 'index_by_field'])->name('plants.details.by_field');
-    Route::get('/plants/details/{id}', [PlantDetailsController::class, 'index'])->name('plants.details');
-    Route::post('/plants/types', [PlantTypesController::class, 'store'])->name('plants.types.store');
+    Route::get('/plants/details/{id}', [PlantDetailsController::class, 'index'])->name('plants.details.index');
 
     Route::get('/harvests/bulk/{id?}', [HarvestsController::class, 'create_bulk'])->name('harvests.create.bulk');
     Route::post('/harvests/bulk', [HarvestsController::class, 'store_bulk'])->name('harvests.store.bulk');
@@ -46,7 +45,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/quarter/{id}/plants', [QuartersController::class, 'plants'])->name('quarters.plants');
     Route::put('/quarter/{id}/plants/position', [QuartersController::class, 'plants_update_position'])->name('quarters.plants.update.position');
-    Route::get('/graphs/{id}/{type}', [GraphsController::class, 'index'])->name('graphs');
+    Route::get('/graphs/{id}/{type}', [GraphsController::class, 'index'])->name('graphs.index');
 
     Route::resources([
         'fields' => FieldsController::class,

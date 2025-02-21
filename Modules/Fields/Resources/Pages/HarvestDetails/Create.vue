@@ -59,7 +59,7 @@ const _submitHandler = (keep_plant_code) => {
     if ([form.foliage_sanitation_photo, form.trunk_sanitation_photo, form.soil_sanitation_photo].some((d) => d != null)) {
       options.forceFormData = true;
     }
-    form.post(route('plant.details.store'), options);
+    form.post(route('plants.details.store'), options);
     resetQr();
   }
 };

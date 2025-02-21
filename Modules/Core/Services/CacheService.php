@@ -28,7 +28,7 @@ class CacheService
     public static function getUserPermissions(User $user)
     {
         return cache()->remember('user_' . $user->id . '_permissions', self::$userDataTtl, function () use ($user) {
-            return $user->getAllPermissions()->pluck('name')->map(fn ($permissionName) => Str::slug($permissionName));
+            return $user->getAllPermissions()->pluck('name')->map(fn ($permissionName) => $permissionName);
         });
     }
 

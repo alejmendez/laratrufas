@@ -16,6 +16,19 @@ use Inertia\Inertia;
 
 class BatchesController extends Controller
 {
+    public function __construct()
+    {
+        $this->setupPermissionMiddleware([
+            'batches.index' => 'batch-index',
+            'batches.create' => 'batch-create',
+            'batches.store' => 'batch-create',
+            'batches.show' => 'batch-show',
+            'batches.edit' => 'batch-edit',
+            'batches.update' => 'batch-edit',
+            'batches.destroy' => 'batch-destroy',
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */

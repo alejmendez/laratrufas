@@ -10,7 +10,7 @@ const list = async (route, show_harvests) => {
 };
 
 const listByPlantId = async (id, show_harvests) => {
-  return await list(route('plants.details', { id }), show_harvests);
+  return await list(route('plants.details.index', { id }), show_harvests);
 };
 
 const listByQuarterId = async (id, show_harvests) => {

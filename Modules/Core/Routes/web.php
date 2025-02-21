@@ -13,7 +13,7 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/select/{entity}', [SelectsController::class, 'index'])->name('selects');
+    Route::get('/select/{entity}', [SelectsController::class, 'index'])->name('selects.index');
     Route::get('/select/multiple', [SelectsController::class, 'multiple'])->name('selects.multiple');
 
     Route::get('/notifications/{type}/unread', [NotificationsController::class, 'unread'])->name('notifications.unread');

@@ -28,22 +28,22 @@ class SyncPermissions extends Command
     protected $defaultGuard = 'web';
 
     protected $entities = [
-        'dog',
-        'field',
-        'harvest',
-        'machinery',
-        'plant',
-        'quarter',
-        'task',
-        'tool',
-        'security-equipment',
-        'user',
-        'batch',
-        'liquidation',
-        'owner',
-        'importer',
-        'category-product',
-        'plant_type',
+        'batches',
+        'category_products',
+        'dogs',
+        'fields',
+        'harvests',
+        'importers',
+        'liquidations',
+        'machineries',
+        'owners',
+        'plant_types',
+        'plants',
+        'quarters',
+        'security_equipments',
+        'tasks',
+        'tools',
+        'users',
     ];
 
     protected $defaultActions = [
@@ -68,6 +68,7 @@ class SyncPermissions extends Command
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         $this->create_roles();
+        $this->clear_permissions();
 
         foreach ($this->entities as $entity) {
             foreach ($this->defaultActions as $action) {
@@ -77,21 +78,30 @@ class SyncPermissions extends Command
 
         $this->create_permission('bulk', 'index');
 
-        $this->create_permission('harvest', 'download_bulk_template');
-        $this->create_permission('harvest', 'create_bulk');
-        $this->create_permission('harvest', 'store_bulk');
-        $this->create_permission('harvest', 'bulk_create');
+        $this->create_permission('harvests', 'download.bulk.template');
+        $this->create_permission('harvests', 'create.bulk');
+        $this->create_permission('harvests', 'store.bulk');
 
-        $this->create_permission('plant', 'download_bulk_template');
-        $this->create_permission('plant', 'create_bulk');
-        $this->create_permission('plant', 'store_bulk');
-        $this->create_permission('plant', 'bulk_create');
+        $this->create_permission('plants', 'download.bulk.template');
+        $this->create_permission('plants', 'create.bulk');
+        $this->create_permission('plants', 'store.bulk');
+        $this->create_permission('plants.details', 'index');
+        $this->create_permission('plants.details', 'store');
+        $this->create_permission('plants.details', 'by_quarter');
+        $this->create_permission('plants.details', 'by_field');
 
-        $this->create_permission('planttype', 'store');
+        $this->create_permission('harvests.details', 'create');
+        $this->create_permission('harvests.details', 'store');
+        $this->create_permission('harvests.details', 'find_by_code');
+        $this->create_permission('selects', 'index');
+        $this->create_permission('selects', 'multiple');
+        $this->create_permission('tasks', 'comments.store');
+        $this->create_permission('tasks', 'comments.update');
+        $this->create_permission('tasks', 'comments.destroy');
+        $this->create_permission('graphs', 'index');
 
-        $this->create_permission('harvestdetail', 'create');
-        $this->create_permission('harvestdetail', 'store');
-        $this->create_permission('harvestdetail', 'find_by_code');
+        $this->create_permission('quarters', 'plants');
+        $this->create_permission('quarters', 'plants.update.position');
 
         $this->save_permissions();
 
@@ -103,28 +113,28 @@ class SyncPermissions extends Command
         $this->roles['administrator']->syncPermissions($allPermissions->toArray());
 
         $this->roles['technician']->syncPermissions([
-            'field-index',
-            'field-show',
-            'quarter-index',
-            'quarter-show',
-            'plant-index',
-            'plant-show',
-            ...collect($this->permissions['harvest'])->filter(fn ($p) => ! Str::contains($p, 'destroy'))->toArray(),
-            ...$this->permissions['harvestdetail'],
-            ...$this->permissions['task'],
-            ...$this->permissions['machinery'],
-            ...$this->permissions['tool'],
-            ...$this->permissions['security_equipment'],
+            'fields.index',
+            'fields.show',
+            'quarters.index',
+            'quarters.show',
+            'plants.index',
+            'plants.show',
+            ...collect($this->permissions['harvests'])->filter(fn ($p) => ! Str::contains($p, 'destroy'))->toArray(),
+            ...$this->permissions['harvests.details'],
+            ...$this->permissions['tasks'],
+            ...$this->permissions['machineries'],
+            ...$this->permissions['tools'],
+            ...$this->permissions['security_equipments'],
         ]);
 
         $this->roles['farmer']->syncPermissions([
-            'quarter-index',
-            'quarter-show',
-            'plant-index',
-            'plant-show',
-            ...collect($this->permissions['harvest'])->filter(fn ($p) => ! Str::contains($p, 'destroy'))->toArray(),
-            ...$this->permissions['harvestdetail'],
-            ...$this->permissions['task'],
+            'quarters.index',
+            'quarters.show',
+            'plants.index',
+            'plants.show',
+            ...collect($this->permissions['harvests'])->filter(fn ($p) => ! Str::contains($p, 'destroy'))->toArray(),
+            ...$this->permissions['harvests.details'],
+            ...$this->permissions['tasks'],
         ]);
 
         $users = User::all();
@@ -153,9 +163,9 @@ class SyncPermissions extends Command
 
     public function create_permission($entity, $action)
     {
-        $permission = $entity.'-'.$action;
+        $permission = $entity.'.'.$action;
 
-        if (! isset($this->permissions[$entity])) {
+        if (!isset($this->permissions[$entity])) {
             $this->permissions[$entity] = [];
         }
 
@@ -183,5 +193,11 @@ class SyncPermissions extends Command
         if (count($permissionToCreate) > 0) {
             Permission::insert($permissionToCreate);
         }
+    }
+
+    public function clear_permissions()
+    {
+        $this->permissions = [];
+        Permission::truncate();
     }
 }
