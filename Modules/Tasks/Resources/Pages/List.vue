@@ -32,12 +32,13 @@ const { t } = useI18n();
 const datatable = ref(null);
 const filter_responsible_options = ref([]);
 
-const statesValues = ['to_begin', 'started', 'stopped', 'finished'];
+const statesValues = ['to_begin', 'started', 'stopped', 'overdued', 'finished'];
 const filter_states_options = statesValues.map((s) => ({ value: s, text: t('task.form.status.options.' + s) }));
 const statesSeverities = {
   to_begin: 'warn',
   started: 'info',
   stopped: 'danger',
+  overdued: 'danger',
   finished: 'success',
 };
 

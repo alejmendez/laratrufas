@@ -2,6 +2,7 @@
 
 namespace Modules\Tasks\Services;
 
+use Carbon\Carbon;
 use Modules\Core\Services\PrimevueDatatables;
 use Modules\Tasks\Models\Task;
 
@@ -14,8 +15,17 @@ class ListTask
         $query = Task::query();
 
         $datatable = new PrimevueDatatables($params, $searchableColumns);
-        $dogs = $datatable->of($query)->make();
+        $tasks = $datatable->of($query)->make();
 
-        return $dogs;
+        $today = now();
+        $tasks->transform(function ($task) use ($today) {
+            $endDate = Carbon::parse($task->end_date);
+            $overdued = $today->diffInDays($endDate) < 0;
+            $status = $overdued ? 'overdued' : $task->status;
+            $task->status = $status;
+            return $task;
+        });
+
+        return $tasks;
     }
 }
