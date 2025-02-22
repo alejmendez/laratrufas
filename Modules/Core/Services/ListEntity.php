@@ -16,6 +16,7 @@ use Modules\Fields\Models\SecurityEquipment;
 use Modules\Fields\Models\Tool;
 use Modules\Fields\Services\Harvests\HarvestAvailableWeeks;
 use Modules\Fields\Services\Harvests\HarvestAvailableYears;
+use Modules\Fields\Services\Liquidations\LiquidationAvailableYears;
 use Modules\Users\Models\User;
 
 class ListEntity
@@ -36,13 +37,7 @@ class ListEntity
             'role' => \Spatie\Permission\Models\Role::select('name as value', 'name as text')->orderBy('name'),
             'harvest_available_years' => HarvestAvailableYears::call(),
             'harvest_available_weeks' => HarvestAvailableWeeks::call(),
-            'liquidation_available_years' => DB::table('liquidations')
-                ->select('year')
-                ->distinct()
-                ->get()
-                ->map(function ($row) {
-                    return ['value' => $row->year, 'text' => $row->year];
-                }),
+            'liquidation_available_years' => LiquidationAvailableYears::call(),
             'importer' => Importer::select('id as value', 'name as text')->orderBy('name'),
             'category_products' => CategoryProduct::select('id', 'name', 'is_commercial'),
             'responsible', 'couple', 'user' => User::select('id as value', 'full_name as text')->orderBy('full_name'),

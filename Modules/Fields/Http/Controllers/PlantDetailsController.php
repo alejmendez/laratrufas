@@ -31,7 +31,8 @@ class PlantDetailsController extends Controller
     public function index(int $id)
     {
         $show_harvests = request('show_harvests') === 'true';
-        $plant_details = FindPlantDetails::get_by_plant_id($id, $show_harvests);
+        $year = request('year');
+        $plant_details = FindPlantDetails::get_by_plant_id($id, $year, $show_harvests);
 
         return new PlantDetailCollection($plant_details);
     }
@@ -39,7 +40,8 @@ class PlantDetailsController extends Controller
     public function index_by_quarter(int $id)
     {
         $show_harvests = request('show_harvests') === 'true';
-        $plant_details = FindPlantDetails::get_by_quarter_id($id, $show_harvests);
+        $year = request('year');
+        $plant_details = FindPlantDetails::get_by_quarter_id($id, $year, $show_harvests);
 
         return new PlantDetailCollection($plant_details);
     }
@@ -47,7 +49,8 @@ class PlantDetailsController extends Controller
     public function index_by_field(int $id)
     {
         $show_harvests = request('show_harvests') === 'true';
-        $plant_details = FindPlantDetails::get_by_field_id($id, $show_harvests);
+        $year = request('year');
+        $plant_details = FindPlantDetails::get_by_field_id($id, $year, $show_harvests);
 
         return new PlantDetailCollection($plant_details);
     }

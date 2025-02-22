@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\Fields\Services\Harvests;
+namespace Modules\Fields\Services\Liquidations;
 
 use Illuminate\Support\Facades\DB;
 
-class HarvestAvailableYears
+class LiquidationAvailableYears
 {
     protected static int $ttl = 60;
 
     public static function call()
     {
-        return cache()->remember('harvest_available_years', self::$ttl, function () {
-            return DB::table('harvests')
+        return cache()->remember('liquidation_available_years', self::$ttl, function () {
+            return DB::table('liquidations')
                 ->select('year')
                 ->distinct()
                 ->get()

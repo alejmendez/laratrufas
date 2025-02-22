@@ -7,5 +7,5 @@ const props = defineProps({
 </script>
 
 <template>
-  <LogsCard :field_id="props.field_id" />
+  <LogsCard :field_id="props.field_id" :show_harvests="true" />
 </template>

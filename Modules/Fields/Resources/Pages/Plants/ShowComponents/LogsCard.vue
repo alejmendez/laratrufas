@@ -9,6 +9,8 @@ import ProgressSpinner from 'primevue/progressspinner';
 import { stringToFormat } from '@/Utils/date';
 
 import PlantDetailService from '@/Services/PlantDetailService';
+import { getDataSelect } from '@/Services/Selects';
+
 
 const { t } = useI18n();
 
@@ -33,6 +35,8 @@ const props = defineProps({
 
 const loading = ref(true);
 const details = ref([]);
+const year_options = ref([]);
+const selectedYear = ref(null);
 
 const categories = ref([
   { name: 'harvest', key: 'harvest', },
@@ -61,14 +65,23 @@ const detailsFiltered = computed(() => {
   return details.value.filter((detail) => selectedCategories.value.includes(detail.type));
 });
 
-onMounted(async () => {
+const filterByYear = async () => {
   if (props.plant_id) {
-    details.value = await PlantDetailService.listByPlantId(props.plant_id, props.show_harvests);
+    details.value = await PlantDetailService.listByPlantId(props.plant_id, selectedYear?.value?.value, props.show_harvests);
   } else if (props.quarter_id) {
-    details.value = await PlantDetailService.listByQuarterId(props.quarter_id, props.show_harvests);
+    details.value = await PlantDetailService.listByQuarterId(props.quarter_id, selectedYear?.value?.value, props.show_harvests);
   } else if (props.field_id) {
-    details.value = await PlantDetailService.listByFieldId(props.field_id, props.show_harvests);
+    details.value = await PlantDetailService.listByFieldId(props.field_id, selectedYear?.value?.value, props.show_harvests);
   }
+};
+
+onMounted(async () => {
+  await filterByYear();
+  const data = await getDataSelect('harvest_available_years');
+
+  const year_value_default = { value: null, text: 'Todos' };
+  year_options.value = [year_value_default, ...data];
+  selectedYear.value = { value: year_options.value[0].value, text: year_options.value[0].text };
 
   loading.value = false;
 });
@@ -81,6 +94,15 @@ onMounted(async () => {
     <CardSection
       wrapperClass="p-5"
     >
+      <div class="mb-4">
+        <div class="text-gray-400 pb-1">Año de cosecha</div>
+        <VSelect
+          v-model="selectedYear"
+          :placeholder="t('generics.please_select')"
+          :options="year_options"
+          @change="filterByYear"
+        />
+      </div>
       <div class="justify-center">
         <Checkbox v-model="selectAll" :inputId="`all-categories`" name="category" value="all" @change="selectAllHandler" />
         <label class="ms-2" :for="`all-categories`">{{ t(`harvest_details.all_categories`) }}</label>
