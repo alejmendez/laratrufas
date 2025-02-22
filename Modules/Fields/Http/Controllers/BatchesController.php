@@ -3,6 +3,7 @@
 namespace Modules\Fields\Http\Controllers;
 
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Fields\Http\Requests\StoreBatchRequest;
 use Modules\Fields\Http\Requests\UpdateBatchRequest;
 use Modules\Fields\Http\Resources\BatchResource;
@@ -16,18 +17,7 @@ use Inertia\Inertia;
 
 class BatchesController extends Controller
 {
-    public function __construct()
-    {
-        $this->setupPermissionMiddleware([
-            'batches.index' => 'batch-index',
-            'batches.create' => 'batch-create',
-            'batches.store' => 'batch-create',
-            'batches.show' => 'batch-show',
-            'batches.edit' => 'batch-edit',
-            'batches.update' => 'batch-edit',
-            'batches.destroy' => 'batch-destroy',
-        ]);
-    }
+    use HasPermissionMiddleware;
 
     /**
      * Display a listing of the resource.

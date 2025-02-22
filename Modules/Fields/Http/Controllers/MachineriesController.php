@@ -12,9 +12,11 @@ use Modules\Fields\Services\Machineries\FindMachinery;
 use Modules\Fields\Services\Machineries\ListMachinery;
 use Modules\Fields\Services\Machineries\UpdateMachinery;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class MachineriesController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

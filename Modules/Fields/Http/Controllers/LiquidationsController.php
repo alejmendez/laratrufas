@@ -13,9 +13,11 @@ use Modules\Fields\Services\Liquidations\FindLiquidation;
 use Modules\Fields\Services\Liquidations\ListLiquidation;
 use Modules\Fields\Services\Liquidations\UpdateLiquidation;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class LiquidationsController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

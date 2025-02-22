@@ -15,9 +15,11 @@ use Modules\Fields\Http\Requests\StoreQuarterRequest;
 use Modules\Fields\Http\Requests\UpdateQuarterRequest;
 use Modules\Fields\Services\Quarters\ListQuarterPlants;
 use Modules\Fields\Services\Quarters\PlantsUpdatePositionQuarter;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class QuartersController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

@@ -4,9 +4,11 @@ namespace Modules\Core\Http\Controllers;
 
 use Modules\Core\Services\ListEntities;
 use Modules\Core\Services\ListEntity;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class SelectsController extends Controller
 {
+    use HasPermissionMiddleware;
     public function index()
     {
         $entity = request('entity');

@@ -8,9 +8,11 @@ use Modules\Fields\Http\Resources\PlantDetailCollection;
 
 use Modules\Fields\Services\PlantDetails\CreatePlantDetails;
 use Modules\Fields\Services\PlantDetails\FindPlantDetails;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class PlantDetailsController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Store a newly created resource in storage.
      */

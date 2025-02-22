@@ -12,9 +12,11 @@ use Modules\Fields\Services\SecurityEquipments\FindSecurityEquipment;
 use Modules\Fields\Services\SecurityEquipments\ListSecurityEquipment;
 use Modules\Fields\Services\SecurityEquipments\UpdateSecurityEquipment;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class SecurityEquipmentsController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

@@ -8,9 +8,11 @@ use Modules\Fields\Services\HarvestDetails\CreateHarvestDetails;
 use Modules\Fields\Services\HarvestDetails\ListHarvestQualities;
 use Modules\Fields\Services\Plants\FindPlantByCode;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class HarvestDetailsController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Show the form for creating a new resource.
      */

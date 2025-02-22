@@ -10,9 +10,11 @@ use Modules\Fields\Services\CategoryProducts\DeleteCategoryProduct;
 use Modules\Fields\Services\CategoryProducts\ListCategoryProduct;
 use Modules\Fields\Services\CategoryProducts\UpdateCategoryProduct;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class CategoryProductsController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

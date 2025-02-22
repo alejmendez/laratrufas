@@ -15,9 +15,11 @@ use Modules\Tasks\Services\UpdateTask;
 use Modules\Tasks\Services\NotifyTaskComment;
 use Modules\Tasks\Services\MarkTaskNotificationAsRead;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class TasksController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

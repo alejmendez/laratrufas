@@ -10,9 +10,11 @@ use Modules\Fields\Services\Owners\DeleteOwner;
 use Modules\Fields\Services\Owners\ListOwner;
 use Modules\Fields\Services\Owners\UpdateOwner;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class OwnersController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

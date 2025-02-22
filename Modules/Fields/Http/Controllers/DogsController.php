@@ -13,9 +13,11 @@ use Modules\Fields\Services\Dogs\ListDog;
 use Modules\Fields\Services\Dogs\UpdateDog;
 use Modules\Core\Services\ListEntity;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class DogsController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

@@ -10,9 +10,11 @@ use Modules\Fields\Services\PlantTypes\DeletePlantType;
 use Modules\Fields\Services\PlantTypes\ListPlantType;
 use Modules\Fields\Services\PlantTypes\UpdatePlantType;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class PlantTypesController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

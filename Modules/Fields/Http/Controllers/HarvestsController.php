@@ -18,9 +18,11 @@ use Modules\Fields\Services\Harvests\ListHarvest;
 use Modules\Fields\Services\Harvests\UpdateHarvest;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class HarvestsController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

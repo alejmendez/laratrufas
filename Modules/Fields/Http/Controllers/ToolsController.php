@@ -12,9 +12,10 @@ use Modules\Fields\Services\Tools\FindTool;
 use Modules\Fields\Services\Tools\ListTool;
 use Modules\Fields\Services\Tools\UpdateTool;
 use Inertia\Inertia;
-
+use Modules\Core\Traits\HasPermissionMiddleware;
 class ToolsController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

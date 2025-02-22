@@ -12,9 +12,11 @@ use Modules\Fields\Services\Fields\FindField;
 use Modules\Fields\Services\Fields\ListField;
 use Modules\Fields\Services\Fields\UpdateField;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class FieldsController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

@@ -13,9 +13,11 @@ use Modules\Users\Services\FindUser;
 use Modules\Users\Services\ListUser;
 use Modules\Users\Services\UpdateUser;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class UsersController extends Controller
 {
+    use HasPermissionMiddleware;
     /**
      * Display a listing of the resource.
      */

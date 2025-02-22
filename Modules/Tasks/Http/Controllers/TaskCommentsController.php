@@ -13,9 +13,11 @@ use Modules\Tasks\Services\NotifyTaskComment;
 
 use Modules\Tasks\Http\Resources\TaskCommentResource;
 use Inertia\Inertia;
+use Modules\Core\Traits\HasPermissionMiddleware;
 
 class TaskCommentsController extends Controller
 {
+    use HasPermissionMiddleware;
     public function store(StoreTaskCommentRequest $request)
     {
         $data = $request->validated();
