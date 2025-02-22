@@ -10,6 +10,11 @@ class BulksController extends Controller
 {
     use HasPermissionMiddleware;
 
+    public function __construct()
+    {
+        $this->setupPermissionMiddleware();
+    }
+
     public function index()
     {
         return Inertia::render('Fields::Bulk/List');

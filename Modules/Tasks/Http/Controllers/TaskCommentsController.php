@@ -16,6 +16,11 @@ class TaskCommentsController extends Controller
 {
     use HasPermissionMiddleware;
 
+    public function __construct()
+    {
+        $this->setupPermissionMiddleware();
+    }
+
     public function store(StoreTaskCommentRequest $request)
     {
         $data = $request->validated();

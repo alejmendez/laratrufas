@@ -13,6 +13,11 @@ class PlantDetailsController extends Controller
 {
     use HasPermissionMiddleware;
 
+    public function __construct()
+    {
+        $this->setupPermissionMiddleware();
+    }
+
     /**
      * Store a newly created resource in storage.
      */

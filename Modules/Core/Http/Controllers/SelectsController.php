@@ -10,6 +10,11 @@ class SelectsController extends Controller
 {
     use HasPermissionMiddleware;
 
+    public function __construct()
+    {
+        $this->setupPermissionMiddleware();
+    }
+
     public function index()
     {
         $entity = request('entity');

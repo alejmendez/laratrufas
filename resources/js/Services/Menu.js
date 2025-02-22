@@ -201,11 +201,7 @@ export const menuElementsRight = (currentComponent) => {
   ];
 
   const menuItemsFiltered = menuItems
-    .filter((item) => item.can)
-    .map((item) => ({
-      ...item,
-      can: can(item.can),
-    }));
+    .filter((item) => item.can);
 
   return menuItemsFiltered;
 };

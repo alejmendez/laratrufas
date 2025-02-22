@@ -19,6 +19,11 @@ class BatchesController extends Controller
 {
     use HasPermissionMiddleware;
 
+    public function __construct()
+    {
+        $this->setupPermissionMiddleware();
+    }
+
     /**
      * Display a listing of the resource.
      */

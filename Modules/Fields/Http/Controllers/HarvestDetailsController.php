@@ -14,6 +14,11 @@ class HarvestDetailsController extends Controller
 {
     use HasPermissionMiddleware;
 
+    public function __construct()
+    {
+        $this->setupPermissionMiddleware();
+    }
+
     /**
      * Show the form for creating a new resource.
      */
