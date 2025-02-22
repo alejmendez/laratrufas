@@ -66,6 +66,7 @@ export default {
     create: 'Crear',
     edit: 'Editar',
     delete: 'Eliminar',
+    show: 'Detalle',
     bulk: 'Carga Masiva',
   },
   date: {

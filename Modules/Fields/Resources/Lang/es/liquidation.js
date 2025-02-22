@@ -3,6 +3,7 @@ export default {
     entity_breadcrumb: 'Liquidaciones',
     create: 'Crear Liquidación',
     edit: 'Editar Liquidación',
+    show: 'Detalle Liquidación Semana {week}',
   },
   table: {
     week: 'Semana',

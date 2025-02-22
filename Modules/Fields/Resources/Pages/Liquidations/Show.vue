@@ -53,6 +53,8 @@ const dateRenderText = (m) => {
   return t('harvest.form.date.renderText', { week, start, end });
 };
 
+const weekLiquidation = computed(() => getWeek(data.date, { weekStartsOn: 1 }));
+
 const date_rendered = ref(data.date ? dateRenderText(data.date) : '');
 
 const total_categories_commercial = computed(() => {
@@ -77,8 +79,8 @@ const total_categories_not_commercial = computed(() => {
 
   <AuthenticatedLayout>
     <HeaderCrud
-      :title="t('liquidation.titles.edit')"
-      :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
+      :title="t('liquidation.titles.show', { week: weekLiquidation })"
+      :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.show') }]"
     />
     <CardSection>
       <VElementFormWrapper :label="t('liquidation.form.date.label')">
