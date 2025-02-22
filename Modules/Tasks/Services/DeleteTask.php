@@ -3,6 +3,7 @@
 namespace Modules\Tasks\Services;
 
 use Modules\Tasks\Models\Task;
+use Modules\Core\Models\Notification;
 
 class DeleteTask
 {
@@ -13,6 +14,8 @@ class DeleteTask
         if ($task) {
             $task->comments()->delete();
             $task->delete();
+
+            Notification::whereRaw("data like '%\"task_id\":$id,%'")->delete();
         }
     }
 }
