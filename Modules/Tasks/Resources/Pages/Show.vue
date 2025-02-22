@@ -209,13 +209,13 @@ const deleteHandler = async (id) => {
     </div>
 
     <CardSection
-      :header-text="t('task.show.activity.title')"
+      :header-text="t('task.show.tracking.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
       v-show="currentTab === tabs[1]"
     >
     </CardSection>
     <CardSection
-      :header-text="t('task.show.statistics.title')"
+      :header-text="t('task.show.logbook.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
       v-show="currentTab === tabs[2]"
     >
