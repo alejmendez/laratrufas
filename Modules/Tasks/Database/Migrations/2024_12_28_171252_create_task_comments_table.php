@@ -31,7 +31,7 @@ return new class extends Migration
                 'user_id' => $task->responsible_id,
                 'task_id' => $task->id,
                 'created_at' => $task->created_at,
-                'updated_at' => $task->updated_at
+                'updated_at' => $task->updated_at,
             ]);
         }
 

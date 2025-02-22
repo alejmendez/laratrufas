@@ -2,19 +2,20 @@
 
 namespace Modules\Fields\Http\Controllers;
 
+use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Fields\Http\Requests\StoreImporterRequest;
 use Modules\Fields\Http\Requests\UpdateImporterRequest;
 use Modules\Fields\Services\Importers\CreateImporter;
 use Modules\Fields\Services\Importers\DeleteImporter;
 use Modules\Fields\Services\Importers\ListImporter;
 use Modules\Fields\Services\Importers\UpdateImporter;
-use Inertia\Inertia;
-use Modules\Core\Traits\HasPermissionMiddleware;
 
 class ImportersController extends Controller
 {
     use HasPermissionMiddleware;
+
     /**
      * Display a listing of the resource.
      */
@@ -64,6 +65,7 @@ class ImportersController extends Controller
     public function destroy(string $id)
     {
         DeleteImporter::call($id);
+
         return response()->noContent();
     }
 }

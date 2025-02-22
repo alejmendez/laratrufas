@@ -2,22 +2,23 @@
 
 namespace Modules\Users\Http\Controllers;
 
+use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Services\ListEntity;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Users\Http\Requests\StoreUserRequest;
 use Modules\Users\Http\Requests\UpdateUserRequest;
 use Modules\Users\Http\Resources\UserResource;
-use Modules\Core\Services\ListEntity;
 use Modules\Users\Services\CreateUser;
 use Modules\Users\Services\DeleteUser;
 use Modules\Users\Services\FindUser;
 use Modules\Users\Services\ListUser;
 use Modules\Users\Services\UpdateUser;
-use Inertia\Inertia;
-use Modules\Core\Traits\HasPermissionMiddleware;
 
 class UsersController extends Controller
 {
     use HasPermissionMiddleware;
+
     /**
      * Display a listing of the resource.
      */

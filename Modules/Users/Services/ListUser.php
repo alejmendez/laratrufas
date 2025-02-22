@@ -2,8 +2,8 @@
 
 namespace Modules\Users\Services;
 
-use Modules\Users\Models\User;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Users\Models\User;
 
 class ListUser
 {

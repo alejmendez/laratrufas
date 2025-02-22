@@ -1,26 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use Modules\Fields\Http\Controllers\BatchesController;
 use Modules\Fields\Http\Controllers\BulksController;
+use Modules\Fields\Http\Controllers\CategoryProductsController;
 use Modules\Fields\Http\Controllers\DogsController;
 use Modules\Fields\Http\Controllers\FieldsController;
+use Modules\Fields\Http\Controllers\GraphsController;
 use Modules\Fields\Http\Controllers\HarvestDetailsController;
-use Modules\Fields\Http\Controllers\PlantDetailsController;
 use Modules\Fields\Http\Controllers\HarvestsController;
+use Modules\Fields\Http\Controllers\ImportersController;
 use Modules\Fields\Http\Controllers\LiquidationsController;
 use Modules\Fields\Http\Controllers\MachineriesController;
-use Modules\Fields\Http\Controllers\PlantsController;
-use Modules\Fields\Http\Controllers\QuartersController;
-use Modules\Fields\Http\Controllers\ToolsController;
-use Modules\Fields\Http\Controllers\SecurityEquipmentsController;
-use Modules\Fields\Http\Controllers\GraphsController;
-
-use Modules\Fields\Http\Controllers\CategoryProductsController;
-use Modules\Fields\Http\Controllers\ImportersController;
 use Modules\Fields\Http\Controllers\OwnersController;
+use Modules\Fields\Http\Controllers\PlantDetailsController;
+use Modules\Fields\Http\Controllers\PlantsController;
 use Modules\Fields\Http\Controllers\PlantTypesController;
+use Modules\Fields\Http\Controllers\QuartersController;
+use Modules\Fields\Http\Controllers\SecurityEquipmentsController;
+use Modules\Fields\Http\Controllers\ToolsController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/bulk', [BulksController::class, 'index'])->name('bulk.index');

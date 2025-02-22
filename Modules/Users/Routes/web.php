@@ -1,8 +1,8 @@
 <?php
 
-use Modules\Users\Http\Controllers\UsersController;
-use Modules\Users\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Modules\Users\Http\Controllers\ProfileController;
+use Modules\Users\Http\Controllers\UsersController;
 
 Route::middleware('auth')->group(function () {
     Route::resources([

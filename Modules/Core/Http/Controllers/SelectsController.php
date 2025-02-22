@@ -9,6 +9,7 @@ use Modules\Core\Traits\HasPermissionMiddleware;
 class SelectsController extends Controller
 {
     use HasPermissionMiddleware;
+
     public function index()
     {
         $entity = request('entity');

@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\PlantTypes;
 
-use Modules\Fields\Models\PlantType;
 use Illuminate\Support\Str;
+use Modules\Fields\Models\PlantType;
 
 class CreatePlantType
 {
@@ -11,7 +11,7 @@ class CreatePlantType
     {
         $slug = Str::slug($data['name']);
         $type = PlantType::where('slug', $slug)->first();
-        if (!$type) {
+        if (! $type) {
             $type = new PlantType;
             $type->name = $data['name'];
             $type->slug = $slug;

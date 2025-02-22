@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\CategoryProducts;
 
-use Modules\Fields\Models\CategoryProduct;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\CategoryProduct;
 
 class ListCategoryProduct
 {

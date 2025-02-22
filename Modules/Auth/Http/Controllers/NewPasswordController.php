@@ -2,7 +2,6 @@
 
 namespace Modules\Auth\Http\Controllers;
 
-use Modules\Core\Http\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,6 +12,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Core\Http\Controllers\Controller;
 
 class NewPasswordController extends Controller
 {

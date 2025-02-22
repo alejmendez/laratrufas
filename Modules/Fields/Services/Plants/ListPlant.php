@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\Plants;
 
-use Modules\Fields\Models\Plant;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\Plant;
 
 class ListPlant
 {

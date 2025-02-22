@@ -2,19 +2,20 @@
 
 namespace Modules\Fields\Http\Controllers;
 
+use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Fields\Http\Requests\StorePlantTypeRequest;
 use Modules\Fields\Http\Requests\UpdatePlantTypeRequest;
 use Modules\Fields\Services\PlantTypes\CreatePlantType;
 use Modules\Fields\Services\PlantTypes\DeletePlantType;
 use Modules\Fields\Services\PlantTypes\ListPlantType;
 use Modules\Fields\Services\PlantTypes\UpdatePlantType;
-use Inertia\Inertia;
-use Modules\Core\Traits\HasPermissionMiddleware;
 
 class PlantTypesController extends Controller
 {
     use HasPermissionMiddleware;
+
     /**
      * Display a listing of the resource.
      */
@@ -64,6 +65,7 @@ class PlantTypesController extends Controller
     public function destroy(string $id)
     {
         DeletePlantType::call($id);
+
         return response()->noContent();
     }
 }

@@ -3,21 +3,20 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Modules\Users\Models\User;
 use Illuminate\Database\Seeder;
-
+use Modules\Fields\Database\Seeders\CategoryProductSeeder;
+use Modules\Fields\Database\Seeders\DogSeeder;
+use Modules\Fields\Database\Seeders\FieldSeeder;
+use Modules\Fields\Database\Seeders\HarvestSeeder;
+use Modules\Fields\Database\Seeders\MachinerySeeder;
+use Modules\Fields\Database\Seeders\OwnerSeeder;
+use Modules\Fields\Database\Seeders\PlantSeeder;
+use Modules\Fields\Database\Seeders\QuarterSeeder;
+use Modules\Fields\Database\Seeders\SecurityEquipmentSeeder;
+use Modules\Fields\Database\Seeders\ToolSeeder;
 use Modules\Users\Database\Seeders\RolSeeder;
 use Modules\Users\Database\Seeders\UserSeeder;
-use Modules\Fields\Database\Seeders\CategoryProductSeeder;
-use Modules\Fields\Database\Seeders\FieldSeeder;
-use Modules\Fields\Database\Seeders\QuarterSeeder;
-use Modules\Fields\Database\Seeders\PlantSeeder;
-use Modules\Fields\Database\Seeders\DogSeeder;
-use Modules\Fields\Database\Seeders\ToolSeeder;
-use Modules\Fields\Database\Seeders\MachinerySeeder;
-use Modules\Fields\Database\Seeders\SecurityEquipmentSeeder;
-use Modules\Fields\Database\Seeders\OwnerSeeder;
-use Modules\Fields\Database\Seeders\HarvestSeeder;
+use Modules\Users\Models\User;
 
 class DatabaseSeeder extends Seeder
 {

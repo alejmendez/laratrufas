@@ -3,7 +3,6 @@
 namespace Modules\Fields\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateImporterRequest extends FormRequest
 {

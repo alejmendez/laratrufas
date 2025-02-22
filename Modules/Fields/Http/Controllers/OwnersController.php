@@ -2,19 +2,20 @@
 
 namespace Modules\Fields\Http\Controllers;
 
+use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Fields\Http\Requests\StoreOwnerRequest;
 use Modules\Fields\Http\Requests\UpdateOwnerRequest;
 use Modules\Fields\Services\Owners\CreateOwner;
 use Modules\Fields\Services\Owners\DeleteOwner;
 use Modules\Fields\Services\Owners\ListOwner;
 use Modules\Fields\Services\Owners\UpdateOwner;
-use Inertia\Inertia;
-use Modules\Core\Traits\HasPermissionMiddleware;
 
 class OwnersController extends Controller
 {
     use HasPermissionMiddleware;
+
     /**
      * Display a listing of the resource.
      */
@@ -63,6 +64,7 @@ class OwnersController extends Controller
     public function destroy(string $id)
     {
         DeleteOwner::call($id);
+
         return response()->noContent();
     }
 }

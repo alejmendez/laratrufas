@@ -2,13 +2,12 @@
 
 namespace Modules\Fields\Services\Quarters;
 
-use Modules\Fields\Models\Quarter;
-use Modules\Fields\Models\Plant;
 use Illuminate\Support\Facades\DB;
+use Modules\Fields\Models\Plant;
 
 class PlantsUpdatePositionQuarter
 {
-    public static function call(string $quarter_id, Array $data): void
+    public static function call(string $quarter_id, array $data): void
     {
         $batchSize = 500;
 

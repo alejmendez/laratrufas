@@ -1,8 +1,8 @@
 <?php
 
-use Modules\Tasks\Http\Controllers\TasksController;
-use Modules\Tasks\Http\Controllers\TaskCommentsController;
 use Illuminate\Support\Facades\Route;
+use Modules\Tasks\Http\Controllers\TaskCommentsController;
+use Modules\Tasks\Http\Controllers\TasksController;
 
 Route::middleware('auth')->group(function () {
     Route::post('/task/comments', [TaskCommentsController::class, 'store'])->name('tasks.comments.store');

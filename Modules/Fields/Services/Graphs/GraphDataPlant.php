@@ -2,10 +2,10 @@
 
 namespace Modules\Fields\Services\Graphs;
 
-use Modules\Fields\Models\Plant;
-use Modules\Fields\Models\Harvest;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Modules\Fields\Models\Harvest;
+use Modules\Fields\Models\Plant;
 use Modules\Fields\Services\Harvests\HarvestAvailableLastYear;
 
 class GraphDataPlant
@@ -45,15 +45,16 @@ class GraphDataPlant
 
         $data_total = $weeks->map(function ($week) use ($harvests) {
             $harvest = $harvests->firstWhere('week', Str::after($week, 'Sem '));
+
             return $harvest ? $harvest->weight_sum : 0;
         });
 
         return [
-            'title' => 'Cosecha por semana Año ' . $year,
+            'title' => 'Cosecha por semana Año '.$year,
             'labels' => $labels,
             'series' => [
                 [
-                    'name' => "Grs",
+                    'name' => 'Grs',
                     'data' => $data_total,
                 ],
             ],
@@ -62,14 +63,14 @@ class GraphDataPlant
 
     protected static function getWeeksFromYear($year)
     {
-        return cache()->remember('harvest_weeks_' . $year, self::$dataTtl, function () use ($year) {
+        return cache()->remember('harvest_weeks_'.$year, self::$dataTtl, function () use ($year) {
             return Harvest::where('year', $year)
                 ->select('week')
                 ->distinct()
                 ->orderBy('week')
                 ->pluck('week')
                 ->map(function ($week) {
-                    return "Sem " . $week;
+                    return 'Sem '.$week;
                 });
         });
 

@@ -2,8 +2,8 @@
 
 namespace Modules\Tasks\Services;
 
-use Modules\Tasks\Models\Task;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Tasks\Models\Task;
 
 class ListTask
 {

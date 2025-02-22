@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\Batches;
 
-use Modules\Fields\Models\Batch;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\Batch;
 
 class ListBatch
 {

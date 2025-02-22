@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\Quarters;
 
-use Modules\Fields\Models\Quarter;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\Quarter;
 
 class ListQuarter
 {

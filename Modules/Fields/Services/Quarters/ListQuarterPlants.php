@@ -2,18 +2,18 @@
 
 namespace Modules\Fields\Services\Quarters;
 
-use Modules\Fields\Models\Plant;
+use Illuminate\Support\Facades\DB;
 use Modules\Fields\Models\Harvest;
 use Modules\Fields\Models\HarvestDetail;
-use Illuminate\Support\Facades\DB;
+use Modules\Fields\Models\Plant;
 
 class ListQuarterPlants
 {
     public static function call($id)
     {
-        $harvests = Harvest::whereHas('quarters', function($q) use ($id){
-                $q->where('quarters.id', $id);
-            })
+        $harvests = Harvest::whereHas('quarters', function ($q) use ($id) {
+            $q->where('quarters.id', $id);
+        })
             ->get()
             ->map(fn ($a) => $a->only(['id', 'year', 'week', 'date', 'batch']));
 
@@ -32,7 +32,7 @@ class ListQuarterPlants
             ->where('quarter_id', $id)
             ->orderBy('id')
             ->get()
-            ->map(function($plant) use ($harvestDetailsByPlantId, $maxWeight) {
+            ->map(function ($plant) use ($harvestDetailsByPlantId, $maxWeight) {
                 $plant->data = [];
 
                 $detail = $harvestDetailsByPlantId->get($plant->id);
@@ -43,11 +43,13 @@ class ListQuarterPlants
                         ->map(function ($a) use ($maxWeight) {
                             $a['weight'] = floatval($a['weight']);
                             $a['scale'] = round($a['weight'] * 100 / $maxWeight, 2);
+
                             return $a;
                         })
                         ->groupBy('harvest_id');
                 }
                 $plant->data = $detail;
+
                 return $plant;
             });
 

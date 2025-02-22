@@ -3,15 +3,12 @@
 namespace Modules\Fields\Models;
 
 use Carbon\Carbon;
-use Modules\Tasks\Models\Task;
-use Modules\Fields\Models\Quarter;
-use Modules\Fields\Models\PlantType;
-use Modules\Fields\Models\HarvestDetail;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Tasks\Models\Task;
 
 class Plant extends Model
 {
@@ -63,7 +60,7 @@ class Plant extends Model
     public function age(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->calculateAgeWithDecimals($this->planned_at),
+            get: fn () => $this->calculateAgeWithDecimals($this->planned_at),
         );
     }
 

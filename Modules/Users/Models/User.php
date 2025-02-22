@@ -4,15 +4,15 @@ namespace Modules\Users\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use Modules\Fields\Models\Harvest;
-use Illuminate\Support\Str;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Notifications\Notifiable;
-use Modules\Users\Observers\UserObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
+use Modules\Fields\Models\Harvest;
+use Modules\Users\Observers\UserObserver;
+use Spatie\Permission\Traits\HasRoles;
 
 #[ObservedBy(UserObserver::class)]
 class User extends Authenticatable
@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public function getAvatarUrlAttribute(): ?string
     {
-        return $this->avatar === null ? "https://avatar.iran.liara.run/username?size=32&username=" . urlencode($this->full_name) : (Str::startsWith($this->avatar, 'http') ? $this->avatar : Storage::url($this->avatar));
+        return $this->avatar === null ? 'https://avatar.iran.liara.run/username?size=32&username='.urlencode($this->full_name) : (Str::startsWith($this->avatar, 'http') ? $this->avatar : Storage::url($this->avatar));
     }
 
     public function harvests()

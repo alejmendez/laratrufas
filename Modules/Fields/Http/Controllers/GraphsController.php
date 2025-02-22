@@ -3,11 +3,13 @@
 namespace Modules\Fields\Http\Controllers;
 
 use Modules\Core\Http\Controllers\Controller;
-use Modules\Fields\Services\Graphs\GraphData;
 use Modules\Core\Traits\HasPermissionMiddleware;
+use Modules\Fields\Services\Graphs\GraphData;
+
 class GraphsController extends Controller
 {
     use HasPermissionMiddleware;
+
     public function index()
     {
         $id = request('id');

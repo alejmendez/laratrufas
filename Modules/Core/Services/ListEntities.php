@@ -2,8 +2,6 @@
 
 namespace Modules\Core\Services;
 
-use Modules\Core\Services\ListEntity;
-
 class ListEntities
 {
     public static function call($entities)

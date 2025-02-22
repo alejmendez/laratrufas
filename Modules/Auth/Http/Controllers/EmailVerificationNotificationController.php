@@ -2,10 +2,10 @@
 
 namespace Modules\Auth\Http\Controllers;
 
-use Modules\Core\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Modules\Core\Http\Controllers\Controller;
 
 class EmailVerificationNotificationController extends Controller
 {

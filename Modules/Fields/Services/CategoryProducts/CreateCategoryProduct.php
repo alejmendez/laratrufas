@@ -13,6 +13,7 @@ class CreateCategoryProduct
         $CategoryProduct->is_commercial = $data['is_commercial'];
 
         $CategoryProduct->save();
+
         return $CategoryProduct;
     }
 }

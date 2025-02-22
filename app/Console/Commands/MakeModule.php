@@ -3,9 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class MakeModule extends Command
 {
@@ -53,7 +50,7 @@ class MakeModule extends Command
         ];
 
         foreach ($directories as $directory) {
-            if (!is_dir($directory)) {
+            if (! is_dir($directory)) {
                 mkdir($directory, 0755, true);
                 $this->info("Directorio creado: {$directory}");
             }
@@ -74,7 +71,7 @@ class MakeModule extends Command
         ];
 
         foreach ($files as $path => $content) {
-            if (!file_exists($path)) {
+            if (! file_exists($path)) {
                 file_put_contents($path, $content);
                 $this->info("Archivo creado: {$path}");
             }
@@ -89,7 +86,7 @@ class MakeModule extends Command
             $jsconfig = json_decode(file_get_contents($jsconfigPath), true);
             $jsconfig['compilerOptions']['paths']["@{$module}/*"] = ["./Modules/{$module}/Resources/*"];
             file_put_contents($jsconfigPath, json_encode($jsconfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-            $this->info("jsconfig.json actualizado con el nuevo módulo");
+            $this->info('jsconfig.json actualizado con el nuevo módulo');
         }
 
         // Actualizar vite.config.js
@@ -102,7 +99,7 @@ class MakeModule extends Command
                 $currentAliases = $matches[1];
                 $newAlias = "\n            '@{$module}': path.resolve(__dirname, './Modules/{$module}/Resources'),";
 
-                if (!str_contains($currentAliases, "@{$module}")) {
+                if (! str_contains($currentAliases, "@{$module}")) {
                     $newContent = str_replace(
                         $matches[0],
                         "alias: {{$currentAliases}{$newAlias}\n        }",
@@ -110,7 +107,7 @@ class MakeModule extends Command
                     );
 
                     file_put_contents($vitePath, $newContent);
-                    $this->info("vite.config.js actualizado con el nuevo módulo");
+                    $this->info('vite.config.js actualizado con el nuevo módulo');
                 }
             }
         }

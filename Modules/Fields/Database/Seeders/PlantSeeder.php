@@ -2,10 +2,10 @@
 
 namespace Modules\Fields\Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use Modules\Fields\Models\Plant;
 use Modules\Fields\Models\PlantType;
 use Modules\Fields\Models\Quarter;
-use Illuminate\Database\Seeder;
 
 class PlantSeeder extends Seeder
 {

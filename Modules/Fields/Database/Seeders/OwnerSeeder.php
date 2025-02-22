@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Database\Seeders;
 
-use Modules\Fields\Models\Owner;
 use Illuminate\Database\Seeder;
+use Modules\Fields\Models\Owner;
 
 class OwnerSeeder extends Seeder
 {

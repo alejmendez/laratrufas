@@ -164,7 +164,7 @@ class PrimevueDatatables
                     );
                     /*$q->join($fTable, "$ownerTable.$fKey", '=', "$fTable.$ownerKey")
                         ->orderBy($fTable.".".$key[1],$this->sortDirection ?? 'asc');*/
-                    /*$q->orderBy($fKey,$this->sortDirection ?? 'asc');*/
+                    /* $q->orderBy($fKey,$this->sortDirection ?? 'asc'); */
                 }
             }
         }

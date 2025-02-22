@@ -2,11 +2,11 @@
 
 namespace Modules\Tasks\Services;
 
+use Modules\Fields\Models\SupplyTask;
 use Modules\Tasks\Models\Task;
 use Modules\Tasks\Models\TaskComment;
-use Modules\Users\Models\User;
-use Modules\Fields\Models\SupplyTask;
 use Modules\Tasks\Notifications\TaskNotification;
+use Modules\Users\Models\User;
 
 class CreateTask
 {
@@ -26,8 +26,8 @@ class CreateTask
         $task->responsible_id = $data['responsible_id']['value'];
         $task->save();
 
-        if (!empty($data['comment'])) {
-            $comment = new TaskComment();
+        if (! empty($data['comment'])) {
+            $comment = new TaskComment;
             $comment->comment = $data['comment'];
             $comment->user_id = auth()->id();
             $comment->task_id = $task->id;
@@ -49,7 +49,7 @@ class CreateTask
 
     protected static function syncRelationship($task, $relation, $data)
     {
-        if (!empty($data)) {
+        if (! empty($data)) {
             $ids = collect($data)->map(fn ($q) => $q['value'])->toArray();
             $task->{$relation}()->sync($ids);
         }
@@ -92,6 +92,7 @@ class CreateTask
     protected static function get_user_ids_from_comment($comment)
     {
         preg_match_all('/<span class="mention"[^>]*data-id="(\d+)"[^>]*>/', $comment, $matches);
+
         return $matches[1];
     }
 }

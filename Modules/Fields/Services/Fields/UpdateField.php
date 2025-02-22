@@ -2,9 +2,9 @@
 
 namespace Modules\Fields\Services\Fields;
 
+use Illuminate\Support\Facades\DB;
 use Modules\Fields\Models\Field;
 use Modules\Fields\Services\Owners\CreateOrUpdateOwner;
-use Illuminate\Support\Facades\DB;
 
 class UpdateField
 {

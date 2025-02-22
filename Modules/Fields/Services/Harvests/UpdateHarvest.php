@@ -2,10 +2,10 @@
 
 namespace Modules\Fields\Services\Harvests;
 
+use Illuminate\Support\Str;
 use Modules\Fields\Models\Harvest;
 use Modules\Fields\Models\HarvestDetail;
 use Modules\Fields\Services\Plants\FindPlantByCode;
-use Illuminate\Support\Str;
 
 class UpdateHarvest
 {

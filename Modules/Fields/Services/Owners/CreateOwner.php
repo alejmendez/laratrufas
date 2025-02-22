@@ -13,6 +13,7 @@ class CreateOwner
         $owner->dni = $data['dni'];
 
         $owner->save();
+
         return $owner;
     }
 }

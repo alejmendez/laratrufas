@@ -3,21 +3,19 @@
 namespace Modules\Tasks\Http\Controllers;
 
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Tasks\Http\Requests\StoreTaskCommentRequest;
 use Modules\Tasks\Http\Requests\UpdateTaskCommentRequest;
-
+use Modules\Tasks\Http\Resources\TaskCommentResource;
 use Modules\Tasks\Services\CreateTaskComment;
 use Modules\Tasks\Services\DeleteTaskComment;
-use Modules\Tasks\Services\UpdateTaskComment;
 use Modules\Tasks\Services\NotifyTaskComment;
-
-use Modules\Tasks\Http\Resources\TaskCommentResource;
-use Inertia\Inertia;
-use Modules\Core\Traits\HasPermissionMiddleware;
+use Modules\Tasks\Services\UpdateTaskComment;
 
 class TaskCommentsController extends Controller
 {
     use HasPermissionMiddleware;
+
     public function store(StoreTaskCommentRequest $request)
     {
         $data = $request->validated();

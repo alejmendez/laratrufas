@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\Owners;
 
-use Modules\Fields\Models\Owner;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\Owner;
 
 class ListOwner
 {

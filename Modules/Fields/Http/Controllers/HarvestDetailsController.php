@@ -2,17 +2,18 @@
 
 namespace Modules\Fields\Http\Controllers;
 
+use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Fields\Http\Requests\StoreHarvestDetailRequest;
 use Modules\Fields\Services\HarvestDetails\CreateHarvestDetails;
 use Modules\Fields\Services\HarvestDetails\ListHarvestQualities;
 use Modules\Fields\Services\Plants\FindPlantByCode;
-use Inertia\Inertia;
-use Modules\Core\Traits\HasPermissionMiddleware;
 
 class HarvestDetailsController extends Controller
 {
     use HasPermissionMiddleware;
+
     /**
      * Show the form for creating a new resource.
      */
@@ -41,6 +42,7 @@ class HarvestDetailsController extends Controller
     public function find_by_code()
     {
         $plant = FindPlantByCode::call(request('code', ''));
+
         return [
             'plant' => $plant,
             'details' => $plant->activeDetails()->pluck('value', 'type'),

@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Providers;
 
-use Modules\Core\Providers\CoreServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Modules\Core\Providers\CoreServiceProvider;
 
 class FieldsServiceProvider extends CoreServiceProvider
 {
@@ -20,7 +20,7 @@ class FieldsServiceProvider extends CoreServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
         Route::middleware('web')->group(base_path('Modules/Fields/Routes/web.php'));
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Modules\Fields\Services\PlantDetails;
 
-use Modules\Fields\Models\Plant;
 use Modules\Fields\Models\PlantDetail;
 use Modules\Fields\Services\Plants\FindPlantByCode;
 
@@ -12,7 +11,7 @@ class CreatePlantDetails
     {
         $plant = FindPlantByCode::call($data['plant_code']);
 
-        if (!$plant) {
+        if (! $plant) {
             throw new \Exception('Planta no encontrada con el código proporcionado.');
         }
 
@@ -55,11 +54,11 @@ class CreatePlantDetails
             ];
         }
 
-        if (!empty($typesToDeactivate)) {
+        if (! empty($typesToDeactivate)) {
             PlantDetail::whereIn('id', $typesToDeactivate)->update(['is_active' => false]);
         }
 
-        if (!empty($detailsToCreate)) {
+        if (! empty($detailsToCreate)) {
             PlantDetail::insert($detailsToCreate);
         }
     }

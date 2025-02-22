@@ -2,10 +2,8 @@
 
 namespace Modules\Tasks\Services;
 
-use Modules\Tasks\Models\Task;
-use Modules\Users\Models\User;
 use Modules\Tasks\Models\SupplyTask;
-use Modules\Tasks\Notifications\TaskNotification;
+use Modules\Tasks\Models\Task;
 
 class UpdateTask
 {

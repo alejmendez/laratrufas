@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\Fields;
 
-use Modules\Fields\Models\Field;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\Field;
 
 class ListField
 {

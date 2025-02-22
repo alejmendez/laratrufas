@@ -2,8 +2,8 @@
 
 namespace Modules\Dashboard\Providers;
 
-use Modules\Core\Providers\CoreServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Modules\Core\Providers\CoreServiceProvider;
 
 class DashboardServiceProvider extends CoreServiceProvider
 {

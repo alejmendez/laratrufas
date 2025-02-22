@@ -3,10 +3,9 @@
 namespace Modules\Dashboard\Http\Controllers;
 
 use Inertia\Inertia;
-
 use Modules\Core\Http\Controllers\Controller;
-use Modules\Fields\Http\Resources\FieldResource;
 use Modules\Dashboard\Services\ShowDashboard;
+use Modules\Fields\Http\Resources\FieldResource;
 
 class DashboardController extends Controller
 {

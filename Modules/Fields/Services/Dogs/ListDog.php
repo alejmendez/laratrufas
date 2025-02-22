@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\Dogs;
 
-use Modules\Fields\Models\Dog;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\Dog;
 
 class ListDog
 {

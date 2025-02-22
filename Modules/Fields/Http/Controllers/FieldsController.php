@@ -2,7 +2,9 @@
 
 namespace Modules\Fields\Http\Controllers;
 
+use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Fields\Http\Requests\StoreFieldRequest;
 use Modules\Fields\Http\Requests\UpdateFieldRequest;
 use Modules\Fields\Http\Resources\FieldResource;
@@ -11,12 +13,11 @@ use Modules\Fields\Services\Fields\DeleteField;
 use Modules\Fields\Services\Fields\FindField;
 use Modules\Fields\Services\Fields\ListField;
 use Modules\Fields\Services\Fields\UpdateField;
-use Inertia\Inertia;
-use Modules\Core\Traits\HasPermissionMiddleware;
 
 class FieldsController extends Controller
 {
     use HasPermissionMiddleware;
+
     /**
      * Display a listing of the resource.
      */

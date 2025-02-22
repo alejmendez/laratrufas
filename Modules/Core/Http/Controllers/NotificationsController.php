@@ -2,7 +2,6 @@
 
 namespace Modules\Core\Http\Controllers;
 
-use Modules\Core\Http\Controllers\Controller;
 use Modules\Core\Services\ListNotification;
 
 class NotificationsController extends Controller
@@ -11,6 +10,7 @@ class NotificationsController extends Controller
     {
         $user = auth()->user();
         $type = request()->route('type');
+
         return ListNotification::call($user, $type);
     }
 }

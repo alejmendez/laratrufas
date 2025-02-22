@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Database\Seeders;
 
-use Modules\Fields\Models\CategoryProduct;
 use Illuminate\Database\Seeder;
+use Modules\Fields\Models\CategoryProduct;
 
 class CategoryProductSeeder extends Seeder
 {

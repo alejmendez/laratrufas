@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\Importers;
 
-use Modules\Fields\Models\Importer;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\Importer;
 
 class ListImporter
 {

@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\Machineries;
 
-use Modules\Fields\Models\Machinery;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\Machinery;
 
 class ListMachinery
 {

@@ -3,8 +3,8 @@
 namespace Modules\Fields\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\Fields\Models\Owner;
 use Modules\Fields\Models\Field;
+use Modules\Fields\Models\Owner;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\Fields\Models\Field>

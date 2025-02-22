@@ -3,7 +3,6 @@
 namespace Modules\Tasks\Services;
 
 use Modules\Tasks\Models\Task;
-use Modules\Users\Models\User;
 
 class FindTask
 {

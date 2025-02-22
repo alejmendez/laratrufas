@@ -2,19 +2,20 @@
 
 namespace Modules\Fields\Http\Controllers;
 
+use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Fields\Http\Requests\StoreCategoryProductRequest;
 use Modules\Fields\Http\Requests\UpdateCategoryProductRequest;
 use Modules\Fields\Services\CategoryProducts\CreateCategoryProduct;
 use Modules\Fields\Services\CategoryProducts\DeleteCategoryProduct;
 use Modules\Fields\Services\CategoryProducts\ListCategoryProduct;
 use Modules\Fields\Services\CategoryProducts\UpdateCategoryProduct;
-use Inertia\Inertia;
-use Modules\Core\Traits\HasPermissionMiddleware;
 
 class CategoryProductsController extends Controller
 {
     use HasPermissionMiddleware;
+
     /**
      * Display a listing of the resource.
      */
@@ -63,6 +64,7 @@ class CategoryProductsController extends Controller
     public function destroy(string $id)
     {
         DeleteCategoryProduct::call($id);
+
         return response()->noContent();
     }
 }

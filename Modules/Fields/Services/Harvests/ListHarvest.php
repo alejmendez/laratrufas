@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\Harvests;
 
-use Modules\Fields\Models\Harvest;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\Harvest;
 
 class ListHarvest
 {
@@ -41,7 +41,7 @@ class ListHarvest
         foreach ($harvestsTotal as $harvest) {
             $detailsTotal = $harvest->details;
             if ($quarterId) {
-                $detailsTotal = $harvest->details->filter(function($detail) use ($quarterId) {
+                $detailsTotal = $harvest->details->filter(function ($detail) use ($quarterId) {
                     return $detail->quarter_id === $quarterId;
                 });
             }

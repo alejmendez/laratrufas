@@ -3,7 +3,6 @@
 namespace Modules\Fields\Services\PlantDetails;
 
 use Modules\Fields\Models\Plant;
-use Modules\Fields\Models\Quarter;
 use Modules\Fields\Models\PlantDetail;
 
 class FindPlantDetails
@@ -16,26 +15,30 @@ class FindPlantDetails
     public static function get_by_plant_id($id, $show_harvests = false)
     {
         $query = PlantDetail::where('plant_id', $id);
+
         return self::get_details($query, $show_harvests);
     }
 
     public static function get_by_quarter_id($id, $show_harvests = false)
     {
         $query = PlantDetail::whereRaw('plant_id IN (SELECT id FROM plants WHERE quarter_id = ?)', [$id]);
+
         return self::get_details($query, $show_harvests);
     }
 
     public static function get_by_field_id($id, $show_harvests = false)
     {
         $query = PlantDetail::whereRaw('plant_id IN (SELECT id FROM plants WHERE quarter_id in (SELECT id FROM quarters WHERE field_id = ?))', [$id]);
+
         return self::get_details($query, $show_harvests);
     }
 
     public static function get_details($query, $show_harvests = false)
     {
-        if (!$show_harvests) {
+        if (! $show_harvests) {
             $query->where('type', '!=', 'harvest');
         }
+
         return $query->get();
     }
 }

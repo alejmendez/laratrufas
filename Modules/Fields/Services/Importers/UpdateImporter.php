@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\Importers;
 
-use Modules\Fields\Models\Importer;
 use Illuminate\Support\Str;
+use Modules\Fields\Models\Importer;
 
 class UpdateImporter
 {

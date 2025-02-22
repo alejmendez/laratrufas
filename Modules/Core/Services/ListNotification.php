@@ -2,8 +2,8 @@
 
 namespace Modules\Core\Services;
 
-use Modules\Users\Models\User;
 use Modules\Core\Models\Notification;
+use Modules\Users\Models\User;
 
 class ListNotification
 {

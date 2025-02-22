@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\Tools;
 
-use Modules\Fields\Models\Tool;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\Tool;
 
 class ListTool
 {

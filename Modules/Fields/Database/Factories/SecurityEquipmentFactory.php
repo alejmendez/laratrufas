@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Database\Factories;
 
-use Modules\Fields\Models\SecurityEquipment;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Fields\Models\SecurityEquipment;
 
 class SecurityEquipmentFactory extends Factory
 {

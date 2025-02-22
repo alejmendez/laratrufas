@@ -4,10 +4,10 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Modules\Core\Services\CacheService;
+use Modules\Users\Models\User;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use Modules\Users\Models\User;
-use Modules\Core\Services\CacheService;
 
 class SyncPermissions extends Command
 {
@@ -165,7 +165,7 @@ class SyncPermissions extends Command
     {
         $permission = $entity.'.'.$action;
 
-        if (!isset($this->permissions[$entity])) {
+        if (! isset($this->permissions[$entity])) {
             $this->permissions[$entity] = [];
         }
 
@@ -179,7 +179,7 @@ class SyncPermissions extends Command
         $now = now()->toDateTimeString();
         foreach ($this->permissions as $entity => $permissions) {
             foreach ($permissions as $permission) {
-                if (!in_array($permission, $existingPermissions)) {
+                if (! in_array($permission, $existingPermissions)) {
                     $permissionToCreate[] = [
                         'name' => $permission,
                         'guard_name' => $this->defaultGuard,

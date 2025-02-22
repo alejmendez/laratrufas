@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\SecurityEquipments;
 
-use Modules\Fields\Models\SecurityEquipment;
 use Modules\Core\Services\PrimevueDatatables;
+use Modules\Fields\Models\SecurityEquipment;
 
 class ListSecurityEquipment
 {

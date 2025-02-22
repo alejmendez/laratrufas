@@ -6,15 +6,15 @@ use Modules\Core\Services\CacheService;
 
 trait HasPermissionMiddleware
 {
-    protected function setupPermissionMiddleware(array $permissions)
+    protected function setupPermissionMiddleware()
     {
-        $this->middleware(function ($request, $next) use ($permissions) {
+        $this->middleware(function ($request, $next) {
             $routeName = $request->route()->getName();
             $user = auth()->user();
 
             $userPermissions = CacheService::getUserPermissions($user);
 
-            if (!$userPermissions->contains($routeName)) {
+            if (! $userPermissions->contains($routeName)) {
                 abort(403);
             }
 

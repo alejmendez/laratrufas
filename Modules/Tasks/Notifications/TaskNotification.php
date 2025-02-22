@@ -3,7 +3,6 @@
 namespace Modules\Tasks\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 
 class TaskNotification extends Notification
@@ -11,6 +10,7 @@ class TaskNotification extends Notification
     use Queueable;
 
     protected $task_data;
+
     public function __construct($task_data)
     {
         $this->task_data = $task_data;

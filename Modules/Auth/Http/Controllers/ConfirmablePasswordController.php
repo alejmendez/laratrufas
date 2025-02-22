@@ -2,7 +2,6 @@
 
 namespace Modules\Auth\Http\Controllers;
 
-use Modules\Core\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -10,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Core\Http\Controllers\Controller;
 
 class ConfirmablePasswordController extends Controller
 {

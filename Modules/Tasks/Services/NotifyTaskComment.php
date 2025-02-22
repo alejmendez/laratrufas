@@ -2,16 +2,15 @@
 
 namespace Modules\Tasks\Services;
 
-use Modules\Users\Models\User;
 use Modules\Tasks\Models\Task;
-use Modules\Tasks\Models\TaskComment;
 use Modules\Tasks\Notifications\TaskNotification;
+use Modules\Users\Models\User;
 
 class NotifyTaskComment
 {
-    public static function call(Task $task, String | null $taskComment, User $commentator)
+    public static function call(Task $task, ?string $taskComment, User $commentator)
     {
-        if (!$taskComment) {
+        if (! $taskComment) {
             return;
         }
 
@@ -32,6 +31,7 @@ class NotifyTaskComment
     protected static function get_user_ids_from_comment($comment)
     {
         preg_match_all('/<span class="mention"[^>]*data-id="(\d+)"[^>]*>/', $comment, $matches);
+
         return $matches[1];
     }
 }

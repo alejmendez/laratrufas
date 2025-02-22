@@ -2,7 +2,9 @@
 
 namespace Modules\Fields\Http\Controllers;
 
+use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Fields\Http\Requests\StoreSecurityEquipmentRequest;
 use Modules\Fields\Http\Requests\UpdateSecurityEquipmentRequest;
 use Modules\Fields\Http\Resources\SecurityEquipmentResource;
@@ -11,12 +13,11 @@ use Modules\Fields\Services\SecurityEquipments\DeleteSecurityEquipment;
 use Modules\Fields\Services\SecurityEquipments\FindSecurityEquipment;
 use Modules\Fields\Services\SecurityEquipments\ListSecurityEquipment;
 use Modules\Fields\Services\SecurityEquipments\UpdateSecurityEquipment;
-use Inertia\Inertia;
-use Modules\Core\Traits\HasPermissionMiddleware;
 
 class SecurityEquipmentsController extends Controller
 {
     use HasPermissionMiddleware;
+
     /**
      * Display a listing of the resource.
      */

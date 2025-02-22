@@ -2,17 +2,17 @@
 
 namespace Modules\Users\Http\Controllers;
 
-use Modules\Core\Http\Controllers\Controller;
-use Modules\Users\Http\Requests\ProfileUpdateRequest;
-use Modules\Users\Http\Resources\UserResource;
-use Modules\Core\Services\ListEntity;
-use Modules\Users\Services\DeleteUser;
-use Modules\Users\Services\UpdateUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Services\ListEntity;
+use Modules\Users\Http\Requests\ProfileUpdateRequest;
+use Modules\Users\Http\Resources\UserResource;
+use Modules\Users\Services\DeleteUser;
+use Modules\Users\Services\UpdateUser;
 
 class ProfileController extends Controller
 {

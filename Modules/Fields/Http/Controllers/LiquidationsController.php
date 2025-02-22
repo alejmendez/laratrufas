@@ -2,22 +2,23 @@
 
 namespace Modules\Fields\Http\Controllers;
 
+use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Services\ListEntity;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Fields\Http\Requests\StoreLiquidationRequest;
 use Modules\Fields\Http\Requests\UpdateLiquidationRequest;
 use Modules\Fields\Http\Resources\LiquidationResource;
-use Modules\Core\Services\ListEntity;
 use Modules\Fields\Services\Liquidations\CreateLiquidation;
 use Modules\Fields\Services\Liquidations\DeleteLiquidation;
 use Modules\Fields\Services\Liquidations\FindLiquidation;
 use Modules\Fields\Services\Liquidations\ListLiquidation;
 use Modules\Fields\Services\Liquidations\UpdateLiquidation;
-use Inertia\Inertia;
-use Modules\Core\Traits\HasPermissionMiddleware;
 
 class LiquidationsController extends Controller
 {
     use HasPermissionMiddleware;
+
     /**
      * Display a listing of the resource.
      */

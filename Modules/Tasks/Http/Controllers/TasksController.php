@@ -2,8 +2,10 @@
 
 namespace Modules\Tasks\Http\Controllers;
 
+use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
 use Modules\Core\Services\ListEntity;
+use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Tasks\Http\Requests\StoreTaskRequest;
 use Modules\Tasks\Http\Requests\UpdateTaskRequest;
 use Modules\Tasks\Http\Resources\TaskResource;
@@ -11,15 +13,14 @@ use Modules\Tasks\Services\CreateTask;
 use Modules\Tasks\Services\DeleteTask;
 use Modules\Tasks\Services\FindTask;
 use Modules\Tasks\Services\ListTask;
-use Modules\Tasks\Services\UpdateTask;
-use Modules\Tasks\Services\NotifyTaskComment;
 use Modules\Tasks\Services\MarkTaskNotificationAsRead;
-use Inertia\Inertia;
-use Modules\Core\Traits\HasPermissionMiddleware;
+use Modules\Tasks\Services\NotifyTaskComment;
+use Modules\Tasks\Services\UpdateTask;
 
 class TasksController extends Controller
 {
     use HasPermissionMiddleware;
+
     /**
      * Display a listing of the resource.
      */

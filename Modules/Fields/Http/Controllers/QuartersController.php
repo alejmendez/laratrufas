@@ -5,21 +5,22 @@ namespace Modules\Fields\Http\Controllers;
 use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
 use Modules\Core\Services\ListEntity;
-use Modules\Fields\Services\Quarters\FindQuarter;
-use Modules\Fields\Services\Quarters\ListQuarter;
+use Modules\Core\Traits\HasPermissionMiddleware;
+use Modules\Fields\Http\Requests\StoreQuarterRequest;
+use Modules\Fields\Http\Requests\UpdateQuarterRequest;
 use Modules\Fields\Http\Resources\QuarterResource;
 use Modules\Fields\Services\Quarters\CreateQuarter;
 use Modules\Fields\Services\Quarters\DeleteQuarter;
-use Modules\Fields\Services\Quarters\UpdateQuarter;
-use Modules\Fields\Http\Requests\StoreQuarterRequest;
-use Modules\Fields\Http\Requests\UpdateQuarterRequest;
+use Modules\Fields\Services\Quarters\FindQuarter;
+use Modules\Fields\Services\Quarters\ListQuarter;
 use Modules\Fields\Services\Quarters\ListQuarterPlants;
 use Modules\Fields\Services\Quarters\PlantsUpdatePositionQuarter;
-use Modules\Core\Traits\HasPermissionMiddleware;
+use Modules\Fields\Services\Quarters\UpdateQuarter;
 
 class QuartersController extends Controller
 {
     use HasPermissionMiddleware;
+
     /**
      * Display a listing of the resource.
      */

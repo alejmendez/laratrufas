@@ -2,8 +2,6 @@
 
 namespace Modules\Tasks\Services;
 
-use Modules\Users\Models\User;
-
 class MarkTaskNotificationAsRead
 {
     protected static $typeNotification = 'Modules\Tasks\Notifications\TaskNotification';

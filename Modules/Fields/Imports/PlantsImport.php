@@ -2,8 +2,6 @@
 
 namespace Modules\Fields\Imports;
 
-use Modules\Fields\Models\Plant;
-use Modules\Fields\Models\PlantType;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\Importable;
@@ -13,6 +11,8 @@ use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
+use Modules\Fields\Models\Plant;
+use Modules\Fields\Models\PlantType;
 
 class PlantsImport implements SkipsEmptyRows, SkipsOnFailure, ToModel, WithHeadingRow, WithValidation
 {

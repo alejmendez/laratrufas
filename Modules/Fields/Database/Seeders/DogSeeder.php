@@ -2,10 +2,10 @@
 
 namespace Modules\Fields\Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use Modules\Fields\Models\Dog;
 use Modules\Fields\Models\Quarter;
 use Modules\Users\Models\User;
-use Illuminate\Database\Seeder;
 
 class DogSeeder extends Seeder
 {

@@ -3,12 +3,13 @@
 namespace Modules\Users\Observers;
 
 use Illuminate\Foundation\Auth\User;
-use Illuminate\Support\Facades\Cache;
 
 class UserObserver
 {
     private int $savedTtl = 600;
+
     private int $restoredTtl = 600;
+
     private int $retrievedTtl = 600;
 
     public function saved(User $user): void

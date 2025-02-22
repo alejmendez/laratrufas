@@ -4,9 +4,7 @@ namespace Modules\Tasks\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 use Modules\Users\Models\User;
-use Modules\Tasks\Models\Task;
 
 class TaskComment extends Model
 {

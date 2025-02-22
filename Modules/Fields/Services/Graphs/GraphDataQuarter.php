@@ -2,10 +2,10 @@
 
 namespace Modules\Fields\Services\Graphs;
 
-use Modules\Fields\Models\Quarter;
-use Modules\Fields\Models\Harvest;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Modules\Fields\Models\Harvest;
+use Modules\Fields\Models\Quarter;
 use Modules\Fields\Services\Harvests\HarvestAvailableLastYear;
 
 class GraphDataQuarter
@@ -49,13 +49,14 @@ class GraphDataQuarter
                 'name' => $quarter->name,
                 'data' => $weeks->map(function ($week) use ($quarter, $harvests) {
                     $harvest = $harvests->where('quarter_id', $quarter->id)->firstWhere('week', Str::after($week, 'Sem '));
+
                     return $harvest ? $harvest->weight_sum : 0;
                 })->values(),
             ];
         });
 
         return [
-            'title' => 'Cosecha por semana Año ' . $year,
+            'title' => 'Cosecha por semana Año '.$year,
             'labels' => $labels,
             'series' => $series,
         ];
@@ -63,14 +64,14 @@ class GraphDataQuarter
 
     protected static function getWeeksFromYear($year)
     {
-        return cache()->remember('harvest_weeks_' . $year, self::$dataTtl, function () use ($year) {
+        return cache()->remember('harvest_weeks_'.$year, self::$dataTtl, function () use ($year) {
             return Harvest::where('year', $year)
                 ->select('week')
                 ->distinct()
                 ->orderBy('week')
                 ->pluck('week')
                 ->map(function ($week) {
-                    return "Sem " . $week;
+                    return 'Sem '.$week;
                 });
         });
 

@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Database\Seeders;
 
-use Modules\Fields\Models\Machinery;
 use Illuminate\Database\Seeder;
+use Modules\Fields\Models\Machinery;
 
 class MachinerySeeder extends Seeder
 {

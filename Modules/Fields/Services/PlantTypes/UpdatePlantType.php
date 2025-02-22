@@ -2,8 +2,8 @@
 
 namespace Modules\Fields\Services\PlantTypes;
 
-use Modules\Fields\Models\PlantType;
 use Illuminate\Support\Str;
+use Modules\Fields\Models\PlantType;
 
 class UpdatePlantType
 {
