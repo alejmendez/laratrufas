@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { create } from '@/Services/ImporterService';
+import importerService from '@/Services/ImporterService';
 
 import Dialog from 'primevue/dialog';
 
@@ -18,7 +18,7 @@ const loading = ref(false);
 
 const addImporter = async () => {
   loading.value = true;
-  const response = await create({ name: importer_name.value });
+  const response = await importerService.create({ name: importer_name.value });
   const newImporter = response.data.importer;
   loading.value = false;
   open.value = false;
