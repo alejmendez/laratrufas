@@ -146,6 +146,14 @@ const filterHandler = async () => {
     _chartOption.labels = response.labels;
   }
 
+  if (type_graph.value.value == 'quarter-on-demand-production') {
+    _chartOption.tooltip = {
+      y: {
+        formatter: (val) => (val / 1000).toFixed(2) + ' KGS'
+      }
+    };
+  }
+
   chartOption.value = { ..._chartOption };
   series.value = response.series;
   loading.value = false;
