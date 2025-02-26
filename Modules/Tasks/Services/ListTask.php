@@ -21,7 +21,7 @@ class ListTask
         $tasks->transform(function ($task) use ($today) {
             $endDate = Carbon::parse($task->end_date);
             $overdued = $today->diffInDays($endDate) < 0;
-            $status = $overdued ? 'overdued' : $task->status;
+            $status = $overdued && $task->status !== 'finished' ? 'overdued' : $task->status;
             $task->status = $status;
             return $task;
         });
