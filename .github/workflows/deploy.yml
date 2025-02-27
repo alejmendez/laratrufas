@@ -26,8 +26,6 @@ jobs:
           sudo systemctl stop php8.3-fpm
           sudo systemctl stop octane
           git pull origin main
-          npm install
-          npm run build
           composer install --optimize-autoloader --no-dev
           composer dump-autoload
           php artisan migrate --force
