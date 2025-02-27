@@ -29,7 +29,7 @@ const props = defineProps({
   },
   show_harvests: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 
