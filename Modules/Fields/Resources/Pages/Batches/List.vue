@@ -14,6 +14,7 @@ import BatchService from '@/Services/BatchService.js';
 import { stringToFormat } from '@/Utils/date';
 import { deleteRowTable } from '@/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
+import { can } from '@/Services/Auth';
 
 const props = defineProps({
   toast: String,
@@ -32,6 +33,14 @@ const filters = {
   delivery_date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   importer_id: { value: null, matchMode: FilterMatchMode.EQUALS },
 };
+
+const canEdit = can('batches.edit');
+const canDestroy = can('batches.destroy');
+
+const headerLinks = [];
+if (can('batches.create')) {
+  headerLinks.push({ to: 'batches.create', text: t('generics.new') });
+}
 
 const fetchHandler = async (params) => {
   return await BatchService.list(params);
@@ -83,7 +92,7 @@ onMounted(async () => {
     <HeaderCrud
       :title="$t('batch.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'batches.index', text: $t('batch.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
-      :links="[{ to: 'batches.create', text: $t('generics.new') }]"
+      :links="headerLinks"
     />
 
     <Datatable
@@ -122,11 +131,11 @@ onMounted(async () => {
 
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
-          <Link :href="route('batches.edit', slotProps.data.id)">
+          <Link :href="route('batches.edit', slotProps.data.id)" v-if="canEdit">
             <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
           </Link>
           <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
-              @click="deleteHandler(slotProps.data)" />
+              @click="deleteHandler(slotProps.data)" v-if="canDestroy" />
         </template>
       </Column>
     </Datatable>

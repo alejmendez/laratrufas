@@ -30,6 +30,16 @@ const filters = {
   size: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
 };
 
+const canShow = can('fields.show');
+const canEdit = can('fields.edit');
+const canDestroy = can('fields.destroy');
+const canCreate = can('fields.create');
+
+const headerLinks = [];
+if (canCreate) {
+  headerLinks.push({ to: 'fields.create', text: t('generics.new') });
+}
+
 const fetchHandler = async (params) => {
   return await FieldService.list(params);
 };
@@ -74,7 +84,7 @@ onMounted(() => {
     <HeaderCrud
       :title="$t('field.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'fields.index', text: $t('field.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
-      :links="[{ to: 'fields.create', text: $t('generics.new') }]"
+      :links="headerLinks"
     />
 
     <Datatable
@@ -116,14 +126,14 @@ onMounted(() => {
 
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
-          <Link :href="route('fields.show', slotProps.data.id)">
+          <Link :href="route('fields.show', slotProps.data.id)" v-if="canShow">
             <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-gray-600" />
           </Link>
-          <Link :href="route('fields.edit', slotProps.data.id)">
+          <Link :href="route('fields.edit', slotProps.data.id)" v-if="canEdit">
             <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
           </Link>
           <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
-              @click="deleteHandler(slotProps.data)" />
+            @click="deleteHandler(slotProps.data)" v-if="canDestroy" />
         </template>
       </Column>
     </Datatable>

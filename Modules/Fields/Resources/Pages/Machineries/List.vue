@@ -13,7 +13,7 @@ import Datatable from '@/Components/Table/Datatable.vue';
 import MachineryService from '@/Services/MachineryService.js';
 import { stringToFormat } from '@/Utils/date';
 import { deleteRowTable } from '@/Utils/table.js';
-
+import { can } from '@/Services/Auth';
 const props = defineProps({
   toast: String,
 });
@@ -33,6 +33,14 @@ const filters = {
   contact: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
 };
 
+const canEdit = can('machineries.edit');
+const canDestroy = can('machineries.destroy');
+const canCreate = can('machineries.create');
+
+const headerLinks = [];
+if (canCreate) {
+  headerLinks.push({ to: 'machineries.create', text: t('generics.new') });
+}
 const fetchHandler = async (params) => {
   return await MachineryService.list(params);
 };
@@ -76,7 +84,7 @@ onMounted(() => {
     <HeaderCrud
       :title="$t('machinery.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'machineries.index', text: $t('machinery.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
-      :links="[{ to: 'machineries.create', text: $t('generics.new') }]"
+      :links="headerLinks"
     />
 
     <Datatable
@@ -133,11 +141,11 @@ onMounted(() => {
 
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
-          <Link :href="route('machineries.edit', slotProps.data.id)">
+          <Link :href="route('machineries.edit', slotProps.data.id)" v-if="canEdit">
             <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
           </Link>
           <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
-              @click="deleteHandler(slotProps.data)" />
+            @click="deleteHandler(slotProps.data)" v-if="canDestroy" />
         </template>
       </Column>
     </Datatable>

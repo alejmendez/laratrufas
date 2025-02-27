@@ -15,6 +15,7 @@ import Datatable from '@/Components/Table/Datatable.vue';
 import UserService from '@/Services/UserService.js';
 import { deleteRowDatatable } from '@/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
+import { can } from '@/Services/Auth';
 
 const props = defineProps({
   toast: String,
@@ -38,6 +39,15 @@ const filters = {
   'roles.name': { value: null, matchMode: FilterMatchMode.EQUALS },
   email: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
 };
+
+const canShow = can('users.show');
+const canEdit = can('users.edit');
+const canDestroy = can('users.destroy');
+
+const headerLinks = [];
+if (can('users.create')) {
+  headerLinks.push({ to: 'users.create', text: t('generics.new') });
+}
 
 const fetchHandler = async (params) => {
   return await UserService.list(params);
@@ -81,7 +91,7 @@ onMounted(async () => {
     <HeaderCrud
       :title="$t('user.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'users.index', text: $t('user.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
-      :links="[{ to: 'users.create', text: $t('generics.new') }]"
+      :links="headerLinks"
     />
 
     <Datatable
@@ -144,17 +154,17 @@ onMounted(async () => {
 
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
-          <Link :href="route('users.show', slotProps.data.id)">
+          <Link :href="route('users.show', slotProps.data.id)" v-if="canShow">
             <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-gray-600" />
           </Link>
-          <Link :href="route('users.edit', slotProps.data.id)">
+          <Link :href="route('users.edit', slotProps.data.id)" v-if="canEdit">
             <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
           </Link>
           <font-awesome-icon
             :icon="['fas', 'trash-can']"
             class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
             @click="deleteHandler(slotProps.data)"
-            v-if="slotProps.data.id !== current_user_id"
+            v-if="canDestroy && slotProps.data.id !== current_user_id"
           />
         </template>
       </Column>

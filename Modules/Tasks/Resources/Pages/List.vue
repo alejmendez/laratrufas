@@ -16,6 +16,7 @@ import TaskService from '@/Services/TaskService.js';
 import { dateToString } from '@/Utils/date.js';
 import { deleteRowTable } from '@/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
+import { can } from '@/Services/Auth';
 
 const props = defineProps({
   toast: String,
@@ -56,6 +57,15 @@ const filters = {
   updated_at: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   responsible_id: { value: null, matchMode: FilterMatchMode.EQUALS },
 };
+
+const canShow = can('tasks.show');
+const canEdit = can('tasks.edit');
+const canDestroy = can('tasks.destroy');
+
+const headerLinks = [];
+if (can('tasks.create')) {
+  headerLinks.push({ to: 'tasks.create', text: t('generics.new') });
+}
 
 const fetchHandler = async (params) => {
   if (!params.filters) {
@@ -117,7 +127,7 @@ onMounted(async () => {
     <HeaderCrud
       :title="t('task.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'tasks.index', text: t('task.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-      :links="[{ to: 'tasks.create', text: t('generics.new') }]"
+      :links="headerLinks"
     />
 
     <Datatable
@@ -170,14 +180,14 @@ onMounted(async () => {
 
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
-          <Link :href="route('tasks.show', slotProps.data.id)">
+          <Link :href="route('tasks.show', slotProps.data.id)" v-if="canShow">
             <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-gray-600" />
           </Link>
-          <Link :href="route('tasks.edit', slotProps.data.id)">
+          <Link :href="route('tasks.edit', slotProps.data.id)" v-if="canEdit">
             <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
           </Link>
           <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
-              @click="deleteHandler(slotProps.data)" />
+              @click="deleteHandler(slotProps.data)" v-if="canDestroy" />
         </template>
       </Column>
     </Datatable>

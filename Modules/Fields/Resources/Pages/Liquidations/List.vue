@@ -14,7 +14,7 @@ import LiquidationService from '@/Services/LiquidationService.js';
 import { stringToFormat } from '@/Utils/date';
 import { deleteRowTable } from '@/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
-
+import { can } from '@/Services/Auth';
 const props = defineProps({
   toast: String,
 });
@@ -38,6 +38,16 @@ const filters = {
   delivery_date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   importer_id: { value: null, matchMode: FilterMatchMode.EQUALS },
 };
+
+const canShow = can('liquidations.show');
+const canEdit = can('liquidations.edit');
+const canDestroy = can('liquidations.destroy');
+const canCreate = can('liquidations.create');
+
+const headerLinks = [];
+if (canCreate) {
+  headerLinks.push({ to: 'liquidations.create', text: t('generics.new') });
+}
 
 const fetchHandler = async (params) => {
   if (!params.rows) {
@@ -113,7 +123,7 @@ onMounted(async () => {
     <HeaderCrud
       :title="$t('liquidation.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'liquidations.index', text: $t('liquidation.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
-      :links="[{ to: 'liquidations.create', text: $t('generics.new') }]"
+      :links="headerLinks"
     />
 
     <CardSection wrapperClass="p-6 mb-5 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
@@ -184,14 +194,14 @@ onMounted(async () => {
 
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
-          <Link :href="route('liquidations.show', slotProps.data.id)">
+          <Link :href="route('liquidations.show', slotProps.data.id)" v-if="canShow">
             <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-gray-600" />
           </Link>
-          <Link :href="route('liquidations.edit', slotProps.data.id)">
+          <Link :href="route('liquidations.edit', slotProps.data.id)" v-if="canEdit">
             <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
           </Link>
           <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
-              @click="deleteHandler(slotProps.data)" />
+            @click="deleteHandler(slotProps.data)" v-if="canDestroy" />
         </template>
       </Column>
     </Datatable>

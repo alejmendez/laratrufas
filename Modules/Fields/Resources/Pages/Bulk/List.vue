@@ -1,5 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
+import { can } from '@/Services/Auth';
 
 const { t } = useI18n();
 
@@ -16,7 +17,7 @@ const list = [
     title: t('bulk.harvests.title'),
     subtitle: t('bulk.harvests.subtitle'),
   },
-];
+].filter((ele) => can(ele.to));
 </script>
 
 <template>

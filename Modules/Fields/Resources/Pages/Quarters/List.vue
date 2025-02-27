@@ -14,6 +14,7 @@ import Datatable from '@/Components/Table/Datatable.vue';
 import QuarterService from '@/Services/QuarterService.js';
 import { deleteRowTable } from '@/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
+import { can } from '@/Services/Auth';
 
 const props = defineProps({
   toast: String,
@@ -32,6 +33,16 @@ const filters = {
   field_id: { value: null, matchMode: FilterMatchMode.EQUALS },
   area: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
 };
+
+const canShow = can('quarters.show');
+const canEdit = can('quarters.edit');
+const canDestroy = can('quarters.destroy');
+const canCreate = can('quarters.create');
+
+const headerLinks = [];
+if (canCreate) {
+  headerLinks.push({ to: 'quarters.create', text: t('generics.new') });
+}
 
 const fetchHandler = async (params) => {
   return await QuarterService.list(params);
@@ -83,7 +94,7 @@ onMounted(async () => {
     <HeaderCrud
       :title="t('quarter.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-      :links="[{ to: 'quarters.create', text: t('generics.new') }]"
+      :links="headerLinks"
     />
 
     <Datatable
@@ -125,14 +136,14 @@ onMounted(async () => {
 
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
-          <Link :href="route('quarters.show', slotProps.data.id)">
+          <Link :href="route('quarters.show', slotProps.data.id)" v-if="canShow">
             <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-gray-600" />
           </Link>
-          <Link :href="route('quarters.edit', slotProps.data.id)">
+          <Link :href="route('quarters.edit', slotProps.data.id)" v-if="canEdit">
             <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
           </Link>
           <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
-              @click="deleteHandler(slotProps.data)" />
+            @click="deleteHandler(slotProps.data)" v-if="canDestroy" />
         </template>
       </Column>
     </Datatable>

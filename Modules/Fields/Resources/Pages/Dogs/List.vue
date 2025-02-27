@@ -15,6 +15,7 @@ import Datatable from '@/Components/Table/Datatable.vue';
 import DogService from '@/Services/DogService.js';
 import { deleteRowTable } from '@/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
+import { can } from '@/Services/Auth';
 
 const props = defineProps({
   toast: String,
@@ -46,6 +47,16 @@ const filters = {
   veterinary: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   couple_id: { value: null, matchMode: FilterMatchMode.EQUALS },
 };
+
+const canShow = can('dogs.show');
+const canEdit = can('dogs.edit');
+const canDestroy = can('dogs.destroy');
+const canCreate = can('dogs.create');
+
+const headerLinks = [];
+if (canCreate) {
+  headerLinks.push({ to: 'dogs.create', text: t('generics.new') });
+}
 
 const fetchHandler = async (params) => {
   return await DogService.list(params);
@@ -99,7 +110,7 @@ onMounted(async () => {
     <HeaderCrud
       :title="$t('dog.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'dogs.index', text: $t('dog.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
-      :links="[{ to: 'dogs.create', text: $t('generics.new') }]"
+      :links="headerLinks"
     />
 
     <Datatable
@@ -162,7 +173,7 @@ onMounted(async () => {
 
       <Column field="couple.name" :header="$t('dog.table.couple')" :showFilterMatchModes="false" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.couple.full_name }}
+          {{ data.couple?.full_name }}
         </template>
         <template #filter="{ filterModel }">
           <Select v-model="filterModel.value" :options="filter_couple_options" optionLabel="text" placeholder="Todos" />
@@ -171,14 +182,14 @@ onMounted(async () => {
 
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
-          <Link :href="route('dogs.show', slotProps.data.id)">
+          <Link :href="route('dogs.show', slotProps.data.id)" v-if="canShow">
             <font-awesome-icon :icon="['fas', 'eye']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-gray-600" />
           </Link>
-          <Link :href="route('dogs.edit', slotProps.data.id)">
+          <Link :href="route('dogs.edit', slotProps.data.id)" v-if="canEdit">
             <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
           </Link>
           <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
-              @click="deleteHandler(slotProps.data)" />
+            @click="deleteHandler(slotProps.data)" v-if="canDestroy" />
         </template>
       </Column>
     </Datatable>

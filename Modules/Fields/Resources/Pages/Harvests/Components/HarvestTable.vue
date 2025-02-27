@@ -19,6 +19,7 @@ import HarvestService from '@/Services/HarvestService.js';
 import { deleteRowTable } from '@/Utils/table.js';
 
 import { getDataSelects } from '@/Services/Selects';
+import { can } from '@/Services/Auth';
 
 const toast = useToast();
 const confirm = useConfirm();
@@ -61,6 +62,9 @@ const form = reactive({
   last_field: [],
   quarter: [],
 });
+
+const canEdit = can('harvests.edit');
+const canDestroy = can('harvests.destroy');
 
 const fetchHandler = async (params) => {
   const year = form.year.value;
@@ -275,11 +279,11 @@ const number_format = (n) => {
 
     <Column :exportable="false" style="min-width: 130px" v-if="props.show_actions">
       <template #body="slotProps">
-        <Link :href="route('harvests.edit', slotProps.data.id)">
+        <Link :href="route('harvests.edit', slotProps.data.id)" v-if="canEdit">
           <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
         </Link>
         <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
-          @click="deleteHandler(slotProps.data)" />
+          @click="deleteHandler(slotProps.data)" v-if="canDestroy" />
       </template>
     </Column>
 

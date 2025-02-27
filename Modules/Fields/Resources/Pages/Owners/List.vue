@@ -14,7 +14,7 @@ import VInputDni from '@/Components/Form/VInputDni.vue';
 import Datatable from '@/Components/Table/Datatable.vue';
 import ownerService from '@/Services/OwnerService.js';
 import { deleteRowDatatable } from '@/Utils/table.js';
-
+import { can } from '@/Services/Auth';
 const props = defineProps({
   toast: String,
 });
@@ -39,6 +39,10 @@ const form = reactive({
   dni: null,
   errors: {},
 });
+
+const canCreate = can('owners.create');
+const canEdit = can('owners.edit');
+const canDestroy = can('owners.destroy');
 
 const showSuccessToast = () => {
   toast.add({
@@ -139,6 +143,7 @@ const updateHandler = () => {
       <Button
         :label="$t('generics.new')"
         @click="showModal = true"
+        v-if="canCreate"
       />
     </HeaderCrud>
 
@@ -173,11 +178,13 @@ const updateHandler = () => {
             :icon="['fas', 'pencil']"
             class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600"
             @click="editHandler(slotProps.data)"
+            v-if="canEdit"
           />
           <font-awesome-icon
             :icon="['fas', 'trash-can']"
             class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
             @click="deleteHandler(slotProps.data)"
+            v-if="canDestroy"
           />
         </template>
       </Column>

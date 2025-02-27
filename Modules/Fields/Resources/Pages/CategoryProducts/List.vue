@@ -15,6 +15,7 @@ import VCheckbox from '@/Components/Form/VCheckbox.vue';
 import Datatable from '@/Components/Table/Datatable.vue';
 import categoryProductService from '@/Services/CategoryProductService.js';
 import { deleteRowDatatable } from '@/Utils/table.js';
+import { can } from '@/Services/Auth';
 
 const props = defineProps({
   toast: String,
@@ -46,6 +47,10 @@ const isCommercialOptions = ref([
   { label: t('generics.yes'), value: true },
   { label: t('generics.no'), value: false },
 ]);
+
+const canEdit = can('category_products.edit');
+const canDestroy = can('category_products.destroy');
+const canCreate = can('category_products.create');
 
 const showSuccessToast = () => {
   toast.add({
@@ -146,6 +151,7 @@ const updateHandler = () => {
       <Button
         :label="$t('generics.new')"
         @click="showModal = true"
+        v-if="canCreate"
       />
     </HeaderCrud>
 
@@ -185,11 +191,13 @@ const updateHandler = () => {
             :icon="['fas', 'pencil']"
             class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600"
             @click="editHandler(slotProps.data)"
+            v-if="canEdit"
           />
           <font-awesome-icon
             :icon="['fas', 'trash-can']"
             class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
             @click="deleteHandler(slotProps.data)"
+            v-if="canDestroy"
           />
         </template>
       </Column>

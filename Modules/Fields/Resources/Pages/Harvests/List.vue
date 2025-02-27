@@ -5,6 +5,7 @@ import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';
 
 import HarvestTable from '@Fields/Pages/Harvests/Components/HarvestTable.vue';
+import { can } from '@/Services/Auth';
 
 const toast = useToast();
 
@@ -13,6 +14,13 @@ const { t } = useI18n();
 const props = defineProps({
   toast: String,
 });
+
+const canCreate = can('harvests.create');
+
+const headerLinks = [];
+if (canCreate) {
+  headerLinks.push({ to: 'harvests.create', text: t('generics.new') });
+}
 
 onMounted(() => {
   if (props.toast) {
@@ -33,7 +41,7 @@ onMounted(() => {
     <HeaderCrud
       :title="t('harvest.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
-      :links="[{ to: 'harvests.create', text: t('generics.new') }]"
+      :links="headerLinks"
     />
 
     <Toast />
