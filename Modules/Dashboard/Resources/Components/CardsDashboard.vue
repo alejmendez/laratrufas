@@ -21,7 +21,7 @@ function getPorcent(total, num) {
     return 100;
   }
 
-  return (num * 100) / total;
+  return ((num * 100) / total).toFixed(2);
 }
 </script>
 
