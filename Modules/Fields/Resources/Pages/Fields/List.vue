@@ -12,6 +12,7 @@ import { useI18n } from 'vue-i18n';
 import Datatable from '@/Components/Table/Datatable.vue';
 import FieldService from '@/Services/FieldService.js';
 import { deleteRowTable } from '@/Utils/table.js';
+import { can } from '@/Services/Auth';
 
 const props = defineProps({
   toast: String,
