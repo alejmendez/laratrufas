@@ -16,7 +16,7 @@ class FindPlantDetails
     {
         $query = PlantDetail::where('plant_id', $id);
 
-        return self::get_details($query, $show_harvests);
+        return self::get_details($query, $year, $show_harvests);
     }
 
     public static function get_by_quarter_id($id, $year, $show_harvests = false)
