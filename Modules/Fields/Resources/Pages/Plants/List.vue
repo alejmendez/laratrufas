@@ -40,6 +40,7 @@ const filters = {
   'quarter.responsible_id': { value: null, matchMode: FilterMatchMode.EQUALS },
 };
 
+const canCreate = can('plants.create');
 const canShow = can('plants.show');
 const canEdit = can('plants.edit');
 const canDestroy = can('plants.destroy');
@@ -125,7 +126,7 @@ onMounted(async () => {
       </Column>
       <Column field="quarter_name" filterField="quarter_id" :showFilterMatchModes="false" :header="$t('plant.table.quarter_id')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.quarter.name }}
+          {{ data.quarter?.name }}
         </template>
         <template #filter="{ filterModel }">
           <Select v-model="filterModel.value" :options="filter_quarter_options" optionLabel="text" placeholder="Todos" />
@@ -133,7 +134,7 @@ onMounted(async () => {
       </Column>
       <Column field="field_name" filterField="quarter.field_id" :showFilterMatchModes="false" :header="$t('plant.table.field_id')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.quarter.field.name }}
+          {{ data.quarter?.field?.name }}
         </template>
         <template #filter="{ filterModel }">
           <Select v-model="filterModel.value" :options="filter_field_options" optionLabel="text" placeholder="Todos" />
@@ -141,7 +142,7 @@ onMounted(async () => {
       </Column>
       <Column field="plant_type_name" filterField="plant_type_id" :showFilterMatchModes="false" :header="$t('plant.table.type')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.plant_type.name }}
+          {{ data.plant_type?.name }}
         </template>
         <template #filter="{ filterModel }">
           <Select v-model="filterModel.value" :options="filter_plant_type_options" optionLabel="text" placeholder="Todos" />
@@ -157,7 +158,7 @@ onMounted(async () => {
       </Column>
       <Column field="quarter.responsible.name" filterField="quarter.responsible_id" :showFilterMatchModes="false" :header="$t('plant.table.manager')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.quarter.responsible.full_name }}
+          {{ data.quarter?.responsible?.full_name }}
         </template>
         <template #filter="{ filterModel }">
           <Select v-model="filterModel.value" :options="filter_responsible_options" optionLabel="text" placeholder="Todos" />

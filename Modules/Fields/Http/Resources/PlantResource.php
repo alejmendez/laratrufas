@@ -15,12 +15,17 @@ class PlantResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $quarter = optional($this->quarter);
+        $field = optional($quarter->field);
+        $responsible = optional($quarter->responsible);
+        $plant_type = optional($this->plant_type);
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'plant_type' => [
-                'id' => optional($this->plant_type)->id,
-                'name' => optional($this->plant_type)->name,
+                'id' => $plant_type->id,
+                'name' => $plant_type->name,
             ],
             'age' => $this->age,
             'planned_at' => $this->planned_at,
@@ -29,16 +34,16 @@ class PlantResource extends JsonResource
             'row' => $this->row,
             'blueprint' => $this->blueprint ? Storage::url($this->blueprint) : '',
             'field' => [
-                'id' => optional($this->quarter->field)->id,
-                'name' => optional($this->quarter->field)->name,
+                'id' => $field->id,
+                'name' => $field->name,
             ],
             'quarter' => [
-                'id' => optional($this->quarter)->id,
-                'name' => optional($this->quarter)->name,
+                'id' => $quarter->id,
+                'name' => $quarter->name,
             ],
             'responsible' => [
-                'id' => optional($this->quarter->responsible)->id,
-                'name' => optional($this->quarter->responsible)->full_name,
+                'id' => $responsible->id,
+                'name' => $responsible->full_name,
             ],
         ];
     }
