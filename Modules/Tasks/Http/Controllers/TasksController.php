@@ -64,7 +64,6 @@ class TasksController extends Controller
     {
         $data = $request->validated();
         $task = CreateTask::call($data);
-        NotifyTaskComment::call($task, $data['comment'], auth()->user());
 
         return redirect()->route('tasks.index')->with('toast', 'Task created.');
     }

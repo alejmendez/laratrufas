@@ -6,20 +6,22 @@ use Modules\Tasks\Models\TaskComment;
 
 class UpdateTaskComment
 {
-    public static function call(string $id, array $data): TaskComment
+    public static function call(TaskComment $taskComment, array $data): TaskComment
     {
-        $taskComment = TaskComment::findOrFail($id);
-
-        // Verificar si el usuario actual es el propietario del comentario
-        if ($taskComment->user_id !== auth()->id()) {
-            throw new \Illuminate\Auth\Access\AuthorizationException(
-                'No estás autorizado para actualizar este comentario.'
-            );
-        }
-
         $taskComment->comment = preg_replace('/<p><br><\/p>(\s*<p><br><\/p>)*$/', '', $data['comment']);
         $taskComment->save();
 
-        return $taskComment->fresh();
+        $taskCommentNotification = Notification::whereRaw("data like '%\"task_comment_id\":$id,%'")->where('read_at', null)->first();
+        if ($taskCommentNotification) {
+            $data = json_decode($taskCommentNotification->data, true);
+            $data['task_comment_id'] = $taskComment->id;
+            $data['task_comment'] = $taskComment->comment;
+            $taskCommentNotification->data = json_encode($data);
+            $taskCommentNotification->save();
+        } else {
+            NotifyTaskComment::call($taskComment->task, $taskComment->comment, auth()->user(), $taskComment->id);
+        }
+
+        return $taskComment;
     }
 }

@@ -15,6 +15,8 @@ class CreateTaskComment
         $taskComment->user_id = $user->id;
         $taskComment->save();
 
+        NotifyTaskComment::call($taskComment->task, $taskComment->comment, $user, $taskComment->id);
+
         return $taskComment;
     }
 }

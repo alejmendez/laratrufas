@@ -2,6 +2,7 @@
 
 namespace Modules\Tasks\Services;
 
+use Illuminate\Support\Facades\DB;
 use Modules\Fields\Models\SupplyTask;
 use Modules\Tasks\Models\Task;
 use Modules\Tasks\Models\TaskComment;
@@ -12,39 +13,47 @@ class CreateTask
 {
     public static function call($data): Task
     {
-        $task = new Task;
+        DB::beginTransaction();
+        try {
+            $task = new Task;
 
-        $task->name = $data['name'];
-        $task->status = $data['status']['value'];
-        $task->repeat_number = '0';
-        $task->repeat_type = '';
-        $task->priority = $data['priority']['value'];
-        $task->start_date = $data['start_date'];
-        $task->end_date = $data['end_date'];
-        $task->field_id = $data['field_id']['value'];
-        $task->rows = collect($data['rows'])->map(fn ($q) => $q['value'])->toArray();
-        $task->responsible_id = $data['responsible_id']['value'];
-        $task->save();
+            $task->name = $data['name'];
+            $task->status = $data['status']['value'];
+            $task->repeat_number = '0';
+            $task->repeat_type = '';
+            $task->priority = $data['priority']['value'];
+            $task->start_date = $data['start_date'];
+            $task->end_date = $data['end_date'];
+            $task->field_id = $data['field_id']['value'];
+            $task->rows = collect($data['rows'])->map(fn ($q) => $q['value'])->toArray();
+            $task->responsible_id = $data['responsible_id']['value'];
+            $task->save();
 
-        if (! empty($data['comment'])) {
-            $comment = new TaskComment;
-            $comment->comment = $data['comment'];
-            $comment->user_id = auth()->id();
-            $comment->task_id = $task->id;
-            $comment->save();
+            if (! empty($data['comment'])) {
+                $comment = new TaskComment;
+                $comment->comment = $data['comment'];
+                $comment->user_id = auth()->id();
+                $comment->task_id = $task->id;
+                $comment->save();
+            }
+
+            self::syncRelationship($task, 'quarters', $data['quarter_id'] ?? []);
+            self::syncRelationship($task, 'plants', $data['plant_id'] ?? []);
+            self::syncRelationship($task, 'tools', $data['tools'] ?? []);
+            self::syncRelationship($task, 'security_equipments', $data['security_equipments'] ?? []);
+            self::syncRelationship($task, 'machineries', $data['machineries'] ?? []);
+
+            self::saveSupplies($task, $data['supplies'] ?? []);
+
+            self::saveComment($task, $data['comment'] ?? '');
+
+            DB::commit();
+
+            return $task;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
-
-        self::syncRelationship($task, 'quarters', $data['quarter_id'] ?? []);
-        self::syncRelationship($task, 'plants', $data['plant_id'] ?? []);
-        self::syncRelationship($task, 'tools', $data['tools'] ?? []);
-        self::syncRelationship($task, 'security_equipments', $data['security_equipments'] ?? []);
-        self::syncRelationship($task, 'machineries', $data['machineries'] ?? []);
-
-        self::saveSupplies($task, $data['supplies'] ?? []);
-
-        self::notify($task, $data['comment'] ?? '');
-
-        return $task;
     }
 
     protected static function syncRelationship($task, $relation, $data)
@@ -72,27 +81,13 @@ class CreateTask
         }
     }
 
-    protected static function notify($task, $comment)
+    protected static function saveComment($task, $comment)
     {
-        $current_user_id = auth()->id();
-        $userIds = self::get_user_ids_from_comment($comment);
-        $userIds[] = $task->responsible_id;
-        $users = User::whereIn('id', array_unique($userIds))->get();
+        $data = [
+            'task_id' => $task->id,
+            'comment' => $comment,
+        ];
 
-        foreach ($users as $user) {
-            $user->notify(new TaskNotification([
-                'task_id' => $task->id,
-                'task_name' => $task->name,
-                'task_comment' => strip_tags($comment),
-                'notifier_user_id' => $current_user_id,
-            ]));
-        }
-    }
-
-    protected static function get_user_ids_from_comment($comment)
-    {
-        preg_match_all('/<span class="mention"[^>]*data-id="(\d+)"[^>]*>/', $comment, $matches);
-
-        return $matches[1];
+        $taskComment = CreateTaskComment::call($data, auth()->user());
     }
 }

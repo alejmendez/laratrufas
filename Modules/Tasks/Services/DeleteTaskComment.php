@@ -17,6 +17,7 @@ class DeleteTaskComment
             );
         }
 
+        Notification::whereRaw("data like '%\"task_comment_id\":$id,%'")->delete();
         $taskComment->delete();
     }
 }

@@ -25,7 +25,6 @@ class TaskCommentsController extends Controller
     {
         $data = $request->validated();
         $taskComment = CreateTaskComment::call($data, auth()->user());
-        NotifyTaskComment::call($taskComment->task, $data['comment'], auth()->user());
 
         return response()->json([
             'data' => new TaskCommentResource($taskComment),
@@ -38,8 +37,16 @@ class TaskCommentsController extends Controller
     public function update(UpdateTaskCommentRequest $request, string $id)
     {
         $data = $request->validated();
-        $taskComment = UpdateTaskComment::call($id, $data);
-        NotifyTaskComment::call($taskComment->task, $data['comment'], auth()->user());
+        $taskComment = TaskComment::findOrFail($id);
+
+        // Verificar si el usuario actual es el propietario del comentario
+        if ($taskComment->user_id !== auth()->id()) {
+            throw new \Illuminate\Auth\Access\AuthorizationException(
+                'No estás autorizado para actualizar este comentario.'
+            );
+        }
+
+        $taskComment = UpdateTaskComment::call($taskComment, $data);
 
         return response()->json([
             'data' => new TaskCommentResource($taskComment),
