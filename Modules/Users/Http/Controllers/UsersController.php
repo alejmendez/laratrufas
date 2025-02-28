@@ -68,9 +68,11 @@ class UsersController extends Controller
     public function show(string $id)
     {
         $user = FindUser::call($id);
+        $current_tab = request()->get('current_tab', 'file');
 
         return Inertia::render('Users::Show', [
             'data' => new UserResource($user),
+            'current_tab' => $current_tab,
         ]);
     }
 
