@@ -23,6 +23,7 @@ class ListTask
             $overdued = $today->diffInDays($endDate) < 0;
             $status = $overdued && $task->status !== 'finished' ? 'overdued' : $task->status;
             $task->status = $status;
+
             return $task;
         });
 

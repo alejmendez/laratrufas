@@ -2,7 +2,6 @@
 
 namespace Modules\Core\Services;
 
-use Illuminate\Support\Facades\DB;
 use Modules\Fields\Models\CategoryProduct;
 use Modules\Fields\Models\Dog;
 use Modules\Fields\Models\Field;

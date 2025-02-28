@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Modules\Fields\Models\SupplyTask;
 use Modules\Tasks\Models\Task;
 use Modules\Tasks\Models\TaskComment;
-use Modules\Tasks\Notifications\TaskNotification;
-use Modules\Users\Models\User;
 
 class CreateTask
 {

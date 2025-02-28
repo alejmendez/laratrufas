@@ -14,7 +14,6 @@ use Modules\Tasks\Services\DeleteTask;
 use Modules\Tasks\Services\FindTask;
 use Modules\Tasks\Services\ListTask;
 use Modules\Tasks\Services\MarkTaskNotificationAsRead;
-use Modules\Tasks\Services\NotifyTaskComment;
 use Modules\Tasks\Services\UpdateTask;
 
 class TasksController extends Controller

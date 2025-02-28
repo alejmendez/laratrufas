@@ -8,7 +8,7 @@ use Modules\Users\Models\User;
 
 class NotifyTaskComment
 {
-    public static function call(Task $task, ?string $taskComment, User $commentator, int $taskCommentId = null)
+    public static function call(Task $task, ?string $taskComment, User $commentator, ?int $taskCommentId = null)
     {
         if (! $taskComment) {
             return;

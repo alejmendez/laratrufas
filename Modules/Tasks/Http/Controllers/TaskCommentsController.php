@@ -9,7 +9,6 @@ use Modules\Tasks\Http\Requests\UpdateTaskCommentRequest;
 use Modules\Tasks\Http\Resources\TaskCommentResource;
 use Modules\Tasks\Services\CreateTaskComment;
 use Modules\Tasks\Services\DeleteTaskComment;
-use Modules\Tasks\Services\NotifyTaskComment;
 use Modules\Tasks\Services\UpdateTaskComment;
 
 class TaskCommentsController extends Controller
