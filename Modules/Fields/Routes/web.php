@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/plants/bulk', [PlantsController::class, 'create_bulk'])->name('plants.create.bulk');
     Route::post('/plants/bulk', [PlantsController::class, 'store_bulk'])->name('plants.store.bulk');
     Route::get('/plants/download/bulk/template', [PlantsController::class, 'download_bulk_template'])->name('plants.download.bulk.template');
+    Route::post('/plants/notes/store', [PlantsController::class, 'store_note'])->name('plants.notes.store');
+
     Route::post('/plants/details', [PlantDetailsController::class, 'store'])->name('plants.details.store');
     Route::get('/plants/details/quarter/{id}', [PlantDetailsController::class, 'index_by_quarter'])->name('plants.details.by_quarter');
     Route::get('/plants/details/field/{id}', [PlantDetailsController::class, 'index_by_field'])->name('plants.details.by_field');

@@ -85,6 +85,7 @@ class SyncPermissions extends Command
         $this->create_permission('plants', 'download.bulk.template');
         $this->create_permission('plants', 'create.bulk');
         $this->create_permission('plants', 'store.bulk');
+        $this->create_permission('plants', 'notes.store');
         $this->create_permission('plants.details', 'index');
         $this->create_permission('plants.details', 'store');
         $this->create_permission('plants.details', 'by_quarter');

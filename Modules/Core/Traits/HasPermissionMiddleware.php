@@ -2,6 +2,7 @@
 
 namespace Modules\Core\Traits;
 
+use Modules\Core\Exceptions\PermissionException;
 use Modules\Core\Services\CacheService;
 
 trait HasPermissionMiddleware
@@ -15,7 +16,7 @@ trait HasPermissionMiddleware
             $userPermissions = CacheService::getUserPermissions($user);
 
             if (! $userPermissions->contains($routeName)) {
-                abort(403);
+                throw new PermissionException($routeName);
             }
 
             return $next($request);

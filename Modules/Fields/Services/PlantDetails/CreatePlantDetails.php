@@ -30,6 +30,7 @@ class CreatePlantDetails
             'soil_sanitation',
             'soil_sanitation_photo',
             'irrigation_system',
+            // 'note',
         ];
 
         $detailsToCreate = [];

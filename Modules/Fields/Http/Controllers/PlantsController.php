@@ -2,6 +2,7 @@
 
 namespace Modules\Fields\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Core\Http\Controllers\Controller;
@@ -14,6 +15,7 @@ use Modules\Fields\Http\Requests\UpdatePlantRequest;
 use Modules\Fields\Http\Resources\PlantResource;
 use Modules\Fields\Imports\PlantsImport;
 use Modules\Fields\Services\Plants\CreatePlant;
+use Modules\Fields\Services\Plants\CreatePlantNote;
 use Modules\Fields\Services\Plants\DeletePlant;
 use Modules\Fields\Services\Plants\FindPlant;
 use Modules\Fields\Services\Plants\ListPlant;
@@ -72,9 +74,11 @@ class PlantsController extends Controller
     public function show(string $id)
     {
         $plant = FindPlant::call($id);
+        $current_tab = request()->get('current_tab', 'file');
 
         return Inertia::render('Fields::Plants/Show', [
             'data' => new PlantResource($plant),
+            'current_tab' => $current_tab,
         ]);
     }
 
@@ -112,6 +116,18 @@ class PlantsController extends Controller
         DeletePlant::call($id);
 
         return response()->noContent();
+    }
+
+    public function store_note(Request $request)
+    {
+        $data = $request->validate([
+            'plant_id' => 'required|exists:plants,id',
+            'note' => 'required|string',
+        ]);
+
+        CreatePlantNote::call($data);
+
+        return response()->json(['message' => 'Nota creada correctamente']);
     }
 
     public function download_bulk_template()

@@ -65,5 +65,10 @@ export default {
       unit: '',
       color: '#FF5722',
     },
+    note: {
+      label: 'Nota',
+      unit: '',
+      color: '#FF9800',
+    },
   },
 };

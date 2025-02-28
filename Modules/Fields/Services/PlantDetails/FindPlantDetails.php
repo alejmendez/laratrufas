@@ -43,6 +43,6 @@ class FindPlantDetails
             $query->whereYear('created_at', $year);
         }
 
-        return $query->get();
+        return $query->orderBy('created_at', 'desc')->get();
     }
 }

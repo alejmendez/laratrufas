@@ -12,7 +12,12 @@ const del = async (id) => {
   return true;
 };
 
+const createNote = async (data) => {
+  await axios.post(route('plants.notes.store'), data);
+};
+
 export default {
   list,
   del,
+  createNote,
 };

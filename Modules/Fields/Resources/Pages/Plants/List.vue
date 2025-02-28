@@ -11,7 +11,7 @@ import Select from 'primevue/select';
 import { useI18n } from 'vue-i18n';
 
 import Datatable from '@/Components/Table/Datatable.vue';
-import PlantService from '@/Services/PlantService.js';
+import PlantService from '@Fields/Services/PlantService.js';
 import { deleteRowTable } from '@/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
 import { can } from '@/Services/Auth';

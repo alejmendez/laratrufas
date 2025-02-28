@@ -49,6 +49,7 @@ const categories = ref([
   { name: 'trunk_sanitation', key: 'trunk_sanitation', },
   { name: 'soil_sanitation', key: 'soil_sanitation', },
   { name: 'irrigation_system', key: 'irrigation_system', },
+  { name: 'note', key: 'note', },
 ]);
 
 const selectedCategories = ref(categories.value.map((category) => category.name));
@@ -65,7 +66,7 @@ const detailsFiltered = computed(() => {
   return details.value.filter((detail) => selectedCategories.value.includes(detail.type));
 });
 
-const filterByYear = async () => {
+const filter = async () => {
   if (props.plant_id) {
     details.value = await PlantDetailService.listByPlantId(props.plant_id, selectedYear?.value?.value, props.show_harvests);
   } else if (props.quarter_id) {
@@ -76,7 +77,7 @@ const filterByYear = async () => {
 };
 
 onMounted(async () => {
-  await filterByYear();
+  await filter();
   const data = await getDataSelect('harvest_available_years');
 
   const year_value_default = { value: null, text: 'Todos' };
@@ -86,7 +87,7 @@ onMounted(async () => {
   loading.value = false;
 });
 
-// mostrar bitacora - pre-filtrar por cosecha y por año cuando viene desde el heatmap del cuartel
+defineExpose({ filter });
 </script>
 
 <template>
@@ -100,7 +101,7 @@ onMounted(async () => {
           v-model="selectedYear"
           :placeholder="t('generics.please_select')"
           :options="year_options"
-          @change="filterByYear"
+          @change="filter"
         />
       </div>
       <div class="justify-center">
