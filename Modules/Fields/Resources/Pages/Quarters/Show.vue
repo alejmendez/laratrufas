@@ -1,9 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 import { deleteRowTable } from '@/Utils/table';
+import { can } from '@/Services/Auth';
 
 import StatisticsCard from '@Fields/Pages/Quarters/ShowComponents/StatisticsCard.vue';
 import HarvestCard from '@Fields/Pages/Quarters/ShowComponents/HarvestCard.vue';
@@ -18,9 +19,22 @@ const props = defineProps({
 
 const { data: quarter } = props.data;
 
-const tabs = ['file', 'logbook', 'harvest', 'statistics'];
+const canDestroy = can('quarters.destroy');
+const canEdit = can('quarters.edit');
 
-const currentTab = ref(tabs[0]);
+const FILE_TAB = 'file';
+const LOGBOOK_TAB = 'logbook';
+const HARVEST_TAB = 'harvest';
+const STATISTICS_TAB = 'statistics';
+
+const tabs = [FILE_TAB, LOGBOOK_TAB, HARVEST_TAB, STATISTICS_TAB];
+
+const currentTab = ref(FILE_TAB);
+
+const isFileTab = computed(() => currentTab.value === FILE_TAB);
+const isLogbookTab = computed(() => currentTab.value === LOGBOOK_TAB);
+const isHarvestTab = computed(() => currentTab.value === HARVEST_TAB);
+const isStatisticsTab = computed(() => currentTab.value === STATISTICS_TAB);
 
 const dataFile = [
   [t('quarter.show.file.field'), quarter.field.name],
@@ -48,11 +62,15 @@ const deleteHandler = async (id) => {
         severity="secondary"
         @click="deleteHandler(quarter.id)"
         :label="$t('generics.actions.delete')"
+        v-if="canDestroy"
+        v-show="isFileTab"
       />
       <Button
         as="Link"
         :href="route('quarters.edit', quarter.id)"
         :label="$t('generics.actions.edit')"
+        v-if="canEdit"
+        v-show="isFileTab"
       />
     </HeaderCrud>
 
@@ -64,14 +82,14 @@ const deleteHandler = async (id) => {
           :class="currentTab === tab ? 'text-[--p-primary-500]' : 'hover:text-[--p-primary-300] dark:hover:text-[--p-primary-600] text-gray-400'"
           @click="currentTab = tab"
         >
-          {{ $t('quarter.show.tabs.' + tab) }}
+          {{ t('quarter.show.tabs.' + tab) }}
         </span>
       </nav>
     </div>
 
     <CardSection
       wrapperClass="p-5 grid grid-cols-2 gap-4"
-      v-show="currentTab === tabs[0]"
+      v-show="isFileTab"
     >
       <div>
         <img
@@ -94,17 +112,17 @@ const deleteHandler = async (id) => {
 
     <LogbookCard
       :quarter_id="quarter.id"
-      v-show="currentTab === tabs[1]"
+      v-show="isLogbookTab"
     />
 
     <HarvestCard
       :quarter_id="quarter.id"
-      v-show="currentTab === tabs[2]"
+      v-show="isHarvestTab"
     />
 
     <StatisticsCard
       :quarter="quarter"
-      v-show="currentTab === tabs[3]"
+      v-show="isStatisticsTab"
     />
   </AuthenticatedLayout>
 </template>
