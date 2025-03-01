@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 use Modules\Core\Services\CacheService;
 use Modules\Users\Models\User;
 use Spatie\Permission\Models\Permission;
