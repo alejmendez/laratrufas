@@ -1,10 +1,13 @@
 <script setup>
-import { ref } from 'vue';
-import { router, useForm } from '@inertiajs/vue3';
+import { ref, computed } from 'vue';
+import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
+
+import { can } from '@/Services/Auth';
 import { deleteRowTable } from '@/Utils/table';
-import { stringToFormat, stringToDate } from '@/Utils/date';
+import { stringToFormat } from '@/Utils/date';
+
 import FormComments from '@Tasks/Components/Comments.vue';
 
 const { t } = useI18n();
@@ -18,6 +21,7 @@ const props = defineProps({
   tools: Array,
   security_equipments: Array,
   machineries: Array,
+  current_tab: String,
 });
 
 const { data } = props.data;
@@ -38,33 +42,37 @@ if (supplies.length === 0) {
   ];
 }
 
-const form = useForm({
-  _method: 'PATCH',
-  id: data.id,
-  name: data.name,
-  repeat_number: data.repeat_number,
-  repeat_type: { value: data.repeat_type, text: t(`task.form.repeat_type.options.${data.repeat_type || 'daily'}`) },
-  status: { value: data.status, text: t(`task.form.status.options.${data.status || 'to_begin'}`) },
-  priority: { value: data.priority, text: t(`task.form.priority.options.${data.priority || 'when_possible'}`) },
-  start_date: stringToDate(data.start_date),
-  end_date: stringToDate(data.end_date),
-  field_id: data.field,
-  quarter_id: props.quarters.filter((a) => data.quarters.includes(a.value)),
-  rows: data.rows.map((a) => ({ value: a, text: a })),
-  plant_id: props.plants.filter((a) => data.plants.includes(a.value)),
-  responsible_id: props.responsibles.find((a) => a.value == data.responsible_id),
-  note: data.note,
-  comment: data.comments[0]?.comment || null,
-  comments: data.comments,
-  tools: data.tools,
-  security_equipments: data.security_equipments,
-  machineries: data.machineries,
-  supplies,
-});
+const canDestroy = can('tasks.destroy');
+const canEdit = can('tasks.edit');
 
-const tabs = ['detail', 'tracking', 'logbook', 'statistics'];
+const headerLinks = [];
+if (canDestroy) {
+  headerLinks.push({ to: () => deleteHandler(data.id), variant: 'secondary', text: t('generics.actions.delete') });
+}
+if (canEdit) {
+  headerLinks.push({ to: route('tasks.edit', data.id), text: t('generics.actions.edit') });
+}
 
-const currentTab = ref(tabs[0]);
+const FILE_TAB = 'detail';
+const TRACKING_TAB = 'tracking';
+const LOGBOOK_TAB = 'logbook';
+const STATISTICS_TAB = 'statistics';
+
+const tabs = [FILE_TAB, TRACKING_TAB, LOGBOOK_TAB, STATISTICS_TAB];
+
+const currentTab = ref(props.current_tab || FILE_TAB);
+
+const isFileTab = computed(() => currentTab.value === FILE_TAB);
+const isTrackingTab = computed(() => currentTab.value === TRACKING_TAB);
+const isLogbookTab = computed(() => currentTab.value === LOGBOOK_TAB);
+const isStatisticsTab = computed(() => currentTab.value === STATISTICS_TAB);
+
+const selectTab = (tab) => {
+  currentTab.value = tab;
+  const url = new URL(window.location.href);
+  url.searchParams.set('current_tab', tab);
+  window.history.pushState({}, '', url);
+};
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, confirm, () => {
@@ -80,10 +88,7 @@ const deleteHandler = async (id) => {
     <HeaderCrud
       :title="t('task.titles.show')"
       :breadcrumbs="[{ to: 'tasks.index', text: t('task.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
-      :links="[
-        { to: () => deleteHandler(data.id), variant: 'secondary', text: t('generics.actions.delete') },
-        { to: route('tasks.edit', data.id), text: t('generics.actions.edit') }
-      ]"
+      :links="headerLinks"
     />
 
     <div class="flex place-content-center mt-5">
@@ -92,14 +97,14 @@ const deleteHandler = async (id) => {
           v-for="tab of tabs"
           class="px-4 py-2 cursor-default font-semibold"
           :class="currentTab === tab ? 'text-[--p-primary-500]' : 'hover:text-[--p-primary-300] dark:hover:text-[--p-primary-600] text-gray-400'"
-          @click="currentTab = tab"
+          @click="selectTab(tab)"
         >
           {{ t('task.show.tabs.' + tab) }}
         </span>
       </nav>
     </div>
 
-    <div class="grid grid-cols-5 gap-4" v-show="currentTab === tabs[0]">
+    <div class="grid grid-cols-5 gap-4" v-show="isFileTab">
       <CardSection
         :header-text="data.name"
         wrapperClass="p-5"
@@ -211,19 +216,19 @@ const deleteHandler = async (id) => {
     <CardSection
       :header-text="t('task.show.tracking.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
-      v-show="currentTab === tabs[1]"
+      v-show="isTrackingTab"
     >
     </CardSection>
     <CardSection
       :header-text="t('task.show.logbook.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
-      v-show="currentTab === tabs[2]"
+      v-show="isLogbookTab"
     >
     </CardSection>
     <CardSection
       :header-text="t('task.show.statistics.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
-      v-show="currentTab === tabs[3]"
+      v-show="isStatisticsTab"
     >
     </CardSection>
   </AuthenticatedLayout>

@@ -76,6 +76,8 @@ class TasksController extends Controller
         $current_user = auth()->user();
         MarkTaskNotificationAsRead::call($task, $current_user);
 
+        $current_tab = request()->get('current_tab', 'detail');
+
         return Inertia::render('Tasks::Show', [
             'data' => new TaskResource($task),
             'fields' => ListEntity::call('field'),
@@ -85,6 +87,7 @@ class TasksController extends Controller
             'tools' => ListEntity::call('tool'),
             'security_equipments' => ListEntity::call('security_equipment'),
             'machineries' => ListEntity::call('machinery'),
+            'current_tab' => $current_tab,
         ]);
     }
 
