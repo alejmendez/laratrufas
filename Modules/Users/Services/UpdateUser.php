@@ -2,6 +2,7 @@
 
 namespace Modules\Users\Services;
 
+use Illuminate\Support\Facades\Hash;
 use Modules\Core\Services\CacheService;
 use Modules\Users\Models\User;
 
