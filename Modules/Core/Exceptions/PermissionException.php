@@ -15,9 +15,13 @@ class PermissionException extends Exception
 
     public function render($request)
     {
-        return response()->json([
-            'message' => 'Unauthorized',
-            'routeName' => $this->routeName,
-        ], 403);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Unauthorized',
+                'routeName' => $this->routeName,
+            ], 403);
+        }
+
+        return redirect()->route('forbidden');
     }
 }

@@ -6,6 +6,7 @@ export default {
   yes: 'Si',
   no: 'No',
   all: 'Todos',
+  forbidden: 'Prohibido',
   messages: {
     saved: 'Guardado',
     saved_successfully: 'Guardado satisfactoriamente',
