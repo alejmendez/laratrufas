@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 import Dialog from 'primevue/dialog';
 import ProgressSpinner from 'primevue/progressspinner';
 import QuarterService from '@/Services/QuarterService.js';
+import { can } from '@/Services/Auth';
 
 const props = defineProps({
   quarter: Object,
@@ -19,6 +20,8 @@ const loading = ref(true);
 const distributionPlants = ref('');
 const current_plant = ref({});
 const detail_current_plant = ref({});
+
+const canUpdatePlantsPosition = can('quarters.plants.update.position');
 
 const processDistribution = (distribution) =>
   distribution
@@ -171,7 +174,11 @@ table tbody tr td.border_cell_left {
 <template>
   <CardSection :header-text="t('field.show.statistics.title')" wrapperClass="p-5 grid gap-4">
     <div>
-      <Button :label="t('harvest.buttons.change_distribution')" @click.prevent="open = true" />
+      <Button
+        :label="t('harvest.buttons.change_distribution')"
+        @click.prevent="open = true"
+        v-if="canUpdatePlantsPosition"
+      />
       <Dialog v-model:visible="open" modal header="cambiar distribucion de arboles" :style="{ maxWidth: '500px' }">
         <div class="grid gap-4 py-4">
           <div class="grid items-center gap-4">
