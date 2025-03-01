@@ -68,7 +68,7 @@ export default {
     created_at: 'Fecha de creación',
     updated_at: 'Última modificación',
     file: {
-      title: 'Detalles del perfil',
+      title: 'Detalles del perro',
       breed: {
         label: 'Raza',
       },
