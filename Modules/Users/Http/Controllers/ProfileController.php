@@ -11,14 +11,17 @@ use Modules\Core\Http\Controllers\Controller;
 use Modules\Core\Services\ListEntity;
 use Modules\Users\Http\Requests\ProfileUpdateRequest;
 use Modules\Users\Http\Resources\UserResource;
-use Modules\Users\Services\DeleteUser;
-use Modules\Users\Services\UpdateUser;
+use Modules\Users\Services\UserService;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
@@ -28,28 +31,22 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $data['avatar'] = $this->storeAvatar($request);
-        UpdateUser::call($request->user()->id, $data);
+        $this->userService->update($request->user()->id, $data);
 
         return redirect()->route('profile.edit')->with('toast', 'Profile updated.');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $user = $request->user();
 
         Auth::logout();
 
-        DeleteUser::call($user->id);
+        $this->userService->delete($user->id);
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

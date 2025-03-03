@@ -4,6 +4,7 @@ namespace Modules\Users\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Modules\Core\Providers\CoreServiceProvider;
+use Modules\Users\Services\UserService;
 
 class UsersServiceProvider extends CoreServiceProvider
 {
@@ -12,7 +13,9 @@ class UsersServiceProvider extends CoreServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(UserService::class, function ($app) {
+            return new UserService;
+        });
     }
 
     /**

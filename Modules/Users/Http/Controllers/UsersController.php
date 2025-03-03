@@ -9,18 +9,17 @@ use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Users\Http\Requests\StoreUserRequest;
 use Modules\Users\Http\Requests\UpdateUserRequest;
 use Modules\Users\Http\Resources\UserResource;
-use Modules\Users\Services\CreateUser;
-use Modules\Users\Services\DeleteUser;
-use Modules\Users\Services\FindUser;
-use Modules\Users\Services\ListUser;
-use Modules\Users\Services\UpdateUser;
+use Modules\Users\Services\UserService;
 
 class UsersController extends Controller
 {
     use HasPermissionMiddleware;
 
-    public function __construct()
+    protected $userService;
+
+    public function __construct(UserService $userService)
     {
+        $this->userService = $userService;
         $this->setupPermissionMiddleware();
     }
 
@@ -32,7 +31,7 @@ class UsersController extends Controller
         if (request()->exists('dt_params')) {
             $params = json_decode(request('dt_params', '[]'), true);
 
-            return response()->json(ListUser::call($params));
+            return response()->json($this->userService->list($params));
         }
 
         return Inertia::render('Users::List', [
@@ -57,7 +56,7 @@ class UsersController extends Controller
     {
         $data = $request->validated();
         $data['avatar'] = $this->storeAvatar($request);
-        CreateUser::call($data);
+        $this->userService->create($data);
 
         return redirect()->route('users.index')->with('toast', 'User created.');
     }
@@ -67,7 +66,7 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        $user = FindUser::call($id);
+        $user = $this->userService->find($id);
         $current_tab = request()->get('current_tab', 'file');
 
         return Inertia::render('Users::Show', [
@@ -81,7 +80,7 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        $user = FindUser::call($id);
+        $user = $this->userService->find($id);
 
         return Inertia::render('Users::Edit', [
             'data' => new UserResource($user),
@@ -96,7 +95,7 @@ class UsersController extends Controller
     {
         $data = $request->validated();
         $data['avatar'] = $this->storeAvatar($request);
-        UpdateUser::call($id, $data);
+        $this->userService->update($id, $data);
 
         return redirect()->route('users.index')->with('toast', 'User updated.');
     }
@@ -106,7 +105,7 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        DeleteUser::call($id);
+        $this->userService->delete($id);
 
         return response()->noContent();
     }
