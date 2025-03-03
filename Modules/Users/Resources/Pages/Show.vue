@@ -65,7 +65,7 @@ const deleteHandler = async (id) => {
     />
 
     <div class="grid grid-cols-3 gap-4 auto-cols-max">
-      <div class="p-4 flex col-span-2 mt-5 rounded-xl bg-white dark:bg-gray-700 shadow-sm ring-1 ring-gray-950/5">
+      <div class="card-section p-4 flex col-span-2 mt-5 rounded-xl shadow-sm ring-1 ring-gray-950/5">
         <div class="w-32 border rounded-md me-4">
           <img
             class="border rounded-md"
@@ -80,7 +80,7 @@ const deleteHandler = async (id) => {
         </div>
       </div>
 
-      <div class="p-4 mt-5 rounded-xl bg-white dark:bg-gray-700 shadow-sm ring-1 ring-gray-950/5">
+      <div class="card-section p-4 mt-5 rounded-xl shadow-sm ring-1 ring-gray-950/5">
         <div class="text-gray-400 dark:text-gray-400 pb-1">{{ $t('user.show.created_at') }}</div>
         <div class="pb-3 dark:text-white">{{ stringToFormat(data.created_at) }}</div>
         <div class="text-gray-400 dark:text-gray-400 pb-1">{{ $t('user.show.updated_at') }}</div>
