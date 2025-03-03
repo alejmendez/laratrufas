@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Core\Http\Controllers\ForbiddenController;
 use Modules\Core\Http\Controllers\NotificationsController;
 use Modules\Core\Http\Controllers\SelectsController;
-use Modules\Core\Http\Controllers\ForbiddenController;
+
 Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route('dashboard');
