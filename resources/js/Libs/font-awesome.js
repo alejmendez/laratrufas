@@ -48,6 +48,7 @@ import {
   faUpRightFromSquare,
   faInfoCircle,
   faGear,
+  faHouse,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faBell, faCalendar, faSquare, faSquareCheck } from '@fortawesome/free-regular-svg-icons';
@@ -106,6 +107,7 @@ const icons = [
   faUpRightFromSquare,
   faInfoCircle,
   faGear,
+  faHouse,
 ];
 
 export const initFontAwesome = (app) => {

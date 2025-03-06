@@ -10,7 +10,7 @@ export default {
     plant_type: 'Tipo de Planta',
   },
   dashboard: 'Escritorio',
-
+  start: 'Inicio',
   management: 'Gestión',
   fields: 'Campos',
   quarters: 'Cuarteles',

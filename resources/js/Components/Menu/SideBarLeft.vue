@@ -22,21 +22,24 @@ const openHandler = (e, index) => {
 <template>
   <aside class="min-h-[calc(100vh-50px)] px-[20px]">
     <div class="flex flex-col justify-between space-y-[10px] mt-3 mb-10">
-      <MenuElement
-        :link="route('dashboard')"
-        :text="$t('menu.dashboard')"
-        :active="page.component.startsWith('Dashboard')"
-        icon="fa-solid fa-square-poll-vertical"
-      />
-
-      <MenuGroup
-        v-for="(menu, index) in menuData"
-        :key="index"
-        :text="$t(menu.text)"
-        :elements="menu.children"
-        :open="menuState[index]"
-        @open="openHandler($event, index)"
-      />
+      <div v-for="(menu, index) in menuData" :key="index">
+        <div v-if="menu.link">
+          <MenuElement
+            :link="menu.link"
+            :text="$t(menu.text)"
+            :active="menu.active"
+            :icon="menu.icon"
+          />
+        </div>
+        <div v-else>
+          <MenuGroup
+            :text="$t(menu.text)"
+            :elements="menu.children"
+            :open="menuState[index]"
+            @open="openHandler($event, index)"
+          />
+        </div>
+      </div>
     </div>
   </aside>
 </template>

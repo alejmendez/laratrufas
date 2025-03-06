@@ -75,6 +75,7 @@ class SyncPermissions extends Command
             }
         }
 
+        $this->create_permission('dashboard', 'index');
         $this->create_permission('bulk', 'index');
 
         $this->create_permission('harvests', 'download.bulk.template');
@@ -113,6 +114,7 @@ class SyncPermissions extends Command
         $this->roles['administrator']->syncPermissions($allPermissions->toArray());
 
         $this->roles['technician']->syncPermissions([
+            'dashboard.index',
             'fields.index',
             'fields.show',
             'quarters.index',
@@ -164,6 +166,8 @@ class SyncPermissions extends Command
             'technician' => 'Técnico',
             'administrator' => 'Administrador',
             'super_admin' => 'Super Admin',
+            'app_assistant' => 'Ayudante APP',
+            'external_advisor' => 'Asesor Externo',
         ];
 
         foreach ($this->roles as $key => $name) {

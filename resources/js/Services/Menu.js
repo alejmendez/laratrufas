@@ -3,6 +3,13 @@ import { can } from '@/Services/Auth';
 export const menuElements = (currentComponent) => {
   const menuItems = [
     {
+      link: route('dashboard.index'),
+      text: 'menu.dashboard',
+      icon: 'fa-solid fa-square-poll-vertical',
+      active: currentComponent.startsWith('Dashboard'),
+      can: can('dashboard.index'),
+    },
+    {
       text: 'menu.management',
       children: [
         {
@@ -152,8 +159,22 @@ export const menuElements = (currentComponent) => {
     },
   ];
 
+  if (!menuItems[0].can) { // If the user does not have access to the dashboard, remove the dashboard menu item
+    menuItems[0] = {
+      link: route('start.index'),
+      text: 'menu.start',
+      icon: 'fa-solid fa-house',
+      active: currentComponent.startsWith('Core::Start'),
+      can: true,
+    };
+  }
+
   const menuItemsFiltered = menuItems
     .map((item) => {
+      if (!item.children) {
+        return item;
+      }
+
       const children = item.children.filter((child) => {
         return child.can;
       });
@@ -161,9 +182,10 @@ export const menuElements = (currentComponent) => {
       return {
         ...item,
         children,
+        can: children.length > 0,
       };
     })
-    .filter((item) => item.children.length > 0);
+    .filter((item) => item.can);
 
   return menuItemsFiltered;
 };
