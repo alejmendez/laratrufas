@@ -61,6 +61,13 @@
     @apply border-blue-100 text-cyan-600 bg-blue-50;
   }
 
+  .role.ayudante-app {
+    @apply border-purple-100 text-purple-600 bg-purple-50;
+  }
+  .role.asesor-externo {
+    @apply border-yellow-100 text-yellow-600 bg-yellow-50;
+  }
+
   .tableContainer {
     @apply mt-8 bg-white shadow-sm ring-1 ring-gray-950/5;
   }
