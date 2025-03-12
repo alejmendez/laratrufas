@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Modules\Core\Services\CacheService;
 use Modules\Users\Models\User;
 use Spatie\Permission\Models\Permission;
@@ -217,5 +218,6 @@ class SyncPermissions extends Command
     {
         $this->permissions = [];
         Permission::truncate();
+        DB::table('role_has_permissions')->truncate();
     }
 }
