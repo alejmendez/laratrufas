@@ -68,10 +68,26 @@ onMounted(async () => {
 
     <div class="mt-5" v-show="!loading" v-for="message in messages.data" :key="message.id">
       <Link :href="route('tasks.show', { id: message.task_id })" >
-        <img class="w-[35px] rounded-full border-2 border-gray-50 float-left me-2 mt-2" :src="message.notifier_user_avatar" alt="" />
+        <img
+          class="w-[35px] rounded-full border-2 float-left me-2 mt-2"
+          :class="{
+            'border-[--p-primary-color]': message.read_at === null,
+            'border-white': message.read_at !== null
+          }"
+          :src="message.notifier_user_avatar"
+          alt=""
+        />
+
         <div>
           <span class="text-gray-500 font-bold text-[12px] float-right" :class="{ 'font-bold': message.read_at === null }">{{ messagesRelativeTimeDifference(message) }}</span>
-          <div class="line-clamp-2" :title="message.description">
+          <div
+            class="line-clamp-2"
+            :class="{
+              'font-medium': message.read_at === null,
+              'text-gray-500 dark:text-gray-300': message.read_at !== null
+            }"
+            :title="message.description"
+          >
             {{ message.description }}
           </div>
         </div>
