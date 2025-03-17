@@ -232,7 +232,7 @@ table tbody tr td.border_cell_left {
         <div>Total cosecha (grs).: {{ detail_current_plant.reduce((a, b) => a + b.weight, 0) }}</div>
         <div>Unidades: {{ detail_current_plant.length }}</div>
         <div>
-          <Link :href="route('plants.show', current_plant.id) + '?tab=logs'">
+          <Link :href="route('plants.show', current_plant.id) + '?current_tab=logs'">
             Ir a ficha de planta <font-awesome-icon :icon="['fas', 'up-right-from-square']" />
           </Link>
         </div>

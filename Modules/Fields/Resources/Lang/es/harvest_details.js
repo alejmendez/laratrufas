@@ -13,7 +13,11 @@ export default {
   selected: 'Seleccionados {size}',
   form: {
     plant_code_to_find: {
-      label: 'O ingresa el código de forma manual',
+      label: 'Escanea el código de la planta',
+      manual_label: 'Ingresa el código de forma manual',
+    },
+    notes: {
+      label: 'Notas',
     },
     harvest: {
       label: 'Cosecha',

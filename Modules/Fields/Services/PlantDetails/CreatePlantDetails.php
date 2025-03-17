@@ -49,6 +49,7 @@ class CreatePlantDetails
                 'plant_id' => $plant->id,
                 'type' => $type,
                 'value' => $data[$type],
+                'note' => $data['notes'][$type] ?? null,
                 'is_active' => true,
                 'created_at' => now(),
                 'updated_at' => now(),

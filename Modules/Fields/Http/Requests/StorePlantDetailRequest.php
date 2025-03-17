@@ -26,6 +26,12 @@ class StorePlantDetailRequest extends FormRequest
             'trunk_diameter' => 'nullable|numeric|min:0',
             'root_diameter' => 'nullable|numeric|min:0',
 
+            'notes.height' => 'nullable',
+            'notes.crown_diameter' => 'nullable',
+            'notes.invasion_radius' => 'nullable',
+            'notes.trunk_diameter' => 'nullable',
+            'notes.root_diameter' => 'nullable',
+
             // Sanidad
             'foliage_sanitation' => 'nullable|string|max:255',
             'foliage_sanitation_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',

@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from 'vue';
-import { useForm } from '@inertiajs/vue3';
+import { useForm, router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { QrcodeStream } from 'vue-qrcode-reader';
+import QrCodeReader from '@Fields/Pages/HarvestDetails/QrCodeReader.vue';
+import HarvestView from '@Fields/Pages/HarvestDetails/Views/HarvestView.vue';
+import VariablesView from '@Fields/Pages/HarvestDetails/Views/VariablesView.vue';
 
-import InputGroup from 'primevue/inputgroup';
-import InputText from 'primevue/inputtext';
-import ButtonPrime from 'primevue/button';
+import Button from 'primevue/button';
 
 import { findByCode } from '@/Services/Plant.js';
 
@@ -19,11 +19,9 @@ const props = defineProps({
   plant_code: String,
 });
 
-const form = useForm({
-  plant_code: props.plant_code || null,
+const properties = {
   quality: null,
   weight: null,
-  keep_plant_code: false,
   height: null,
   crown_diameter: null,
   invasion_radius: null,
@@ -36,6 +34,16 @@ const form = useForm({
   soil_sanitation: null,
   soil_sanitation_photo: null,
   irrigation_system: null,
+};
+
+const form = useForm({
+  plant_id: null,
+  plant_code: props.plant_code || null,
+  keep_plant_code: false,
+  ...properties,
+  notes: {
+    ...properties,
+  },
 });
 
 const DEFAULT_OPTION_VIEW = 'main';
@@ -68,6 +76,7 @@ const submitHandler = () => _submitHandler(false);
 const submitAndLoadAnother = () => _submitHandler(true);
 
 const paused = ref(!!form.plant_code);
+const loading = ref(false);
 const hasError = ref(false);
 
 const onDetect = async (detectedCodes) => {
@@ -75,26 +84,42 @@ const onDetect = async (detectedCodes) => {
 };
 
 const findPlantByCode = async (plant_code) => {
-  paused.value = true;
+  loading.value = true;
   hasError.value = false;
-  form.plant_code = plant_code;
   plantCodeToFind.value = plant_code;
-  const { plant, details } = await findByCode(form.plant_code);
-  if (!plant) {
+  form.plant_code = plant_code;
+  paused.value = true;
+  try {
+    const { plant } = await findByCode(plant_code);
+    optionView.value = DEFAULT_OPTION_VIEW;
+    form.plant_id = plant.id;
+  } catch (error) {
     optionView.value = '';
     hasError.value = true;
-    return;
+  } finally {
+    loading.value = false;
   }
-
-  optionView.value = DEFAULT_OPTION_VIEW;
 };
 
 const resetQr = () => {
   paused.value = false;
   hasError.value = false;
+  loading.value = false;
+  form.plant_id = null;
   form.plant_code = null;
   plantCodeToFind.value = '';
   optionView.value = '';
+};
+
+const optionViewHandler = (option) => {
+  optionView.value = option;
+  if (option === optionViews[2]) {
+    router.visit(route('plants.show', form.plant_id) + '?current_tab=logs');
+  }
+
+  if (option === optionViews[3]) {
+    // TODO: Implement location view
+  }
 };
 </script>
 
@@ -109,218 +134,52 @@ const resetQr = () => {
       {{ t('harvest_details.titles.find', { code: form.plant_code }) }}
     </h3>
 
-    <div class="mb-5">
-      <QrcodeStream
-        :paused="paused"
-        @detect="onDetect"
-      >
-        <div
-          v-if="form.plant_code"
-          @click="resetQr"
-          class="feedback"
-          :class="{ 'text-red-800' : hasError }"
-        >
-          {{ hasError ? t('harvest.errors.details.plant_code_not_found', { plant_code: form.plant_code }) : form.plant_code }}
-          <font-awesome-icon :icon="['fas', 'rotate-right']" class="mt-3" />
-        </div>
-      </QrcodeStream>
-      <div class="py-5 text-center dark:text-gray-100">
-        {{ t('harvest_details.form.plant_code_to_find.label') }}
-      </div>
-      <div>
-        <InputGroup>
-          <InputText
-            class="text-center"
-            v-model="plantCodeToFind"
-            size="large"
-          />
-          <ButtonPrime icon="pi pi-search" class="!w-[60px]" @click="findPlantByCode(plantCodeToFind)" />
-        </InputGroup>
-      </div>
-      <div v-show="form.errors.plant_code">
-        <p class="text-sm text-red-600">
-          {{ form.errors.plant_code }}
-        </p>
-      </div>
+    <QrCodeReader
+      :paused="paused"
+      :has-error="hasError"
+      :loading="loading"
+      :plant-code="form.plant_code"
+      v-model:plant-code-to-find="plantCodeToFind"
+      @detect="onDetect"
+      @find-plant="findPlantByCode"
+      @reset-qr="resetQr"
+    />
+
+    <div v-show="form.errors.plant_code">
+      <p class="text-sm text-red-600">
+        {{ form.errors.plant_code }}
+      </p>
     </div>
 
+    <div v-show="optionView === DEFAULT_OPTION_VIEW">
+      <Button
+        v-for="option in optionViews"
+        class="w-full mt-3 text-xl h-16"
+        :loading="form.processing"
+        :disabled="hasError"
+        :label="t(`harvest_details.buttons.${option}`)"
+        @click="optionViewHandler(option)"
+      />
+    </div>
     <form @submit.prevent="_submitHandler">
-      <div v-show="optionView === DEFAULT_OPTION_VIEW">
-        <Button
-          v-for="option in optionViews"
-          class="w-full mt-3 text-xl h-16"
-          :loading="form.processing"
-          :disabled="hasError"
-          :label="t(`harvest_details.buttons.${option}`)"
-          @click="optionView = option"
-        />
-      </div>
-
       <div v-show="optionView === optionViews[0]">
-        <VSelect
-          id="quality"
-          v-model="form.quality"
-          :placeholder="t('generics.please_select')"
-          :options="props.qualities"
-          :label="t('harvest.form.details.quality.label')"
-          :message="form.errors.quality"
+        <HarvestView
+          :form="form"
+          :qualities="props.qualities"
+          :has-error="hasError"
+          @submit="submitHandler"
+          @submit-and-load-another="submitAndLoadAnother"
+          @reset-qr="resetQr"
         />
-
-        <VInput
-          id="weight"
-          v-model="form.weight"
-          type="number"
-          :min="0"
-          :max="2000"
-          :step="0.01"
-          :label="t('harvest.form.details.weight.label')"
-          :message="form.errors.weight"
-        />
-
-        <div class="mt-20 mb-20">
-          <Button
-            class="w-full text-xl h-16"
-            severity="secondary"
-            :loading="form.processing"
-            :disabled="hasError"
-            @click="submitAndLoadAnother"
-            label="Guardar y cargar otra"
-          />
-
-          <Button
-            class="w-full mt-3 text-xl h-16"
-            :loading="form.processing"
-            :disabled="hasError"
-            @click="submitHandler"
-            label="Guardar"
-          />
-
-          <Button
-            class="w-full mt-3 text-xl h-16"
-            :loading="form.processing"
-            :disabled="hasError"
-            severity="danger"
-            @click="resetQr"
-            label="Cancelar"
-          />
-        </div>
       </div>
 
       <div v-show="optionView === optionViews[1]">
-        <VInput
-          id="height"
-          class="mb-2"
-          v-model="form.height"
-          type="number"
-          :min="0"
-          :max="2000"
-          :step="0.1"
-          sufix="mts"
-          :label="t('harvest_details.form.height.label')"
-          :message="form.errors.height"
+        <VariablesView
+          :form="form"
+          :has-error="hasError"
+          @submit="submitHandler"
+          @reset-qr="resetQr"
         />
-
-        <VInput
-          id="crown_diameter"
-          class="mb-2"
-          v-model="form.crown_diameter"
-          type="number"
-          :min="0"
-          :max="2000"
-          :step="0.1"
-          sufix="mts"
-          :label="t('harvest_details.form.crown_diameter.label')"
-          :message="form.errors.crown_diameter"
-        />
-
-        <VInput
-          id="trunk_diameter"
-          class="mb-2"
-          v-model="form.trunk_diameter"
-          type="number"
-          :min="0"
-          :max="2000"
-          :step="0.1"
-          sufix="mm"
-          :label="t('harvest_details.form.trunk_diameter.label')"
-          :message="form.errors.trunk_diameter"
-        />
-
-        <VInput
-          id="root_diameter"
-          class="mb-2"
-          v-model="form.root_diameter"
-          type="number"
-          :min="0"
-          :max="2000"
-          :step="0.1"
-          sufix="mm"
-          :label="t('harvest_details.form.root_diameter.label')"
-          :message="form.errors.root_diameter"
-        />
-
-        <VInput
-          id="invasion_radius"
-          class="mb-2"
-          v-model="form.invasion_radius"
-          type="number"
-          :min="0"
-          :max="2000"
-          :step="0.1"
-          sufix="mts"
-          :label="t('harvest_details.form.invasion_radius.label')"
-          :message="form.errors.invasion_radius"
-        />
-
-        <VInput
-          id="foliage_sanitation"
-          class="mb-2"
-          v-model="form.foliage_sanitation"
-          :label="t('harvest_details.form.foliage_sanitation.label')"
-          :message="form.errors.foliage_sanitation"
-        />
-
-        <VInput
-          id="trunk_sanitation"
-          class="mb-2"
-          v-model="form.trunk_sanitation"
-          :label="t('harvest_details.form.trunk_sanitation.label')"
-          :message="form.errors.trunk_sanitation"
-        />
-
-        <VInput
-          id="soil_sanitation"
-          class="mb-2"
-          v-model="form.soil_sanitation"
-          :label="t('harvest_details.form.soil_sanitation.label')"
-          :message="form.errors.soil_sanitation"
-        />
-
-        <VInput
-          id="irrigation_system"
-          class="mb-2"
-          v-model="form.irrigation_system"
-          :label="t('harvest_details.form.irrigation_system.label')"
-          :message="form.errors.irrigation_system"
-        />
-        <div class="mt-5 mb-20">
-          <Button
-            class="w-full mt-3 text-xl h-16"
-            :loading="form.processing"
-            :disabled="hasError"
-            @click="submitHandler"
-            label="Guardar"
-          />
-
-          <Button
-            class="w-full mt-3 text-xl h-16"
-            :loading="form.processing"
-            :disabled="hasError"
-            severity="danger"
-            @click="resetQr"
-            label="Cancelar"
-          />
-        </div>
       </div>
     </form>
   </AuthenticatedLayout>
