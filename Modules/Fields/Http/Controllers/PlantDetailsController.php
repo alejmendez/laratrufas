@@ -25,7 +25,7 @@ class PlantDetailsController extends Controller
     {
         CreatePlantDetails::call($request->validated());
 
-        return redirect()->route('harvests.details.create');
+        return redirect()->back()->with('success', 'Variables agregadas correctamente');
     }
 
     public function index(int $id)

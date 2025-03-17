@@ -178,7 +178,7 @@ const optionViewHandler = (option) => {
           :form="form"
           :has-error="hasError"
           @submit="submitHandler"
-          @reset-qr="resetQr"
+          @cancel="resetQr"
         />
       </div>
     </form>

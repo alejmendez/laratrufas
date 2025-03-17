@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue';
-import { router } from '@inertiajs/vue3';
+import { useForm, router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 import Button from 'primevue/button';
@@ -9,13 +9,11 @@ import { useToast } from 'primevue/usetoast';
 import { deleteRowTable } from '@/Utils/table';
 import { can } from '@/Services/Auth';
 
-import VTextarea from '@/Components/Form/VTextarea.vue';
+import VariablesView from '@Fields/Pages/HarvestDetails/Views/VariablesView.vue';
 
 import FileCard from '@Fields/Pages/Plants/ShowComponents/FileCard.vue';
 import LogsCard from '@Fields/Pages/Plants/ShowComponents/LogsCard.vue';
 import StatisticsCard from '@Fields/Pages/Plants/ShowComponents/StatisticsCard.vue';
-
-import plantService from '@Fields/Services/PlantService';
 
 const { t } = useI18n();
 const confirm = useConfirm();
@@ -30,14 +28,34 @@ const { data } = props.data;
 const logsCard = ref(null);
 
 const showModalNote = ref(false);
-const form = ref({
+
+const properties = {
+  quality: null,
+  weight: null,
+  height: null,
+  crown_diameter: null,
+  invasion_radius: null,
+  trunk_diameter: null,
+  root_diameter: null,
+  foliage_sanitation: null,
+  foliage_sanitation_photo: null,
+  trunk_sanitation: null,
+  trunk_sanitation_photo: null,
+  soil_sanitation: null,
+  soil_sanitation_photo: null,
+  irrigation_system: null,
+};
+
+const form = useForm({
   plant_id: data.id,
-  note: '',
-  errors: {},
+  plant_code: data.code,
+  ...properties,
+  notes: {
+    ...properties,
+  },
 });
 
-const loading = ref(false);
-const toast = useToast();
+const hasError = ref(false);
 const canDestroy = can('plants.destroy');
 const canEdit = can('plants.edit');
 
@@ -70,47 +88,27 @@ const deleteHandler = async (id) => {
   });
 };
 
-const showSuccessToast = () => {
-  toast.add({
-    severity: 'success',
-    summary: t('plant.titles.entity_breadcrumb'),
-    detail: t('generics.messages.saved_successfully'),
-    life: 5000,
-  });
+const resetVariables = () => {
+  form.value = {
+    plant_id: data.id,
+    plant_code: data.code,
+    ...properties,
+    notes: {
+      ...properties,
+    },
+  };
 
-  form.note = null;
-  form.errors = {};
+  logsCard.value.filter();
+  showModalNote.value = false;
 };
 
-const showErrorToast = () => {
-  toast.add({
-    severity: 'danger',
-    summary: t('plant.titles.entity_breadcrumb'),
-    detail: t('generics.errors.trying_to_save'),
-    life: 5000,
-  });
-};
-
-const createNote = async () => {
-  loading.value = true;
-  form.errors = {};
-
-  try {
-    await plantService.createNote(form.value);
-    showModalNote.value = false;
-    showSuccessToast();
-  } catch (error) {
-    const errors = error.response?.data?.errors;
-    if (errors) {
-      Object.keys(errors).forEach(key => {
-        form.errors[key] = errors[key].join(', ');
-      });
-    }
-    showErrorToast();
-  } finally {
-    logsCard.value.filter();
-    loading.value = false;
+const submitHandler = () => {
+  const options = {};
+  if ([form.foliage_sanitation_photo, form.trunk_sanitation_photo, form.soil_sanitation_photo].some((d) => d != null)) {
+    options.forceFormData = true;
   }
+  form.post(route('plants.details.store'), options);
+  resetVariables();
 };
 </script>
 
@@ -138,7 +136,7 @@ const createNote = async () => {
       />
 
       <Button
-        label="Agregar Nota"
+        :label="t('plant.titles.add_variables')"
         v-show="isLogsTab"
         @click="showModalNote = true"
       />
@@ -161,29 +159,13 @@ const createNote = async () => {
     <LogsCard ref="logsCard" :plant_id="data.id" v-show="isLogsTab" />
     <StatisticsCard :plant="data" v-show="isStatisticsTab" />
 
-    <Dialog v-model:visible="showModalNote" :header="t('plant.titles.add_note')" modal :style="{ width: '25rem' }">
-      <VTextarea
-        id="note"
-        v-model="form.note"
-        :label="t('plant.form.note.label')"
-        :message="form.errors.note"
+    <Dialog v-model:visible="showModalNote" :header="t('plant.titles.add_variables')" modal :style="{ width: '75rem' }">
+      <VariablesView
+        :form="form"
+        :has-error="hasError"
+        @submit="submitHandler"
+        @cancel="resetVariables"
       />
-
-      <div class="flex justify-end gap-2 mt-4">
-        <Button
-          type="button"
-          :label="$t('generics.buttons.cancel')"
-          severity="secondary"
-          @click="showModalNote = false"
-          :loading="loading"
-        />
-        <Button
-          type="button"
-          :label="$t('generics.buttons.create')"
-          @click="createNote()"
-          :loading="loading"
-        />
-      </div>
     </Dialog>
   </AuthenticatedLayout>
 </template>

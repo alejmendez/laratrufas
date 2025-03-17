@@ -5,7 +5,7 @@ export default {
     edit: 'Editar Planta',
     bulk: 'Nuevo carga masiva de plantas',
     show: 'Detalle de la Planta: {name}',
-    add_note: 'Agregar Nota',
+    add_variables: 'Agregar Variables',
   },
   table: {
     name: 'Planta',

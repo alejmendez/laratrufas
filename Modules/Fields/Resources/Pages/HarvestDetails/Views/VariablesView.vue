@@ -15,7 +15,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['submit', 'resetQr']);
+const emit = defineEmits(['submit', 'cancel']);
 </script>
 
 <template>
@@ -174,7 +174,7 @@ const emit = defineEmits(['submit', 'resetQr']);
         :loading="form.processing"
         :disabled="hasError"
         severity="danger"
-        @click="$emit('resetQr')"
+        @click="$emit('cancel')"
         label="Cancelar"
       />
     </div>
