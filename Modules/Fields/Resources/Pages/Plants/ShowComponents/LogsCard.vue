@@ -151,6 +151,12 @@ defineExpose({ filter });
           </template>
           <template #opposite="slotProps">
             <span class="text-surface-500 dark:text-surface-400">{{ stringToFormat(slotProps.item.updated_at, 'dd/MM/yyyy HH:mm') }}</span>
+            <div
+              class="text-surface-500 dark:text-surface-400"
+              v-if="slotProps.item.note"
+            >
+              {{ slotProps.item.note }}
+            </div>
           </template>
           <template #content="slotProps">
             {{ t(`harvest_details.form.${slotProps.item.type}.label`) }} <br />

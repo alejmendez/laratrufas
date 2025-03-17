@@ -18,6 +18,7 @@ class PlantDetailResource extends JsonResource
             'id' => $this->id,
             'type' => $this->type,
             'value' => $this->value,
+            'note' => $this->note,
             'is_active' => $this->is_active,
             'updated_at' => $this->updated_at,
         ];
