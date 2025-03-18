@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
 
@@ -16,6 +17,18 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['submit', 'cancel']);
+
+const foliageSanitationPhotoHandler = (event) => {
+  props.form.foliage_sanitation_photo = event.fileInput;
+};
+
+const trunkSanitationPhotoHandler = (event) => {
+  props.form.trunk_sanitation_photo = event.fileInput;
+};
+
+const soilSanitationPhotoHandler = (event) => {
+  props.form.soil_sanitation_photo = event.fileInput;
+};
 </script>
 
 <template>
@@ -128,12 +141,14 @@ const emit = defineEmits(['submit', 'cancel']);
       :message="form.errors.foliage_sanitation"
     />
 
-    <VInput
-      id="notes_foliage_sanitation"
-      class="mb-2"
-      v-model="form.notes.foliage_sanitation"
-      :label="t('harvest_details.form.notes.label') + ` (${t('harvest_details.form.foliage_sanitation.label')})`"
-    />
+    <div class="mb-2">
+      <VInputFile
+        :imagePreview="false"
+        :withRemove="false"
+        :label="t('harvest_details.form.foliage_sanitation_photo.label')"
+        @change="foliageSanitationPhotoHandler"
+      />
+    </div>
 
     <VInput
       id="trunk_sanitation"
@@ -143,6 +158,15 @@ const emit = defineEmits(['submit', 'cancel']);
       :message="form.errors.trunk_sanitation"
     />
 
+    <div class="mb-2">
+      <VInputFile
+        :imagePreview="false"
+        :withRemove="false"
+        :label="t('harvest_details.form.trunk_sanitation_photo.label')"
+        @change="trunkSanitationPhotoHandler"
+      />
+    </div>
+
     <VInput
       id="soil_sanitation"
       class="mb-2"
@@ -150,6 +174,15 @@ const emit = defineEmits(['submit', 'cancel']);
       :label="t('harvest_details.form.soil_sanitation.label')"
       :message="form.errors.soil_sanitation"
     />
+
+    <div class="mb-2">
+      <VInputFile
+        :imagePreview="false"
+        :withRemove="false"
+        :label="t('harvest_details.form.soil_sanitation_photo.label')"
+        @change="soilSanitationPhotoHandler"
+      />
+    </div>
 
     <VInput
       id="irrigation_system"

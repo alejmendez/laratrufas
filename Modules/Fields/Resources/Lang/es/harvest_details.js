@@ -54,13 +54,28 @@ export default {
       unit: '',
       color: '#E91E63',
     },
+    foliage_sanitation_photo: {
+      label: 'Foto de Sanidad en el Follaje',
+      unit: '',
+      color: '#E91E63',
+    },
     trunk_sanitation: {
       label: 'Sanidad en el Tronco',
       unit: '',
       color: '#673AB7',
     },
+    trunk_sanitation_photo: {
+      label: 'Foto de Sanidad en el Tronco',
+      unit: '',
+      color: '#673AB7',
+    },
     soil_sanitation: {
       label: 'Sanidad del Suelo',
+      unit: '',
+      color: '#8BC34A',
+    },
+    soil_sanitation_photo: {
+      label: 'Foto de Sanidad del Suelo',
       unit: '',
       color: '#8BC34A',
     },

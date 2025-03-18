@@ -23,9 +23,23 @@ class PlantDetailsController extends Controller
      */
     public function store(StorePlantDetailRequest $request)
     {
-        CreatePlantDetails::call($request->validated());
+        $data = $request->validated();
+        $data['foliage_sanitation_photo'] = $this->storeFile($request, 'foliage_sanitation_photo');
+        $data['trunk_sanitation_photo'] = $this->storeFile($request, 'trunk_sanitation_photo');
+        $data['soil_sanitation_photo'] = $this->storeFile($request, 'soil_sanitation_photo');
+
+        CreatePlantDetails::call($data);
 
         return redirect()->back()->with('success', 'Variables agregadas correctamente');
+    }
+
+    protected function storeFile($request, $field)
+    {
+        if ($request->file($field) == null) {
+            return null;
+        }
+
+        return $request->file($field)->storePublicly('public/variables');
     }
 
     public function index(int $id)

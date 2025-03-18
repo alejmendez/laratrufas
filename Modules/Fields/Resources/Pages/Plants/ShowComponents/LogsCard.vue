@@ -46,8 +46,11 @@ const categories = ref([
   { name: 'root_diameter', key: 'root_diameter', },
   { name: 'invasion_radius', key: 'invasion_radius', },
   { name: 'foliage_sanitation', key: 'foliage_sanitation', },
+  { name: 'foliage_sanitation_photo', key: 'foliage_sanitation_photo', },
   { name: 'trunk_sanitation', key: 'trunk_sanitation', },
+  { name: 'trunk_sanitation_photo', key: 'trunk_sanitation_photo', },
   { name: 'soil_sanitation', key: 'soil_sanitation', },
+  { name: 'soil_sanitation_photo', key: 'soil_sanitation_photo', },
   { name: 'irrigation_system', key: 'irrigation_system', },
   { name: 'note', key: 'note', },
 ]);
@@ -86,6 +89,10 @@ onMounted(async () => {
 
   loading.value = false;
 });
+
+const openImage = (image) => {
+  window.open(image, '_blank');
+};
 
 defineExpose({ filter });
 </script>
@@ -160,7 +167,16 @@ defineExpose({ filter });
           </template>
           <template #content="slotProps">
             {{ t(`harvest_details.form.${slotProps.item.type}.label`) }} <br />
-            {{ slotProps.item.value }}
+            <div v-if="slotProps.item.type.endsWith('_photo')">
+              <img
+                :src="slotProps.item.value"
+                class="w-1/2 h-auto cursor-pointer"
+                @click="openImage(slotProps.item.value)"
+              >
+            </div>
+            <div v-else>
+              {{ slotProps.item.value }}
+            </div>
             {{ t(`harvest_details.form.${slotProps.item.type}.unit`) }}
           </template>
         </Timeline>

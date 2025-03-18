@@ -141,7 +141,7 @@ const remove_element = (id) => {
       @change="changeFileHandler"
     />
     <div class="w-full" v-if="multiple">
-      <div class="mb-2 w-full text-gray-900 dark:text-gray-100">{{ props.label }}</div>
+      <div class="mb-1 w-full text-gray-900 dark:text-gray-100">{{ props.label }}</div>
 
       <Button
         severity="secondary"
@@ -167,10 +167,15 @@ const remove_element = (id) => {
       <div class="text-slate-500 dark:text-slate-300 text-sm mt-2">Los archivos no debe superar 5 mb</div>
     </div>
     <div class="w-full" v-else>
-      <div class="mb-2 w-full text-gray-900 dark:text-gray-100">{{ props.label }}</div>
+      <div class="mb-1 w-full text-gray-900 dark:text-gray-100">{{ props.label }}</div>
       <div class="md:w-[420px] max-w-full sm:hidden md:block">
         <InputGroup>
-          <div class="border dark:border-[--p-surface-700] dark:text-[--p-surface-400] dark:bg-[--p-surface-950] p-2 grow truncate rounded-s border-e-0 dark:text-gray-100" :title="filePath">{{ filePath }}</div>
+          <div
+            class="border dark:border-[--p-surface-700] dark:text-[--p-surface-400] dark:bg-[--p-surface-950] p-2 grow truncate rounded-s border-e-0 dark:text-gray-100"
+            :title="filePath"
+          >
+            {{ filePath }}
+          </div>
           <Button
             severity="secondary"
             @click.prevent="selectFile"
@@ -180,7 +185,12 @@ const remove_element = (id) => {
       </div>
       <div class="md:w-[420px] max-w-full sm:block md:hidden">
         <InputGroup>
-          <div class="border dark:border-[--p-surface-700] dark:text-[--p-surface-400] dark:bg-[--p-surface-950] p-2 grow truncate rounded-s border-e-0 dark:text-gray-100" :title="filePath">{{ filePath }}</div>
+          <div
+            class="border dark:border-[--p-surface-700] dark:text-[--p-surface-400] dark:bg-[--p-surface-950] p-2 grow truncate rounded-s border-e-0 dark:text-gray-100"
+            :title="filePath"
+          >
+            {{ filePath }}
+          </div>
           <Button
             severity="secondary"
             @click.prevent="selectFile"
