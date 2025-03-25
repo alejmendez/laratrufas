@@ -9,6 +9,8 @@ import VariablesView from '@Fields/Pages/HarvestDetails/Views/VariablesView.vue'
 import Button from 'primevue/button';
 
 import { findByCode } from '@/Services/Plant.js';
+import HarvestDetailService from '@/Services/HarvestDetailService.js';
+import PlantDetailService from '@/Services/PlantDetailService.js';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
@@ -20,8 +22,6 @@ const props = defineProps({
 });
 
 const properties = {
-  quality: null,
-  weight: null,
   height: null,
   crown_diameter: null,
   invasion_radius: null,
@@ -40,6 +40,8 @@ const form = useForm({
   plant_id: null,
   plant_code: props.plant_code || null,
   keep_plant_code: false,
+  quality: null,
+  weight: null,
   ...properties,
   notes: {
     ...properties,
@@ -53,23 +55,24 @@ const optionViews = ['harvest', 'variables', 'logbook', 'location'];
 const plantCodeToFind = ref('');
 const optionView = ref(props.plant_code === null ? '' : optionViews[0]);
 
-const _submitHandler = (keep_plant_code) => {
+const _submitHandler = async (keep_plant_code = false) => {
   form.keep_plant_code = keep_plant_code;
+  form.processing = true;
 
   if (optionView.value === optionViews[0]) {
-    form.post(route('harvests.details.store'), options);
+    await HarvestDetailService.store(form);
     optionView.value = keep_plant_code ? optionViews[0] : '';
-    return;
+    form.weight = null;
   }
 
   if (optionView.value === optionViews[1]) {
-    const options = {};
-    if ([form.foliage_sanitation_photo, form.trunk_sanitation_photo, form.soil_sanitation_photo].some((d) => d != null)) {
-      options.forceFormData = true;
-    }
-    form.post(route('plants.details.store'), options);
+    await PlantDetailService.store(form);
+  }
+
+  if (!keep_plant_code) {
     resetQr();
   }
+  form.processing = false;
 };
 
 const submitHandler = () => _submitHandler(false);
@@ -105,6 +108,7 @@ const resetQr = () => {
   paused.value = false;
   hasError.value = false;
   loading.value = false;
+  form.reset();
   form.plant_id = null;
   form.plant_code = null;
   plantCodeToFind.value = '';

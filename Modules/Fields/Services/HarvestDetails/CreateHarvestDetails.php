@@ -15,8 +15,9 @@ class CreateHarvestDetails
 
         $harvest = new HarvestDetail;
         $harvest->harvest_id = Harvest::latest()->first()->id;
+        $harvest->quarter_id = $plant->quarter_id;
         $harvest->plant_id = $plant->id;
-        $harvest->quality = Str::slug($data['quality'] ?? '');
+        $harvest->quality = Str::slug($data['quality']['value'] ?? '');
         $harvest->weight = $data['weight'];
         $harvest->save();
 

@@ -2,6 +2,10 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
+import InputGroup from 'primevue/inputgroup';
+
+import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
 
 const { t } = useI18n();
 
@@ -18,16 +22,32 @@ const props = defineProps({
 
 const emit = defineEmits(['submit', 'cancel']);
 
+const foliageSanitationPhotoInput = ref(null);
+const trunkSanitationPhotoInput = ref(null);
+const soilSanitationPhotoInput = ref(null);
+
 const foliageSanitationPhotoHandler = (event) => {
-  props.form.foliage_sanitation_photo = event.fileInput;
+  props.form.foliage_sanitation_photo = event.target.files[0];
 };
 
 const trunkSanitationPhotoHandler = (event) => {
-  props.form.trunk_sanitation_photo = event.fileInput;
+  props.form.trunk_sanitation_photo = event.target.files[0];
 };
 
 const soilSanitationPhotoHandler = (event) => {
-  props.form.soil_sanitation_photo = event.fileInput;
+  props.form.soil_sanitation_photo = event.target.files[0];
+};
+
+const openTrunkSanitationPhoto = () => {
+  trunkSanitationPhotoInput.value.click();
+};
+
+const openFoliageSanitationPhoto = () => {
+  foliageSanitationPhotoInput.value.click();
+};
+
+const openSoilSanitationPhoto = () => {
+  soilSanitationPhotoInput.value.click();
 };
 </script>
 
@@ -133,56 +153,50 @@ const soilSanitationPhotoHandler = (event) => {
       :label="t('harvest_details.form.notes.label') + ` (${t('harvest_details.form.invasion_radius.label')})`"
     />
 
-    <VInput
-      id="foliage_sanitation"
-      class="mb-2"
-      v-model="form.foliage_sanitation"
-      :label="t('harvest_details.form.foliage_sanitation.label')"
-      :message="form.errors.foliage_sanitation"
-    />
+    <VElementFormWrapper :label="t('harvest_details.form.foliage_sanitation.label')" :message="form.errors.foliage_sanitation">
+      <InputGroup>
+        <InputText
+          id="foliage_sanitation"
+          class="mb-2"
+          fluid
+          v-model="form.foliage_sanitation"
+        />
+        <Button
+          icon="pi pi-plus"
+          @click="openFoliageSanitationPhoto"
+        />
+      </InputGroup>
+    </VElementFormWrapper>
 
-    <div class="mb-2">
-      <VInputFile
-        :imagePreview="false"
-        :withRemove="false"
-        :label="t('harvest_details.form.foliage_sanitation_photo.label')"
-        @change="foliageSanitationPhotoHandler"
-      />
-    </div>
+    <VElementFormWrapper :label="t('harvest_details.form.trunk_sanitation.label')" :message="form.errors.trunk_sanitation">
+      <InputGroup>
+        <InputText
+          id="trunk_sanitation"
+          class="mb-2"
+          fluid
+          v-model="form.trunk_sanitation"
+        />
+        <Button
+          icon="pi pi-plus"
+          @click="openTrunkSanitationPhoto"
+        />
+      </InputGroup>
+    </VElementFormWrapper>
 
-    <VInput
-      id="trunk_sanitation"
-      class="mb-2"
-      v-model="form.trunk_sanitation"
-      :label="t('harvest_details.form.trunk_sanitation.label')"
-      :message="form.errors.trunk_sanitation"
-    />
-
-    <div class="mb-2">
-      <VInputFile
-        :imagePreview="false"
-        :withRemove="false"
-        :label="t('harvest_details.form.trunk_sanitation_photo.label')"
-        @change="trunkSanitationPhotoHandler"
-      />
-    </div>
-
-    <VInput
-      id="soil_sanitation"
-      class="mb-2"
-      v-model="form.soil_sanitation"
-      :label="t('harvest_details.form.soil_sanitation.label')"
-      :message="form.errors.soil_sanitation"
-    />
-
-    <div class="mb-2">
-      <VInputFile
-        :imagePreview="false"
-        :withRemove="false"
-        :label="t('harvest_details.form.soil_sanitation_photo.label')"
-        @change="soilSanitationPhotoHandler"
-      />
-    </div>
+    <VElementFormWrapper :label="t('harvest_details.form.soil_sanitation.label')" :message="form.errors.soil_sanitation">
+      <InputGroup>
+        <InputText
+          id="soil_sanitation"
+          class="mb-2"
+          fluid
+          v-model="form.soil_sanitation"
+        />
+        <Button
+          icon="pi pi-plus"
+          @click="openSoilSanitationPhoto"
+        />
+      </InputGroup>
+    </VElementFormWrapper>
 
     <VInput
       id="irrigation_system"
@@ -191,13 +205,16 @@ const soilSanitationPhotoHandler = (event) => {
       :label="t('harvest_details.form.irrigation_system.label')"
       :message="form.errors.irrigation_system"
     />
+    <input ref="foliageSanitationPhotoInput" class="hidden" type="file" accept="image/*" @change="foliageSanitationPhotoHandler" />
+    <input ref="trunkSanitationPhotoInput" class="hidden" type="file" accept="image/*" @change="trunkSanitationPhotoHandler" />
+    <input ref="soilSanitationPhotoInput" class="hidden" type="file" accept="image/*" @change="soilSanitationPhotoHandler" />
   </div>
   <div class="md:w-1/2 md:mx-auto sm:w-full">
     <div class="mt-5 mb-20">
       <Button
         class="w-full mt-3 text-xl h-16"
         :loading="form.processing"
-        :disabled="hasError"
+        :disabled="hasError || form.processing"
         @click="$emit('submit')"
         label="Guardar"
       />
@@ -205,7 +222,7 @@ const soilSanitationPhotoHandler = (event) => {
       <Button
         class="w-full mt-3 text-xl h-16"
         :loading="form.processing"
-        :disabled="hasError"
+        :disabled="hasError || form.processing"
         severity="danger"
         @click="$emit('cancel')"
         label="Cancelar"

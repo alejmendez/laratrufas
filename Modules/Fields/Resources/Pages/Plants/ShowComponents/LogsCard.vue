@@ -52,7 +52,6 @@ const categories = ref([
   { name: 'soil_sanitation', key: 'soil_sanitation', },
   { name: 'soil_sanitation_photo', key: 'soil_sanitation_photo', },
   { name: 'irrigation_system', key: 'irrigation_system', },
-  { name: 'note', key: 'note', },
 ]);
 
 const selectedCategories = ref(categories.value.map((category) => category.name));

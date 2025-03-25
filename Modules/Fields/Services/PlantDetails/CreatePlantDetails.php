@@ -37,7 +37,7 @@ class CreatePlantDetails
         $typesToDeactivate = [];
 
         foreach ($detailsToProcess as $type) {
-            if (is_null($data[$type])) {
+            if (!isset($data[$type]) || is_null($data[$type])) {
                 continue;
             }
 

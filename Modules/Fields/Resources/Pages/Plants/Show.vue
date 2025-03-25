@@ -15,6 +15,8 @@ import FileCard from '@Fields/Pages/Plants/ShowComponents/FileCard.vue';
 import LogsCard from '@Fields/Pages/Plants/ShowComponents/LogsCard.vue';
 import StatisticsCard from '@Fields/Pages/Plants/ShowComponents/StatisticsCard.vue';
 
+import PlantDetailService from '@/Services/PlantDetailService';
+
 const { t } = useI18n();
 const confirm = useConfirm();
 const props = defineProps({
@@ -88,27 +90,17 @@ const deleteHandler = async (id) => {
   });
 };
 
-const resetVariables = () => {
-  form.value = {
-    plant_id: data.id,
-    plant_code: data.code,
-    ...properties,
-    notes: {
-      ...properties,
-    },
-  };
-
-  logsCard.value.filter();
+const resetVariables = async () => {
+  form.reset();
+  form.processing = false;
+  await logsCard.value.filter();
   showModalNote.value = false;
 };
 
-const submitHandler = () => {
-  const options = {};
-  if ([form.foliage_sanitation_photo, form.trunk_sanitation_photo, form.soil_sanitation_photo].some((d) => d != null)) {
-    options.forceFormData = true;
-  }
-  form.post(route('plants.details.store'), options);
-  resetVariables();
+const submitHandler = async () => {
+  form.processing = true;
+  await PlantDetailService.store(form);
+  await resetVariables();
 };
 </script>
 
