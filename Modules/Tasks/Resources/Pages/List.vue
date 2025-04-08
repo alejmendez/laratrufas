@@ -134,8 +134,8 @@ onMounted(async () => {
       ref="datatable"
       :filters="filters"
       :fetchHandler="fetchHandler"
-      sortField="name"
-      :sortOrder="1"
+      sortField="updated_at"
+      :sortOrder="-1"
     >
       <Column field="name" filterField="name" :header="$t('task.table.name')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
