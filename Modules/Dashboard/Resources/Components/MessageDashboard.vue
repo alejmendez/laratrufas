@@ -29,7 +29,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="p-5 rounded-xl bg-white dark:bg-gray-700 shadow-sm border text-neutral-800 dark:text-gray-100 border-gray-200 dark:border-gray-700">
+  <div class="p-5 rounded-xl card-section">
     <div class="flex justify-between">
       <div class="font-bold">
         {{ t('dashboard.messages') }}
@@ -71,7 +71,7 @@ onMounted(async () => {
         <img
           class="w-[35px] rounded-full border-2 float-left me-2 mt-2"
           :class="{
-            'border-[--p-primary-color]': message.read_at === null,
+            'border-(--p-primary-color)': message.read_at === null,
             'border-white': message.read_at !== null
           }"
           :src="message.notifier_user_avatar"
