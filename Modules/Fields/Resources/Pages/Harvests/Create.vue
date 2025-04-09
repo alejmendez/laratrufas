@@ -20,15 +20,11 @@ const form = useForm({
   dog_id: '',
   farmer_id: '',
   assistant_id: '',
+  weight: 0,
 });
 
 const submitHandler = () => {
-  form
-    .transform((data) => ({
-      ...data,
-      details: data.details.map((d) => ({ ...d, quality: d.quality.value })),
-    }))
-    .post(route('harvests.store'));
+  form.post(route('harvests.store'));
 };
 </script>
 

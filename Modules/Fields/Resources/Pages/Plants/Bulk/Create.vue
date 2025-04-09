@@ -15,7 +15,7 @@ const props = defineProps({
   unprocessed_message: String,
   unprocessed_details: Array,
   error_message: String,
-  errors: Array,
+  import_errors: Array,
 });
 
 const form = useForm({
@@ -67,7 +67,7 @@ const changeFileHandler = (e) => {
         :unprocessed_message="props.unprocessed_message"
         :unprocessed_details="props.unprocessed_details"
         :error_message="props.error_message"
-        :errors="props.errors"
+        :errors="props.import_errors"
         :title="t('generics.bulk.section_title')"
         downloadRoute="plants.download.bulk.template"
       >

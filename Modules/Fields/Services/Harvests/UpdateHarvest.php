@@ -18,6 +18,7 @@ class UpdateHarvest
         $harvest->dog_id = $data['dog_id']['value'];
         $harvest->farmer_id = $data['farmer_id']['value'];
         $harvest->assistant_id = $data['assistant_id']['value'];
+        $harvest->weight = $data['weight'];
         $harvest->save();
 
         $quarter_ids = [];
@@ -25,6 +26,10 @@ class UpdateHarvest
             $quarter_ids[] = $option['value'];
         }
         $harvest->quarters()->sync($quarter_ids);
+
+        if (!isset($data['details'])) {
+            $data['details'] = [];
+        }
 
         $details = collect($data['details']);
 

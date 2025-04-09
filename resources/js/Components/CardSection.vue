@@ -14,6 +14,7 @@ const props = defineProps({
 
 <template>
   <section class="card-section" :class="props.sectionClass">
+    <slot name="header"></slot>
     <header class="flex items-center gap-x-3 overflow-hidden px-6 py-4" v-if="props.headerText">
       <h3 class="text-xl font-bold leading-6 text-gray-900 dark:text-gray-100">
         {{ props.headerText }}

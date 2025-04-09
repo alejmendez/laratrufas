@@ -29,8 +29,9 @@ const form = useForm({
   dog_id: props.dogs.find((a) => a.value == data.dog.id),
   farmer_id: props.users.find((a) => a.value == data.farmer.id),
   assistant_id: props.users.find((a) => a.value == data.assistant.id),
+  weight: data.weight,
   details: data.details.length
-    ? data.details.map((d) => ({ ...d, weight: parseFloat(d.weight), quality: props.qualities.find((q) => q.value == d.quality) }))
+    ? data.details.map((d) => ({ ...d, weight: (d.weight ? parseFloat(d.weight) : null), quality: props.qualities.find((q) => q.value == d.quality) }))
     : [
         {
           id: null,

@@ -36,6 +36,7 @@ class UpdateHarvestRequest extends FormRequest
             'details.*.plant_code' => 'exists:plants,code|nullable',
             'details.*.quality' => 'max:30|nullable',
             'details.*.weight' => 'numeric|between:0,99999|nullable',
+            'weight' => 'numeric|between:0,99999',
         ];
     }
 
@@ -48,6 +49,7 @@ class UpdateHarvestRequest extends FormRequest
             'farmer_id' => 'agricultor',
             'assistant_id' => 'ayudante',
             'quarter_ids' => 'cuarteles',
+            'weight' => 'peso total',
         ];
     }
 }

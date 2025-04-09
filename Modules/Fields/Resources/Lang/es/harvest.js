@@ -60,6 +60,9 @@ export default {
     comments: {
       label: 'Comentarios',
     },
+    weight: {
+      label: 'Peso total',
+    },
   },
   sections: {
     harvest: 'Registro Manual Semana {week} Batch {batch}',

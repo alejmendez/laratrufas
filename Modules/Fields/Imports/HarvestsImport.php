@@ -43,22 +43,24 @@ class HarvestsImport implements SkipsEmptyRows, SkipsOnFailure, ToModel, WithHea
         $harvest_detail->quality = Str::slug($row['calidad']);
         $harvest_detail->weight = $row['peso'];
 
-        $count = HarvestDetail::where([
-            'harvest_id' => $harvest_detail->harvest_id,
-            'plant_id' => $harvest_detail->plant_id,
-            'quality' => $harvest_detail->quality,
-            'weight' => $harvest_detail->weight,
-        ])->count();
+        if ($harvest_detail->quality !== '' && $harvest_detail->weight !== null) {
+            $count = HarvestDetail::where([
+                'harvest_id' => $harvest_detail->harvest_id,
+                'plant_id' => $harvest_detail->plant_id,
+                'quality' => $harvest_detail->quality,
+                'weight' => $harvest_detail->weight,
+            ])->count();
 
-        if ($count > 0) {
-            $this->unprocessedRecords[] = [
-                'line' => $this->line,
-                'code' => $row['codigo_de_planta'],
-                'quality' => $row['calidad'],
-                'weight' => $row['peso'],
-            ];
+            if ($count > 0) {
+                $this->unprocessedRecords[] = [
+                    'line' => $this->line,
+                    'code' => $row['codigo_de_planta'],
+                    'quality' => $row['calidad'],
+                    'weight' => $row['peso'],
+                ];
 
-            return null;
+                return null;
+            }
         }
 
         $this->rowCount++;
@@ -79,7 +81,7 @@ class HarvestsImport implements SkipsEmptyRows, SkipsOnFailure, ToModel, WithHea
                 Rule::exists('plants', 'code'),
             ],
             'calidad' => 'max:30|nullable',
-            'peso' => 'required|numeric|between:0,99999',
+            'peso' => 'numeric|between:0,99999|nullable',
         ];
     }
 

@@ -140,7 +140,7 @@ class HarvestsController extends Controller
             'unprocessed_message' => session('unprocessed_message', ''),
             'unprocessed_details' => session('unprocessed_details', []),
             'error_message' => session('error_message', ''),
-            'errors' => session('errors', []),
+            'import_errors' => session('import_errors', []),
         ]);
     }
 
@@ -190,11 +190,11 @@ class HarvestsController extends Controller
         }
 
         return redirect()
-            ->route('harvests.create.bulk')
+            ->back()
             ->with('message_success', $message_success)
             ->with('unprocessed_message', $unprocessed_message)
             ->with('unprocessed_details', $unprocessed_details)
             ->with('error_message', $error_message)
-            ->with('errors', $errors);
+            ->with('import_errors', $errors);
     }
 }

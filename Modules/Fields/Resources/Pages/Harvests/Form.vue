@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
 
@@ -7,6 +7,7 @@ import Dialog from 'primevue/dialog';
 import DatePicker from 'primevue/datepicker';
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
+import InputNumber from 'primevue/inputnumber';
 
 import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
 import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
@@ -63,6 +64,20 @@ const handler_input_batch = (e) => {
   e.target.value = filteredValue;
   form.batch = filteredValue;
 };
+
+const totalWeight = computed(() => {
+  if (!form.details) {
+    return 0;
+  }
+
+  return form.details.reduce((sum, detail) => {
+    return sum + (Number(detail.weight) || 0);
+  }, 0);
+});
+
+watch(totalWeight, (newValue) => {
+  form.weight = newValue;
+});
 </script>
 
 <template>
@@ -127,7 +142,29 @@ const handler_input_batch = (e) => {
       />
     </CardSection>
 
-    <CardSection :header-text="t('harvest.sections.harvest', { batch: form.batch.toUpperCase(), week: getWeek(form.date, { weekStartsOn: 1 })})" wrapperClass="" v-if="props.details">
+    <CardSection
+      wrapperClass=""
+      v-if="props.details"
+    >
+      <template #header>
+        <header class="flex items-center justify-between gap-x-3 overflow-hidden px-6 py-4">
+          <h3 class="text-xl font-bold leading-6 text-gray-900 dark:text-gray-100">
+            {{ t('harvest.sections.harvest', { batch: form.batch.toUpperCase(), week: getWeek(form.date, { weekStartsOn: 1 })}) }}
+          </h3>
+
+          <div class="flex items-center gap-2">
+            {{ t('harvest.form.weight.label') }}
+            <InputNumber
+              v-model="form.weight"
+              :message="form.errors.weight"
+              showButtons
+              :min="0"
+              :step="1"
+              suffix=" grs"
+            />
+          </div>
+        </header>
+      </template>
       <div
         class="px-6 py-3 grid grid-cols-2 gap-x-16 gap-y-4"
         v-for="(detail, index) in form.details"
@@ -161,7 +198,7 @@ const handler_input_batch = (e) => {
             :label="t('harvest.form.details.weight.label')"
             :message="form.errors[`details.${index}.weight`]"
           />
-          <div class="pt-8 text-black hover:text-red-500" @click="remove_detail(index)">
+          <div class="pt-8 text-black dark:text-white hover:text-red-500 cursor-pointer dark:hover:text-red-500" @click="remove_detail(index)">
             <font-awesome-icon :icon="['fas', 'trash-can']" />
           </div>
         </div>

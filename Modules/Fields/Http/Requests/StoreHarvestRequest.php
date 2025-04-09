@@ -32,6 +32,7 @@ class StoreHarvestRequest extends FormRequest
             'assistant_id.value' => 'required|exists:users,id',
             'quarter_ids' => 'required',
             'quarter_ids.*.value' => 'integer',
+            'weight' => 'required|numeric|min:0',
         ];
     }
 
@@ -44,6 +45,7 @@ class StoreHarvestRequest extends FormRequest
             'farmer_id' => 'agricultor',
             'assistant_id' => 'ayudante',
             'quarter_ids' => 'cuarteles',
+            'weight' => 'peso total',
         ];
     }
 }

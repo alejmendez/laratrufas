@@ -47,6 +47,7 @@ class HarvestResource extends JsonResource
                 'quality' => $detail->quality,
                 'weight' => $detail->weight,
             ]),
+            'weight' => $this->weight,
         ];
     }
 }
