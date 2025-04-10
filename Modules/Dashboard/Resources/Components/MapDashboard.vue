@@ -8,7 +8,7 @@ const field = props.field.data;
 
 <template>
   <div class="lg:col-span-3 rounded-xl card-section">
-    <header class="flex items-center overflow-hidden border-b dark:border-gray-800">
+    <header class="flex items-center overflow-hidden border-b border-gray-200 dark:border-gray-900">
       <h3 class="px-4 py-3 text-base font-semibold leading-6 text-gray-900 dark:text-gray-100">
         Campo: {{ field.name }}
       </h3>
