@@ -10,24 +10,24 @@ const { t } = useI18n();
 const props = defineProps({
   paused: {
     type: Boolean,
-    required: true
+    required: true,
   },
   hasError: {
     type: Boolean,
-    required: true
+    required: true,
   },
   plantCode: {
     type: String,
-    required: false
+    required: false,
   },
   plantCodeToFind: {
     type: String,
-    required: true
+    required: true,
   },
   loading: {
     type: Boolean,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const emit = defineEmits(['detect', 'findPlant', 'resetQr', 'update:plantCodeToFind']);

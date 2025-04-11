@@ -4,7 +4,7 @@ const list = async (route, show_harvests) => {
   const response = await axios.get(route, {
     params: {
       show_harvests,
-    }
+    },
   });
   return response.data.data;
 };
@@ -15,8 +15,8 @@ const store = async (form) => {
     const formData = form.data();
     if ([formData.foliage_sanitation_photo, formData.trunk_sanitation_photo, formData.soil_sanitation_photo].some((d) => d != null)) {
       options.headers = {
-        'Content-Type': 'multipart/form-data'
-      }
+        'Content-Type': 'multipart/form-data',
+      };
     }
 
     await axios.post(route('plants.details.store'), formData, options);

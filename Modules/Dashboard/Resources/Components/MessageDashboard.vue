@@ -18,7 +18,7 @@ const loading = ref(true);
 
 const messagesRelativeTimeDifference = (message) => {
   return relativeTimeDifference(t, today, stringToDate(message.created_at));
-}
+};
 
 onMounted(async () => {
   const response = await listUnread();

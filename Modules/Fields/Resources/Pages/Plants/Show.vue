@@ -65,11 +65,7 @@ const FILE_TAB = 'file';
 const LOGS_TAB = 'logs';
 const STATISTICS_TAB = 'statistics';
 
-const tabs = [
-  FILE_TAB,
-  LOGS_TAB,
-  STATISTICS_TAB,
-];
+const tabs = [FILE_TAB, LOGS_TAB, STATISTICS_TAB];
 
 const currentTab = ref(props.current_tab || FILE_TAB);
 

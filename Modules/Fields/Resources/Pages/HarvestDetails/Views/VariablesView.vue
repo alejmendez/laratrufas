@@ -12,12 +12,12 @@ const { t } = useI18n();
 const props = defineProps({
   form: {
     type: Object,
-    required: true
+    required: true,
   },
   hasError: {
     type: Boolean,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const emit = defineEmits(['submit', 'cancel']);

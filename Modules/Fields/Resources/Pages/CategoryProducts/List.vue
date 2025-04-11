@@ -103,7 +103,7 @@ const handleSave = async (saveAction) => {
   } catch (error) {
     const errors = error.response?.data?.errors;
     if (errors) {
-      Object.keys(errors).forEach(key => {
+      Object.keys(errors).forEach((key) => {
         form.errors[key] = errors[key].join(', ');
       });
     }
@@ -115,10 +115,11 @@ const handleSave = async (saveAction) => {
 };
 
 const createHandler = () => {
-  const saveAction = () => categoryProductService.create({
-    name: form.name,
-    is_commercial: form.is_commercial,
-  });
+  const saveAction = () =>
+    categoryProductService.create({
+      name: form.name,
+      is_commercial: form.is_commercial,
+    });
 
   handleSave(saveAction);
 };
@@ -131,10 +132,11 @@ const editHandler = (record) => {
 };
 
 const updateHandler = () => {
-  const saveAction = () => categoryProductService.update(form.id, {
-    name: form.name,
-    is_commercial: form.is_commercial,
-  });
+  const saveAction = () =>
+    categoryProductService.update(form.id, {
+      name: form.name,
+      is_commercial: form.is_commercial,
+    });
 
   handleSave(saveAction);
 };

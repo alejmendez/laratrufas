@@ -159,7 +159,8 @@ export const menuElements = (currentComponent) => {
     },
   ];
 
-  if (!menuItems[0].can) { // If the user does not have access to the dashboard, remove the dashboard menu item
+  if (!menuItems[0].can) {
+    // If the user does not have access to the dashboard, remove the dashboard menu item
     menuItems[0] = {
       link: route('start.index'),
       text: 'menu.start',
@@ -222,8 +223,7 @@ export const menuElementsRight = (currentComponent) => {
     },
   ];
 
-  const menuItemsFiltered = menuItems
-    .filter((item) => item.can);
+  const menuItemsFiltered = menuItems.filter((item) => item.can);
 
   return menuItemsFiltered;
 };

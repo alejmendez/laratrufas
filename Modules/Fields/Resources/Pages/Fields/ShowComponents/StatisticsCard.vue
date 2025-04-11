@@ -136,7 +136,7 @@ const filterHandler = async () => {
     ...chartOptions[type_graph.value.type],
     theme: {
       mode: localStorage.themeType,
-    }
+    },
   };
 
   _chartOption.title.text = response.title;
@@ -149,8 +149,8 @@ const filterHandler = async () => {
   if (type_graph.value.value == 'quarter-on-demand-production') {
     _chartOption.tooltip = {
       y: {
-        formatter: (val) => (val / 1000).toFixed(2) + ' KGS'
-      }
+        formatter: (val) => (val / 1000).toFixed(2) + ' KGS',
+      },
     };
   }
 

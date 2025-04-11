@@ -77,14 +77,19 @@ const updateCommentHandler = async () => {
 };
 
 const deleteComment = (id) => {
-  deleteRowTable(t, confirm, async () => {
-    loading.value = true;
-    const deletedComment = await destroyComment(id);
-    if (deletedComment) {
-      comments.value = comments.value.filter((a) => a.id !== id);
-    }
-    loading.value = false;
-  }, t('task.form.comments.entity'));
+  deleteRowTable(
+    t,
+    confirm,
+    async () => {
+      loading.value = true;
+      const deletedComment = await destroyComment(id);
+      if (deletedComment) {
+        comments.value = comments.value.filter((a) => a.id !== id);
+      }
+      loading.value = false;
+    },
+    t('task.form.comments.entity'),
+  );
 };
 
 if (form.id === null) {

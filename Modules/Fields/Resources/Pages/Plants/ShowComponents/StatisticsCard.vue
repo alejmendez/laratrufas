@@ -127,7 +127,7 @@ const filterHandler = async () => {
     ...chartOptions[type_graph.value.type],
     theme: {
       mode: localStorage.themeType,
-    }
+    },
   };
 
   _chartOption.title.text = response.title;

@@ -19,7 +19,7 @@ export const useSideBarStore = defineStore('sideBar', () => {
   const update = (status) => {
     show.value = status;
     setItem(LS_KEY_SHOW_SIDE_BAR, status);
-  }
+  };
 
   return { show, toggle, open, close };
 });
@@ -34,7 +34,7 @@ export const useDrawerRightMenuStore = defineStore('drawerRightMenu', () => {
   const update = (status) => {
     show.value = status;
     setItem(LS_KEY_SHOW_DRAWER_RIGHT_MENU, status);
-  }
+  };
 
   return { show, toggle, open, close };
 });

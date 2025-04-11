@@ -34,7 +34,7 @@ export const relativeTimeDifference = (t, current, previous) => {
   } else if (elapsed < msPerHour) {
     message = 'generics.date.minutes_ago';
     time = Math.round(elapsed / msPerMinute);
-  } else if (elapsed < msPerDay ) {
+  } else if (elapsed < msPerDay) {
     message = 'generics.date.hours_ago';
     time = Math.round(elapsed / msPerHour);
   } else if (elapsed < msPerMonth) {
@@ -49,4 +49,4 @@ export const relativeTimeDifference = (t, current, previous) => {
   }
 
   return t(message, { time });
-}
+};

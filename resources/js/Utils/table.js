@@ -17,15 +17,17 @@ const createConfirmOptions = (t, entity, accept) => ({
 });
 
 const showToast = (toast, t, isSuccess = true) => {
-  const config = isSuccess ? {
-    severity: 'success',
-    summary: t('generics.messages.deleted_successfully_summary'),
-    detail: t('generics.messages.deleted_successfully'),
-  } : {
-    severity: 'danger',
-    summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
-    detail: t('generics.tables.errors.could_not_delete_the_record'),
-  };
+  const config = isSuccess
+    ? {
+        severity: 'success',
+        summary: t('generics.messages.deleted_successfully_summary'),
+        detail: t('generics.messages.deleted_successfully'),
+      }
+    : {
+        severity: 'danger',
+        summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
+        detail: t('generics.tables.errors.could_not_delete_the_record'),
+      };
 
   toast.add({
     ...config,
@@ -46,30 +48,15 @@ const handleDeleteConfirmation = async (handler, datatable, toast, t) => {
 };
 
 export const deleteRowTable = async (t, confirm, accept, entity = null) => {
-  const confirmOptions = createConfirmOptions(
-    t,
-    entity || t('generics.tables.entity'),
-    accept
-  );
+  const confirmOptions = createConfirmOptions(t, entity || t('generics.tables.entity'), accept);
 
   confirm.require(confirmOptions);
 };
 
 export const deleteRowDatatable = (options) => {
-  const {
-    datatable,
-    confirm,
-    toast,
-    t,
-    entity = t('generics.tables.entity'),
-    handler,
-  } = options;
+  const { datatable, confirm, toast, t, entity = t('generics.tables.entity'), handler } = options;
 
-  const confirmOptions = createConfirmOptions(
-    t,
-    entity,
-    async () => await handleDeleteConfirmation(handler, datatable, toast, t)
-  );
+  const confirmOptions = createConfirmOptions(t, entity, async () => await handleDeleteConfirmation(handler, datatable, toast, t));
 
   confirm.require(confirmOptions);
 };

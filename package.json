@@ -4,7 +4,7 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "format": "npx @biomejs/biome format --write ./resources/js"
+        "format": "npx @biomejs/biome format --write ./resources/js ./Modules"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.7.2",

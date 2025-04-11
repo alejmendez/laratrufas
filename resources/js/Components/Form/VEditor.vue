@@ -16,9 +16,9 @@ const editorModules = {
   mention: {
     allowedChars: /^[A-Za-z\s]*$/,
     source: (searchTerm, renderList) => {
-      const matches = props.options.filter(option =>
-        option.text.toLowerCase().includes(searchTerm.toLowerCase())
-      ).map(option => ({ id: option.value, value: option.text }));
+      const matches = props.options
+        .filter((option) => option.text.toLowerCase().includes(searchTerm.toLowerCase()))
+        .map((option) => ({ id: option.value, value: option.text }));
       renderList(matches, searchTerm);
     },
     toolbar: [

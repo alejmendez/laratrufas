@@ -28,7 +28,7 @@ const resolvePageComponent = (name) => {
   }
 
   return typeof page === 'function' ? page() : page;
-}
+};
 
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,

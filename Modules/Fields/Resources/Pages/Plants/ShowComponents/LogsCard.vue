@@ -11,7 +11,6 @@ import { stringToFormat } from '@/Utils/date';
 import PlantDetailService from '@/Services/PlantDetailService';
 import { getDataSelect } from '@/Services/Selects';
 
-
 const { t } = useI18n();
 
 const props = defineProps({
@@ -39,19 +38,19 @@ const year_options = ref([]);
 const selectedYear = ref(null);
 
 const categories = ref([
-  { name: 'harvest', key: 'harvest', },
-  { name: 'height', key: 'height', },
-  { name: 'crown_diameter', key: 'crown_diameter', },
-  { name: 'trunk_diameter', key: 'trunk_diameter', },
-  { name: 'root_diameter', key: 'root_diameter', },
-  { name: 'invasion_radius', key: 'invasion_radius', },
-  { name: 'foliage_sanitation', key: 'foliage_sanitation', },
-  { name: 'foliage_sanitation_photo', key: 'foliage_sanitation_photo', },
-  { name: 'trunk_sanitation', key: 'trunk_sanitation', },
-  { name: 'trunk_sanitation_photo', key: 'trunk_sanitation_photo', },
-  { name: 'soil_sanitation', key: 'soil_sanitation', },
-  { name: 'soil_sanitation_photo', key: 'soil_sanitation_photo', },
-  { name: 'irrigation_system', key: 'irrigation_system', },
+  { name: 'harvest', key: 'harvest' },
+  { name: 'height', key: 'height' },
+  { name: 'crown_diameter', key: 'crown_diameter' },
+  { name: 'trunk_diameter', key: 'trunk_diameter' },
+  { name: 'root_diameter', key: 'root_diameter' },
+  { name: 'invasion_radius', key: 'invasion_radius' },
+  { name: 'foliage_sanitation', key: 'foliage_sanitation' },
+  { name: 'foliage_sanitation_photo', key: 'foliage_sanitation_photo' },
+  { name: 'trunk_sanitation', key: 'trunk_sanitation' },
+  { name: 'trunk_sanitation_photo', key: 'trunk_sanitation_photo' },
+  { name: 'soil_sanitation', key: 'soil_sanitation' },
+  { name: 'soil_sanitation_photo', key: 'soil_sanitation_photo' },
+  { name: 'irrigation_system', key: 'irrigation_system' },
 ]);
 
 const selectedCategories = ref(categories.value.map((category) => category.name));
