@@ -47,7 +47,7 @@ class HarvestDetailsController extends Controller
     public function find_by_code()
     {
         $plant = FindPlantByCode::call(request('code', ''));
-        if (!$plant) {
+        if (! $plant) {
             return response()->json([
                 'error' => 'Plant not found',
             ], 404);

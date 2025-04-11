@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Modules\Core\Http\Controllers\StartController;
+use Illuminate\Support\Facades\Route;
 use Modules\Core\Http\Controllers\ForbiddenController;
 use Modules\Core\Http\Controllers\NotificationsController;
 use Modules\Core\Http\Controllers\SelectsController;
+use Modules\Core\Http\Controllers\StartController;
 use Modules\Core\Services\CacheService;
 
 Route::get('/', function () {

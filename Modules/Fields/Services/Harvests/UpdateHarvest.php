@@ -27,7 +27,7 @@ class UpdateHarvest
         }
         $harvest->quarters()->sync($quarter_ids);
 
-        if (!isset($data['details'])) {
+        if (! isset($data['details'])) {
             $data['details'] = [];
         }
 
