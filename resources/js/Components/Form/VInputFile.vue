@@ -171,7 +171,7 @@ const remove_element = (id) => {
       <div class="md:w-[420px] max-w-full sm:hidden md:block">
         <InputGroup>
           <div
-            class="border dark:border-(--p-surface-700) dark:text-(--p-surface-400) dark:bg-(--p-surface-950) p-2 grow truncate rounded-s border-e-0 dark:text-gray-100"
+            class="border border-gray-300 dark:border-(--p-surface-700) dark:text-(--p-surface-400) dark:bg-(--p-surface-950) p-2 grow truncate rounded-s border-e-0 dark:text-gray-100"
             :title="filePath"
           >
             {{ filePath }}
