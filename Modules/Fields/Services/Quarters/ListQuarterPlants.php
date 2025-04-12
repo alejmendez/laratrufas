@@ -23,8 +23,14 @@ class ListQuarterPlants
             ->select(DB::raw('sum(weight) as weight'))
             ->get()
             ->max('weight');
-
         $maxWeight = floatval($maxWeight);
+
+        $maxQuantityByPlant = HarvestDetail::where('quarter_id', $id)
+            ->groupBy('plant_id')
+            ->select(DB::raw('count(*) as count'))
+            ->get()
+            ->max('count');
+        $maxQuantityByPlant = floatval($maxQuantityByPlant);
 
         $harvestDetailsByPlantId = $harvestDetails->groupBy('plant_id');
 
@@ -32,17 +38,22 @@ class ListQuarterPlants
             ->where('quarter_id', $id)
             ->orderBy('id')
             ->get()
-            ->map(function ($plant) use ($harvestDetailsByPlantId, $maxWeight) {
+            ->map(function ($plant) use ($harvestDetailsByPlantId, $maxWeight, $maxQuantityByPlant) {
                 $plant->data = [];
 
                 $detail = $harvestDetailsByPlantId->get($plant->id);
-                $plant->scale = 0;
+                $plant->scaleByWeight = 0;
+                $plant->scaleByQuantity = 0;
+
                 if ($detail) {
-                    $plant->scale = round($detail->sum('weight') * 100 / $maxWeight, 2);
+                    $quantityPlant = $detail->count();
+                    $plant->scaleByWeight = round($detail->sum('weight') * 100 / $maxWeight, 2);
+                    $plant->scaleByQuantity = round($quantityPlant * 100 / $maxQuantityByPlant, 2);
                     $detail = $detail->map(fn ($a) => $a->only(['id', 'harvest_id', 'quality', 'weight']))
-                        ->map(function ($a) use ($maxWeight) {
+                        ->map(function ($a) use ($maxWeight, $maxQuantityByPlant, $quantityPlant) {
                             $a['weight'] = floatval($a['weight']);
-                            $a['scale'] = round($a['weight'] * 100 / $maxWeight, 2);
+                            $a['scaleByWeight'] = round($a['weight'] * 100 / $maxWeight, 2);
+                            $a['scaleByQuantity'] = round($quantityPlant * 100 / $maxQuantityByPlant, 2);
 
                             return $a;
                         })

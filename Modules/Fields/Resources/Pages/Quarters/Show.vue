@@ -9,12 +9,13 @@ import { can } from '@/Services/Auth';
 import StatisticsCard from '@Fields/Pages/Quarters/ShowComponents/StatisticsCard.vue';
 import HarvestCard from '@Fields/Pages/Quarters/ShowComponents/HarvestCard.vue';
 import LogbookCard from '@Fields/Pages/Quarters/ShowComponents/LogbookCard.vue';
-
+import FileCard from '@Fields/Pages/Quarters/ShowComponents/FileCard.vue';
 const { t } = useI18n();
 const confirm = useConfirm();
 
 const props = defineProps({
   data: Object,
+  current_tab: String,
 });
 
 const { data: quarter } = props.data;
@@ -29,19 +30,19 @@ const STATISTICS_TAB = 'statistics';
 
 const tabs = [FILE_TAB, LOGBOOK_TAB, HARVEST_TAB, STATISTICS_TAB];
 
-const currentTab = ref(FILE_TAB);
+const current_tab = ref(props.current_tab || FILE_TAB);
 
-const isFileTab = computed(() => currentTab.value === FILE_TAB);
-const isLogbookTab = computed(() => currentTab.value === LOGBOOK_TAB);
-const isHarvestTab = computed(() => currentTab.value === HARVEST_TAB);
-const isStatisticsTab = computed(() => currentTab.value === STATISTICS_TAB);
+const isFileTab = computed(() => current_tab.value === FILE_TAB);
+const isLogbookTab = computed(() => current_tab.value === LOGBOOK_TAB);
+const isHarvestTab = computed(() => current_tab.value === HARVEST_TAB);
+const isStatisticsTab = computed(() => current_tab.value === STATISTICS_TAB);
 
-const dataFile = [
-  [t('quarter.show.file.field'), quarter.field.name],
-  [t('quarter.show.file.area'), quarter.area],
-  [t('quarter.show.file.plants_count'), quarter.plants_count],
-  [t('quarter.show.file.responsible'), quarter.responsible.name],
-];
+const selectTab = (tab) => {
+  current_tab.value = tab;
+  const url = new URL(window.location.href);
+  url.searchParams.set('current_tab', tab);
+  window.history.pushState({}, '', url);
+};
 
 const deleteHandler = async (id) => {
   await deleteRowTable(t, confirm, () => {
@@ -79,36 +80,18 @@ const deleteHandler = async (id) => {
         <span
           v-for="tab of tabs"
           class="px-4 py-2 cursor-default font-semibold"
-          :class="currentTab === tab ? 'text-(--p-primary-500)' : 'hover:text-(--p-primary-300) dark:hover:text-(--p-primary-600) text-gray-400'"
-          @click="currentTab = tab"
+          :class="current_tab === tab ? 'text-(--p-primary-500)' : 'hover:text-(--p-primary-300) dark:hover:text-(--p-primary-600) text-gray-400'"
+          @click="selectTab(tab)"
         >
           {{ t('quarter.show.tabs.' + tab) }}
         </span>
       </nav>
     </div>
 
-    <CardSection
-      wrapperClass="p-5 grid grid-cols-2 gap-4"
+    <FileCard
+      :quarter="quarter"
       v-show="isFileTab"
-    >
-      <div>
-        <img
-          :src="quarter.blueprint"
-          class="w-full"
-          alt=""
-        >
-      </div>
-      <div>
-        <template v-for="block of dataFile">
-          <div class="text-gray-400 pb-1">
-            {{ block[0] }}
-          </div>
-          <div class="pb-3 dark:text-gray-50">
-            {{ block[1] }}
-          </div>
-        </template>
-      </div>
-    </CardSection>
+    />
 
     <LogbookCard
       :quarter_id="quarter.id"

@@ -21,7 +21,15 @@ const distributionPlants = ref('');
 const current_plant = ref({});
 const detail_current_plant = ref({});
 
-const canUpdatePlantsPosition = can('quarters.plants.update.position');
+const scaleTypes = ref([
+  { value: 'weight', text: t('quarter.show.statistics.scale_type.options.weight') },
+  { value: 'quantity', text: t('quarter.show.statistics.scale_type.options.quantity') },
+]);
+const scaleType = ref(scaleTypes.value[0]);
+
+// TODO: Se oculta temporalmente, buscar alguna alternativa para que no se pueda editar la distribución de plantas
+// se puede agregar en la seccion del engranaje
+const canUpdatePlantsPosition = false; //can('quarters.plants.update.position');
 
 const processDistribution = (distribution) =>
   distribution
@@ -75,7 +83,8 @@ const generatePlantsDispositionWithPosition = (dataPlants) => {
         plant.number = plant.code;
         const [_, position] = plant.code.match(/\d+/g);
         plant.position = position;
-        plant.color = generarColorPorPorcentaje(plant.scale);
+        plant.colorByWeight = generarColorPorPorcentaje(plant.scaleByWeight);
+        plant.colorByQuantity = generarColorPorPorcentaje(plant.scaleByQuantity);
       }
       return plant || null;
     }),
@@ -173,11 +182,10 @@ table tbody tr td.border_cell_left {
 
 <template>
   <CardSection :header-text="t('field.show.statistics.title')" wrapperClass="p-5 grid gap-4">
-    <div>
+    <div v-if="canUpdatePlantsPosition">
       <Button
         :label="t('harvest.buttons.change_distribution')"
         @click.prevent="open = true"
-        v-if="canUpdatePlantsPosition"
       />
       <Dialog v-model:visible="open" modal header="cambiar distribucion de arboles" :style="{ maxWidth: '500px' }">
         <div class="grid gap-4 py-4">
@@ -189,6 +197,16 @@ table tbody tr td.border_cell_left {
           <Button type="submit" @click="changeDistribution" :label="$t('generics.actions.create')" />
         </div>
       </Dialog>
+    </div>
+
+    <div class="py-6 grid md:grid-cols-2 gap-x-16 gap-y-4 sm:grid-cols-1">
+      <VSelect
+        id="scaleType"
+        v-model="scaleType"
+        :placeholder="t('generics.please_select')"
+        :options="scaleTypes"
+        :label="t('quarter.show.statistics.scale_type.label')"
+      />
     </div>
 
     <div v-show="loading" class="text-center mt-5">
@@ -219,7 +237,7 @@ table tbody tr td.border_cell_left {
                 border_cell_left: plant?.code,
               }"
               :style="{
-                backgroundColor: plant?.color,
+                backgroundColor: scaleType.value === 'weight' ? plant?.colorByWeight : plant?.colorByQuantity,
               }"
               v-tooltip.top="plant?.code"
               @click="setCurrentPlant(plant)"

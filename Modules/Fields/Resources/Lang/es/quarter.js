@@ -53,6 +53,13 @@ export default {
     },
     statistics: {
       title: 'Estadísticas',
+      scale_type: {
+        label: 'Tipo de escala',
+        options: {
+          weight: 'Peso',
+          quantity: 'Cantidad',
+        },
+      },
     },
     tabs: {
       file: 'Ficha',

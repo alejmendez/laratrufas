@@ -70,10 +70,12 @@ class QuartersController extends Controller
      */
     public function show(string $id)
     {
+        $current_tab = request('current_tab', 'file');
         $quarter = FindQuarter::call($id);
 
         return Inertia::render('Fields::Quarters/Show', [
             'data' => new QuarterResource($quarter),
+            'current_tab' => $current_tab,
         ]);
     }
 
