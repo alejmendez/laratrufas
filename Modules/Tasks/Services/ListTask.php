@@ -13,9 +13,14 @@ class ListTask
         $searchableColumns = ['name', 'status', 'priority', 'updated_at', 'responsible.full_name'];
         $query = Task::query();
 
-        if (self::filterHasOverdued($params)) {
+        $statusFilter = $params['filters']['status']['value']['value'] ?? null;
+
+        if ($statusFilter === 'overdued') {
             unset($params['filters']['status']);
-            $query->where('end_date', '<', now())->where('status', '!=', 'finished');
+            $query->where('end_date', '<', now())
+                  ->where('status', '!=', 'finished');
+        } elseif ($statusFilter !== 'finished' && $statusFilter !== null) {
+            $query->where('end_date', '>=', now());
         }
 
         $datatable = new PrimevueDatatables($params, $searchableColumns);
@@ -25,19 +30,10 @@ class ListTask
         $tasks->transform(function ($task) use ($today) {
             $endDate = Carbon::parse($task->end_date);
             $overdued = $today->diffInDays($endDate) < 0;
-            $status = $overdued && $task->status !== 'finished' ? 'overdued' : $task->status;
-            $task->status = $status;
-
+            $task->status = $overdued && $task->status !== 'finished' ? 'overdued' : $task->status;
             return $task;
         });
 
         return $tasks;
-    }
-
-    protected static function filterHasOverdued($params)
-    {
-        $status = $params['filters']['status']['value']['value'] ?? null;
-
-        return $status === 'overdued';
     }
 }
