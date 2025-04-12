@@ -27,14 +27,6 @@ class CreateTask
             $task->responsible_id = $data['responsible_id']['value'];
             $task->save();
 
-            if (! empty($data['comment'])) {
-                $comment = new TaskComment;
-                $comment->comment = $data['comment'];
-                $comment->user_id = auth()->id();
-                $comment->task_id = $task->id;
-                $comment->save();
-            }
-
             self::syncRelationship($task, 'quarters', $data['quarter_id'] ?? []);
             self::syncRelationship($task, 'plants', $data['plant_id'] ?? []);
             self::syncRelationship($task, 'tools', $data['tools'] ?? []);
