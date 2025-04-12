@@ -11,8 +11,12 @@ class ListTask
     public static function call($params)
     {
         $searchableColumns = ['name', 'status', 'priority', 'updated_at', 'responsible.full_name'];
-
         $query = Task::query();
+
+        if (self::filterHasOverdued($params)) {
+            unset($params['filters']['status']);
+            $query->where('end_date', '<', now())->where('status', '!=', 'finished');
+        }
 
         $datatable = new PrimevueDatatables($params, $searchableColumns);
         $tasks = $datatable->of($query)->make();
@@ -28,5 +32,12 @@ class ListTask
         });
 
         return $tasks;
+    }
+
+    protected static function filterHasOverdued($params)
+    {
+        $status = $params['filters']['status']['value']['value'] ?? null;
+
+        return $status === 'overdued';
     }
 }
