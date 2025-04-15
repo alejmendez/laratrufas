@@ -119,10 +119,10 @@ const remove_supply = (index) => {
             :message="form.errors[`supplies.${index}.unit`]"
           />
         </div>
-        <div class="pt-8" v-if="index !== 0">
+        <div class="pt-10" v-if="index !== 0">
           <font-awesome-icon
             :icon="['fas', 'trash-can']"
-            class="float-right me-3 text-black hover:text-red-500"
+            class="float-right me-3 text-gray-800 dark:text-gray-100 hover:text-orange-700 dark:hover:text-orange-700"
             @click="remove_supply(index)"
           />
         </div>

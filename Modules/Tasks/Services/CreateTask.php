@@ -3,9 +3,8 @@
 namespace Modules\Tasks\Services;
 
 use Illuminate\Support\Facades\DB;
-use Modules\Fields\Models\SupplyTask;
+use Modules\Tasks\Models\SupplyTask;
 use Modules\Tasks\Models\Task;
-use Modules\Tasks\Models\TaskComment;
 
 class CreateTask
 {

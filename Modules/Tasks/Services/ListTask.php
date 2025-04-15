@@ -18,7 +18,7 @@ class ListTask
         if ($statusFilter === 'overdued') {
             unset($params['filters']['status']);
             $query->where('end_date', '<', now())
-                  ->where('status', '!=', 'finished');
+                ->where('status', '!=', 'finished');
         } elseif ($statusFilter !== 'finished' && $statusFilter !== null) {
             $query->where('end_date', '>=', now());
         }
@@ -31,6 +31,7 @@ class ListTask
             $endDate = Carbon::parse($task->end_date);
             $overdued = $today->diffInDays($endDate) < 0;
             $task->status = $overdued && $task->status !== 'finished' ? 'overdued' : $task->status;
+
             return $task;
         });
 

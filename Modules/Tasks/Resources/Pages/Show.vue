@@ -152,7 +152,7 @@ const deleteHandler = async (id) => {
             {{ t('task.show.detail.tools.label') }}
           </div>
           <div class="mb-4">
-            <div class="py-1 ps-3 min-h-10 border rounded-md bg-white dark:bg-(--p-surface-950) dark:border-(--p-surface-700) ring-1 ring-gray-950/5">
+            <div class="py-3 ps-3 min-h-10 border border-gray-200 rounded-md bg-gray-50 dark:bg-(--p-surface-950) dark:border-(--p-surface-700) ring-1 ring-gray-950/5">
               <span
                 class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
                 v-for="tool of data.tools"
@@ -165,7 +165,7 @@ const deleteHandler = async (id) => {
             {{ t('task.show.detail.machineries.label') }}
           </div>
           <div class="mb-4">
-            <div class="py-1 ps-3 min-h-10 border rounded-md bg-white dark:bg-(--p-surface-950) dark:border-(--p-surface-700) ring-1 ring-gray-950/5">
+            <div class="py-3 ps-3 min-h-10 border border-gray-200 rounded-md bg-gray-50 dark:bg-(--p-surface-950) dark:border-(--p-surface-700) ring-1 ring-gray-950/5">
               <span
                 class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
                 v-for="machinery of data.machineries"
@@ -179,7 +179,7 @@ const deleteHandler = async (id) => {
             {{ t('task.show.detail.security_equipments.label') }}
           </div>
           <div class="mb-4">
-            <div class="py-1 ps-3 min-h-10 border rounded-md bg-white dark:bg-(--p-surface-950) dark:border-(--p-surface-700) ring-1 ring-gray-950/5">
+            <div class="py-3 ps-3 min-h-10 border border-gray-200 rounded-md bg-gray-50 dark:bg-(--p-surface-950) dark:border-(--p-surface-700) ring-1 ring-gray-950/5">
               <span
                 class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
                 v-for="security_equipment of data.security_equipments"
@@ -203,7 +203,7 @@ const deleteHandler = async (id) => {
                 <td>{{ supply.name }}</td>
                 <td>{{ supply.brand }}</td>
                 <td>{{ supply.quantity }}</td>
-                <td>{{ t('task.show.detail.supplies.unit.options.' + supply.unit) }}</td>
+                <td>{{ t('task.show.detail.supplies.unit.options.' + supply.unit.value) }}</td>
               </tr>
             </tbody>
           </table>

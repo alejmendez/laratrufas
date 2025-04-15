@@ -7,6 +7,7 @@ use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Tasks\Http\Requests\StoreTaskCommentRequest;
 use Modules\Tasks\Http\Requests\UpdateTaskCommentRequest;
 use Modules\Tasks\Http\Resources\TaskCommentResource;
+use Modules\Tasks\Models\TaskComment;
 use Modules\Tasks\Services\CreateTaskComment;
 use Modules\Tasks\Services\DeleteTaskComment;
 use Modules\Tasks\Services\UpdateTaskComment;

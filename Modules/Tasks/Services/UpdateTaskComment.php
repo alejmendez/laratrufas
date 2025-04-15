@@ -3,6 +3,7 @@
 namespace Modules\Tasks\Services;
 
 use Modules\Tasks\Models\TaskComment;
+use Modules\Core\Models\Notification;
 
 class UpdateTaskComment
 {
@@ -11,7 +12,7 @@ class UpdateTaskComment
         $taskComment->comment = preg_replace('/<p><br><\/p>(\s*<p><br><\/p>)*$/', '', $data['comment']);
         $taskComment->save();
 
-        $taskCommentNotification = Notification::whereRaw("data like '%\"task_comment_id\":$id,%'")->where('read_at', null)->first();
+        $taskCommentNotification = Notification::whereRaw("data like '%\"task_comment_id\":$taskComment->id,%'")->where('read_at', null)->first();
         if ($taskCommentNotification) {
             $data = json_decode($taskCommentNotification->data, true);
             $data['task_comment_id'] = $taskComment->id;
