@@ -49,18 +49,18 @@ class Plant extends Model
         return $this->activeDetails->pluck('value', 'type')->toArray();
     }
 
+    public function age(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->calculateAgeWithDecimals($this->planned_at),
+        );
+    }
+
     protected function code(): Attribute
     {
         return Attribute::make(
             get: fn (string $value) => strtoupper(trim($value)),
             set: fn (string $value) => strtoupper(trim($value)),
-        );
-    }
-
-    public function age(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => $this->calculateAgeWithDecimals($this->planned_at),
         );
     }
 

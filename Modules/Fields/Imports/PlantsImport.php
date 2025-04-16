@@ -20,13 +20,13 @@ class PlantsImport implements SkipsEmptyRows, SkipsOnFailure, ToModel, WithHeadi
 
     protected $line = 0;
 
-    private $rowCount = 0;
-
     protected $unprocessedRecords = [];
 
     protected $quarter_id;
 
     protected $plant_types;
+
+    private $rowCount = 0;
 
     public function __construct($quarter_id)
     {

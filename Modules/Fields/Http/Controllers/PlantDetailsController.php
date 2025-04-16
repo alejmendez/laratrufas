@@ -33,15 +33,6 @@ class PlantDetailsController extends Controller
         return redirect()->back()->with('success', 'Variables agregadas correctamente');
     }
 
-    protected function storeFile($request, $field)
-    {
-        if ($request->file($field) == null) {
-            return null;
-        }
-
-        return $request->file($field)->storePublicly('public/variables');
-    }
-
     public function index(int $id)
     {
         $show_harvests = request('show_harvests') === 'true';
@@ -67,5 +58,14 @@ class PlantDetailsController extends Controller
         $plant_details = FindPlantDetails::get_by_field_id($id, $year, $show_harvests);
 
         return new PlantDetailCollection($plant_details);
+    }
+
+    protected function storeFile($request, $field)
+    {
+        if ($request->file($field) == null) {
+            return null;
+        }
+
+        return $request->file($field)->storePublicly('public/variables');
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Modules\Tasks\Services;
 
-use Modules\Tasks\Models\TaskComment;
 use Modules\Core\Models\Notification;
+use Modules\Tasks\Models\TaskComment;
 
 class DeleteTaskComment
 {
