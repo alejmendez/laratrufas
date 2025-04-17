@@ -8,6 +8,7 @@ import DatePicker from 'primevue/datepicker';
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
 import InputNumber from 'primevue/inputnumber';
+import VirtualScroller from 'primevue/virtualscroller';
 
 import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
 import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
@@ -165,44 +166,46 @@ watch(totalWeight, (newValue) => {
           </div>
         </header>
       </template>
-      <div
-        class="px-6 py-3 grid grid-cols-2 gap-x-16 gap-y-4"
-        v-for="(detail, index) in form.details"
-      >
-        <VInput
-          :id="`details_plant_code_${index}`"
-          v-model="detail.plant_code"
-          :label="t('harvest.form.details.plant_code.label')"
-          :message="form.errors[`details.${index}.plant_code`]"
-        />
 
-        <div class="grid grid-cols-9 gap-x-16 gap-y-4">
-          <VSelect
-            :id="`details_quality_${index}`"
-            class="col-span-4"
-            v-model="detail.quality"
-            :placeholder="t('generics.please_select')"
-            :options="props.qualities"
-            :label="t('harvest.form.details.quality.label')"
-            :message="form.errors[`details.${index}.quality`]"
-          />
+      <VirtualScroller :items="form.details" :itemSize="30" style="height: 500px">
+        <template v-slot:item="{ item, options }">
+          <div class="px-6 py-3 grid grid-cols-2 gap-x-16 gap-y-4">
+            <VInput
+              :id="`details_plant_code_${options.index}`"
+              v-model="item.plant_code"
+              :label="t('harvest.form.details.plant_code.label')"
+              :message="form.errors[`details.${options.index}.plant_code`]"
+            />
 
-          <VInput
-            :id="`details_weight_${index}`"
-            type="number"
-            class="col-span-4"
-            v-model="detail.weight"
-            :min="0"
-            :max="20000"
-            :step="1"
-            :label="t('harvest.form.details.weight.label')"
-            :message="form.errors[`details.${index}.weight`]"
-          />
-          <div class="pt-8 text-black dark:text-white hover:text-red-500 cursor-pointer dark:hover:text-red-500" @click="remove_detail(index)">
-            <font-awesome-icon :icon="['fas', 'trash-can']" />
+            <div class="grid grid-cols-9 gap-x-16 gap-y-4">
+              <VSelect
+                :id="`details_quality_${options.index}`"
+                class="col-span-4"
+                v-model="item.quality"
+                :placeholder="t('generics.please_select')"
+                :options="props.qualities"
+                :label="t('harvest.form.details.quality.label')"
+                :message="form.errors[`details.${options.index}.quality`]"
+              />
+
+              <VInput
+                :id="`details_weight_${options.index}`"
+                type="number"
+                class="col-span-4"
+                v-model="item.weight"
+                :min="0"
+                :max="20000"
+                :step="1"
+                :label="t('harvest.form.details.weight.label')"
+                :message="form.errors[`details.${options.index}.weight`]"
+              />
+              <div class="pt-8 text-black dark:text-white hover:text-red-500 cursor-pointer dark:hover:text-red-500" @click="remove_detail(options.index)">
+                <font-awesome-icon :icon="['fas', 'trash-can']" />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </template>
+      </VirtualScroller>
       <div class="px-6 py-3">
         <Button
           severity="secondary"
