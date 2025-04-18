@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, reactive, onMounted } from 'vue';
+import { Link } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
 import ConfirmDialog from 'primevue/confirmdialog';
@@ -11,6 +12,9 @@ import ColumnGroup from 'primevue/columngroup';
 import Row from 'primevue/row';
 import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
+
+import CardSection from '@/Components/CardSection.vue';
+import VSelect from '@/Components/Form/VSelect.vue';
 
 import { useI18n } from 'vue-i18n';
 

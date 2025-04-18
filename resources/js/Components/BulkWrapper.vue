@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 
 import CardSection from '@/Components/CardSection.vue';
+import Button from '@/Components/Form/Button.vue';
 
 const props = defineProps({
   message_success: String,

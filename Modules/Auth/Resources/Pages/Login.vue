@@ -1,6 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
-import { useForm } from '@inertiajs/vue3';
+import { useForm, Link } from '@inertiajs/vue3';
 
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import Checkbox from '@/Components/Form/Checkbox.vue';

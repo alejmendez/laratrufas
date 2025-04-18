@@ -5,6 +5,8 @@ import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
 import { useConfirm } from 'primevue/useconfirm';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FileCard from '@Fields/Pages/Fields/ShowComponents/FileCard.vue';
 import LogbookCard from '@Fields/Pages/Fields/ShowComponents/LogbookCard.vue';
 import HarvestCard from '@Fields/Pages/Fields/ShowComponents/HarvestCard.vue';
@@ -60,9 +62,7 @@ const deleteHandler = async (id) => {
 </script>
 
 <template>
-  <Head :title="t('field.titles.show', { name: field.name })" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="t('field.titles.show', { name: field.name })">
     <HeaderCrud
       :title="t('field.titles.show', { name: field.name })"
       :breadcrumbs="[{ to: 'fields.index', text: t('field.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"

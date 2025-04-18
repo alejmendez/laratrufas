@@ -1,7 +1,8 @@
 <script setup>
 import { computed } from 'vue';
+import { useForm, Link } from '@inertiajs/vue3';
+
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { useForm } from '@inertiajs/vue3';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 import { useI18n } from 'vue-i18n';

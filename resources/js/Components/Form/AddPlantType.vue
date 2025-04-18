@@ -2,9 +2,11 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import plantTypeService from '@/Services/PlantTypeService.js';
-
 import Dialog from 'primevue/dialog';
+import VInput from '@/Components/Form/VInput.vue';
+import Button from '@/Components/Form/Button.vue';
+
+import plantTypeService from '@/Services/PlantTypeService.js';
 
 const { t } = useI18n();
 

@@ -6,10 +6,12 @@ import Timeline from 'primevue/timeline';
 import Checkbox from 'primevue/checkbox';
 import ProgressSpinner from 'primevue/progressspinner';
 
-import { stringToFormat } from '@/Utils/date';
+import CardSection from '@/Components/CardSection.vue';
+import VSelect from '@/Components/Form/VSelect.vue';
 
 import PlantDetailService from '@/Services/PlantDetailService';
 import { getDataSelect } from '@/Services/Selects';
+import { stringToFormat } from '@/Utils/date';
 
 const { t } = useI18n();
 

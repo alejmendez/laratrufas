@@ -5,9 +5,11 @@ import { useI18n } from 'vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
-import { useToast } from 'primevue/usetoast';
 import { deleteRowTable } from '@/Utils/table';
 import { can } from '@/Services/Auth';
+
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 
 import VariablesView from '@Fields/Pages/HarvestDetails/Views/VariablesView.vue';
 
@@ -101,9 +103,7 @@ const submitHandler = async () => {
 </script>
 
 <template>
-  <Head :title="t('plant.titles.show', {name: data.code})" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="t('plant.titles.show', {name: data.code})">
     <HeaderCrud
       :title="t('plant.titles.show', {name: data.code})"
       :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"

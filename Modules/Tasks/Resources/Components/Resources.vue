@@ -1,5 +1,9 @@
 <script setup>
+import CardSection from '@/Components/CardSection.vue';
 import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
+import VSelect from '@/Components/Form/VSelect.vue';
+import VInput from '@/Components/Form/VInput.vue';
+import Button from '@/Components/Form/Button.vue';
 
 const props = defineProps({
   t: Function,

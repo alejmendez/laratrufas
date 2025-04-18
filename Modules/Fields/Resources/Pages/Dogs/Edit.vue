@@ -1,12 +1,11 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormDog from '@Fields/Pages/Dogs/Form.vue';
 
 import { stringToDate, getAge } from '@/Utils/date';
-
-const { t } = useI18n();
 
 const props = defineProps({
   data: Object,
@@ -43,13 +42,11 @@ const submitHandler = () => form.post(route('dogs.update', data.id), form.avatar
 </script>
 
 <template>
-  <Head :title="t('dog.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('dog.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('dog.titles.edit')"
-      :breadcrumbs="[{ to: 'dogs.index', text: t('dog.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('dogs.index') }"
+      :title="$t('dog.titles.edit')"
+      :breadcrumbs="[{ to: 'dogs.index', text: $t('dog.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('dogs.index') }"
     />
     <FormDog
       :form="form"

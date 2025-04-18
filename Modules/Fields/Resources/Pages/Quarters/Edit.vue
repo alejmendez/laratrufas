@@ -1,10 +1,9 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormQuarter from '@Fields/Pages/Quarters/Form.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   data: Object,
@@ -31,13 +30,11 @@ const submitHandler = () => form.post(route('quarters.update', data.id), form.bl
 </script>
 
 <template>
-  <Head :title="t('quarter.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('quarter.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('quarter.titles.edit')"
-      :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('quarters.index') }"
+      :title="$t('quarter.titles.edit')"
+      :breadcrumbs="[{ to: 'quarters.index', text: $t('quarter.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('quarters.index') }"
     />
     <FormQuarter
       :form="form"

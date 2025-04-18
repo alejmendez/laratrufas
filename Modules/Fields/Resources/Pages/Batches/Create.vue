@@ -1,10 +1,9 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import FormBatch from '@Fields/Pages/Batches/Form.vue';
-
-const { t } = useI18n();
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 
 const props = defineProps({
   importers: Array,
@@ -22,13 +21,11 @@ const submitHandler = () => form.post(route('batches.store'));
 </script>
 
 <template>
-  <Head :title="t('batch.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('batch.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('batch.titles.create')"
-      :breadcrumbs="[{ to: 'batches.index', text: t('batch.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('batches.index') }"
+      :title="$t('batch.titles.create')"
+      :breadcrumbs="[{ to: 'batches.index', text: $t('batch.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('batches.index') }"
     />
     <FormBatch
       :form="form"

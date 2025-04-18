@@ -1,12 +1,11 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormBatch from '@Fields/Pages/Batches/Form.vue';
 
 import { stringToDate } from '@/Utils/date';
-
-const { t } = useI18n();
 
 const props = defineProps({
   data: Object,
@@ -38,13 +37,11 @@ const submitHandler = () => form.post(route('batches.update', data.id));
 </script>
 
 <template>
-  <Head :title="t('batch.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('batch.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('batch.titles.edit')"
-      :breadcrumbs="[{ to: 'batches.index', text: t('batch.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('batches.index') }"
+      :title="$t('batch.titles.edit')"
+      :breadcrumbs="[{ to: 'batches.index', text: $t('batch.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('batches.index') }"
     />
     <FormBatch
       :form="form"

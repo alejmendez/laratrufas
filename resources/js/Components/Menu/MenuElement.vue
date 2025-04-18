@@ -1,5 +1,6 @@
 <script setup>
 import { useAttrs } from 'vue';
+import { Link } from '@inertiajs/vue3';
 
 import { useSideBarStore } from '@/Stores/sidebar.js';
 

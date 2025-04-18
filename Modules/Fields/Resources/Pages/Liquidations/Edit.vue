@@ -1,11 +1,11 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormLiquidation from '@Fields/Pages/Liquidations/Form.vue';
-import { stringToDate } from '@/Utils/date';
 
-const { t } = useI18n();
+import { stringToDate } from '@/Utils/date';
 
 const props = defineProps({
   data: Object,
@@ -47,13 +47,11 @@ const submitHandler = () => form.post(route('liquidations.update', data.id));
 </script>
 
 <template>
-  <Head :title="t('liquidation.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('liquidation.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('liquidation.titles.edit')"
-      :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('liquidations.index') }"
+      :title="$t('liquidation.titles.edit')"
+      :breadcrumbs="[{ to: 'liquidations.index', text: $t('liquidation.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('liquidations.index') }"
     />
     <FormLiquidation
       :form="form"

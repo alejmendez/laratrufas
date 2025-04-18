@@ -1,6 +1,8 @@
 <script setup>
 import { useAttrs, computed } from 'vue';
 
+import Label from '@/Components/Form/Label.vue';
+
 const attrs = useAttrs();
 
 const props = defineProps({

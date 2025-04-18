@@ -1,10 +1,9 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormTool from '@Fields/Pages/Tools/Form.vue';
-
-const { t } = useI18n();
 
 const form = useForm({
   name: null,
@@ -20,13 +19,11 @@ const submitHandler = () => form.post(route('tools.store'));
 </script>
 
 <template>
-  <Head :title="t('tool.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('tool.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('tool.titles.create')"
-      :breadcrumbs="[{ to: 'tools.index', text: t('tool.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('tools.index') }"
+      :title="$t('tool.titles.create')"
+      :breadcrumbs="[{ to: 'tools.index', text: $t('tool.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('tools.index') }"
     />
     <FormTool
       :form="form"

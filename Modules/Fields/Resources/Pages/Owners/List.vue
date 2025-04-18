@@ -9,6 +9,8 @@ import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import VInput from '@/Components/Form/VInput.vue';
 import VInputDni from '@/Components/Form/VInputDni.vue';
 import Datatable from '@/Components/Table/Datatable.vue';
@@ -135,9 +137,7 @@ const updateHandler = () => {
 </script>
 
 <template>
-  <Head :title="$t('owner.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('owner.titles.entity_breadcrumb')">
     <HeaderCrud
       :title="$t('owner.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'owners.index', text: $t('owner.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"

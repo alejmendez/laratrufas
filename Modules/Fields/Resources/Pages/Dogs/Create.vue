@@ -1,10 +1,9 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormDog from '@Fields/Pages/Dogs/Form.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   fields: Array,
@@ -36,13 +35,11 @@ const submitHandler = () => form.post(route('dogs.store'), form.avatar ? { force
 </script>
 
 <template>
-  <Head :title="t('dog.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('dog.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('dog.titles.create')"
-      :breadcrumbs="[{ to: 'dogs.index', text: t('dog.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('dogs.index') }"
+      :title="$t('dog.titles.create')"
+      :breadcrumbs="[{ to: 'dogs.index', text: $t('dog.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('dogs.index') }"
     />
     <FormDog
       :form="form"

@@ -2,6 +2,9 @@
 import { ref, watch } from 'vue';
 import { useConfirm } from 'primevue/useconfirm';
 
+import CardSection from '@/Components/CardSection.vue';
+import Button from '@/Components/Form/Button.vue';
+
 import VEditor from '@/Components/Form/VEditor.vue';
 import { stringToFormat, relativeTimeDifference, stringToDate } from '@/Utils/date.js';
 import { store as storeComment, update as updateComment, destroy as destroyComment } from '@Tasks/Services/TaskCommentService';

@@ -4,6 +4,8 @@ import { useI18n } from 'vue-i18n';
 import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import HarvestTable from '@Fields/Pages/Harvests/Components/HarvestTable.vue';
 import { can } from '@/Services/Auth';
 
@@ -35,12 +37,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <Head :title="t('harvest.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('harvest.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('harvest.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
+      :title="$t('harvest.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'harvests.index', text: $t('harvest.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
       :links="headerLinks"
     />
 

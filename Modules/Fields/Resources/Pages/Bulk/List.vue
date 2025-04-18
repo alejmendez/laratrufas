@@ -1,6 +1,10 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
+import { Link } from '@inertiajs/vue3';
 import { can } from '@/Services/Auth';
+
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 
 const { t } = useI18n();
 
@@ -21,9 +25,7 @@ const list = [
 </script>
 
 <template>
-  <Head :title="t('bulk.title')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="t('bulk.title')">
     <HeaderCrud
       :title="t('bulk.title')"
     />

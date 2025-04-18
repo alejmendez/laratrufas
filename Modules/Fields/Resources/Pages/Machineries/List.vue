@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { Link } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
 
@@ -9,6 +10,8 @@ import InputText from 'primevue/inputtext';
 
 import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import Datatable from '@/Components/Table/Datatable.vue';
 import MachineryService from '@/Services/MachineryService.js';
 import { stringToFormat } from '@/Utils/date';
@@ -78,9 +81,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <Head :title="$t('machinery.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('machinery.titles.entity_breadcrumb')">
     <HeaderCrud
       :title="$t('machinery.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'machineries.index', text: $t('machinery.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"

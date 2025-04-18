@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
+import { Link } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
 
@@ -9,12 +10,18 @@ import InputText from 'primevue/inputtext';
 
 import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import CardSection from '@/Components/CardSection.vue';
 import Datatable from '@/Components/Table/Datatable.vue';
+import VSelect from '@/Components/Form/VSelect.vue';
+
 import LiquidationService from '@/Services/LiquidationService.js';
 import { stringToFormat } from '@/Utils/date';
 import { deleteRowTable } from '@/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
 import { can } from '@/Services/Auth';
+
 const props = defineProps({
   toast: String,
 });
@@ -117,9 +124,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Head :title="$t('liquidation.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('liquidation.titles.entity_breadcrumb')">
     <HeaderCrud
       :title="$t('liquidation.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'liquidations.index', text: $t('liquidation.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"

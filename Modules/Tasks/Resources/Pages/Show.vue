@@ -8,6 +8,9 @@ import { can } from '@/Services/Auth';
 import { deleteRowTable } from '@/Utils/table';
 import { stringToFormat } from '@/Utils/date';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import CardSection from '@/Components/CardSection.vue';
 import FormComments from '@Tasks/Components/Comments.vue';
 
 const { t } = useI18n();
@@ -82,12 +85,10 @@ const deleteHandler = async (id) => {
 </script>
 
 <template>
-  <Head :title="t('task.titles.show')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('task.titles.show')">
     <HeaderCrud
-      :title="t('task.titles.show')"
-      :breadcrumbs="[{ to: 'tasks.index', text: t('task.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
+      :title="$t('task.titles.show')"
+      :breadcrumbs="[{ to: 'tasks.index', text: $t('task.titles.entity_breadcrumb') }, { text: $t('generics.detail') }]"
       :links="headerLinks"
     />
 

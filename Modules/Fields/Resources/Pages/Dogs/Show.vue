@@ -7,6 +7,10 @@ import { deleteRowTable } from '@/Utils/table';
 import { stringToFormat } from '@/Utils/date';
 import { can } from '@/Services/Auth';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import CardSection from '@/Components/CardSection.vue';
+
 const { t } = useI18n();
 
 const props = defineProps({
@@ -57,12 +61,10 @@ const deleteHandler = async (id) => {
 </script>
 
 <template>
-  <Head :title="t('dog.titles.show')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('dog.titles.show')" >
     <HeaderCrud
-      :title="t('dog.titles.show')"
-      :breadcrumbs="[{ to: 'dogs.index', text: t('dog.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
+      :title="$t('dog.titles.show')"
+      :breadcrumbs="[{ to: 'dogs.index', text: $t('dog.titles.entity_breadcrumb') }, { text: $t('generics.detail') }]"
       :links="headerLinks"
     />
 

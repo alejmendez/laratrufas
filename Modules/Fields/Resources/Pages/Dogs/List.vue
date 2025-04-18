@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { Link } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
 
@@ -11,6 +12,8 @@ import Select from 'primevue/select';
 import { useI18n } from 'vue-i18n';
 import { getAge } from '@/Utils/date';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import Datatable from '@/Components/Table/Datatable.vue';
 import DogService from '@/Services/DogService.js';
 import { deleteRowTable } from '@/Utils/table.js';
@@ -104,9 +107,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Head :title="$t('dog.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('dog.titles.entity_breadcrumb')">
     <HeaderCrud
       :title="$t('dog.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'dogs.index', text: $t('dog.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"

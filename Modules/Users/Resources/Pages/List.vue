@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { usePage, Link } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
-import { usePage } from '@inertiajs/vue3';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
@@ -11,6 +11,8 @@ import Select from 'primevue/select';
 import { useI18n } from 'vue-i18n';
 import slugify from '@/Utils/slugify';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import Datatable from '@/Components/Table/Datatable.vue';
 import UserService from '@/Services/UserService.js';
 import { deleteRowDatatable } from '@/Utils/table.js';
@@ -85,9 +87,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Head :title="$t('user.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('user.titles.entity_breadcrumb')">
     <HeaderCrud
       :title="$t('user.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'users.index', text: $t('user.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"

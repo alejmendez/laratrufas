@@ -10,6 +10,8 @@ import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import VInput from '@/Components/Form/VInput.vue';
 import VCheckbox from '@/Components/Form/VCheckbox.vue';
 import Datatable from '@/Components/Table/Datatable.vue';
@@ -143,9 +145,7 @@ const updateHandler = () => {
 </script>
 
 <template>
-  <Head :title="$t('category_product.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('category_product.titles.entity_breadcrumb')">
     <HeaderCrud
       :title="$t('category_product.titles.entity_breadcrumb')"
       :breadcrumbs="[{ to: 'category_products.index', text: $t('category_product.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"

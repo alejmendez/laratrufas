@@ -6,6 +6,8 @@ import { useConfirm } from 'primevue/useconfirm';
 import { deleteRowTable } from '@/Utils/table';
 import { can } from '@/Services/Auth';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import StatisticsCard from '@Fields/Pages/Quarters/ShowComponents/StatisticsCard.vue';
 import HarvestCard from '@Fields/Pages/Quarters/ShowComponents/HarvestCard.vue';
 import LogbookCard from '@Fields/Pages/Quarters/ShowComponents/LogbookCard.vue';
@@ -52,9 +54,7 @@ const deleteHandler = async (id) => {
 </script>
 
 <template>
-  <Head :title="t('quarter.titles.show', {name: quarter.name})" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="t('quarter.titles.show', {name: quarter.name})">
     <HeaderCrud
       :title="t('quarter.titles.show', {name: quarter.name})"
       :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"

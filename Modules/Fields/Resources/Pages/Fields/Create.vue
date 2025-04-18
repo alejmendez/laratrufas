@@ -1,10 +1,9 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormField from '@Fields/Pages/Fields/Form.vue';
-
-const { t } = useI18n();
 
 const form = useForm({
   name: null,
@@ -21,13 +20,11 @@ const submitHandler = () => form.post(route('fields.store'), form.blueprint || f
 </script>
 
 <template>
-  <Head :title="t('field.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('field.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('field.titles.create')"
-      :breadcrumbs="[{ to: 'fields.index', text: t('field.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('fields.index') }"
+      :title="$t('field.titles.create')"
+      :breadcrumbs="[{ to: 'fields.index', text: $t('field.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('fields.index') }"
     />
     <FormField
       :form="form"

@@ -2,6 +2,8 @@
 import { useAttrs } from 'vue';
 import Checkbox from 'primevue/checkbox';
 
+import Label from '@/Components/Form/Label.vue';
+
 const model = defineModel({ default: false });
 
 const attrs = useAttrs();

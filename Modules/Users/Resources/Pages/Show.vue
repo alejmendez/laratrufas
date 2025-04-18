@@ -7,6 +7,10 @@ import { deleteRowTable } from '@/Utils/table';
 import { stringToFormat } from '@/Utils/date';
 import { can } from '@/Services/Auth';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import CardSection from '@/Components/CardSection.vue';
+
 const { t } = useI18n();
 const confirm = useConfirm();
 
@@ -55,9 +59,7 @@ const deleteHandler = async (id) => {
 </script>
 
 <template>
-  <Head :title="$t('user.titles.show')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('user.titles.show')">
     <HeaderCrud
       :title="$t('user.titles.show')"
       :breadcrumbs="[{ to: 'users.index', text: $t('user.titles.entity_breadcrumb') }, { text: $t('generics.detail') }]"

@@ -1,8 +1,13 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { getDataSelect } from '@/Services/Selects';
 
+import CardSection from '@/Components/CardSection.vue';
+import VInput from '@/Components/Form/VInput.vue';
+import VInputFile from '@/Components/Form/VInputFile.vue';
+import VSelect from '@/Components/Form/VSelect.vue';
+
+import { getDataSelect } from '@/Services/Selects';
 import { getAge } from '@/Utils/date';
 
 const { t } = useI18n();

@@ -1,12 +1,11 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormMachineries from '@Fields/Pages/Machineries/Form.vue';
 
 import { stringToDate } from '@/Utils/date';
-
-const { t } = useI18n();
 
 const props = defineProps({
   data: Object,
@@ -30,13 +29,11 @@ const submitHandler = () => form.post(route('machineries.update', data.id));
 </script>
 
 <template>
-  <Head :title="t('machinery.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('machinery.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('machinery.titles.edit')"
-      :breadcrumbs="[{ to: 'machineries.index', text: t('machinery.titles.entity_breadcrumb') }, { text: t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('machineries.index') }"
+      :title="$t('machinery.titles.edit')"
+      :breadcrumbs="[{ to: 'machineries.index', text: $t('machinery.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('machineries.index') }"
     />
     <FormMachineries
       :form="form"

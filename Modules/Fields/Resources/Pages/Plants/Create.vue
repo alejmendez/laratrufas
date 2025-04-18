@@ -1,10 +1,9 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormPlant from '@Fields/Pages/Plants/Form.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   fields: Array,
@@ -28,13 +27,11 @@ const submitHandler = () => form.post(route('plants.store'));
 </script>
 
 <template>
-  <Head :title="t('plant.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('plant.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('plant.titles.create')"
-      :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('plants.index') }"
+      :title="$t('plant.titles.create')"
+      :breadcrumbs="[{ to: 'plants.index', text: $t('plant.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('plants.index') }"
     />
     <FormPlant
       :form="form"

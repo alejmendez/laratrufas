@@ -14,9 +14,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <Head title="Dashboard" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout title="Dashboard">
     <FiltersDashboard :fields="props.fields" :field="props.field" />
     <CardsDashboard :field="props.field" :harvest_data="props.harvest_data" :task_data="props.task_data" />
 

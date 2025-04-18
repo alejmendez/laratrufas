@@ -1,9 +1,13 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { stringToDate } from '@/Utils/date';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import BulkWrapper from '@/Components/BulkWrapper.vue';
+
+import VSelect from '@/Components/Form/VSelect.vue';
+import VInputFile from '@/Components/Form/VInputFile.vue';
 
 const { t } = useI18n();
 
@@ -49,9 +53,7 @@ const changeFileHandler = (e) => {
 </script>
 
 <template>
-  <Head :title="t('harvest.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="t('harvest.titles.entity_breadcrumb')">
     <HeaderCrud
       :title="t('harvest.titles.bulk')"
       :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.actions.bulk') }]"

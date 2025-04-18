@@ -2,6 +2,9 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+
 import FormTask from '@Tasks/Components/Form.vue';
 
 const { t } = useI18n();
@@ -57,13 +60,11 @@ const submitHandler = () => form.post(route('tasks.store'));
 </script>
 
 <template>
-  <Head :title="t('task.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('task.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('task.titles.create')"
-      :breadcrumbs="[{ to: 'tasks.index', text: t('task.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('tasks.index') }"
+      :title="$t('task.titles.create')"
+      :breadcrumbs="[{ to: 'tasks.index', text: $t('task.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('tasks.index') }"
     />
     <FormTask
       :form="form"

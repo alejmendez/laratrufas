@@ -1,8 +1,14 @@
 <script setup>
 import { ref, toRaw, onMounted } from 'vue';
+import { Link } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import Dialog from 'primevue/dialog';
 import ProgressSpinner from 'primevue/progressspinner';
+
+import CardSection from '@/Components/CardSection.vue';
+import VSelect from '@/Components/Form/VSelect.vue';
+import Button from '@/Components/Form/Button.vue';
+
 import QuarterService from '@/Services/QuarterService.js';
 import { can } from '@/Services/Auth';
 

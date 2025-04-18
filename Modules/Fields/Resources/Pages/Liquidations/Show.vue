@@ -5,6 +5,9 @@ import { useI18n } from 'vue-i18n';
 import { stringToDate, stringToFormat } from '@/Utils/date';
 import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import CardSection from '@/Components/CardSection.vue';
 import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
 
 const { t } = useI18n();
@@ -75,9 +78,7 @@ const total_categories_not_commercial = computed(() => {
 </script>
 
 <template>
-  <Head :title="t('liquidation.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="t('liquidation.titles.entity_breadcrumb')">
     <HeaderCrud
       :title="t('liquidation.titles.show', { week: weekLiquidation })"
       :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.show') }]"

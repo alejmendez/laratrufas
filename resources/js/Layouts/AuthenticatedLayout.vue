@@ -1,5 +1,5 @@
 <script setup>
-import { usePage } from '@inertiajs/vue3';
+import { usePage, Head, Link } from '@inertiajs/vue3';
 import { storeToRefs } from 'pinia';
 import ConfirmDialog from 'primevue/confirmdialog';
 import Toast from 'primevue/toast';
@@ -10,6 +10,13 @@ import MenuUser from '@/Components/Menu/MenuUser.vue';
 import { useSideBarStore } from '@/Stores/sidebar.js';
 import { useDrawerRightMenuStore } from '@/Stores/sidebar.js';
 import { menuElementsRight } from '@/Services/Menu';
+
+const props = defineProps({
+  title: {
+    type: String,
+    default: '',
+  },
+});
 
 const page = usePage();
 const currentComponent = page.component;
@@ -24,6 +31,8 @@ const menuRightItems = menuElementsRight(currentComponent);
 </script>
 
 <template>
+  <Head :title="title" />
+
   <div class="flex items-center w-full h-[64px] bg-gray-50 dark:bg-[#2F3349] text-gray-100 px-[20px] py-[10px] z-30">
     <div class="w-[230px]">
       <div

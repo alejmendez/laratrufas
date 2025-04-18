@@ -2,6 +2,9 @@
 import { ref } from 'vue';
 import { useForm, router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
+
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import QrCodeReader from '@Fields/Pages/HarvestDetails/QrCodeReader.vue';
 import HarvestView from '@Fields/Pages/HarvestDetails/Views/HarvestView.vue';
 import VariablesView from '@Fields/Pages/HarvestDetails/Views/VariablesView.vue';
@@ -11,8 +14,6 @@ import Button from 'primevue/button';
 import { findByCode } from '@/Services/Plant.js';
 import HarvestDetailService from '@/Services/HarvestDetailService.js';
 import PlantDetailService from '@/Services/PlantDetailService.js';
-
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 const { t } = useI18n();
 
@@ -128,9 +129,7 @@ const optionViewHandler = (option) => {
 </script>
 
 <template>
-  <Head :title="t('harvest.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="t('harvest.titles.entity_breadcrumb')">
     <HeaderCrud
       :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }]"
     />

@@ -4,6 +4,8 @@ import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'primevue/usetoast';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormUser from '@Users/Components/Form.vue';
 
 const { t } = useI18n();
@@ -46,9 +48,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Head :title="t('profile.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="t('profile.titles.entity_breadcrumb')">
     <HeaderCrud
       :title="t('profile.titles.edit')"
       :breadcrumbs="[{ text: t('profile.titles.entity_breadcrumb') }]"

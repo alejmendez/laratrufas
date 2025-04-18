@@ -2,6 +2,8 @@
 import { useI18n } from 'vue-i18n';
 import { stringToFormat } from '@/Utils/date';
 
+import CardSection from '@/Components/CardSection.vue';
+
 const { t } = useI18n();
 
 const props = defineProps({

@@ -1,4 +1,6 @@
 <script setup>
+import { Link } from '@inertiajs/vue3';
+
 import PaginationTable from '@/Components/Table/PaginationTable.vue';
 import SearchInput from '@/Components/Table/SearchInput.vue';
 

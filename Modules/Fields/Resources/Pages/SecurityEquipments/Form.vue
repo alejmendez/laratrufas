@@ -1,6 +1,9 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 
+import CardSection from '@/Components/CardSection.vue';
+import VInput from '@/Components/Form/VInput.vue';
+
 const { t } = useI18n();
 
 const props = defineProps({

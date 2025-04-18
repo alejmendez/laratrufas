@@ -1,6 +1,8 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormUser from '@Users/Components/Form.vue';
 
 const props = defineProps({
@@ -22,9 +24,7 @@ const submitHandler = () => form.post(route('users.store'), form.avatar ? { forc
 </script>
 
 <template>
-  <Head :title="$t('user.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('user.titles.entity_breadcrumb')">
     <HeaderCrud
       :title="$t('user.titles.create')"
       :breadcrumbs="[{ to: 'users.index', text: $t('user.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"

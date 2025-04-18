@@ -1,10 +1,9 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormLiquidation from '@Fields/Pages/Liquidations/Form.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   importers: Array,
@@ -28,13 +27,11 @@ const submitHandler = () => form.post(route('liquidations.store'));
 </script>
 
 <template>
-  <Head :title="t('liquidation.titles.entity_breadcrumb')" />
-
-  <AuthenticatedLayout>
+  <AuthenticatedLayout :title="$t('liquidation.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('liquidation.titles.create')"
-      :breadcrumbs="[{ to: 'liquidations.index', text: t('liquidation.titles.entity_breadcrumb') }, { text: t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.create'), hrefCancel: route('liquidations.index') }"
+      :title="$t('liquidation.titles.create')"
+      :breadcrumbs="[{ to: 'liquidations.index', text: $t('liquidation.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('liquidations.index') }"
     />
     <FormLiquidation
       :form="form"
