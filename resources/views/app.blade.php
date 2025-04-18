@@ -18,18 +18,9 @@
 
         <!-- Scripts -->
         @routes()
-        @php
-            if (str_contains($page['component'], '::')) {
-                $parts = explode('::', $page['component']);
-                $componentPath = "Modules/" . $parts[0] . "/Resources/Pages/" . $parts[1] . ".vue";
-            } else {
-                $componentPath = "resources/js/Pages/{$page['component']}.vue";
-            }
-        @endphp
         @vite([
             'resources/css/app.css',
-            'resources/js/app.js',
-            $componentPath
+            'resources/js/app.js'
         ])
         @inertiaHead
     </head>
