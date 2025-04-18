@@ -67,8 +67,6 @@ const submitHandler = () => form.post(route('tasks.update', data.id));
 </script>
 
 <template>
-  <Head  />
-
   <AuthenticatedLayout :title="$t('task.titles.entity_breadcrumb')">
     <HeaderCrud
       :title="$t('task.titles.edit')"

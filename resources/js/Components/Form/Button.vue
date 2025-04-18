@@ -8,8 +8,8 @@ const attrs = useAttrs();
 
 <template>
   <template v-if="attrs.as === 'Link'">
-    <ButtonPrime v-bind="attrs">
-      <Link :href="attrs.href">
+    <ButtonPrime asChild v-slot="slotProps">
+      <Link :href="attrs.href" v-bind="slotProps">
         {{ attrs.label }}
       </Link>
     </ButtonPrime>

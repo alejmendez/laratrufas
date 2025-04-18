@@ -2,6 +2,8 @@
 import { useForm, router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
+import VSelect from '@/Components/Form/VSelect.vue';
+
 const props = defineProps({
   fields: Array,
   field: Object,

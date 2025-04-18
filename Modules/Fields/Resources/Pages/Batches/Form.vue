@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 
 import CardSection from '@/Components/CardSection.vue';
 import VInput from '@/Components/Form/VInput.vue';
+import VSelect from '@/Components/Form/VSelect.vue';
 import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
 import AddImporter from '@/Components/Form/AddImporter.vue';
 

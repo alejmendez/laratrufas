@@ -3,6 +3,9 @@ import { parse, parseISO, format } from 'date-fns';
 export const getAge = (birthDate) => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e10);
 export const stringToDate = (date) => {
   // Verifica si la fecha contiene una 'T', indicando un formato ISO
+  if (date === null) {
+    return null;
+  }
   if (date.includes('T')) {
     return parseISO(date);
   }
