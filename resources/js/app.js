@@ -6,7 +6,7 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { ZiggyVue } from 'ziggy-js';
 import { initLibs } from '@/Libs';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Agricola Frayleon';
 
 // Importamos todos los módulos de una vez
 const modulePages = import.meta.glob('./../../Modules/*/Resources/Pages/**/*.vue');
@@ -24,7 +24,11 @@ const resolvePageComponent = (name) => {
 
     page = modulePages[pagePath];
   } else {
-    page = pages[`./Pages/${name}.vue`];
+    const pagePath = `./Pages/${name}.vue`;
+    if (!pages[pagePath]) {
+      throw new Error(`Page "${pagePath}" not found`);
+    }
+    page = pages[pagePath];
   }
 
   return typeof page === 'function' ? page() : page;
