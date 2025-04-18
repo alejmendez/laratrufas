@@ -15,6 +15,7 @@ import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
 import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
 import VSelect from '@/Components/Form/VSelect.vue';
 import Button from '@/Components/Form/Button.vue';
+import VInput from '@/Components/Form/VInput.vue';
 
 const { t } = useI18n();
 

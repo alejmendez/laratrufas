@@ -1,6 +1,10 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
+
 import Button from 'primevue/button';
+
+import VSelect from '@/Components/Form/VSelect.vue';
+import VInput from '@/Components/Form/VInput.vue';
 
 const { t } = useI18n();
 

@@ -6,6 +6,7 @@ import CardSection from '@/Components/CardSection.vue';
 import VInput from '@/Components/Form/VInput.vue';
 import VInputFile from '@/Components/Form/VInputFile.vue';
 import VSelect from '@/Components/Form/VSelect.vue';
+import Button from '@/Components/Form/Button.vue';
 
 import { getDataSelect } from '@/Services/Selects';
 import { getAge } from '@/Utils/date';

@@ -6,6 +6,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
 import FormHarvest from '@Fields/Pages/Harvests/Form.vue';
 
+import Button from '@/Components/Form/Button.vue';
+
 import { stringToDate } from '@/Utils/date';
 
 const props = defineProps({

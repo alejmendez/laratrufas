@@ -12,6 +12,8 @@ import StatisticsCard from '@Fields/Pages/Quarters/ShowComponents/StatisticsCard
 import HarvestCard from '@Fields/Pages/Quarters/ShowComponents/HarvestCard.vue';
 import LogbookCard from '@Fields/Pages/Quarters/ShowComponents/LogbookCard.vue';
 import FileCard from '@Fields/Pages/Quarters/ShowComponents/FileCard.vue';
+
+import Button from '@/Components/Form/Button.vue';
 const { t } = useI18n();
 const confirm = useConfirm();
 

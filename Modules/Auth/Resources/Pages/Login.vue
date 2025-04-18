@@ -4,6 +4,8 @@ import { useForm, Link } from '@inertiajs/vue3';
 
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import Checkbox from '@/Components/Form/Checkbox.vue';
+import VInput from '@/Components/Form/VInput.vue';
+import Button from '@/Components/Form/Button.vue';
 
 const { t } = useI18n();
 

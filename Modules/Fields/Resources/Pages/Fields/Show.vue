@@ -13,6 +13,8 @@ import HarvestCard from '@Fields/Pages/Fields/ShowComponents/HarvestCard.vue';
 import StatisticsCard from '@Fields/Pages/Fields/ShowComponents/StatisticsCard.vue';
 import DocumentationCard from '@Fields/Pages/Fields/ShowComponents/DocumentationCard.vue';
 
+import Button from '@/Components/Form/Button.vue';
+
 import { can } from '@/Services/Auth';
 
 const { t } = useI18n();
