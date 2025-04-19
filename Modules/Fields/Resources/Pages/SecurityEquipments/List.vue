@@ -13,10 +13,10 @@ import { useI18n } from 'vue-i18n';
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
-import SecurityEquipmentService from '@/Services/SecurityEquipmentService.js';
+import SecurityEquipmentService from '@Fields/Services/SecurityEquipmentService.js';
 import { stringToFormat } from '@Core/Utils/date';
 import { deleteRowTable } from '@Core/Utils/table.js';
-import { can } from '@/Services/Auth';
+import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: String,

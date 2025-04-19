@@ -11,9 +11,9 @@ import VariablesView from '@Fields/Pages/HarvestDetails/Views/VariablesView.vue'
 
 import Button from 'primevue/button';
 
-import { findByCode } from '@/Services/Plant.js';
-import HarvestDetailService from '@/Services/HarvestDetailService.js';
-import PlantDetailService from '@/Services/PlantDetailService.js';
+import { findByCode } from '@Fields/Services/Plant.js';
+import HarvestDetailService from '@Fields/Services/HarvestDetailService.js';
+import PlantDetailService from '@Fields/Services/PlantDetailService.js';
 
 const { t } = useI18n();
 

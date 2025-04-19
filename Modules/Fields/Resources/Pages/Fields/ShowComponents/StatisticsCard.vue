@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 import CardSection from '@Core/Components/CardSection.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 
-import { getGraph } from '@/Services/Graphs';
+import { getGraph } from '@Fields/Services/Graphs';
 
 const props = defineProps({
   field: Object,

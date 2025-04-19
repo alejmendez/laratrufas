@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 import { deleteRowTable } from '@Core/Utils/table';
 import { stringToFormat } from '@Core/Utils/date';
-import { can } from '@/Services/Auth';
+import { can } from '@Auth/Services/Auth';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';

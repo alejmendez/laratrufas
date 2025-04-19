@@ -16,11 +16,11 @@ import CardSection from '@Core/Components/CardSection.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 
-import LiquidationService from '@/Services/LiquidationService.js';
+import LiquidationService from '@Fields/Services/LiquidationService.js.js';
 import { stringToFormat } from '@Core/Utils/date';
 import { deleteRowTable } from '@Core/Utils/table.js';
-import { getDataSelects } from '@/Services/Selects';
-import { can } from '@/Services/Auth';
+import { getDataSelects } from '@Core/Services/Selects';
+import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: String,

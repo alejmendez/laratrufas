@@ -14,10 +14,10 @@ import slugify from '@Core/Utils/slugify';
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
-import UserService from '@/Services/UserService.js';
+import UserService from '@Users/Services/UserService.js';
 import { deleteRowDatatable } from '@Core/Utils/table.js';
-import { getDataSelects } from '@/Services/Selects';
-import { can } from '@/Services/Auth';
+import { getDataSelects } from '@Core/Services/Selects';
+import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: String,

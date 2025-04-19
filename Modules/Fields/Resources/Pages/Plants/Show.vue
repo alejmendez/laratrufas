@@ -6,7 +6,7 @@ import { useConfirm } from 'primevue/useconfirm';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import { deleteRowTable } from '@Core/Utils/table';
-import { can } from '@/Services/Auth';
+import { can } from '@Auth/Services/Auth';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -17,7 +17,7 @@ import FileCard from '@Fields/Pages/Plants/ShowComponents/FileCard.vue';
 import LogsCard from '@Fields/Pages/Plants/ShowComponents/LogsCard.vue';
 import StatisticsCard from '@Fields/Pages/Plants/ShowComponents/StatisticsCard.vue';
 
-import PlantDetailService from '@/Services/PlantDetailService';
+import PlantDetailService from '@Fields/Services/PlantDetailService';
 
 const { t } = useI18n();
 const confirm = useConfirm();

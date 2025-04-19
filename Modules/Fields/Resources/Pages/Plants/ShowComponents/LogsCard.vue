@@ -9,8 +9,8 @@ import ProgressSpinner from 'primevue/progressspinner';
 import CardSection from '@Core/Components/CardSection.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 
-import PlantDetailService from '@/Services/PlantDetailService';
-import { getDataSelect } from '@/Services/Selects';
+import PlantDetailService from '@Fields/Services/PlantDetailService';
+import { getDataSelect } from '@Core/Services/Selects';
 import { stringToFormat } from '@Core/Utils/date';
 
 const { t } = useI18n();

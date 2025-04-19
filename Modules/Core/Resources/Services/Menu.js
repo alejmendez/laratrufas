@@ -1,4 +1,4 @@
-import { can } from '@/Services/Auth';
+import { can } from '@Auth/Services/Auth';
 
 export const menuElements = (currentComponent) => {
   const menuItems = [

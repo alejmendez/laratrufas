@@ -19,11 +19,11 @@ import VSelect from '@Core/Components/Form/VSelect.vue';
 import { useI18n } from 'vue-i18n';
 
 import Datatable from '@Core/Components/Table/Datatable.vue';
-import HarvestService from '@/Services/HarvestService.js';
+import HarvestService from '@Fields/Services/HarvestService.js';
 import { deleteRowTable } from '@Core/Utils/table.js';
 
-import { getDataSelects } from '@/Services/Selects';
-import { can } from '@/Services/Auth';
+import { getDataSelects } from '@Core/Services/Selects';
+import { can } from '@Auth/Services/Auth';
 
 const toast = useToast();
 const confirm = useConfirm();

@@ -16,8 +16,8 @@ import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import PlantService from '@Fields/Services/PlantService.js';
 import { deleteRowTable } from '@Core/Utils/table.js';
-import { getDataSelects } from '@/Services/Selects';
-import { can } from '@/Services/Auth';
+import { getDataSelects } from '@Core/Services/Selects';
+import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: String,

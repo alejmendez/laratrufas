@@ -1,5 +1,5 @@
 import axios from 'axios';
-import datatable from '@/Services/Datatable';
+import datatable from '@Core/Services/Datatable';
 
 const list = async (lazyParams) => {
   const response = await datatable.list(route('tools.index'), lazyParams);

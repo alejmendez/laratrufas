@@ -13,9 +13,9 @@ import { useI18n } from 'vue-i18n';
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
-import FieldService from '@/Services/FieldService.js';
+import FieldService from '@Fields/Services/FieldService.js';
 import { deleteRowTable } from '@Core/Utils/table.js';
-import { can } from '@/Services/Auth';
+import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: String,

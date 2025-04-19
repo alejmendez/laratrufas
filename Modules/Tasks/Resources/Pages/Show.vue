@@ -4,7 +4,7 @@ import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 
-import { can } from '@/Services/Auth';
+import { can } from '@Auth/Services/Auth';
 import { deleteRowTable } from '@Core/Utils/table';
 import { stringToFormat } from '@Core/Utils/date';
 

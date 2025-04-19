@@ -6,7 +6,7 @@ import Dialog from 'primevue/dialog';
 import VInput from '@Core/Components/Form/VInput.vue';
 import Button from '@Core/Components/Form/Button.vue';
 
-import plantTypeService from '@/Services/PlantTypeService.js';
+import plantTypeService from '@Fields/Services/PlantTypeService.js';
 
 const { t } = useI18n();
 

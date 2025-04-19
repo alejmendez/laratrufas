@@ -5,7 +5,7 @@ import CardSection from '@Core/Components/CardSection.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 import VSelectMultiple from '@Core/Components/Form/VSelectMultiple.vue';
 
-import { getDataSelect } from '@/Services/Selects';
+import { getDataSelect } from '@Core/Services/Selects';
 
 const props = defineProps({
   t: Function,

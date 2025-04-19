@@ -14,9 +14,9 @@ import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 
 import VInput from '@Core/Components/Form/VInput.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
-import importerService from '@/Services/ImporterService.js';
+import importerService from '@Fields/Services/ImporterService.js';
 import { deleteRowDatatable } from '@Core/Utils/table.js';
-import { can } from '@/Services/Auth';
+import { can } from '@Auth/Services/Auth';
 const toast = useToast();
 const confirm = useConfirm();
 const { t } = useI18n();

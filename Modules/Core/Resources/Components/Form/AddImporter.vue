@@ -7,7 +7,7 @@ import Dialog from 'primevue/dialog';
 import VInput from '@Core/Components/Form/VInput.vue';
 import Button from '@Core/Components/Form/Button.vue';
 
-import importerService from '@/Services/ImporterService';
+import importerService from '@Fields/Services/ImporterService';
 
 const { t } = useI18n();
 

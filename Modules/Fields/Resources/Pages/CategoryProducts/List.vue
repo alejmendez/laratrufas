@@ -15,9 +15,9 @@ import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
 import VCheckbox from '@Core/Components/Form/VCheckbox.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
-import categoryProductService from '@/Services/CategoryProductService.js';
+import categoryProductService from '@Fields/Services/CategoryProductService.js';
 import { deleteRowDatatable } from '@Core/Utils/table.js';
-import { can } from '@/Services/Auth';
+import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: String,

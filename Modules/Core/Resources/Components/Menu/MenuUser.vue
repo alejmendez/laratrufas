@@ -5,7 +5,7 @@ import { usePreset } from '@primevue/themes';
 import SelectButton from 'primevue/selectbutton';
 import Presents from '@Core/Libs/PrimePresents';
 import { useDrawerRightMenuStore } from '@Core/Stores/sidebar.js';
-import { canShowRightMenu } from '@/Services/Auth';
+import { canShowRightMenu } from '@Auth/Services/Auth';
 
 const darkModeValue = ref(null);
 const darkMode = ref([

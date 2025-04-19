@@ -3,7 +3,7 @@ import { usePage } from '@inertiajs/vue3';
 
 import MenuGroup from './MenuGroup.vue';
 import MenuElement from './MenuElement.vue';
-import { menuElements } from '@/Services/Menu.js';
+import { menuElements } from '@Core/Services/Menu.js';
 
 const page = usePage();
 const currentComponent = page.component;

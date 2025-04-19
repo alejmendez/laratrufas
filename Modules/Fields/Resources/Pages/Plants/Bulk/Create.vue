@@ -9,7 +9,7 @@ import BulkWrapper from '@Core/Components/BulkWrapper.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 import VInputFile from '@Core/Components/Form/VInputFile.vue';
 
-import { getDataSelect } from '@/Services/Selects';
+import { getDataSelect } from '@Core/Services/Selects';
 
 const props = defineProps({
   fields: Array,

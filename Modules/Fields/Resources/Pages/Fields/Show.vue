@@ -15,7 +15,7 @@ import DocumentationCard from '@Fields/Pages/Fields/ShowComponents/Documentation
 
 import Button from '@Core/Components/Form/Button.vue';
 
-import { can } from '@/Services/Auth';
+import { can } from '@Auth/Services/Auth';
 
 const { t } = useI18n();
 

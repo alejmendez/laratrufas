@@ -7,7 +7,7 @@ import VSelect from '@Core/Components/Form/VSelect.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
 
 import AddPlantType from '@Core/Components/Form/AddPlantType.vue';
-import { getDataSelect } from '@/Services/Selects';
+import { getDataSelect } from '@Core/Services/Selects';
 
 const { t } = useI18n();
 

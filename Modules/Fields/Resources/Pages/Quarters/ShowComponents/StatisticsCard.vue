@@ -10,8 +10,8 @@ import VSelect from '@Core/Components/Form/VSelect.vue';
 import Button from '@Core/Components/Form/Button.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
 
-import QuarterService from '@/Services/QuarterService.js';
-import { can } from '@/Services/Auth';
+import QuarterService from '@Fields/Services/QuarterService.js';
+import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   quarter: Object,

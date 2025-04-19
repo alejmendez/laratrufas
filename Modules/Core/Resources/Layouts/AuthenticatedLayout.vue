@@ -9,7 +9,7 @@ import SideBarLeft from '@Core/Components/Menu/SideBarLeft.vue';
 import MenuUser from '@Core/Components/Menu/MenuUser.vue';
 import { useSideBarStore } from '@Core/Stores/sidebar.js';
 import { useDrawerRightMenuStore } from '@Core/Stores/sidebar.js';
-import { menuElementsRight } from '@/Services/Menu';
+import { menuElementsRight } from '@Core/Services/Menu';
 
 const props = defineProps({
   title: {
