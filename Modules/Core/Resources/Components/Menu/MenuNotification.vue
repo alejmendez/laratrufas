@@ -4,7 +4,7 @@ import { usePage, Link } from '@inertiajs/vue3';
 
 const root = ref(null);
 const page = usePage();
-const unread_notifications = page.props.auth.user.unread_notifications;
+const unread_notifications = page.props.auth.user.unread_notifications || [];
 
 const showDropDown = ref(false);
 

@@ -33,18 +33,11 @@ class HandleInertiaRequests extends Middleware
         $user = $request->user();
         $userData = $user;
         if ($user) {
-            $data = $user->toArray();
-
-            $userData = [
-                'id' => $user->id,
-                'full_name' => $user->full_name,
-                'avatar_url' => CacheService::getUserAvatar($user),
-                'dni' => $user->dni,
-                'email' => $user->email,
-                'roles' => CacheService::getUserRoles($user),
-                'permissions' => CacheService::getUserPermissions($user),
-                'unread_notifications' => CacheService::getUserUnreadNotifications($user),
-            ];
+            if ($request->ajax()) {
+                $userData = CacheService::getUserDataSessionAjax($user);
+            } else {
+                $userData = CacheService::getUserDataSession($user);
+            }
         }
 
         return [
