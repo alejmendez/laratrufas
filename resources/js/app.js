@@ -10,26 +10,16 @@ const appName = import.meta.env.VITE_APP_NAME || 'Agricola Frayleon';
 
 // Importamos todos los módulos de una vez
 const modulePages = import.meta.glob('./../../Modules/*/Resources/Pages/**/*.vue', { eager: true });
-const pages = import.meta.glob('./Pages/**/*.vue', { eager: true });
 
 const resolvePageComponent = (name) => {
-  let page;
-  if (name.includes('::')) {
-    const [module, pageName] = name.split('::');
-    const pagePath = `../../Modules/${module}/Resources/Pages/${pageName}.vue`;
+  const [module, pageName] = name.split('::');
+  const pagePath = `../../Modules/${module}/Resources/Pages/${pageName}.vue`;
 
-    if (!modulePages[pagePath]) {
-      throw new Error(`Page "${pagePath}" not found`);
-    }
-
-    page = modulePages[pagePath];
-  } else {
-    const pagePath = `./Pages/${name}.vue`;
-    if (!pages[pagePath]) {
-      throw new Error(`Page "${pagePath}" not found`);
-    }
-    page = pages[pagePath];
+  if (!modulePages[pagePath]) {
+    throw new Error(`Page "${pagePath}" not found`);
   }
+
+  const page = modulePages[pagePath];
 
   return typeof page === 'function' ? page() : page;
 };
