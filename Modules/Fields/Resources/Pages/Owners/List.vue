@@ -15,7 +15,7 @@ import VInput from '@Core/Components/Form/VInput.vue';
 import VInputDni from '@Core/Components/Form/VInputDni.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import ownerService from '@/Services/OwnerService.js';
-import { deleteRowDatatable } from '@/Utils/table.js';
+import { deleteRowDatatable } from '@Core/Utils/table.js';
 import { can } from '@/Services/Auth';
 const props = defineProps({
   toast: String,

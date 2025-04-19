@@ -6,9 +6,9 @@ import CardSection from '@Core/Components/CardSection.vue';
 import Button from '@Core/Components/Form/Button.vue';
 
 import VEditor from '@Core/Components/Form/VEditor.vue';
-import { stringToFormat, relativeTimeDifference, stringToDate } from '@/Utils/date.js';
+import { stringToFormat, relativeTimeDifference, stringToDate } from '@Core/Utils/date.js';
 import { store as storeComment, update as updateComment, destroy as destroyComment } from '@Tasks/Services/TaskCommentService';
-import { deleteRowTable } from '@/Utils/table.js';
+import { deleteRowTable } from '@Core/Utils/table.js';
 
 const props = defineProps({
   t: Function,

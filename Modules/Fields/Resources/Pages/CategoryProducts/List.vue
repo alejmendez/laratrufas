@@ -16,7 +16,7 @@ import VInput from '@Core/Components/Form/VInput.vue';
 import VCheckbox from '@Core/Components/Form/VCheckbox.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import categoryProductService from '@/Services/CategoryProductService.js';
-import { deleteRowDatatable } from '@/Utils/table.js';
+import { deleteRowDatatable } from '@Core/Utils/table.js';
 import { can } from '@/Services/Auth';
 
 const props = defineProps({

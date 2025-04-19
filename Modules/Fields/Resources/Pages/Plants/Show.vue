@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
-import { deleteRowTable } from '@/Utils/table';
+import { deleteRowTable } from '@Core/Utils/table';
 import { can } from '@/Services/Auth';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';

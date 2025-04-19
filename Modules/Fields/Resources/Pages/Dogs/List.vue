@@ -10,13 +10,13 @@ import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
 
 import { useI18n } from 'vue-i18n';
-import { getAge } from '@/Utils/date';
+import { getAge } from '@Core/Utils/date';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import DogService from '@/Services/DogService.js';
-import { deleteRowTable } from '@/Utils/table.js';
+import { deleteRowTable } from '@Core/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
 import { can } from '@/Services/Auth';
 

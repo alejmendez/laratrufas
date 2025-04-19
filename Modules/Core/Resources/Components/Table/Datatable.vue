@@ -8,7 +8,7 @@ import InputText from 'primevue/inputtext';
 import { useToast } from 'primevue/usetoast';
 import { useI18n } from 'vue-i18n';
 
-import { useSideBarStore } from '@/Stores/sidebar';
+import { useSideBarStore } from '@Core/Stores/sidebar';
 
 import Button from '@Core/Components/Form/Button.vue';
 

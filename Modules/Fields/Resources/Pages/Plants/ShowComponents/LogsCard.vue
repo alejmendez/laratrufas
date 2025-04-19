@@ -11,7 +11,7 @@ import VSelect from '@Core/Components/Form/VSelect.vue';
 
 import PlantDetailService from '@/Services/PlantDetailService';
 import { getDataSelect } from '@/Services/Selects';
-import { stringToFormat } from '@/Utils/date';
+import { stringToFormat } from '@Core/Utils/date';
 
 const { t } = useI18n();
 

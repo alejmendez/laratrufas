@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia';
 import SideBarLeft from '@Core/Components/Menu/SideBarLeft.vue';
 
-import { useSideBarStore } from '@/Stores/sidebar.js';
+import { useSideBarStore } from '@Core/Stores/sidebar.js';
 
 const sideBarStore = useSideBarStore();
 const { show } = storeToRefs(sideBarStore);

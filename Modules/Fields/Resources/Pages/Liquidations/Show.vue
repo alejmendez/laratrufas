@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { stringToDate, stringToFormat } from '@/Utils/date';
+import { stringToDate, stringToFormat } from '@Core/Utils/date';
 import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';

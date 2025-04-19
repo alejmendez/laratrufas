@@ -9,7 +9,7 @@ import VSelect from '@Core/Components/Form/VSelect.vue';
 import Button from '@Core/Components/Form/Button.vue';
 
 import { getDataSelect } from '@/Services/Selects';
-import { getAge } from '@/Utils/date';
+import { getAge } from '@Core/Utils/date';
 
 const { t } = useI18n();
 

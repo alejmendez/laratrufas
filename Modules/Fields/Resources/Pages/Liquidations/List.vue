@@ -17,8 +17,8 @@ import Datatable from '@Core/Components/Table/Datatable.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 
 import LiquidationService from '@/Services/LiquidationService.js';
-import { stringToFormat } from '@/Utils/date';
-import { deleteRowTable } from '@/Utils/table.js';
+import { stringToFormat } from '@Core/Utils/date';
+import { deleteRowTable } from '@Core/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
 import { can } from '@/Services/Auth';
 

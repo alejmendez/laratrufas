@@ -2,7 +2,7 @@
 import { useAttrs } from 'vue';
 import { Link } from '@inertiajs/vue3';
 
-import { useSideBarStore } from '@/Stores/sidebar.js';
+import { useSideBarStore } from '@Core/Stores/sidebar.js';
 
 const attrs = useAttrs();
 

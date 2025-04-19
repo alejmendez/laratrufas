@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
-import { deleteRowTable } from '@/Utils/table';
+import { deleteRowTable } from '@Core/Utils/table';
 import { useConfirm } from 'primevue/useconfirm';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';

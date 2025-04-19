@@ -3,8 +3,8 @@ import { ref, computed } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
-import { deleteRowTable } from '@/Utils/table';
-import { stringToFormat } from '@/Utils/date';
+import { deleteRowTable } from '@Core/Utils/table';
+import { stringToFormat } from '@Core/Utils/date';
 import { can } from '@/Services/Auth';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';

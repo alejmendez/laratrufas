@@ -5,7 +5,7 @@ import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import FormMachineries from '@Fields/Pages/Machineries/Form.vue';
 
-import { stringToDate } from '@/Utils/date';
+import { stringToDate } from '@Core/Utils/date';
 
 const props = defineProps({
   data: Object,

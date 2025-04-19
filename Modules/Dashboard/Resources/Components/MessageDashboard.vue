@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 import ProgressSpinner from 'primevue/progressspinner';
 
 import { listUnread } from '@Tasks/Services/TaskNotificationService';
-import { stringToDate, relativeTimeDifference } from '@/Utils/date';
+import { stringToDate, relativeTimeDifference } from '@Core/Utils/date';
 
 const props = defineProps({
   tasks: Array,

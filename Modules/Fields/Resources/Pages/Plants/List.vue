@@ -15,7 +15,7 @@ import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import PlantService from '@Fields/Services/PlantService.js';
-import { deleteRowTable } from '@/Utils/table.js';
+import { deleteRowTable } from '@Core/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
 import { can } from '@/Services/Auth';
 

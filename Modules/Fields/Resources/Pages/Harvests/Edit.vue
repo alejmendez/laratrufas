@@ -8,7 +8,7 @@ import FormHarvest from '@Fields/Pages/Harvests/Form.vue';
 
 import Button from '@Core/Components/Form/Button.vue';
 
-import { stringToDate } from '@/Utils/date';
+import { stringToDate } from '@Core/Utils/date';
 
 const props = defineProps({
   data: Object,

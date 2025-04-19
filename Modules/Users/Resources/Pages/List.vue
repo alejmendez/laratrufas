@@ -9,13 +9,13 @@ import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
 
 import { useI18n } from 'vue-i18n';
-import slugify from '@/Utils/slugify';
+import slugify from '@Core/Utils/slugify';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import UserService from '@/Services/UserService.js';
-import { deleteRowDatatable } from '@/Utils/table.js';
+import { deleteRowDatatable } from '@Core/Utils/table.js';
 import { getDataSelects } from '@/Services/Selects';
 import { can } from '@/Services/Auth';
 

@@ -1,6 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
-import { stringToFormat } from '@/Utils/date';
+import { stringToFormat } from '@Core/Utils/date';
 
 import CardSection from '@Core/Components/CardSection.vue';
 

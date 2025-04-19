@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/vue3';
 import { usePreset } from '@primevue/themes';
 import SelectButton from 'primevue/selectbutton';
 import Presents from '@/Libs/PrimePresents';
-import { useDrawerRightMenuStore } from '@/Stores/sidebar.js';
+import { useDrawerRightMenuStore } from '@Core/Stores/sidebar.js';
 import { canShowRightMenu } from '@/Services/Auth';
 
 const darkModeValue = ref(null);
