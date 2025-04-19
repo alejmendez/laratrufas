@@ -19,6 +19,7 @@ class CoreServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'core');
         Route::middleware('web')->group(base_path('Modules/Core/Routes/web.php'));
 
         if ($this->app->runningInConsole()) {
