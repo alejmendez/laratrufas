@@ -4,7 +4,7 @@ import 'primeicons/primeicons.css';
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { ZiggyVue } from 'ziggy-js';
-import { initLibs } from '@/Libs';
+import { initLibs } from '@Core/Libs';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Agricola Frayleon';
 
