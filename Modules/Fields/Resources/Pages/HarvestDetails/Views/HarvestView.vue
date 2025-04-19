@@ -3,8 +3,8 @@ import { useI18n } from 'vue-i18n';
 
 import Button from 'primevue/button';
 
-import VSelect from '@/Components/Form/VSelect.vue';
-import VInput from '@/Components/Form/VInput.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
 
 const { t } = useI18n();
 

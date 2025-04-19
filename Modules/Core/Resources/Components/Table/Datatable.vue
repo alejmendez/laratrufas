@@ -10,7 +10,7 @@ import { useI18n } from 'vue-i18n';
 
 import { useSideBarStore } from '@/Stores/sidebar';
 
-import Button from '@/Components/Form/Button.vue';
+import Button from '@Core/Components/Form/Button.vue';
 
 const { t } = useI18n();
 

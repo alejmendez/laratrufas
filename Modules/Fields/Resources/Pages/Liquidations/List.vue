@@ -10,11 +10,11 @@ import InputText from 'primevue/inputtext';
 
 import { useI18n } from 'vue-i18n';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
-import CardSection from '@/Components/CardSection.vue';
-import Datatable from '@/Components/Table/Datatable.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import Datatable from '@Core/Components/Table/Datatable.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
 
 import LiquidationService from '@/Services/LiquidationService.js';
 import { stringToFormat } from '@/Utils/date';

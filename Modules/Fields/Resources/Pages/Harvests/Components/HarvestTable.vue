@@ -13,12 +13,12 @@ import Row from 'primevue/row';
 import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
 
-import CardSection from '@/Components/CardSection.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
 
 import { useI18n } from 'vue-i18n';
 
-import Datatable from '@/Components/Table/Datatable.vue';
+import Datatable from '@Core/Components/Table/Datatable.vue';
 import HarvestService from '@/Services/HarvestService.js';
 import { deleteRowTable } from '@/Utils/table.js';
 

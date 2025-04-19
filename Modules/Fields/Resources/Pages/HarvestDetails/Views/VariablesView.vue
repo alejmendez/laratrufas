@@ -5,8 +5,8 @@ import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
 
-import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
-import VInput from '@/Components/Form/VInput.vue';
+import VElementFormWrapper from '@Core/Components/Form/VElementFormWrapper.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
 
 const { t } = useI18n();
 

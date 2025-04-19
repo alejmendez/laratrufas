@@ -1,11 +1,11 @@
 <script setup>
 import { useForm, Head } from '@inertiajs/vue3';
 
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import GuestLayout from '@Core/Layouts/GuestLayout.vue';
+import InputError from '@Core/Components/InputError.vue';
+import InputLabel from '@Core/Components/InputLabel.vue';
+import TextInput from '@Core/Components/TextInput.vue';
+import PrimaryButton from '@Core/Components/PrimaryButton.vue';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();

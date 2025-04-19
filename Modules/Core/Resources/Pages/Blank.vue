@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 </script>
 
 <template>

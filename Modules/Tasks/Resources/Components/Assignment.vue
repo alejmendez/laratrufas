@@ -1,9 +1,9 @@
 <script setup>
 import { ref, watch } from 'vue';
 
-import CardSection from '@/Components/CardSection.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
-import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
+import VSelectMultiple from '@Core/Components/Form/VSelectMultiple.vue';
 
 import { getDataSelect } from '@/Services/Selects';
 

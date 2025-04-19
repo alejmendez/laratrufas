@@ -1,8 +1,8 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 
-import CardSection from '@/Components/CardSection.vue';
-import VInput from '@/Components/Form/VInput.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
 
 const { t } = useI18n();
 

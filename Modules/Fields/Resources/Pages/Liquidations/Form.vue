@@ -9,12 +9,12 @@ import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 
-import CardSection from '@/Components/CardSection.vue';
-import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
-import AddImporter from '@/Components/Form/AddImporter.vue';
-import VInput from '@/Components/Form/VInput.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
-import Button from '@/Components/Form/Button.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import VElementFormWrapper from '@Core/Components/Form/VElementFormWrapper.vue';
+import AddImporter from '@Core/Components/Form/AddImporter.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
+import Button from '@Core/Components/Form/Button.vue';
 
 const { t } = useI18n();
 

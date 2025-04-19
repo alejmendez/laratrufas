@@ -9,11 +9,11 @@ import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import { useI18n } from 'vue-i18n';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
-import VInput from '@/Components/Form/VInput.vue';
-import VInputDni from '@/Components/Form/VInputDni.vue';
-import Datatable from '@/Components/Table/Datatable.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
+import VInputDni from '@Core/Components/Form/VInputDni.vue';
+import Datatable from '@Core/Components/Table/Datatable.vue';
 import ownerService from '@/Services/OwnerService.js';
 import { deleteRowDatatable } from '@/Utils/table.js';
 import { can } from '@/Services/Auth';

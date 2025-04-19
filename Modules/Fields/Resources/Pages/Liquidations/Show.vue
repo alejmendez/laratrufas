@@ -5,10 +5,10 @@ import { useI18n } from 'vue-i18n';
 import { stringToDate, stringToFormat } from '@/Utils/date';
 import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
-import CardSection from '@/Components/CardSection.vue';
-import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import VElementFormWrapper from '@Core/Components/Form/VElementFormWrapper.vue';
 
 const { t } = useI18n();
 

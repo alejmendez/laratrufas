@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue';
 
 import InputGroup from 'primevue/inputgroup';
-import Button from '@/Components/Form/Button.vue';
+import Button from '@Core/Components/Form/Button.vue';
 
 
 const props = defineProps({

@@ -1,5 +1,5 @@
 import PrimeVue from 'primevue/config';
-import primeLocale from '@/lang/es/prime';
+import primeLocale from '@Core/Lang/es/prime';
 
 import Presents from './PrimePresents';
 

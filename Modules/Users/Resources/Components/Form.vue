@@ -2,12 +2,12 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import CardSection from '@/Components/CardSection.vue';
-import VInputFile from '@/Components/Form/VInputFile.vue';
-import VInputDni from '@/Components/Form/VInputDni.vue';
-import VInput from '@/Components/Form/VInput.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
-import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import VInputFile from '@Core/Components/Form/VInputFile.vue';
+import VInputDni from '@Core/Components/Form/VInputDni.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
+import VElementFormWrapper from '@Core/Components/Form/VElementFormWrapper.vue';
 import InputMask from 'primevue/inputmask';
 
 const { t } = useI18n();

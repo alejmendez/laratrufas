@@ -3,14 +3,14 @@ import { useAttrs } from 'vue';
 
 import InputText from 'primevue/inputtext';
 
-import VInputDate from '@/Components/Form/VInputDate.vue';
-import VTextarea from '@/Components/Form/VTextarea.vue';
-import VInputNumber from '@/Components/Form/VInputNumber.vue';
+import VInputDate from '@Core/Components/Form/VInputDate.vue';
+import VTextarea from '@Core/Components/Form/VTextarea.vue';
+import VInputNumber from '@Core/Components/Form/VInputNumber.vue';
 
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 
-import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
+import VElementFormWrapper from '@Core/Components/Form/VElementFormWrapper.vue';
 
 const model = defineModel();
 

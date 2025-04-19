@@ -5,10 +5,10 @@ import { useI18n } from 'vue-i18n';
 import Dialog from 'primevue/dialog';
 import ProgressSpinner from 'primevue/progressspinner';
 
-import CardSection from '@/Components/CardSection.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
-import Button from '@/Components/Form/Button.vue';
-import VInput from '@/Components/Form/VInput.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
+import Button from '@Core/Components/Form/Button.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
 
 import QuarterService from '@/Services/QuarterService.js';
 import { can } from '@/Services/Auth';

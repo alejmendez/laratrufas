@@ -6,14 +6,14 @@ import { useConfirm } from 'primevue/useconfirm';
 import { deleteRowTable } from '@/Utils/table';
 import { can } from '@/Services/Auth';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import StatisticsCard from '@Fields/Pages/Quarters/ShowComponents/StatisticsCard.vue';
 import HarvestCard from '@Fields/Pages/Quarters/ShowComponents/HarvestCard.vue';
 import LogbookCard from '@Fields/Pages/Quarters/ShowComponents/LogbookCard.vue';
 import FileCard from '@Fields/Pages/Quarters/ShowComponents/FileCard.vue';
 
-import Button from '@/Components/Form/Button.vue';
+import Button from '@Core/Components/Form/Button.vue';
 const { t } = useI18n();
 const confirm = useConfirm();
 

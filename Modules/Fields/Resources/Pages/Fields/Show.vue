@@ -5,15 +5,15 @@ import { useI18n } from 'vue-i18n';
 import { deleteRowTable } from '@/Utils/table';
 import { useConfirm } from 'primevue/useconfirm';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import FileCard from '@Fields/Pages/Fields/ShowComponents/FileCard.vue';
 import LogbookCard from '@Fields/Pages/Fields/ShowComponents/LogbookCard.vue';
 import HarvestCard from '@Fields/Pages/Fields/ShowComponents/HarvestCard.vue';
 import StatisticsCard from '@Fields/Pages/Fields/ShowComponents/StatisticsCard.vue';
 import DocumentationCard from '@Fields/Pages/Fields/ShowComponents/DocumentationCard.vue';
 
-import Button from '@/Components/Form/Button.vue';
+import Button from '@Core/Components/Form/Button.vue';
 
 import { can } from '@/Services/Auth';
 

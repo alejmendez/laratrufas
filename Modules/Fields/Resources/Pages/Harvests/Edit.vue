@@ -2,11 +2,11 @@
 import { useForm } from '@inertiajs/vue3';
 import { getWeek } from 'date-fns';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import FormHarvest from '@Fields/Pages/Harvests/Form.vue';
 
-import Button from '@/Components/Form/Button.vue';
+import Button from '@Core/Components/Form/Button.vue';
 
 import { stringToDate } from '@/Utils/date';
 

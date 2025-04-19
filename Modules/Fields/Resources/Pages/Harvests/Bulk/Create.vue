@@ -2,12 +2,12 @@
 import { useForm } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
-import BulkWrapper from '@/Components/BulkWrapper.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
+import BulkWrapper from '@Core/Components/BulkWrapper.vue';
 
-import VSelect from '@/Components/Form/VSelect.vue';
-import VInputFile from '@/Components/Form/VInputFile.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
+import VInputFile from '@Core/Components/Form/VInputFile.vue';
 
 const { t } = useI18n();
 

@@ -6,7 +6,7 @@ import FormMain from './Main.vue';
 import FormComments from './Comments.vue';
 import FormResources from './Resources.vue';
 
-import Button from '@/Components/Form/Button.vue';
+import Button from '@Core/Components/Form/Button.vue';
 
 const { t } = useI18n();
 

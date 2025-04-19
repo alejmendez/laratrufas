@@ -2,11 +2,11 @@
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import CardSection from '@/Components/CardSection.vue';
-import VInput from '@/Components/Form/VInput.vue';
-import VInputFile from '@/Components/Form/VInputFile.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
-import Button from '@/Components/Form/Button.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
+import VInputFile from '@Core/Components/Form/VInputFile.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
+import Button from '@Core/Components/Form/Button.vue';
 
 import { getDataSelect } from '@/Services/Selects';
 import { getAge } from '@/Utils/date';

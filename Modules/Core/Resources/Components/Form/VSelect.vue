@@ -1,8 +1,8 @@
 <script setup>
-import { useAttrs, computed } from 'vue';
+import { useAttrs, ref, onMounted, watch, computed } from 'vue';
 
-import MultiSelect from 'primevue/multiselect';
-import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
+import Select from 'primevue/select';
+import VElementFormWrapper from '@Core/Components/Form/VElementFormWrapper.vue';
 
 const model = defineModel();
 
@@ -24,29 +24,41 @@ const props = defineProps({
   message: {
     type: String,
   },
+  autofocus: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const emit = defineEmits(['change', 'blur']);
+watch(
+  () => props.options,
+  (newValue, _) => {
+    if (!newValue.find((v) => v.value === model.value?.value)) {
+      model.value = '';
+    }
+  },
+);
+
+const input = ref(null);
 const isInvalid = computed(() => props.message !== '' && props.message !== undefined);
+
+onMounted(() => {
+  if (props.autofocus) {
+    input.value.focus();
+  }
+});
 </script>
 
 <template>
   <VElementFormWrapper :classWrapper="props.classWrapper" :label="props.label" :message="props.message">
-    <MultiSelect
-      v-model="model"
+    <Select
       v-bind="attrs"
-      filter
+      v-model="model"
       fluid
+      ref="input"
       optionLabel="text"
       :options="options"
-      :maxSelectedLabels="3"
       :invalid="isInvalid"
-    >
-      <template #optiongroup="slotProps">
-        <div class="flex items-center">
-          <div>{{ slotProps.option.text }}</div>
-        </div>
-      </template>
-    </MultiSelect>
+    />
   </VElementFormWrapper>
 </template>

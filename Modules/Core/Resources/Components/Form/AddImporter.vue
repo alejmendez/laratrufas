@@ -4,8 +4,8 @@ import { useI18n } from 'vue-i18n';
 
 import Dialog from 'primevue/dialog';
 
-import VInput from '@/Components/Form/VInput.vue';
-import Button from '@/Components/Form/Button.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
+import Button from '@Core/Components/Form/Button.vue';
 
 import importerService from '@/Services/ImporterService';
 

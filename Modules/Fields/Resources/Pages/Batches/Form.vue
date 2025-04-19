@@ -2,11 +2,11 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import CardSection from '@/Components/CardSection.vue';
-import VInput from '@/Components/Form/VInput.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
-import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
-import AddImporter from '@/Components/Form/AddImporter.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
+import VSelectMultiple from '@Core/Components/Form/VSelectMultiple.vue';
+import AddImporter from '@Core/Components/Form/AddImporter.vue';
 
 const { t } = useI18n();
 

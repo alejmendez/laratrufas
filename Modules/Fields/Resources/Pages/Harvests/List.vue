@@ -4,8 +4,8 @@ import { useI18n } from 'vue-i18n';
 import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import HarvestTable from '@Fields/Pages/Harvests/Components/HarvestTable.vue';
 import { can } from '@/Services/Auth';
 

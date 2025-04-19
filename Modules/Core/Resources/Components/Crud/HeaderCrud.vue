@@ -1,8 +1,8 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 
-import BreadCrumbs from '@/Components/Crud/BreadCrumbs.vue';
-import Button from '@/Components/Form/Button.vue';
+import BreadCrumbs from '@Core/Components/Crud/BreadCrumbs.vue';
+import Button from '@Core/Components/Form/Button.vue';
 
 const props = defineProps({
   breadcrumbs: Array,

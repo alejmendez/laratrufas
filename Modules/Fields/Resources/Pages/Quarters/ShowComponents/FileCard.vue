@@ -1,7 +1,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 
-import CardSection from '@/Components/CardSection.vue';
+import CardSection from '@Core/Components/CardSection.vue';
 
 const props = defineProps({
   quarter: Object,

@@ -2,10 +2,10 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import CardSection from '@/Components/CardSection.vue';
-import VInput from '@/Components/Form/VInput.vue';
-import VInputDni from '@/Components/Form/VInputDni.vue';
-import VInputFile from '@/Components/Form/VInputFile.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
+import VInputDni from '@Core/Components/Form/VInputDni.vue';
+import VInputFile from '@Core/Components/Form/VInputFile.vue';
 
 const { t } = useI18n();
 

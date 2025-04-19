@@ -12,9 +12,9 @@ import Select from 'primevue/select';
 
 import { useI18n } from 'vue-i18n';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
-import Datatable from '@/Components/Table/Datatable.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
+import Datatable from '@Core/Components/Table/Datatable.vue';
 import TaskService from '@/Services/TaskService.js';
 import { dateToString } from '@/Utils/date.js';
 import { deleteRowTable } from '@/Utils/table.js';

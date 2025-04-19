@@ -2,8 +2,8 @@
 import { computed } from 'vue';
 import { useForm, Link, Head } from '@inertiajs/vue3';
 
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import GuestLayout from '@Core/Layouts/GuestLayout.vue';
+import PrimaryButton from '@Core/Components/PrimaryButton.vue';
 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();

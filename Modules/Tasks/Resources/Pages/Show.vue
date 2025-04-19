@@ -8,9 +8,9 @@ import { can } from '@/Services/Auth';
 import { deleteRowTable } from '@/Utils/table';
 import { stringToFormat } from '@/Utils/date';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
-import CardSection from '@/Components/CardSection.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
+import CardSection from '@Core/Components/CardSection.vue';
 import FormComments from '@Tasks/Components/Comments.vue';
 
 const { t } = useI18n();

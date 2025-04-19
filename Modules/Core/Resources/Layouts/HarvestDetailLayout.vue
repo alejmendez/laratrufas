@@ -1,6 +1,6 @@
 <script setup>
 import { storeToRefs } from 'pinia';
-import SideBarLeft from '@/Components/Menu/SideBarLeft.vue';
+import SideBarLeft from '@Core/Components/Menu/SideBarLeft.vue';
 
 import { useSideBarStore } from '@/Stores/sidebar.js';
 

@@ -8,8 +8,8 @@ import Dialog from 'primevue/dialog';
 import { deleteRowTable } from '@/Utils/table';
 import { can } from '@/Services/Auth';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 
 import VariablesView from '@Fields/Pages/HarvestDetails/Views/VariablesView.vue';
 

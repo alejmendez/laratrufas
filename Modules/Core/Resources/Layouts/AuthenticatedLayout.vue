@@ -5,8 +5,8 @@ import ConfirmDialog from 'primevue/confirmdialog';
 import Toast from 'primevue/toast';
 import Drawer from 'primevue/drawer';
 
-import SideBarLeft from '@/Components/Menu/SideBarLeft.vue';
-import MenuUser from '@/Components/Menu/MenuUser.vue';
+import SideBarLeft from '@Core/Components/Menu/SideBarLeft.vue';
+import MenuUser from '@Core/Components/Menu/MenuUser.vue';
 import { useSideBarStore } from '@/Stores/sidebar.js';
 import { useDrawerRightMenuStore } from '@/Stores/sidebar.js';
 import { menuElementsRight } from '@/Services/Menu';

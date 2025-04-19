@@ -10,12 +10,12 @@ import InputGroup from 'primevue/inputgroup';
 import InputNumber from 'primevue/inputnumber';
 import VirtualScroller from 'primevue/virtualscroller';
 
-import CardSection from '@/Components/CardSection.vue';
-import VElementFormWrapper from '@/Components/Form/VElementFormWrapper.vue';
-import VSelectMultiple from '@/Components/Form/VSelectMultiple.vue';
-import VSelect from '@/Components/Form/VSelect.vue';
-import Button from '@/Components/Form/Button.vue';
-import VInput from '@/Components/Form/VInput.vue';
+import CardSection from '@Core/Components/CardSection.vue';
+import VElementFormWrapper from '@Core/Components/Form/VElementFormWrapper.vue';
+import VSelectMultiple from '@Core/Components/Form/VSelectMultiple.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
+import Button from '@Core/Components/Form/Button.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
 
 const { t } = useI18n();
 

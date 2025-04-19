@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import FiltersDashboard from '@Dashboard/Components/FiltersDashboard.vue';
 import CardsDashboard from '@Dashboard/Components/CardsDashboard.vue';
 import MapDashboard from '@Dashboard/Components/MapDashboard.vue';

@@ -3,8 +3,8 @@ import { ref } from 'vue';
 import { useForm, router } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import HeaderCrud from '@/Components/Crud/HeaderCrud.vue';
+import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
+import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import QrCodeReader from '@Fields/Pages/HarvestDetails/QrCodeReader.vue';
 import HarvestView from '@Fields/Pages/HarvestDetails/Views/HarvestView.vue';
 import VariablesView from '@Fields/Pages/HarvestDetails/Views/VariablesView.vue';

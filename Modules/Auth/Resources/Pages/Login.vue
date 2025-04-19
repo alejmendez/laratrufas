@@ -2,10 +2,10 @@
 import { useI18n } from 'vue-i18n';
 import { useForm, Link, Head } from '@inertiajs/vue3';
 
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import Checkbox from '@/Components/Form/Checkbox.vue';
-import VInput from '@/Components/Form/VInput.vue';
-import Button from '@/Components/Form/Button.vue';
+import GuestLayout from '@Core/Layouts/GuestLayout.vue';
+import Checkbox from '@Core/Components/Form/Checkbox.vue';
+import VInput from '@Core/Components/Form/VInput.vue';
+import Button from '@Core/Components/Form/Button.vue';
 
 const { t } = useI18n();
 
