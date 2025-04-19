@@ -48,6 +48,14 @@ server {
     server_name agricolafrayleon.app *.agricolafrayleon.app;
     root /home/ubuntu/laratrufas/public;
 
+    # Configuración de compresión gzip
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_min_length 1000;
+    gzip_comp_level 6;
+    gzip_types text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml;
+
     # Certificados SSL
     ssl_certificate /etc/letsencrypt/live/agricolafrayleon.app/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/agricolafrayleon.app/privkey.pem;
