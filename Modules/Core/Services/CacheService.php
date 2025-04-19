@@ -18,8 +18,6 @@ class CacheService
                 'id' => $user->id,
                 'full_name' => $user->full_name,
                 'avatar_url' => self::getUserAvatar($user),
-                'dni' => $user->dni,
-                'email' => $user->email,
                 'roles' => self::getUserRoles($user),
                 'permissions' => self::getUserPermissions($user),
                 'unread_notifications' => self::getUserUnreadNotifications($user),
@@ -34,8 +32,6 @@ class CacheService
                 'id' => $user->id,
                 'full_name' => $user->full_name,
                 'avatar_url' => self::getUserAvatar($user),
-                'dni' => $user->dni,
-                'email' => $user->email,
                 'unread_notifications' => self::getUserUnreadNotifications($user),
             ];
         });
