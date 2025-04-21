@@ -3,87 +3,177 @@
 namespace Modules\Core\Services;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Modules\Users\Models\User;
 use Modules\Core\Models\Module;
 use Modules\Core\Models\Menu;
 use Illuminate\Http\Request;
+use Modules\Core\Services\CacheService;
 
+/**
+ * Service for handling menu generation and management in the application
+ */
 class MenuService
 {
-    protected static int $modulesTtl = 600;
-    protected static int $menusTtl = 600;
+    private const CACHE_TTL_MODULES = 600; // 10 minutes
+    private const CACHE_TTL_MENUS = 600; // 10 minutes
+    private const CACHE_KEY_MODULES = 'modules';
+    private const CACHE_KEY_MENUS = 'menus';
 
-    protected $user;
-    protected $request;
+    /** @var User|null */
+    private ?User $user;
 
-    public function __construct(Request $request, User $user = null)
+    /** @var Request */
+    private Request $request;
+
+    /** @var array */
+    private array $permissions = [];
+
+    /** @var Collection */
+    private Collection $modules;
+
+    /** @var Collection */
+    private Collection $menus;
+
+    /**
+     * Service constructor
+     *
+     * @param Request $request
+     * @param User|null $user
+     */
+    public function __construct(Request $request, ?User $user = null)
     {
         $this->request = $request;
         $this->user = $user;
+
+        if ($this->user) {
+            $this->initializeUserData();
+        }
     }
 
-    public function getMenu()
+    /**
+     * Gets the complete menu for the current user
+     *
+     * @return array
+     */
+    public function getMenu(): array
     {
         if (!$this->user) {
+            return [];
+        }
+
+        return $this->getRootElements()
+            ->map(fn ($item) => $this->getMenuData($item))
+            ->filter()
+            ->values()
+            ->toArray();
+    }
+
+    /**
+     * Initializes user data
+     */
+    private function initializeUserData(): void
+    {
+        $this->permissions = CacheService::getUserPermissions($this->user)->toArray();
+        $this->modules = $this->getModules();
+        $this->menus = $this->getMenus();
+    }
+
+    /**
+     * Gets the data for a menu item
+     *
+     * @param Menu $item
+     * @return array|null
+     */
+    private function getMenuData(Menu $item): ?array
+    {
+        $children = $this->menus->where('parent_id', $item->id);
+
+        if ($children->isEmpty()) {
+            return $this->getLeafMenuItem($item);
+        }
+
+        return $this->getParentMenuItem($item, $children);
+    }
+
+    /**
+     * Gets the data for a leaf menu item
+     *
+     * @param Menu $item
+     * @return array|null
+     */
+    private function getLeafMenuItem(Menu $item): ?array
+    {
+        if (!isset($this->modules[$item->module_id]) || !in_array($item->link, $this->permissions)) {
             return null;
         }
 
-        $modules = $this->getModules();
-        $menus = $this->getMenus();
-        $menuData = $this->getMenuData($modules, $menus);
-        // dd($menus->toArray(), $menuData);
-
-        return $menuData;
+        return [
+            'text' => $item->text,
+            'link' => route($item->link),
+            'icon' => $item->icon,
+            'active' => $this->request->routeIs($item->active_with),
+        ];
     }
 
-    public function getMenuData($modules, $menus, $parentId = null, $menuElement = null)
+    /**
+     * Gets the data for a parent menu item
+     *
+     * @param Menu $item
+     * @param Collection $children
+     * @return array|null
+     */
+    private function getParentMenuItem(Menu $item, Collection $children): ?array
     {
-        if ($menuElement) {
-            $children = $menus->where('parent_id', $parentId);
-            if ($children->count() > 0) {
-                $childrenData = $children->map(function ($child) use ($modules, $menus) {
-                    return $this->getMenuData($modules, $menus, $child->id, $child);
-                })->values();
+        $childrenData = $children->map(fn ($child) => $this->getMenuData($child))
+            ->filter()
+            ->values();
 
-                if ($childrenData->isEmpty()) {
-                    return null;
-                }
-
-                return [
-                    'text' => $menuElement->text,
-                    'children' => $childrenData,
-                ];
-            } else {
-                if (!isset($modules[$menuElement->module_id])) {
-                    return null;
-                }
-
-                return [
-                    'text' => $menuElement->text,
-                    'link' => route($menuElement->link),
-                    'icon' => $menuElement->icon,
-                    'active' => $this->request->routeIs($menuElement->active_with),
-                ];
-            }
-
+        if ($childrenData->isEmpty()) {
+            return null;
         }
 
-        return $menus->where('parent_id', $parentId)->map(function ($menu) use ($modules, $menus) {
-            return $this->getMenuData($modules, $menus, $menu->id, $menu);
-        })->values();
+        return [
+            'text' => $item->text,
+            'children' => $childrenData,
+        ];
     }
 
-    protected function getModules()
+    /**
+     * Gets active modules from cache
+     *
+     * @return Collection
+     */
+    private function getModules(): Collection
     {
-        return cache()->remember('modules', self::$modulesTtl, function () {
-            return Module::where('is_active', true)->pluck('name', 'id');
-        });
+        return cache()->remember(
+            self::CACHE_KEY_MODULES,
+            self::CACHE_TTL_MODULES,
+            fn () => Module::where('is_active', true)->pluck('name', 'id')
+        );
     }
 
-    protected function getMenus()
+    /**
+     * Gets menu items from cache
+     *
+     * @return Collection
+     */
+    private function getMenus(): Collection
     {
-        return cache()->remember('menus', self::$menusTtl, function () {
-            return Menu::orderBy('order')->get();
-        });
+        return cache()->remember(
+            self::CACHE_KEY_MENUS,
+            self::CACHE_TTL_MENUS,
+            fn () => Menu::orderBy('order')->get()
+        );
+    }
+
+    /**
+     * Gets root menu elements
+     *
+     * @return Collection
+     */
+    private function getRootElements(): Collection
+    {
+        return $this->menus->whereNull('parent_id');
     }
 }
