@@ -92,9 +92,9 @@ class SyncPermissions extends Command
         $this->create_permission('plants.details', 'by_quarter');
         $this->create_permission('plants.details', 'by_field');
 
-        $this->create_permission('harvests.details', 'create');
-        $this->create_permission('harvests.details', 'store');
-        $this->create_permission('harvests.details', 'find_by_code');
+        $this->create_permission('harvests_details', 'create');
+        $this->create_permission('harvests_details', 'store');
+        $this->create_permission('harvests_details', 'find_by_code');
         $this->create_permission('selects', 'index');
         $this->create_permission('selects', 'multiple');
         $this->create_permission('tasks', 'comments.store');
@@ -142,7 +142,7 @@ class SyncPermissions extends Command
             'quarters.plants',
             ...$this->permissions['plants.details'],
             ...$this->permissions['batches'],
-            ...$this->permissions['harvests.details'],
+            ...$this->permissions['harvests_details'],
             ...$this->permissions['tasks'],
             ...$this->permissions['machineries'],
             ...$this->permissions['tools'],
@@ -150,7 +150,7 @@ class SyncPermissions extends Command
         ]);
 
         $this->roles['farmer']->syncPermissions([
-            ...$this->permissions['harvests.details'],
+            ...$this->permissions['harvests_details'],
             ...$this->permissions['tasks'],
         ]);
 

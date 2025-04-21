@@ -7,6 +7,7 @@ use Modules\Users\Models\User;
 use Modules\Core\Models\Module;
 use Modules\Core\Models\Menu;
 use Illuminate\Http\Request;
+
 class MenuService
 {
     protected static int $modulesTtl = 600;
@@ -15,7 +16,7 @@ class MenuService
     protected $user;
     protected $request;
 
-    public function __construct(Request $request, User $user)
+    public function __construct(Request $request, User $user = null)
     {
         $this->request = $request;
         $this->user = $user;
@@ -23,6 +24,10 @@ class MenuService
 
     public function getMenu()
     {
+        if (!$this->user) {
+            return null;
+        }
+
         $modules = $this->getModules();
         $menus = $this->getMenus();
         $menuData = $this->getMenuData($modules, $menus);

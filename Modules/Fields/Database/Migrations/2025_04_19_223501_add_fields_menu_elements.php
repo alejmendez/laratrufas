@@ -48,9 +48,9 @@ return new class extends Migration
                     ],
                     [
                         'text' => 'menu.harvest_details',
-                        'link' => 'harvests.details.create',
+                        'link' => 'harvests_details.create',
                         'icon' => 'fa-solid fa-barcode',
-                        'active_with' => "harvests.details.*",
+                        'active_with' => "harvests_details.*",
                     ],
 
                     [

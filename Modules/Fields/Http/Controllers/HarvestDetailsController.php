@@ -37,9 +37,9 @@ class HarvestDetailsController extends Controller
     {
         CreateHarvestDetails::call($request->validated());
         if ($request->keep_plant_code) {
-            return redirect()->route('harvests.details.create')->with('plant_code', $request->plant_code);
+            return redirect()->route('harvests_details.create')->with('plant_code', $request->plant_code);
         } else {
-            return redirect()->route('harvests.details.create');
+            return redirect()->route('harvests_details.create');
         }
 
     }
