@@ -4,12 +4,13 @@ namespace Modules\Core\Services;
 
 use Illuminate\Support\Str;
 use Modules\Users\Models\User;
+use Modules\Core\Services\MenuService;
 
 class CacheService
 {
-    protected static int $userDataTtl = 600;
-
-    protected static int $unreadNotificationsTtl = 60;
+    protected static int $userDataTtl = 600; // 10 minutes
+    protected static int $unreadNotificationsTtl = 60; // 1 minute
+    protected static int $menuTtl = 1; // 86_400; // 24 hours
 
     public static function getUserDataSession(User $user)
     {
@@ -70,12 +71,23 @@ class CacheService
         self::clearUserCacheById($user->id);
     }
 
+    public static function getMenu(User $user)
+    {
+        return cache()->remember('menu_'.$user->id.'_1', self::$menuTtl, function () use ($user) {
+            $menuService = new MenuService($user);
+            return $menuService->getMenu();
+        });
+    }
+
     public static function clearUserCacheById($userId)
     {
+        cache()->forget('menu_'.$userId);
         cache()->forget('user_'.$userId);
         cache()->forget('user_'.$userId.'_avatar');
         cache()->forget('user_'.$userId.'_roles');
         cache()->forget('user_'.$userId.'_permissions');
         cache()->forget('user_'.$userId.'_unreadnotifications');
+        cache()->forget('user_'.$userId.'_data_session');
+        cache()->forget('user_'.$userId.'_data_session_ajax');
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Modules\Core\Services\CacheService;
+use Illuminate\Support\Facades\Route;
+use Modules\Core\Services\MenuService;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -32,6 +34,7 @@ class HandleInertiaRequests extends Middleware
     {
         $user = $request->user();
         $userData = $user;
+
         if ($user) {
             if ($request->ajax()) {
                 $userData = CacheService::getUserDataSessionAjax($user);
@@ -40,11 +43,15 @@ class HandleInertiaRequests extends Middleware
             }
         }
 
+        $menuService = new MenuService($request, $user);
+        $menu = $menuService->getMenu();
+
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $userData,
             ],
+            'menu' => $menu,
         ];
     }
 }

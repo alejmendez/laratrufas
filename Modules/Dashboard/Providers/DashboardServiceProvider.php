@@ -20,7 +20,7 @@ class DashboardServiceProvider extends CoreServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         Route::middleware('web')->group(base_path('Modules/Dashboard/Routes/web.php'));
     }
 }
