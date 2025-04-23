@@ -6,7 +6,7 @@ const list = async (lazyParams) => {
     const response = await datatable.list(route('owners.index'), lazyParams);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return false;
   }
 };

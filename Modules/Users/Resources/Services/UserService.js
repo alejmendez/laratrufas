@@ -6,7 +6,7 @@ const list = async (lazyParams) => {
     const response = await datatable.list(route('users.index'), lazyParams);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return false;
   }
 };
@@ -16,7 +16,7 @@ const del = async (id) => {
     await axios.delete(route('users.destroy', { id }));
     return true;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return false;
   }
 };
