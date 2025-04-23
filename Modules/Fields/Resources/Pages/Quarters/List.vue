@@ -9,7 +9,7 @@ import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
 
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -25,7 +25,6 @@ const props = defineProps({
 
 const toast = useToast();
 const confirm = useConfirm();
-const { t } = useI18n();
 
 const datatable = ref(null);
 const filter_field_options = ref([]);
@@ -44,7 +43,7 @@ const canCreate = can('quarters.create');
 
 const headerLinks = [];
 if (canCreate) {
-  headerLinks.push({ to: 'quarters.create', text: t('generics.new') });
+  headerLinks.push({ to: 'quarters.create', text: trans('generics.new') });
 }
 
 const fetchHandler = async (params) => {
@@ -52,21 +51,21 @@ const fetchHandler = async (params) => {
 };
 
 const deleteHandler = (record) => {
-  deleteRowTable(t, confirm, async () => {
+  deleteRowTable(trans, confirm, async () => {
     const result = await QuarterService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();
       return toast.add({
         severity: 'success',
-        summary: t('generics.messages.deleted_successfully_summary'),
-        detail: t('generics.messages.deleted_successfully'),
+        summary: trans('generics.messages.deleted_successfully_summary'),
+        detail: trans('generics.messages.deleted_successfully'),
         life: 3000,
       });
     }
     toast.add({
       severity: 'danger',
-      summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
-      detail: t('generics.tables.errors.could_not_delete_the_record'),
+      summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
+      detail: trans('generics.tables.errors.could_not_delete_the_record'),
       life: 3000,
     });
   });
@@ -76,8 +75,8 @@ onMounted(async () => {
   if (props.toast) {
     toast.add({
       severity: 'success',
-      summary: t('quarter.titles.entity_breadcrumb'),
-      detail: t('generics.messages.saved_successfully'),
+      summary: trans('quarter.titles.entity_breadcrumb'),
+      detail: trans('generics.messages.saved_successfully'),
       life: 5000,
     });
   }
@@ -91,10 +90,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="t('quarter.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('quarter.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('quarter.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
+      :title="__('quarter.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'quarters.index', text: __('quarter.titles.entity_breadcrumb') }, { text: __('generics.list') }]"
       :links="headerLinks"
     />
 
@@ -105,7 +104,7 @@ onMounted(async () => {
       sortField="name"
       :sortOrder="1"
     >
-      <Column field="name" filterField="quarters.name" :header="$t('quarter.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="name" filterField="quarters.name" :header="__('quarter.table.name')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
           {{ data.name }}
         </template>
@@ -113,7 +112,7 @@ onMounted(async () => {
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nombre" />
         </template>
       </Column>
-      <Column field="field_name" filterField="field_id" :showFilterMatchModes="false" :header="$t('quarter.table.field_id')" sortable style="min-width: 200px">
+      <Column field="field_name" filterField="field_id" :showFilterMatchModes="false" :header="__('quarter.table.field_id')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.field_name }}
         </template>
@@ -121,7 +120,7 @@ onMounted(async () => {
           <Select v-model="filterModel.value" :options="filter_field_options" optionLabel="text" placeholder="Todos" />
         </template>
       </Column>
-      <Column field="area" :header="$t('quarter.table.area')" sortable style="min-width: 100px">
+      <Column field="area" :header="__('quarter.table.area')" sortable style="min-width: 100px">
         <template #body="{ data }">
           {{ data.area }} ha
         </template>
@@ -129,7 +128,7 @@ onMounted(async () => {
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por area" />
         </template>
       </Column>
-      <Column field="plants_count" :header="$t('quarter.table.plants_count')" sortable style="min-width: 100px">
+      <Column field="plants_count" :header="__('quarter.table.plants_count')" sortable style="min-width: 100px">
         <template #body="{ data }">
           {{ data.plants_count }}
         </template>

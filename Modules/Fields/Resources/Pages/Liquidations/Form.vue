@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
 
 import Dialog from 'primevue/dialog';
@@ -15,8 +15,6 @@ import AddImporter from '@Core/Components/Form/AddImporter.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 import Button from '@Core/Components/Form/Button.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   form: Object,
@@ -36,7 +34,7 @@ const dateRenderText = (m) => {
   const start = format(startOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
   const end = format(endOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
   const week = getWeek(m, { weekStartsOn: 1 });
-  return t('harvest.form.date.renderText', { week, start, end });
+  return trans('harvest.form.date.renderText', { week, start, end });
 };
 
 const date_rendered = ref(form.date ? dateRenderText(form.date) : '');
@@ -75,7 +73,7 @@ const total_categories_not_commercial = computed(() => {
 <template>
   <form @submit.prevent="props.submitHandler">
     <CardSection>
-      <VElementFormWrapper :label="t('liquidation.form.date.label')" :message="form.errors.date">
+      <VElementFormWrapper :label="__('liquidation.form.date.label')" :message="form.errors.date">
         <InputGroup>
           <InputText
             fluid
@@ -92,9 +90,9 @@ const total_categories_not_commercial = computed(() => {
           id="importer_id"
           v-model="form.importer_id"
           classWrapper="col-span-11"
-          :placeholder="t('generics.please_select')"
+          :placeholder="__('generics.please_select')"
           :options="importers"
-          :label="t('liquidation.form.importer_id.label')"
+          :label="__('liquidation.form.importer_id.label')"
           :message="form.errors.importer_id"
         />
         <div class="ms-2" style="margin-top: 28px;">
@@ -106,7 +104,7 @@ const total_categories_not_commercial = computed(() => {
         id="delivery_date"
         type="date"
         v-model="form.delivery_date"
-        :label="t('liquidation.form.delivery_date.label')"
+        :label="__('liquidation.form.delivery_date.label')"
         :message="form.errors.delivery_date"
         :maxDate="new Date()"
       />
@@ -115,7 +113,7 @@ const total_categories_not_commercial = computed(() => {
         id="reception_date"
         type="date"
         v-model="form.reception_date"
-        :label="t('liquidation.form.reception_date.label')"
+        :label="__('liquidation.form.reception_date.label')"
         :message="form.errors.reception_date"
         :maxDate="new Date()"
       />
@@ -123,14 +121,14 @@ const total_categories_not_commercial = computed(() => {
       <VSelect
         id="field_id"
         v-model="form.field_id"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="props.fields"
-        :label="t('liquidation.form.field_id.label')"
+        :label="__('liquidation.form.field_id.label')"
         :message="form.errors.field_id"
       />
     </CardSection>
     <CardSection>
-      <VElementFormWrapper :label="t('liquidation.form.weight_with_earth.label')" :message="form.errors.weight_with_earth">
+      <VElementFormWrapper :label="__('liquidation.form.weight_with_earth.label')" :message="form.errors.weight_with_earth">
         <InputGroup>
           <InputText
             fluid
@@ -140,10 +138,10 @@ const total_categories_not_commercial = computed(() => {
             :max="200000"
             :step="0.1"
           />
-          <InputGroupAddon>{{ t('liquidation.weight_unit') }}</InputGroupAddon>
+          <InputGroupAddon>{{ __('liquidation.weight_unit') }}</InputGroupAddon>
         </InputGroup>
       </VElementFormWrapper>
-      <VElementFormWrapper :label="t('liquidation.form.weight_washed.label')" :message="form.errors.weight_washed">
+      <VElementFormWrapper :label="__('liquidation.form.weight_washed.label')" :message="form.errors.weight_washed">
         <InputGroup>
           <InputText
             fluid
@@ -153,10 +151,10 @@ const total_categories_not_commercial = computed(() => {
             :max="200000"
             :step="0.1"
           />
-          <InputGroupAddon>{{ t('liquidation.weight_unit') }}</InputGroupAddon>
+          <InputGroupAddon>{{ __('liquidation.weight_unit') }}</InputGroupAddon>
         </InputGroup>
       </VElementFormWrapper>
-      <VElementFormWrapper :label="t('liquidation.form.dollar_value.label')" :message="form.errors.dollar_value">
+      <VElementFormWrapper :label="__('liquidation.form.dollar_value.label')" :message="form.errors.dollar_value">
         <InputGroup>
           <InputText
             fluid
@@ -166,19 +164,19 @@ const total_categories_not_commercial = computed(() => {
             :max="200000"
             :step="0.1"
           />
-          <InputGroupAddon>{{ t('liquidation.currency_unit') }}</InputGroupAddon>
+          <InputGroupAddon>{{ __('liquidation.currency_unit') }}</InputGroupAddon>
         </InputGroup>
       </VElementFormWrapper>
     </CardSection>
-    <CardSection :headerText="t('liquidation.sections.commercial_categories')" wrapperClass="p-4 grid md:grid-cols-10 sm:grid-cols-1 gap-x-2 gap-y-1">
+    <CardSection :headerText="__('liquidation.sections.commercial_categories')" wrapperClass="p-4 grid md:grid-cols-10 sm:grid-cols-1 gap-x-2 gap-y-1">
       <div class="col-span-4 font-semibold">
-        {{ t('liquidation.form.commercial_categories.labels.name') }}
+        {{ __('liquidation.form.commercial_categories.labels.name') }}
       </div>
       <div class="col-span-3 font-semibold">
-        {{ t('liquidation.form.commercial_categories.labels.price') }}
+        {{ __('liquidation.form.commercial_categories.labels.price') }}
       </div>
       <div class="col-span-3 font-semibold">
-        {{ t('liquidation.form.commercial_categories.labels.weight') }}
+        {{ __('liquidation.form.commercial_categories.labels.weight') }}
       </div>
       <template v-for="(commercial, index) in categories_commercial">
         <div class="col-span-10 border-t mt-[2px]"></div>
@@ -210,18 +208,18 @@ const total_categories_not_commercial = computed(() => {
       <div class="col-span-10 border-t mt-[2px]"></div>
       <div class="col-span-4 pt-3"></div>
       <div class="col-span-3 pt-3 text-right font-bold">
-        {{ t('liquidation.total') }}:
+        {{ __('liquidation.total') }}:
       </div>
       <div class="col-span-3 pt-3 font-bold">
         {{ total_categories_commercial }}
       </div>
     </CardSection>
-    <CardSection :headerText="t('liquidation.sections.rejected_categories')" wrapperClass="p-4 grid md:grid-cols-10 sm:grid-cols-1 gap-x-2 gap-y-1">
+    <CardSection :headerText="__('liquidation.sections.rejected_categories')" wrapperClass="p-4 grid md:grid-cols-10 sm:grid-cols-1 gap-x-2 gap-y-1">
       <div class="col-span-7 font-semibold">
-        {{ t('liquidation.form.commercial_categories.labels.name') }}
+        {{ __('liquidation.form.commercial_categories.labels.name') }}
       </div>
       <div class="col-span-3 font-semibold">
-        {{ t('liquidation.form.commercial_categories.labels.weight') }}
+        {{ __('liquidation.form.commercial_categories.labels.weight') }}
       </div>
       <template v-for="(commercial, index) in categories_not_commercial">
         <div class="col-span-10 border-t mt-[2px]"></div>
@@ -241,7 +239,7 @@ const total_categories_not_commercial = computed(() => {
       </template>
       <div class="col-span-10 border-t mt-[2px]"></div>
       <div class="col-span-7 pt-3 text-right font-bold">
-        {{ t('liquidation.total') }}:
+        {{ __('liquidation.total') }}:
       </div>
       <div class="col-span-3 pt-3 font-bold">
         {{ total_categories_not_commercial }}

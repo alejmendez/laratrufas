@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { router } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import { deleteRowTable } from '@Core/Utils/table';
 import { useConfirm } from 'primevue/useconfirm';
 
@@ -16,8 +16,6 @@ import DocumentationCard from '@Fields/Pages/Fields/ShowComponents/Documentation
 import Button from '@Core/Components/Form/Button.vue';
 
 import { can } from '@Auth/Services/Auth';
-
-const { t } = useI18n();
 
 const props = defineProps({
   field: Object,
@@ -57,29 +55,29 @@ const isStatisticsTab = computed(() => current_tab.value === STATISTICS_TAB);
 const isDocumentationTab = computed(() => current_tab.value === DOCUMENTATION_TAB);
 
 const deleteHandler = async (id) => {
-  await deleteRowTable(t, confirm, () => {
+  await deleteRowTable(trans, confirm, () => {
     router.delete(route('fields.destroy', id));
   });
 };
 </script>
 
 <template>
-  <AuthenticatedLayout :title="t('field.titles.show', { name: field.name })">
+  <AuthenticatedLayout :title="__('field.titles.show', { name: field.name })">
     <HeaderCrud
-      :title="t('field.titles.show', { name: field.name })"
-      :breadcrumbs="[{ to: 'fields.index', text: t('field.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
+      :title="__('field.titles.show', { name: field.name })"
+      :breadcrumbs="[{ to: 'fields.index', text: trans('field.titles.entity_breadcrumb') }, { text: trans('generics.detail') }]"
     >
       <Button
         severity="secondary"
         @click="deleteHandler(field.id)"
-        :label="$t('generics.actions.delete')"
+        :label="__('generics.actions.delete')"
         v-if="canDestroy"
         v-show="isFileTab"
       />
       <Button
         as="Link"
         :href="route('fields.edit', field.id)"
-        :label="$t('generics.actions.edit')"
+        :label="__('generics.actions.edit')"
         v-if="canEdit"
         v-show="isFileTab"
       />
@@ -93,7 +91,7 @@ const deleteHandler = async (id) => {
           :class="current_tab === tab ? 'text-(--p-primary-500)' : 'hover:text-(--p-primary-300) dark:hover:text-(--p-primary-600) text-gray-400'"
           @click="selectTab(tab)"
         >
-          {{ t('field.show.tabs.' + tab) }}
+          {{ __('field.show.tabs.' + tab) }}
         </span>
       </nav>
     </div>

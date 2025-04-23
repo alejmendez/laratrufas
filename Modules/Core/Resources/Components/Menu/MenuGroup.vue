@@ -42,7 +42,7 @@ const clickHandler = () => {
         v-for="(ele, index) in props.elements"
         :key="index"
         :link="ele.link"
-        :text="$t(ele.text)"
+        :text="ele.text"
         :icon="ele.icon"
         :active="ele.active"
       />

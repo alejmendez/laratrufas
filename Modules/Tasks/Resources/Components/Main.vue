@@ -4,17 +4,15 @@ import VInput from '@Core/Components/Form/VInput.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 
 const props = defineProps({
-  t: Function,
   form: Object,
   states: Array,
 });
 
-const t = props.t;
 const form = props.form;
 
 const priorities = ['when_possible', 'routine', 'important', 'urgent'].map((p) => ({
   value: p,
-  text: t('task.form.priority.options.' + p),
+  text: trans('task.form.priority.options.' + p),
 }));
 </script>
 
@@ -24,25 +22,25 @@ const priorities = ['when_possible', 'routine', 'important', 'urgent'].map((p) =
       id="name"
       v-model="form.name"
       classWrapper="col-span-2"
-      :label="t('task.form.name.label')"
+      :label="__('task.form.name.label')"
       :message="form.errors.name"
     />
 
     <VSelect
       id="priority"
       v-model="form.priority"
-      :placeholder="t('generics.please_select')"
+      :placeholder="__('generics.please_select')"
       :options="priorities"
-      :label="t('task.form.priority.label')"
+      :label="__('task.form.priority.label')"
       :message="form.errors.priority"
     />
 
     <VSelect
       id="status"
       v-model="form.status"
-      :placeholder="t('generics.please_select')"
+      :placeholder="__('generics.please_select')"
       :options="states"
-      :label="t('task.form.status.label')"
+      :label="__('task.form.status.label')"
       :message="form.errors.status"
     />
 
@@ -50,7 +48,7 @@ const priorities = ['when_possible', 'routine', 'important', 'urgent'].map((p) =
       id="start_date"
       type="date"
       v-model="form.start_date"
-      :label="t('task.form.start_date.label')"
+      :label="__('task.form.start_date.label')"
       :message="form.errors.start_date"
     />
 
@@ -58,7 +56,7 @@ const priorities = ['when_possible', 'routine', 'important', 'urgent'].map((p) =
       id="end_date"
       type="date"
       v-model="form.end_date"
-      :label="t('task.form.end_date.label')"
+      :label="__('task.form.end_date.label')"
       :message="form.errors.end_date"
     />
   </CardSection>

@@ -8,7 +8,7 @@ import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -23,7 +23,6 @@ const props = defineProps({
 
 const toast = useToast();
 const confirm = useConfirm();
-const { t } = useI18n();
 
 const datatable = ref(null);
 
@@ -42,28 +41,28 @@ const canCreate = can('machineries.create');
 
 const headerLinks = [];
 if (canCreate) {
-  headerLinks.push({ to: 'machineries.create', text: t('generics.new') });
+  headerLinks.push({ to: 'machineries.create', text: trans('generics.new') });
 }
 const fetchHandler = async (params) => {
   return await MachineryService.list(params);
 };
 
 const deleteHandler = (record) => {
-  deleteRowTable(t, confirm, async () => {
+  deleteRowTable(trans, confirm, async () => {
     const result = await MachineryService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();
       return toast.add({
         severity: 'success',
-        summary: t('generics.messages.deleted_successfully_summary'),
-        detail: t('generics.messages.deleted_successfully'),
+        summary: trans('generics.messages.deleted_successfully_summary'),
+        detail: trans('generics.messages.deleted_successfully'),
         life: 3000,
       });
     }
     toast.add({
       severity: 'danger',
-      summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
-      detail: t('generics.tables.errors.could_not_delete_the_record'),
+      summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
+      detail: trans('generics.tables.errors.could_not_delete_the_record'),
       life: 3000,
     });
   });
@@ -73,18 +72,18 @@ onMounted(() => {
   if (props.toast) {
     toast.add({
       severity: 'success',
-      summary: t('machinery.titles.entity_breadcrumb'),
-      detail: t('generics.messages.saved_successfully'),
+      summary: trans('machinery.titles.entity_breadcrumb'),
+      detail: trans('generics.messages.saved_successfully'),
       life: 5000,
     });
   }
 });
 </script>
 <template>
-  <AuthenticatedLayout :title="$t('machinery.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('machinery.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('machinery.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'machineries.index', text: $t('machinery.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
+      :title="__('machinery.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'machineries.index', text: __('machinery.titles.entity_breadcrumb') }, { text: __('generics.list') }]"
       :links="headerLinks"
     />
 
@@ -95,7 +94,7 @@ onMounted(() => {
       sortField="name"
       :sortOrder="1"
     >
-      <Column field="name" :header="$t('machinery.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="name" :header="__('machinery.table.name')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
           {{ data.name }}
         </template>
@@ -104,7 +103,7 @@ onMounted(() => {
         </template>
       </Column>
 
-      <Column field="purchase_date" :header="$t('machinery.table.purchase_date')" sortable style="min-width: 200px">
+      <Column field="purchase_date" :header="__('machinery.table.purchase_date')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ stringToFormat(data.purchase_date) }}
         </template>
@@ -113,7 +112,7 @@ onMounted(() => {
         </template>
       </Column>
 
-      <Column field="last_maintenance" :header="$t('machinery.table.last_maintenance')" sortable style="min-width: 200px">
+      <Column field="last_maintenance" :header="__('machinery.table.last_maintenance')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.last_maintenance ? stringToFormat(data.last_maintenance) : 's/i' }}
         </template>
@@ -122,7 +121,7 @@ onMounted(() => {
         </template>
       </Column>
 
-      <Column field="purchase_location" :header="$t('machinery.table.purchase_location')" sortable style="min-width: 200px">
+      <Column field="purchase_location" :header="__('machinery.table.purchase_location')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.purchase_location }}
         </template>
@@ -131,7 +130,7 @@ onMounted(() => {
         </template>
       </Column>
 
-      <Column field="contact" :header="$t('machinery.table.contact')" sortable style="min-width: 200px">
+      <Column field="contact" :header="__('machinery.table.contact')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.contact }}
         </template>

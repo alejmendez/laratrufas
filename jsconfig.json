@@ -2,9 +2,6 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@/*": [
-                "resources/js/*"
-            ],
             "@Users/*": [
                 "./Modules/Users/Resources/*"
             ],

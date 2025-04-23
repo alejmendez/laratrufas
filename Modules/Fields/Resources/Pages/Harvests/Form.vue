@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
 
 import Dialog from 'primevue/dialog';
@@ -16,8 +16,6 @@ import VSelectMultiple from '@Core/Components/Form/VSelectMultiple.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 import Button from '@Core/Components/Form/Button.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   form: Object,
@@ -36,7 +34,7 @@ const dateRenderText = (m) => {
   const start = format(startOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
   const end = format(endOfWeek(m, { weekStartsOn: 1 }), 'dd/MM/yyyy');
   const week = getWeek(m, { weekStartsOn: 1 });
-  return t('harvest.form.date.renderText', { week, start, end });
+  return trans('harvest.form.date.renderText', { week, start, end });
 };
 
 const date_rendered = ref(form.date ? dateRenderText(form.date) : '');
@@ -88,7 +86,7 @@ watch(totalWeight, (newValue) => {
 <template>
   <form @submit.prevent="props.submitHandler">
     <CardSection>
-      <VElementFormWrapper :label="t('harvest.form.date.label')" :message="form.errors.date">
+      <VElementFormWrapper :label="__('harvest.form.date.label')" :message="form.errors.date">
         <InputGroup>
           <InputText
             fluid
@@ -105,8 +103,8 @@ watch(totalWeight, (newValue) => {
         optionGroupLabel="text"
         optionGroupChildren="items"
         :options="props.quarters"
-        :label="$t('harvest.form.quarter_ids.label')"
-        :placeholder="t('generics.please_select')"
+        :label="__('harvest.form.quarter_ids.label')"
+        :placeholder="__('generics.please_select')"
         :message="form.errors.quarter_ids"
       />
 
@@ -115,34 +113,34 @@ watch(totalWeight, (newValue) => {
         v-model="form.batch"
         maxlength="2"
         @input="handler_input_batch"
-        :label="t('harvest.form.batch.label')"
+        :label="__('harvest.form.batch.label')"
         :message="form.errors.batch"
       />
 
       <VSelect
         id="dog_id"
         v-model="form.dog_id"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="props.dogs"
-        :label="t('harvest.form.dog_id.label')"
+        :label="__('harvest.form.dog_id.label')"
         :message="form.errors.dog_id"
       />
 
       <VSelect
         id="farmer_id"
         v-model="form.farmer_id"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="props.users"
-        :label="t('harvest.form.farmer_id.label')"
+        :label="__('harvest.form.farmer_id.label')"
         :message="form.errors.farmer_id"
       />
 
       <VSelect
         id="assistant_id"
         v-model="form.assistant_id"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="props.users"
-        :label="t('harvest.form.assistant_id.label')"
+        :label="__('harvest.form.assistant_id.label')"
         :message="form.errors.assistant_id"
       />
     </CardSection>
@@ -154,11 +152,11 @@ watch(totalWeight, (newValue) => {
       <template #header>
         <header class="flex items-center justify-between gap-x-3 overflow-hidden px-6 py-4">
           <h3 class="text-xl font-bold leading-6 text-gray-900 dark:text-gray-100">
-            {{ t('harvest.sections.harvest', { batch: form.batch.toUpperCase(), week: getWeek(form.date, { weekStartsOn: 1 })}) }}
+            {{ __('harvest.sections.harvest', { batch: form.batch.toUpperCase(), week: getWeek(form.date, { weekStartsOn: 1 })}) }}
           </h3>
 
           <div class="flex items-center gap-2">
-            {{ t('harvest.form.weight.label') }}
+            {{ __('harvest.form.weight.label') }}
             <InputNumber
               v-model="form.weight"
               :message="form.errors.weight"
@@ -177,7 +175,7 @@ watch(totalWeight, (newValue) => {
             <VInput
               :id="`details_plant_code_${options.index}`"
               v-model="item.plant_code"
-              :label="t('harvest.form.details.plant_code.label')"
+              :label="__('harvest.form.details.plant_code.label')"
               :message="form.errors[`details.${options.index}.plant_code`]"
             />
 
@@ -186,9 +184,9 @@ watch(totalWeight, (newValue) => {
                 :id="`details_quality_${options.index}`"
                 class="col-span-4"
                 v-model="item.quality"
-                :placeholder="t('generics.please_select')"
+                :placeholder="__('generics.please_select')"
                 :options="props.qualities"
-                :label="t('harvest.form.details.quality.label')"
+                :label="__('harvest.form.details.quality.label')"
                 :message="form.errors[`details.${options.index}.quality`]"
               />
 
@@ -200,7 +198,7 @@ watch(totalWeight, (newValue) => {
                 :min="0"
                 :max="20000"
                 :step="1"
-                :label="t('harvest.form.details.weight.label')"
+                :label="__('harvest.form.details.weight.label')"
                 :message="form.errors[`details.${options.index}.weight`]"
               />
               <div class="pt-8 text-black dark:text-white hover:text-red-500 cursor-pointer dark:hover:text-red-500" @click="remove_detail(options.index)">
@@ -214,7 +212,7 @@ watch(totalWeight, (newValue) => {
         <Button
           severity="secondary"
           @click.prevent="add_detail"
-          :label="$t('harvest.buttons.add_detail')"
+          :label="__('harvest.buttons.add_detail')"
         />
 
         <Button
@@ -222,7 +220,7 @@ watch(totalWeight, (newValue) => {
           as="Link"
           severity="secondary"
           :href="route('harvests.create.bulk', { id: form.id })"
-          :label="$t('generics.bulk.button')"
+          :label="__('generics.bulk.button')"
         />
       </div>
     </CardSection>

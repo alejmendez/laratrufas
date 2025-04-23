@@ -22,17 +22,17 @@ const openUnprocesseds = ref(true);
 <template>
   <CardSection :header-text="props.title" wrapperClass="">
     <div class="p-6">
-      <p class="pb-3">{{ $t('generics.bulk.instruction_1') }}</p>
+      <p class="pb-3">{{ __('generics.bulk.instruction_1') }}</p>
       <ul class="list-decimal ps-5">
-        <li>{{ $t('generics.bulk.instruction_2') }}</li>
-        <li>{{ $t('generics.bulk.instruction_3') }}</li>
-        <li>{{ $t('generics.bulk.instruction_4') }}</li>
-        <li>{{ $t('generics.bulk.instruction_5') }}</li>
-        <li>{{ $t('generics.bulk.instruction_6') }}</li>
+        <li>{{ __('generics.bulk.instruction_2') }}</li>
+        <li>{{ __('generics.bulk.instruction_3') }}</li>
+        <li>{{ __('generics.bulk.instruction_4') }}</li>
+        <li>{{ __('generics.bulk.instruction_5') }}</li>
+        <li>{{ __('generics.bulk.instruction_6') }}</li>
       </ul>
       <p class="py-3">
-        <b>{{ $t('generics.bulk.important') }}:</b>
-        {{ $t('generics.bulk.instruction_7') }}
+        <b>{{ __('generics.bulk.important') }}:</b>
+        {{ __('generics.bulk.instruction_7') }}
       </p>
 
       <Button
@@ -40,7 +40,7 @@ const openUnprocesseds = ref(true);
         as="a"
         :href="route(props.downloadRoute)"
         target="_blank"
-        :label="$t('generics.bulk.download_template')"
+        :label="__('generics.bulk.download_template')"
       />
     </div>
 

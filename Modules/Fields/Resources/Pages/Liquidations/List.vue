@@ -8,7 +8,7 @@ import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -28,7 +28,6 @@ const props = defineProps({
 
 const toast = useToast();
 const confirm = useConfirm();
-const { t } = useI18n();
 
 const datatable = ref(null);
 const filter_importer_options = ref([]);
@@ -53,7 +52,7 @@ const canCreate = can('liquidations.create');
 
 const headerLinks = [];
 if (canCreate) {
-  headerLinks.push({ to: 'liquidations.create', text: t('generics.new') });
+  headerLinks.push({ to: 'liquidations.create', text: trans('generics.new') });
 }
 
 const fetchHandler = async (params) => {
@@ -77,21 +76,21 @@ const fetchHandler = async (params) => {
 };
 
 const deleteHandler = (record) => {
-  deleteRowTable(t, confirm, async () => {
+  deleteRowTable(trans, confirm, async () => {
     const result = await LiquidationService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();
       return toast.add({
         severity: 'success',
-        summary: t('generics.messages.deleted_successfully_summary'),
-        detail: t('generics.messages.deleted_successfully'),
+        summary: trans('generics.messages.deleted_successfully_summary'),
+        detail: trans('generics.messages.deleted_successfully'),
         life: 3000,
       });
     }
     toast.add({
       severity: 'danger',
-      summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
-      detail: t('generics.tables.errors.could_not_delete_the_record'),
+      summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
+      detail: trans('generics.tables.errors.could_not_delete_the_record'),
       life: 3000,
     });
   });
@@ -105,8 +104,8 @@ onMounted(async () => {
   if (props.toast) {
     toast.add({
       severity: 'success',
-      summary: t('liquidation.titles.entity_breadcrumb'),
-      detail: t('generics.messages.saved_successfully'),
+      summary: trans('liquidation.titles.entity_breadcrumb'),
+      detail: trans('generics.messages.saved_successfully'),
       life: 5000,
     });
   }
@@ -124,20 +123,20 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('liquidation.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('liquidation.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('liquidation.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'liquidations.index', text: $t('liquidation.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
+      :title="__('liquidation.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'liquidations.index', text: __('liquidation.titles.entity_breadcrumb') }, { text: __('generics.list') }]"
       :links="headerLinks"
     />
 
     <CardSection wrapperClass="p-6 mb-5 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
       <div>
-        <div class="text-gray-400 pb-1">{{ t('harvest.table_filters.year') }}</div>
+        <div class="text-gray-400 pb-1">{{ __('harvest.table_filters.year') }}</div>
         <VSelect
           id="year"
           v-model="form.year"
-          :placeholder="t('generics.please_select')"
+          :placeholder="__('generics.please_select')"
           :options="filter_year_options"
           @change="filterHandler"
         />
@@ -152,7 +151,7 @@ onMounted(async () => {
       scrollHeight="800px"
       sortField="week"
     >
-      <Column field="week" :header="$t('liquidation.table.week')" sortable frozen style="min-width: 200px">
+      <Column field="week" :header="__('liquidation.table.week')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
           {{ data.week }}
         </template>
@@ -161,7 +160,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="delivery_date" :header="$t('liquidation.table.delivery_date')" sortable style="min-width: 200px">
+      <Column field="delivery_date" :header="__('liquidation.table.delivery_date')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ stringToFormat(data.delivery_date) }}
         </template>
@@ -170,7 +169,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="importer_id" :header="$t('liquidation.table.importer_id')" sortable style="min-width: 200px">
+      <Column field="importer_id" :header="__('liquidation.table.importer_id')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.importer.name }}
         </template>
@@ -179,7 +178,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="total_commercial" :header="$t('liquidation.table.total_commercial')" sortable style="min-width: 200px">
+      <Column field="total_commercial" :header="__('liquidation.table.total_commercial')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.total_commercial }}
         </template>
@@ -188,7 +187,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="total_not_commercial" :header="$t('liquidation.table.total_not_commercial')" sortable style="min-width: 200px">
+      <Column field="total_not_commercial" :header="__('liquidation.table.total_not_commercial')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.total_not_commercial }}
         </template>

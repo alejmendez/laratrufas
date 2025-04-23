@@ -2,13 +2,11 @@
 
 namespace Modules\Core\Services;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Collection;
-use Modules\Users\Models\User;
-use Modules\Core\Models\Module;
-use Modules\Core\Models\Menu;
 use Illuminate\Http\Request;
-use Modules\Core\Services\CacheService;
+use Illuminate\Support\Collection;
+use Modules\Core\Models\Menu;
+use Modules\Core\Models\Module;
+use Modules\Users\Models\User;
 
 /**
  * Service for handling menu generation and management in the application
@@ -16,30 +14,25 @@ use Modules\Core\Services\CacheService;
 class MenuService
 {
     private const CACHE_TTL_MODULES = 600; // 10 minutes
+
     private const CACHE_TTL_MENUS = 600; // 10 minutes
+
     private const CACHE_KEY_MODULES = 'modules';
+
     private const CACHE_KEY_MENUS = 'menus';
 
-    /** @var User|null */
     private ?User $user;
 
-    /** @var Request */
     private Request $request;
 
-    /** @var array */
     private array $permissions = [];
 
-    /** @var Collection */
     private Collection $modules;
 
-    /** @var Collection */
     private Collection $menus;
 
     /**
      * Service constructor
-     *
-     * @param Request $request
-     * @param User|null $user
      */
     public function __construct(Request $request, ?User $user = null)
     {
@@ -53,12 +46,10 @@ class MenuService
 
     /**
      * Gets the complete menu for the current user
-     *
-     * @return array
      */
     public function getMenu(): array
     {
-        if (!$this->user) {
+        if (! $this->user) {
             return [];
         }
 
@@ -81,9 +72,6 @@ class MenuService
 
     /**
      * Gets the data for a menu item
-     *
-     * @param Menu $item
-     * @return array|null
      */
     private function getMenuData(Menu $item): ?array
     {
@@ -98,18 +86,15 @@ class MenuService
 
     /**
      * Gets the data for a leaf menu item
-     *
-     * @param Menu $item
-     * @return array|null
      */
     private function getLeafMenuItem(Menu $item): ?array
     {
-        if (!isset($this->modules[$item->module_id]) || !in_array($item->link, $this->permissions)) {
+        if (! isset($this->modules[$item->module_id]) || ! in_array($item->link, $this->permissions)) {
             return null;
         }
 
         return [
-            'text' => $item->text,
+            'text' => __($item->text),
             'link' => route($item->link),
             'icon' => $item->icon,
             'active' => $this->request->routeIs($item->active_with),
@@ -118,10 +103,6 @@ class MenuService
 
     /**
      * Gets the data for a parent menu item
-     *
-     * @param Menu $item
-     * @param Collection $children
-     * @return array|null
      */
     private function getParentMenuItem(Menu $item, Collection $children): ?array
     {
@@ -134,15 +115,13 @@ class MenuService
         }
 
         return [
-            'text' => $item->text,
+            'text' => __($item->text),
             'children' => $childrenData,
         ];
     }
 
     /**
      * Gets active modules from cache
-     *
-     * @return Collection
      */
     private function getModules(): Collection
     {
@@ -155,8 +134,6 @@ class MenuService
 
     /**
      * Gets menu items from cache
-     *
-     * @return Collection
      */
     private function getMenus(): Collection
     {
@@ -169,8 +146,6 @@ class MenuService
 
     /**
      * Gets root menu elements
-     *
-     * @return Collection
      */
     private function getRootElements(): Collection
     {

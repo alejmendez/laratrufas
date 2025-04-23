@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { router } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 
 import { can } from '@Auth/Services/Auth';
@@ -13,7 +13,6 @@ import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import CardSection from '@Core/Components/CardSection.vue';
 import FormComments from '@Tasks/Components/Comments.vue';
 
-const { t } = useI18n();
 const confirm = useConfirm();
 const props = defineProps({
   data: Object,
@@ -30,7 +29,7 @@ const props = defineProps({
 const { data } = props.data;
 
 let supplies = data.supplies.map((a) => {
-  a.unit = { value: a.unit, text: t('task.form.supplies.unit.options.' + a.unit) };
+  a.unit = { value: a.unit, text: trans('task.form.supplies.unit.options.' + a.unit) };
   return a;
 });
 
@@ -50,10 +49,10 @@ const canEdit = can('tasks.edit');
 
 const headerLinks = [];
 if (canDestroy) {
-  headerLinks.push({ to: () => deleteHandler(data.id), variant: 'secondary', text: t('generics.actions.delete') });
+  headerLinks.push({ to: () => deleteHandler(data.id), variant: 'secondary', text: trans('generics.actions.delete') });
 }
 if (canEdit) {
-  headerLinks.push({ to: route('tasks.edit', data.id), text: t('generics.actions.edit') });
+  headerLinks.push({ to: route('tasks.edit', data.id), text: trans('generics.actions.edit') });
 }
 
 const FILE_TAB = 'detail';
@@ -78,17 +77,17 @@ const selectTab = (tab) => {
 };
 
 const deleteHandler = async (id) => {
-  await deleteRowTable(t, confirm, () => {
+  await deleteRowTable(trans, confirm, () => {
     router.delete(route('tasks.destroy', id));
   });
 };
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('task.titles.show')">
+  <AuthenticatedLayout :title="__('task.titles.show')">
     <HeaderCrud
-      :title="$t('task.titles.show')"
-      :breadcrumbs="[{ to: 'tasks.index', text: $t('task.titles.entity_breadcrumb') }, { text: $t('generics.detail') }]"
+      :title="__('task.titles.show')"
+      :breadcrumbs="[{ to: 'tasks.index', text: __('task.titles.entity_breadcrumb') }, { text: __('generics.detail') }]"
       :links="headerLinks"
     />
 
@@ -100,7 +99,7 @@ const deleteHandler = async (id) => {
           :class="currentTab === tab ? 'text-(--p-primary-500)' : 'hover:text-(--p-primary-300) dark:hover:text-(--p-primary-600) text-gray-400'"
           @click="selectTab(tab)"
         >
-          {{ t('task.show.tabs.' + tab) }}
+          {{ __('task.show.tabs.' + tab) }}
         </span>
       </nav>
     </div>
@@ -111,34 +110,34 @@ const deleteHandler = async (id) => {
         wrapperClass="p-5"
       >
         <div class="text-gray-400 mb-1">
-          {{ t('task.show.detail.priority.label') }}
+          {{ __('task.show.detail.priority.label') }}
         </div>
         <div class="mb-4">
           <span class="inline-flex items-center rounded-md bg-gray-200 px-2 py-1 me-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-            {{ t('task.show.detail.priority.options.' + data.priority) }}
+            {{ __('task.show.detail.priority.options.' + data.priority) }}
           </span>
         </div>
 
         <div class="text-gray-400 mb-1">
-          {{ t('task.show.detail.status.label') }}
+          {{ __('task.show.detail.status.label') }}
         </div>
         <div class="mb-4">
-          {{ t('task.show.detail.status.options.' + data.status) }}
+          {{ __('task.show.detail.status.options.' + data.status) }}
         </div>
         <div class="text-gray-400 mb-1">
-          {{ t('task.show.detail.start_date.label') }}
+          {{ __('task.show.detail.start_date.label') }}
         </div>
         <div class="mb-4">
           {{ stringToFormat(data.start_date) }}
         </div>
         <div class="text-gray-400 mb-1">
-          {{ t('task.show.detail.end_date.label') }}
+          {{ __('task.show.detail.end_date.label') }}
         </div>
         <div class="mb-4">
           {{ stringToFormat(data.end_date) }}
         </div>
         <div class="text-gray-400 mb-1">
-          {{ t('task.show.detail.responsible.label') }}
+          {{ __('task.show.detail.responsible.label') }}
         </div>
         <div class="mb-4">
           {{ data.responsible_name }}
@@ -146,11 +145,11 @@ const deleteHandler = async (id) => {
       </CardSection>
       <div class="col-span-4">
         <CardSection
-          :header-text="t('task.show.detail.sections.resources')"
+          :header-text="__('task.show.detail.sections.resources')"
           wrapperClass="p-5"
         >
           <div class="mb-1 font-semibold">
-            {{ t('task.show.detail.tools.label') }}
+            {{ __('task.show.detail.tools.label') }}
           </div>
           <div class="mb-4">
             <div class="py-3 ps-3 min-h-10 border border-gray-200 rounded-md bg-gray-50 dark:bg-(--p-surface-950) dark:border-(--p-surface-700) ring-1 ring-gray-950/5">
@@ -163,7 +162,7 @@ const deleteHandler = async (id) => {
             </div>
           </div>
           <div class="mb-1 font-semibold">
-            {{ t('task.show.detail.machineries.label') }}
+            {{ __('task.show.detail.machineries.label') }}
           </div>
           <div class="mb-4">
             <div class="py-3 ps-3 min-h-10 border border-gray-200 rounded-md bg-gray-50 dark:bg-(--p-surface-950) dark:border-(--p-surface-700) ring-1 ring-gray-950/5">
@@ -177,7 +176,7 @@ const deleteHandler = async (id) => {
           </div>
 
           <div class="mb-1 font-semibold">
-            {{ t('task.show.detail.security_equipments.label') }}
+            {{ __('task.show.detail.security_equipments.label') }}
           </div>
           <div class="mb-4">
             <div class="py-3 ps-3 min-h-10 border border-gray-200 rounded-md bg-gray-50 dark:bg-(--p-surface-950) dark:border-(--p-surface-700) ring-1 ring-gray-950/5">
@@ -193,10 +192,10 @@ const deleteHandler = async (id) => {
           <table class="w-full">
             <thead>
               <tr>
-                <th class="text-gray-400 font-normal text-left">{{ t('task.show.detail.supplies.name.label') }}</th>
-                <th class="text-gray-400 font-normal text-left">{{ t('task.show.detail.supplies.brand.label') }}</th>
-                <th class="text-gray-400 font-normal text-left">{{ t('task.show.detail.supplies.quantity.label') }}</th>
-                <th class="text-gray-400 font-normal text-left">{{ t('task.show.detail.supplies.unit.label') }}</th>
+                <th class="text-gray-400 font-normal text-left">{{ __('task.show.detail.supplies.name.label') }}</th>
+                <th class="text-gray-400 font-normal text-left">{{ __('task.show.detail.supplies.brand.label') }}</th>
+                <th class="text-gray-400 font-normal text-left">{{ __('task.show.detail.supplies.quantity.label') }}</th>
+                <th class="text-gray-400 font-normal text-left">{{ __('task.show.detail.supplies.unit.label') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -204,30 +203,30 @@ const deleteHandler = async (id) => {
                 <td>{{ supply.name }}</td>
                 <td>{{ supply.brand }}</td>
                 <td>{{ supply.quantity }}</td>
-                <td>{{ t('task.show.detail.supplies.unit.options.' + supply.unit.value) }}</td>
+                <td>{{ __('task.show.detail.supplies.unit.options.' + supply.unit.value) }}</td>
               </tr>
             </tbody>
           </table>
         </CardSection>
 
-        <FormComments :form="data" :t="t" :responsibles="props.responsibles" />
+        <FormComments :form="data" :responsibles="props.responsibles" />
       </div>
     </div>
 
     <CardSection
-      :header-text="t('task.show.tracking.title')"
+      :header-text="__('task.show.tracking.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
       v-show="isTrackingTab"
     >
     </CardSection>
     <CardSection
-      :header-text="t('task.show.logbook.title')"
+      :header-text="__('task.show.logbook.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
       v-show="isLogbookTab"
     >
     </CardSection>
     <CardSection
-      :header-text="t('task.show.statistics.title')"
+      :header-text="__('task.show.statistics.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
       v-show="isStatisticsTab"
     >

@@ -8,7 +8,7 @@ import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
 
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import slugify from '@Core/Utils/slugify';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
@@ -25,7 +25,6 @@ const props = defineProps({
 
 const toast = useToast();
 const confirm = useConfirm();
-const { t } = useI18n();
 
 const page = usePage();
 const current_user_id = page.props.auth.user.id;
@@ -48,7 +47,7 @@ const canDestroy = can('users.destroy');
 
 const headerLinks = [];
 if (can('users.create')) {
-  headerLinks.push({ to: 'users.create', text: t('generics.new') });
+  headerLinks.push({ to: 'users.create', text: trans('generics.new') });
 }
 
 const fetchHandler = async (params) => {
@@ -60,8 +59,8 @@ const deleteHandler = async (record) => {
     datatable,
     confirm,
     toast,
-    t,
-    entity: t('user.titles.entity_breadcrumb'),
+    trans,
+    entity: trans('user.titles.entity_breadcrumb'),
     handler: () => UserService.del(record.id),
   };
 
@@ -72,8 +71,8 @@ onMounted(async () => {
   if (props.toast) {
     toast.add({
       severity: 'success',
-      summary: t('user.titles.entity_breadcrumb'),
-      detail: t('generics.messages.saved_successfully'),
+      summary: trans('user.titles.entity_breadcrumb'),
+      detail: trans('generics.messages.saved_successfully'),
       life: 5000,
     });
   }
@@ -87,10 +86,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('user.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('user.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('user.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'users.index', text: $t('user.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
+      :title="__('user.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'users.index', text: __('user.titles.entity_breadcrumb') }, { text: __('generics.list') }]"
       :links="headerLinks"
     />
 
@@ -101,7 +100,7 @@ onMounted(async () => {
       sortField="full_name"
       :sortOrder="1"
     >
-      <Column field="full_name" :header="$t('user.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="full_name" :header="__('user.table.name')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
           {{ data.full_name }}
         </template>
@@ -110,7 +109,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="dni" :header="$t('user.table.dni')" sortable style="min-width: 200px">
+      <Column field="dni" :header="__('user.table.dni')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.dni }}
         </template>
@@ -119,7 +118,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="phone" :header="$t('user.table.phone')" sortable style="min-width: 200px">
+      <Column field="phone" :header="__('user.table.phone')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.phone }}
         </template>
@@ -128,7 +127,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="roles.name" :header="$t('user.table.role')" :showFilterMatchModes="false" style="min-width: 200px">
+      <Column field="roles.name" :header="__('user.table.role')" :showFilterMatchModes="false" style="min-width: 200px">
         <template #body="{ data }">
           <span
             v-for="role in data.roles"
@@ -143,7 +142,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="email" :header="$t('user.table.email')" sortable style="min-width: 200px">
+      <Column field="email" :header="__('user.table.email')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.email }}
         </template>

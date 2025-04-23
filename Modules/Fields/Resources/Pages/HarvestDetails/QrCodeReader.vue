@@ -3,9 +3,6 @@ import { QrcodeStream } from 'vue-qrcode-reader';
 import InputGroup from 'primevue/inputgroup';
 import InputText from 'primevue/inputtext';
 import ButtonPrime from 'primevue/button';
-import { useI18n } from 'vue-i18n';
-
-const { t } = useI18n();
 
 const props = defineProps({
   paused: {
@@ -45,7 +42,7 @@ const findPlantByCode = () => {
   <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-x-16 gap-y-4 mb-5">
     <div class="w-full">
       <div class="py-5 text-center dark:text-gray-100">
-        {{ t('harvest_details.form.plant_code_to_find.label') }}
+        {{ __('harvest_details.form.plant_code_to_find.label') }}
       </div>
       <div class="w-full overflow-hidden">
         <QrcodeStream
@@ -58,7 +55,7 @@ const findPlantByCode = () => {
             class="feedback"
             :class="{ 'text-red-800' : hasError }"
           >
-            {{ hasError ? t('harvest.errors.details.plant_code_not_found', { plant_code: plantCode }) : plantCode }}
+            {{ hasError ? __('harvest.errors.details.plant_code_not_found', { plant_code: plantCode }) : plantCode }}
             <font-awesome-icon :icon="['fas', 'rotate-right']" class="mt-3" />
           </div>
         </QrcodeStream>
@@ -66,7 +63,7 @@ const findPlantByCode = () => {
     </div>
     <div class="w-full">
       <div class="py-5 text-center dark:text-gray-100">
-        {{ t('harvest_details.form.plant_code_to_find.manual_label') }}
+        {{ __('harvest_details.form.plant_code_to_find.manual_label') }}
       </div>
       <div>
         <InputGroup>

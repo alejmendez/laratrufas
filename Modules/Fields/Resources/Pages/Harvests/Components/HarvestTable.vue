@@ -16,7 +16,7 @@ import Select from 'primevue/select';
 import CardSection from '@Core/Components/CardSection.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import HarvestService from '@Fields/Services/HarvestService.js';
@@ -27,7 +27,6 @@ import { can } from '@Auth/Services/Auth';
 
 const toast = useToast();
 const confirm = useConfirm();
-const { t } = useI18n();
 
 const props = defineProps({
   field_id: {
@@ -110,21 +109,21 @@ const filterHandler = async () => {
 };
 
 const deleteHandler = (record) => {
-  deleteRowTable(t, confirm, async () => {
+  deleteRowTable(trans, confirm, async () => {
     const result = await HarvestService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();
       return toast.add({
         severity: 'success',
-        summary: t('generics.messages.deleted_successfully_summary'),
-        detail: t('generics.messages.deleted_successfully'),
+        summary: trans('generics.messages.deleted_successfully_summary'),
+        detail: trans('generics.messages.deleted_successfully'),
         life: 3000,
       });
     }
     toast.add({
       severity: 'danger',
-      summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
-      detail: t('generics.tables.errors.could_not_delete_the_record'),
+      summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
+      detail: trans('generics.tables.errors.could_not_delete_the_record'),
       life: 3000,
     });
   });
@@ -179,11 +178,11 @@ const number_format = (n) => {
 
   <div class="grid md:grid-cols-3 sm:grid-cols-1 gap-4 items-stretch mb-4">
     <CardSection sectionClass="flex-1 mt-5 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5" wrapperClass="p-5">
-      <div class="text-gray-400 pb-1">{{ t('harvest.table_filters.year') }}</div>
+      <div class="text-gray-400 pb-1">{{ __('harvest.table_filters.year') }}</div>
       <VSelect
         id="year"
         v-model="form.year"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="filter_year_options"
         @change="filterHandler"
       />
@@ -208,16 +207,16 @@ const number_format = (n) => {
     sortField="date"
     :sortOrder="1"
   >
-    <Column field="week" :header="$t('harvest.table.date')" :showFilterMatchModes="false" sortable frozen style="min-width: 200px">
+    <Column field="week" :header="__('harvest.table.date')" :showFilterMatchModes="false" sortable frozen style="min-width: 200px">
       <template #body="{ data }">
-        {{ $t('harvest.table_data.date', { week: data.week }) }}
+        {{ __('harvest.table_data.date', { week: data.week }) }}
       </template>
       <template #filter="{ filterModel }">
         <Select v-model="filterModel.value" :options="harvest_available_weeks" optionLabel="text" placeholder="Todos" />
       </template>
     </Column>
 
-    <Column field="batch" :header="$t('harvest.table.batch')" sortable style="min-width: 200px">
+    <Column field="batch" :header="__('harvest.table.batch')" sortable style="min-width: 200px">
       <template #body="{ data }">
         {{ data.batch }}
       </template>
@@ -230,7 +229,7 @@ const number_format = (n) => {
       field="field_names"
       filterField="details.quarter.field_id"
       :showFilterMatchModes="false"
-      :header="$t('harvest.table.field')"
+      :header="__('harvest.table.field')"
       sortable
       style="min-width: 200px"
       v-if="props.field_id === undefined && props.quarter_id === undefined"
@@ -247,7 +246,7 @@ const number_format = (n) => {
       field="quarter_names"
       filterField="details.quarter_id"
       :showFilterMatchModes="false"
-      :header="$t('harvest.table.quarter')"
+      :header="__('harvest.table.quarter')"
       sortable
       style="min-width: 200px"
       v-if="props.quarter_id === undefined"
@@ -260,19 +259,19 @@ const number_format = (n) => {
       </template>
     </Column>
 
-    <Column field="total_weight" :header="$t('harvest.table.weight')" sortable style="min-width: 200px">
+    <Column field="total_weight" :header="__('harvest.table.weight')" sortable style="min-width: 200px">
       <template #body="{ data }">
         {{ number_format(data.total_weight / 1000) }} Kgs
       </template>
     </Column>
 
-    <Column field="unit_count" :header="$t('harvest.table.count_details')" sortable style="min-width: 200px">
+    <Column field="unit_count" :header="__('harvest.table.count_details')" sortable style="min-width: 200px">
       <template #body="{ data }">
         {{ number_format(data.unit_count) }}
       </template>
     </Column>
 
-    <Column field="farmer_name" filterField="farmer.id" :showFilterMatchModes="false" :header="$t('harvest.table.responsible')" sortable style="min-width: 200px">
+    <Column field="farmer_name" filterField="farmer.id" :showFilterMatchModes="false" :header="__('harvest.table.responsible')" sortable style="min-width: 200px">
       <template #body="{ data }">
         {{ data.farmer_name }}
       </template>

@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Modules\Core\Services\CacheService;
-use Illuminate\Support\Facades\Route;
 use Modules\Core\Services\MenuService;
 
 class HandleInertiaRequests extends Middleware

@@ -11,12 +11,10 @@ import { store as storeComment, update as updateComment, destroy as destroyComme
 import { deleteRowTable } from '@Core/Utils/table.js';
 
 const props = defineProps({
-  t: Function,
   form: Object,
   responsibles: Array,
 });
 
-const t = props.t;
 const form = props.form;
 
 const confirm = useConfirm();
@@ -81,7 +79,7 @@ const updateCommentHandler = async () => {
 
 const deleteComment = (id) => {
   deleteRowTable(
-    t,
+    trans,
     confirm,
     async () => {
       loading.value = true;
@@ -91,7 +89,7 @@ const deleteComment = (id) => {
       }
       loading.value = false;
     },
-    t('task.form.comments.entity'),
+    trans('task.form.comments.entity'),
   );
 };
 
@@ -103,7 +101,7 @@ if (form.id === null) {
 </script>
 
 <template>
-  <CardSection :header-text="t('task.sections.comments')" wrapperClass="" v-if="form.id === null">
+  <CardSection :header-text="__('task.sections.comments')" wrapperClass="" v-if="form.id === null">
     <VEditor
       id="new_comment_create_task"
       v-model="commentField"
@@ -113,7 +111,7 @@ if (form.id === null) {
   </CardSection>
 
   <CardSection
-    :header-text="t('task.sections.comments')"
+    :header-text="__('task.sections.comments')"
     wrapperClass=""
     v-if="form.id !== null"
   >
@@ -126,7 +124,7 @@ if (form.id === null) {
             <span
               class="text-xs text-gray-500"
               :title="stringToFormat(comment.created_at, 'dd/MM/yyyy HH:mm')"
-              v-html="relativeTimeDifference(t, new Date(), stringToDate(comment.created_at))"
+              v-html="relativeTimeDifference(trans, new Date(), stringToDate(comment.created_at))"
             ></span>
           </div>
         </div>
@@ -139,22 +137,22 @@ if (form.id === null) {
           />
           <div v-if="commentFieldError !== null" class="text-xs text-red-500">{{ commentFieldError }}</div>
           <div class="flex w-full gap-2 pe-5 mt-2 justify-end">
-            <Button @click="updateCommentHandler" :label="t('task.form.comments.save')" :loading="loading" />
-            <Button @click="resetEditComment" severity="secondary" :label="t('task.form.comments.cancel')" :loading="loading" />
+            <Button @click="updateCommentHandler" :label="__('task.form.comments.save')" :loading="loading" />
+            <Button @click="resetEditComment" severity="secondary" :label="__('task.form.comments.cancel')" :loading="loading" />
           </div>
         </div>
         <div v-else>
           <div class="text-sm font-medium my-2" v-html="comment.comment"></div>
           <div class="flex w-full gap-2 pe-5" v-if="comment.user_id === $page.props.auth.user.id">
-            <div @click="editCommentHandler(comment.id)" class="text-xs text-gray-500 hover:text-gray-300 cursor-default">{{ t('task.form.comments.edit') }}</div>
-            <div @click="deleteComment(comment.id)" class="text-xs text-gray-500 hover:text-gray-300 cursor-default">{{ t('task.form.comments.delete') }}</div>
+            <div @click="editCommentHandler(comment.id)" class="text-xs text-gray-500 hover:text-gray-300 cursor-default">{{ __('task.form.comments.edit') }}</div>
+            <div @click="deleteComment(comment.id)" class="text-xs text-gray-500 hover:text-gray-300 cursor-default">{{ __('task.form.comments.delete') }}</div>
           </div>
         </div>
       </div>
     </div>
 
     <div v-show="!isEditing">
-      <div class="text-xl font-medium mt-2 ms-2">{{ t('task.form.comments.new_comment') }}</div>
+      <div class="text-xl font-medium mt-2 ms-2">{{ __('task.form.comments.new_comment') }}</div>
       <div class="mt-2">
         <VEditor
           id="new_comment"
@@ -165,8 +163,8 @@ if (form.id === null) {
         <div v-if="commentFieldError !== null" class="text-xs text-red-500">{{ commentFieldError }}</div>
       </div>
       <div class="flex w-full gap-2 pe-5 py-2 justify-end">
-        <Button @click="storeCommentHandler" :label="t('task.form.comments.save')" :loading="loading" />
-        <Button @click="commentField = null" severity="secondary" :label="t('task.form.comments.cancel')" :loading="loading" />
+        <Button @click="storeCommentHandler" :label="__('task.form.comments.save')" :loading="loading" />
+        <Button @click="commentField = null" severity="secondary" :label="__('task.form.comments.cancel')" :loading="loading" />
       </div>
     </div>
   </CardSection>

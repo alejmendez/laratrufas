@@ -1,13 +1,10 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
 import { useForm, Link, Head } from '@inertiajs/vue3';
 
 import GuestLayout from '@Core/Layouts/GuestLayout.vue';
 import Checkbox from '@Core/Components/Form/Checkbox.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
 import Button from '@Core/Components/Form/Button.vue';
-
-const { t } = useI18n();
 
 defineProps({
   canResetPassword: {
@@ -33,10 +30,10 @@ const submit = () => {
 
 <template>
   <GuestLayout>
-    <Head :title="t('auth.login.title')" />
+    <Head :title="__('auth.login.title')" />
 
     <div class="my-4 text-4xl text-gray-900 dark:text-slate-300 font-bold text-center">
-      {{ $t('auth.login.title') }}
+      {{ __('auth.login.title') }}
     </div>
 
     <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -49,7 +46,7 @@ const submit = () => {
         type="email"
         classWrapper="mt-4"
         v-model="form.email"
-        :label="t('auth.login.form.email')"
+        :label="__('auth.login.form.email')"
         :message="form.errors.email"
       />
 
@@ -59,14 +56,14 @@ const submit = () => {
         autocomplete="current-password"
         classWrapper="mt-4"
         v-model="form.password"
-        :label="t('auth.login.form.password')"
+        :label="__('auth.login.form.password')"
         :message="form.errors.password"
       />
 
       <div class="block mt-4">
         <label class="flex items-center">
           <Checkbox name="remember" v-model="form.remember" />
-          <span class="ms-2 text-sm text-gray-600 dark:text-slate-300">{{ $t('auth.login.form.remember_me') }}</span>
+          <span class="ms-2 text-sm text-gray-600 dark:text-slate-300">{{ __('auth.login.form.remember_me') }}</span>
         </label>
       </div>
 
@@ -74,7 +71,7 @@ const submit = () => {
         <Button
           class="w-full"
           :loading="form.processing"
-          :label="$t('auth.login.form.submit')"
+          :label="__('auth.login.form.submit')"
           @click="submit"
         />
       </div>
@@ -85,7 +82,7 @@ const submit = () => {
           :href="route('password.request')"
           class="text-l font-bold text-gray-600 hover:text-gray-900 dark:text-slate-300 dark:hover:text-slate-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          {{ $t('auth.login.links.restore_password') }}
+          {{ __('auth.login.links.restore_password') }}
         </Link>
       </div>
     </form>

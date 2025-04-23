@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { router } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 import { deleteRowTable } from '@Core/Utils/table';
 import { stringToFormat } from '@Core/Utils/date';
@@ -11,7 +11,6 @@ import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import CardSection from '@Core/Components/CardSection.vue';
 
-const { t } = useI18n();
 const confirm = useConfirm();
 
 const props = defineProps({
@@ -26,10 +25,10 @@ const canEdit = can('users.edit');
 
 const headerLinks = [];
 if (canDestroy) {
-  headerLinks.push({ to: () => deleteHandler(data.id), variant: 'secondary', text: t('generics.actions.delete') });
+  headerLinks.push({ to: () => deleteHandler(data.id), variant: 'secondary', text: trans('generics.actions.delete') });
 }
 if (canEdit) {
-  headerLinks.push({ to: route('users.edit', data.id), text: t('generics.actions.edit') });
+  headerLinks.push({ to: route('users.edit', data.id), text: trans('generics.actions.edit') });
 }
 
 const FILE_TAB = 'file';
@@ -52,17 +51,17 @@ const selectTab = (tab) => {
 };
 
 const deleteHandler = async (id) => {
-  await deleteRowTable(t, confirm, () => {
+  await deleteRowTable(trans, confirm, () => {
     router.delete(route('users.destroy', id));
   });
 };
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('user.titles.show')">
+  <AuthenticatedLayout :title="__('user.titles.show')">
     <HeaderCrud
-      :title="$t('user.titles.show')"
-      :breadcrumbs="[{ to: 'users.index', text: $t('user.titles.entity_breadcrumb') }, { text: $t('generics.detail') }]"
+      :title="__('user.titles.show')"
+      :breadcrumbs="[{ to: 'users.index', text: __('user.titles.entity_breadcrumb') }, { text: __('generics.detail') }]"
       :links="headerLinks"
     />
 
@@ -83,9 +82,9 @@ const deleteHandler = async (id) => {
       </div>
 
       <div class="card-section p-4 mt-5 rounded-xl shadow-sm ring-1 ring-gray-950/5">
-        <div class="text-gray-400 dark:text-gray-400 pb-1">{{ $t('user.show.created_at') }}</div>
+        <div class="text-gray-400 dark:text-gray-400 pb-1">{{ __('user.show.created_at') }}</div>
         <div class="pb-3 dark:text-white">{{ stringToFormat(data.created_at) }}</div>
-        <div class="text-gray-400 dark:text-gray-400 pb-1">{{ $t('user.show.updated_at') }}</div>
+        <div class="text-gray-400 dark:text-gray-400 pb-1">{{ __('user.show.updated_at') }}</div>
         <div class="dark:text-white">{{ stringToFormat(data.updated_at) }}</div>
       </div>
     </div>
@@ -98,55 +97,55 @@ const deleteHandler = async (id) => {
           :class="currentTab === tab ? 'text-(--p-primary-500)' : 'hover:text-(--p-primary-300) dark:hover:text-(--p-primary-600) text-gray-400'"
           @click="selectTab(tab)"
         >
-          {{ $t('user.show.tabs.' + tab) }}
+          {{ __('user.show.tabs.' + tab) }}
         </span>
       </nav>
     </div>
 
     <CardSection
-      :header-text="$t('user.show.file.title')"
+      :header-text="__('user.show.file.title')"
       wrapperClass="p-5 grid grid-cols-3 gap-4"
       v-show="isFileTab"
     >
       <div class="mb-2">
-        <div class="text-gray-400 mb-2">{{ $t('user.show.file.dni.label') }}</div>
+        <div class="text-gray-400 mb-2">{{ __('user.show.file.dni.label') }}</div>
         <div class="">{{ data.dni }}</div>
       </div>
 
       <div class="mb-2">
-        <div class="text-gray-400 mb-2">{{ $t('user.show.file.name.label') }}</div>
+        <div class="text-gray-400 mb-2">{{ __('user.show.file.name.label') }}</div>
         <div class="">{{ data.name }}</div>
       </div>
 
       <div class="mb-2">
-        <div class="text-gray-400 mb-2">{{ $t('user.show.file.last_name.label') }}</div>
+        <div class="text-gray-400 mb-2">{{ __('user.show.file.last_name.label') }}</div>
         <div class="">{{ data.last_name }}</div>
       </div>
 
       <div class="mb-2">
-        <div class="text-gray-400 mb-2">{{ $t('user.show.file.email.label') }}</div>
+        <div class="text-gray-400 mb-2">{{ __('user.show.file.email.label') }}</div>
         <div class="">{{ data.email }}</div>
       </div>
 
       <div class="mb-2">
-        <div class="text-gray-400 mb-2">{{ $t('user.show.file.phone.label') }}</div>
+        <div class="text-gray-400 mb-2">{{ __('user.show.file.phone.label') }}</div>
         <div class="">{{ data.phone }}</div>
       </div>
 
       <div class="mb-2">
-        <div class="text-gray-400 mb-2">{{ $t('user.show.file.role.label') }}</div>
+        <div class="text-gray-400 mb-2">{{ __('user.show.file.role.label') }}</div>
         <div class="">{{ data.role.name }}</div>
       </div>
     </CardSection>
 
     <CardSection
-      :header-text="$t('user.show.activity.title')"
+      :header-text="__('user.show.activity.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
       v-show="isActivityTab"
     >
     </CardSection>
     <CardSection
-      :header-text="$t('user.show.statistics.title')"
+      :header-text="__('user.show.statistics.title')"
       wrapperClass="p-5 grid grid-cols-2 gap-4"
       v-show="isStatisticsTab"
     >

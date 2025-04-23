@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
@@ -22,9 +20,9 @@ return new class extends Migration
                         'text' => 'menu.users',
                         'link' => 'users.index',
                         'icon' => 'fa-solid fa-users',
-                        'active_with' => "users.*",
+                        'active_with' => 'users.*',
                     ],
-                ]
+                ],
             ],
         ];
 
@@ -32,12 +30,12 @@ return new class extends Migration
         foreach ($menu as $item) {
             $menuElementOrder = 0;
             $menuGroup = DB::table('menus')->where('text', $item['text'])->first();
-            if (!$menuGroup) {
+            if (! $menuGroup) {
                 $menuGroupId = DB::table('menus')->insertGetId([
                     'text' => $item['text'],
                     'order' => $menuGroupOrder++,
                 ]);
-                $menuGroup = (object)['id' => $menuGroupId];
+                $menuGroup = (object) ['id' => $menuGroupId];
             } else {
                 DB::table('menus')->where('id', $menuGroup->id)->update([
                     'order' => $menuGroupOrder++,
@@ -46,7 +44,7 @@ return new class extends Migration
 
             foreach ($item['children'] as $child) {
                 $menuItem = DB::table('menus')->where('text', $child['text'])->first();
-                if (!$menuItem) {
+                if (! $menuItem) {
                     $menuItem = DB::table('menus')->insert([
                         'text' => $child['text'],
                         'link' => $child['link'],

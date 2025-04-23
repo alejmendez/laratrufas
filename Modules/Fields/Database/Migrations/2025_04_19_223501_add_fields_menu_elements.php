@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -21,19 +19,19 @@ return new class extends Migration
                         'text' => 'menu.fields',
                         'link' => 'fields.index',
                         'icon' => 'fa-solid fa-table-cells',
-                        'active_with' => "fields.*",
+                        'active_with' => 'fields.*',
                     ],
                     [
                         'text' => 'menu.quarters',
                         'link' => 'quarters.index',
                         'icon' => 'fa-solid fa-table-cells-large',
-                        'active_with' => "quarters.*",
+                        'active_with' => 'quarters.*',
                     ],
                     [
                         'text' => 'menu.plants',
                         'link' => 'plants.index',
                         'icon' => 'fa-brands fa-envira',
-                        'active_with' => "plants.*",
+                        'active_with' => 'plants.*',
                     ],
                 ],
             ],
@@ -44,29 +42,29 @@ return new class extends Migration
                         'text' => 'menu.harvest',
                         'link' => 'harvests.index',
                         'icon' => 'fa-solid fa-basket-shopping',
-                        'active_with' => "harvests.*",
+                        'active_with' => 'harvests.*',
                     ],
                     [
                         'text' => 'menu.harvest_details',
                         'link' => 'harvests_details.create',
                         'icon' => 'fa-solid fa-barcode',
-                        'active_with' => "harvests_details.*",
+                        'active_with' => 'harvests_details.*',
                     ],
 
                     [
                         'text' => 'menu.batch',
                         'link' => 'batches.index',
                         'icon' => 'fa-solid fa-table-list',
-                        'active_with' => "batches.*",
+                        'active_with' => 'batches.*',
                     ],
 
                     [
                         'text' => 'menu.liquidations',
                         'link' => 'liquidations.index',
                         'icon' => 'fa-solid fa-file-invoice-dollar',
-                        'active_with' => "liquidations.*",
+                        'active_with' => 'liquidations.*',
                     ],
-                ]
+                ],
             ],
             [
                 'text' => 'menu.records',
@@ -75,21 +73,21 @@ return new class extends Migration
                         'text' => 'menu.machineries',
                         'link' => 'machineries.index',
                         'icon' => 'fa-solid fa-tractor',
-                        'active_with' => "machineries.*",
+                        'active_with' => 'machineries.*',
                     ],
                     [
                         'text' => 'menu.tools',
                         'link' => 'tools.index',
                         'icon' => 'fa-solid fa-wrench',
-                        'active_with' => "tools.*",
+                        'active_with' => 'tools.*',
                     ],
                     [
                         'text' => 'menu.security_equipments',
                         'link' => 'security_equipments.index',
                         'icon' => 'fa-solid fa-shield-heart',
-                        'active_with' => "security_equipments.*",
+                        'active_with' => 'security_equipments.*',
                     ],
-                ]
+                ],
             ],
             [
                 'text' => 'menu.settings',
@@ -98,15 +96,15 @@ return new class extends Migration
                         'text' => 'menu.dogs',
                         'link' => 'dogs.index',
                         'icon' => 'fa-solid fa-dog',
-                        'active_with' => "dogs.*",
+                        'active_with' => 'dogs.*',
                     ],
                     [
                         'text' => 'menu.bulk_uploads',
                         'link' => 'bulk.index',
                         'icon' => 'fa-solid fa-file-arrow-up',
-                        'active_with' => "bulk.*",
+                        'active_with' => 'bulk.*',
                     ],
-                ]
+                ],
             ],
         ];
 
@@ -114,12 +112,12 @@ return new class extends Migration
         foreach ($menu as $item) {
             $menuElementOrder = 0;
             $menuGroup = DB::table('menus')->where('text', $item['text'])->first();
-            if (!$menuGroup) {
+            if (! $menuGroup) {
                 $menuGroupId = DB::table('menus')->insertGetId([
                     'text' => $item['text'],
                     'order' => $menuGroupOrder++,
                 ]);
-                $menuGroup = (object)['id' => $menuGroupId];
+                $menuGroup = (object) ['id' => $menuGroupId];
             } else {
                 DB::table('menus')->where('id', $menuGroup->id)->update([
                     'order' => $menuGroupOrder++,
@@ -128,7 +126,7 @@ return new class extends Migration
 
             foreach ($item['children'] as $child) {
                 $menuItem = DB::table('menus')->where('text', $child['text'])->first();
-                if (!$menuItem) {
+                if (! $menuItem) {
                     $menuItem = DB::table('menus')->insert([
                         'text' => $child['text'],
                         'link' => $child['link'],

@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import Dialog from 'primevue/dialog';
 
@@ -8,8 +7,6 @@ import VInput from '@Core/Components/Form/VInput.vue';
 import Button from '@Core/Components/Form/Button.vue';
 
 import importerService from '@Fields/Services/ImporterService';
-
-const { t } = useI18n();
 
 const props = defineProps({
   callback: Function,
@@ -42,12 +39,12 @@ const addImporter = async () => {
         <VInput
           id="importer_name"
           v-model="importer_name"
-          :label="t('liquidation.form.importer_id.label')"
+          :label="__('liquidation.form.importer_id.label')"
         />
       </div>
     </div>
     <div class="flex justify-end">
-      <Button type="submit" @click="addImporter" :label="$t('generics.actions.create')" :loading="loading" />
+      <Button type="submit" @click="addImporter" :label="__('generics.actions.create')" :loading="loading" />
     </div>
   </Dialog>
 </template>

@@ -6,13 +6,11 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import InputText from 'primevue/inputtext';
 import { useToast } from 'primevue/usetoast';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import { useSideBarStore } from '@Core/Stores/sidebar';
 
 import Button from '@Core/Components/Form/Button.vue';
-
-const { t } = useI18n();
 
 const toast = useToast();
 
@@ -63,8 +61,8 @@ const loadLazyData = async () => {
   if (!response) {
     toast.add({
       severity: 'danger',
-      summary: t('generics.tables.errors.could_not_load_the_data_summary'),
-      detail: t('generics.tables.errors.could_not_load_the_data'),
+      summary: trans('generics.tables.errors.could_not_load_the_data_summary'),
+      detail: trans('generics.tables.errors.could_not_load_the_data'),
     });
 
     records.value = [];
@@ -132,7 +130,7 @@ onMounted(() => {
       :filters="filters"
       :rowsPerPageOptions="[5, 10, 25, 50, 100]"
       :loading="loading"
-      :currentPageReportTemplate="$t('generics.tables.pagination.template', metadata)"
+      :currentPageReportTemplate="__('generics.tables.pagination.template', {metadata})"
       @page="onPage($event)"
       @sort="onSort($event)"
       @filter="onFilter($event)"
@@ -151,12 +149,12 @@ onMounted(() => {
             <InputIcon>
               <i class="pi pi-search" />
             </InputIcon>
-            <InputText v-model="filters['global'].value" :placeholder="$t('generics.tables.search') + '...'" @keyup.enter="onFilter" />
+            <InputText v-model="filters['global'].value" :placeholder="__('generics.tables.search') + '...'" @keyup.enter="onFilter" />
           </IconField>
         </div>
       </template>
 
-      <template #empty> {{ $t('generics.tables.empty') }} </template>
+      <template #empty> {{ __('generics.tables.empty') }} </template>
 
       <slot></slot>
     </DataTable>

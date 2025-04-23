@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import Timeline from 'primevue/timeline';
 import Checkbox from 'primevue/checkbox';
@@ -12,8 +11,6 @@ import VSelect from '@Core/Components/Form/VSelect.vue';
 import PlantDetailService from '@Fields/Services/PlantDetailService';
 import { getDataSelect } from '@Core/Services/Selects';
 import { stringToFormat } from '@Core/Utils/date';
-
-const { t } = useI18n();
 
 const props = defineProps({
   plant_id: {
@@ -106,25 +103,25 @@ defineExpose({ filter });
         <div class="text-gray-400 pb-1">Año de cosecha</div>
         <VSelect
           v-model="selectedYear"
-          :placeholder="t('generics.please_select')"
+          :placeholder="__('generics.please_select')"
           :options="year_options"
           @change="filter"
         />
       </div>
       <div class="justify-center">
         <Checkbox v-model="selectAll" :inputId="`all-categories`" name="category" value="all" @change="selectAllHandler" />
-        <label class="ms-2" :for="`all-categories`">{{ t(`harvest_details.all_categories`) }}</label>
+        <label class="ms-2" :for="`all-categories`">{{ __('harvest_details.all_categories') }}</label>
 
-        <span class="ms-8 text-surface-500 dark:text-surface-400">{{ t(`harvest_details.selected`, { size: selectedCategories.length }) }}</span>
+        <span class="ms-8 text-surface-500 dark:text-surface-400">{{ __('harvest_details.selected', { size: selectedCategories.length }) }}</span>
 
         <div v-for="category of categories" :key="category.key" class="flex items-center gap-2 my-4">
           <Checkbox v-model="selectedCategories" :inputId="category.key" name="category" :value="category.name" @change="selectHandler" />
           <label :for="category.key">
-            {{ t(`harvest_details.form.${category.name}.label`) }}
+            {{ __(`harvest_details.form.${category.name}.label`) }}
             <!--
             <div
               class="w-4 h-4 mt-1 ms-2 border-2 border-gray-500 rounded-full float-end"
-              :style="{ backgroundColor: t(`harvest_details.form.${category.name}.color`) }"
+              :style="{ backgroundColor: __(`harvest_details.form.${category.name}.color`) }"
             ></div>
             -->
           </label>
@@ -151,7 +148,7 @@ defineExpose({ filter });
           <template #marker="slotProps">
             <span
               class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm"
-              :style="{ backgroundColor: t(`harvest_details.form.${slotProps.item.type}.color`) }"
+              :style="{ backgroundColor: __(`harvest_details.form.${slotProps.item.type}.color`) }"
             >
               <i class="pi pi-circle-fill"></i>
             </span>
@@ -166,7 +163,7 @@ defineExpose({ filter });
             </div>
           </template>
           <template #content="slotProps">
-            {{ t(`harvest_details.form.${slotProps.item.type}.label`) }} <br />
+            {{ __(`harvest_details.form.${slotProps.item.type}.label`) }} <br />
             <div v-if="slotProps.item.type.endsWith('_photo')">
               <img
                 :src="slotProps.item.value"
@@ -177,13 +174,13 @@ defineExpose({ filter });
             <div v-else>
               {{ slotProps.item.value }}
             </div>
-            {{ t(`harvest_details.form.${slotProps.item.type}.unit`) }}
+            {{ __(`harvest_details.form.${slotProps.item.type}.unit`) }}
           </template>
         </Timeline>
       </div>
       <div v-else class="my-20">
         <p class="text-center text-surface-500 dark:text-surface-400">
-          {{ t('harvest_details.no_data') }}
+          {{ __('harvest_details.no_data') }}
         </p>
       </div>
     </CardSection>

@@ -9,7 +9,7 @@ import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
 
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import { getAge } from '@Core/Utils/date';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
@@ -26,19 +26,18 @@ const props = defineProps({
 
 const toast = useToast();
 const confirm = useConfirm();
-const { t } = useI18n();
 
 const datatable = ref(null);
 const filter_quarter_options = ref([]);
 const filter_couple_options = ref([]);
 const filter_gender_options = ref([
-  { value: 'M', text: t('dog.form.gender.options.male') },
-  { value: 'F', text: t('dog.form.gender.options.female') },
+  { value: 'M', text: trans('dog.form.gender.options.male') },
+  { value: 'F', text: trans('dog.form.gender.options.female') },
 ]);
 
 const genders = {
-  M: t('dog.form.gender.options.male'),
-  F: t('dog.form.gender.options.female'),
+  M: trans('dog.form.gender.options.male'),
+  F: trans('dog.form.gender.options.female'),
 };
 
 const filters = {
@@ -58,7 +57,7 @@ const canCreate = can('dogs.create');
 
 const headerLinks = [];
 if (canCreate) {
-  headerLinks.push({ to: 'dogs.create', text: t('generics.new') });
+  headerLinks.push({ to: 'dogs.create', text: trans('generics.new') });
 }
 
 const fetchHandler = async (params) => {
@@ -66,21 +65,21 @@ const fetchHandler = async (params) => {
 };
 
 const deleteHandler = (record) => {
-  deleteRowTable(t, confirm, async () => {
+  deleteRowTable(trans, confirm, async () => {
     const result = await DogService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();
       return toast.add({
         severity: 'success',
-        summary: t('generics.messages.deleted_successfully_summary'),
-        detail: t('generics.messages.deleted_successfully'),
+        summary: trans('generics.messages.deleted_successfully_summary'),
+        detail: trans('generics.messages.deleted_successfully'),
         life: 3000,
       });
     }
     toast.add({
       severity: 'danger',
-      summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
-      detail: t('generics.tables.errors.could_not_delete_the_record'),
+      summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
+      detail: trans('generics.tables.errors.could_not_delete_the_record'),
       life: 3000,
     });
   });
@@ -90,8 +89,8 @@ onMounted(async () => {
   if (props.toast) {
     toast.add({
       severity: 'success',
-      summary: t('dog.titles.entity_breadcrumb'),
-      detail: t('generics.messages.saved_successfully'),
+      summary: trans('dog.titles.entity_breadcrumb'),
+      detail: trans('generics.messages.saved_successfully'),
       life: 5000,
     });
   }
@@ -107,10 +106,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('dog.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('dog.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('dog.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'dogs.index', text: $t('dog.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
+      :title="__('dog.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'dogs.index', text: __('dog.titles.entity_breadcrumb') }, { text: __('generics.list') }]"
       :links="headerLinks"
     />
 
@@ -121,7 +120,7 @@ onMounted(async () => {
       sortField="name"
       :sortOrder="1"
     >
-      <Column field="name" :header="$t('dog.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="name" :header="__('dog.table.name')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
           {{ data.name }}
         </template>
@@ -130,7 +129,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="quarter.name" :header="$t('dog.table.quarter')" :showFilterMatchModes="false" sortable style="min-width: 200px">
+      <Column field="quarter.name" :header="__('dog.table.quarter')" :showFilterMatchModes="false" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.quarter.name }}
         </template>
@@ -139,7 +138,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="gender" :header="$t('dog.table.gender')" :showFilterMatchModes="false" sortable style="min-width: 200px">
+      <Column field="gender" :header="__('dog.table.gender')" :showFilterMatchModes="false" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ genders[data.gender] }}
         </template>
@@ -148,22 +147,22 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="breed" :header="$t('dog.table.breed')" sortable style="min-width: 200px">
+      <Column field="breed" :header="__('dog.table.breed')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.breed }}
         </template>
         <template #filter="{ filterModel }">
-          <InputText v-model="filterModel.value" type="text" :placeholder="'Buscar por ' + $t('dog.table.breed')" />
+          <InputText v-model="filterModel.value" type="text" :placeholder="'Buscar por ' + __('dog.table.breed')" />
         </template>
       </Column>
 
-      <Column field="age" :header="$t('dog.table.age')" style="min-width: 100px">
+      <Column field="age" :header="__('dog.table.age')" style="min-width: 100px">
         <template #body="{ data }">
           {{ getAge(data.birthdate) }}
         </template>
       </Column>
 
-      <Column field="veterinary" :header="$t('dog.table.veterinary')" sortable style="min-width: 200px">
+      <Column field="veterinary" :header="__('dog.table.veterinary')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.veterinary }}
         </template>
@@ -172,7 +171,7 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="couple.name" :header="$t('dog.table.couple')" :showFilterMatchModes="false" sortable style="min-width: 200px">
+      <Column field="couple.name" :header="__('dog.table.couple')" :showFilterMatchModes="false" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.couple?.full_name }}
         </template>

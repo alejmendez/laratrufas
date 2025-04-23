@@ -6,14 +6,12 @@ import VInput from '@Core/Components/Form/VInput.vue';
 import Button from '@Core/Components/Form/Button.vue';
 
 const props = defineProps({
-  t: Function,
   form: Object,
   tools: Array,
   security_equipments: Array,
   machineries: Array,
 });
 
-const t = props.t;
 const form = props.form;
 
 const units = [
@@ -36,7 +34,7 @@ const units = [
   'inches',
   'feet',
   'yards',
-].map((u) => ({ value: u, text: t('task.form.supplies.unit.options.' + u) }));
+].map((u) => ({ value: u, text: trans('task.form.supplies.unit.options.' + u) }));
 
 const add_supply = () => {
   form.supplies.push({
@@ -54,14 +52,14 @@ const remove_supply = (index) => {
 </script>
 
 <template>
-  <CardSection :header-text="t('task.sections.resources')" wrapperClass="">
+  <CardSection :header-text="__('task.sections.resources')" wrapperClass="">
     <div class="p-6 grid md:grid-cols-3 gap-x-16 gap-y-4 sm:grid-cols-1">
       <VSelectMultiple
         class="mt-1"
         v-model="form.tools"
         :options="props.tools"
-        :label="$t('task.form.tools.label')"
-        :placeholder="t('generics.please_select')"
+        :label="__('task.form.tools.label')"
+        :placeholder="__('generics.please_select')"
         :message="form.errors.tools"
       />
 
@@ -69,8 +67,8 @@ const remove_supply = (index) => {
         class="mt-1"
         v-model="form.machineries"
         :options="props.machineries"
-        :label="$t('task.form.machineries.label')"
-        :placeholder="t('generics.please_select')"
+        :label="__('task.form.machineries.label')"
+        :placeholder="__('generics.please_select')"
         :message="form.errors.machineries"
       />
 
@@ -78,8 +76,8 @@ const remove_supply = (index) => {
         class="mt-1"
         v-model="form.security_equipments"
         :options="props.security_equipments"
-        :label="$t('task.form.security_equipments.label')"
-        :placeholder="t('generics.please_select')"
+        :label="__('task.form.security_equipments.label')"
+        :placeholder="__('generics.please_select')"
         :message="form.errors.security_equipments"
       />
     </div>
@@ -91,7 +89,7 @@ const remove_supply = (index) => {
       <VInput
         :id="`supplies_name_${index}`"
         v-model="supply.name"
-        :label="t('task.form.supplies.name.label')"
+        :label="__('task.form.supplies.name.label')"
         :message="form.errors[`supplies.${index}.name`]"
       />
       <!-- class="col-span-4" -->
@@ -100,7 +98,7 @@ const remove_supply = (index) => {
           <VInput
             :id="`supplies_brand_${index}`"
             v-model="supply.brand"
-            :label="t('task.form.supplies.brand.label')"
+            :label="__('task.form.supplies.brand.label')"
             :message="form.errors[`supplies.${index}.brand`]"
           />
           <VInput
@@ -110,16 +108,16 @@ const remove_supply = (index) => {
             :min="0"
             :max="2000"
             :step="0.01"
-            :label="t('task.form.supplies.quantity.label')"
+            :label="__('task.form.supplies.quantity.label')"
             :message="form.errors[`supplies.${index}.quantity`]"
           />
 
           <VSelect
             :id="`supplies_unit_${index}`"
             v-model="supply.unit"
-            :placeholder="t('generics.please_select')"
+            :placeholder="__('generics.please_select')"
             :options="units"
-            :label="t('task.form.supplies.unit.label')"
+            :label="__('task.form.supplies.unit.label')"
             :message="form.errors[`supplies.${index}.unit`]"
           />
         </div>
@@ -134,7 +132,7 @@ const remove_supply = (index) => {
     </div>
 
     <div class="p-6">
-      <Button @click.prevent="add_supply" :label="$t('task.buttons.add_supply')" />
+      <Button @click.prevent="add_supply" :label="__('task.buttons.add_supply')" />
     </div>
   </CardSection>
 </template>

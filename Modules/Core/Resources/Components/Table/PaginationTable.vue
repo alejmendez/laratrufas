@@ -9,10 +9,10 @@ const props = defineProps({
 <template>
   <nav class="w-full pagination" v-if="props.meta.total > 0">
     <p>
-      {{ $t('generics.tables.pagination.show') }}
+      {{ __('generics.tables.pagination.show') }}
       <strong>{{ props.meta.from || 0 }}</strong> -
       <strong>{{ props.meta.to || 0 }}</strong>
-      {{ $t('generics.tables.pagination.of') }}
+      {{ __('generics.tables.pagination.of') }}
       <strong>{{ props.meta.total }}</strong>
     </p>
 

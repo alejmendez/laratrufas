@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import CardSection from '@Core/Components/CardSection.vue';
 
@@ -11,8 +10,6 @@ const props = defineProps({
 });
 
 const plant = props.plant;
-
-const { t } = useI18n();
 
 const type_graph = ref({ value: 'plant-on-demand-production', text: 'Cosecha por semana', type: 'area' });
 

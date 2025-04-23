@@ -1,5 +1,5 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import FormAssignment from './Assignment.vue';
 import FormMain from './Main.vue';
@@ -7,8 +7,6 @@ import FormComments from './Comments.vue';
 import FormResources from './Resources.vue';
 
 import Button from '@Core/Components/Form/Button.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   form: Object,
@@ -38,7 +36,7 @@ const statesClasses = {
   stopped: '!bg-red-500 !border-red-500 hover:!bg-red-600 hover:!border-red-600',
 };
 
-const states = statesValues.map((s) => ({ value: s, text: t('task.form.status.options.' + s) }));
+const states = statesValues.map((s) => ({ value: s, text: trans('task.form.status.options.' + s) }));
 </script>
 
 <template>
@@ -47,14 +45,14 @@ const states = statesValues.map((s) => ({ value: s, text: t('task.form.status.op
       v-for="state in states"
       :class="`me-3 text-l ${statesClasses[state.value]}`"
       @click.prevent="form.status = state"
-      :label="$t(`task.form.status.options.${state.value}`)"
+      :label="__(`task.form.status.options.${state.value}`)"
       :icon="form.status.value === state.value ? 'pi pi-check-square' : 'pi pi-stop'"
     />
   </div>
   <form @submit.prevent="props.submitHandler">
-    <FormMain :form="form" :t="t" :states="states" />
-    <FormAssignment :form="form" :t="t" :fields="props.fields" :quarters="props.quarters" :plants="props.plants" :responsibles="props.responsibles" />
-    <FormResources :form="form" :t="t" :tools="tools" :security_equipments="security_equipments" :machineries="machineries" />
-    <FormComments :form="form" :t="t" :responsibles="props.responsibles" />
+    <FormMain :form="form" :states="states" />
+    <FormAssignment :form="form" :fields="props.fields" :quarters="props.quarters" :plants="props.plants" :responsibles="props.responsibles" />
+    <FormResources :form="form" :tools="tools" :security_equipments="security_equipments" :machineries="machineries" />
+    <FormComments :form="form" :responsibles="props.responsibles" />
   </form>
 </template>

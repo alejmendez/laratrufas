@@ -4,7 +4,6 @@ import { ref, computed } from 'vue';
 import InputGroup from 'primevue/inputgroup';
 import Button from '@Core/Components/Form/Button.vue';
 
-
 const props = defineProps({
   multiple: {
     type: Boolean,
@@ -149,7 +148,7 @@ const remove_element = (id) => {
       <Button
         severity="secondary"
         @click.prevent="selectFile"
-        :label="$t('generics.form.file.upload_file')"
+        :label="__('generics.form.file.upload_file')"
       />
 
       <div class="max-w-full mt-2" :title="file.name" v-for="file in filesServer">
@@ -182,7 +181,7 @@ const remove_element = (id) => {
           <Button
             severity="secondary"
             @click.prevent="selectFile"
-            :label="$t('generics.form.file.upload_file')"
+            :label="__('generics.form.file.upload_file')"
           />
         </InputGroup>
       </div>
@@ -207,7 +206,7 @@ const remove_element = (id) => {
         v-if="props.withRemove"
         class="mt-4"
         @click.prevent="fileRemoveHandler"
-        :label="$t('generics.form.file.remove_image')"
+        :label="__('generics.form.file.remove_image')"
       />
     </div>
   </div>

@@ -1,14 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import CardSection from '@Core/Components/CardSection.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 import VSelectMultiple from '@Core/Components/Form/VSelectMultiple.vue';
 import AddImporter from '@Core/Components/Form/AddImporter.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   form: Object,
@@ -40,7 +37,7 @@ const addImporterCallback = (newType) => {
       <VInput
         id="batch_number"
         v-model="form.batch_number"
-        :label="t('batch.form.batch_number.label')"
+        :label="__('batch.form.batch_number.label')"
         :message="form.errors.batch_number"
       />
 
@@ -48,7 +45,7 @@ const addImporterCallback = (newType) => {
         id="delivery_date"
         type="date"
         v-model="form.delivery_date"
-        :label="t('batch.form.delivery_date.label')"
+        :label="__('batch.form.delivery_date.label')"
         :message="form.errors.delivery_date"
         :maxDate="new Date()"
       />
@@ -58,9 +55,9 @@ const addImporterCallback = (newType) => {
           id="importer_id"
           v-model="form.importer_id"
           classWrapper="col-span-11"
-          :placeholder="t('generics.please_select')"
+          :placeholder="__('generics.please_select')"
           :options="importers"
-          :label="t('batch.form.importer_id.label')"
+          :label="__('batch.form.importer_id.label')"
           :message="form.errors.importer_id"
         />
         <div class="ms-2" style="margin-top: 28px;">
@@ -71,9 +68,9 @@ const addImporterCallback = (newType) => {
       <VSelectMultiple
         id="harvests"
         v-model="form.harvests"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="harvests"
-        :label="t('batch.form.harvests.label')"
+        :label="__('batch.form.harvests.label')"
         :message="form.errors.harvests"
       />
     </CardSection>

@@ -1,32 +1,32 @@
-const createConfirmOptions = (t, entity, accept) => ({
-  message: t('generics.tables.confirm.delete', { entity }),
-  header: t('generics.tables.confirm.delete_header', { entity }),
+const createConfirmOptions = (trans, entity, accept) => ({
+  message: trans('generics.tables.confirm.delete', { entity }),
+  header: trans('generics.tables.confirm.delete_header', { entity }),
   icon: 'pi pi-info-circle',
-  rejectLabel: t('generics.tables.confirm.denyButton'),
+  rejectLabel: trans('generics.tables.confirm.denyButton'),
   rejectProps: {
-    label: t('generics.tables.confirm.denyButton'),
+    label: trans('generics.tables.confirm.denyButton'),
     severity: 'secondary',
     outlined: true,
   },
   acceptProps: {
-    label: t('generics.tables.confirm.confirmButton'),
+    label: trans('generics.tables.confirm.confirmButton'),
     severity: 'danger',
   },
   accept,
   reject: () => {},
 });
 
-const showToast = (toast, t, isSuccess = true) => {
+const showToast = (toast, trans, isSuccess = true) => {
   const config = isSuccess
     ? {
         severity: 'success',
-        summary: t('generics.messages.deleted_successfully_summary'),
-        detail: t('generics.messages.deleted_successfully'),
+        summary: trans('generics.messages.deleted_successfully_summary'),
+        detail: trans('generics.messages.deleted_successfully'),
       }
     : {
         severity: 'danger',
-        summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
-        detail: t('generics.tables.errors.could_not_delete_the_record'),
+        summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
+        detail: trans('generics.tables.errors.could_not_delete_the_record'),
       };
 
   toast.add({
@@ -35,28 +35,28 @@ const showToast = (toast, t, isSuccess = true) => {
   });
 };
 
-const handleDeleteConfirmation = async (handler, datatable, toast, t) => {
+const handleDeleteConfirmation = async (handler, datatable, toast, trans) => {
   const result = await handler();
 
   if (result) {
     datatable.value.loadLazyData();
-    showToast(toast, t, true);
+    showToast(toast, trans, true);
     return;
   }
 
-  showToast(toast, t, false);
+  showToast(toast, trans, false);
 };
 
-export const deleteRowTable = async (t, confirm, accept, entity = null) => {
-  const confirmOptions = createConfirmOptions(t, entity || t('generics.tables.entity'), accept);
+export const deleteRowTable = async (trans, confirm, accept, entity = null) => {
+  const confirmOptions = createConfirmOptions(trans, entity || trans('generics.tables.entity'), accept);
 
   confirm.require(confirmOptions);
 };
 
 export const deleteRowDatatable = (options) => {
-  const { datatable, confirm, toast, t, entity = t('generics.tables.entity'), handler } = options;
+  const { datatable, confirm, toast, trans, entity = trans('generics.tables.entity'), handler } = options;
 
-  const confirmOptions = createConfirmOptions(t, entity, async () => await handleDeleteConfirmation(handler, datatable, toast, t));
+  const confirmOptions = createConfirmOptions(trans, entity, async () => await handleDeleteConfirmation(handler, datatable, toast, t));
 
   confirm.require(confirmOptions);
 };

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm, router } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -14,8 +14,6 @@ import Button from 'primevue/button';
 import { findByCode } from '@Fields/Services/Plant.js';
 import HarvestDetailService from '@Fields/Services/HarvestDetailService.js';
 import PlantDetailService from '@Fields/Services/PlantDetailService.js';
-
-const { t } = useI18n();
 
 const props = defineProps({
   qualities: Array,
@@ -129,12 +127,12 @@ const optionViewHandler = (option) => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="t('harvest.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('harvest.titles.entity_breadcrumb')">
     <HeaderCrud
-      :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }]"
+      :breadcrumbs="[{ to: 'harvests.index', text: __('harvest.titles.entity_breadcrumb') }]"
     />
     <h3 class="text-2xl mb-3 input-label">
-      {{ t('harvest_details.titles.find', { code: form.plant_code }) }}
+      {{ __('harvest_details.titles.find', { code: form.plant_code || '' }) }}
     </h3>
 
     <QrCodeReader
@@ -160,7 +158,7 @@ const optionViewHandler = (option) => {
         class="w-full mt-3 text-xl h-16"
         :loading="form.processing"
         :disabled="hasError"
-        :label="t(`harvest_details.buttons.${option}`)"
+        :label="__(`harvest_details.buttons.${option}`)"
         @click="optionViewHandler(option)"
       />
     </div>

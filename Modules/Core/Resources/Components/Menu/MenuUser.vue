@@ -128,9 +128,9 @@ onUnmounted(() => {
         <div :class="`${theme.class} rounded-full w-4 h-4 float-left me-2`" v-for="theme in themes" @click="setTheme(theme)"></div>
       </div>
       <div class="py-1 text-left" role="none">
-        <Link :href="route('profile.edit')" class="text-gray-700 dark:text-gray-100 block px-4 py-2"> {{ $t('menu.top.profile') }} </Link>
+        <Link :href="route('profile.edit')" class="text-gray-700 dark:text-gray-100 block px-4 py-2"> {{ __('menu.top.profile') }} </Link>
         <Link :href="route('logout')" method="post" as="button" class="text-gray-700 dark:text-gray-100 block px-4 py-2">
-            {{ $t('menu.top.logout') }}
+            {{ __('menu.top.logout') }}
         </Link>
       </div>
     </div>

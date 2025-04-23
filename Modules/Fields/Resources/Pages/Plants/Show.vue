@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useForm, router } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
@@ -19,7 +19,6 @@ import StatisticsCard from '@Fields/Pages/Plants/ShowComponents/StatisticsCard.v
 
 import PlantDetailService from '@Fields/Services/PlantDetailService';
 
-const { t } = useI18n();
 const confirm = useConfirm();
 const props = defineProps({
   data: Object,
@@ -83,7 +82,7 @@ const selectTab = (tab) => {
 };
 
 const deleteHandler = async (id) => {
-  await deleteRowTable(t, confirm, () => {
+  await deleteRowTable(trans, confirm, () => {
     router.delete(route('plants.destroy', id));
   });
 };
@@ -103,28 +102,28 @@ const submitHandler = async () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="t('plant.titles.show', {name: data.code})">
+  <AuthenticatedLayout :title="__('plant.titles.show', {name: data.code})">
     <HeaderCrud
-      :title="t('plant.titles.show', {name: data.code})"
-      :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
+      :title="__('plant.titles.show', {name: data.code})"
+      :breadcrumbs="[{ to: 'plants.index', text: __('plant.titles.entity_breadcrumb') }, { text: __('generics.detail') }]"
     >
       <Button
         severity="secondary"
         @click="deleteHandler(data.id)"
-        :label="$t('generics.actions.delete')"
+        :label="__('generics.actions.delete')"
         v-if="canDestroy"
         v-show="isFileTab"
       />
       <Button
         as="Link"
         :href="route('plants.edit', data.id)"
-        :label="$t('generics.actions.edit')"
+        :label="__('generics.actions.edit')"
         v-if="canEdit"
         v-show="isFileTab"
       />
 
       <Button
-        :label="t('plant.titles.add_variables')"
+        :label="__('plant.titles.add_variables')"
         v-show="isLogsTab"
         @click="showModalNote = true"
       />
@@ -138,7 +137,7 @@ const submitHandler = async () => {
           :class="currentTab === tab ? 'text-(--p-primary-500)' : 'hover:text-(--p-primary-300) dark:hover:text-(--p-primary-600) text-gray-400'"
           @click="selectTab(tab)"
         >
-          {{ t('plant.show.tabs.' + tab) }}
+          {{ __('plant.show.tabs.' + tab) }}
         </span>
       </nav>
     </div>
@@ -147,7 +146,7 @@ const submitHandler = async () => {
     <LogsCard ref="logsCard" :plant_id="data.id" v-show="isLogsTab" />
     <StatisticsCard :plant="data" v-show="isStatisticsTab" />
 
-    <Dialog v-model:visible="showModalNote" :header="t('plant.titles.add_variables')" modal :style="{ width: '75rem' }">
+    <Dialog v-model:visible="showModalNote" :header="__('plant.titles.add_variables')" modal :style="{ width: '75rem' }">
       <VariablesView
         :form="form"
         :has-error="hasError"

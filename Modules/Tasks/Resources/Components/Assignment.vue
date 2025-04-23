@@ -8,7 +8,6 @@ import VSelectMultiple from '@Core/Components/Form/VSelectMultiple.vue';
 import { getDataSelect } from '@Core/Services/Selects';
 
 const props = defineProps({
-  t: Function,
   form: Object,
   fields: Array,
   quarters: Array,
@@ -16,7 +15,6 @@ const props = defineProps({
   responsibles: Array,
 });
 
-const t = props.t;
 const form = props.form;
 
 const quarters = ref(props.quarters);
@@ -71,51 +69,51 @@ watch(
 </script>
 
 <template>
-  <CardSection :header-text="t('task.sections.assignment')">
+  <CardSection :header-text="__('task.sections.assignment')">
     <VSelect
       id="field_id"
       v-model="form.field_id"
-      :placeholder="t('generics.please_select')"
+      :placeholder="__('generics.please_select')"
       :options="props.fields"
-      :label="t('task.form.field_id.label')"
+      :label="__('task.form.field_id.label')"
       :message="form.errors.field_id"
     />
 
     <VSelectMultiple
       id="quarter_id"
       v-model="form.quarter_id"
-      :placeholder="t('generics.please_select')"
+      :placeholder="__('generics.please_select')"
       :options="quarters"
-      :label="t('task.form.quarter_id.label')"
+      :label="__('task.form.quarter_id.label')"
       :message="form.errors.quarter_id"
     />
 
     <VSelectMultiple
       id="rows"
       v-model="form.rows"
-      :placeholder="t('generics.please_select')"
+      :placeholder="__('generics.please_select')"
       :options="rows"
       :virtualScrollerOptions="{ itemSize: 44 }"
-      :label="t('task.form.rows.label')"
+      :label="__('task.form.rows.label')"
       :message="form.errors.rows"
     />
 
     <VSelectMultiple
       id="plant_id"
       v-model="form.plant_id"
-      :placeholder="t('generics.please_select')"
+      :placeholder="__('generics.please_select')"
       :options="plants"
       :virtualScrollerOptions="{ itemSize: 44 }"
-      :label="t('task.form.plant_id.label')"
+      :label="__('task.form.plant_id.label')"
       :message="form.errors.plant_id"
     />
 
     <VSelect
       id="responsible_id"
       v-model="form.responsible_id"
-      :placeholder="t('generics.please_select')"
+      :placeholder="__('generics.please_select')"
       :options="props.responsibles"
-      :label="t('task.form.responsible_id.label')"
+      :label="__('task.form.responsible_id.label')"
       :message="form.errors.responsible_id"
     />
   </CardSection>

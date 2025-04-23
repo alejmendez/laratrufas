@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import CardSection from '@Core/Components/CardSection.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
@@ -10,8 +10,6 @@ import Button from '@Core/Components/Form/Button.vue';
 
 import { getDataSelect } from '@Core/Services/Selects';
 import { getAge } from '@Core/Utils/date';
-
-const { t } = useI18n();
 
 const props = defineProps({
   form: Object,
@@ -28,11 +26,11 @@ const avatarPreview = ref(form.avatar);
 const genders = [
   {
     value: 'M',
-    text: t('dog.form.gender.options.male'),
+    text: trans('dog.form.gender.options.male'),
   },
   {
     value: 'F',
-    text: t('dog.form.gender.options.female'),
+    text: trans('dog.form.gender.options.female'),
   },
 ];
 
@@ -75,7 +73,7 @@ const remove_vaccine = (index) => {
         <VInputFile
           :image="avatarPreview"
           :imagePreview="true"
-          :label="t('dog.form.avatar.label')"
+          :label="__('dog.form.avatar.label')"
           @change="changeFileHandler"
         />
       </div>
@@ -83,23 +81,23 @@ const remove_vaccine = (index) => {
       <VInput
         id="name"
         v-model="form.name"
-        :label="t('dog.form.name.label')"
+        :label="__('dog.form.name.label')"
         :message="form.errors.name"
       />
 
       <VInput
         id="breed"
         v-model="form.breed"
-        :label="t('dog.form.breed.label')"
+        :label="__('dog.form.breed.label')"
         :message="form.errors.breed"
       />
 
       <VSelect
         id="gender"
         v-model="form.gender"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="genders"
-        :label="t('dog.form.gender.label')"
+        :label="__('dog.form.gender.label')"
         :message="form.errors.gender"
       />
 
@@ -107,7 +105,7 @@ const remove_vaccine = (index) => {
         id="birthdate"
         type="date"
         v-model="form.birthdate"
-        :label="t('dog.form.birthdate.label')"
+        :label="__('dog.form.birthdate.label')"
         :message="form.errors.birthdate"
         @change="calculateAge"
         :maxDate="new Date()"
@@ -115,7 +113,7 @@ const remove_vaccine = (index) => {
 
       <VInput
         id="age"
-        :label="t('dog.form.age.label')"
+        :label="__('dog.form.age.label')"
         v-model="form.age"
         readonly
         :message="form.errors.age"
@@ -124,39 +122,39 @@ const remove_vaccine = (index) => {
       <VSelect
         id="field_id"
         v-model="form.field_id"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="props.fields"
-        :label="t('dog.form.field_id.label')"
+        :label="__('dog.form.field_id.label')"
         :message="form.errors.field_id"
       />
 
       <VSelect
         id="quarter_id"
         v-model="form.quarter_id"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="quartersOptions"
-        :label="t('dog.form.quarter_id.label')"
+        :label="__('dog.form.quarter_id.label')"
         :message="form.errors.quarter_id"
       />
 
       <VInput
         id="veterinary"
         v-model="form.veterinary"
-        :label="t('dog.form.veterinary.label')"
+        :label="__('dog.form.veterinary.label')"
         :message="form.errors.veterinary"
       />
 
       <VSelect
         id="couple_id"
         v-model="form.couple_id"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="props.couples"
-        :label="t('dog.form.couple_id.label')"
+        :label="__('dog.form.couple_id.label')"
         :message="form.errors.couple_id"
       />
     </CardSection>
 
-    <CardSection :header-text="t('dog.sections.vaccines')" wrapperClass="">
+    <CardSection :header-text="__('dog.sections.vaccines')" wrapperClass="">
       <div
         class="p-6 grid grid-cols-2 gap-x-16 gap-y-4"
         v-for="(vaccine, index) in form.vaccines"
@@ -164,7 +162,7 @@ const remove_vaccine = (index) => {
         <VInput
           :id="`vaccines_name_${index}`"
           v-model="vaccine.name"
-          :label="t('dog.form.vaccines.name.label')"
+          :label="__('dog.form.vaccines.name.label')"
           :message="form.errors[`vaccines.${index}.name`]"
         />
 
@@ -174,7 +172,7 @@ const remove_vaccine = (index) => {
             type="date"
             v-model="vaccine.date"
             class="col-span-4"
-            :label="t('dog.form.vaccines.date.label')"
+            :label="__('dog.form.vaccines.date.label')"
             :message="form.errors[`vaccines.${index}.date`]"
             :max-date="new Date()"
           />
@@ -183,7 +181,7 @@ const remove_vaccine = (index) => {
             :id="`vaccines_code_${index}`"
             v-model="vaccine.code"
             class="col-span-4"
-            :label="t('dog.form.vaccines.code.label')"
+            :label="__('dog.form.vaccines.code.label')"
             :message="form.errors[`vaccines.${index}.code`]"
           />
           <div class="pt-8 text-black hover:text-red-500" v-if="index !== 0" @click="remove_vaccine(index)">
@@ -196,7 +194,7 @@ const remove_vaccine = (index) => {
         <Button
           class="btn btn-secondary border-gray-800"
           @click.prevent="add_vaccine"
-          :label="$t('dog.buttons.add_vaccine')"
+          :label="__('dog.buttons.add_vaccine')"
         />
       </div>
     </CardSection>

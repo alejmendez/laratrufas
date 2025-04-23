@@ -7,9 +7,6 @@ import InputLabel from '@Core/Components/InputLabel.vue';
 import TextInput from '@Core/Components/TextInput.vue';
 import PrimaryButton from '@Core/Components/PrimaryButton.vue';
 
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
 const props = defineProps({
   email: {
     type: String,
@@ -37,11 +34,11 @@ const submit = () => {
 
 <template>
   <GuestLayout>
-    <Head :title="t('auth.resetPassword.title')" />
+    <Head :title="__('auth.resetPassword.title')" />
 
     <form @submit.prevent="submit">
       <div>
-        <InputLabel for="email" :value="t('auth.resetPassword.form.email')" />
+        <InputLabel for="email" :value="__('auth.resetPassword.form.email')" />
 
         <TextInput
           id="email"
@@ -57,7 +54,7 @@ const submit = () => {
       </div>
 
       <div class="mt-4">
-        <InputLabel for="password" :value="t('auth.resetPassword.form.password')" />
+        <InputLabel for="password" :value="__('auth.resetPassword.form.password')" />
 
         <TextInput
           id="password"
@@ -72,7 +69,7 @@ const submit = () => {
       </div>
 
       <div class="mt-4">
-        <InputLabel for="password_confirmation" :value="t('auth.resetPassword.form.confirm_password')" />
+        <InputLabel for="password_confirmation" :value="__('auth.resetPassword.form.confirm_password')" />
 
         <TextInput
           id="password_confirmation"
@@ -88,7 +85,7 @@ const submit = () => {
 
       <div class="flex items-center justify-end mt-4">
         <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-          {{ $t('auth.resetPassword.form.submit') }}
+          {{ __('auth.resetPassword.form.submit') }}
         </PrimaryButton>
       </div>
     </form>

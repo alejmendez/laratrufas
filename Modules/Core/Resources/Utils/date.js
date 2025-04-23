@@ -26,7 +26,7 @@ const msPerDay = msPerHour * 24;
 const msPerMonth = msPerDay * 30;
 const msPerYear = msPerDay * 365;
 
-export const relativeTimeDifference = (t, current, previous) => {
+export const relativeTimeDifference = (trans, current, previous) => {
   const elapsed = current - previous;
   let message = '';
   let time = 0;
@@ -51,5 +51,5 @@ export const relativeTimeDifference = (t, current, previous) => {
     time = Math.round(elapsed / msPerYear);
   }
 
-  return t(message, { time });
+  return trans(message, { time });
 };

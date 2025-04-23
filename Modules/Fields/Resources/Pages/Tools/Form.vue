@@ -1,10 +1,6 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
-
 import CardSection from '@Core/Components/CardSection.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   form: Object,
@@ -24,11 +20,11 @@ textarea.p-textarea.note {
 
 <template>
   <form @submit.prevent="props.submitHandler">
-    <CardSection :header-text="t('tool.sections.details')">
+    <CardSection :header-text="__('tool.sections.details')">
       <VInput
         id="name"
         v-model="form.name"
-        :label="t('tool.form.name.label')"
+        :label="__('tool.form.name.label')"
         :message="form.errors.name"
       />
 
@@ -36,7 +32,7 @@ textarea.p-textarea.note {
         id="purchase_date"
         type="date"
         v-model="form.purchase_date"
-        :label="t('tool.form.purchase_date.label')"
+        :label="__('tool.form.purchase_date.label')"
         :message="form.errors.purchase_date"
         :maxDate="new Date()"
       />
@@ -45,7 +41,7 @@ textarea.p-textarea.note {
         id="last_maintenance"
         type="date"
         v-model="form.last_maintenance"
-        :label="t('tool.form.last_maintenance.label')"
+        :label="__('tool.form.last_maintenance.label')"
         :message="form.errors.last_maintenance"
         :maxDate="new Date()"
       />
@@ -53,32 +49,32 @@ textarea.p-textarea.note {
       <VInput
         id="purchase_location"
         v-model="form.purchase_location"
-        :label="t('tool.form.purchase_location.label')"
+        :label="__('tool.form.purchase_location.label')"
         :message="form.errors.purchase_location"
       />
 
       <VInput
         id="type"
         v-model="form.type"
-        :label="t('tool.form.type.label')"
+        :label="__('tool.form.type.label')"
         :message="form.errors.type"
       />
 
       <VInput
         id="contact"
         v-model="form.contact"
-        :label="t('tool.form.contact.label')"
+        :label="__('tool.form.contact.label')"
         :message="form.errors.contact"
       />
     </CardSection>
 
-    <CardSection :header-text="t('tool.sections.note')" wrapperClass="">
+    <CardSection :header-text="__('tool.sections.note')" wrapperClass="">
       <VInput
         id="note"
         type="textarea"
         class="min-h-36 note"
         v-model="form.note"
-        :placeholder="t('tool.form.note.placeholder')"
+        :placeholder="__('tool.form.note.placeholder')"
         :message="form.errors.note"
       />
     </CardSection>

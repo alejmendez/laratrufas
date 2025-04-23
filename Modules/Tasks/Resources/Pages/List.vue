@@ -10,7 +10,7 @@ import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
 
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -31,13 +31,12 @@ const props = defineProps({
 
 const toast = useToast();
 const confirm = useConfirm();
-const { t } = useI18n();
 
 const datatable = ref(null);
 const filter_responsible_options = ref([]);
 
 const statesValues = ['to_begin', 'started', 'stopped', 'overdued', 'finished'];
-const filter_states_options = statesValues.map((s) => ({ value: s, text: t('task.form.status.options.' + s) }));
+const filter_states_options = statesValues.map((s) => ({ value: s, text: trans('task.form.status.options.' + s) }));
 const statesSeverities = {
   to_begin: 'warn',
   started: 'info',
@@ -49,7 +48,7 @@ const statesSeverities = {
 const priorities = ['when_possible', 'routine', 'important', 'urgent'];
 const filter_priorities_options = priorities.map((p) => ({
   value: p,
-  text: t('task.form.priority.options.' + p),
+  text: trans('task.form.priority.options.' + p),
 }));
 
 const filters = {
@@ -67,7 +66,7 @@ const canDestroy = can('tasks.destroy');
 
 const headerLinks = [];
 if (can('tasks.create')) {
-  headerLinks.push({ to: 'tasks.create', text: t('generics.new') });
+  headerLinks.push({ to: 'tasks.create', text: trans('generics.new') });
 }
 
 const fetchHandler = async (params) => {
@@ -85,21 +84,21 @@ const fetchHandler = async (params) => {
 };
 
 const deleteHandler = (record) => {
-  deleteRowTable(t, confirm, async () => {
+  deleteRowTable(trans, confirm, async () => {
     const result = await TaskService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();
       return toast.add({
         severity: 'success',
-        summary: t('generics.messages.deleted_successfully_summary'),
-        detail: t('generics.messages.deleted_successfully'),
+        summary: trans('generics.messages.deleted_successfully_summary'),
+        detail: trans('generics.messages.deleted_successfully'),
         life: 3000,
       });
     }
     toast.add({
       severity: 'danger',
-      summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
-      detail: t('generics.tables.errors.could_not_delete_the_record'),
+      summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
+      detail: trans('generics.tables.errors.could_not_delete_the_record'),
       life: 3000,
     });
   });
@@ -109,8 +108,8 @@ onMounted(async () => {
   if (props.toast) {
     toast.add({
       severity: 'success',
-      summary: t('task.titles.entity_breadcrumb'),
-      detail: t('generics.messages.saved_successfully'),
+      summary: trans('task.titles.entity_breadcrumb'),
+      detail: trans('generics.messages.saved_successfully'),
       life: 5000,
     });
   }
@@ -124,10 +123,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('task.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('task.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('task.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'tasks.index', text: $t('task.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
+      :title="__('task.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'tasks.index', text: __('task.titles.entity_breadcrumb') }, { text: __('generics.list') }]"
       :links="headerLinks"
     />
 
@@ -138,7 +137,7 @@ onMounted(async () => {
       sortField="updated_at"
       :sortOrder="-1"
     >
-      <Column field="name" filterField="name" :header="$t('task.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="name" filterField="name" :header="__('task.table.name')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
           {{ data.name }}
         </template>
@@ -146,23 +145,23 @@ onMounted(async () => {
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nombre" />
         </template>
       </Column>
-      <Column field="status" filterField="status" :showFilterMatchModes="false" :header="$t('task.table.status')" sortable style="min-width: 200px">
+      <Column field="status" filterField="status" :showFilterMatchModes="false" :header="__('task.table.status')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          <Tag :severity="statesSeverities[data.status]" :value="t('task.form.status.options.' + data.status)"></Tag>
+          <Tag :severity="statesSeverities[data.status]" :value="__('task.form.status.options.' + data.status)"></Tag>
         </template>
         <template #filter="{ filterModel }">
           <Select v-model="filterModel.value" :options="filter_states_options" optionLabel="text" placeholder="Todos" />
         </template>
       </Column>
-      <Column field="priority" filterField="priority" :showFilterMatchModes="false" :header="$t('task.table.priority')" sortable style="min-width: 200px">
+      <Column field="priority" filterField="priority" :showFilterMatchModes="false" :header="__('task.table.priority')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ t('task.form.priority.options.' + data.priority) }}
+          {{ __('task.form.priority.options.' + data.priority) }}
         </template>
         <template #filter="{ filterModel }">
           <Select v-model="filterModel.value" :options="filter_priorities_options" optionLabel="text" placeholder="Todos" />
         </template>
       </Column>
-      <Column field="updated_at" filterField="updated_at" :header="$t('task.table.updated_at')" sortable style="min-width: 200px">
+      <Column field="updated_at" filterField="updated_at" :header="__('task.table.updated_at')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ dateToString(data.updated_at) }}
         </template>
@@ -170,7 +169,7 @@ onMounted(async () => {
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por fecha de actualización" />
         </template>
       </Column>
-      <Column field="responsible.name" filterField="responsible_id" :showFilterMatchModes="false" :header="$t('task.table.responsible')" sortable style="min-width: 200px">
+      <Column field="responsible.name" filterField="responsible_id" :showFilterMatchModes="false" :header="__('task.table.responsible')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.responsible?.full_name }}
         </template>

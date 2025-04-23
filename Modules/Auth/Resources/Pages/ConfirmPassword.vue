@@ -7,9 +7,6 @@ import InputLabel from '@Core/Components/InputLabel.vue';
 import TextInput from '@Core/Components/TextInput.vue';
 import PrimaryButton from '@Core/Components/PrimaryButton.vue';
 
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
 const form = useForm({
   password: '',
 });
@@ -23,15 +20,15 @@ const submit = () => {
 
 <template>
   <GuestLayout>
-    <Head :title="t('auth.confirmPassword.title')" />
+    <Head :title="__('auth.confirmPassword.title')" />
 
     <div class="mb-4 text-sm text-gray-600">
-      {{ $t('auth.confirmPassword.subtitle') }}
+      {{ __('auth.confirmPassword.subtitle') }}
     </div>
 
     <form @submit.prevent="submit">
       <div>
-        <InputLabel for="password" :value="t('auth.confirmPassword.form.password')" />
+        <InputLabel for="password" :value="__('auth.confirmPassword.form.password')" />
         <TextInput
           id="password"
           type="password"
@@ -46,7 +43,7 @@ const submit = () => {
 
       <div class="flex justify-end mt-4">
         <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-          {{ $t('auth.confirmPassword.form.password') }}
+          {{ __('auth.confirmPassword.form.password') }}
         </PrimaryButton>
       </div>
     </form>

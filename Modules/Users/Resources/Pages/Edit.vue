@@ -30,11 +30,11 @@ const submitHandler = () => form.post(route('users.update', data.id), form.avata
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('user.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('user.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('user.titles.edit')"
-      :breadcrumbs="[{ to: 'users.index', text: $t('user.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('users.index') }"
+      :title="__('user.titles.edit')"
+      :breadcrumbs="[{ to: 'users.index', text: __('user.titles.entity_breadcrumb') }, { text: __('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.save_edit'), hrefCancel: route('users.index') }"
     />
     <FormUser
       :form="form"

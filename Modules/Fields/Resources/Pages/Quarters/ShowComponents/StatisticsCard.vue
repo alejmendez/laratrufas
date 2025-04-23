@@ -1,7 +1,7 @@
 <script setup>
 import { ref, toRaw, onMounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import Dialog from 'primevue/dialog';
 import ProgressSpinner from 'primevue/progressspinner';
 
@@ -17,7 +17,6 @@ const props = defineProps({
   quarter: Object,
 });
 
-const { t } = useI18n();
 const plants = ref([]);
 const tableCols = ref([]);
 const dataPlantsPosition = ref([]);
@@ -29,8 +28,8 @@ const current_plant = ref({});
 const detail_current_plant = ref({});
 
 const scaleTypes = ref([
-  { value: 'weight', text: t('quarter.show.statistics.scale_type.options.weight') },
-  { value: 'quantity', text: t('quarter.show.statistics.scale_type.options.quantity') },
+  { value: 'weight', text: trans('quarter.show.statistics.scale_type.options.weight') },
+  { value: 'quantity', text: trans('quarter.show.statistics.scale_type.options.quantity') },
 ]);
 const scaleType = ref(scaleTypes.value[0]);
 
@@ -188,10 +187,10 @@ table tbody tr td.border_cell_left {
 </style>
 
 <template>
-  <CardSection :header-text="t('field.show.statistics.title')" wrapperClass="p-5 grid gap-4">
+  <CardSection :header-text="__('field.show.statistics.title')" wrapperClass="p-5 grid gap-4">
     <div v-if="canUpdatePlantsPosition">
       <Button
-        :label="t('harvest.buttons.change_distribution')"
+        :label="__('harvest.buttons.change_distribution')"
         @click.prevent="open = true"
       />
       <Dialog v-model:visible="open" modal header="cambiar distribucion de arboles" :style="{ maxWidth: '500px' }">
@@ -201,7 +200,7 @@ table tbody tr td.border_cell_left {
           </div>
         </div>
         <div class="flex justify-end">
-          <Button type="submit" @click="changeDistribution" :label="$t('generics.actions.create')" />
+          <Button type="submit" @click="changeDistribution" :label="__('generics.actions.create')" />
         </div>
       </Dialog>
     </div>
@@ -210,9 +209,9 @@ table tbody tr td.border_cell_left {
       <VSelect
         id="scaleType"
         v-model="scaleType"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="scaleTypes"
-        :label="t('quarter.show.statistics.scale_type.label')"
+        :label="__('quarter.show.statistics.scale_type.label')"
       />
     </div>
 

@@ -1,8 +1,5 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
 import { router } from '@inertiajs/vue3';
-
-const { t } = useI18n();
 
 const searchHandler = (e) => {
   const url = new URL(window.location.href);
@@ -18,11 +15,11 @@ const props = defineProps({
 <template>
   <div class="flex justify-end px-4 py-3 sm:px-6">
     <div class="relative">
-      <label for="inputSearch" class="sr-only">{{ t('generics.tables.search') }} </label>
+      <label for="inputSearch" class="sr-only">{{ __('generics.tables.search') }} </label>
       <input
         id="inputSearch"
         type="text"
-        :placeholder="t('generics.tables.search') + '...'"
+        :placeholder="__('generics.tables.search') + '...'"
         class="block w-64 rounded-lg border py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
         :value="props.q"
         @keyup.enter="searchHandler"

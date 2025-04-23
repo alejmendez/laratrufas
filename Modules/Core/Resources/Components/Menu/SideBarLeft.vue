@@ -26,14 +26,14 @@ const openHandler = (e, index) => {
         <div v-if="menu.link">
           <MenuElement
             :link="menu.link"
-            :text="$t(menu.text)"
+            :text="menu.text"
             :active="menu.active"
             :icon="menu.icon"
           />
         </div>
         <div v-else>
           <MenuGroup
-            :text="$t(menu.text)"
+            :text="menu.text"
             :elements="menu.children"
             :open="menuState[index]"
             @open="openHandler($event, index)"

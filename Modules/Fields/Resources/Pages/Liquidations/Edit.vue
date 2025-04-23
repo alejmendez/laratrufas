@@ -47,11 +47,11 @@ const submitHandler = () => form.post(route('liquidations.update', data.id));
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('liquidation.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('liquidation.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('liquidation.titles.edit')"
-      :breadcrumbs="[{ to: 'liquidations.index', text: $t('liquidation.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('liquidations.index') }"
+      :title="__('liquidation.titles.edit')"
+      :breadcrumbs="[{ to: 'liquidations.index', text: __('liquidation.titles.entity_breadcrumb') }, { text: __('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.save_edit'), hrefCancel: route('liquidations.index') }"
     />
     <FormLiquidation
       :form="form"

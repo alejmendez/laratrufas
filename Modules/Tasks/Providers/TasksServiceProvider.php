@@ -21,6 +21,8 @@ class TasksServiceProvider extends CoreServiceProvider
     public function boot(): void
     {
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+        $this->loadTranslationsFrom(__DIR__.'/../Lang');
+        $this->loadJsonTranslationsFrom(__DIR__.'/../Lang');
         Route::middleware('web')->group(base_path('Modules/Tasks/Routes/web.php'));
     }
 }

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import ProgressSpinner from 'primevue/progressspinner';
 
 import { listUnread } from '@Tasks/Services/TaskNotificationService';
@@ -11,14 +11,13 @@ const props = defineProps({
   tasks: Array,
 });
 
-const { t } = useI18n();
 const messages = ref([]);
 const today = new Date();
 const countMessagesUnRead = ref(0);
 const loading = ref(true);
 
 const messagesRelativeTimeDifference = (message) => {
-  return relativeTimeDifference(t, today, stringToDate(message.created_at));
+  return relativeTimeDifference(trans, today, stringToDate(message.created_at));
 };
 
 onMounted(async () => {
@@ -33,7 +32,7 @@ onMounted(async () => {
   <div class="p-5 rounded-xl card-section">
     <div class="flex justify-between">
       <div class="font-bold">
-        {{ t('dashboard.messages') }}
+        {{ __('dashboard.messages') }}
         <span
           v-show="countMessagesUnRead > 0"
           class="text-xs bg-orange-700 text-gray-100 rounded-full px-1">
@@ -63,7 +62,7 @@ onMounted(async () => {
 
     <div class="mt-5" v-show="!loading && messages.total == 0">
       <div class="text-center">
-        {{ t('dashboard.no_messages') }}
+        {{ __('dashboard.no_messages') }}
       </div>
     </div>
 

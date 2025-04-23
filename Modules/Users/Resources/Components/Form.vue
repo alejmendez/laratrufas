@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import CardSection from '@Core/Components/CardSection.vue';
 import VInputFile from '@Core/Components/Form/VInputFile.vue';
@@ -9,8 +8,6 @@ import VInput from '@Core/Components/Form/VInput.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 import VElementFormWrapper from '@Core/Components/Form/VElementFormWrapper.vue';
 import InputMask from 'primevue/inputmask';
-
-const { t } = useI18n();
 
 const props = defineProps({
   form: Object,
@@ -34,12 +31,12 @@ const changeFileHandler = (e) => {
 
 <template>
   <form @submit.prevent="props.submitHandler">
-    <CardSection :header-text="t('user.sections.details')">
+    <CardSection :header-text="__('user.sections.details')">
       <div class="form-text col-span-2 form-text-type">
         <VInputFile
           :image="avatarPreview"
           :imagePreview="true"
-          :label="t('generics.form.file.select_a_image')"
+          :label="__('generics.form.file.select_a_image')"
           @change="changeFileHandler"
         />
       </div>
@@ -47,32 +44,32 @@ const changeFileHandler = (e) => {
       <VInputDni
         id="dni"
         v-model="form.dni"
-        :label="t('user.form.dni.label')"
+        :label="__('user.form.dni.label')"
         :message="form.errors.dni"
       />
 
       <VInput
         id="name"
         v-model="form.name"
-        :label="t('user.form.name.label')"
+        :label="__('user.form.name.label')"
         :message="form.errors.name"
       />
 
       <VInput
         id="last_name"
         v-model="form.last_name"
-        :label="t('user.form.last_name.label')"
+        :label="__('user.form.last_name.label')"
         :message="form.errors.last_name"
       />
 
       <VInput
         id="email"
         v-model="form.email"
-        :label="t('user.form.email.label')"
+        :label="__('user.form.email.label')"
         :message="form.errors.email"
       />
 
-      <VElementFormWrapper :classWrapper="props.classWrapper" :label="t('user.form.phone.label')" :message="form.errors.phone">
+      <VElementFormWrapper :classWrapper="props.classWrapper" :label="__('user.form.phone.label')" :message="form.errors.phone">
         <InputMask
           v-model="form.phone"
           mask="(+99) 9 9999 9999"
@@ -84,17 +81,17 @@ const changeFileHandler = (e) => {
         id="password"
         type="password"
         v-model="form.password"
-        :label="t('user.form.password.label')"
+        :label="__('user.form.password.label')"
         :message="form.errors.password"
       />
     </CardSection>
-    <CardSection :header-text="t('user.sections.roles')" v-if="props.showRole">
+    <CardSection :header-text="__('user.sections.roles')" v-if="props.showRole">
       <VSelect
         id="role"
         v-model="form.role"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="props.roles"
-        :label="t('user.form.role.label')"
+        :label="__('user.form.role.label')"
         :message="form.errors.role"
       />
     </CardSection>

@@ -42,11 +42,11 @@ const submitHandler = () => form.post(route('dogs.update', data.id), form.avatar
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('dog.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('dog.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('dog.titles.edit')"
-      :breadcrumbs="[{ to: 'dogs.index', text: $t('dog.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('dogs.index') }"
+      :title="__('dog.titles.edit')"
+      :breadcrumbs="[{ to: 'dogs.index', text: __('dog.titles.entity_breadcrumb') }, { text: __('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.save_edit'), hrefCancel: route('dogs.index') }"
     />
     <FormDog
       :form="form"

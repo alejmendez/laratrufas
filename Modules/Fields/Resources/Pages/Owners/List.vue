@@ -7,7 +7,7 @@ import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -23,7 +23,6 @@ const props = defineProps({
 
 const toast = useToast();
 const confirm = useConfirm();
-const { t } = useI18n();
 
 const showModal = ref(false);
 
@@ -49,8 +48,8 @@ const canDestroy = can('owners.destroy');
 const showSuccessToast = () => {
   toast.add({
     severity: 'success',
-    summary: t('owner.titles.entity_breadcrumb'),
-    detail: t('generics.messages.saved_successfully'),
+    summary: trans('owner.titles.entity_breadcrumb'),
+    detail: trans('generics.messages.saved_successfully'),
     life: 5000,
   });
 
@@ -63,8 +62,8 @@ const showSuccessToast = () => {
 const showErrorToast = () => {
   toast.add({
     severity: 'danger',
-    summary: t('owner.titles.entity_breadcrumb'),
-    detail: t('generics.errors.trying_to_save'),
+    summary: trans('owner.titles.entity_breadcrumb'),
+    detail: trans('generics.errors.trying_to_save'),
     life: 5000,
   });
 };
@@ -78,8 +77,8 @@ const deleteHandler = async (record) => {
     datatable,
     confirm,
     toast,
-    t,
-    entity: t('owner.titles.entity_breadcrumb'),
+    trans,
+    entity: trans('owner.titles.entity_breadcrumb'),
     handler: () => ownerService.del(record.id),
   };
 
@@ -137,13 +136,13 @@ const updateHandler = () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('owner.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('owner.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('owner.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'owners.index', text: $t('owner.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
+      :title="__('owner.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'owners.index', text: __('owner.titles.entity_breadcrumb') }, { text: __('generics.list') }]"
     >
       <Button
-        :label="$t('generics.new')"
+        :label="__('generics.new')"
         @click="showModal = true"
         v-if="canCreate"
       />
@@ -156,7 +155,7 @@ const updateHandler = () => {
       sortField="name"
       :sortOrder="1"
     >
-      <Column field="name" :header="$t('owner.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="name" :header="__('owner.table.name')" sortable frozen style="min-width: 200px">
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nombre" />
         </template>
@@ -165,7 +164,7 @@ const updateHandler = () => {
         </template>
       </Column>
 
-      <Column field="dni" :header="$t('owner.table.dni')" sortable style="min-width: 200px">
+      <Column field="dni" :header="__('owner.table.dni')" sortable style="min-width: 200px">
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Dni" />
         </template>
@@ -192,32 +191,32 @@ const updateHandler = () => {
       </Column>
     </Datatable>
 
-    <Dialog v-model:visible="showModal" modal :header="form.id ? $t('owner.titles.edit') : $t('owner.titles.create')" :style="{ width: '25rem' }">
+    <Dialog v-model:visible="showModal" modal :header="form.id ? __('owner.titles.edit') : __('owner.titles.create')" :style="{ width: '25rem' }">
       <VInput
         id="name"
         v-model="form.name"
-        :label="t('owner.form.name.label')"
+        :label="__('owner.form.name.label')"
         :message="form.errors.name"
       />
 
       <VInputDni
         id="dni"
         v-model="form.dni"
-        :label="t('owner.form.dni.label')"
+        :label="__('owner.form.dni.label')"
         :message="form.errors.dni"
       />
 
       <div class="flex justify-end gap-2 mt-4">
         <Button
           type="button"
-          :label="$t('generics.buttons.cancel')"
+          :label="__('generics.buttons.cancel')"
           severity="secondary"
           @click="showModal = false"
           :loading="loading"
         />
         <Button
           type="button"
-          :label="form.id ? $t('generics.buttons.save_edit') : $t('generics.buttons.create')"
+          :label="form.id ? __('generics.buttons.save_edit') : __('generics.buttons.create')"
           @click="form.id ? updateHandler() : createHandler()"
           :loading="loading"
         />

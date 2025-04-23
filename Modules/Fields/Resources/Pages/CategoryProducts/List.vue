@@ -8,7 +8,7 @@ import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -25,7 +25,6 @@ const props = defineProps({
 
 const toast = useToast();
 const confirm = useConfirm();
-const { t } = useI18n();
 
 const showModal = ref(false);
 
@@ -45,9 +44,9 @@ const form = reactive({
 });
 
 const isCommercialOptions = ref([
-  { label: t('generics.all'), value: null },
-  { label: t('generics.yes'), value: true },
-  { label: t('generics.no'), value: false },
+  { label: trans('generics.all'), value: null },
+  { label: trans('generics.yes'), value: true },
+  { label: trans('generics.no'), value: false },
 ]);
 
 const canEdit = can('category_products.edit');
@@ -57,8 +56,8 @@ const canCreate = can('category_products.create');
 const showSuccessToast = () => {
   toast.add({
     severity: 'success',
-    summary: t('category_product.titles.entity_breadcrumb'),
-    detail: t('generics.messages.saved_successfully'),
+    summary: trans('category_product.titles.entity_breadcrumb'),
+    detail: trans('generics.messages.saved_successfully'),
     life: 5000,
   });
 
@@ -71,8 +70,8 @@ const showSuccessToast = () => {
 const showErrorToast = () => {
   toast.add({
     severity: 'danger',
-    summary: t('category_product.titles.entity_breadcrumb'),
-    detail: t('generics.errors.trying_to_save'),
+    summary: trans('category_product.titles.entity_breadcrumb'),
+    detail: trans('generics.errors.trying_to_save'),
     life: 5000,
   });
 };
@@ -86,8 +85,8 @@ const deleteHandler = async (record) => {
     datatable,
     confirm,
     toast,
-    t,
-    entity: t('category_product.titles.entity_breadcrumb'),
+    trans,
+    entity: trans('category_product.titles.entity_breadcrumb'),
     handler: () => categoryProductService.del(record.id),
   };
 
@@ -145,13 +144,13 @@ const updateHandler = () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('category_product.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('category_product.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('category_product.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'category_products.index', text: $t('category_product.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
+      :title="__('category_product.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'category_products.index', text: __('category_product.titles.entity_breadcrumb') }, { text: __('generics.list') }]"
     >
       <Button
-        :label="$t('generics.new')"
+        :label="__('generics.new')"
         @click="showModal = true"
         v-if="canCreate"
       />
@@ -164,7 +163,7 @@ const updateHandler = () => {
       sortField="name"
       :sortOrder="1"
     >
-      <Column field="name" :header="$t('category_product.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="name" :header="__('category_product.table.name')" sortable frozen style="min-width: 200px">
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nombre" />
         </template>
@@ -173,7 +172,7 @@ const updateHandler = () => {
         </template>
       </Column>
 
-      <Column field="is_commercial" :header="$t('category_product.table.is_commercial')" sortable style="min-width: 200px">
+      <Column field="is_commercial" :header="__('category_product.table.is_commercial')" sortable style="min-width: 200px">
         <template #filter="{ filterModel }">
           <Select v-model="filterModel.value" :options="isCommercialOptions" placeholder="Buscar por es comercial" />
         </template>
@@ -182,7 +181,7 @@ const updateHandler = () => {
             class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none border rounded-full"
             :class="data.is_commercial ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
           >
-            {{ data.is_commercial ? t('generics.yes') : t('generics.no') }}
+            {{ data.is_commercial ? trans('generics.yes') : trans('generics.no') }}
           </span>
         </template>
       </Column>
@@ -205,11 +204,11 @@ const updateHandler = () => {
       </Column>
     </Datatable>
 
-    <Dialog v-model:visible="showModal" modal :header="form.id ? $t('category_product.titles.edit') : $t('category_product.titles.create')" :style="{ width: '25rem' }">
+    <Dialog v-model:visible="showModal" modal :header="form.id ? __('category_product.titles.edit') : __('category_product.titles.create')" :style="{ width: '25rem' }">
       <VInput
         id="name"
         v-model="form.name"
-        :label="t('category_product.form.name.label')"
+        :label="__('category_product.form.name.label')"
         :message="form.errors.name"
       />
 
@@ -217,21 +216,21 @@ const updateHandler = () => {
         id="is_commercial"
         v-model="form.is_commercial"
         classWrapper="my-3"
-        :label="t('category_product.form.is_commercial.label')"
+        :label="__('category_product.form.is_commercial.label')"
         :message="form.errors.is_commercial"
       />
 
       <div class="flex justify-end gap-2 mt-4">
         <Button
           type="button"
-          :label="$t('generics.buttons.cancel')"
+          :label="__('generics.buttons.cancel')"
           severity="secondary"
           @click="showModal = false"
           :loading="loading"
         />
         <Button
           type="button"
-          :label="form.id ? $t('generics.buttons.save_edit') : $t('generics.buttons.create')"
+          :label="form.id ? __('generics.buttons.save_edit') : __('generics.buttons.create')"
           @click="form.id ? updateHandler() : createHandler()"
           :loading="loading"
         />

@@ -1,14 +1,13 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import { useToast } from 'primevue/usetoast';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import FormUser from '@Users/Components/Form.vue';
 
-const { t } = useI18n();
 const toast = useToast();
 
 const props = defineProps({
@@ -39,8 +38,8 @@ onMounted(async () => {
   if (props.toast) {
     toast.add({
       severity: 'success',
-      summary: t('profile.titles.entity_breadcrumb'),
-      detail: t('generics.messages.saved_successfully'),
+      summary: trans('profile.titles.entity_breadcrumb'),
+      detail: trans('generics.messages.saved_successfully'),
       life: 5000,
     });
   }
@@ -48,11 +47,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="t('profile.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('profile.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('profile.titles.edit')"
-      :breadcrumbs="[{ text: t('profile.titles.entity_breadcrumb') }]"
-      :form="{ instance: form, submitHandler, submitText: t('generics.buttons.save_edit'), hrefCancel: route('dashboard') }"
+      :title="__('profile.titles.edit')"
+      :breadcrumbs="[{ text: __('profile.titles.entity_breadcrumb') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.save_edit'), hrefCancel: route('dashboard') }"
     />
     <FormUser
       :form="form"

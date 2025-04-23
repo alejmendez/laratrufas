@@ -19,11 +19,11 @@ const submitHandler = () => form.post(route('machineries.store'));
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('machinery.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('machinery.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('machinery.titles.create')"
-      :breadcrumbs="[{ to: 'machineries.index', text: $t('machinery.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('machineries.index') }"
+      :title="__('machinery.titles.create')"
+      :breadcrumbs="[{ to: 'machineries.index', text: __('machinery.titles.entity_breadcrumb') }, { text: __('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.create'), hrefCancel: route('machineries.index') }"
     />
     <FormMachineries
       :form="form"

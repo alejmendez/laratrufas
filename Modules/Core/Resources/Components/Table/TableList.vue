@@ -48,7 +48,7 @@ const orderUrl = (col) => {
                 <font-awesome-icon class="text-slate-500" icon="sort" v-else />
               </Link>
             </th>
-            <th scope="col" v-if="props.show_actions">{{ $t('generics.tables.actions') }}</th>
+            <th scope="col" v-if="props.show_actions">{{ __('generics.tables.actions') }}</th>
           </tr>
         </thead>
 

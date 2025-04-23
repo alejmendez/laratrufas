@@ -30,11 +30,11 @@ const submitHandler = () => form.post(route('fields.update', data.id), form.blue
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('field.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('field.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('field.titles.edit')"
-      :breadcrumbs="[{ to: 'fields.index', text: $t('field.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('fields.index') }"
+      :title="__('field.titles.edit')"
+      :breadcrumbs="[{ to: 'fields.index', text: __('field.titles.entity_breadcrumb') }, { text: __('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.save_edit'), hrefCancel: route('fields.index') }"
     />
     <FormField
       :form="form"

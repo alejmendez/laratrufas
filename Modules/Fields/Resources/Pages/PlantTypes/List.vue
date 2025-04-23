@@ -7,7 +7,7 @@ import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -18,7 +18,6 @@ import { deleteRowDatatable } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
 const toast = useToast();
 const confirm = useConfirm();
-const { t } = useI18n();
 
 const showModal = ref(false);
 
@@ -43,8 +42,8 @@ const canDestroy = can('plant_types.destroy');
 const showSuccessToast = () => {
   toast.add({
     severity: 'success',
-    summary: t('plant_type.titles.entity_breadcrumb'),
-    detail: t('generics.messages.saved_successfully'),
+    summary: trans('plant_type.titles.entity_breadcrumb'),
+    detail: trans('generics.messages.saved_successfully'),
     life: 5000,
   });
 
@@ -56,8 +55,8 @@ const showSuccessToast = () => {
 const showErrorToast = () => {
   toast.add({
     severity: 'danger',
-    summary: t('plant_type.titles.entity_breadcrumb'),
-    detail: t('generics.errors.trying_to_save'),
+    summary: trans('plant_type.titles.entity_breadcrumb'),
+    detail: trans('generics.errors.trying_to_save'),
     life: 5000,
   });
 };
@@ -71,8 +70,8 @@ const deleteHandler = async (record) => {
     datatable,
     confirm,
     toast,
-    t,
-    entity: t('plant_type.titles.entity_breadcrumb'),
+    trans,
+    entity: trans('plant_type.titles.entity_breadcrumb'),
     handler: () => plantTypeService.del(record.id),
   };
 
@@ -127,13 +126,13 @@ const updateHandler = () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('plant_type.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('plant_type.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('plant_type.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'plant_types.index', text: $t('plant_type.titles.entity_breadcrumb') }, { text: $t('generics.list') }]"
+      :title="__('plant_type.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'plant_types.index', text: __('plant_type.titles.entity_breadcrumb') }, { text: __('generics.list') }]"
     >
       <Button
-        :label="$t('generics.new')"
+        :label="__('generics.new')"
         @click="showModal = true"
         v-if="canCreate"
       />
@@ -146,7 +145,7 @@ const updateHandler = () => {
       sortField="name"
       :sortOrder="1"
     >
-      <Column field="name" :header="$t('plant_type.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="name" :header="__('plant_type.table.name')" sortable frozen style="min-width: 200px">
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por nombre" />
         </template>
@@ -155,7 +154,7 @@ const updateHandler = () => {
         </template>
       </Column>
 
-      <Column field="slug" :header="$t('plant_type.table.slug')" sortable style="min-width: 200px">
+      <Column field="slug" :header="__('plant_type.table.slug')" sortable style="min-width: 200px">
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Codigo" />
         </template>
@@ -182,25 +181,25 @@ const updateHandler = () => {
       </Column>
     </Datatable>
 
-    <Dialog v-model:visible="showModal" modal :header="form.id ? $t('plant_type.titles.edit') : $t('plant_type.titles.create')" :style="{ width: '25rem' }">
+    <Dialog v-model:visible="showModal" modal :header="form.id ? __('plant_type.titles.edit') : __('plant_type.titles.create')" :style="{ width: '25rem' }">
       <VInput
         id="name"
         v-model="form.name"
-        :label="t('plant_type.form.name.label')"
+        :label="__('plant_type.form.name.label')"
         :message="form.errors.name"
       />
 
       <div class="flex justify-end gap-2 mt-4">
         <Button
           type="button"
-          :label="$t('generics.buttons.cancel')"
+          :label="__('generics.buttons.cancel')"
           severity="secondary"
           @click="showModal = false"
           :loading="loading"
         />
         <Button
           type="button"
-          :label="form.id ? $t('generics.buttons.save_edit') : $t('generics.buttons.create')"
+          :label="form.id ? __('generics.buttons.save_edit') : __('generics.buttons.create')"
           @click="form.id ? updateHandler() : createHandler()"
           :loading="loading"
         />

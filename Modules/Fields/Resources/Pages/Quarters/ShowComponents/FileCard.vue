@@ -1,5 +1,5 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import CardSection from '@Core/Components/CardSection.vue';
 
@@ -9,13 +9,11 @@ const props = defineProps({
 
 const quarter = props.quarter;
 
-const { t } = useI18n();
-
 const dataFile = [
-  [t('quarter.show.file.field'), quarter.field.name],
-  [t('quarter.show.file.area'), quarter.area],
-  [t('quarter.show.file.plants_count'), quarter.plants_count],
-  [t('quarter.show.file.responsible'), quarter.responsible.name],
+  [trans('quarter.show.file.field'), quarter.field.name],
+  [trans('quarter.show.file.area'), quarter.area],
+  [trans('quarter.show.file.plants_count'), quarter.plants_count],
+  [trans('quarter.show.file.responsible'), quarter.responsible.name],
 ];
 </script>
 

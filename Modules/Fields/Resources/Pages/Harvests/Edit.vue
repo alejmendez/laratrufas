@@ -58,15 +58,15 @@ const submitHandler = () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('harvest.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('harvest.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('harvest.titles.edit', { batch: form.batch.toUpperCase(), week: getWeek(form.date, { weekStartsOn: 1 })})"
-      :breadcrumbs="[{ to: 'harvests.index', text: $t('harvest.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
+      :title="__('harvest.titles.edit', { batch: form.batch.toUpperCase(), week: getWeek(form.date, { weekStartsOn: 1 })})"
+      :breadcrumbs="[{ to: 'harvests.index', text: __('harvest.titles.entity_breadcrumb') }, { text: __('generics.actions.edit') }]"
     >
       <Button
         class="btn btn-secondary border-gray-800"
         :loading="form.processing"
-        :label="$t('generics.buttons.save_edit')"
+        :label="__('generics.buttons.save_edit')"
         @click="submitHandler"
         v-if="submitHandler"
       />
@@ -76,7 +76,7 @@ const submitHandler = () => {
         severity="secondary"
         :disabled="form.processing"
         :href="route('harvests.index')"
-        :label="$t('generics.buttons.cancel')"
+        :label="__('generics.buttons.cancel')"
       />
     </HeaderCrud>
 

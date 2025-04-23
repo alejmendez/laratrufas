@@ -1,13 +1,11 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 
 import FormTask from '@Tasks/Components/Form.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   fields: Array,
@@ -21,9 +19,9 @@ const form = useForm({
   id: null,
   name: null,
   repeat_number: '1',
-  repeat_type: { value: 'daily', text: t('task.form.repeat_type.options.daily') },
-  status: { value: 'to_begin', text: t('task.form.status.options.to_begin') },
-  priority: { value: 'when_possible', text: t('task.form.priority.options.when_possible') },
+  repeat_type: { value: 'daily', text: trans('task.form.repeat_type.options.daily') },
+  status: { value: 'to_begin', text: trans('task.form.status.options.to_begin') },
+  priority: { value: 'when_possible', text: trans('task.form.priority.options.when_possible') },
   start_date: null,
   end_date: null,
   field_id: [],
@@ -60,11 +58,11 @@ const submitHandler = () => form.post(route('tasks.store'));
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('task.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('task.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('task.titles.create')"
-      :breadcrumbs="[{ to: 'tasks.index', text: $t('task.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('tasks.index') }"
+      :title="__('task.titles.create')"
+      :breadcrumbs="[{ to: 'tasks.index', text: __('task.titles.entity_breadcrumb') }, { text: __('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.create'), hrefCancel: route('tasks.index') }"
     />
     <FormTask
       :form="form"

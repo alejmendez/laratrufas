@@ -1,6 +1,5 @@
 <script setup>
 import { useForm, router } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
 import VSelect from '@Core/Components/Form/VSelect.vue';
 
@@ -8,8 +7,6 @@ const props = defineProps({
   fields: Array,
   field: Object,
 });
-
-const { t } = useI18n();
 
 const form = useForm({
   field_id: props.fields.find((a) => a.value === props.field.data.id),
@@ -39,9 +36,9 @@ const fieldChangeHandler = () => {
       <VSelect
         id="field"
         v-model="form.field_id"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="props.fields"
-        :label="t('dashboard.form.field_id.label')"
+        :label="__('dashboard.form.field_id.label')"
         @change="fieldChangeHandler"
       />
     </div>

@@ -56,10 +56,10 @@ const changeFileHandler = (e) => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('plant.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('plant.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('plant.titles.bulk')"
-      :breadcrumbs="[{ to: 'plants.index', text: $t('plant.titles.entity_breadcrumb') }, { text: $t('generics.actions.bulk') }]"
+      :title="__('plant.titles.bulk')"
+      :breadcrumbs="[{ to: 'plants.index', text: __('plant.titles.entity_breadcrumb') }, { text: __('generics.actions.bulk') }]"
       :form="{ instance: form }"
     />
     <form @submit.prevent="submitHandler">
@@ -69,16 +69,16 @@ const changeFileHandler = (e) => {
         :unprocessed_details="props.unprocessed_details"
         :error_message="props.error_message"
         :errors="props.import_errors"
-        :title="$t('generics.bulk.section_title')"
+        :title="__('generics.bulk.section_title')"
         downloadRoute="plants.download.bulk.template"
       >
         <div class="px-6 pb-6 grid grid-cols-2 gap-x-16 gap-y-4">
           <VSelect
             id="field_id"
             v-model="form.field_id"
-            :placeholder="$t('generics.please_select')"
+            :placeholder="__('generics.please_select')"
             :options="props.fields"
-            :label="$t('plant.bulk.form.field_id')"
+            :label="__('plant.bulk.form.field_id')"
             :message="form.errors.field_id"
             @change="() => submitHandler()"
           />
@@ -86,9 +86,9 @@ const changeFileHandler = (e) => {
           <VSelect
             id="quarter_id"
             v-model="form.quarter_id"
-            :placeholder="$t('generics.please_select')"
+            :placeholder="__('generics.please_select')"
             :options="quartersOptions"
-            :label="$t('plant.bulk.form.quarter_id')"
+            :label="__('plant.bulk.form.quarter_id')"
             :message="form.errors.quarter_id"
             :loading="loading_quarters"
             @change="() => submitHandler()"
@@ -96,7 +96,7 @@ const changeFileHandler = (e) => {
 
           <div class="form-text col-span-2 form-text-type">
             <VInputFile
-              :label="$t('generics.form.file.select_a_file')"
+              :label="__('generics.form.file.select_a_file')"
               :withRemove="false"
               :showPathFile="true"
               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"

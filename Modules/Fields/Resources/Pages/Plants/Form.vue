@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import CardSection from '@Core/Components/CardSection.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
@@ -8,8 +7,6 @@ import VInput from '@Core/Components/Form/VInput.vue';
 
 import AddPlantType from '@Core/Components/Form/AddPlantType.vue';
 import { getDataSelect } from '@Core/Services/Selects';
-
-const { t } = useI18n();
 
 const props = defineProps({
   form: Object,
@@ -42,13 +39,13 @@ const handler_input_row = (e) => {
 
 <template>
   <form @submit.prevent="props.submitHandler">
-    <CardSection :header-text="t('plant.sections.location')">
+    <CardSection :header-text="__('plant.sections.location')">
       <VSelect
         id="field_id"
         v-model="form.field_id"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="props.fields"
-        :label="t('plant.form.field_id.label')"
+        :label="__('plant.form.field_id.label')"
         :message="form.errors.field_id"
         @change="handlerChangeFieldId"
       />
@@ -56,9 +53,9 @@ const handler_input_row = (e) => {
       <VSelect
         id="quarter_id"
         v-model="form.quarter_id"
-        :placeholder="t('generics.please_select')"
+        :placeholder="__('generics.please_select')"
         :options="quartersOptions"
-        :label="t('plant.form.quarter_id.label')"
+        :label="__('plant.form.quarter_id.label')"
         :message="form.errors.quarter_id"
       />
 
@@ -67,7 +64,7 @@ const handler_input_row = (e) => {
         maxlength="2"
         v-model="form.row"
         @input="handler_input_row"
-        :label="t('plant.form.row.label')"
+        :label="__('plant.form.row.label')"
         :message="form.errors.row"
       />
     </CardSection>
@@ -76,7 +73,7 @@ const handler_input_row = (e) => {
       <VInput
         id="code"
         v-model="form.code"
-        :label="t('plant.form.code.label')"
+        :label="__('plant.form.code.label')"
         :message="form.errors.code"
       />
 
@@ -85,9 +82,9 @@ const handler_input_row = (e) => {
           id="plant_type_id"
           v-model="form.plant_type_id"
           :classWrapper="'col-span-11'"
-          :placeholder="t('generics.please_select')"
+          :placeholder="__('generics.please_select')"
           :options="plant_types"
-          :label="t('plant.form.plant_type_id.label')"
+          :label="__('plant.form.plant_type_id.label')"
           :message="form.errors.plant_type_id"
         />
         <div class="ms-2" style="margin-top: 28px;">
@@ -99,7 +96,7 @@ const handler_input_row = (e) => {
         id="planned_at"
         type="date"
         v-model="form.planned_at"
-        :label="t('plant.form.planned_at.label')"
+        :label="__('plant.form.planned_at.label')"
         :message="form.errors.planned_at"
         :max-date="new Date()"
       />
@@ -107,7 +104,7 @@ const handler_input_row = (e) => {
       <VInput
         id="nursery_origin"
         v-model="form.nursery_origin"
-        :label="t('plant.form.nursery_origin.label')"
+        :label="__('plant.form.nursery_origin.label')"
         :message="form.errors.nursery_origin"
       />
     </CardSection>

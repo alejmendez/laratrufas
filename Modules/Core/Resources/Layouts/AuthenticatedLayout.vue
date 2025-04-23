@@ -82,7 +82,7 @@ const menuRightItems = menuElementsRight(currentComponent);
             @click="drawerRightMenuStore.close"
           >
             <font-awesome-icon :icon="item.icon" class="mr-3" v-if="item.icon" />
-            {{ $t(item.text) }}
+            {{ __(item.text) }}
           </Link>
         </li>
       </ul>

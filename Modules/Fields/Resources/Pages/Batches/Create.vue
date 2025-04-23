@@ -21,11 +21,11 @@ const submitHandler = () => form.post(route('batches.store'));
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('batch.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('batch.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('batch.titles.create')"
-      :breadcrumbs="[{ to: 'batches.index', text: $t('batch.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('batches.index') }"
+      :title="__('batch.titles.create')"
+      :breadcrumbs="[{ to: 'batches.index', text: __('batch.titles.entity_breadcrumb') }, { text: __('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.create'), hrefCancel: route('batches.index') }"
     />
     <FormBatch
       :form="form"

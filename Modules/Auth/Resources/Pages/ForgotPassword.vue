@@ -7,9 +7,6 @@ import InputLabel from '@Core/Components/InputLabel.vue';
 import TextInput from '@Core/Components/TextInput.vue';
 import PrimaryButton from '@Core/Components/PrimaryButton.vue';
 
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
-
 defineProps({
   status: {
     type: String,
@@ -27,10 +24,10 @@ const submit = () => {
 
 <template>
   <GuestLayout>
-    <Head :title="t('auth.forgotPassword.title')" />
+    <Head :title="__('auth.forgotPassword.title')" />
 
     <div class="mb-4 text-sm text-gray-600">
-      {{ $t('auth.forgotPassword.subtitle') }}
+      {{ __('auth.forgotPassword.subtitle') }}
     </div>
 
     <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -39,7 +36,7 @@ const submit = () => {
 
     <form @submit.prevent="submit">
       <div>
-        <InputLabel for="email" :value="t('auth.forgotPassword.form.email')" />
+        <InputLabel for="email" :value="__('auth.forgotPassword.form.email')" />
 
         <TextInput
           id="email"
@@ -56,7 +53,7 @@ const submit = () => {
 
       <div class="flex items-center justify-end mt-4">
         <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-          {{ $t('auth.forgotPassword.form.submit') }}
+          {{ __('auth.forgotPassword.form.submit') }}
         </PrimaryButton>
       </div>
     </form>

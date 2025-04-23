@@ -30,11 +30,11 @@ const submitHandler = () => form.post(route('quarters.update', data.id), form.bl
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('quarter.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('quarter.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('quarter.titles.edit')"
-      :breadcrumbs="[{ to: 'quarters.index', text: $t('quarter.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('quarters.index') }"
+      :title="__('quarter.titles.edit')"
+      :breadcrumbs="[{ to: 'quarters.index', text: __('quarter.titles.entity_breadcrumb') }, { text: __('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.save_edit'), hrefCancel: route('quarters.index') }"
     />
     <FormQuarter
       :form="form"

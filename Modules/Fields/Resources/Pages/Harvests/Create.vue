@@ -28,11 +28,11 @@ const submitHandler = () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('harvest.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('harvest.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('harvest.titles.create')"
-      :breadcrumbs="[{ to: 'harvests.index', text: $t('harvest.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('harvests.index') }"
+      :title="__('harvest.titles.create')"
+      :breadcrumbs="[{ to: 'harvests.index', text: __('harvest.titles.entity_breadcrumb') }, { text: __('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.create'), hrefCancel: route('harvests.index') }"
     />
     <FormHarvest
       :form="form"

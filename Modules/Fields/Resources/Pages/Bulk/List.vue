@@ -1,33 +1,31 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import { Link } from '@inertiajs/vue3';
 import { can } from '@Auth/Services/Auth';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 
-const { t } = useI18n();
-
 const list = [
   {
     to: 'plants.create.bulk',
     icon: ['fas', 'seedling'],
-    title: t('bulk.plants.title'),
-    subtitle: t('bulk.plants.subtitle'),
+    title: trans('bulk.plants.title'),
+    subtitle: trans('bulk.plants.subtitle'),
   },
   {
     to: 'harvests.create.bulk',
     icon: ['fas', 'basket-shopping'],
-    title: t('bulk.harvests.title'),
-    subtitle: t('bulk.harvests.subtitle'),
+    title: trans('bulk.harvests.title'),
+    subtitle: trans('bulk.harvests.subtitle'),
   },
 ].filter((ele) => can(ele.to));
 </script>
 
 <template>
-  <AuthenticatedLayout :title="t('bulk.title')">
+  <AuthenticatedLayout :title="__('bulk.title')">
     <HeaderCrud
-      :title="t('bulk.title')"
+      :title="__('bulk.title')"
     />
 
     <div class="grid grid-cols-4 gap-x-16 gap-y-4 mt-5">

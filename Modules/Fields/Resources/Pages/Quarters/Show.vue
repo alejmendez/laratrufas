@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { router } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 import { deleteRowTable } from '@Core/Utils/table';
 import { can } from '@Auth/Services/Auth';
@@ -14,7 +14,7 @@ import LogbookCard from '@Fields/Pages/Quarters/ShowComponents/LogbookCard.vue';
 import FileCard from '@Fields/Pages/Quarters/ShowComponents/FileCard.vue';
 
 import Button from '@Core/Components/Form/Button.vue';
-const { t } = useI18n();
+
 const confirm = useConfirm();
 
 const props = defineProps({
@@ -49,29 +49,29 @@ const selectTab = (tab) => {
 };
 
 const deleteHandler = async (id) => {
-  await deleteRowTable(t, confirm, () => {
+  await deleteRowTable(trans, confirm, () => {
     router.delete(route('quarters.destroy', id));
   });
 };
 </script>
 
 <template>
-  <AuthenticatedLayout :title="t('quarter.titles.show', {name: quarter.name})">
+  <AuthenticatedLayout :title="__('quarter.titles.show', {name: quarter.name})">
     <HeaderCrud
-      :title="t('quarter.titles.show', {name: quarter.name})"
-      :breadcrumbs="[{ to: 'quarters.index', text: t('quarter.titles.entity_breadcrumb') }, { text: t('generics.detail') }]"
+      :title="__('quarter.titles.show', {name: quarter.name})"
+      :breadcrumbs="[{ to: 'quarters.index', text: __('quarter.titles.entity_breadcrumb') }, { text: __('generics.detail') }]"
     >
       <Button
         severity="secondary"
         @click="deleteHandler(quarter.id)"
-        :label="$t('generics.actions.delete')"
+        :label="__('generics.actions.delete')"
         v-if="canDestroy"
         v-show="isFileTab"
       />
       <Button
         as="Link"
         :href="route('quarters.edit', quarter.id)"
-        :label="$t('generics.actions.edit')"
+        :label="__('generics.actions.edit')"
         v-if="canEdit"
         v-show="isFileTab"
       />
@@ -85,7 +85,7 @@ const deleteHandler = async (id) => {
           :class="current_tab === tab ? 'text-(--p-primary-500)' : 'hover:text-(--p-primary-300) dark:hover:text-(--p-primary-600) text-gray-400'"
           @click="selectTab(tab)"
         >
-          {{ t('quarter.show.tabs.' + tab) }}
+          {{ __('quarter.show.tabs.' + tab) }}
         </span>
       </nav>
     </div>

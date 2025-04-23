@@ -20,6 +20,8 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'core');
+        $this->loadTranslationsFrom(__DIR__.'/../Lang');
+        $this->loadJsonTranslationsFrom(__DIR__.'/../Lang');
         Route::middleware('web')->group(base_path('Modules/Core/Routes/web.php'));
 
         if ($this->app->runningInConsole()) {

@@ -1,6 +1,4 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
-
 import CardSection from '@Core/Components/CardSection.vue';
 
 const props = defineProps({
@@ -8,8 +6,6 @@ const props = defineProps({
 });
 
 const field = props.field;
-
-const { t } = useI18n();
 </script>
 
 <template>
@@ -17,7 +13,7 @@ const { t } = useI18n();
     wrapperClass="p-5 grid grid-cols-1 gap-4"
   >
     <div v-if="field.documents.length === 0">
-      <p>{{ t('field.show.documentation.no_documents') }}</p>
+      <p>{{ __('field.show.documentation.no_documents') }}</p>
     </div>
     <div class="max-w-full mt-2" :title="file.name" v-for="file in field.documents">
       <a :href="file.url" target="_blank">

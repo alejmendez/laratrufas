@@ -1,14 +1,12 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import FormTask from '@Tasks/Components/Form.vue';
 
 import { stringToDate } from '@Core/Utils/date';
-
-const { t } = useI18n();
 
 const props = defineProps({
   data: Object,
@@ -24,7 +22,7 @@ const props = defineProps({
 const { data } = props.data;
 
 let supplies = data.supplies.map((a) => {
-  a.unit = { value: a.unit, text: t('task.form.supplies.unit.options.' + a.unit) };
+  a.unit = { value: a.unit, text: trans('task.form.supplies.unit.options.' + a.unit) };
   return a;
 });
 
@@ -44,9 +42,9 @@ const form = useForm({
   id: data.id,
   name: data.name,
   repeat_number: data.repeat_number,
-  repeat_type: { value: data.repeat_type, text: t(`task.form.repeat_type.options.${data.repeat_type || 'daily'}`) },
-  status: { value: data.status, text: t(`task.form.status.options.${data.status || 'to_begin'}`) },
-  priority: { value: data.priority, text: t(`task.form.priority.options.${data.priority || 'when_possible'}`) },
+  repeat_type: { value: data.repeat_type, text: trans(`task.form.repeat_type.options.${data.repeat_type || 'daily'}`) },
+  status: { value: data.status, text: trans(`task.form.status.options.${data.status || 'to_begin'}`) },
+  priority: { value: data.priority, text: trans(`task.form.priority.options.${data.priority || 'when_possible'}`) },
   start_date: stringToDate(data.start_date),
   end_date: stringToDate(data.end_date),
   field_id: data.field,
@@ -67,11 +65,11 @@ const submitHandler = () => form.post(route('tasks.update', data.id));
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('task.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('task.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('task.titles.edit')"
-      :breadcrumbs="[{ to: 'tasks.index', text: $t('task.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('tasks.index') }"
+      :title="__('task.titles.edit')"
+      :breadcrumbs="[{ to: 'tasks.index', text: __('task.titles.entity_breadcrumb') }, { text: __('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.save_edit'), hrefCancel: route('tasks.index') }"
     />
     <FormTask
       :form="form"

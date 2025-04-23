@@ -9,7 +9,7 @@ import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
 
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -25,7 +25,6 @@ const props = defineProps({
 
 const toast = useToast();
 const confirm = useConfirm();
-const { t } = useI18n();
 
 const datatable = ref(null);
 const filter_field_options = ref([]);
@@ -50,7 +49,7 @@ const canDestroy = can('plants.destroy');
 
 const headerLinks = [];
 if (canCreate) {
-  headerLinks.push({ to: 'plants.create', text: t('generics.new') });
+  headerLinks.push({ to: 'plants.create', text: trans('generics.new') });
 }
 
 const fetchHandler = async (params) => {
@@ -58,21 +57,21 @@ const fetchHandler = async (params) => {
 };
 
 const deleteHandler = (record) => {
-  deleteRowTable(t, confirm, async () => {
+  deleteRowTable(trans, confirm, async () => {
     const result = await PlantService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();
       return toast.add({
         severity: 'success',
-        summary: t('generics.messages.deleted_successfully_summary'),
-        detail: t('generics.messages.deleted_successfully'),
+        summary: trans('generics.messages.deleted_successfully_summary'),
+        detail: trans('generics.messages.deleted_successfully'),
         life: 3000,
       });
     }
     toast.add({
       severity: 'danger',
-      summary: t('generics.tables.errors.could_not_delete_the_record_summary'),
-      detail: t('generics.tables.errors.could_not_delete_the_record'),
+      summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
+      detail: trans('generics.tables.errors.could_not_delete_the_record'),
       life: 3000,
     });
   });
@@ -82,8 +81,8 @@ onMounted(async () => {
   if (props.toast) {
     toast.add({
       severity: 'success',
-      summary: t('plant.titles.entity_breadcrumb'),
-      detail: t('generics.messages.saved_successfully'),
+      summary: trans('plant.titles.entity_breadcrumb'),
+      detail: trans('generics.messages.saved_successfully'),
       life: 5000,
     });
   }
@@ -103,10 +102,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="t('plant.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('plant.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('plant.titles.entity_breadcrumb')"
-      :breadcrumbs="[{ to: 'plants.index', text: t('plant.titles.entity_breadcrumb') }, { text: t('generics.list') }]"
+      :title="__('plant.titles.entity_breadcrumb')"
+      :breadcrumbs="[{ to: 'plants.index', text: __('plant.titles.entity_breadcrumb') }, { text: __('generics.list') }]"
       :links="headerLinks"
     />
 
@@ -117,7 +116,7 @@ onMounted(async () => {
       sortField="code"
       :sortOrder="1"
     >
-      <Column field="code" filterField="code" :header="$t('plant.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="code" filterField="code" :header="__('plant.table.name')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
           {{ data.code }}
         </template>
@@ -125,7 +124,7 @@ onMounted(async () => {
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Codigo" />
         </template>
       </Column>
-      <Column field="quarter_name" filterField="quarter_id" :showFilterMatchModes="false" :header="$t('plant.table.quarter_id')" sortable style="min-width: 200px">
+      <Column field="quarter_name" filterField="quarter_id" :showFilterMatchModes="false" :header="__('plant.table.quarter_id')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.quarter?.name }}
         </template>
@@ -133,7 +132,7 @@ onMounted(async () => {
           <Select v-model="filterModel.value" :options="filter_quarter_options" optionLabel="text" placeholder="Todos" />
         </template>
       </Column>
-      <Column field="field_name" filterField="quarter.field_id" :showFilterMatchModes="false" :header="$t('plant.table.field_id')" sortable style="min-width: 200px">
+      <Column field="field_name" filterField="quarter.field_id" :showFilterMatchModes="false" :header="__('plant.table.field_id')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.quarter?.field?.name }}
         </template>
@@ -141,7 +140,7 @@ onMounted(async () => {
           <Select v-model="filterModel.value" :options="filter_field_options" optionLabel="text" placeholder="Todos" />
         </template>
       </Column>
-      <Column field="plant_type_name" filterField="plant_type_id" :showFilterMatchModes="false" :header="$t('plant.table.type')" sortable style="min-width: 200px">
+      <Column field="plant_type_name" filterField="plant_type_id" :showFilterMatchModes="false" :header="__('plant.table.type')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.plant_type?.name }}
         </template>
@@ -149,7 +148,7 @@ onMounted(async () => {
           <Select v-model="filterModel.value" :options="filter_plant_type_options" optionLabel="text" placeholder="Todos" />
         </template>
       </Column>
-      <Column field="age" :header="$t('plant.table.age')" sortable style="min-width: 100px">
+      <Column field="age" :header="__('plant.table.age')" sortable style="min-width: 100px">
         <template #body="{ data }">
           {{ data.age }}
         </template>
@@ -157,7 +156,7 @@ onMounted(async () => {
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por edad" />
         </template>
       </Column>
-      <Column field="quarter.responsible.name" filterField="quarter.responsible_id" :showFilterMatchModes="false" :header="$t('plant.table.manager')" sortable style="min-width: 200px">
+      <Column field="quarter.responsible.name" filterField="quarter.responsible_id" :showFilterMatchModes="false" :header="__('plant.table.manager')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.quarter?.responsible?.full_name }}
         </template>

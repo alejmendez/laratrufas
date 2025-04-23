@@ -4,12 +4,13 @@ namespace Modules\Core\Services;
 
 use Illuminate\Support\Str;
 use Modules\Users\Models\User;
-use Modules\Core\Services\MenuService;
 
 class CacheService
 {
     protected static int $userDataTtl = 600; // 10 minutes
+
     protected static int $unreadNotificationsTtl = 60; // 1 minute
+
     protected static int $menuTtl = 1; // 86_400; // 24 hours
 
     public static function getUserDataSession(User $user)
@@ -75,6 +76,7 @@ class CacheService
     {
         return cache()->remember('menu_'.$user->id.'_1', self::$menuTtl, function () use ($user) {
             $menuService = new MenuService($user);
+
             return $menuService->getMenu();
         });
     }

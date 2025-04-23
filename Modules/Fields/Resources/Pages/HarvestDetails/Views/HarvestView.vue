@@ -1,12 +1,8 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
-
 import Button from 'primevue/button';
 
 import VSelect from '@Core/Components/Form/VSelect.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   form: {
@@ -31,9 +27,9 @@ const emit = defineEmits(['submit', 'submitAndLoadAnother', 'resetQr']);
     <VSelect
       id="quality"
       v-model="form.quality"
-      :placeholder="t('generics.please_select')"
+      :placeholder="__('generics.please_select')"
       :options="qualities"
-      :label="t('harvest.form.details.quality.label')"
+      :label="__('harvest.form.details.quality.label')"
       :message="form.errors.quality"
     />
 
@@ -44,7 +40,7 @@ const emit = defineEmits(['submit', 'submitAndLoadAnother', 'resetQr']);
       :min="0"
       :max="2000"
       :step="0.01"
-      :label="t('harvest.form.details.weight.label')"
+      :label="__('harvest.form.details.weight.label')"
       :message="form.errors.weight"
     />
 

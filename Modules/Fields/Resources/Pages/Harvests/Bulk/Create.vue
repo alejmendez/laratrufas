@@ -1,6 +1,5 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -8,8 +7,6 @@ import BulkWrapper from '@Core/Components/BulkWrapper.vue';
 
 import VSelect from '@Core/Components/Form/VSelect.vue';
 import VInputFile from '@Core/Components/Form/VInputFile.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   harvests: Array,
@@ -53,10 +50,10 @@ const changeFileHandler = (e) => {
 </script>
 
 <template>
-  <AuthenticatedLayout :title="t('harvest.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('harvest.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="t('harvest.titles.bulk')"
-      :breadcrumbs="[{ to: 'harvests.index', text: t('harvest.titles.entity_breadcrumb') }, { text: t('generics.actions.bulk') }]"
+      :title="__('harvest.titles.bulk')"
+      :breadcrumbs="[{ to: 'harvests.index', text: __('harvest.titles.entity_breadcrumb') }, { text: __('generics.actions.bulk') }]"
       :form="{ instance: form }"
     />
     <form @submit.prevent="submitHandler">
@@ -66,23 +63,23 @@ const changeFileHandler = (e) => {
         :unprocessed_details="props.unprocessed_details"
         :error_message="props.error_message"
         :errors="props.import_errors"
-        :title="t('generics.bulk.section_title')"
+        :title="__('generics.bulk.section_title')"
         downloadRoute="harvests.download.bulk.template"
       >
         <div class="px-6 pb-6 grid grid-cols-2 gap-x-16 gap-y-4">
           <VSelect
             id="harvest_id"
             v-model="form.harvest_id"
-            :placeholder="t('generics.please_select')"
+            :placeholder="__('generics.please_select')"
             :options="harvests"
-            :label="t('harvest.bulk.form.harvest_id')"
+            :label="__('harvest.bulk.form.harvest_id')"
             :message="form.errors.harvest_id"
             @change="() => submitHandler()"
           />
 
           <div class="form-text col-span-2 form-text-type">
             <VInputFile
-              :label="t('generics.form.file.select_a_file')"
+              :label="__('generics.form.file.select_a_file')"
               :withRemove="false"
               :showPathFile="true"
               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"

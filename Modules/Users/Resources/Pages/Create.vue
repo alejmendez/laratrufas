@@ -24,11 +24,11 @@ const submitHandler = () => form.post(route('users.store'), form.avatar ? { forc
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('user.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('user.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('user.titles.create')"
-      :breadcrumbs="[{ to: 'users.index', text: $t('user.titles.entity_breadcrumb') }, { text: $t('generics.actions.create') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.create'), hrefCancel: route('users.index') }"
+      :title="__('user.titles.create')"
+      :breadcrumbs="[{ to: 'users.index', text: __('user.titles.entity_breadcrumb') }, { text: __('generics.actions.create') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.create'), hrefCancel: route('users.index') }"
     />
     <FormUser
       :form="form"

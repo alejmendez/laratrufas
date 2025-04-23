@@ -37,11 +37,11 @@ const submitHandler = () => form.post(route('batches.update', data.id));
 </script>
 
 <template>
-  <AuthenticatedLayout :title="$t('batch.titles.entity_breadcrumb')">
+  <AuthenticatedLayout :title="__('batch.titles.entity_breadcrumb')">
     <HeaderCrud
-      :title="$t('batch.titles.edit')"
-      :breadcrumbs="[{ to: 'batches.index', text: $t('batch.titles.entity_breadcrumb') }, { text: $t('generics.actions.edit') }]"
-      :form="{ instance: form, submitHandler, submitText: $t('generics.buttons.save_edit'), hrefCancel: route('batches.index') }"
+      :title="__('batch.titles.edit')"
+      :breadcrumbs="[{ to: 'batches.index', text: __('batch.titles.entity_breadcrumb') }, { text: __('generics.actions.edit') }]"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.save_edit'), hrefCancel: route('batches.index') }"
     />
     <FormBatch
       :form="form"

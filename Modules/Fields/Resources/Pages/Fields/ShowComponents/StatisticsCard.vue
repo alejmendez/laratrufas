@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import CardSection from '@Core/Components/CardSection.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
@@ -12,8 +11,6 @@ const props = defineProps({
 });
 
 const field = props.field;
-
-const { t } = useI18n();
 
 const types_graphs = ref([
   { value: 'field-shrinkage-detail', text: 'Resumen de liquidaciones', type: 'pie' },
@@ -174,7 +171,7 @@ onMounted(async () => {
         <div class="text-gray-400 pb-1">Tipo de gráfica</div>
         <VSelect
           v-model="type_graph"
-          :placeholder="t('generics.please_select')"
+          :placeholder="__('generics.please_select')"
           :options="types_graphs"
           @change="filterHandler"
         />

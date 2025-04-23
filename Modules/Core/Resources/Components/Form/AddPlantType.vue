@@ -1,14 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import Dialog from 'primevue/dialog';
 import VInput from '@Core/Components/Form/VInput.vue';
 import Button from '@Core/Components/Form/Button.vue';
 
 import plantTypeService from '@Fields/Services/PlantTypeService.js';
-
-const { t } = useI18n();
 
 const props = defineProps({
   callback: Function,
@@ -41,12 +38,12 @@ const addPlantType = async () => {
         <VInput
           id="plant_type_name"
           v-model="plant_type_name"
-          :label="t('plant.form.plant_type_id.label')"
+          :label="__('plant.form.plant_type_id.label')"
         />
       </div>
     </div>
     <div class="flex justify-end">
-      <Button type="submit" @click="addPlantType" :label="$t('generics.actions.create')" :loading="loading" />
+      <Button type="submit" @click="addPlantType" :label="__('generics.actions.create')" :loading="loading" />
     </div>
   </Dialog>
 </template>

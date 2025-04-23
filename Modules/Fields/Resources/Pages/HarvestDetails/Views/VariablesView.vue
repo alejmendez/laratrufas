@@ -1,14 +1,12 @@
 <script setup>
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
 
 import VElementFormWrapper from '@Core/Components/Form/VElementFormWrapper.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   form: {
@@ -63,7 +61,7 @@ const openSoilSanitationPhoto = () => {
       :max="2000"
       :step="0.1"
       sufix="mts"
-      :label="t('harvest_details.form.height.label')"
+      :label="__('harvest_details.form.height.label')"
       :message="form.errors.height"
     />
 
@@ -71,7 +69,7 @@ const openSoilSanitationPhoto = () => {
       id="notes_height"
       class="mb-2"
       v-model="form.notes.height"
-      :label="t('harvest_details.form.notes.label') + ` (${t('harvest_details.form.height.label')})`"
+      :label="__('harvest_details.form.notes.label') + ` (${__('harvest_details.form.height.label')})`"
     />
 
     <VInput
@@ -83,7 +81,7 @@ const openSoilSanitationPhoto = () => {
       :max="2000"
       :step="0.1"
       sufix="mts"
-      :label="t('harvest_details.form.crown_diameter.label')"
+      :label="__('harvest_details.form.crown_diameter.label')"
       :message="form.errors.crown_diameter"
     />
 
@@ -91,7 +89,7 @@ const openSoilSanitationPhoto = () => {
       id="notes_crown_diameter"
       class="mb-2"
       v-model="form.notes.crown_diameter"
-      :label="t('harvest_details.form.notes.label') + ` (${t('harvest_details.form.crown_diameter.label')})`"
+      :label="__('harvest_details.form.notes.label') + ` (${__('harvest_details.form.crown_diameter.label')})`"
     />
 
     <VInput
@@ -103,7 +101,7 @@ const openSoilSanitationPhoto = () => {
       :max="2000"
       :step="0.1"
       sufix="mm"
-      :label="t('harvest_details.form.trunk_diameter.label')"
+      :label="__('harvest_details.form.trunk_diameter.label')"
       :message="form.errors.trunk_diameter"
     />
 
@@ -111,7 +109,7 @@ const openSoilSanitationPhoto = () => {
       id="notes_trunk_diameter"
       class="mb-2"
       v-model="form.notes.trunk_diameter"
-      :label="t('harvest_details.form.notes.label') + ` (${t('harvest_details.form.trunk_diameter.label')})`"
+      :label="__('harvest_details.form.notes.label') + ` (${__('harvest_details.form.trunk_diameter.label')})`"
     />
 
     <VInput
@@ -123,7 +121,7 @@ const openSoilSanitationPhoto = () => {
       :max="2000"
       :step="0.1"
       sufix="mm"
-      :label="t('harvest_details.form.root_diameter.label')"
+      :label="__('harvest_details.form.root_diameter.label')"
       :message="form.errors.root_diameter"
     />
 
@@ -131,7 +129,7 @@ const openSoilSanitationPhoto = () => {
       id="notes_root_diameter"
       class="mb-2"
       v-model="form.notes.root_diameter"
-      :label="t('harvest_details.form.notes.label') + ` (${t('harvest_details.form.root_diameter.label')})`"
+      :label="__('harvest_details.form.notes.label') + ` (${__('harvest_details.form.root_diameter.label')})`"
     />
 
     <VInput
@@ -143,7 +141,7 @@ const openSoilSanitationPhoto = () => {
       :max="2000"
       :step="0.1"
       sufix="mts"
-      :label="t('harvest_details.form.invasion_radius.label')"
+      :label="__('harvest_details.form.invasion_radius.label')"
       :message="form.errors.invasion_radius"
     />
 
@@ -151,10 +149,10 @@ const openSoilSanitationPhoto = () => {
       id="notes_invasion_radius"
       class="mb-2"
       v-model="form.notes.invasion_radius"
-      :label="t('harvest_details.form.notes.label') + ` (${t('harvest_details.form.invasion_radius.label')})`"
+      :label="__('harvest_details.form.notes.label') + ` (${__('harvest_details.form.invasion_radius.label')})`"
     />
 
-    <VElementFormWrapper :label="t('harvest_details.form.foliage_sanitation.label')" :message="form.errors.foliage_sanitation">
+    <VElementFormWrapper :label="__('harvest_details.form.foliage_sanitation.label')" :message="form.errors.foliage_sanitation">
       <InputGroup>
         <InputText
           id="foliage_sanitation"
@@ -169,7 +167,7 @@ const openSoilSanitationPhoto = () => {
       </InputGroup>
     </VElementFormWrapper>
 
-    <VElementFormWrapper :label="t('harvest_details.form.trunk_sanitation.label')" :message="form.errors.trunk_sanitation">
+    <VElementFormWrapper :label="__('harvest_details.form.trunk_sanitation.label')" :message="form.errors.trunk_sanitation">
       <InputGroup>
         <InputText
           id="trunk_sanitation"
@@ -184,7 +182,7 @@ const openSoilSanitationPhoto = () => {
       </InputGroup>
     </VElementFormWrapper>
 
-    <VElementFormWrapper :label="t('harvest_details.form.soil_sanitation.label')" :message="form.errors.soil_sanitation">
+    <VElementFormWrapper :label="__('harvest_details.form.soil_sanitation.label')" :message="form.errors.soil_sanitation">
       <InputGroup>
         <InputText
           id="soil_sanitation"
@@ -203,7 +201,7 @@ const openSoilSanitationPhoto = () => {
       id="irrigation_system"
       class="mb-2"
       v-model="form.irrigation_system"
-      :label="t('harvest_details.form.irrigation_system.label')"
+      :label="__('harvest_details.form.irrigation_system.label')"
       :message="form.errors.irrigation_system"
     />
     <input ref="foliageSanitationPhotoInput" class="hidden" type="file" accept="image/*" @change="foliageSanitationPhotoHandler" />

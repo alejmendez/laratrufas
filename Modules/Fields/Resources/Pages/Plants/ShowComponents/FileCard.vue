@@ -1,10 +1,8 @@
 <script setup>
-import { useI18n } from 'vue-i18n';
+import { trans } from 'laravel-vue-i18n';
 import { stringToFormat } from '@Core/Utils/date';
 
 import CardSection from '@Core/Components/CardSection.vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   data: Object,
@@ -13,12 +11,12 @@ const props = defineProps({
 const data = props.data;
 
 const dataFile = [
-  [t('plant.show.file.field'), data.field.name],
-  [t('plant.show.file.quarter'), data.quarter.name],
-  [t('plant.show.file.plant_type'), data.plant_type.name],
-  [t('plant.show.file.age'), data.age],
-  [t('plant.show.file.planned_at'), stringToFormat(data.planned_at)],
-  [t('plant.show.file.responsible'), data.responsible.name],
+  [trans('plant.show.file.field'), data.field.name],
+  [trans('plant.show.file.quarter'), data.quarter.name],
+  [trans('plant.show.file.plant_type'), data.plant_type.name],
+  [trans('plant.show.file.age'), data.age],
+  [trans('plant.show.file.planned_at'), stringToFormat(data.planned_at)],
+  [trans('plant.show.file.responsible'), data.responsible.name],
 ];
 </script>
 
