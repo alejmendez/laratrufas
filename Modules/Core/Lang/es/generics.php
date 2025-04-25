@@ -73,12 +73,12 @@ return [
         'bulk' => 'Carga Masiva',
     ],
     'date' => [
-        'seconds_ago' => 'hace {time} segundos',
-        'minutes_ago' => 'hace {time} minutos',
-        'hours_ago' => 'hace {time} horas',
-        'days_ago' => 'hace {time} dias',
-        'months_ago' => 'hace {time} meses',
-        'years_ago' => 'hace {time} años',
+        'seconds_ago' => 'hace :time segundos',
+        'minutes_ago' => 'hace :time minutos',
+        'hours_ago' => 'hace :time horas',
+        'days_ago' => 'hace :time días',
+        'months_ago' => 'hace :time meses',
+        'years_ago' => 'hace :time años',
     ],
     'bulk' => [
         'button' => 'Carga Masiva',

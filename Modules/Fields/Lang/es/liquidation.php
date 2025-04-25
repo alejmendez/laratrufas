@@ -5,7 +5,7 @@ return [
         'entity_breadcrumb' => 'Liquidaciones',
         'create' => 'Crear Liquidación',
         'edit' => 'Editar Liquidación',
-        'show' => 'Detalle Liquidación Semana {week}',
+        'show' => 'Detalle Liquidación Semana :week',
     ],
     'table' => [
         'week' => 'Semana',

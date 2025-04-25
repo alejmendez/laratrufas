@@ -13,15 +13,19 @@ const props = defineProps({
   tools: Array,
   security_equipments: Array,
   machineries: Array,
+  task_priorities: Array,
+  task_states: Array,
+  task_repeat_type: Array,
+  task_supplies_units: Array,
 });
 
 const form = useForm({
   id: null,
   name: null,
   repeat_number: '1',
-  repeat_type: { value: 'daily', text: trans('task.form.repeat_type.options.daily') },
-  status: { value: 'to_begin', text: trans('task.form.status.options.to_begin') },
-  priority: { value: 'when_possible', text: trans('task.form.priority.options.when_possible') },
+  repeat_type: props.task_repeat_type.find((a) => a.value === 'daily'),
+  status: props.task_states.find((a) => a.value === 'to_begin'),
+  priority: props.task_priorities.find((a) => a.value === 'when_possible'),
   start_date: null,
   end_date: null,
   field_id: [],
@@ -72,6 +76,9 @@ const submitHandler = () => form.post(route('tasks.store'));
       :security_equipments="props.security_equipments"
       :machineries="props.machineries"
       :submitHandler="submitHandler"
+      :task_priorities="props.task_priorities"
+      :task_states="props.task_states"
+      :task_supplies_units="props.task_supplies_units"
     />
   </AuthenticatedLayout>
 </template>

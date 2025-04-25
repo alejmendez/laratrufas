@@ -5,7 +5,7 @@ return [
         'entity_breadcrumb' => 'Campos',
         'create' => 'Crear Campo',
         'edit' => 'Editar Campo',
-        'show' => 'Ficha del Campo: {name}',
+        'show' => 'Ficha del Campo: :name',
     ],
     'table' => [
         'name' => 'Campo',
@@ -41,7 +41,7 @@ return [
     ],
     'show' => [
         'file' => [
-            'title' => 'Campo: {name}',
+            'title' => 'Campo: :name',
             'location' => 'Ubicación',
             'size' => 'Superficie del campo (hectáreas)',
             'plants_count' => 'Cantidad de arboles',

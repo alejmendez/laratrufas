@@ -1,3 +1,4 @@
+import { trans } from 'laravel-vue-i18n';
 import { parse, parseISO, format } from 'date-fns';
 
 export const getAge = (birthDate) => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e10);
@@ -26,7 +27,7 @@ const msPerDay = msPerHour * 24;
 const msPerMonth = msPerDay * 30;
 const msPerYear = msPerDay * 365;
 
-export const relativeTimeDifference = (trans, current, previous) => {
+export const relativeTimeDifference = (current, previous) => {
   const elapsed = current - previous;
   let message = '';
   let time = 0;

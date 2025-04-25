@@ -24,35 +24,55 @@ const props = defineProps({
   tools: Array,
   security_equipments: Array,
   machineries: Array,
+  task_priorities: Array,
+  task_states: Array,
+  task_repeat_type: Array,
+  task_supplies_units: Array,
 });
 
 const form = props.form;
 
-const statesValues = ['to_begin', 'started', 'finished', 'stopped'];
 const statesClasses = {
   to_begin: '!bg-gray-500 !border-gray-500 hover:!bg-gray-600 hover:!border-gray-600',
   started: '!bg-cyan-500 !border-cyan-500 hover:!bg-cyan-600 hover:!border-cyan-600',
   finished: '!bg-green-500 !border-green-500 hover:!bg-green-600 hover:!border-green-600',
   stopped: '!bg-red-500 !border-red-500 hover:!bg-red-600 hover:!border-red-600',
 };
-
-const states = statesValues.map((s) => ({ value: s, text: trans('task.form.status.options.' + s) }));
 </script>
 
 <template>
   <div class="mt-5">
     <Button
-      v-for="state in states"
+      v-for="state in props.task_states"
       :class="`me-3 text-l ${statesClasses[state.value]}`"
       @click.prevent="form.status = state"
-      :label="__(`task.form.status.options.${state.value}`)"
+      :label="state.text"
       :icon="form.status.value === state.value ? 'pi pi-check-square' : 'pi pi-stop'"
     />
   </div>
   <form @submit.prevent="props.submitHandler">
-    <FormMain :form="form" :states="states" />
-    <FormAssignment :form="form" :fields="props.fields" :quarters="props.quarters" :plants="props.plants" :responsibles="props.responsibles" />
-    <FormResources :form="form" :tools="tools" :security_equipments="security_equipments" :machineries="machineries" />
-    <FormComments :form="form" :responsibles="props.responsibles" />
+    <FormMain
+      :form="form"
+      :task_priorities="props.task_priorities"
+      :task_states="props.task_states"
+    />
+    <FormAssignment
+      :form="form"
+      :fields="props.fields"
+      :quarters="props.quarters"
+      :plants="props.plants"
+      :responsibles="props.responsibles"
+    />
+    <FormResources
+      :form="form"
+      :tools="tools"
+      :security_equipments="security_equipments"
+      :machineries="machineries"
+      :task_supplies_units="props.task_supplies_units"
+    />
+    <FormComments
+      :form="form"
+      :responsibles="props.responsibles"
+    />
   </form>
 </template>

@@ -5,7 +5,7 @@ return [
         'entity_breadcrumb' => 'Cuarteles',
         'create' => 'Crear Cuartel',
         'edit' => 'Editar Cuartel',
-        'show' => 'Detalle del Cuartel: {name}',
+        'show' => 'Detalle del Cuartel: :name',
     ],
     'table' => [
         'name' => 'Cuartel',

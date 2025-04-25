@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import { trans } from 'laravel-vue-i18n';
 import ProgressSpinner from 'primevue/progressspinner';
 
 import { listUnread } from '@Tasks/Services/TaskNotificationService';
@@ -17,7 +16,7 @@ const countMessagesUnRead = ref(0);
 const loading = ref(true);
 
 const messagesRelativeTimeDifference = (message) => {
-  return relativeTimeDifference(trans, today, stringToDate(message.created_at));
+  return relativeTimeDifference(today, stringToDate(message.created_at));
 };
 
 onMounted(async () => {

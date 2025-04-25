@@ -39,6 +39,30 @@ class ListEntity
             'liquidation_available_years' => LiquidationAvailableYears::call(),
             'importer' => Importer::select('id as value', 'name as text')->orderBy('name'),
             'category_products' => CategoryProduct::select('id', 'name', 'is_commercial'),
+            'task_priorities' => collect(config('tasks.priorities'))->map(function ($priority) {
+                return [
+                    'value' => $priority,
+                    'text' => __("task.form.priority.options.{$priority}"),
+                ];
+            }),
+            'task_states' => collect(config('tasks.states'))->map(function ($state) {
+                return [
+                    'value' => $state,
+                    'text' => __("task.form.status.options.{$state}"),
+                ];
+            }),
+            'task_repeat_type' => collect(config('tasks.repeat_type'))->map(function ($type) {
+                return [
+                    'value' => $type,
+                    'text' => __("task.form.repeat_type.options.{$type}"),
+                ];
+            }),
+            'task_supplies_units' => collect(config('tasks.supplies_units'))->map(function ($unit) {
+                return [
+                    'value' => $unit,
+                    'text' => __("task.form.supplies.unit.options.{$unit}"),
+                ];
+            }),
             'responsible', 'couple', 'user' => User::select('id as value', 'full_name as text')->orderBy('full_name'),
             default => [],
         };

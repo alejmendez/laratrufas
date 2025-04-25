@@ -71,7 +71,6 @@ const deleteHandler = async (record) => {
     datatable,
     confirm,
     toast,
-    trans,
     entity: trans('importer.titles.entity_breadcrumb'),
     handler: () => importerService.del(record.id),
   };

@@ -70,7 +70,6 @@ const deleteHandler = async (record) => {
     datatable,
     confirm,
     toast,
-    trans,
     entity: trans('plant_type.titles.entity_breadcrumb'),
     handler: () => plantTypeService.del(record.id),
   };

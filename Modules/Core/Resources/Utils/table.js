@@ -1,4 +1,6 @@
-const createConfirmOptions = (trans, entity, accept) => ({
+import { trans } from 'laravel-vue-i18n';
+
+const createConfirmOptions = (entity, accept) => ({
   message: trans('generics.tables.confirm.delete', { entity }),
   header: trans('generics.tables.confirm.delete_header', { entity }),
   icon: 'pi pi-info-circle',
@@ -16,7 +18,7 @@ const createConfirmOptions = (trans, entity, accept) => ({
   reject: () => {},
 });
 
-const showToast = (toast, trans, isSuccess = true) => {
+const showToast = (toast, isSuccess = true) => {
   const config = isSuccess
     ? {
         severity: 'success',
@@ -35,20 +37,20 @@ const showToast = (toast, trans, isSuccess = true) => {
   });
 };
 
-const handleDeleteConfirmation = async (handler, datatable, toast, trans) => {
+const handleDeleteConfirmation = async (handler, datatable, toast) => {
   const result = await handler();
 
   if (result) {
     datatable.value.loadLazyData();
-    showToast(toast, trans, true);
+    showToast(toast, true);
     return;
   }
 
-  showToast(toast, trans, false);
+  showToast(toast, false);
 };
 
-export const deleteRowTable = async (trans, confirm, accept, entity = null) => {
-  const confirmOptions = createConfirmOptions(trans, entity || trans('generics.tables.entity'), accept);
+export const deleteRowTable = async (confirm, accept, entity = null) => {
+  const confirmOptions = createConfirmOptions(entity || trans('generics.tables.entity'), accept);
 
   confirm.require(confirmOptions);
 };
@@ -56,7 +58,7 @@ export const deleteRowTable = async (trans, confirm, accept, entity = null) => {
 export const deleteRowDatatable = (options) => {
   const { datatable, confirm, toast, trans, entity = trans('generics.tables.entity'), handler } = options;
 
-  const confirmOptions = createConfirmOptions(trans, entity, async () => await handleDeleteConfirmation(handler, datatable, toast, t));
+  const confirmOptions = createConfirmOptions(entity, async () => await handleDeleteConfirmation(handler, datatable, toast));
 
   confirm.require(confirmOptions);
 };

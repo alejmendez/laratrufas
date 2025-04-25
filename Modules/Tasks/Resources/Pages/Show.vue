@@ -77,7 +77,7 @@ const selectTab = (tab) => {
 };
 
 const deleteHandler = async (id) => {
-  await deleteRowTable(trans, confirm, () => {
+  await deleteRowTable(confirm, () => {
     router.delete(route('tasks.destroy', id));
   });
 };

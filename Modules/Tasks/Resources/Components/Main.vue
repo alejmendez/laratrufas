@@ -5,15 +5,13 @@ import VSelect from '@Core/Components/Form/VSelect.vue';
 
 const props = defineProps({
   form: Object,
-  states: Array,
+  task_priorities: Array,
+  task_states: Array,
 });
 
 const form = props.form;
 
-const priorities = ['when_possible', 'routine', 'important', 'urgent'].map((p) => ({
-  value: p,
-  text: trans('task.form.priority.options.' + p),
-}));
+console.log(props.task_states);
 </script>
 
 <template>
@@ -30,7 +28,7 @@ const priorities = ['when_possible', 'routine', 'important', 'urgent'].map((p) =
       id="priority"
       v-model="form.priority"
       :placeholder="__('generics.please_select')"
-      :options="priorities"
+      :options="props.task_priorities"
       :label="__('task.form.priority.label')"
       :message="form.errors.priority"
     />
@@ -39,7 +37,7 @@ const priorities = ['when_possible', 'routine', 'important', 'urgent'].map((p) =
       id="status"
       v-model="form.status"
       :placeholder="__('generics.please_select')"
-      :options="states"
+      :options="props.task_states"
       :label="__('task.form.status.label')"
       :message="form.errors.status"
     />

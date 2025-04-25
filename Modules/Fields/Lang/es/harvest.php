@@ -4,7 +4,7 @@ return [
     'titles' => [
         'entity_breadcrumb' => 'Cosechas',
         'create' => 'Crear Cosecha',
-        'edit' => 'Editar Cosecha Semana {week} Batch {batch}',
+        'edit' => 'Editar Cosecha Semana :week Batch :batch',
         'bulk' => 'Nuevo carga masiva de cosechas',
     ],
     'table' => [
@@ -22,7 +22,7 @@ return [
         'year' => 'Año de cosecha',
     ],
     'table_data' => [
-        'date' => 'Semana {week}',
+        'date' => 'Semana :week',
     ],
     'buttons' => [
         'add_detail' => 'Añadir otro',
@@ -31,7 +31,7 @@ return [
     'form' => [
         'date' => [
             'label' => 'Semana',
-            'renderText' => 'Semana {week} - {start} al {end}',
+            'renderText' => 'Semana :week - :start al :end',
         ],
         'batch' => [
             'label' => 'Batch',
@@ -67,7 +67,7 @@ return [
         ],
     ],
     'sections' => [
-        'harvest' => 'Registro Manual Semana {week} Batch {batch}',
+        'harvest' => 'Registro Manual Semana :week Batch :batch',
         'comments' => 'Comentarios',
     ],
     'bulk' => [
@@ -77,7 +77,7 @@ return [
     ],
     'errors' => [
         'details' => [
-            'plant_code_not_found' => 'El código {plant_code} no fue encontrado',
+            'plant_code_not_found' => 'El código :plant_code no fue encontrado',
         ],
     ],
 ];

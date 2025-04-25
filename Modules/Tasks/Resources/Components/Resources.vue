@@ -1,4 +1,6 @@
 <script setup>
+import { trans } from 'laravel-vue-i18n';
+
 import CardSection from '@Core/Components/CardSection.vue';
 import VSelectMultiple from '@Core/Components/Form/VSelectMultiple.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
@@ -10,31 +12,12 @@ const props = defineProps({
   tools: Array,
   security_equipments: Array,
   machineries: Array,
+  task_supplies_units: Array,
 });
 
 const form = props.form;
 
-const units = [
-  'unit',
-  'package',
-  'box',
-  'pallet',
-  'container',
-  'grams',
-  'kilograms',
-  'tons',
-  'milliliters',
-  'liters',
-  'gallons',
-  'barrels',
-  'millimeters',
-  'centimeters',
-  'meters',
-  'kilometers',
-  'inches',
-  'feet',
-  'yards',
-].map((u) => ({ value: u, text: trans('task.form.supplies.unit.options.' + u) }));
+const units = props.task_supplies_units;
 
 const add_supply = () => {
   form.supplies.push({

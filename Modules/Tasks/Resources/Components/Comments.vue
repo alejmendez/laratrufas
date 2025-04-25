@@ -124,7 +124,7 @@ if (form.id === null) {
             <span
               class="text-xs text-gray-500"
               :title="stringToFormat(comment.created_at, 'dd/MM/yyyy HH:mm')"
-              v-html="relativeTimeDifference(trans, new Date(), stringToDate(comment.created_at))"
+              v-html="relativeTimeDifference(new Date(), stringToDate(comment.created_at))"
             ></span>
           </div>
         </div>

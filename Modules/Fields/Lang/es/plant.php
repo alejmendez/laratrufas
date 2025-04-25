@@ -6,7 +6,7 @@ return [
         'create' => 'Crear Planta',
         'edit' => 'Editar Planta',
         'bulk' => 'Nuevo carga masiva de plantas',
-        'show' => 'Detalle de la Planta: {name}',
+        'show' => 'Detalle de la Planta: :name',
         'add_variables' => 'Agregar Variables',
     ],
     'table' => [

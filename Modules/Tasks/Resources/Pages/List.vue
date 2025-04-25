@@ -27,6 +27,8 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  task_states: Array,
+  task_priorities: Array,
 });
 
 const toast = useToast();
@@ -35,8 +37,7 @@ const confirm = useConfirm();
 const datatable = ref(null);
 const filter_responsible_options = ref([]);
 
-const statesValues = ['to_begin', 'started', 'stopped', 'overdued', 'finished'];
-const filter_states_options = statesValues.map((s) => ({ value: s, text: trans('task.form.status.options.' + s) }));
+const filter_states_options = props.task_states.map((s) => ({ value: s.value, text: s.text }));
 const statesSeverities = {
   to_begin: 'warn',
   started: 'info',
@@ -45,11 +46,7 @@ const statesSeverities = {
   finished: 'success',
 };
 
-const priorities = ['when_possible', 'routine', 'important', 'urgent'];
-const filter_priorities_options = priorities.map((p) => ({
-  value: p,
-  text: trans('task.form.priority.options.' + p),
-}));
+const filter_priorities_options = props.task_priorities.map((p) => ({ value: p.value, text: p.text }));
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -84,7 +81,7 @@ const fetchHandler = async (params) => {
 };
 
 const deleteHandler = (record) => {
-  deleteRowTable(trans, confirm, async () => {
+  deleteRowTable(confirm, async () => {
     const result = await TaskService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();

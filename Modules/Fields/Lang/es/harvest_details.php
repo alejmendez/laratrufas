@@ -2,7 +2,7 @@
 
 return [
     'titles' => [
-        'find' => 'Planta {code}',
+        'find' => 'Planta :code',
     ],
     'buttons' => [
         'harvest' => 'Cosecha',
@@ -12,7 +12,7 @@ return [
     ],
     'no_data' => 'No hay datos para mostrar',
     'all_categories' => 'Todos',
-    'selected' => 'Seleccionados {size}',
+    'selected' => 'Seleccionados :size',
     'form' => [
         'plant_code_to_find' => [
             'label' => 'Escanea el código de la planta',

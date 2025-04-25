@@ -17,6 +17,10 @@ const props = defineProps({
   tools: Array,
   security_equipments: Array,
   machineries: Array,
+  task_priorities: Array,
+  task_states: Array,
+  task_repeat_type: Array,
+  task_supplies_units: Array,
 });
 
 const { data } = props.data;
@@ -42,9 +46,9 @@ const form = useForm({
   id: data.id,
   name: data.name,
   repeat_number: data.repeat_number,
-  repeat_type: { value: data.repeat_type, text: trans(`task.form.repeat_type.options.${data.repeat_type || 'daily'}`) },
-  status: { value: data.status, text: trans(`task.form.status.options.${data.status || 'to_begin'}`) },
-  priority: { value: data.priority, text: trans(`task.form.priority.options.${data.priority || 'when_possible'}`) },
+  repeat_type: props.task_repeat_type.find((a) => a.value === data.repeat_type),
+  status: props.task_states.find((a) => a.value === data.status),
+  priority: props.task_priorities.find((a) => a.value === data.priority),
   start_date: stringToDate(data.start_date),
   end_date: stringToDate(data.end_date),
   field_id: data.field,
@@ -81,6 +85,10 @@ const submitHandler = () => form.post(route('tasks.update', data.id));
       :security_equipments="props.security_equipments"
       :machineries="props.machineries"
       :submitHandler="submitHandler"
+      :task_priorities="props.task_priorities"
+      :task_states="props.task_states"
+      :task_repeat_type="props.task_repeat_type"
+      :task_supplies_units="props.task_supplies_units"
     />
   </AuthenticatedLayout>
 </template>

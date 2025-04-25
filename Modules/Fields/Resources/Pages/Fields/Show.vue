@@ -55,7 +55,7 @@ const isStatisticsTab = computed(() => current_tab.value === STATISTICS_TAB);
 const isDocumentationTab = computed(() => current_tab.value === DOCUMENTATION_TAB);
 
 const deleteHandler = async (id) => {
-  await deleteRowTable(trans, confirm, () => {
+  await deleteRowTable(confirm, () => {
     router.delete(route('fields.destroy', id));
   });
 };

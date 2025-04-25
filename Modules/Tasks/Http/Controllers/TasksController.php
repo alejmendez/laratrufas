@@ -39,6 +39,9 @@ class TasksController extends Controller
         return Inertia::render('Tasks::List', [
             'toast' => session('toast'),
             'status' => request('status'),
+            'task_priorities' => ListEntity::call('task_priorities'),
+            'task_states' => ListEntity::call('task_states'),
+            'task_repeat_type' => ListEntity::call('task_repeat_type'),
         ]);
     }
 
@@ -53,6 +56,10 @@ class TasksController extends Controller
             'tools' => ListEntity::call('tool'),
             'security_equipments' => ListEntity::call('security_equipment'),
             'machineries' => ListEntity::call('machinery'),
+            'task_priorities' => ListEntity::call('task_priorities'),
+            'task_states' => ListEntity::call('task_states'),
+            'task_repeat_type' => ListEntity::call('task_repeat_type'),
+            'task_supplies_units' => ListEntity::call('task_supplies_units'),
         ]);
     }
 
@@ -87,6 +94,10 @@ class TasksController extends Controller
             'tools' => ListEntity::call('tool'),
             'security_equipments' => ListEntity::call('security_equipment'),
             'machineries' => ListEntity::call('machinery'),
+            'task_priorities' => ListEntity::call('task_priorities'),
+            'task_states' => ListEntity::call('task_states'),
+            'task_repeat_type' => ListEntity::call('task_repeat_type'),
+            'task_supplies_units' => ListEntity::call('task_supplies_units'),
             'current_tab' => $current_tab,
         ]);
     }
@@ -107,6 +118,10 @@ class TasksController extends Controller
             'tools' => ListEntity::call('tool'),
             'security_equipments' => ListEntity::call('security_equipment'),
             'machineries' => ListEntity::call('machinery'),
+            'task_priorities' => ListEntity::call('task_priorities'),
+            'task_states' => ListEntity::call('task_states'),
+            'task_repeat_type' => ListEntity::call('task_repeat_type'),
+            'task_supplies_units' => ListEntity::call('task_supplies_units'),
         ]);
     }
 

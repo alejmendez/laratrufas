@@ -50,7 +50,7 @@ const fetchHandler = async (params) => {
 };
 
 const deleteHandler = (record) => {
-  deleteRowTable(trans, confirm, async () => {
+  deleteRowTable(confirm, async () => {
     const result = await ToolService.del(record.id);
     if (result) {
       datatable.value.loadLazyData();
