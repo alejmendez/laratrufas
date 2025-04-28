@@ -63,7 +63,7 @@ const canDestroy = can('tasks.destroy');
 
 const headerLinks = [];
 if (can('tasks.create')) {
-  headerLinks.push({ to: 'tasks.create', text: trans('generics.new') });
+  headerLinks.push({ to: 'tasks.create', text: 'generics.new' });
 }
 
 const fetchHandler = async (params) => {
@@ -93,7 +93,7 @@ const deleteHandler = (record) => {
       });
     }
     toast.add({
-      severity: 'danger',
+      severity: 'error',
       summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
       detail: trans('generics.tables.errors.could_not_delete_the_record'),
       life: 3000,

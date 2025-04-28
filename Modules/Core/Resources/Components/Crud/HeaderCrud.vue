@@ -37,7 +37,7 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
         :key="link.text"
       >
         <template v-if="isPromise(link.to) || isFunction(link.to)">
-          <Button :severity="link.variant" @click="link.to" :label="link.text" />
+          <Button :severity="link.variant" @click="link.to" :label="__(link.text)" />
         </template>
         <template v-else>
           <Button
@@ -45,7 +45,7 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
             :key="link.text"
             :severity="link.variant"
             :href="isLink(link.to) ? link.to : route(link.to)"
-            :label="link.text"
+            :label="__(link.text)"
           />
         </template>
       </template>

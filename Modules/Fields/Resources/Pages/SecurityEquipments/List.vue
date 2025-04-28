@@ -42,7 +42,7 @@ const canCreate = can('security_equipments.create');
 
 const headerLinks = [];
 if (canCreate) {
-  headerLinks.push({ to: 'security_equipments.create', text: trans('generics.new') });
+  headerLinks.push({ to: 'security_equipments.create', text: 'generics.new' });
 }
 
 const fetchHandler = async (params) => {
@@ -62,7 +62,7 @@ const deleteHandler = (record) => {
       });
     }
     toast.add({
-      severity: 'danger',
+      severity: 'error',
       summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
       detail: trans('generics.tables.errors.could_not_delete_the_record'),
       life: 3000,

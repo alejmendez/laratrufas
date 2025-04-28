@@ -49,10 +49,10 @@ const canEdit = can('tasks.edit');
 
 const headerLinks = [];
 if (canDestroy) {
-  headerLinks.push({ to: () => deleteHandler(data.id), variant: 'secondary', text: trans('generics.actions.delete') });
+  headerLinks.push({ to: () => deleteHandler(data.id), variant: 'secondary', text: 'generics.actions.delete' });
 }
 if (canEdit) {
-  headerLinks.push({ to: route('tasks.edit', data.id), text: trans('generics.actions.edit') });
+  headerLinks.push({ to: route('tasks.edit', data.id), text: 'generics.actions.edit' });
 }
 
 const FILE_TAB = 'detail';

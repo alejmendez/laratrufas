@@ -41,7 +41,7 @@ const canCreate = can('machineries.create');
 
 const headerLinks = [];
 if (canCreate) {
-  headerLinks.push({ to: 'machineries.create', text: trans('generics.new') });
+  headerLinks.push({ to: 'machineries.create', text: 'generics.new' });
 }
 const fetchHandler = async (params) => {
   return await MachineryService.list(params);
@@ -60,7 +60,7 @@ const deleteHandler = (record) => {
       });
     }
     toast.add({
-      severity: 'danger',
+      severity: 'error',
       summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
       detail: trans('generics.tables.errors.could_not_delete_the_record'),
       life: 3000,

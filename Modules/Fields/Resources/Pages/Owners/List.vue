@@ -61,7 +61,7 @@ const showSuccessToast = () => {
 
 const showErrorToast = () => {
   toast.add({
-    severity: 'danger',
+    severity: 'error',
     summary: trans('owner.titles.entity_breadcrumb'),
     detail: trans('generics.errors.trying_to_save'),
     life: 5000,

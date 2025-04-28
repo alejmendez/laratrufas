@@ -60,7 +60,7 @@ const loadLazyData = async () => {
 
   if (!response) {
     toast.add({
-      severity: 'danger',
+      severity: 'error',
       summary: trans('generics.tables.errors.could_not_load_the_data_summary'),
       detail: trans('generics.tables.errors.could_not_load_the_data'),
     });

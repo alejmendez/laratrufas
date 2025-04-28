@@ -47,7 +47,7 @@ const canDestroy = can('users.destroy');
 
 const headerLinks = [];
 if (can('users.create')) {
-  headerLinks.push({ to: 'users.create', text: trans('generics.new') });
+  headerLinks.push({ to: 'users.create', text: 'generics.new' });
 }
 
 const fetchHandler = async (params) => {

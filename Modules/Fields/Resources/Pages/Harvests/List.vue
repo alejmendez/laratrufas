@@ -19,7 +19,7 @@ const canCreate = can('harvests.create');
 
 const headerLinks = [];
 if (canCreate) {
-  headerLinks.push({ to: 'harvests.create', text: trans('generics.new') });
+  headerLinks.push({ to: 'harvests.create', text: 'generics.new' });
 }
 
 onMounted(() => {
