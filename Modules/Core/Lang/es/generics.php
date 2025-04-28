@@ -25,8 +25,8 @@ return [
         'actions' => 'Acciones',
         'entity' => 'registro',
         'confirm' => [
-            'delete_header' => 'Eliminar {entity}',
-            'delete' => '¿Está seguro que desea eliminar el {entity}?',
+            'delete_header' => 'Eliminar :entity',
+            'delete' => '¿Está seguro que desea eliminar el :entity?',
             'confirmButton' => 'Aceptar',
             'denyButton' => 'Cancelar',
         ],
@@ -39,7 +39,7 @@ return [
             'could_not_load_the_data' => 'No se pudo cargar los datos, intentelo luego',
         ],
         'pagination' => [
-            'template' => 'Mostrando del {from} al {to} de {total} registros',
+            'template' => 'Mostrando del :from al :to de :total registros',
             'show' => 'Mostrando',
             'of' => 'de',
         ],
