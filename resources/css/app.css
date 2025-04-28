@@ -160,7 +160,7 @@ body {
 }
 
 .aside-left-menu .p-accordionheader svg {
-  @apply float-right;
+  @apply float-right text-(--p-primary-color) me-3;
 }
 
 .aside-left-menu .p-accordioncontent-content {
@@ -168,7 +168,7 @@ body {
 }
 
 .aside-left-menu .menu-element {
-  @apply text-neutral-800 inline-flex relative items-center py-[10px] w-full text-sm font-medium leading-1 rounded-md transition duration-400 ease-in-out ps-2;
+  @apply w-full py-[8px] ps-3 text-neutral-800 inline-flex relative items-center text-sm font-medium leading-1 rounded-md transition duration-400 ease-in-out;
 }
 
 .aside-left-menu .menu-element:hover {
