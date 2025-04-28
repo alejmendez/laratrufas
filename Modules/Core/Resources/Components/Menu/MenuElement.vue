@@ -31,7 +31,7 @@ const sideBarStore = useSideBarStore();
     @click="sideBarStore.close"
   >
     <div class="w-[25px] mr-2 flex justify-center">
-      <FontAwesomeIcon :icon="props.icon" class="text-xl" />
+      <span v-html="props.icon"></span>
     </div>
     {{ props.text }}
   </Link>

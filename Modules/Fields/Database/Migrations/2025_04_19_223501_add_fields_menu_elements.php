@@ -18,19 +18,19 @@ return new class extends Migration
                     [
                         'text' => 'menu.fields',
                         'link' => 'fields.index',
-                        'icon' => 'fa-solid fa-table-cells',
+                        'icon' => '<span class="material-symbols-outlined">grid_on</span>',
                         'active_with' => 'fields.*',
                     ],
                     [
                         'text' => 'menu.quarters',
                         'link' => 'quarters.index',
-                        'icon' => 'fa-solid fa-table-cells-large',
+                        'icon' => '<span class="material-symbols-outlined">border_all</span>',
                         'active_with' => 'quarters.*',
                     ],
                     [
                         'text' => 'menu.plants',
                         'link' => 'plants.index',
-                        'icon' => 'fa-brands fa-envira',
+                        'icon' => '<span class="material-symbols-outlined">eco</span>',
                         'active_with' => 'plants.*',
                     ],
                 ],
@@ -41,27 +41,27 @@ return new class extends Migration
                     [
                         'text' => 'menu.harvest',
                         'link' => 'harvests.index',
-                        'icon' => 'fa-solid fa-basket-shopping',
+                        'icon' => '<span class="material-symbols-outlined">shopping_basket</span>',
                         'active_with' => 'harvests.*',
                     ],
                     [
                         'text' => 'menu.harvest_details',
                         'link' => 'harvests_details.create',
-                        'icon' => 'fa-solid fa-barcode',
+                        'icon' => '<span class="material-symbols-outlined">barcode</span>',
                         'active_with' => 'harvests_details.*',
                     ],
 
                     [
                         'text' => 'menu.batch',
                         'link' => 'batches.index',
-                        'icon' => 'fa-solid fa-table-list',
+                        'icon' => '<span class="material-symbols-outlined">format_list_bulleted</span>',
                         'active_with' => 'batches.*',
                     ],
 
                     [
                         'text' => 'menu.liquidations',
                         'link' => 'liquidations.index',
-                        'icon' => 'fa-solid fa-file-invoice-dollar',
+                        'icon' => '<span class="material-symbols-outlined">request_quote</span>',
                         'active_with' => 'liquidations.*',
                     ],
                 ],
@@ -72,19 +72,19 @@ return new class extends Migration
                     [
                         'text' => 'menu.machineries',
                         'link' => 'machineries.index',
-                        'icon' => 'fa-solid fa-tractor',
+                        'icon' => '<span class="material-symbols-outlined">agriculture</span>',
                         'active_with' => 'machineries.*',
                     ],
                     [
                         'text' => 'menu.tools',
                         'link' => 'tools.index',
-                        'icon' => 'fa-solid fa-wrench',
+                        'icon' => '<span class="material-symbols-outlined">build</span>',
                         'active_with' => 'tools.*',
                     ],
                     [
                         'text' => 'menu.security_equipments',
                         'link' => 'security_equipments.index',
-                        'icon' => 'fa-solid fa-shield-heart',
+                        'icon' => '<span class="material-symbols-outlined">shield_with_heart</span>',
                         'active_with' => 'security_equipments.*',
                     ],
                 ],
@@ -95,13 +95,13 @@ return new class extends Migration
                     [
                         'text' => 'menu.dogs',
                         'link' => 'dogs.index',
-                        'icon' => 'fa-solid fa-dog',
+                        'icon' => '<span class="material-symbols-outlined">pets</span>',
                         'active_with' => 'dogs.*',
                     ],
                     [
                         'text' => 'menu.bulk_uploads',
                         'link' => 'bulk.index',
-                        'icon' => 'fa-solid fa-file-arrow-up',
+                        'icon' => '<span class="material-symbols-outlined">unarchive</span>',
                         'active_with' => 'bulk.*',
                     ],
                 ],

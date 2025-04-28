@@ -32,10 +32,10 @@ onUnmounted(() => {
 <template>
   <div class="relative me-3" ref="root">
     <div
-      class="text-lg w-[43px] h-[43px] hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 pt-2 ps-3 rounded-full transition-all ease-out duration-300"
+      class="text-lg w-[40px] h-[40px] cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 pt-2 ps-2 rounded-full transition-all ease-out duration-300"
       @click="toggleDrop"
     >
-      <font-awesome-icon :icon="['far', 'bell']" />
+      <span class="material-symbols-rounded">notifications</span>
       <span
         class="text-xs bg-orange-700 text-gray-100 rounded-full px-1 py-0 absolute top-2 right-2"
         v-if="numberOfNotifications > 0"

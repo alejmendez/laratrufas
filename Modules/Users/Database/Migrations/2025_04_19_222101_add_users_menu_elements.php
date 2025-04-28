@@ -19,7 +19,7 @@ return new class extends Migration
                     [
                         'text' => 'menu.users',
                         'link' => 'users.index',
-                        'icon' => 'fa-solid fa-users',
+                        'icon' => '<span class="material-symbols-rounded">groups</span>',
                         'active_with' => 'users.*',
                     ],
                 ],

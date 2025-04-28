@@ -82,10 +82,10 @@ onUnmounted(() => {
 <template>
   <div class="relative me-3" ref="root" v-if="showRightMenu">
     <div
-      class="text-lg w-[43px] h-[43px] hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 pt-2 ps-3 rounded-full transition-all ease-out duration-300"
+      class="text-lg w-[40px] h-[40px] cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 pt-2 ps-2 rounded-full transition-all ease-out duration-300"
       @click="toggleDropMenu"
     >
-      <font-awesome-icon icon="fa-solid fa-gear" />
+      <span class="material-symbols-rounded">settings</span>
     </div>
   </div>
 

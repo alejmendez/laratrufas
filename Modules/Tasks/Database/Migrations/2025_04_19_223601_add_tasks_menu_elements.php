@@ -19,7 +19,7 @@ return new class extends Migration
                     [
                         'text' => 'menu.tasks',
                         'link' => 'tasks.index',
-                        'icon' => 'fa-solid fa-list-check',
+                        'icon' => '<span class="material-symbols-rounded">checklist</span>',
                         'active_with' => 'tasks.*',
                     ],
                 ],

@@ -21,15 +21,15 @@ const field = props.field.data;
         <div class="text-gray-500 dark:text-gray-100 font-bold mb-3">Ciclo: Siembra</div>
         <div class="min-h-10">
           <div class="w-8 h-8 px-2 py-1 me-2 rounded text-green-500 float-left" title="Ubicación">
-            <font-awesome-icon :icon="['fas', 'location-dot']" />
+            <span class="material-symbols-rounded">pin_drop</span>
           </div>
           <div class="pt-1 truncate" :title="field.location">
             {{ field.location }}
           </div>
         </div>
         <div class="min-h-10" title="Tamaño">
-          <div class="w-8 h-8 px-2 py-1 me-2 rounded text-red-500 float-left" style="padding-left: 0.30rem; padding-top: 0.15rem;">
-            <span class="text-xs">HAS</span>
+          <div class="w-8 h-8 px-2 py-1 me-1 rounded text-red-500 float-left" style="padding-left: 0.30rem; padding-top: 0.15rem;">
+            <span class="text-xs ps-1">HAS</span>
           </div>
           <div class="pt-1">
             {{ Math.round((parseFloat(field.size) + Number.EPSILON) * 10) / 10 }}
@@ -37,7 +37,7 @@ const field = props.field.data;
         </div>
         <div class="min-h-10" title="Cantidad de Cuarteles">
           <div class="w-8 h-8 px-2 py-1 me-2 rounded text-yellow-500 float-left">
-            <font-awesome-icon :icon="['fas', 'vector-square']" />
+            <span class="material-symbols-rounded">check_box_outline_blank</span>
           </div>
           <div class="pt-1">
             {{ field.quarters_count }}
@@ -45,7 +45,7 @@ const field = props.field.data;
         </div>
         <div class="min-h-10" title="Cantidad de Arboles">
           <div class="w-8 h-8 px-2 py-1 me-2 rounded text-yellow-500 float-left">
-            <font-awesome-icon :icon="['fas', 'tree']" />
+            <span class="material-symbols-rounded">park</span>
           </div>
           <div class="pt-1">
             {{ field.plants_count }}

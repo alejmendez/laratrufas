@@ -14,7 +14,7 @@ return new class extends Migration
         DB::table('menus')->insert([
             'text' => 'menu.dashboard',
             'link' => 'dashboard.index',
-            'icon' => 'fa-solid fa-house',
+            'icon' => '<span class="material-symbols-rounded">insert_chart</span>',
             'order' => 0,
             'parent_id' => null,
             'module_id' => $dashboardModule->id,

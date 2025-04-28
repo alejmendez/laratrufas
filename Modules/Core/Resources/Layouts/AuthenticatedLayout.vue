@@ -34,12 +34,12 @@ const menuRightItems = menuElementsRight(currentComponent);
   <Head :title="title" />
 
   <div class="flex items-center w-full h-[64px] bg-gray-50 dark:bg-[#2F3349] text-gray-100 px-[20px] py-[10px] z-30">
-    <div class="w-[230px]">
+    <div class="w-[230px] select-none">
       <div
-        class="w-[36px] inline rounded outline-none transition duration-75 text-(color:--p-primary-500) hover:text-(color:--p-primary-700) focus-visible:ring-primary-600 border border-(color:--p-primary-500) hover:border-(color:--p-primary-700) px-3 py-1"
+        class="px-2 pt-3 inline rounded outline-none transition duration-75 text-(color:--p-primary-500) hover:text-(color:--p-primary-700) focus-visible:ring-primary-600 border border-(color:--p-primary-500) hover:border-(color:--p-primary-700)"
         @click="sideBarStore.toggle"
       >
-        <FontAwesomeIcon icon="fa-solid fa-bars" />
+        <span class="material-symbols-rounded !text-md">dehaze</span>
       </div>
     </div>
 
