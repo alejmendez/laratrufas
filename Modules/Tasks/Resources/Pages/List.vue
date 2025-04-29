@@ -41,7 +41,7 @@ const filter_states_options = props.task_states.map((s) => ({ value: s.value, te
 const statesSeverities = {
   to_begin: 'warn',
   started: 'info',
-  stopped: 'danger',
+  stopped: 'secondary',
   overdued: 'danger',
   finished: 'success',
 };

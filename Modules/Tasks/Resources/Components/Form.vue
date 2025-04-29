@@ -30,6 +30,8 @@ const props = defineProps({
   task_supplies_units: Array,
 });
 
+const task_states = props.task_states.filter((state) => state.value !== 'overdued');
+
 const form = props.form;
 
 const statesClasses = {
@@ -43,7 +45,7 @@ const statesClasses = {
 <template>
   <div class="mt-5">
     <Button
-      v-for="state in props.task_states"
+      v-for="state in task_states"
       :class="`me-3 text-l ${statesClasses[state.value]}`"
       @click.prevent="form.status = state"
       :label="state.text"
@@ -54,7 +56,7 @@ const statesClasses = {
     <FormMain
       :form="form"
       :task_priorities="props.task_priorities"
-      :task_states="props.task_states"
+      :task_states="task_states"
     />
     <FormAssignment
       :form="form"
