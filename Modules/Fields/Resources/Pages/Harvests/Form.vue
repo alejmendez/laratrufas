@@ -202,7 +202,7 @@ watch(totalWeight, (newValue) => {
                 :message="form.errors[`details.${options.index}.weight`]"
               />
               <div class="pt-8 text-black dark:text-white hover:text-red-500 cursor-pointer dark:hover:text-red-500" @click="remove_detail(options.index)">
-                <font-awesome-icon :icon="['fas', 'trash-can']" />
+                <span class="material-symbols-rounded">delete</span>
               </div>
             </div>
           </div>

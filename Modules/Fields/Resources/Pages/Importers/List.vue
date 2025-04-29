@@ -165,18 +165,21 @@ const updateHandler = () => {
 
       <Column :exportable="false" style="width: 130px">
         <template #body="slotProps">
-          <font-awesome-icon
-            :icon="['fas', 'pencil']"
-            class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600"
+          <span
+            class="material-symbols-rounded mr-4 cursor-pointer transition-all text-slate-500 hover:text-emerald-600"
             @click="editHandler(slotProps.data)"
             v-if="canEdit"
-          />
-          <font-awesome-icon
-            :icon="['fas', 'trash-can']"
-            class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
+          >
+            edit
+          </span>
+
+          <span
+            class="material-symbols-rounded mr-4 cursor-pointer transition-all text-slate-500 hover:text-pink-600"
             @click="deleteHandler(slotProps.data)"
             v-if="canDestroy"
-          />
+          >
+            delete
+          </span>
         </template>
       </Column>
     </Datatable>

@@ -16,11 +16,12 @@ const props = defineProps({
         <div v-else class="text-gray-600">
           {{ ele.text }}
         </div>
-        <font-awesome-icon
-          :icon="['fa', 'chevron-right']"
-          class="w-5 fill-current mx-2 text-gray-400"
+        <span
+          class="material-symbols-rounded w-5 fill-current mx-2 text-gray-400"
           v-if="index != props.elements.length - 1"
-        />
+        >
+          chevron_right
+        </span>
       </li>
     </ul>
   </div>

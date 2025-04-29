@@ -257,7 +257,7 @@ table tbody tr td.border_cell_left {
         <div>Unidades: {{ detail_current_plant.length }}</div>
         <div>
           <Link :href="route('plants.show', current_plant.id) + '?current_tab=logs'">
-            Ir a ficha de planta <font-awesome-icon :icon="['fas', 'up-right-from-square']" />
+            Ir a ficha de planta <span class="material-symbols-rounded">open_in_new</span>
           </Link>
         </div>
       </div>

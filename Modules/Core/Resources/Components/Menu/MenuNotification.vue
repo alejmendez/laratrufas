@@ -58,7 +58,7 @@ onUnmounted(() => {
       <div v-else>
         <ul>
           <li v-for="notification in unread_notifications">
-            <font-awesome-icon :icon="['fas', 'circle-info']" class="text-sky-600" />
+            <div class="material-symbols-rounded text-sky-600 !text-[20px]">info</div>
             <Link :href="route('tasks.show', notification.data.task_id)">
               Hay una actualizacion en la tarea {{ notification.data.task_name }}
             </Link>

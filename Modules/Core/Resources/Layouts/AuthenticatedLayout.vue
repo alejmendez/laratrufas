@@ -81,7 +81,7 @@ const menuRightItems = menuElementsRight(currentComponent);
             class="flex items-center py-2 px-2 border-s-4 border-(--p-primary-color) hover:border-primary-500 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-100 hover:text-primary-500 transition-colors"
             @click="drawerRightMenuStore.close"
           >
-            <font-awesome-icon :icon="item.icon" class="mr-3" v-if="item.icon" />
+            <span class="material-symbols-rounded me-3" v-if="item.icon">{{ item.icon }}</span>
             {{ __(item.text) }}
           </Link>
         </li>

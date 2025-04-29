@@ -152,11 +152,8 @@ const remove_element = (id) => {
       />
 
       <div class="max-w-full mt-2" :title="file.name" v-for="file in filesServer">
-        <font-awesome-icon
-          :icon="['fas', 'trash-can']"
-          class="me-1 text-black hover:text-red-500"
-          @click="remove_element(file.id)"
-        />
+        <span class="material-symbols-rounded cursor-pointer mt-1 me-1 !text-md text-black hover:text-red-500" @click="remove_element(file.id)">delete</span>
+
         <a :href="file.url" target="_blank">
           {{ file.name }}
         </a>

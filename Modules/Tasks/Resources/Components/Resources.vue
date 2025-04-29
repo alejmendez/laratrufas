@@ -105,11 +105,12 @@ const remove_supply = (index) => {
           />
         </div>
         <div class="pt-10" v-if="index !== 0">
-          <font-awesome-icon
-            :icon="['fas', 'trash-can']"
-            class="float-right me-3 text-gray-800 dark:text-gray-100 hover:text-orange-700 dark:hover:text-orange-700"
+          <span
+            class="material-symbols-rounded float-right me-3 text-gray-800 dark:text-gray-100 hover:text-orange-700 dark:hover:text-orange-700"
             @click="remove_supply(index)"
-          />
+          >
+            delete
+          </span>
         </div>
       </div>
     </div>

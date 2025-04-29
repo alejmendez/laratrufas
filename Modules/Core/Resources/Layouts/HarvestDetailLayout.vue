@@ -15,7 +15,7 @@ const { show } = storeToRefs(sideBarStore);
       class="w-[36px] inline rounded outline-none transition duration-75 text-gray-100 hover:text-red-500 focus-visible:ring-primary-600 border border-white hover:border-red-500 px-3 py-1"
         @click="sideBarStore.toggle"
       >
-        <FontAwesomeIcon icon="fa-solid fa-bars" />
+        <span class="material-symbols-rounded !text-md">dehaze</span>
       </div>
     </div>
   </div>

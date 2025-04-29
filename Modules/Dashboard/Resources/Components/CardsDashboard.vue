@@ -46,7 +46,7 @@ function getPorcent(total, num) {
         }"
       >
         {{ harvest_data.variation_between_harvests >= 0 ? 'Incremento' : 'Disminución'}}
-        <font-awesome-icon :icon="['fas', harvest_data.variation_between_harvests >= 0 ? 'arrow-up-long' : 'arrow-down-long']" />
+        <span class="material-symbols-rounded !text-[18px]" :class="{ 'rotate-180' : harvest_data.variation_between_harvests < 0 }">straight</span>
       </div>
     </div>
 

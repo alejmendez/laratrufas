@@ -185,7 +185,7 @@ const remove_vaccine = (index) => {
             :message="form.errors[`vaccines.${index}.code`]"
           />
           <div class="pt-8 text-black hover:text-red-500" v-if="index !== 0" @click="remove_vaccine(index)">
-            <font-awesome-icon :icon="['fas', 'trash-can']" />
+            <span class="material-symbols-rounded">delete</span>
           </div>
         </div>
       </div>

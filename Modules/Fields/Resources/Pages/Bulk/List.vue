@@ -9,15 +9,15 @@ import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 const list = [
   {
     to: 'plants.create.bulk',
-    icon: ['fas', 'seedling'],
-    title: trans('bulk.plants.title'),
-    subtitle: trans('bulk.plants.subtitle'),
+    icon: 'potted_plant',
+    title: 'bulk.plants.title',
+    subtitle: 'bulk.plants.subtitle',
   },
   {
     to: 'harvests.create.bulk',
-    icon: ['fas', 'basket-shopping'],
-    title: trans('bulk.harvests.title'),
-    subtitle: trans('bulk.harvests.subtitle'),
+    icon: 'shopping_basket',
+    title: 'bulk.harvests.title',
+    subtitle: 'bulk.harvests.subtitle',
   },
 ].filter((ele) => can(ele.to));
 </script>
@@ -35,10 +35,10 @@ const list = [
         :href="route(ele.to)"
       >
         <div class="text-xl">
-          <font-awesome-icon class="me-2" :icon="ele.icon" />
-          {{ ele.title }}
+          <span class="material-symbols-rounded me-2">{{ ele.icon }}</span>
+          {{ __(ele.title) }}
         </div>
-        <div>{{ ele.subtitle }}</div>
+        <div>{{ __(ele.subtitle) }}</div>
       </Link>
     </div>
   </AuthenticatedLayout>

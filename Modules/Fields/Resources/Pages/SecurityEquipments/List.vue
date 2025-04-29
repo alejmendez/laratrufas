@@ -145,10 +145,15 @@ onMounted(() => {
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
           <Link :href="route('security_equipments.edit', slotProps.data.id)" v-if="canEdit">
-            <font-awesome-icon :icon="['fas', 'pencil']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-lime-600" />
+            <span class="material-symbols-rounded cursor-pointer transition-all text-slate-500 hover:text-emerald-600">edit</span>
           </Link>
-          <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-4 cursor-pointer transition-all text-slate-500 hover:text-red-600"
-            @click="deleteHandler(slotProps.data)" v-if="canDestroy" />
+          <span
+            class="material-symbols-rounded cursor-pointer transition-all text-slate-500 hover:text-pink-600"
+            @click="deleteHandler(slotProps.data)"
+            v-if="canDestroy"
+          >
+            delete
+          </span>
         </template>
       </Column>
     </Datatable>

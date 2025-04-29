@@ -56,7 +56,7 @@ const findPlantByCode = () => {
             :class="{ 'text-red-800' : hasError }"
           >
             {{ hasError ? __('harvest.errors.details.plant_code_not_found', { plant_code: plantCode }) : plantCode }}
-            <font-awesome-icon :icon="['fas', 'rotate-right']" class="mt-3" />
+            <span class="material-symbols-rounded mt-3">refresh</span>
           </div>
         </QrcodeStream>
       </div>
