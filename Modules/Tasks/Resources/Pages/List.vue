@@ -50,6 +50,7 @@ const filter_priorities_options = props.task_priorities.map((p) => ({ value: p.v
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  correlative: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   status: { value: filter_states_options.find((s) => s.value === props.status), matchMode: FilterMatchMode.EQUALS },
   priority: { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -134,6 +135,11 @@ onMounted(async () => {
       sortField="updated_at"
       :sortOrder="-1"
     >
+      <Column field="correlative" filterField="correlative" :header="__('task.table.correlative')" sortable frozen style="min-width: 200px">
+        <template #body="{ data }">
+          {{ data.correlative }}
+        </template>
+      </Column>
       <Column field="name" filterField="name" :header="__('task.table.name')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
           {{ data.name }}

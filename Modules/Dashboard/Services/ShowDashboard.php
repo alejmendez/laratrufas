@@ -77,16 +77,10 @@ class ShowDashboard
 
     public static function getTaskData($current_user)
     {
-        $count_pending_tasks = Task::where([
-            'status' => 'to_begin',
-        ])->count();
+        $count_pending_tasks = Task::where('end_date', '>', now())->whereStatus('to_begin')->count();
+        $count_tasks_in_progress = Task::where('end_date', '>', now())->whereStatus('started')->count();
 
-        $count_tasks_in_progress = Task::where([
-            'status' => 'started',
-        ])->count();
-
-        $count_total_task = Task::whereIn('status', ['to_begin', 'started', 'stopped'])
-            ->count();
+        $count_total_task = Task::whereIn('status', ['to_begin', 'started', 'stopped'])->count();
 
         return [
             'pending_tasks' => $count_pending_tasks,

@@ -10,17 +10,17 @@ class ListTask
 {
     public static function call($params)
     {
-        $searchableColumns = ['name', 'status', 'priority', 'updated_at', 'responsible.full_name'];
+        $searchableColumns = ['correlative', 'name', 'status', 'priority', 'updated_at', 'responsible.full_name'];
         $query = Task::query();
 
         $statusFilter = $params['filters']['status']['value']['value'] ?? null;
 
         if ($statusFilter === 'overdued') {
             unset($params['filters']['status']);
-            $query->where('end_date', '<', now())
+            $query->where('end_date', '<=', now())
                 ->where('status', '!=', 'finished');
         } elseif ($statusFilter !== 'finished' && $statusFilter !== null) {
-            $query->where('end_date', '>=', now());
+            $query->where('end_date', '>', now());
         }
 
         $datatable = new PrimevueDatatables($params, $searchableColumns);

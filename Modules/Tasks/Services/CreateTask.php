@@ -24,6 +24,7 @@ class CreateTask
             $task->field_id = $data['field_id']['value'];
             $task->rows = collect($data['rows'])->map(fn ($q) => $q['value'])->toArray();
             $task->responsible_id = $data['responsible_id']['value'];
+            $task->correlative = self::getCorrelative($data['start_date']);
             $task->save();
 
             self::syncRelationship($task, 'quarters', $data['quarter_id'] ?? []);
@@ -78,5 +79,21 @@ class CreateTask
         ];
 
         $taskComment = CreateTaskComment::call($data, auth()->user());
+    }
+
+    protected static function getCorrelative($date)
+    {
+        $year = Carbon::parse($date)->year;
+        $correlative = DB::table('task_correlative')->where('year', $year)->first();
+        if ($correlative) {
+            $correlative->correlative++;
+            $correlative->save();
+            return $correlative->correlative;
+        }
+        $correlative = new TaskCorrelative;
+        $correlative->correlative = 0;
+        $correlative->year = $year;
+        $correlative->save();
+        return $correlative->correlative;
     }
 }

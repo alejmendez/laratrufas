@@ -8,6 +8,7 @@ return [
         'show' => 'Detalle de la Tarea',
     ],
     'table' => [
+        'correlative' => 'Correlativo',
         'name' => 'Tarea',
         'priority' => 'Prioridad',
         'status' => 'Estado',
