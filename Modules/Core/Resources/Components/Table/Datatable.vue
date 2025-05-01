@@ -43,7 +43,7 @@ if (attrs.sortOrder) {
 const lazyParams = ref(initLazyParams);
 const records = ref([]);
 const metadataInitial = {
-  total: 1,
+  total: 0,
   from: 1,
   to: 1,
   current_page: 1,
@@ -126,11 +126,15 @@ onMounted(() => {
       :currentPage="metadata.current_page"
       :totalPages="metadata.last_page"
       :rows="metadata.per_page"
-      :paginator="true"
+      :paginator="metadata.total > 0"
       :filters="filters"
       :rowsPerPageOptions="[5, 10, 25, 50, 100]"
       :loading="loading"
-      :currentPageReportTemplate="__('generics.tables.pagination.template', { from: metadata.from, to: metadata.to, total: metadata.total })"
+      :currentPageReportTemplate="metadata.total > 0 ? __('generics.tables.pagination.template', {
+        from: metadata.from || 1,
+        to: metadata.to || 1,
+        total: metadata.total || 1
+      }) : ''"
       @page="onPage($event)"
       @sort="onSort($event)"
       @filter="onFilter($event)"
