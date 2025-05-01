@@ -21,7 +21,7 @@ const props = defineProps({
   fetchHandler: Function,
   scrollHeight: {
     type: String,
-    default: '500px',
+    default: null,
   },
 });
 
