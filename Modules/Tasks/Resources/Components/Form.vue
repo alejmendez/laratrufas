@@ -1,6 +1,4 @@
 <script setup>
-import { trans } from 'laravel-vue-i18n';
-
 import FormAssignment from './Assignment.vue';
 import FormMain from './Main.vue';
 import FormComments from './Comments.vue';
@@ -30,7 +28,7 @@ const props = defineProps({
   task_supplies_units: Array,
 });
 
-const task_states = props.task_states.filter((state) => state.value !== 'overdued');
+const task_states = props.task_states;
 
 const form = props.form;
 
@@ -39,6 +37,7 @@ const statesClasses = {
   started: '!bg-cyan-500 !border-cyan-500 hover:!bg-cyan-600 hover:!border-cyan-600',
   finished: '!bg-green-500 !border-green-500 hover:!bg-green-600 hover:!border-green-600',
   stopped: '!bg-red-500 !border-red-500 hover:!bg-red-600 hover:!border-red-600',
+  overdued: '!bg-pink-500 !border-pink-500 hover:!bg-pink-600 hover:!border-pink-600',
 };
 </script>
 
