@@ -10,8 +10,6 @@ const props = defineProps({
 });
 
 const form = props.form;
-
-console.log(props.task_states);
 </script>
 
 <template>
