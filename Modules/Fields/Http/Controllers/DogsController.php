@@ -60,7 +60,12 @@ class DogsController extends Controller
         $data['avatar'] = $this->storeAvatar($request);
         CreateDog::call($data);
 
-        return redirect()->route('dogs.index')->with('toast', 'Dog created.');
+        return redirect()->route('dogs.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -99,7 +104,12 @@ class DogsController extends Controller
         $data['avatar'] = $this->storeAvatar($request);
         UpdateDog::call($id, $data);
 
-        return redirect()->route('dogs.index')->with('toast', 'Dog updated.');
+        return redirect()->route('dogs.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

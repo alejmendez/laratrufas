@@ -54,7 +54,12 @@ class MachineriesController extends Controller
     {
         CreateMachinery::call($request->validated());
 
-        return redirect()->route('machineries.index')->with('toast', 'Machinery created.');
+        return redirect()->route('machineries.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -88,7 +93,12 @@ class MachineriesController extends Controller
     {
         UpdateMachinery::call($id, $request->validated());
 
-        return redirect()->route('machineries.index')->with('toast', 'Machinery updated.');
+        return redirect()->route('machineries.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

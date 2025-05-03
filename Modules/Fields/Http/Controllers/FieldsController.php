@@ -57,7 +57,12 @@ class FieldsController extends Controller
         $data['documents'] = $this->storeDocuments($request);
         CreateField::call($data);
 
-        return redirect()->route('fields.index')->with('toast', 'Field created.');
+        return redirect()->route('fields.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -96,7 +101,12 @@ class FieldsController extends Controller
         $data['documents'] = $this->storeDocuments($request);
         UpdateField::call($id, $data);
 
-        return redirect()->route('fields.index')->with('toast', 'Field updated.');
+        return redirect()->route('fields.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

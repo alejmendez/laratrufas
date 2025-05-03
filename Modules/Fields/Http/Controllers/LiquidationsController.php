@@ -59,7 +59,12 @@ class LiquidationsController extends Controller
     {
         CreateLiquidation::call($request->validated());
 
-        return redirect()->route('liquidations.index')->with('toast', 'Liquidation created.');
+        return redirect()->route('liquidations.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -99,7 +104,12 @@ class LiquidationsController extends Controller
     {
         UpdateLiquidation::call($id, $request->validated());
 
-        return redirect()->route('liquidations.index')->with('toast', 'Liquidation updated.');
+        return redirect()->route('liquidations.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

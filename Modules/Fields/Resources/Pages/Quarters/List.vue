@@ -20,7 +20,7 @@ import { getDataSelects } from '@Core/Services/Selects';
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
-  toast: String,
+  toast: Object,
 });
 
 const toast = useToast();

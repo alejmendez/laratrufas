@@ -69,7 +69,12 @@ class HarvestsController extends Controller
     {
         CreateHarvest::call($request->validated());
 
-        return redirect()->route('harvests.index')->with('toast', 'Harvest created.');
+        return redirect()->route('harvests.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -113,7 +118,12 @@ class HarvestsController extends Controller
     {
         UpdateHarvest::call($id, $request->validated());
 
-        return redirect()->route('harvests.index')->with('toast', 'Harvest updated.');
+        return redirect()->route('harvests.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

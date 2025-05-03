@@ -37,7 +37,12 @@ class ProfileController extends Controller
         $data['avatar'] = $this->storeAvatar($request);
         $this->userService->update($request->user()->id, $data);
 
-        return redirect()->route('profile.edit')->with('toast', 'Profile updated.');
+        return redirect()->route('profile.edit')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     public function destroy(Request $request): RedirectResponse

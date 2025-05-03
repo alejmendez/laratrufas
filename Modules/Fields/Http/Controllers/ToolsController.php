@@ -54,7 +54,12 @@ class ToolsController extends Controller
     {
         CreateTool::call($request->validated());
 
-        return redirect()->route('tools.index')->with('toast', 'Tool created.');
+        return redirect()->route('tools.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -88,7 +93,12 @@ class ToolsController extends Controller
     {
         UpdateTool::call($id, $request->validated());
 
-        return redirect()->route('tools.index')->with('toast', 'Tool updated.');
+        return redirect()->route('tools.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

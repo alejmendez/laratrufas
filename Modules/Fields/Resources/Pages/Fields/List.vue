@@ -18,7 +18,7 @@ import { deleteRowTable } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
-  toast: String,
+  toast: Object,
 });
 
 const toast = useToast();
@@ -70,12 +70,7 @@ const deleteHandler = (record) => {
 
 onMounted(() => {
   if (props.toast) {
-    toast.add({
-      severity: 'success',
-      summary: trans('field.titles.entity_breadcrumb'),
-      detail: trans('generics.messages.saved_successfully'),
-      life: 5000,
-    });
+    toast.add(props.toast);
   }
 });
 </script>

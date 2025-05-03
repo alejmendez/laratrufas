@@ -62,7 +62,12 @@ class QuartersController extends Controller
         $data['blueprint'] = $this->storeBlueprint($request);
         CreateQuarter::call($data);
 
-        return redirect()->route('quarters.index')->with('toast', 'Quarter created.');
+        return redirect()->route('quarters.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -102,7 +107,12 @@ class QuartersController extends Controller
         $data['blueprint'] = $this->storeBlueprint($request);
         UpdateQuarter::call($id, $data);
 
-        return redirect()->route('quarters.index')->with('toast', 'Quarter updated.');
+        return redirect()->route('quarters.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

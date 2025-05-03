@@ -54,7 +54,12 @@ class SecurityEquipmentsController extends Controller
     {
         CreateSecurityEquipment::call($request->validated());
 
-        return redirect()->route('security_equipments.index')->with('toast', 'SecurityEquipment created.');
+        return redirect()->route('security_equipments.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -88,7 +93,12 @@ class SecurityEquipmentsController extends Controller
     {
         UpdateSecurityEquipment::call($id, $request->validated());
 
-        return redirect()->route('security_equipments.index')->with('toast', 'SecurityEquipment updated.');
+        return redirect()->route('security_equipments.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

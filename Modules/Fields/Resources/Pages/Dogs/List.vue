@@ -21,7 +21,7 @@ import { getDataSelects } from '@Core/Services/Selects';
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
-  toast: String,
+  toast: Object,
 });
 
 const toast = useToast();
@@ -87,12 +87,7 @@ const deleteHandler = (record) => {
 
 onMounted(async () => {
   if (props.toast) {
-    toast.add({
-      severity: 'success',
-      summary: trans('dog.titles.entity_breadcrumb'),
-      detail: trans('generics.messages.saved_successfully'),
-      life: 5000,
-    });
+    toast.add(props.toast);
   }
 
   const data = await getDataSelects({

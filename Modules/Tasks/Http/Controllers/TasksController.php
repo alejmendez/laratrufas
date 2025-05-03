@@ -74,7 +74,12 @@ class TasksController extends Controller
         $data = $request->validated();
         $task = CreateTask::call($data);
 
-        return redirect()->route('tasks.index')->with('toast', 'Task created.');
+        return redirect()->route('tasks.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -135,7 +140,12 @@ class TasksController extends Controller
     {
         UpdateTask::call($id, $request->validated());
 
-        return redirect()->route('tasks.index')->with('toast', 'Task updated.');
+        return redirect()->route('tasks.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted } from 'vue';
-import { trans } from 'laravel-vue-i18n';
 import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';
 
@@ -12,7 +11,7 @@ import { can } from '@Auth/Services/Auth';
 const toast = useToast();
 
 const props = defineProps({
-  toast: String,
+  toast: Object,
 });
 
 const canCreate = can('harvests.create');
@@ -24,12 +23,7 @@ if (canCreate) {
 
 onMounted(() => {
   if (props.toast) {
-    toast.add({
-      severity: 'success',
-      summary: trans('harvest.titles.entity_breadcrumb'),
-      detail: trans('generics.messages.saved_successfully'),
-      life: 5000,
-    });
+    toast.add(props.toast);
   }
 });
 </script>

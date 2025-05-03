@@ -65,7 +65,12 @@ class PlantsController extends Controller
         $data = $request->validated();
         CreatePlant::call($data);
 
-        return redirect()->route('plants.index')->with('toast', 'Plant created.');
+        return redirect()->route('plants.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -105,7 +110,12 @@ class PlantsController extends Controller
         $data = $request->validated();
         UpdatePlant::call($id, $data);
 
-        return redirect()->route('plants.index')->with('toast', 'Plant updated.');
+        return redirect()->route('plants.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

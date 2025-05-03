@@ -13,7 +13,7 @@ const toast = useToast();
 const props = defineProps({
   data: Object,
   roles: Array,
-  toast: String,
+  toast: Object,
 });
 
 const { data } = props.data;

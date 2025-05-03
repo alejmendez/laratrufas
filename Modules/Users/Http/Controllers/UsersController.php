@@ -58,7 +58,12 @@ class UsersController extends Controller
         $data['avatar'] = $this->storeAvatar($request);
         $this->userService->create($data);
 
-        return redirect()->route('users.index')->with('toast', 'User created.');
+        return redirect()->route('users.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -97,7 +102,12 @@ class UsersController extends Controller
         $data['avatar'] = $this->storeAvatar($request);
         $this->userService->update($id, $data);
 
-        return redirect()->route('users.index')->with('toast', 'User updated.');
+        return redirect()->route('users.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

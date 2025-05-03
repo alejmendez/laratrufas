@@ -58,7 +58,12 @@ class BatchesController extends Controller
     {
         CreateBatch::call($request->validated());
 
-        return redirect()->route('batches.index')->with('toast', 'Batch created.');
+        return redirect()->route('batches.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**
@@ -95,7 +100,12 @@ class BatchesController extends Controller
     {
         UpdateBatch::call($id, $request->validated());
 
-        return redirect()->route('batches.index')->with('toast', 'Batch updated.');
+        return redirect()->route('batches.index')->with('toast', [
+            'severity' => 'success',
+            'summary' => __('generics.messages.saved_successfully'),
+            'detail' => __('generics.messages.saved_successfully'),
+            'life' => 5000,
+        ]);
     }
 
     /**

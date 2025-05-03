@@ -19,7 +19,7 @@ import { deleteRowTable } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
-  toast: String,
+  toast: Object,
 });
 
 const toast = useToast();

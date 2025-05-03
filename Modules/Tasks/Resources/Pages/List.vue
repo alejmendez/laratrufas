@@ -18,12 +18,11 @@ import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import TaskService from '@Fields/Services/TaskService.js';
 import { dateToString } from '@Core/Utils/date.js';
-import { deleteRowTable } from '@Core/Utils/table.js';
-import { getDataSelects } from '@Core/Services/Selects';
+import { defaultDeleteHandler } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
-  toast: String,
+  toast: Object,
   status: {
     type: Array,
     default: [],
@@ -83,34 +82,12 @@ const fetchHandler = async (params) => {
 };
 
 const deleteHandler = (record) => {
-  deleteRowTable(confirm, async () => {
-    const result = await TaskService.del(record.id);
-    if (result) {
-      datatable.value.loadLazyData();
-      return toast.add({
-        severity: 'success',
-        summary: trans('generics.messages.deleted_successfully_summary'),
-        detail: trans('generics.messages.deleted_successfully'),
-        life: 3000,
-      });
-    }
-    toast.add({
-      severity: 'error',
-      summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
-      detail: trans('generics.tables.errors.could_not_delete_the_record'),
-      life: 3000,
-    });
-  });
-};
+  defaultDeleteHandler(confirm, datatable, toast, () => TaskService.del(record.id));
+}
 
 onMounted(async () => {
   if (props.toast) {
-    toast.add({
-      severity: 'success',
-      summary: trans('task.titles.entity_breadcrumb'),
-      detail: trans('generics.messages.saved_successfully'),
-      life: 5000,
-    });
+    toast.add(props.toast);
   }
 });
 </script>

@@ -18,7 +18,7 @@ import ownerService from '@Fields/Services/OwnerService.js';
 import { deleteRowDatatable } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
 const props = defineProps({
-  toast: String,
+  toast: Object,
 });
 
 const toast = useToast();
