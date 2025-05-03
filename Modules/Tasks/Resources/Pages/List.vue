@@ -8,6 +8,7 @@ import Tag from 'primevue/tag';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
+import MultiSelect from 'primevue/multiselect';
 import Select from 'primevue/select';
 
 import { trans } from 'laravel-vue-i18n';
@@ -24,8 +25,8 @@ import { can } from '@Auth/Services/Auth';
 const props = defineProps({
   toast: String,
   status: {
-    type: String,
-    default: null,
+    type: Array,
+    default: [],
   },
   task_states: Array,
   task_priorities: Array,
@@ -52,7 +53,7 @@ const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   correlative: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  status: { value: filter_states_options.find((s) => s.value === props.status), matchMode: FilterMatchMode.EQUALS },
+  status: { value: filter_states_options.filter((s) => props.status.includes(s.value)), matchMode: FilterMatchMode.IN },
   priority: { value: null, matchMode: FilterMatchMode.EQUALS },
   updated_at: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   responsible_id: { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -71,11 +72,10 @@ const fetchHandler = async (params) => {
   if (!params.filters) {
     params.filters = {};
   }
-
-  if (props.status) {
+  if (props.status && params.filters.status == null) {
     params.filters.status = {
-      value: filter_states_options.find((s) => s.value === props.status),
-      matchMode: FilterMatchMode.EQUALS,
+      value: filter_states_options.filter((s) => props.status.includes(s.value)),
+      matchMode: FilterMatchMode.IN,
     };
   }
   return await TaskService.list(params);
@@ -153,7 +153,7 @@ onMounted(async () => {
           <Tag :severity="statesSeverities[data.status]" :value="__('task.form.status.options.' + data.status)"></Tag>
         </template>
         <template #filter="{ filterModel }">
-          <Select v-model="filterModel.value" :options="filter_states_options" optionLabel="text" placeholder="Todos" />
+          <MultiSelect v-model="filterModel.value" :options="filter_states_options" optionLabel="text" placeholder="Todos" />
         </template>
       </Column>
       <Column field="priority" filterField="priority" :showFilterMatchModes="false" :header="__('task.table.priority')" sortable style="min-width: 200px">

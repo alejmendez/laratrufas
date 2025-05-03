@@ -54,7 +54,7 @@ function getPorcent(total, num) {
       class="mt-5 p-5 rounded-xl bg-(--p-primary-500) shadow-sm text-gray-50 cursor-pointer"
       @click="navigateToTasks('status=to_begin')"
     >
-      <span class="text-3xl font-bold mr-2">{{ task_data.pending_tasks }}</span> Tareas Pendientes
+      <span class="text-3xl font-bold mr-2">{{ task_data.pending_tasks }}</span> Tareas Atrasadas
       <div class="flex justify-between mt-3">
         <div>{{ task_data.tasks_totals }} Tareas</div>
         <div>{{ percent_pending_tasks }}%</div>
@@ -66,7 +66,7 @@ function getPorcent(total, num) {
 
     <div
       class="mt-5 p-5 rounded-xl card-section cursor-pointer"
-      @click="navigateToTasks('status=started')"
+      @click="navigateToTasks('status=started,overdued')"
     >
       <span class="text-3xl font-bold mr-2">{{ task_data.tasks_in_progress }}</span> Tareas en curso
       <div class="flex justify-between mt-3">

@@ -13,7 +13,8 @@ class ListTask
         $searchableColumns = ['correlative', 'name', 'status', 'priority', 'updated_at', 'responsible.full_name'];
         $query = Task::query();
 
-        $statusFilter = $params['filters']['status']['value']['value'] ?? null;
+        $statusFilter = collect($params['filters']['status']['value'] ?? []);
+        $params['filters']['status']['value'] = $statusFilter->map(fn ($item) => $item['value'])->toArray();
 
         $datatable = new PrimevueDatatables($params, $searchableColumns);
         $tasks = $datatable->of($query)->make();

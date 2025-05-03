@@ -36,9 +36,11 @@ class TasksController extends Controller
             return response()->json(ListTask::call($params));
         }
 
+        $status = explode(',', request('status', ''));
+
         return Inertia::render('Tasks::List', [
             'toast' => session('toast'),
-            'status' => request('status'),
+            'status' => $status,
             'task_priorities' => ListEntity::call('task_priorities'),
             'task_states' => ListEntity::call('task_states'),
             'task_repeat_type' => ListEntity::call('task_repeat_type'),
