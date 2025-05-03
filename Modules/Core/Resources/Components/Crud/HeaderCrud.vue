@@ -69,6 +69,7 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
         as="Link"
         :disabled="props.form?.instance.processing"
         :href="props.form?.hrefCancel"
+        :loading="props.form?.instance.processing"
         :label="__('generics.buttons.cancel')"
         v-if="props.form?.hrefCancel"
       />
