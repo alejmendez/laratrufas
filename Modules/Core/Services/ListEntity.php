@@ -63,7 +63,9 @@ class ListEntity
                     'text' => __("task.form.supplies.unit.options.{$unit}"),
                 ];
             }),
-            'responsible', 'couple', 'user' => User::select('id as value', 'full_name as text')->orderBy('full_name'),
+            'responsible' => User::select('id as value', 'full_name as text')->orderBy('full_name'),
+            'couple' => User::select('id as value', 'full_name as text')->orderBy('full_name'),
+            'user' => User::select('id as value', 'full_name as text')->orderBy('full_name'),
             default => [],
         };
 

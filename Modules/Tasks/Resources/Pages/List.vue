@@ -30,13 +30,14 @@ const props = defineProps({
   },
   task_states: Array,
   task_priorities: Array,
+  responsibles: Array,
 });
 
 const toast = useToast();
 const confirm = useConfirm();
 
 const datatable = ref(null);
-const filter_responsible_options = ref([]);
+const filter_responsible_options = props.responsibles;
 
 const filter_states_options = props.task_states.map((s) => ({ value: s.value, text: s.text }));
 const statesSeverities = {
@@ -111,12 +112,6 @@ onMounted(async () => {
       life: 5000,
     });
   }
-
-  const data = await getDataSelects({
-    responsible: {},
-  });
-
-  filter_responsible_options.value = data.responsible;
 });
 </script>
 

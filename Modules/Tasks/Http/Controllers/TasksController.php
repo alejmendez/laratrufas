@@ -41,6 +41,7 @@ class TasksController extends Controller
         return Inertia::render('Tasks::List', [
             'toast' => session('toast'),
             'status' => $status,
+            'responsibles' => ListEntity::call('responsible'),
             'task_priorities' => ListEntity::call('task_priorities'),
             'task_states' => ListEntity::call('task_states'),
             'task_repeat_type' => ListEntity::call('task_repeat_type'),
