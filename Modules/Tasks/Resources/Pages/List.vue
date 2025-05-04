@@ -83,7 +83,7 @@ const fetchHandler = async (params) => {
 
 const deleteHandler = (record) => {
   defaultDeleteHandler(confirm, datatable, toast, () => TaskService.del(record.id));
-}
+};
 
 onMounted(async () => {
   if (props.toast) {
