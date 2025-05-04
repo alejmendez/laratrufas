@@ -65,24 +65,7 @@ const fetchHandler = async (params) => {
 };
 
 const deleteHandler = (record) => {
-  deleteRowTable(confirm, async () => {
-    const result = await DogService.del(record.id);
-    if (result) {
-      datatable.value.loadLazyData();
-      return toast.add({
-        severity: 'success',
-        summary: trans('generics.messages.deleted_successfully_summary'),
-        detail: trans('generics.messages.deleted_successfully'),
-        life: 3000,
-      });
-    }
-    toast.add({
-      severity: 'error',
-      summary: trans('generics.tables.errors.could_not_delete_the_record_summary'),
-      detail: trans('generics.tables.errors.could_not_delete_the_record'),
-      life: 3000,
-    });
-  });
+  defaultDeleteHandler(confirm, datatable, toast, () => DogService.del(record.id));
 };
 
 onMounted(async () => {
