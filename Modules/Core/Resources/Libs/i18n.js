@@ -1,4 +1,4 @@
-import { trans, i18nVue, I18n, isLoaded } from 'laravel-vue-i18n';
+import { trans, i18nVue, I18n } from 'laravel-vue-i18n';
 
 const langs = import.meta.glob('../../../../lang/*.json');
 const resolver = async (lang) => {
@@ -10,11 +10,6 @@ export const initI18n = (app) => {
     lang: 'es',
     fallbackLang: 'es',
     shared: true,
-    resolve: resolver,
-  });
-
-  const i18nEs = new I18n({
-    lang: 'es',
     resolve: resolver,
   });
 

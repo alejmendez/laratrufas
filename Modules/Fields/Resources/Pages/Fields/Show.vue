@@ -1,9 +1,8 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { router } from '@inertiajs/vue3';
-import { trans } from 'laravel-vue-i18n';
-import { deleteRowTable } from '@Core/Utils/table';
 import { useConfirm } from 'primevue/useconfirm';
+import { deleteRowTable } from '@Core/Utils/table';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -20,9 +19,12 @@ import { can } from '@Auth/Services/Auth';
 const props = defineProps({
   field: Object,
   harvests: Object,
-  order: String,
-  search: String,
   current_tab: String,
+  harvest_available_years: Array,
+  harvest_available_weeks: Array,
+  fields: Array,
+  quarters: Array,
+  users: Array,
 });
 
 const field = props.field.data;
@@ -65,7 +67,7 @@ const deleteHandler = async (id) => {
   <AuthenticatedLayout :title="__('field.titles.show', { name: field.name })">
     <HeaderCrud
       :title="__('field.titles.show', { name: field.name })"
-      :breadcrumbs="[{ to: 'fields.index', text: trans('field.titles.entity_breadcrumb') }, { text: trans('generics.detail') }]"
+      :breadcrumbs="[{ to: 'fields.index', text: __('field.titles.entity_breadcrumb') }, { text: __('generics.detail') }]"
     >
       <Button
         severity="secondary"
@@ -75,7 +77,6 @@ const deleteHandler = async (id) => {
         v-show="isFileTab"
       />
       <Button
-        as="Link"
         :href="route('fields.edit', field.id)"
         :label="__('generics.actions.edit')"
         v-if="canEdit"
@@ -108,6 +109,11 @@ const deleteHandler = async (id) => {
 
     <HarvestCard
       :field_id="field.id"
+      :harvest_available_years="props.harvest_available_years"
+      :harvest_available_weeks="props.harvest_available_weeks"
+      :field="props.fields"
+      :quarter="props.quarters"
+      :user="props.users"
       v-show="isHarvestTab"
     />
 

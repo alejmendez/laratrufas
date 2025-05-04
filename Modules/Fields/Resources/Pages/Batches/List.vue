@@ -7,27 +7,26 @@ import { useConfirm } from 'primevue/useconfirm';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
-
-import { trans } from 'laravel-vue-i18n';
+import VSelect from '@Core/Components/Form/VSelect.vue';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import BatchService from '@Fields/Services/BatchService.js';
 import { stringToFormat } from '@Core/Utils/date';
-import { deleteRowTable } from '@Core/Utils/table.js';
-import { getDataSelects } from '@Core/Services/Selects';
+import { defaultDeleteHandler } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: Object,
+  importers: Array,
 });
 
 const toast = useToast();
 const confirm = useConfirm();
 
 const datatable = ref(null);
-const filter_importer_options = ref([]);
+const filter_importer_options = props.importers;
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -56,12 +55,6 @@ onMounted(async () => {
   if (props.toast) {
     toast.add(props.toast);
   }
-
-  const data = await getDataSelects({
-    importer: {},
-  });
-
-  filter_importer_options.value = data.importer;
 });
 </script>
 
@@ -103,7 +96,7 @@ onMounted(async () => {
           {{ data.importer.name }}
         </template>
         <template #filter="{ filterModel }">
-          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Exportador" />
+          <VSelect v-model="filterModel.value" :options="filter_importer_options" placeholder="Buscar por Exportador" />
         </template>
       </Column>
 

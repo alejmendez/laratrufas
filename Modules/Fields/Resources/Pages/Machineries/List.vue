@@ -15,7 +15,7 @@ import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import MachineryService from '@Fields/Services/MachineryService.js';
 import { stringToFormat } from '@Core/Utils/date';
-import { deleteRowTable } from '@Core/Utils/table.js';
+import { defaultDeleteHandler } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
 const props = defineProps({
   toast: Object,

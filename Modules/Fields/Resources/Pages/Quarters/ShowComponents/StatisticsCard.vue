@@ -1,7 +1,6 @@
 <script setup>
 import { ref, toRaw, onMounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import { trans } from 'laravel-vue-i18n';
 import Dialog from 'primevue/dialog';
 import ProgressSpinner from 'primevue/progressspinner';
 
@@ -15,6 +14,7 @@ import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   quarter: Object,
+  scale_types: Array,
 });
 
 const plants = ref([]);
@@ -27,10 +27,7 @@ const distributionPlants = ref('');
 const current_plant = ref({});
 const detail_current_plant = ref({});
 
-const scaleTypes = ref([
-  { value: 'weight', text: trans('quarter.show.statistics.scale_type.options.weight') },
-  { value: 'quantity', text: trans('quarter.show.statistics.scale_type.options.quantity') },
-]);
+const scaleTypes = ref(props.scale_types);
 const scaleType = ref(scaleTypes.value[0]);
 
 // TODO: Se oculta temporalmente, buscar alguna alternativa para que no se pueda editar la distribución de plantas
@@ -243,7 +240,7 @@ table tbody tr td.border_cell_left {
                 border_cell_left: plant?.code,
               }"
               :style="{
-                backgroundColor: scaleType.value === 'weight' ? plant?.colorByWeight : plant?.colorByQuantity,
+                backgroundColor: scaleType === 'weight' ? plant?.colorByWeight : plant?.colorByQuantity,
               }"
               v-tooltip.top="plant?.code"
               @click="setCurrentPlant(plant)"

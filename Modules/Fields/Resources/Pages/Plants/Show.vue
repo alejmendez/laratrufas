@@ -115,7 +115,6 @@ const submitHandler = async () => {
         v-show="isFileTab"
       />
       <Button
-        as="Link"
         :href="route('plants.edit', data.id)"
         :label="__('generics.actions.edit')"
         v-if="canEdit"

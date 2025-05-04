@@ -72,7 +72,6 @@ const submitHandler = () => {
       />
 
       <Button
-        as="Link"
         severity="secondary"
         :disabled="form.processing"
         :href="route('harvests.index')"

@@ -10,10 +10,10 @@ const props = defineProps({
 const quarter = props.quarter;
 
 const dataFile = [
-  [trans('quarter.show.file.field'), quarter.field.name],
-  [trans('quarter.show.file.area'), quarter.area],
-  [trans('quarter.show.file.plants_count'), quarter.plants_count],
-  [trans('quarter.show.file.responsible'), quarter.responsible.name],
+  ['quarter.show.file.field', quarter.field.name],
+  ['quarter.show.file.area', quarter.area],
+  ['quarter.show.file.plants_count', quarter.plants_count],
+  ['quarter.show.file.responsible', quarter.responsible.name],
 ];
 </script>
 
@@ -31,7 +31,7 @@ const dataFile = [
     <div>
       <template v-for="block of dataFile">
         <div class="text-gray-400 pb-1">
-          {{ block[0] }}
+          {{ __(block[0]) }}
         </div>
         <div class="pb-3 dark:text-gray-50">
           {{ block[1] }}

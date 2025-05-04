@@ -13,6 +13,7 @@ import { trans } from 'laravel-vue-i18n';
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
+import VSelect from '@Core/Components/Form/VSelect.vue';
 import VCheckbox from '@Core/Components/Form/VCheckbox.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import categoryProductService from '@Fields/Services/CategoryProductService.js';
@@ -44,9 +45,9 @@ const form = reactive({
 });
 
 const isCommercialOptions = ref([
-  { label: trans('generics.all'), value: null },
-  { label: trans('generics.yes'), value: true },
-  { label: trans('generics.no'), value: false },
+  { text: trans('generics.all'), value: null },
+  { text: trans('generics.yes'), value: true },
+  { text: trans('generics.no'), value: false },
 ]);
 
 const canEdit = can('category_products.edit');
@@ -74,6 +75,14 @@ const showErrorToast = () => {
     detail: trans('generics.errors.trying_to_save'),
     life: 5000,
   });
+};
+
+const openModalCreate = () => {
+  form.id = null;
+  form.name = null;
+  form.is_commercial = false;
+  form.errors = {};
+  showModal.value = true;
 };
 
 const fetchHandler = async (params) => {
@@ -150,7 +159,7 @@ const updateHandler = () => {
     >
       <Button
         :label="__('generics.new')"
-        @click="showModal = true"
+        @click="openModalCreate"
         v-if="canCreate"
       />
     </HeaderCrud>
@@ -173,14 +182,14 @@ const updateHandler = () => {
 
       <Column field="is_commercial" :header="__('category_product.table.is_commercial')" sortable style="min-width: 200px">
         <template #filter="{ filterModel }">
-          <Select v-model="filterModel.value" :options="isCommercialOptions" placeholder="Buscar por es comercial" />
+          <VSelect v-model="filterModel.value" :options="isCommercialOptions" placeholder="Buscar por es comercial" />
         </template>
         <template #body="{ data }">
           <span
             class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none border rounded-full"
             :class="data.is_commercial ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
           >
-            {{ data.is_commercial ? trans('generics.yes') : trans('generics.no') }}
+            {{ data.is_commercial ? __('generics.yes') : __('generics.no') }}
           </span>
         </template>
       </Column>

@@ -1,20 +1,21 @@
 <script setup>
-import { useAttrs } from 'vue';
+import { useAttrs, computed } from 'vue';
+import { router } from '@inertiajs/vue3';
 import ButtonPrime from 'primevue/button';
-import { Link } from '@inertiajs/vue3';
 
-const attrs = useAttrs();
+const attrOriginal = useAttrs();
+const attrs = computed(() => {
+  const { href, onClick, ...rest } = attrOriginal;
+  return rest;
+});
+
+if (attrOriginal.href && !attrOriginal.onClick) {
+  attrs.value.onClick = () => {
+    router.visit(attrOriginal.href);
+  };
+}
 </script>
 
 <template>
-  <template v-if="attrs.as === 'Link'">
-    <ButtonPrime asChild v-slot="slotProps">
-      <Link :href="attrs.href" v-bind="slotProps">
-        {{ attrs.label }}
-      </Link>
-    </ButtonPrime>
-  </template>
-  <template v-else>
-    <ButtonPrime v-bind="attrs" />
-  </template>
+  <ButtonPrime v-bind="attrs" />
 </template>

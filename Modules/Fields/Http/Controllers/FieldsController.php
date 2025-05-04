@@ -13,6 +13,7 @@ use Modules\Fields\Services\Fields\DeleteField;
 use Modules\Fields\Services\Fields\FindField;
 use Modules\Fields\Services\Fields\ListField;
 use Modules\Fields\Services\Fields\UpdateField;
+use Modules\Core\Services\ListEntity;
 
 class FieldsController extends Controller
 {
@@ -76,6 +77,11 @@ class FieldsController extends Controller
         return Inertia::render('Fields::Fields/Show', [
             'current_tab' => $current_tab,
             'field' => new FieldResource($field),
+            'harvest_available_years' => ListEntity::call('harvest_available_years'),
+            'harvest_available_weeks' => ListEntity::call('harvest_available_weeks'),
+            'fields' => ListEntity::call('field'),
+            'quarters' => ListEntity::call('quarter'),
+            'users' => ListEntity::call('user'),
         ]);
     }
 

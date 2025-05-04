@@ -39,6 +39,7 @@ class QuartersController extends Controller
 
         return Inertia::render('Fields::Quarters/List', [
             'toast' => session('toast'),
+            'fields' => ListEntity::call('field'),
         ]);
     }
 
@@ -81,6 +82,12 @@ class QuartersController extends Controller
         return Inertia::render('Fields::Quarters/Show', [
             'data' => new QuarterResource($quarter),
             'current_tab' => $current_tab,
+            'harvest_available_years' => ListEntity::call('harvest_available_years'),
+            'harvest_available_weeks' => ListEntity::call('harvest_available_weeks'),
+            'fields' => ListEntity::call('field'),
+            'quarters' => ListEntity::call('quarter'),
+            'users' => ListEntity::call('user'),
+            'scale_types' => ListEntity::call('scale_type'),
         ]);
     }
 

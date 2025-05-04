@@ -66,6 +66,16 @@ class ListEntity
             'responsible' => User::select('id as value', 'full_name as text')->orderBy('full_name'),
             'couple' => User::select('id as value', 'full_name as text')->orderBy('full_name'),
             'user' => User::select('id as value', 'full_name as text')->orderBy('full_name'),
+            'scale_type' => [
+                [
+                    'value' => 'weight',
+                    'text' => trans('quarter.show.statistics.scale_type.options.weight'),
+                ],
+                [
+                    'value' => 'quantity',
+                    'text' => trans('quarter.show.statistics.scale_type.options.quantity'),
+                ],
+            ],
             default => [],
         };
 

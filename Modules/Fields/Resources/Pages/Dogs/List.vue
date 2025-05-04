@@ -7,7 +7,7 @@ import { useConfirm } from 'primevue/useconfirm';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
-import Select from 'primevue/select';
+import VSelect from '@Core/Components/Form/VSelect.vue';
 
 import { trans } from 'laravel-vue-i18n';
 import { getAge } from '@Core/Utils/date';
@@ -16,20 +16,22 @@ import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import DogService from '@Fields/Services/DogService.js';
-import { deleteRowTable } from '@Core/Utils/table.js';
-import { getDataSelects } from '@Core/Services/Selects';
+import { defaultDeleteHandler } from '@Core/Utils/table.js';
+
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: Object,
+  quarters: Array,
+  couples: Array,
 });
 
 const toast = useToast();
 const confirm = useConfirm();
 
 const datatable = ref(null);
-const filter_quarter_options = ref([]);
-const filter_couple_options = ref([]);
+const filter_quarter_options = props.quarters;
+const filter_couple_options = props.couples;
 const filter_gender_options = ref([
   { value: 'M', text: trans('dog.form.gender.options.male') },
   { value: 'F', text: trans('dog.form.gender.options.female') },
@@ -72,14 +74,6 @@ onMounted(async () => {
   if (props.toast) {
     toast.add(props.toast);
   }
-
-  const data = await getDataSelects({
-    quarter: {},
-    couple: {},
-  });
-
-  filter_quarter_options.value = data.quarter;
-  filter_couple_options.value = data.couple;
 });
 </script>
 
@@ -107,12 +101,12 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="quarter.name" :header="__('dog.table.quarter')" :showFilterMatchModes="false" sortable style="min-width: 200px">
+      <Column field="quarter_id" :header="__('dog.table.quarter')" :showFilterMatchModes="false" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.quarter.name }}
         </template>
         <template #filter="{ filterModel }">
-          <Select v-model="filterModel.value" :options="filter_quarter_options" optionLabel="text" placeholder="Todos" />
+          <VSelect v-model="filterModel.value" :options="filter_quarter_options" placeholder="Buscar por Cuartel" />
         </template>
       </Column>
 
@@ -121,7 +115,7 @@ onMounted(async () => {
           {{ genders[data.gender] }}
         </template>
         <template #filter="{ filterModel }">
-          <Select v-model="filterModel.value" :options="filter_gender_options" optionLabel="text" placeholder="Todos" />
+          <VSelect v-model="filterModel.value" :options="filter_gender_options" placeholder="Buscar por Género" />
         </template>
       </Column>
 
@@ -149,12 +143,12 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="couple.name" :header="__('dog.table.couple')" :showFilterMatchModes="false" sortable style="min-width: 200px">
+      <Column field="couple_id" :header="__('dog.table.couple')" :showFilterMatchModes="false" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.couple?.full_name }}
         </template>
         <template #filter="{ filterModel }">
-          <Select v-model="filterModel.value" :options="filter_couple_options" optionLabel="text" placeholder="Todos" />
+          <VSelect v-model="filterModel.value" :options="filter_couple_options" placeholder="Buscar por Pareja" />
         </template>
       </Column>
 

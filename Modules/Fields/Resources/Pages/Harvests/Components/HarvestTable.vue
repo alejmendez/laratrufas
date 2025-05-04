@@ -3,7 +3,6 @@ import { ref, computed, reactive, onMounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
-import ConfirmDialog from 'primevue/confirmdialog';
 import Toast from 'primevue/toast';
 
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
@@ -16,13 +15,10 @@ import Select from 'primevue/select';
 import CardSection from '@Core/Components/CardSection.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 
-import { trans } from 'laravel-vue-i18n';
-
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import HarvestService from '@Fields/Services/HarvestService.js';
-import { deleteRowTable } from '@Core/Utils/table.js';
+import { defaultDeleteHandler } from '@Core/Utils/table.js';
 
-import { getDataSelects } from '@Core/Services/Selects';
 import { can } from '@Auth/Services/Auth';
 
 const toast = useToast();
@@ -39,15 +35,20 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  harvest_available_years: Array,
+  harvest_available_weeks: Array,
+  field: Array,
+  quarter: Array,
+  user: Array,
 });
 
 const datatable = ref(null);
 
-const filter_year_options = ref([]);
-const harvest_available_weeks = ref([]);
-const filter_field_options = ref([]);
-const filter_quarter_options = ref([]);
-const filter_user_options = ref([]);
+const filter_year_options = [{ value: null, text: 'Todos' }, ...props.harvest_available_years];
+const harvest_available_weeks = props.harvest_available_weeks;
+const filter_field_options = props.field;
+const filter_quarter_options = props.quarter;
+const filter_user_options = props.user;
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -60,7 +61,7 @@ const filters = {
 };
 
 const form = reactive({
-  year: [],
+  year: filter_year_options[0],
   field: [],
   last_field: [],
   quarter: [],
@@ -131,32 +132,12 @@ const unitCountTotal = computed(() => {
   return number_format(total);
 });
 
-onMounted(async () => {
-  const data = await getDataSelects({
-    harvest_available_years: {},
-    harvest_available_weeks: {},
-    field: {},
-    quarter: {},
-    user: {},
-  });
-
-  const year_value_default = { value: null, text: 'Todos' };
-  filter_year_options.value = [year_value_default, ...data.harvest_available_years];
-  form.year = year_value_default;
-
-  harvest_available_weeks.value = data.harvest_available_weeks;
-  filter_field_options.value = data.field;
-  filter_quarter_options.value = data.quarter;
-  filter_user_options.value = data.user;
-});
-
 const number_format = (n) => {
   return new Intl.NumberFormat('es-CL', { maximumFractionDigits: 2 }).format(n);
 };
 </script>
 
 <template>
-  <ConfirmDialog></ConfirmDialog>
   <Toast />
 
   <div class="grid md:grid-cols-3 sm:grid-cols-1 gap-4 items-stretch mb-4">

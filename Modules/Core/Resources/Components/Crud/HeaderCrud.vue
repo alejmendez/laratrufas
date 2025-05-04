@@ -1,6 +1,4 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
-
 import BreadCrumbs from '@Core/Components/Crud/BreadCrumbs.vue';
 import Button from '@Core/Components/Form/Button.vue';
 
@@ -41,7 +39,6 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
         </template>
         <template v-else>
           <Button
-            as="Link"
             :key="link.text"
             :severity="link.variant"
             :href="isLink(link.to) ? link.to : route(link.to)"
@@ -66,7 +63,6 @@ const isLink = (str) => str.toLowerCase().startsWith('http');
 
       <Button
         severity="secondary"
-        as="Link"
         :disabled="props.form?.instance.processing"
         :href="props.form?.hrefCancel"
         :loading="props.form?.instance.processing"

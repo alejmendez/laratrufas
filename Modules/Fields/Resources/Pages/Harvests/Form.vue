@@ -217,7 +217,6 @@ watch(totalWeight, (newValue) => {
 
         <Button
           class="ms-3"
-          as="Link"
           severity="secondary"
           :href="route('harvests.create.bulk', { id: form.id })"
           :label="__('generics.bulk.button')"

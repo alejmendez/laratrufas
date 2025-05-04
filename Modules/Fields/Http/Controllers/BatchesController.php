@@ -37,6 +37,7 @@ class BatchesController extends Controller
 
         return Inertia::render('Fields::Batches/List', [
             'toast' => session('toast'),
+            'importers' => ListEntity::call('importer'),
         ]);
     }
 

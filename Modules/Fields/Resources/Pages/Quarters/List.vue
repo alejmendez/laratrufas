@@ -15,19 +15,20 @@ import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import QuarterService from '@Fields/Services/QuarterService.js';
-import { deleteRowTable } from '@Core/Utils/table.js';
+import { defaultDeleteHandler } from '@Core/Utils/table.js';
 import { getDataSelects } from '@Core/Services/Selects';
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: Object,
+  fields: Array,
 });
 
 const toast = useToast();
 const confirm = useConfirm();
 
 const datatable = ref(null);
-const filter_field_options = ref([]);
+const filter_field_options = ref(props.fields);
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -63,12 +64,6 @@ onMounted(async () => {
       life: 5000,
     });
   }
-
-  const data = await getDataSelects({
-    field: {},
-  });
-
-  filter_field_options.value = data.field;
 });
 </script>
 

@@ -37,6 +37,8 @@ class DogsController extends Controller
 
         return Inertia::render('Fields::Dogs/List', [
             'toast' => session('toast'),
+            'quarters' => ListEntity::call('quarter'),
+            'couples' => ListEntity::call('couple'),
         ]);
     }
 

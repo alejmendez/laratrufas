@@ -12,6 +12,11 @@ const toast = useToast();
 
 const props = defineProps({
   toast: Object,
+  harvest_available_years: Array,
+  harvest_available_weeks: Array,
+  field: Array,
+  quarter: Array,
+  user: Array,
 });
 
 const canCreate = can('harvests.create');
@@ -38,6 +43,12 @@ onMounted(() => {
 
     <Toast />
 
-    <HarvestTable />
+    <HarvestTable
+      :harvest_available_years="props.harvest_available_years"
+      :harvest_available_weeks="props.harvest_available_weeks"
+      :field="props.field"
+      :quarter="props.quarter"
+      :user="props.user"
+    />
   </AuthenticatedLayout>
 </template>

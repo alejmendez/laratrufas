@@ -1,7 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { router } from '@inertiajs/vue3';
-import { trans } from 'laravel-vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 import { deleteRowTable } from '@Core/Utils/table';
 import { can } from '@Auth/Services/Auth';
@@ -20,6 +19,12 @@ const confirm = useConfirm();
 const props = defineProps({
   data: Object,
   current_tab: String,
+  harvest_available_years: Array,
+  harvest_available_weeks: Array,
+  field: Array,
+  quarter: Array,
+  user: Array,
+  scale_types: Array,
 });
 
 const { data: quarter } = props.data;
@@ -69,7 +74,6 @@ const deleteHandler = async (id) => {
         v-show="isFileTab"
       />
       <Button
-        as="Link"
         :href="route('quarters.edit', quarter.id)"
         :label="__('generics.actions.edit')"
         v-if="canEdit"
@@ -102,11 +106,17 @@ const deleteHandler = async (id) => {
 
     <HarvestCard
       :quarter_id="quarter.id"
+      :harvest_available_years="props.harvest_available_years"
+      :harvest_available_weeks="props.harvest_available_weeks"
+      :field="props.fields"
+      :quarter="props.quarters"
+      :user="props.users"
       v-show="isHarvestTab"
     />
 
     <StatisticsCard
       :quarter="quarter"
+      :scale_types="props.scale_types"
       v-show="isStatisticsTab"
     />
   </AuthenticatedLayout>

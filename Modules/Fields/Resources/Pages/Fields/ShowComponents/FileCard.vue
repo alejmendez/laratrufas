@@ -10,10 +10,10 @@ const props = defineProps({
 const field = props.field;
 
 const fieldFile = [
-  [trans('field.show.file.location'), field.location],
-  [trans('field.show.file.size'), field.size],
-  [trans('field.show.file.plants_count'), field.plants_count],
-  [trans('field.show.file.quarters_count'), field.quarters_count],
+  ['field.show.file.location', field.location],
+  ['field.show.file.size', field.size],
+  ['field.show.file.plants_count', field.plants_count],
+  ['field.show.file.quarters_count', field.quarters_count],
 ];
 </script>
 
@@ -31,7 +31,7 @@ const fieldFile = [
     <div>
       <template v-for="block of fieldFile">
         <div class="text-gray-400 pb-1">
-          {{ block[0] }}
+          {{ __(block[0]) }}
         </div>
         <div class="pb-3 dark:text-gray-50">
           {{ block[1] }}
