@@ -32,16 +32,11 @@ const form = useForm({
   avatarRemove: false,
 });
 
-const submitHandler = () => form.post(route('profile.store'), form.avatar ? { forceFormData: true } : {});
+const submitHandler = () => form.post(route('profile.update'), form.avatar ? { forceFormData: true } : {});
 
 onMounted(async () => {
   if (props.toast) {
-    toast.add({
-      severity: 'success',
-      summary: trans('profile.titles.entity_breadcrumb'),
-      detail: trans('generics.messages.saved_successfully'),
-      life: 5000,
-    });
+    toast.add(props.toast);
   }
 });
 </script>
@@ -51,7 +46,7 @@ onMounted(async () => {
     <HeaderCrud
       :title="__('profile.titles.edit')"
       :breadcrumbs="[{ text: __('profile.titles.entity_breadcrumb') }]"
-      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.save_edit'), hrefCancel: route('dashboard') }"
+      :form="{ instance: form, submitHandler, submitText: __('generics.buttons.save_edit'), hrefCancel: route('dashboard.index') }"
     />
     <FormUser
       :form="form"

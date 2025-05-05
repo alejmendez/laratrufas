@@ -38,7 +38,7 @@ class UserService
         $user->password = Hash::make($data['password']);
         $user->save();
 
-        if ($data['role']) {
+        if (isset($data['role'])) {
             $user->syncRoles([$data['role']]);
         }
 
@@ -75,7 +75,7 @@ class UserService
 
         $user->save();
 
-        if ($data['role']) {
+        if (isset($data['role'])) {
             $user->syncRoles([$data['role']]);
         }
 
