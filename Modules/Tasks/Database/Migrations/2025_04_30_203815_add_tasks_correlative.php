@@ -1,10 +1,10 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Carbon\Carbon;
 
 return new class extends Migration
 {
@@ -28,10 +28,10 @@ return new class extends Migration
         $correlatives = [];
         foreach ($tasks as $task) {
             $year = Carbon::parse($task->created_at)->year;
-            if (!isset($correlatives[$year])) {
+            if (! isset($correlatives[$year])) {
                 $correlatives[$year] = 0;
             }
-            $correlative = str_pad($correlatives[$year], 3, '0', STR_PAD_LEFT) . "_" . substr($year, -2);
+            $correlative = str_pad($correlatives[$year], 3, '0', STR_PAD_LEFT).'_'.substr($year, -2);
             DB::table('tasks')->where('id', $task->id)->update(['correlative' => $correlative]);
             $correlatives[$year]++;
         }

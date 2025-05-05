@@ -88,12 +88,14 @@ class CreateTask
         if ($correlative) {
             $correlative->correlative++;
             $correlative->save();
+
             return $correlative->correlative;
         }
         $correlative = new TaskCorrelative;
         $correlative->correlative = 0;
         $correlative->year = $year;
         $correlative->save();
+
         return $correlative->correlative;
     }
 }

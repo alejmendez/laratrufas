@@ -17,7 +17,7 @@ class ListDog
         $dogs = $datatable->of($query)->make();
 
         $dogs->map(function ($dog) {
-            $dog->gender = trans('dog.form.gender.options.' . ($dog->gender === 'M' ? 'male' : 'female'));
+            $dog->gender = trans('dog.form.gender.options.'.($dog->gender === 'M' ? 'male' : 'female'));
         });
 
         return $dogs;

@@ -19,7 +19,7 @@ class DogResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'breed' => $this->breed,
-            'gender' => trans('dog.form.gender.options.' . ($this->gender === 'M' ? 'male' : 'female')),
+            'gender' => trans('dog.form.gender.options.'.($this->gender === 'M' ? 'male' : 'female')),
             'birthdate' => $this->birthdate,
             'age' => $this->age,
             'veterinary' => $this->veterinary,

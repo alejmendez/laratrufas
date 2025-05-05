@@ -4,6 +4,7 @@ namespace Modules\Fields\Http\Controllers;
 
 use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
+use Modules\Core\Services\ListEntity;
 use Modules\Core\Traits\HasPermissionMiddleware;
 use Modules\Fields\Http\Requests\StoreFieldRequest;
 use Modules\Fields\Http\Requests\UpdateFieldRequest;
@@ -13,7 +14,6 @@ use Modules\Fields\Services\Fields\DeleteField;
 use Modules\Fields\Services\Fields\FindField;
 use Modules\Fields\Services\Fields\ListField;
 use Modules\Fields\Services\Fields\UpdateField;
-use Modules\Core\Services\ListEntity;
 
 class FieldsController extends Controller
 {
