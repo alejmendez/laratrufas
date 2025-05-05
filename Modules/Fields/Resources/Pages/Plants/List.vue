@@ -9,8 +9,6 @@ import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
 
-import { trans } from 'laravel-vue-i18n';
-
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
@@ -21,16 +19,20 @@ import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: Object,
+  fields: Array,
+  quarters: Array,
+  plant_types: Array,
+  responsible: Array,
 });
 
 const toast = useToast();
 const confirm = useConfirm();
 
 const datatable = ref(null);
-const filter_field_options = ref([]);
-const filter_quarter_options = ref([]);
-const filter_plant_type_options = ref([]);
-const filter_responsible_options = ref([]);
+const filter_field_options = ref(props.fields);
+const filter_quarter_options = ref(props.quarters);
+const filter_plant_type_options = ref(props.plant_types);
+const filter_responsible_options = ref(props.responsible);
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -64,18 +66,6 @@ onMounted(async () => {
   if (props.toast) {
     toast.add(props.toast);
   }
-
-  const data = await getDataSelects({
-    field: {},
-    quarter: {},
-    plant_type: {},
-    responsible: {},
-  });
-
-  filter_field_options.value = data.field;
-  filter_quarter_options.value = data.quarter;
-  filter_plant_type_options.value = data.plant_type;
-  filter_responsible_options.value = data.responsible;
 });
 </script>
 

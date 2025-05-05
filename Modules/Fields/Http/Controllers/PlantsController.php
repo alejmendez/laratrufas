@@ -43,6 +43,10 @@ class PlantsController extends Controller
 
         return Inertia::render('Fields::Plants/List', [
             'toast' => session('toast'),
+            'fields' => ListEntity::call('field'),
+            'quarters' => ListEntity::call('quarter'),
+            'plant_types' => ListEntity::call('plant_type'),
+            'responsible' => ListEntity::call('responsible'),
         ]);
     }
 
