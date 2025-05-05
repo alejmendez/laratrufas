@@ -14,7 +14,6 @@ import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import PlantService from '@Fields/Services/PlantService.js';
 import { defaultDeleteHandler } from '@Core/Utils/table.js';
-import { getDataSelects } from '@Core/Services/Selects';
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({

@@ -21,6 +21,7 @@ import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: Object,
+  roles: Array,
 });
 
 const toast = useToast();
@@ -30,7 +31,7 @@ const page = usePage();
 const current_user_id = page.props.auth.user.id;
 
 const datatable = ref(null);
-const filter_role_options = ref([]);
+const filter_role_options = ref(props.roles);
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -70,12 +71,6 @@ onMounted(async () => {
   if (props.toast) {
     toast.add(props.toast);
   }
-
-  const data = await getDataSelects({
-    role: {},
-  });
-
-  filter_role_options.value = data.role;
 });
 </script>
 

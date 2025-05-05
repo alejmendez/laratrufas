@@ -36,6 +36,7 @@ class UsersController extends Controller
 
         return Inertia::render('Users::List', [
             'toast' => session('toast'),
+            'roles' => ListEntity::call('role'),
         ]);
     }
 
