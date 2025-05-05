@@ -39,6 +39,7 @@ class DogsController extends Controller
             'toast' => session('toast'),
             'quarters' => ListEntity::call('quarter'),
             'couples' => ListEntity::call('couple'),
+            'genders' => $this->getGenders(),
         ]);
     }
 
@@ -131,5 +132,13 @@ class DogsController extends Controller
         }
 
         return $request->file('avatar')->storePublicly('public/avatars');
+    }
+
+    protected function getGenders()
+    {
+        return [
+            ['value' => 'M', 'text' => trans('dog.form.gender.options.male')],
+            ['value' => 'F', 'text' => trans('dog.form.gender.options.female')],
+        ];
     }
 }

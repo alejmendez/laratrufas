@@ -119,6 +119,7 @@ onMounted(() => {
       :scrollHeight="props.scrollHeight"
       tableStyle="min-width: 100px"
       v-bind="attrs"
+      :stripedRows="true"
       :value="records"
       :totalRecords="metadata.total"
       :first="metadata.from"

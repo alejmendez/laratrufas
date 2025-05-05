@@ -18,7 +18,7 @@ const props = defineProps({
 
 const { data } = props.data;
 
-const gender = trans('dog.form.gender.options.' + (data.gender.toLowerCase() === 'm' ? 'male' : 'female'));
+const gender = 'dog.form.gender.options.' + (data.gender.toLowerCase() === 'm' ? 'male' : 'female');
 
 const canDestroy = can('dogs.destroy');
 const canEdit = can('dogs.edit');
@@ -115,7 +115,7 @@ const deleteHandler = async (id) => {
 
       <div class="mb-2">
         <div class="text-gray-400 mb-2">{{ __('dog.show.file.gender.label') }}</div>
-        <div class="">{{ gender }}</div>
+        <div class="">{{ __(gender) }}</div>
       </div>
 
       <div class="mb-2">

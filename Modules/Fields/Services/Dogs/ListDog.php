@@ -16,6 +16,10 @@ class ListDog
         $datatable = new PrimevueDatatables($params, $searchableColumns);
         $dogs = $datatable->of($query)->make();
 
+        $dogs->map(function ($dog) {
+            $dog->gender = trans('dog.form.gender.options.' . ($dog->gender === 'M' ? 'male' : 'female'));
+        });
+
         return $dogs;
     }
 }

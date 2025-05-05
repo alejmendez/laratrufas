@@ -24,6 +24,7 @@ const props = defineProps({
   toast: Object,
   quarters: Array,
   couples: Array,
+  genders: Object,
 });
 
 const toast = useToast();
@@ -32,15 +33,7 @@ const confirm = useConfirm();
 const datatable = ref(null);
 const filter_quarter_options = props.quarters;
 const filter_couple_options = props.couples;
-const filter_gender_options = ref([
-  { value: 'M', text: trans('dog.form.gender.options.male') },
-  { value: 'F', text: trans('dog.form.gender.options.female') },
-]);
-
-const genders = {
-  M: trans('dog.form.gender.options.male'),
-  F: trans('dog.form.gender.options.female'),
-};
+const filter_gender_options = props.genders;
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -112,7 +105,7 @@ onMounted(async () => {
 
       <Column field="gender" :header="__('dog.table.gender')" :showFilterMatchModes="false" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ genders[data.gender] }}
+          {{ data.gender }}
         </template>
         <template #filter="{ filterModel }">
           <VSelect v-model="filterModel.value" :options="filter_gender_options" placeholder="Buscar por Género" />
