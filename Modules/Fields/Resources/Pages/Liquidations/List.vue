@@ -8,8 +8,6 @@ import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 
-import { trans } from 'laravel-vue-i18n';
-
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import CardSection from '@Core/Components/CardSection.vue';
@@ -19,27 +17,30 @@ import VSelect from '@Core/Components/Form/VSelect.vue';
 import LiquidationService from '@Fields/Services/LiquidationService.js.js';
 import { stringToFormat } from '@Core/Utils/date';
 import { defaultDeleteHandler } from '@Core/Utils/table.js';
-import { getDataSelects } from '@Core/Services/Selects';
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: Object,
+  importers: Array,
+  liquidation_available_years: Array,
 });
 
 const toast = useToast();
 const confirm = useConfirm();
 
 const datatable = ref(null);
-const filter_importer_options = ref([]);
-const filter_year_options = ref([]);
+const filter_importer_options = ref(props.importers);
+const year_value_default = { value: null, text: 'Todos' };
+const filter_year_options = ref([year_value_default, ...props.liquidation_available_years]);
 
 const form = reactive({
-  year: [],
+  year: year_value_default,
 });
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   year: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+  week: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
   liquidation_number: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   delivery_date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   importer_id: { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -87,16 +88,6 @@ onMounted(async () => {
   if (props.toast) {
     toast.add(props.toast);
   }
-
-  const data = await getDataSelects({
-    importer: {},
-    liquidation_available_years: {},
-  });
-
-  filter_importer_options.value = data.importer;
-  const year_value_default = { value: null, text: 'Todos' };
-  filter_year_options.value = [year_value_default, ...data.liquidation_available_years];
-  form.year = year_value_default;
 });
 </script>
 
@@ -160,17 +151,11 @@ onMounted(async () => {
         <template #body="{ data }">
           {{ data.total_commercial }}
         </template>
-        <template #filter="{ filterModel }">
-          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Exportador" />
-        </template>
       </Column>
 
       <Column field="total_not_commercial" :header="__('liquidation.table.total_not_commercial')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.total_not_commercial }}
-        </template>
-        <template #filter="{ filterModel }">
-          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Exportador" />
         </template>
       </Column>
 

@@ -37,6 +37,8 @@ class LiquidationsController extends Controller
 
         return Inertia::render('Fields::Liquidations/List', [
             'toast' => session('toast'),
+            'importers' => ListEntity::call('importer'),
+            'liquidation_available_years' => ListEntity::call('liquidation_available_years'),
         ]);
     }
 
