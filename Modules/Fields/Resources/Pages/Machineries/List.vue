@@ -53,12 +53,7 @@ const deleteHandler = (record) => {
 
 onMounted(() => {
   if (props.toast) {
-    toast.add({
-      severity: 'success',
-      summary: trans('machinery.titles.entity_breadcrumb'),
-      detail: trans('generics.messages.saved_successfully'),
-      life: 5000,
-    });
+    toast.add(props.toast);
   }
 });
 </script>
