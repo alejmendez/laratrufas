@@ -91,7 +91,7 @@ onMounted(async () => {
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por Codigo" />
         </template>
       </Column>
-      <Column field="quarter_name" filterField="quarter_id" :showFilterMatchModes="false" :header="__('plant.table.quarter_id')" sortable style="min-width: 200px">
+      <Column field="quarter.name" filterField="quarter_id" :showFilterMatchModes="false" :header="__('plant.table.quarter_id')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.quarter?.name }}
         </template>
@@ -99,7 +99,7 @@ onMounted(async () => {
           <Select v-model="filterModel.value" :options="filter_quarter_options" optionLabel="text" placeholder="Todos" />
         </template>
       </Column>
-      <Column field="field_name" filterField="quarter.field_id" :showFilterMatchModes="false" :header="__('plant.table.field_id')" sortable style="min-width: 200px">
+      <Column field="field.name" filterField="quarter.field_id" :showFilterMatchModes="false" :header="__('plant.table.field_id')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.quarter?.field?.name }}
         </template>
@@ -107,7 +107,7 @@ onMounted(async () => {
           <Select v-model="filterModel.value" :options="filter_field_options" optionLabel="text" placeholder="Todos" />
         </template>
       </Column>
-      <Column field="plant_type_name" filterField="plant_type_id" :showFilterMatchModes="false" :header="__('plant.table.type')" sortable style="min-width: 200px">
+      <Column field="plant_type.name" filterField="plant_type_id" :showFilterMatchModes="false" :header="__('plant.table.type')" sortable style="min-width: 200px">
         <template #body="{ data }">
           {{ data.plant_type?.name }}
         </template>
