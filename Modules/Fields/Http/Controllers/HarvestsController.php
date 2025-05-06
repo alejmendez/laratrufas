@@ -45,6 +45,11 @@ class HarvestsController extends Controller
 
         return Inertia::render('Fields::Harvests/List', [
             'toast' => session('toast'),
+            'harvest_available_years' => ListEntity::call('harvest_available_years'),
+            'harvest_available_weeks' => ListEntity::call('harvest_available_weeks'),
+            'fields' => ListEntity::call('field'),
+            'quarters' => ListEntity::call('quarter'),
+            'users' => ListEntity::call('user'),
         ]);
     }
 
