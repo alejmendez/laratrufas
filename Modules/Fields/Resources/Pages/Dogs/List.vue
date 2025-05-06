@@ -9,7 +9,6 @@ import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 
-import { trans } from 'laravel-vue-i18n';
 import { getAge } from '@Core/Utils/date';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';

@@ -8,7 +8,6 @@ import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Select from 'primevue/select';
 
-import { trans } from 'laravel-vue-i18n';
 import slugify from '@Core/Utils/slugify';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
@@ -60,7 +59,6 @@ const deleteHandler = async (record) => {
     datatable,
     confirm,
     toast,
-    entity: trans('user.titles.entity_breadcrumb'),
     handler: () => UserService.del(record.id),
   };
 

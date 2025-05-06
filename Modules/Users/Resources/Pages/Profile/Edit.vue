@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import { trans } from 'laravel-vue-i18n';
 import { useToast } from 'primevue/usetoast';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';

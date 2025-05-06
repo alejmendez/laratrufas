@@ -78,7 +78,7 @@ export const defaultDeleteHandler = (confirm, datatable, toast, fetchDelete) => 
 };
 
 export const deleteRowDatatable = (options) => {
-  const { datatable, confirm, toast, trans, entity = trans('generics.tables.entity'), handler } = options;
+  const { datatable, confirm, toast, entity = trans('generics.tables.entity'), handler } = options;
 
   const confirmOptions = createConfirmOptions(entity, async () => await handleDeleteConfirmation(handler, datatable, toast));
 

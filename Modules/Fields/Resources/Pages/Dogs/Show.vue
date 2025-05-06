@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { router } from '@inertiajs/vue3';
-import { trans } from 'laravel-vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 import { deleteRowTable } from '@Core/Utils/table';
 import { stringToFormat } from '@Core/Utils/date';

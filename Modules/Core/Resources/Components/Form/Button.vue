@@ -9,13 +9,13 @@ const attrs = computed(() => {
   return rest;
 });
 
-if (attrOriginal.href && !attrOriginal.onClick) {
-  attrs.value.onClick = () => {
+const clickHandler = attrOriginal.onClick ? attrOriginal.onClick : () => {
+  if (attrOriginal.href) {
     router.visit(attrOriginal.href);
-  };
-}
+  }
+};
 </script>
 
 <template>
-  <ButtonPrime v-bind="attrs" />
+  <ButtonPrime v-bind="attrs" @click="clickHandler" />
 </template>

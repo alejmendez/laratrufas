@@ -39,7 +39,7 @@ class DogsController extends Controller
             'toast' => session('toast'),
             'quarters' => ListEntity::call('quarter'),
             'couples' => ListEntity::call('couple'),
-            'genders' => $this->getGenders(),
+            'genders' => ListEntity::call('genders'),
         ]);
     }
 
@@ -51,6 +51,7 @@ class DogsController extends Controller
         return Inertia::render('Fields::Dogs/Create', [
             'fields' => ListEntity::call('field'),
             'couples' => ListEntity::call('couple'),
+            'genders' => ListEntity::call('genders'),
         ]);
     }
 
@@ -95,6 +96,7 @@ class DogsController extends Controller
             'fields' => ListEntity::call('field'),
             'quarters' => ListEntity::call('quarter', ['field_id' => $dog->quarter->field_id]),
             'couples' => ListEntity::call('couple'),
+            'genders' => ListEntity::call('genders'),
         ]);
     }
 
@@ -132,13 +134,5 @@ class DogsController extends Controller
         }
 
         return $request->file('avatar')->storePublicly('public/avatars');
-    }
-
-    protected function getGenders()
-    {
-        return [
-            ['value' => 'M', 'text' => trans('dog.form.gender.options.male')],
-            ['value' => 'F', 'text' => trans('dog.form.gender.options.female')],
-        ];
     }
 }

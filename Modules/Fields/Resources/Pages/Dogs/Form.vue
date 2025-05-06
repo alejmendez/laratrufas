@@ -1,6 +1,5 @@
 <script setup>
 import { ref, watch } from 'vue';
-import { trans } from 'laravel-vue-i18n';
 
 import CardSection from '@Core/Components/CardSection.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
@@ -16,6 +15,7 @@ const props = defineProps({
   fields: Array,
   quarters: Array,
   couples: Array,
+  genders: Array,
   submitHandler: Function,
 });
 
@@ -23,18 +23,9 @@ const form = props.form;
 
 const avatarPreview = ref(form.avatar);
 
-const genders = [
-  {
-    value: 'M',
-    text: trans('dog.form.gender.options.male'),
-  },
-  {
-    value: 'F',
-    text: trans('dog.form.gender.options.female'),
-  },
-];
+const genders = ref(props.genders);
 
-form.gender = genders.find((a) => a.value == form.gender);
+form.gender = genders.value.find((a) => a.value == form.gender);
 
 const calculateAge = () => (form.age = getAge(form.birthdate));
 

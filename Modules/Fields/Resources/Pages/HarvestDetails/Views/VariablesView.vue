@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { trans } from 'laravel-vue-i18n';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';

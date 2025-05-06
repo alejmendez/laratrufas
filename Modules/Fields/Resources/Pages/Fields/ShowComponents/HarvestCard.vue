@@ -5,9 +5,9 @@ const props = defineProps({
   field_id: Number,
   harvest_available_years: Array,
   harvest_available_weeks: Array,
-  field: Array,
-  quarter: Array,
-  user: Array,
+  fields: Array,
+  quarters: Array,
+  users: Array,
 });
 </script>
 
@@ -18,9 +18,9 @@ const props = defineProps({
       :show_actions="false"
       :harvest_available_years="props.harvest_available_years"
       :harvest_available_weeks="props.harvest_available_weeks"
-      :field="props.field"
-      :quarter="props.quarter"
-      :user="props.user"
+      :fields="props.fields"
+      :quarters="props.quarters"
+      :users="props.users"
     />
   </div>
 </template>

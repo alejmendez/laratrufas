@@ -76,6 +76,30 @@ class ListEntity
                     'text' => trans('quarter.show.statistics.scale_type.options.quantity'),
                 ],
             ],
+            'is_commercial_options' => [
+                [
+                    'value' => null,
+                    'text' => trans('generics.all'),
+                ],
+                [
+                    'value' => true,
+                    'text' => trans('generics.yes'),
+                ],
+                [
+                    'value' => false,
+                    'text' => trans('generics.no'),
+                ],
+            ],
+            'genders' => [
+                [
+                    'value' => 'M',
+                    'text' => trans('dog.form.gender.options.male'),
+                ],
+                [
+                    'value' => 'F',
+                    'text' => trans('dog.form.gender.options.female'),
+                ],
+            ],
             default => [],
         };
 

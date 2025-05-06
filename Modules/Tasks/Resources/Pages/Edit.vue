@@ -1,6 +1,5 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { trans } from 'laravel-vue-i18n';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -26,7 +25,7 @@ const props = defineProps({
 const { data } = props.data;
 
 let supplies = data.supplies.map((a) => {
-  a.unit = { value: a.unit, text: trans('task.form.supplies.unit.options.' + a.unit) };
+  a.unit = props.task_supplies_units.find((b) => b.value === a.unit);
   return a;
 });
 

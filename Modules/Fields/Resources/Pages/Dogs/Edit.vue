@@ -12,6 +12,7 @@ const props = defineProps({
   fields: Array,
   quarters: Array,
   couples: Array,
+  genders: Array,
 });
 
 const { data } = props.data;
@@ -53,6 +54,7 @@ const submitHandler = () => form.post(route('dogs.update', data.id), form.avatar
       :fields="props.fields"
       :quarters="props.quarters"
       :couples="props.couples"
+      :genders="props.genders"
       :submitHandler="submitHandler"
     />
   </AuthenticatedLayout>

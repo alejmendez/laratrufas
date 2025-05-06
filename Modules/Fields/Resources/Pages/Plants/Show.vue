@@ -1,7 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useForm, router } from '@inertiajs/vue3';
-import { trans } from 'laravel-vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
@@ -24,6 +23,7 @@ const props = defineProps({
   data: Object,
   details: Object,
   current_tab: String,
+  harvest_available_years: Array,
 });
 
 const { data } = props.data;
@@ -142,7 +142,7 @@ const submitHandler = async () => {
     </div>
 
     <FileCard :data="data" v-show="isFileTab" />
-    <LogsCard ref="logsCard" :plant_id="data.id" v-show="isLogsTab" />
+    <LogsCard ref="logsCard" :plant_id="data.id" :harvest_available_years="harvest_available_years" v-show="isLogsTab" />
     <StatisticsCard :plant="data" v-show="isStatisticsTab" />
 
     <Dialog v-model:visible="showModalNote" :header="__('plant.titles.add_variables')" modal :style="{ width: '75rem' }">

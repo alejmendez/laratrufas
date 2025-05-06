@@ -5,7 +5,6 @@ import { useConfirm } from 'primevue/useconfirm';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
-import Select from 'primevue/select';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import { trans } from 'laravel-vue-i18n';
@@ -21,7 +20,7 @@ import { deleteRowDatatable } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
-  toast: Object,
+  isCommercialOptions: Array,
 });
 
 const toast = useToast();
@@ -44,11 +43,7 @@ const form = reactive({
   errors: {},
 });
 
-const isCommercialOptions = ref([
-  { text: trans('generics.all'), value: null },
-  { text: trans('generics.yes'), value: true },
-  { text: trans('generics.no'), value: false },
-]);
+const isCommercialOptions = ref(props.isCommercialOptions);
 
 const canEdit = can('category_products.edit');
 const canDestroy = can('category_products.destroy');

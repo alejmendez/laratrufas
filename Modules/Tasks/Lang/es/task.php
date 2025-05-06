@@ -144,6 +144,7 @@ return [
                     'started' => 'Iniciada',
                     'stopped' => 'Detenida',
                     'finished' => 'Terminada',
+                    'overdued' => 'Atrasada',
                 ],
             ],
             'start_date' => [

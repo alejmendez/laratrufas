@@ -1,5 +1,4 @@
 <script setup>
-import { trans } from 'laravel-vue-i18n';
 import { Link } from '@inertiajs/vue3';
 import { can } from '@Auth/Services/Auth';
 

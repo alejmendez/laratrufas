@@ -5,6 +5,7 @@ namespace Modules\Fields\Http\Controllers;
 use Inertia\Inertia;
 use Modules\Core\Http\Controllers\Controller;
 use Modules\Core\Traits\HasPermissionMiddleware;
+use Modules\Core\Services\ListEntity;
 use Modules\Fields\Http\Requests\StoreCategoryProductRequest;
 use Modules\Fields\Http\Requests\UpdateCategoryProductRequest;
 use Modules\Fields\Services\CategoryProducts\CreateCategoryProduct;
@@ -32,7 +33,9 @@ class CategoryProductsController extends Controller
             return response()->json(ListCategoryProduct::call($params));
         }
 
-        return Inertia::render('Fields::CategoryProducts/List');
+        return Inertia::render('Fields::CategoryProducts/List', [
+            'isCommercialOptions' => ListEntity::call('is_commercial_options'),
+        ]);
     }
 
     /**

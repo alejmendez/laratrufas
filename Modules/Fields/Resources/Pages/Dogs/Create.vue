@@ -9,6 +9,7 @@ const props = defineProps({
   fields: Array,
   quarters: Array,
   couples: Array,
+  genders: Array,
 });
 
 const form = useForm({
@@ -46,6 +47,7 @@ const submitHandler = () => form.post(route('dogs.store'), form.avatar ? { force
       :fields="props.fields"
       :quarters="props.quarters"
       :couples="props.couples"
+      :genders="props.genders"
       :submitHandler="submitHandler"
     />
   </AuthenticatedLayout>

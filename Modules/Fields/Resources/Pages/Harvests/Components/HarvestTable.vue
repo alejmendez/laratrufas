@@ -37,18 +37,18 @@ const props = defineProps({
   },
   harvest_available_years: Array,
   harvest_available_weeks: Array,
-  field: Array,
-  quarter: Array,
-  user: Array,
+  fields: Array,
+  quarters: Array,
+  users: Array,
 });
 
 const datatable = ref(null);
 
 const filter_year_options = [{ value: null, text: 'Todos' }, ...props.harvest_available_years];
 const harvest_available_weeks = props.harvest_available_weeks;
-const filter_field_options = props.field;
-const filter_quarter_options = props.quarter;
-const filter_user_options = props.user;
+const filter_field_options = props.fields;
+const filter_quarter_options = props.quarters;
+const filter_user_options = props.users;
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },

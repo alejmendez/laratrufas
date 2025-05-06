@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { router } from '@inertiajs/vue3';
-import { trans } from 'laravel-vue-i18n';
 import { useConfirm } from 'primevue/useconfirm';
 
 import { can } from '@Auth/Services/Auth';
@@ -29,7 +28,7 @@ const props = defineProps({
 const { data } = props.data;
 
 let supplies = data.supplies.map((a) => {
-  a.unit = { value: a.unit, text: trans('task.form.supplies.unit.options.' + a.unit) };
+  a.unit = props.task_supplies_units.find((b) => b.value === a.unit);
   return a;
 });
 

@@ -104,6 +104,7 @@ const deleteHandler = async (id) => {
 
     <LogbookCard
       :field_id="field.id"
+      :harvest_available_years="props.harvest_available_years"
       v-show="isLogbookTab"
     />
 
@@ -111,9 +112,9 @@ const deleteHandler = async (id) => {
       :field_id="field.id"
       :harvest_available_years="props.harvest_available_years"
       :harvest_available_weeks="props.harvest_available_weeks"
-      :field="props.fields"
-      :quarter="props.quarters"
-      :user="props.users"
+      :fields="props.fields"
+      :quarters="props.quarters"
+      :users="props.users"
       v-show="isHarvestTab"
     />
 

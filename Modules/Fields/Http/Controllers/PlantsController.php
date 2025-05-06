@@ -88,6 +88,7 @@ class PlantsController extends Controller
         return Inertia::render('Fields::Plants/Show', [
             'data' => new PlantResource($plant),
             'current_tab' => $current_tab,
+            'harvest_available_years' => ListEntity::call('harvest_available_years'),
         ]);
     }
 

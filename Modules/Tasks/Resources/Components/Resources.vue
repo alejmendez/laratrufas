@@ -1,6 +1,4 @@
 <script setup>
-import { trans } from 'laravel-vue-i18n';
-
 import CardSection from '@Core/Components/CardSection.vue';
 import VSelectMultiple from '@Core/Components/Form/VSelectMultiple.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';

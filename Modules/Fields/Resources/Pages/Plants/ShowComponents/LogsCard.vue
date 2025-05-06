@@ -29,12 +29,16 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  harvest_available_years: {
+    type: Array,
+    default: [],
+  },
 });
 
 const loading = ref(true);
 const details = ref([]);
-const year_options = ref([]);
-const selectedYear = ref(null);
+const year_options = ref([{ value: null, text: 'Todos' }, ...props.harvest_available_years]);
+const selectedYear = ref(year_options.value[0]);
 
 const categories = ref([
   { name: 'harvest', key: 'harvest' },
@@ -78,12 +82,6 @@ const filter = async () => {
 
 onMounted(async () => {
   await filter();
-  const data = await getDataSelect('harvest_available_years');
-
-  const year_value_default = { value: null, text: 'Todos' };
-  year_options.value = [year_value_default, ...data];
-  selectedYear.value = { value: year_options.value[0].value, text: year_options.value[0].text };
-
   loading.value = false;
 });
 
