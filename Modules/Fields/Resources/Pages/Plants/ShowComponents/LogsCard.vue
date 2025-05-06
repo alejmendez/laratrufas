@@ -9,7 +9,6 @@ import CardSection from '@Core/Components/CardSection.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
 
 import PlantDetailService from '@Fields/Services/PlantDetailService';
-import { getDataSelect } from '@Core/Services/Selects';
 import { stringToFormat } from '@Core/Utils/date';
 
 const props = defineProps({

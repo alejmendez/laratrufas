@@ -15,7 +15,6 @@ import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import UserService from '@Users/Services/UserService.js';
 import { deleteRowDatatable } from '@Core/Utils/table.js';
-import { getDataSelects } from '@Core/Services/Selects';
 import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
