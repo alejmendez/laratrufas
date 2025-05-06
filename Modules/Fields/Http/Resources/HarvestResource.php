@@ -4,6 +4,7 @@ namespace Modules\Fields\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class HarvestResource extends JsonResource
 {
@@ -20,6 +21,11 @@ class HarvestResource extends JsonResource
             'year' => $this->year,
             'week' => $this->week,
             'batch' => $this->batch,
+            'date_rendered' => trans('harvest.form.date.renderText', [
+                'week' => $this->week,
+                'start' => Carbon::parse($this->date)->startOfWeek()->format('d/m/Y'),
+                'end' => Carbon::parse($this->date)->endOfWeek()->format('d/m/Y'),
+            ]),
             'dog' => [
                 'id' => optional($this->dog)->id,
                 'name' => optional($this->dog)->name,

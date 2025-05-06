@@ -17,6 +17,7 @@ const props = defineProps({
   users: Array,
   plant_codes: Array,
   qualities: Array,
+  date_rendered: String,
 });
 
 const { data } = props.data;
@@ -88,6 +89,7 @@ const submitHandler = () => {
       :qualities="props.qualities"
       :details="true"
       :submitHandler="submitHandler"
+      :date_rendered="data.date_rendered"
     />
   </AuthenticatedLayout>
 </template>

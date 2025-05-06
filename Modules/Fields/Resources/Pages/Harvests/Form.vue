@@ -25,6 +25,7 @@ const props = defineProps({
   plant_codes: Array,
   qualities: Array,
   details: Boolean,
+  date_rendered: String,
   submitHandler: Function,
 });
 
@@ -37,7 +38,7 @@ const dateRenderText = (m) => {
   return trans('harvest.form.date.renderText', { week, start, end });
 };
 
-const date_rendered = ref(form.date ? dateRenderText(form.date) : '');
+const date_rendered = ref(props.date_rendered ?? '');
 const show_modal_datepicker = ref(false);
 
 const add_detail = () => {
