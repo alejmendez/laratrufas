@@ -190,7 +190,7 @@ const number_format = (n) => {
     </Column>
 
     <Column
-      field="field_names"
+      field="field.names"
       filterField="details.quarter.field_id"
       :showFilterMatchModes="false"
       :header="__('harvest.table.field')"
@@ -207,7 +207,7 @@ const number_format = (n) => {
     </Column>
 
     <Column
-      field="quarter_names"
+      field="quarter.name"
       filterField="details.quarter_id"
       :showFilterMatchModes="false"
       :header="__('harvest.table.quarter')"
@@ -235,7 +235,7 @@ const number_format = (n) => {
       </template>
     </Column>
 
-    <Column field="farmer_name" filterField="farmer.id" :showFilterMatchModes="false" :header="__('harvest.table.responsible')" sortable style="min-width: 200px">
+    <Column field="farmer.name" filterField="farmer.id" :showFilterMatchModes="false" :header="__('harvest.table.responsible')" sortable style="min-width: 200px">
       <template #body="{ data }">
         {{ data.farmer_name }}
       </template>

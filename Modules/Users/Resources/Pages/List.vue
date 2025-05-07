@@ -86,7 +86,7 @@ onMounted(async () => {
       sortField="full_name"
       :sortOrder="1"
     >
-      <Column field="full_name" :header="__('user.table.name')" sortable frozen style="min-width: 200px">
+      <Column field="name" :header="__('user.table.name')" sortable frozen style="min-width: 200px">
         <template #body="{ data }">
           {{ data.full_name }}
         </template>
