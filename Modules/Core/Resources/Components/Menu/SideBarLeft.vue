@@ -14,26 +14,17 @@ const page = usePage();
 const currentComponent = page.component;
 
 const menuData = menuElements(currentComponent);
-const menuState = ref(menuData.map((_, index) => index));
-const initialState = Array(menuData.length).fill(true);
-// const menuState = JSON.parse(localStorage.getItem('menu-state')) || initialState;
+const initialState = menuData.map((_, index) => index);
+const menuState = ref(JSON.parse(localStorage.getItem('menu-state')) || initialState);
 
-const openHandler = (e, index) => {
-  console.log(e, index);
-  // const menuState = JSON.parse(localStorage.getItem('menu-state')) || initialState;
-  // const newState = [...menuState];
-  // newState[index] = e.value;
-  // localStorage.setItem('menu-state', JSON.stringify(newState));
+const openHandler = (e) => {
+  localStorage.setItem('menu-state', JSON.stringify(e));
 };
-
-watch(menuState, (newVal) => {
-  console.log(newVal);
-});
 </script>
 <template>
   <aside class="aside-left-menu min-h-[calc(100vh-50px)] ps-[15px] pe-[20px]">
     <div class="flex flex-col justify-between space-y-[10px] mt-3 mb-10">
-      <Accordion :value="menuState" multiple :update:value="openHandler">
+      <Accordion :value="menuState" multiple @update:value="openHandler">
         <AccordionPanel :value="index" v-for="(menu, index) in menuData" :key="index">
           <div v-if="menu.link">
             <MenuElement

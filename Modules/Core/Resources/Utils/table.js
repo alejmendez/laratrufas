@@ -51,8 +51,6 @@ const handleDeleteConfirmation = async (handler, datatable, toast) => {
 
 export const deleteRowTable = async (confirm, accept, entity = null) => {
   const confirmOptions = createConfirmOptions(entity || trans('generics.tables.entity'), accept);
-
-  console.log('***');
   confirm.require(confirmOptions);
 };
 
