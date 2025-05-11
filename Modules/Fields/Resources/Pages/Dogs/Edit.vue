@@ -17,14 +17,19 @@ const props = defineProps({
 
 const { data } = props.data;
 
-const vaccines = data.vaccines.length > 0 ? data.vaccines.map((v) => {
-  v.date = stringToDate(v.date);
-  return v;
-}) : [{
-      name: null,
-      date: null,
-      code: null,
-    }];
+const vaccines =
+  data.vaccines.length > 0
+    ? data.vaccines.map((v) => {
+        v.date = stringToDate(v.date);
+        return v;
+      })
+    : [
+        {
+          name: null,
+          date: null,
+          code: null,
+        },
+      ];
 
 console.log(vaccines);
 console.log(data.vaccines);
