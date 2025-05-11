@@ -9,11 +9,13 @@ const attrs = computed(() => {
   return rest;
 });
 
-const clickHandler = attrOriginal.onClick ? attrOriginal.onClick : () => {
-  if (attrOriginal.href) {
-    router.visit(attrOriginal.href);
-  }
-};
+const clickHandler = attrOriginal.onClick
+  ? attrOriginal.onClick
+  : () => {
+      if (attrOriginal.href) {
+        router.visit(attrOriginal.href);
+      }
+    };
 </script>
 
 <template>
