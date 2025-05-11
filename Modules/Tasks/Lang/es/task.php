@@ -13,6 +13,7 @@ return [
         'priority' => 'Prioridad',
         'status' => 'Estado',
         'updated_at' => 'Actualización',
+        'end_date' => 'Fecha fin',
         'responsible' => 'Responsable',
     ],
     'form' => [

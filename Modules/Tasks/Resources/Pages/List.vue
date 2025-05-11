@@ -54,6 +54,7 @@ const filters = {
   status: { value: filter_states_options.filter((s) => props.status.includes(s.value)), matchMode: FilterMatchMode.IN },
   priority: { value: null, matchMode: FilterMatchMode.EQUALS },
   updated_at: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+  end_date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   responsible_id: { value: null, matchMode: FilterMatchMode.EQUALS },
 };
 
@@ -140,6 +141,14 @@ onMounted(async () => {
         </template>
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por fecha de actualización" />
+        </template>
+      </Column>
+      <Column field="end_date" filterField="end_date" :header="__('task.table.end_date')" sortable style="min-width: 200px">
+        <template #body="{ data }">
+          {{ dateToString(data.end_date) }}
+        </template>
+        <template #filter="{ filterModel }">
+          <InputText v-model="filterModel.value" type="text" placeholder="Buscar por fecha de fin" />
         </template>
       </Column>
       <Column field="responsible.name" filterField="responsible_id" :showFilterMatchModes="false" :header="__('task.table.responsible')" sortable style="min-width: 200px">
