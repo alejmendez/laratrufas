@@ -31,9 +31,6 @@ const vaccines =
         },
       ];
 
-console.log(vaccines);
-console.log(data.vaccines);
-
 const form = useForm({
   _method: 'PATCH',
   id: data.id,
