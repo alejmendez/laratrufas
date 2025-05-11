@@ -134,6 +134,12 @@ onMounted(async () => {
 
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
+          <!--
+            <Button icon="pi pi-eye" class="me-2" severity="secondary" size="small" v-if="canShow" />
+            <Button icon="pi pi-pencil" class="me-2" severity="info" size="small" v-if="canEdit" />
+            <Button icon="pi pi-trash" class="me-2" severity="danger" size="small" v-if="canDestroy" @click="deleteHandler(slotProps.data)" />
+          -->
+
           <Link :href="route('plants.show', slotProps.data.id)" v-if="canShow">
             <span class="material-symbols-rounded cursor-pointer transition-all text-slate-500 hover:text-sky-600">visibility</span>
           </Link>
