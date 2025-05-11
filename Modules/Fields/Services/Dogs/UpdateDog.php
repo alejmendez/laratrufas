@@ -46,6 +46,9 @@ class UpdateDog
 
         DogVaccine::destroy($idVaccinesToDestroy);
         foreach ($vaccines as $vaccine) {
+            if ($vaccine['name'] == null && $vaccine['date'] == null && $vaccine['code'] == null) {
+                continue;
+            }
             $dog_vaccine = DogVaccine::firstOrNew(['id' => $vaccine['id']]);
             $dog_vaccine->name = $vaccine['name'];
             $dog_vaccine->date = $vaccine['date'];

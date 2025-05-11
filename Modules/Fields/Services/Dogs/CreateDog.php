@@ -22,6 +22,9 @@ class CreateDog
         $dog->save();
 
         foreach ($data['vaccines'] as $vaccine) {
+            if ($vaccine['name'] == null && $vaccine['date'] == null && $vaccine['code'] == null) {
+                continue;
+            }
             $dog_vaccine = new DogVaccine;
             $dog_vaccine->name = $vaccine['name'];
             $dog_vaccine->date = $vaccine['date'];

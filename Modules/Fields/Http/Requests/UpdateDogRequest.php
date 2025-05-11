@@ -42,9 +42,9 @@ class UpdateDogRequest extends FormRequest
             'avatar' => '',
             'avatarRemove' => 'boolean',
             'vaccines.*.id' => 'nullable',
-            'vaccines.*.name' => 'max:80',
-            'vaccines.*.date' => 'date',
-            'vaccines.*.code' => 'max:80',
+            'vaccines.*.name' => 'max:80|nullable',
+            'vaccines.*.date' => 'date|nullable',
+            'vaccines.*.code' => 'max:80|nullable',
         ];
     }
 
