@@ -28,27 +28,27 @@ return [
         ],
         'height' => [
             'label' => 'Altura',
-            'unit' => 'mts',
+            'unit' => 'cms',
             'color' => '#F44336',
         ],
         'crown_diameter' => [
             'label' => 'Diámetro de copa',
-            'unit' => 'mts',
+            'unit' => 'cms',
             'color' => '#2196F3',
         ],
         'trunk_diameter' => [
             'label' => 'Diámetro de tronco',
-            'unit' => 'mm',
+            'unit' => 'cms',
             'color' => '#9C27B0',
         ],
         'root_diameter' => [
             'label' => 'Diámetro de raíces',
-            'unit' => 'mm',
+            'unit' => 'cms',
             'color' => '#FFC107',
         ],
         'invasion_radius' => [
             'label' => 'Radio invasión',
-            'unit' => 'mts',
+            'unit' => 'cms',
             'color' => '#00BCD4',
         ],
         'foliage_sanitation' => [

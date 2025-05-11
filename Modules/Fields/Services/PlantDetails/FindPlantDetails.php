@@ -14,21 +14,21 @@ class FindPlantDetails
 
     public static function get_by_plant_id($id, $year, $show_harvests = false)
     {
-        $query = PlantDetail::where('plant_id', $id);
+        $query = PlantDetail::with('plant')->where('plant_id', $id);
 
         return self::get_details($query, $year, $show_harvests);
     }
 
     public static function get_by_quarter_id($id, $year, $show_harvests = false)
     {
-        $query = PlantDetail::whereRaw('plant_id IN (SELECT id FROM plants WHERE quarter_id = ?)', [$id]);
+        $query = PlantDetail::with('plant')->whereRaw('plant_id IN (SELECT id FROM plants WHERE quarter_id = ?)', [$id]);
 
         return self::get_details($query, $year, $show_harvests);
     }
 
     public static function get_by_field_id($id, $year, $show_harvests = false)
     {
-        $query = PlantDetail::whereRaw('plant_id IN (SELECT id FROM plants WHERE quarter_id in (SELECT id FROM quarters WHERE field_id = ?))', [$id]);
+        $query = PlantDetail::with('plant')->whereRaw('plant_id IN (SELECT id FROM plants WHERE quarter_id in (SELECT id FROM quarters WHERE field_id = ?))', [$id]);
 
         return self::get_details($query, $year, $show_harvests);
     }

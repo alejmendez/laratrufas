@@ -60,7 +60,7 @@ const openSoilSanitationPhoto = () => {
       :max="2000"
       :step="0.1"
       sufix="mts"
-      :label="__('harvest_details.form.height.label')"
+      :label="__('harvest_details.form.height.label') + ` (${__('harvest_details.form.height.unit')})`"
       :message="form.errors.height"
     />
 
@@ -80,7 +80,7 @@ const openSoilSanitationPhoto = () => {
       :max="2000"
       :step="0.1"
       sufix="mts"
-      :label="__('harvest_details.form.crown_diameter.label')"
+      :label="__('harvest_details.form.crown_diameter.label') + ` (${__('harvest_details.form.crown_diameter.unit')})`"
       :message="form.errors.crown_diameter"
     />
 
@@ -100,7 +100,7 @@ const openSoilSanitationPhoto = () => {
       :max="2000"
       :step="0.1"
       sufix="mm"
-      :label="__('harvest_details.form.trunk_diameter.label')"
+      :label="__('harvest_details.form.trunk_diameter.label') + ` (${__('harvest_details.form.trunk_diameter.unit')})`"
       :message="form.errors.trunk_diameter"
     />
 
@@ -120,7 +120,7 @@ const openSoilSanitationPhoto = () => {
       :max="2000"
       :step="0.1"
       sufix="mm"
-      :label="__('harvest_details.form.root_diameter.label')"
+      :label="__('harvest_details.form.root_diameter.label') + ` (${__('harvest_details.form.root_diameter.unit')})`"
       :message="form.errors.root_diameter"
     />
 
@@ -140,7 +140,7 @@ const openSoilSanitationPhoto = () => {
       :max="2000"
       :step="0.1"
       sufix="mts"
-      :label="__('harvest_details.form.invasion_radius.label')"
+      :label="__('harvest_details.form.invasion_radius.label') + ` (${__('harvest_details.form.invasion_radius.unit')})`"
       :message="form.errors.invasion_radius"
     />
 

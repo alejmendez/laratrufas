@@ -151,12 +151,14 @@ defineExpose({ filter });
             </span>
           </template>
           <template #opposite="slotProps">
+            <span class="text-surface-500 dark:text-surface-400">{{ slotProps.item.plant_code }}</span>
+            <br />
             <span class="text-surface-500 dark:text-surface-400">{{ stringToFormat(slotProps.item.updated_at, 'dd/MM/yyyy HH:mm') }}</span>
             <div
               class="text-surface-500 dark:text-surface-400"
               v-if="slotProps.item.note"
             >
-              {{ slotProps.item.note }}
+              Nota: {{ slotProps.item.note }}
             </div>
           </template>
           <template #content="slotProps">
@@ -170,8 +172,10 @@ defineExpose({ filter });
             </div>
             <div v-else>
               {{ slotProps.item.value }}
+              <span v-if="__(`harvest_details.form.${slotProps.item.type}.unit`)">
+                ({{ __(`harvest_details.form.${slotProps.item.type}.unit`) }})
+              </span>
             </div>
-            {{ __(`harvest_details.form.${slotProps.item.type}.unit`) }}
           </template>
         </Timeline>
       </div>
