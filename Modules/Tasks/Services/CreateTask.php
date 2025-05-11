@@ -5,6 +5,9 @@ namespace Modules\Tasks\Services;
 use Illuminate\Support\Facades\DB;
 use Modules\Tasks\Models\SupplyTask;
 use Modules\Tasks\Models\Task;
+use Modules\Tasks\Models\TaskCorrelative;
+use Modules\Tasks\Models\TaskComment;
+use Carbon\Carbon;
 
 class CreateTask
 {
@@ -24,7 +27,8 @@ class CreateTask
             $task->field_id = $data['field_id']['value'];
             $task->rows = collect($data['rows'])->map(fn ($q) => $q['value'])->toArray();
             $task->responsible_id = $data['responsible_id']['value'];
-            $task->correlative = self::getCorrelative($data['start_date']);
+            $correlative = self::getCorrelative($data['start_date']);
+            $task->correlative = $correlative->getCorrelative();
             $task->save();
 
             self::syncRelationship($task, 'quarters', $data['quarter_id'] ?? []);
@@ -84,18 +88,19 @@ class CreateTask
     protected static function getCorrelative($date)
     {
         $year = Carbon::parse($date)->year;
-        $correlative = DB::table('task_correlative')->where('year', $year)->first();
+        $correlative = TaskCorrelative::where('year', $year)->first();
         if ($correlative) {
             $correlative->correlative++;
             $correlative->save();
 
-            return $correlative->correlative;
+            return $correlative;
         }
-        $correlative = new TaskCorrelative;
-        $correlative->correlative = 0;
-        $correlative->year = $year;
-        $correlative->save();
 
-        return $correlative->correlative;
+        $correlative = TaskCorrelative::create([
+            'correlative' => 0,
+            'year' => $year,
+        ]);
+
+        return $correlative;
     }
 }
