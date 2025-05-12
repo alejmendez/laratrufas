@@ -39,7 +39,7 @@ class ListNotification
                 'id' => $notification['id'],
                 'task_id' => $notification_data['task_id'],
                 'notifier_user_avatar' => $avatar,
-                'description' => $notification_data['task_comment'],
+                'description' => str_replace('&nbsp;', ' ', strip_tags($notification_data['task_comment'])),
                 'created_at' => $notification['created_at'],
                 'read_at' => $notification['read_at'],
             ];
