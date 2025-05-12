@@ -52,7 +52,7 @@ function getPorcent(total, num) {
 
     <div
       class="mt-5 p-5 rounded-xl bg-(--p-primary-500) shadow-sm text-gray-50 cursor-pointer"
-      @click="navigateToTasks('status=to_begin')"
+      @click="navigateToTasks('status=overdued')"
     >
       <span class="text-3xl font-bold mr-2">{{ task_data.pending_tasks }}</span> Tareas Atrasadas
       <div class="flex justify-between mt-3">
