@@ -22,7 +22,7 @@ return [
         'year' => 'Año de cosecha',
     ],
     'table_data' => [
-        'date' => 'Semana :week',
+        'date' => 'Semana :week - :year',
     ],
     'buttons' => [
         'add_detail' => 'Añadir otro',
@@ -35,6 +35,7 @@ return [
         ],
         'batch' => [
             'label' => 'Batch',
+            'renderText' => 'Semana :week - Batch :batch',
         ],
         'details' => [
             'plant_code' => [
@@ -73,6 +74,7 @@ return [
     'bulk' => [
         'form' => [
             'harvest_id' => 'Cosecha',
+            'year' => 'Año',
         ],
     ],
     'errors' => [

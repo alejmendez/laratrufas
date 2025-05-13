@@ -149,13 +149,14 @@ class HarvestsController extends Controller
     public function create_bulk()
     {
         return Inertia::render('Fields::Harvests/Bulk/Create', [
-            'harvests' => ListEntity::call('harvest'),
             'id' => request('id'),
             'message_success' => session('message_success', ''),
             'unprocessed_message' => session('unprocessed_message', ''),
             'unprocessed_details' => session('unprocessed_details', []),
             'error_message' => session('error_message', ''),
             'import_errors' => session('import_errors', []),
+            'harvests' => ListEntity::call('harvest'),
+            'harvest_available_years' => ListEntity::call('harvest_available_years'),
         ]);
     }
 

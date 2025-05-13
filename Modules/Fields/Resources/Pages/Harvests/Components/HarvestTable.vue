@@ -173,7 +173,7 @@ const number_format = (n) => {
   >
     <Column field="week" :header="__('harvest.table.date')" :showFilterMatchModes="false" sortable frozen style="min-width: 200px">
       <template #body="{ data }">
-        {{ __('harvest.table_data.date', { week: data.week }) }}
+        {{ __('harvest.table_data.date', { week: data.week, year: data.year }) }}
       </template>
       <template #filter="{ filterModel }">
         <Select v-model="filterModel.value" :options="harvest_available_weeks" optionLabel="text" placeholder="Todos" />

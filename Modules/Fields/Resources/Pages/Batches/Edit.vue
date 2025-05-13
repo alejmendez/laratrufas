@@ -1,4 +1,5 @@
 <script setup>
+import { toRaw } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
@@ -15,14 +16,7 @@ const props = defineProps({
 
 const { data } = props.data;
 
-const harvest_options = props.harvests
-  .map((h) => {
-    return {
-      value: h.id,
-      text: `Semana ${h.week} Batch ${h.batch}`,
-    };
-  })
-  .sort((a, b) => a.text - b.text);
+const harvests_options = Object.values(toRaw(props.harvests)).flatMap(entry => entry.items);
 
 const form = useForm({
   _method: 'PATCH',
@@ -30,7 +24,7 @@ const form = useForm({
   batch_number: data.batch_number,
   delivery_date: stringToDate(data.delivery_date),
   importer_id: data.importer_id,
-  harvests: harvest_options.filter((a) => data.harvests.includes(a.value)),
+  harvests: harvests_options.filter(item => data.harvests.includes(item.value)),
 });
 
 const submitHandler = () => form.post(route('batches.update', data.id));

@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
@@ -9,28 +10,27 @@ import VSelect from '@Core/Components/Form/VSelect.vue';
 import VInputFile from '@Core/Components/Form/VInputFile.vue';
 
 const props = defineProps({
-  harvests: Array,
   id: String,
   message_success: String,
   unprocessed_message: String,
   unprocessed_details: Array,
   error_message: String,
   import_errors: Array,
+  harvests: Array,
+  harvest_available_years: Array,
 });
 
-const harvests = props.harvests
-  .map((h) => {
-    return {
-      value: h.id,
-      text: `Semana ${h.week} Batch ${h.batch}`,
-    };
-  })
-  .sort((a, b) => a.text - b.text);
+const harvest_available_years = ref(props.harvest_available_years);
 
-const harvest_id = harvests.find((h) => h.value == props.id);
+const current_year = new Date().getFullYear();
+const current_harvest = props.id ? props.harvests.find((h) => h.value == props.id) : null;
+
+const current_year_option = current_harvest ? props.harvest_available_years.find((h) => h.value == current_harvest.year) : props.harvest_available_years.find((h) => h.value == current_year);
+const harvests = ref(props.harvests.filter((h) => h.year == current_year_option.value));
 
 const form = useForm({
-  harvest_id: harvest_id,
+  year: current_year_option,
+  harvest_id: current_harvest,
   bulk_file: null,
 });
 
@@ -46,6 +46,11 @@ const submitHandler = () => {
 const changeFileHandler = (e) => {
   form.bulk_file = e.fileInput;
   submitHandler();
+};
+
+const handleYearChange = () => {
+  form.harvest_id = null;
+  harvests.value = props.harvests.filter((h) => h.year == form.year.value);
 };
 </script>
 
@@ -68,7 +73,15 @@ const changeFileHandler = (e) => {
       >
         <div class="px-6 pb-6 grid grid-cols-2 gap-x-16 gap-y-4">
           <VSelect
-            id="harvest_id"
+            v-model="form.year"
+            :placeholder="__('generics.please_select')"
+            :options="harvest_available_years"
+            :label="__('harvest.bulk.form.year')"
+            :message="form.errors.year"
+            @change="handleYearChange"
+          />
+
+          <VSelect
             v-model="form.harvest_id"
             :placeholder="__('generics.please_select')"
             :options="harvests"

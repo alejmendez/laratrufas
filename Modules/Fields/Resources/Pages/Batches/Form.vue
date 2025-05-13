@@ -1,10 +1,11 @@
 <script setup>
 import { ref } from 'vue';
+import MultiSelect from 'primevue/multiselect';
 
 import CardSection from '@Core/Components/CardSection.vue';
 import VInput from '@Core/Components/Form/VInput.vue';
 import VSelect from '@Core/Components/Form/VSelect.vue';
-import VSelectMultiple from '@Core/Components/Form/VSelectMultiple.vue';
+import VElementFormWrapper from '@Core/Components/Form/VElementFormWrapper.vue';
 import AddImporter from '@Core/Components/Form/AddImporter.vue';
 
 const props = defineProps({
@@ -17,14 +18,7 @@ const props = defineProps({
 const form = props.form;
 const importers = ref(props.importers);
 
-const harvests = props.harvests
-  .map((h) => {
-    return {
-      value: h.id,
-      text: `Semana ${h.week} Batch ${h.batch}`,
-    };
-  })
-  .sort((a, b) => a.text - b.text);
+const harvests = ref(props.harvests);
 
 const addImporterCallback = (newType) => {
   importers.value = [...importers.value, { value: newType.id, text: newType.name }];
@@ -65,14 +59,24 @@ const addImporterCallback = (newType) => {
         </div>
       </div>
 
-      <VSelectMultiple
-        id="harvests"
-        v-model="form.harvests"
-        :placeholder="__('generics.please_select')"
-        :options="harvests"
-        :label="__('batch.form.harvests.label')"
-        :message="form.errors.harvests"
-      />
+      <VElementFormWrapper :classWrapper="props.classWrapper" :label="__('batch.form.harvests.label')" :message="form.errors.harvests">
+        <MultiSelect
+          id="harvests"
+          v-model="form.harvests"
+          optionGroupLabel="label"
+          optionGroupChildren="items"
+          optionLabel="label"
+          fluid
+          :placeholder="__('generics.please_select')"
+          :options="harvests"
+        >
+          <template #optiongroup="slotProps">
+            <div class="flex items-center">
+              <div>{{ slotProps.option.label }}</div>
+            </div>
+          </template>
+        </MultiSelect>
+      </VElementFormWrapper>
     </CardSection>
   </form>
 </template>

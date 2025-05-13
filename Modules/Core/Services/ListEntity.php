@@ -32,7 +32,24 @@ class ListEntity
             'security_equipment' => SecurityEquipment::select('id as value', 'name as text')->orderBy('name'),
             'machinery' => Machinery::select('id as value', 'name as text')->orderBy('name'),
             'dog' => Dog::select('id as value', 'name as text')->orderBy('name'),
-            'harvest' => Harvest::select('id', 'week', 'batch')->orderBy('date'),
+            'harvest' => Harvest::select('id', 'week', 'batch', 'year')->orderBy('date')->get()->map(function ($harvest) {
+                return [
+                    'value' => $harvest->id,
+                    'year' => $harvest->year,
+                    'text' => __('harvest.form.batch.renderText', ['week' => $harvest->week, 'batch' => $harvest->batch]),
+                ];
+            }),
+            'harvest_multiselect' => Harvest::select('year')->distinct()->orderBy('year', 'desc')->get()->map(function ($harvest) {
+                return [
+                    'items' => Harvest::select('id', 'week', 'batch')->where('year', $harvest->year)->orderBy('date', 'desc')->get()->map(function ($harvest) {
+                        return [
+                            'value' => $harvest->id,
+                            'label' => __('harvest.form.batch.renderText', ['week' => $harvest->week, 'batch' => $harvest->batch]),
+                        ];
+                    }),
+                    'label' => $harvest->year,
+                ];
+            }),
             'role' => \Spatie\Permission\Models\Role::select('name as value', 'name as text')->orderBy('name'),
             'harvest_available_years' => HarvestAvailableYears::call(),
             'harvest_available_weeks' => HarvestAvailableWeeks::call(),

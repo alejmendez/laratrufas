@@ -48,7 +48,7 @@ class BatchesController extends Controller
     {
         return Inertia::render('Fields::Batches/Create', [
             'importers' => ListEntity::call('importer'),
-            'harvests' => ListEntity::call('harvest'),
+            'harvests' => ListEntity::call('harvest_multiselect'),
         ]);
     }
 
@@ -76,7 +76,7 @@ class BatchesController extends Controller
 
         return Inertia::render('Fields::Batches/Show', [
             'importers' => ListEntity::call('importer'),
-            'harvests' => ListEntity::call('harvest'),
+            'harvests' => ListEntity::call('harvest_multiselect'),
         ]);
     }
 
@@ -90,7 +90,7 @@ class BatchesController extends Controller
         return Inertia::render('Fields::Batches/Edit', [
             'data' => new BatchResource($batch),
             'importers' => ListEntity::call('importer'),
-            'harvests' => ListEntity::call('harvest'),
+            'harvests' => ListEntity::call('harvest_multiselect'),
         ]);
     }
 
