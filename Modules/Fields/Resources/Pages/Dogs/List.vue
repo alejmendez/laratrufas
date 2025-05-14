@@ -21,7 +21,7 @@ import { can } from '@Auth/Services/Auth';
 
 const props = defineProps({
   toast: Object,
-  quarters: Array,
+  fields: Array,
   couples: Array,
   genders: Object,
 });
@@ -30,14 +30,14 @@ const toast = useToast();
 const confirm = useConfirm();
 
 const datatable = ref(null);
-const filter_quarter_options = props.quarters;
+const filter_field_options = props.fields;
 const filter_couple_options = props.couples;
 const filter_gender_options = props.genders;
 
 const filters = {
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
-  quarter_id: { value: null, matchMode: FilterMatchMode.EQUALS },
+  field_id: { value: null, matchMode: FilterMatchMode.EQUALS },
   gender: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   breed: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
   veterinary: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
@@ -93,12 +93,12 @@ onMounted(async () => {
         </template>
       </Column>
 
-      <Column field="quarter_id" :header="__('dog.table.quarter')" :showFilterMatchModes="false" sortable style="min-width: 200px">
+      <Column field="field_id" :header="__('dog.table.field')" :showFilterMatchModes="false" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.quarter.name }}
+          {{ data.field.name }}
         </template>
         <template #filter="{ filterModel }">
-          <VSelect v-model="filterModel.value" :options="filter_quarter_options" placeholder="Buscar por Cuartel" />
+          <VSelect v-model="filterModel.value" :options="filter_field_options" placeholder="Buscar por Campo" />
         </template>
       </Column>
 

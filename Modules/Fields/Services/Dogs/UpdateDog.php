@@ -17,7 +17,7 @@ class UpdateDog
         $dog->gender = $data['gender']['value'];
         $dog->birthdate = $data['birthdate'];
         $dog->veterinary = $data['veterinary'];
-        $dog->quarter_id = $data['quarter_id']['value'];
+        $dog->field_id = $data['field_id']['value'];
         $dog->couple_id = $data['couple_id']['value'];
 
         if ($data['avatar']) {
@@ -46,13 +46,17 @@ class UpdateDog
 
         DogVaccine::destroy($idVaccinesToDestroy);
         foreach ($vaccines as $vaccine) {
-            if ($vaccine['name'] == null && $vaccine['date'] == null && $vaccine['code'] == null) {
+            if ($vaccine['name'] == null && $vaccine['date'] == null) {
                 continue;
             }
-            $dog_vaccine = DogVaccine::firstOrNew(['id' => $vaccine['id']]);
+            $dog_vaccine = DogVaccine::where('id', $vaccine['id'])->first();
+            if (! $dog_vaccine) {
+                $dog_vaccine = new DogVaccine();
+            }
+
             $dog_vaccine->name = $vaccine['name'];
             $dog_vaccine->date = $vaccine['date'];
-            $dog_vaccine->code = $vaccine['code'];
+            $dog_vaccine->dog_id = $dog->id;
             $dog_vaccine->save();
         }
     }

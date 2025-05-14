@@ -7,7 +7,7 @@ import FormDog from '@Fields/Pages/Dogs/Form.vue';
 
 const props = defineProps({
   fields: Array,
-  quarters: Array,
+  fields: Array,
   couples: Array,
   genders: Array,
 });
@@ -22,12 +22,10 @@ const form = useForm({
   avatar: null,
   age: null,
   field_id: '',
-  quarter_id: '',
   vaccines: [
     {
       name: null,
       date: null,
-      code: null,
     },
   ],
 });
@@ -45,7 +43,6 @@ const submitHandler = () => form.post(route('dogs.store'), form.avatar ? { force
     <FormDog
       :form="form"
       :fields="props.fields"
-      :quarters="props.quarters"
       :couples="props.couples"
       :genders="props.genders"
       :submitHandler="submitHandler"

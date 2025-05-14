@@ -25,12 +25,8 @@ class DogResource extends JsonResource
             'veterinary' => $this->veterinary,
             'avatar' => $this->avatar ? Storage::url($this->avatar) : '',
             'field' => [
-                'id' => optional($this->quarter->field)->id,
-                'name' => optional($this->quarter->field)->name,
-            ],
-            'quarter' => [
-                'id' => optional($this->quarter)->id,
-                'name' => optional($this->quarter)->name,
+                'id' => optional($this->field)->id,
+                'name' => optional($this->field)->name,
             ],
             'couple' => [
                 'id' => optional($this->couple)->id,
@@ -41,7 +37,6 @@ class DogResource extends JsonResource
                     'id' => $v['id'],
                     'name' => $v['name'],
                     'date' => $v['date'],
-                    'code' => $v['code'],
                 ];
             }),
             'created_at' => $this->created_at,

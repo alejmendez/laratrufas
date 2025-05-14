@@ -10,7 +10,6 @@ import { stringToDate, getAge } from '@Core/Utils/date';
 const props = defineProps({
   data: Object,
   fields: Array,
-  quarters: Array,
   couples: Array,
   genders: Array,
 });
@@ -25,9 +24,9 @@ const vaccines =
       })
     : [
         {
+          id: null,
           name: null,
           date: null,
-          code: null,
         },
       ];
 
@@ -44,7 +43,6 @@ const form = useForm({
   avatar: data.avatar,
   avatarRemove: false,
   field_id: props.fields.find((a) => a.value == data.field.id),
-  quarter_id: props.quarters.find((a) => a.value == data.quarter.id),
   vaccines,
 });
 
@@ -61,7 +59,6 @@ const submitHandler = () => form.post(route('dogs.update', data.id), form.avatar
     <FormDog
       :form="form"
       :fields="props.fields"
-      :quarters="props.quarters"
       :couples="props.couples"
       :genders="props.genders"
       :submitHandler="submitHandler"

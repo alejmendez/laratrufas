@@ -37,7 +37,7 @@ class DogsController extends Controller
 
         return Inertia::render('Fields::Dogs/List', [
             'toast' => session('toast'),
-            'quarters' => ListEntity::call('quarter'),
+            'fields' => ListEntity::call('field'),
             'couples' => ListEntity::call('couple'),
             'genders' => ListEntity::call('genders'),
         ]);
@@ -94,7 +94,6 @@ class DogsController extends Controller
         return Inertia::render('Fields::Dogs/Edit', [
             'data' => new DogResource($dog),
             'fields' => ListEntity::call('field'),
-            'quarters' => ListEntity::call('quarter', ['field_id' => $dog->quarter->field_id]),
             'couples' => ListEntity::call('couple'),
             'genders' => ListEntity::call('genders'),
         ]);

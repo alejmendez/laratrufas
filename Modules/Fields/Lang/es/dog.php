@@ -9,7 +9,7 @@ return [
     ],
     'table' => [
         'name' => 'Nombre',
-        'quarter' => 'Cuartel',
+        'field' => 'Campo',
         'gender' => 'Genero',
         'breed' => 'Raza',
         'age' => 'Edad',

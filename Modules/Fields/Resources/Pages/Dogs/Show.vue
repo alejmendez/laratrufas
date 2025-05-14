@@ -77,7 +77,7 @@ const deleteHandler = async (id) => {
         </div>
         <div class="grow">
           <h3 class="my-4 text-2xl dark:text-white font-bold">{{ data.name }}</h3>
-          <div class="text-gray-400">Cuartel: {{ data.quarter.name }}</div>
+          <div class="text-gray-400">Campo: {{ data.field.name }}</div>
         </div>
       </div>
 

@@ -13,9 +13,9 @@ class Dog extends Model
 {
     use HasFactory;
 
-    public function quarter(): BelongsTo
+    public function field(): BelongsTo
     {
-        return $this->belongsTo(Quarter::class);
+        return $this->belongsTo(Field::class);
     }
 
     public function vaccines(): HasMany
