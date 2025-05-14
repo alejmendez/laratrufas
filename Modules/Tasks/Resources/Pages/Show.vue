@@ -22,6 +22,7 @@ const props = defineProps({
   tools: Array,
   security_equipments: Array,
   machineries: Array,
+  task_supplies_units: Array,
   current_tab: String,
 });
 
