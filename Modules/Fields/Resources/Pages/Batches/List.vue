@@ -16,6 +16,7 @@ import BatchService from '@Fields/Services/BatchService.js';
 import { stringToFormat } from '@Core/Utils/date';
 import { defaultDeleteHandler } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
+import jsPDF from 'jspdf';
 
 const props = defineProps({
   toast: Object,
@@ -49,6 +50,76 @@ const fetchHandler = async (params) => {
 
 const deleteHandler = (record) => {
   defaultDeleteHandler(confirm, datatable, toast, () => BatchService.del(record.id));
+};
+
+const printHandler = async (record) => {
+  const batch = await BatchService.getOne(record.id);
+  console.log(batch);
+  // Datos de ejemplo, reemplazar por los datos reales del record
+
+  const doc = new jsPDF();
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.text('RESUMEN DE LOTE DE ENTREGA', 15, 20);
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'normal');
+  doc.text(batch.field_name, 15, 28);
+
+  // Lote y datos principales
+  doc.setFont('helvetica', 'normal');
+  doc.text('Lote', 15, 40);
+  doc.setFont('helvetica', 'bold');
+  doc.text(batch.batch_number, 60, 40);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Fecha de entrega', 15, 48);
+  doc.setFont('helvetica', 'bold');
+  doc.text(stringToFormat(batch.delivery_date), 60, 48);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Flete', 15, 56);
+  doc.setFont('helvetica', 'bold');
+  doc.text(batch.carrier, 60, 56);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Exportador', 15, 64);
+  doc.setFont('helvetica', 'bold');
+  doc.text(batch.importer_name, 60, 64);
+
+  // Resumen de Batch
+  doc.setFont('helvetica', 'normal');
+  doc.text('Resumen de Batch', 15, 76);
+  doc.setFont('helvetica', 'bold');
+  doc.text('N°', 15, 84);
+  doc.text('Batch', 30, 84);
+  doc.text('Fecha', 90, 84);
+  doc.text('Peso', 140, 84);
+  doc.setFont('helvetica', 'normal');
+  let y = 92;
+  let n = 1;
+  batch.harvests_elements.forEach((item) => {
+    doc.text(String(n++), 15, y);
+    doc.text(item.batch, 30, y);
+    doc.text(item.date, 90, y);
+    doc.text(item.weight + ' gr', 140, y);
+    y += 8;
+  });
+  doc.setLineWidth(0.5);
+  doc.line(15, y, 195, y);
+  y += 8;
+  doc.setFont('helvetica', 'bold');
+  doc.text('TOTAL', 30, y);
+  doc.text(batch.total_weight + ' gr', 140, y);
+
+  // Peso actual del lote
+  y += 20;
+  doc.setFont('helvetica', 'normal');
+  doc.text('Peso actual del Lote', 15, y);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(22);
+  doc.text(batch.total_weight + '', 70, y);
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'normal');
+  doc.text('gr', 110, y);
+
+  window.open(doc.output('bloburl'), '_blank');
 };
 
 onMounted(async () => {
@@ -102,6 +173,12 @@ onMounted(async () => {
 
       <Column :exportable="false" style="min-width: 130px">
         <template #body="slotProps">
+          <span
+            class="material-symbols-rounded cursor-pointer transition-all text-slate-500 hover:text-sky-600"
+            @click="printHandler(slotProps.data)"
+          >
+            print
+          </span>
           <Link :href="route('batches.edit', slotProps.data.id)" v-if="canEdit">
             <span class="material-symbols-rounded cursor-pointer transition-all text-slate-500 hover:text-emerald-600">edit</span>
           </Link>

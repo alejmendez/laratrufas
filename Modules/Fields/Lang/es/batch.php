@@ -24,5 +24,8 @@ return [
         'harvests' => [
             'label' => 'Batch',
         ],
+        'carrier' => [
+            'label' => 'Empresa de cargo o envío',
+        ],
     ],
 ];

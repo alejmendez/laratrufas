@@ -77,6 +77,13 @@ const addImporterCallback = (newType) => {
           </template>
         </MultiSelect>
       </VElementFormWrapper>
+
+      <VInput
+        id="carrier"
+        v-model="form.carrier"
+        :label="__('batch.form.carrier.label')"
+        :message="form.errors.carrier"
+      />
     </CardSection>
   </form>
 </template>

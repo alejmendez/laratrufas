@@ -74,6 +74,10 @@ class BatchesController extends Controller
     {
         $batch = FindBatch::call($id);
 
+        if (request()->exists('print')) {
+            return new BatchResource($batch);
+        }
+
         return Inertia::render('Fields::Batches/Show', [
             'importers' => ListEntity::call('importer'),
             'harvests' => ListEntity::call('harvest_multiselect'),

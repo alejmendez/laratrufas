@@ -25,6 +25,7 @@ const form = useForm({
   delivery_date: stringToDate(data.delivery_date),
   importer_id: data.importer_id,
   harvests: harvests_options.filter(item => data.harvests.includes(item.value)),
+  carrier: data.carrier,
 });
 
 const submitHandler = () => form.post(route('batches.update', data.id));

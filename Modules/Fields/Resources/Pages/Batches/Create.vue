@@ -15,6 +15,7 @@ const form = useForm({
   delivery_date: null,
   importer_id: [],
   harvests: [],
+  carrier: null,
 });
 
 const submitHandler = () => form.post(route('batches.store'));

@@ -7,6 +7,12 @@ const list = async (lazyParams) => {
   return response.data;
 };
 
+const getOne = async (id) => {
+  const response = await axios.get(route('batches.show', { id }) + '?print=true');
+
+  return response.data?.data;
+};
+
 const del = async (id) => {
   await axios.delete(route('batches.destroy', { id }));
   return true;
@@ -15,4 +21,5 @@ const del = async (id) => {
 export default {
   list,
   del,
+  getOne,
 };

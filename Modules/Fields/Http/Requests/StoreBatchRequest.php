@@ -28,6 +28,7 @@ class StoreBatchRequest extends FormRequest
             'importer_id.value' => 'required|exists:importers,id',
             'harvests' => 'required|array',
             'harvests.*.value' => 'exists:harvests,id',
+            'carrier' => 'string|max:255',
         ];
     }
 
@@ -38,6 +39,7 @@ class StoreBatchRequest extends FormRequest
             'delivery_date' => 'Fecha de entrega',
             'importer_id' => 'Importador',
             'harvests' => 'cosechas',
+            'carrier' => 'Empresa de cargo o envío',
         ];
     }
 }
