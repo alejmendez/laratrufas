@@ -29,8 +29,8 @@ return [
         'gender' => [
             'label' => 'Género',
             'options' => [
-                'male' => 'Masculino',
-                'female' => 'Femenino',
+                'male' => 'Macho',
+                'female' => 'Hembra',
             ],
         ],
         'birthdate' => [
@@ -77,8 +77,8 @@ return [
             'gender' => [
                 'label' => 'Género',
                 'options' => [
-                    'male' => 'Masculino',
-                    'female' => 'Femenino',
+                    'male' => 'Macho',
+                    'female' => 'Hembra',
                 ],
             ],
             'birthdate' => [
