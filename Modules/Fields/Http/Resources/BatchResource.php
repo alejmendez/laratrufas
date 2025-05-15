@@ -14,20 +14,24 @@ class BatchResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $harvests = $this->harvests;
+        $quarters = $harvests->count() > 0 ? $harvests->first()->quarters : null;
+        $field_name = $quarters && $quarters->count() > 0 ? $quarters->first()->field->name : null;
+
         return [
             'id' => $this->id,
             'batch_number' => $this->batch_number,
             'delivery_date' => $this->delivery_date,
             'carrier' => $this->carrier ?? '',
-            'field_name' => $this->harvests->first()->quarters->first()->field->name,
-            'total_weight' => $this->harvests->sum('weight'),
+            'field_name' => $field_name,
+            'total_weight' => $harvests->sum('weight'),
             'current_weight' => $this->current_weight,
             'importer_name' => optional($this->importer)->name,
             'importer_id' => [
                 'value' => optional($this->importer)->id,
                 'text' => optional($this->importer)->name,
             ],
-            'harvests_elements' => $this->harvests->map(function ($harvest) {
+            'harvests_elements' => $harvests->map(function ($harvest) {
                 return [
                     'id' => $harvest->id,
                     'date' => $harvest->date,
@@ -38,7 +42,7 @@ class BatchResource extends JsonResource
                     ]),
                 ];
             }),
-            'harvests' => $this->harvests->pluck('id'),
+            'harvests' => $harvests->pluck('id'),
         ];
     }
 }
