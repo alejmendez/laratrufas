@@ -25,7 +25,7 @@ return [
             'label' => 'Batch',
         ],
         'carrier' => [
-            'label' => 'Empresa de cargo o envío',
+            'label' => 'Transportista',
         ],
     ],
 ];
