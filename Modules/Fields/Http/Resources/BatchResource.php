@@ -23,7 +23,7 @@ class BatchResource extends JsonResource
             'batch_number' => $this->batch_number,
             'delivery_date' => $this->delivery_date,
             'carrier' => $this->carrier ?? '',
-            'field_name' => $field_name,
+            'field_name' => $field_name ?? '',
             'total_weight' => $harvests->sum('weight'),
             'current_weight' => $this->current_weight,
             'importer_name' => optional($this->importer)->name,
