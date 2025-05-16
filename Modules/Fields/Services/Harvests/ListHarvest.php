@@ -47,7 +47,8 @@ class ListHarvest
             }
 
             $details_count += $detailsTotal->count();
-            $details_sum_weight += $detailsTotal->sum('weight');
+            // $details_sum_weight += $detailsTotal->sum('weight');
+            $details_sum_weight += $harvest->weight;
         }
 
         $harvests = $harvestsQuery->paginate($perPage, page: $currentPage);
@@ -71,7 +72,8 @@ class ListHarvest
                 'batch' => $harvest->batch,
                 'field_names' => $details->map(fn ($detail) => $detail->quarter?->field?->name)->unique()->join(', '),
                 'quarter_names' => $details->map(fn ($detail) => $detail->quarter?->name)->unique()->join(', '),
-                'total_weight' => $details->map(fn ($detail) => $detail->weight)->sum(),
+                // 'total_weight' => $details->map(fn ($detail) => $detail->weight)->sum(),
+                'total_weight' => $harvest->weight,
                 'unit_count' => $details->count(),
                 'farmer_name' => optional($harvest->farmer)->name,
             ];
