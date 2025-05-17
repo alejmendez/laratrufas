@@ -75,7 +75,7 @@ const printHandler = async (record) => {
   doc.setFont('helvetica', 'bold');
   doc.text(stringToFormat(batch.delivery_date), 60, 48);
   doc.setFont('helvetica', 'normal');
-  doc.text('Flete', 15, 56);
+  doc.text('Transportista', 15, 56);
   doc.setFont('helvetica', 'bold');
   doc.text(batch.carrier, 60, 56);
   doc.setFont('helvetica', 'normal');
