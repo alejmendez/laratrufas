@@ -15,7 +15,7 @@ class GraphDataQuarter
     public static function call($id, $year, $type, $filters)
     {
         $quarter = Quarter::findOrFail($id);
-        $harvest_available_last_year = HarvestAvailableLastYear::call($quarter->field);
+        $harvest_available_last_year = HarvestAvailableLastYear::call();
         $year = $year ?? $harvest_available_last_year;
 
         $typeQuery = match ($type) {

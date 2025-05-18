@@ -30,7 +30,7 @@ class ShowDashboard
 
     public static function getHarvestData($field, $quarter_ids)
     {
-        $current_year = HarvestAvailableLastYear::call($field);
+        $current_year = HarvestAvailableLastYear::call();
         $last_year = $current_year - 1;
 
         $current_year_harvest_details = self::getLiquidationDataByYear($current_year, $field);
@@ -38,10 +38,6 @@ class ShowDashboard
 
         $current_year_total_weight = floatval($current_year_harvest_details->weight_sum);
         $last_year_total_weight = floatval($last_year_harvest_details->weight_sum);
-
-        if ($current_year === 2024) {
-            $last_year_total_weight = 86.23;
-        }
 
         if ($last_year_total_weight == 0) {
             $variation_between_harvests = 0;

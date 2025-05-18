@@ -7,14 +7,13 @@ use Modules\Fields\Models\Harvest;
 
 class HarvestAvailableLastYear
 {
-    public static function call(Field $field)
+    protected static $ttl = 60 * 60 * 24; // 1 day
+
+    public static function call()
     {
-        return cache()->remember('last_years_harvest_'.$field->id, now()->addDay(), function () use ($field) {
-            $quarter_ids = $field->quarters->pluck('id');
+        return cache()->remember('last_years_harvest', self::$ttl, function () {
             $current_year = (int) date('Y');
-            $year = Harvest::join('harvest_details', 'harvests.id', '=', 'harvest_details.harvest_id')
-                ->whereIn('harvest_details.quarter_id', $quarter_ids)
-                ->max('harvests.year');
+            $year = Harvest::max('year');
 
             return $year > $current_year ? $current_year : $year;
         });

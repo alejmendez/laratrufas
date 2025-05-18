@@ -12,7 +12,7 @@ class GraphDataField
     public static function call($id, $year, $type, $filters)
     {
         $field = Field::findOrFail($id);
-        $harvest_available_last_year = HarvestAvailableLastYear::call($field);
+        $harvest_available_last_year = HarvestAvailableLastYear::call();
         $year = $year ?? $harvest_available_last_year;
 
         $typeQuery = match ($type) {
