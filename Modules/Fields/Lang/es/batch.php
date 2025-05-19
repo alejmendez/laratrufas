@@ -27,5 +27,8 @@ return [
         'carrier' => [
             'label' => 'Transportista',
         ],
+        'current_weight' => [
+            'label' => 'Peso actual',
+        ],
     ],
 ];

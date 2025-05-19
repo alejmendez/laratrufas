@@ -52,6 +52,10 @@ const deleteHandler = (record) => {
   defaultDeleteHandler(confirm, datatable, toast, () => BatchService.del(record.id));
 };
 
+const grToKg = (gr) => {
+  return (gr / 1000).toFixed(2);
+};
+
 const printHandler = async (record) => {
   const batch = await BatchService.getOne(record.id);
   console.log(batch);
@@ -98,7 +102,7 @@ const printHandler = async (record) => {
     doc.text(String(n++), 15, y);
     doc.text(item.batch, 30, y);
     doc.text(item.date, 90, y);
-    doc.text(item.weight + ' gr', 140, y);
+    doc.text(grToKg(item.weight) + ' Kgs', 140, y);
     y += 8;
   });
   doc.setLineWidth(0.5);
@@ -106,7 +110,7 @@ const printHandler = async (record) => {
   y += 8;
   doc.setFont('helvetica', 'bold');
   doc.text('TOTAL', 30, y);
-  doc.text(batch.total_weight + ' gr', 140, y);
+  doc.text(grToKg(batch.total_weight) + ' Kgs', 140, y);
 
   // Peso actual del lote
   y += 20;
@@ -114,10 +118,10 @@ const printHandler = async (record) => {
   doc.text('Peso actual del Lote', 15, y);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(22);
-  doc.text(batch.total_weight + '', 70, y);
+  doc.text(grToKg(batch.current_weight) + '', 70, y);
   doc.setFontSize(12);
   doc.setFont('helvetica', 'normal');
-  doc.text('gr', 110, y);
+  doc.text('Kgs', 110, y);
 
   window.open(doc.output('bloburl'), '_blank');
 };

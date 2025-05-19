@@ -84,6 +84,14 @@ const addImporterCallback = (newType) => {
         :label="__('batch.form.carrier.label')"
         :message="form.errors.carrier"
       />
+
+      <VInput
+        id="current_weight"
+        type="number"
+        v-model="form.current_weight"
+        :label="__('batch.form.current_weight.label')"
+        :message="form.errors.current_weight"
+      />
     </CardSection>
   </form>
 </template>

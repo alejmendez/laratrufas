@@ -26,6 +26,7 @@ const form = useForm({
   importer_id: data.importer_id,
   harvests: harvests_options.filter(item => data.harvests.includes(item.value)),
   carrier: data.carrier,
+  current_weight: data.current_weight,
 });
 
 const submitHandler = () => form.post(route('batches.update', data.id));

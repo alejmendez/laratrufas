@@ -13,6 +13,7 @@ class UpdateBatch
         $batch->delivery_date = $data['delivery_date'];
         $batch->importer_id = $data['importer_id']['value'];
         $batch->carrier = $data['carrier'];
+        $batch->current_weight = $data['current_weight'];
         $batch->save();
 
         $harvests_ids = collect($data['harvests'] ?? [])->map(fn ($q) => $q['value'])->toArray();

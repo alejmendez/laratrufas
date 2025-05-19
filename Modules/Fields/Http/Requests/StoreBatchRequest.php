@@ -29,6 +29,7 @@ class StoreBatchRequest extends FormRequest
             'harvests' => 'required|array',
             'harvests.*.value' => 'exists:harvests,id',
             'carrier' => 'string|max:255',
+            'current_weight' => 'required|numeric|min:0',
         ];
     }
 
@@ -40,6 +41,7 @@ class StoreBatchRequest extends FormRequest
             'importer_id' => 'Importador',
             'harvests' => 'cosechas',
             'carrier' => 'Empresa de cargo o envío',
+            'current_weight' => 'Peso actual',
         ];
     }
 }
