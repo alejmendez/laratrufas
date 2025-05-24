@@ -35,11 +35,7 @@ class HandleInertiaRequests extends Middleware
         $userData = $user;
 
         if ($user) {
-            if ($request->ajax()) {
-                $userData = CacheService::getUserDataSessionAjax($user);
-            } else {
-                $userData = CacheService::getUserDataSession($user);
-            }
+            $userData = CacheService::getUserDataSession($user);
         }
 
         $menuService = new MenuService($request, $user);
