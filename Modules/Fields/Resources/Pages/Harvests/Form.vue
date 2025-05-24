@@ -144,6 +144,15 @@ watch(totalWeight, (newValue) => {
         :label="__('harvest.form.assistant_id.label')"
         :message="form.errors.assistant_id"
       />
+
+      <VInput
+        id="note"
+        type="textarea"
+        v-model="form.note"
+        classWrapper="col-span-2"
+        :label="__('harvest.form.note.label')"
+        :message="form.errors.note"
+      />
     </CardSection>
 
     <CardSection

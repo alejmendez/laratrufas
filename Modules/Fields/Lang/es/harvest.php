@@ -60,6 +60,9 @@ return [
         'assistant_id' => [
             'label' => 'Ayudante',
         ],
+        'note' => [
+            'label' => 'Nota',
+        ],
         'comments' => [
             'label' => 'Comentarios',
         ],

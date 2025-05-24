@@ -16,6 +16,7 @@ class CreateHarvest
         $harvest->farmer_id = $data['farmer_id']['value'];
         $harvest->assistant_id = $data['assistant_id']['value'];
         $harvest->weight = $data['weight'];
+        $harvest->note = $data['note'];
         $harvest->save();
 
         $quarter_ids = [];

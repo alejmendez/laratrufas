@@ -72,6 +72,15 @@ const deleteHandler = async (id) => {
 
       <VInput :label="__('harvest.form.farmer_id.label')" :value="data.farmer.name" readonly />
       <VInput :label="__('harvest.form.assistant_id.label')" :value="data.assistant.name" readonly />
+
+      <VInput
+        id="note"
+        type="textarea"
+        v-model="data.note"
+        classWrapper="col-span-2"
+        :label="__('harvest.form.note.label')"
+        readonly
+      />
     </CardSection>
     <CardSection
       wrapperClass=""

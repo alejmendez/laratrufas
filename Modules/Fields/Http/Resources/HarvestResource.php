@@ -21,6 +21,7 @@ class HarvestResource extends JsonResource
             'year' => $this->year,
             'week' => $this->week,
             'batch' => $this->batch,
+            'note' => $this->note,
             'date_rendered' => trans('harvest.form.date.renderText', [
                 'week' => $this->week,
                 'start' => Carbon::parse($this->date)->startOfWeek()->format('d/m/Y'),

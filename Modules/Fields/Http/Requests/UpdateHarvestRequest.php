@@ -37,6 +37,7 @@ class UpdateHarvestRequest extends FormRequest
             'details.*.quality' => 'max:30|nullable',
             'details.*.weight' => 'numeric|between:0,99999|nullable',
             'weight' => 'numeric|between:0,99999',
+            'note' => 'nullable|string|max:300',
         ];
     }
 
@@ -50,6 +51,7 @@ class UpdateHarvestRequest extends FormRequest
             'assistant_id' => 'ayudante',
             'quarter_ids' => 'cuarteles',
             'weight' => 'peso total',
+            'note' => 'nota',
         ];
     }
 }

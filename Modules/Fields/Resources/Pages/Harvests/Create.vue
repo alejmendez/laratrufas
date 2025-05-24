@@ -20,6 +20,7 @@ const form = useForm({
   farmer_id: '',
   assistant_id: '',
   weight: 0,
+  note: null,
 });
 
 const submitHandler = () => {

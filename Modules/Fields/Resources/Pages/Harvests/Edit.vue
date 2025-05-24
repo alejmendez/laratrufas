@@ -32,6 +32,7 @@ const form = useForm({
   farmer_id: props.users.find((a) => a.value == data.farmer.id),
   assistant_id: props.users.find((a) => a.value == data.assistant.id),
   weight: data.weight,
+  note: data.note,
   details: data.details.length
     ? data.details.map((d) => ({
         ...d,

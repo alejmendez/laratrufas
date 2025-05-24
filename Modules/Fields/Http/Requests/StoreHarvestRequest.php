@@ -33,6 +33,7 @@ class StoreHarvestRequest extends FormRequest
             'quarter_ids' => 'required',
             'quarter_ids.*.value' => 'integer',
             'weight' => 'required|numeric|min:0',
+            'note' => 'nullable|string|max:300',
         ];
     }
 
@@ -46,6 +47,7 @@ class StoreHarvestRequest extends FormRequest
             'assistant_id' => 'ayudante',
             'quarter_ids' => 'cuarteles',
             'weight' => 'peso total',
+            'note' => 'nota',
         ];
     }
 }
