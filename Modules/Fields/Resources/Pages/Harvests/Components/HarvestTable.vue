@@ -67,6 +67,7 @@ const form = reactive({
   quarter: [],
 });
 
+const canShow = can('harvests.show');
 const canEdit = can('harvests.edit');
 const canDestroy = can('harvests.destroy');
 
@@ -246,6 +247,9 @@ const number_format = (n) => {
 
     <Column :exportable="false" style="min-width: 130px" v-if="props.show_actions">
       <template #body="slotProps">
+        <Link :href="route('harvests.show', slotProps.data.id)" v-if="canShow">
+          <span class="material-symbols-rounded cursor-pointer transition-all text-slate-500 hover:text-sky-600">visibility</span>
+        </Link>
         <Link :href="route('harvests.edit', slotProps.data.id)" v-if="canEdit">
           <span class="material-symbols-rounded cursor-pointer transition-all text-slate-500 hover:text-emerald-600">edit</span>
         </Link>
