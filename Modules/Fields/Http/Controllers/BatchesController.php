@@ -14,6 +14,8 @@ use Modules\Fields\Services\Batches\DeleteBatch;
 use Modules\Fields\Services\Batches\FindBatch;
 use Modules\Fields\Services\Batches\ListBatch;
 use Modules\Fields\Services\Batches\UpdateBatch;
+use Modules\Fields\Models\Harvest;
+
 
 class BatchesController extends Controller
 {
@@ -48,7 +50,7 @@ class BatchesController extends Controller
     {
         return Inertia::render('Fields::Batches/Create', [
             'importers' => ListEntity::call('importer'),
-            'harvests' => ListEntity::call('harvest_multiselect'),
+            'harvests' => $this->getHarvests(),
         ]);
     }
 
@@ -80,7 +82,7 @@ class BatchesController extends Controller
 
         return Inertia::render('Fields::Batches/Show', [
             'importers' => ListEntity::call('importer'),
-            'harvests' => ListEntity::call('harvest_multiselect'),
+            'harvests' => $this->getHarvests($id),
         ]);
     }
 
@@ -94,7 +96,7 @@ class BatchesController extends Controller
         return Inertia::render('Fields::Batches/Edit', [
             'data' => new BatchResource($batch),
             'importers' => ListEntity::call('importer'),
-            'harvests' => ListEntity::call('harvest_multiselect'),
+            'harvests' => $this->getHarvests($id),
         ]);
     }
 
@@ -121,5 +123,32 @@ class BatchesController extends Controller
         DeleteBatch::call($id);
 
         return response()->noContent();
+    }
+
+
+    protected function getHarvests($batch_id = null)
+    {
+        return Harvest::select('year')->distinct()->orderBy('year', 'desc')->get()->map(function ($harvest) use ($batch_id) {
+            $harvests = Harvest::select('id', 'week', 'batch')
+                ->where('year', $harvest->year)
+                ->whereDoesntHave('batches', function ($query) use ($batch_id) {
+                    if ($batch_id) {
+                        $query->where('batch_id', '!=', $batch_id);
+                    }
+                })
+                ->orderBy('date', 'desc')
+                ->get();
+            return [
+                'items' => $harvests->map(function ($harvest) {
+                    return [
+                        'value' => $harvest->id,
+                        'label' => __('harvest.form.batch.renderText', ['week' => $harvest->week, 'batch' => $harvest->batch]),
+                    ];
+                }),
+                'label' => $harvest->year,
+            ];
+        })->filter(function ($harvest) {
+            return $harvest['items']->isNotEmpty();
+        })->values();
     }
 }

@@ -40,23 +40,16 @@ class ListEntity
                 ];
             }),
             'harvest_multiselect' => Harvest::select('year')->distinct()->orderBy('year', 'desc')->get()->map(function ($harvest) {
-                    $harvests = Harvest::select('id', 'week', 'batch')
-                        ->where('year', $harvest->year)
-                        ->whereDoesntHave('batches')
-                        ->orderBy('date', 'desc')
-                        ->get();
-                    return [
-                        'items' => $harvests->map(function ($harvest) {
-                            return [
-                                'value' => $harvest->id,
-                                'label' => __('harvest.form.batch.renderText', ['week' => $harvest->week, 'batch' => $harvest->batch]),
-                            ];
-                        }),
-                        'label' => $harvest->year,
-                    ];
-                })->filter(function ($harvest) {
-                    return $harvest['items']->isNotEmpty();
-                })->values(),
+                return [
+                    'items' => Harvest::select('id', 'week', 'batch')->where('year', $harvest->year)->orderBy('date', 'desc')->get()->map(function ($harvest) {
+                        return [
+                            'value' => $harvest->id,
+                            'label' => __('harvest.form.batch.renderText', ['week' => $harvest->week, 'batch' => $harvest->batch]),
+                        ];
+                    }),
+                    'label' => $harvest->year,
+                ];
+            }),
             'role' => \Spatie\Permission\Models\Role::select('name as value', 'name as text')->orderBy('name'),
             'harvest_available_years' => HarvestAvailableYears::call(),
             'harvest_available_weeks' => HarvestAvailableWeeks::call(),
