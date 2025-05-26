@@ -22,6 +22,7 @@
         "fakerphp/faker": "^1.24.1",
         "laravel-lang/common": "^6.7.0",
         "laravel/breeze": "^2.3.6",
+        "laravel/pail": "^1.2",
         "laravel/pint": "^1.22.0",
         "laravel/sail": "^1.41.0",
         "mockery/mockery": "^1.6.12",
@@ -55,7 +56,17 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve --port=9000\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names=server,queue,logs,vite"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test"
         ]
     },
     "extra": {
