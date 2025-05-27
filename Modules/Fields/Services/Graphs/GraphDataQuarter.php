@@ -34,11 +34,11 @@ class GraphDataQuarter
     {
         $weeks = self::getWeeksFromYear($year);
 
-        $harvests = Harvest::leftJoin('harvest_details', 'harvests.id', '=', 'harvest_details.harvest_id')
-            ->select(DB::raw('sum(harvest_details.weight) as weight_sum'), 'quarter_id', 'week', 'year')
+        $harvests = Harvest::leftJoin('harvest_quarter', 'harvests.id', '=', 'harvest_quarter.harvest_id')
+            ->select(DB::raw('sum(harvests.weight) as weight_sum'), 'quarter_id', 'week', 'year')
             // ->where('quarter_id', $quarter->id)
             ->where('year', $year)
-            ->groupBy('harvest_details.quarter_id', 'week', 'year')
+            ->groupBy('harvest_quarter.quarter_id', 'week', 'year')
             ->get();
 
         $labels = $weeks->toArray();

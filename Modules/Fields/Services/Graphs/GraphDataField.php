@@ -33,38 +33,43 @@ class GraphDataField
 
     protected static function onDemandProduction($field, $year)
     {
-        $liquidations = Liquidation::leftJoin('liquidation_products', 'liquidations.id', '=', 'liquidation_products.liquidation_id')
+        $liquidations_sum_not_commercial = Liquidation::leftJoin('liquidation_products', 'liquidations.id', '=', 'liquidation_products.liquidation_id')
             ->leftJoin('category_products', 'liquidation_products.category_product_id', '=', 'category_products.id')
-            ->select('week', 'year', 'weight_with_earth', 'weight_washed', 'category_products.is_commercial')
             ->selectRaw('sum(liquidation_products.weight) as weight_sum')
             ->where('field_id', $field->id)
             ->where('year', $year)
-            ->groupBy('week', 'year', 'weight_with_earth', 'weight_washed', 'category_products.is_commercial')
-            ->orderBy('year', 'desc')
+            ->where('category_products.is_commercial', false)
+            ->groupBy('week')
             ->orderBy('week', 'asc')
             ->get();
 
-        if (count($liquidations) === 0) {
+        $liquidations_sum = Liquidation::select('week')
+            ->selectRaw('sum(weight_with_earth) as weight_with_earth, sum(weight_with_earth) - sum(weight_washed) as weight_earth')
+            ->where('field_id', $field->id)
+            ->where('year', $year)
+            ->groupBy('week')
+            ->orderBy('week', 'asc')
+            ->get();
+
+        if (count($liquidations_sum) === 0) {
             return [];
         }
 
-        $labels = $liquidations->map(function ($l) {
+        $labels = $liquidations_sum->map(function ($l) {
             return 'Sem '.$l->week;
-        })->unique()->values();
+        })->values();
 
-        $data_not_commercial = $liquidations->filter(function ($l) {
-            return ! $l->is_commercial;
-        })->map(function ($l) {
+        $data_not_commercial = $liquidations_sum_not_commercial->map(function ($l) {
             return round($l->weight_sum, 2);
         })->values();
 
-        $data_total = $liquidations->map(function ($l) {
-            return $l->weight_with_earth;
-        })->unique()->values();
+        $data_total = $liquidations_sum->map(function ($l) {
+            return round($l->weight_with_earth, 2);
+        })->values();
 
-        $data_tierra = $liquidations->map(function ($l) {
-            return round($l->weight_with_earth - $l->weight_washed, 2);
-        })->unique()->values();
+        $data_tierra = $liquidations_sum->map(function ($l) {
+            return round($l->weight_earth, 2);
+        })->values();
 
         return [
             'title' => 'Liquidacion por semana Año '.$year,
@@ -88,6 +93,7 @@ class GraphDataField
 
     protected static function salesVsShrinkage($field, $year)
     {
+        // TODO: revisar
         $liquidations = Liquidation::leftJoin('liquidation_products', 'liquidations.id', '=', 'liquidation_products.liquidation_id')
             ->leftJoin('category_products', 'liquidation_products.category_product_id', '=', 'category_products.id')
             ->select('week', 'year', 'category_products.is_commercial')
