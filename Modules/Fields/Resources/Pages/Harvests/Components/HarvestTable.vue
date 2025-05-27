@@ -20,6 +20,7 @@ import HarvestService from '@Fields/Services/HarvestService.js';
 import { defaultDeleteHandler } from '@Core/Utils/table.js';
 
 import { can } from '@Auth/Services/Auth';
+import { stringToFormat } from '@Core/Utils/date';
 
 const toast = useToast();
 const confirm = useConfirm();
@@ -172,9 +173,18 @@ const number_format = (n) => {
     sortField="date"
     :sortOrder="1"
   >
-    <Column field="week" :header="__('harvest.table.date')" :showFilterMatchModes="false" sortable frozen style="min-width: 200px">
+    <Column field="week" :header="__('harvest.table.week')" :showFilterMatchModes="false" sortable frozen style="min-width: 200px">
       <template #body="{ data }">
         {{ __('harvest.table_data.date', { week: data.week, year: data.year }) }}
+      </template>
+      <template #filter="{ filterModel }">
+        <Select v-model="filterModel.value" :options="harvest_available_weeks" optionLabel="text" placeholder="Todos" />
+      </template>
+    </Column>
+
+    <Column field="date" :header="__('harvest.table.date')" :showFilterMatchModes="false" sortable style="min-width: 200px">
+      <template #body="{ data }">
+        {{ stringToFormat(data.date) }}
       </template>
       <template #filter="{ filterModel }">
         <Select v-model="filterModel.value" :options="harvest_available_weeks" optionLabel="text" placeholder="Todos" />

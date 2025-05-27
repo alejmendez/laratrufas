@@ -3,12 +3,8 @@ import { ref, computed, watch } from 'vue';
 import { trans } from 'laravel-vue-i18n';
 import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
 
-import Dialog from 'primevue/dialog';
-import DatePicker from 'primevue/datepicker';
 import InputText from 'primevue/inputtext';
-import InputGroup from 'primevue/inputgroup';
 import InputNumber from 'primevue/inputnumber';
-import VirtualScroller from 'primevue/virtualscroller';
 
 import CardSection from '@Core/Components/CardSection.vue';
 import VElementFormWrapper from '@Core/Components/Form/VElementFormWrapper.vue';
@@ -39,7 +35,6 @@ const dateRenderText = (m) => {
 };
 
 const date_rendered = ref(props.date_rendered ?? '');
-const show_modal_datepicker = ref(false);
 
 const add_detail = () => {
   form.details.push({
@@ -54,13 +49,8 @@ const remove_detail = (index) => {
   form.details.splice(index, 1);
 };
 
-const handler_open_datepicker = () => {
-  show_modal_datepicker.value = true;
-};
-
 const handler_date_selected = () => {
   date_rendered.value = dateRenderText(form.date);
-  show_modal_datepicker.value = false;
 };
 
 const handler_input_batch = (e) => {
@@ -87,17 +77,24 @@ watch(totalWeight, (newValue) => {
 <template>
   <form @submit.prevent="props.submitHandler">
     <CardSection>
-      <VElementFormWrapper :label="__('harvest.form.date.label')" :message="form.errors.date">
-        <InputGroup>
+      <div class="grid grid-cols-2 gap-x-2 gap-y-4">
+        <VElementFormWrapper :label="__('harvest.form.date.label_rendered')">
           <InputText
             fluid
+            class="mt-1"
             v-model="date_rendered"
             variant="filled"
-            @click="handler_open_datepicker"
           />
-          <Button severity="secondary" icon="pi pi-calendar" @click="handler_open_datepicker" />
-        </InputGroup>
-      </VElementFormWrapper>
+        </VElementFormWrapper>
+        <VInput
+          id="date"
+          v-model="form.date"
+          type="date"
+          :label="__('harvest.form.date.label')"
+          :message="form.errors.date"
+          @change="handler_date_selected"
+        />
+      </div>
 
       <VSelectMultiple
         v-model="form.quarter_ids"
@@ -237,8 +234,4 @@ watch(totalWeight, (newValue) => {
       </div>
     </CardSection>
   </form>
-
-  <Dialog v-model:visible="show_modal_datepicker" modal header="Seleccionar Fecha">
-    <DatePicker v-model="form.date" fluid inline showWeek @date-select="handler_date_selected" />
-  </Dialog>
 </template>

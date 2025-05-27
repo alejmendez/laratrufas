@@ -8,7 +8,8 @@ return [
         'bulk' => 'Nuevo carga masiva de cosechas',
     ],
     'table' => [
-        'date' => 'Semana',
+        'date' => 'Fecha',
+        'week' => 'Semana',
         'batch' => 'Batch',
         'weight' => 'Peso',
         'count_details' => 'Unidades',
@@ -30,7 +31,8 @@ return [
     ],
     'form' => [
         'date' => [
-            'label' => 'Semana',
+            'label' => 'Fecha',
+            'label_rendered' => 'Semana',
             'renderText' => 'Semana :week - :start al :end',
         ],
         'batch' => [
