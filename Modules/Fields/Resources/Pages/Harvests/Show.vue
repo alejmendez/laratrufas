@@ -17,6 +17,7 @@ import Button from '@Core/Components/Form/Button.vue';
 
 import { can } from '@Auth/Services/Auth';
 import { deleteRowTable } from '@Core/Utils/table';
+import { formatNumber } from '@Core/Utils/format';
 
 const props = defineProps({
   data: Object,
@@ -95,7 +96,7 @@ const deleteHandler = async (id) => {
           <div class="flex items-center gap-2">
             {{ __('harvest.form.weight.label') }}
             <VInput
-              v-model="data.weight"
+              :value="formatNumber(data.weight)"
               readonly
             />
           </div>
@@ -105,7 +106,11 @@ const deleteHandler = async (id) => {
       <DataTable :value="data.details" tableStyle="min-width: 50rem">
         <Column field="plant_code" :header="__('harvest.form.details.plant_code.label')"></Column>
         <Column field="quality" :header="__('harvest.form.details.quality.label')"></Column>
-        <Column field="weight" :header="__('harvest.form.details.weight.label')"></Column>
+        <Column :header="__('harvest.form.details.weight.label')">
+          <template #body="{ data }">
+            {{ formatNumber(data.weight) }}
+          </template>
+        </Column>
       </DataTable>
     </CardSection>
   </AuthenticatedLayout>

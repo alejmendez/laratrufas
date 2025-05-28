@@ -18,6 +18,7 @@ import LiquidationService from '@Fields/Services/LiquidationService.js.js';
 import { stringToFormat } from '@Core/Utils/date';
 import { defaultDeleteHandler } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
+import { formatNumber } from '@Core/Utils/format';
 
 const props = defineProps({
   toast: Object,
@@ -149,13 +150,13 @@ onMounted(async () => {
 
       <Column field="total_commercial" :header="__('liquidation.table.total_commercial')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.total_commercial }}
+          {{ formatNumber(data.total_commercial) }}
         </template>
       </Column>
 
       <Column field="total_not_commercial" :header="__('liquidation.table.total_not_commercial')" sortable style="min-width: 200px">
         <template #body="{ data }">
-          {{ data.total_not_commercial }}
+          {{ formatNumber(data.total_not_commercial) }}
         </template>
       </Column>
 

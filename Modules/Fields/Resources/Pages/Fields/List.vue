@@ -14,6 +14,7 @@ import Datatable from '@Core/Components/Table/Datatable.vue';
 import FieldService from '@Fields/Services/FieldService.js';
 import { defaultDeleteHandler } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
+import { formatNumber } from '@Core/Utils/format';
 
 const props = defineProps({
   toast: Object,
@@ -89,7 +90,7 @@ onMounted(() => {
       </Column>
       <Column field="size" :header="__('field.table.size')" sortable style="min-width: 100px">
         <template #body="{ data }">
-          {{ data.size }} ha
+          {{ formatNumber(data.size) }} ha
         </template>
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por tamaño" />
@@ -97,7 +98,7 @@ onMounted(() => {
       </Column>
       <Column field="plants_count" :header="__('field.table.plants_count')" sortable style="min-width: 100px">
         <template #body="{ data }">
-          {{ data.plants_count }}
+          {{ formatNumber(data.plants_count, 0) }}
         </template>
       </Column>
 

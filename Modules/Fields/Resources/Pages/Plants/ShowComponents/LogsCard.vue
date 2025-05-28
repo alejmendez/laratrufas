@@ -10,6 +10,7 @@ import VSelect from '@Core/Components/Form/VSelect.vue';
 
 import PlantDetailService from '@Fields/Services/PlantDetailService';
 import { stringToFormat } from '@Core/Utils/date';
+import { formatNumber } from '@Core/Utils/format';
 
 const props = defineProps({
   plant_id: {
@@ -171,7 +172,7 @@ defineExpose({ filter });
               >
             </div>
             <div v-else>
-              {{ slotProps.item.value }}
+              {{ __(`harvest_details.form.${slotProps.item.type}.unit`) ? formatNumber(slotProps.item.value) : slotProps.item.value }}
               <span v-if="__(`harvest_details.form.${slotProps.item.type}.unit`)">
                 ({{ __(`harvest_details.form.${slotProps.item.type}.unit`) }})
               </span>

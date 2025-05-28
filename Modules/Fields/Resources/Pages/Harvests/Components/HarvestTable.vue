@@ -275,7 +275,7 @@ const number_format = (n) => {
 
     <ColumnGroup type="footer">
       <Row>
-        <Column footer="Totals:" :colspan="props.quarter_id ? 2 : (props.field_id ? 3 : 4)" footerStyle="text-align:right"/>
+        <Column footer="Totals:" :colspan="props.quarter_id ? 3 : (props.field_id ? 4 : 5)" footerStyle="text-align:right"/>
         <Column :footer="weightTotal" />
         <Column :footer="unitCountTotal" :colspan="3" />
       </Row>

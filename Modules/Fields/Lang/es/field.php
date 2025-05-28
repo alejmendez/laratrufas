@@ -72,4 +72,8 @@ return [
             'documents' => 'Documentos',
         ],
     ],
+    'sections' => [
+        'blueprint' => 'Planos',
+        'documents' => 'Documentos',
+    ],
 ];

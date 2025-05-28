@@ -15,6 +15,7 @@ import Datatable from '@Core/Components/Table/Datatable.vue';
 import QuarterService from '@Fields/Services/QuarterService.js';
 import { defaultDeleteHandler } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
+import { formatNumber } from '@Core/Utils/format';
 
 const props = defineProps({
   toast: Object,
@@ -92,7 +93,7 @@ onMounted(async () => {
       </Column>
       <Column field="area" :header="__('quarter.table.area')" sortable style="min-width: 100px">
         <template #body="{ data }">
-          {{ data.area }} ha
+          {{ formatNumber(data.area) }} ha
         </template>
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por area" />
@@ -100,7 +101,7 @@ onMounted(async () => {
       </Column>
       <Column field="plants_count" :header="__('quarter.table.plants_count')" sortable style="min-width: 100px">
         <template #body="{ data }">
-          {{ data.plants_count }}
+          {{ formatNumber(data.plants_count, 0) }}
         </template>
       </Column>
 

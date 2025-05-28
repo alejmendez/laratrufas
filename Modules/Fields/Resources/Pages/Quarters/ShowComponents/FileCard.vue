@@ -1,5 +1,6 @@
 <script setup>
 import CardSection from '@Core/Components/CardSection.vue';
+import { formatNumber } from '@Core/Utils/format';
 
 const props = defineProps({
   quarter: Object,
@@ -9,8 +10,8 @@ const quarter = props.quarter;
 
 const dataFile = [
   ['quarter.show.file.field', quarter.field.name],
-  ['quarter.show.file.area', quarter.area],
-  ['quarter.show.file.plants_count', quarter.plants_count],
+  ['quarter.show.file.area', formatNumber(quarter.area)],
+  ['quarter.show.file.plants_count', formatNumber(quarter.plants_count, 0)],
   ['quarter.show.file.responsible', quarter.responsible.name],
 ];
 </script>

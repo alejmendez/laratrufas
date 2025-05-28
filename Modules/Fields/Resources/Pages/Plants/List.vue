@@ -15,6 +15,7 @@ import Datatable from '@Core/Components/Table/Datatable.vue';
 import PlantService from '@Fields/Services/PlantService.js';
 import { defaultDeleteHandler } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
+import { formatNumber } from '@Core/Utils/format';
 
 const props = defineProps({
   toast: Object,
@@ -117,7 +118,7 @@ onMounted(async () => {
       </Column>
       <Column field="age" :header="__('plant.table.age')" sortable style="min-width: 100px">
         <template #body="{ data }">
-          {{ data.age }}
+          {{ formatNumber(data.age) }}
         </template>
         <template #filter="{ filterModel }">
           <InputText v-model="filterModel.value" type="text" placeholder="Buscar por edad" />

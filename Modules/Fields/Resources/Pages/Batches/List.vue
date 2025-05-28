@@ -14,6 +14,7 @@ import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
 import Datatable from '@Core/Components/Table/Datatable.vue';
 import BatchService from '@Fields/Services/BatchService.js';
 import { stringToFormat } from '@Core/Utils/date';
+import { formatNumber } from '@Core/Utils/format';
 import { defaultDeleteHandler } from '@Core/Utils/table.js';
 import { can } from '@Auth/Services/Auth';
 import jsPDF from 'jspdf';
@@ -53,7 +54,7 @@ const deleteHandler = (record) => {
 };
 
 const grToKg = (gr) => {
-  return (gr / 1000).toFixed(2);
+  return formatNumber(gr / 1000);
 };
 
 const printHandler = async (record) => {

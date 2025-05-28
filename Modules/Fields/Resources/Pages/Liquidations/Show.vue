@@ -4,6 +4,7 @@ import { trans } from 'laravel-vue-i18n';
 
 import { stringToDate, stringToFormat } from '@Core/Utils/date';
 import { format, getWeek, endOfWeek, startOfWeek } from 'date-fns';
+import { formatNumber } from '@Core/Utils/format';
 
 import AuthenticatedLayout from '@Core/Layouts/AuthenticatedLayout.vue';
 import HeaderCrud from '@Core/Components/Crud/HeaderCrud.vue';
@@ -63,7 +64,7 @@ const total_categories_commercial = computed(() => {
   const productsFiltered = products.filter((a) => props.category_products.find((b) => b.id === a.category_product_id).is_commercial);
   const sum = productsFiltered.reduce((acc, curr) => acc + parseFloat(curr.weight), 0);
   const sumRounded = Math.round(sum * 100) / 100;
-  return `${sumRounded} Kg`;
+  return `${formatNumber(sumRounded)} Kg`;
 });
 
 const total_categories_not_commercial = computed(() => {
@@ -71,7 +72,7 @@ const total_categories_not_commercial = computed(() => {
   const productsFiltered = products.filter((a) => !props.category_products.find((b) => b.id === a.category_product_id).is_commercial);
   const sum = productsFiltered.reduce((acc, curr) => acc + parseFloat(curr.weight), 0);
   const sumRounded = Math.round(sum * 100) / 100;
-  return `${sumRounded} Kg`;
+  return `${formatNumber(sumRounded)} Kg`;
 });
 </script>
 
@@ -109,17 +110,17 @@ const total_categories_not_commercial = computed(() => {
     <CardSection>
       <VElementFormWrapper :label="__('liquidation.form.weight_with_earth.label')">
         <div>
-          {{ data.weight_with_earth }}
+          {{ formatNumber(data.weight_with_earth) }}
         </div>
       </VElementFormWrapper>
       <VElementFormWrapper :label="__('liquidation.form.weight_washed.label')">
         <div>
-          {{ data.weight_washed }}
+          {{ formatNumber(data.weight_washed) }}
         </div>
       </VElementFormWrapper>
       <VElementFormWrapper :label="__('liquidation.form.dollar_value.label')">
         <div>
-          {{ data.dollar_value }}
+          {{ formatNumber(data.dollar_value) }}
         </div>
       </VElementFormWrapper>
     </CardSection>
@@ -139,10 +140,10 @@ const total_categories_not_commercial = computed(() => {
           {{ data.products[commercial.id].name }}
         </div>
         <div class="col-span-3">
-          {{ data.products[commercial.id].price }}
+          {{ formatNumber(data.products[commercial.id].price) }}
         </div>
         <div class="col-span-3">
-          {{ data.products[commercial.id].weight }}
+          {{ formatNumber(data.products[commercial.id].weight) }}
         </div>
       </template>
 
@@ -168,7 +169,7 @@ const total_categories_not_commercial = computed(() => {
           {{ data.products[commercial.id].name }}
         </div>
         <div class="col-span-3">
-          {{ data.products[commercial.id].weight }}
+          {{ formatNumber(data.products[commercial.id].weight) }}
         </div>
       </template>
       <div class="col-span-10 border-t mt-[2px]"></div>

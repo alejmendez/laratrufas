@@ -1,4 +1,6 @@
 <script setup>
+import { formatNumber } from '@Core/Utils/format';
+
 const props = defineProps({
   field: Object,
 });
@@ -32,7 +34,7 @@ const field = props.field.data;
             <span class="text-xs ps-1">HAS</span>
           </div>
           <div class="pt-1">
-            {{ Math.round((parseFloat(field.size) + Number.EPSILON) * 10) / 10 }}
+            {{ formatNumber(field.size) }}
           </div>
         </div>
         <div class="min-h-10" title="Cantidad de Cuarteles">
@@ -40,7 +42,7 @@ const field = props.field.data;
             <span class="material-symbols-rounded">check_box_outline_blank</span>
           </div>
           <div class="pt-1">
-            {{ field.quarters_count }}
+            {{ formatNumber(field.quarters_count, 0) }}
           </div>
         </div>
         <div class="min-h-10" title="Cantidad de Arboles">
@@ -48,7 +50,7 @@ const field = props.field.data;
             <span class="material-symbols-rounded">park</span>
           </div>
           <div class="pt-1">
-            {{ field.plants_count }}
+            {{ formatNumber(field.plants_count, 0) }}
           </div>
         </div>
       </div>
