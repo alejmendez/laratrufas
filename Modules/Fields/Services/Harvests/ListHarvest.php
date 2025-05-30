@@ -64,14 +64,24 @@ class ListHarvest
                 $details = $details->where('quarter_id', $quarterId);
             }
 
+            $field_names = $details->map(fn ($detail) => $detail->quarter?->field?->name)->unique()->join(', ');
+            $quarter_names = $details->map(fn ($detail) => $detail->quarter?->name)->unique()->join(', ');
+
+            if ($quarter_names == '') {
+                if ($harvest->quarters->count() > 0) {
+                    $quarter_names = $harvest->quarters->map(fn ($quarter) => $quarter->name)->unique()->join(', ');
+                    $field_names = $harvest->quarters->map(fn ($quarter) => $quarter->field?->name)->unique()->join(', ');
+                }
+            }
+
             return [
                 'id' => $harvest->id,
                 'date' => $harvest->date,
                 'year' => $harvest->year,
                 'week' => $harvest->week,
                 'batch' => $harvest->batch,
-                'field_names' => $details->map(fn ($detail) => $detail->quarter?->field?->name)->unique()->join(', '),
-                'quarter_names' => $details->map(fn ($detail) => $detail->quarter?->name)->unique()->join(', '),
+                'field_names' => $field_names,
+                'quarter_names' => $quarter_names,
                 // 'total_weight' => $details->map(fn ($detail) => $detail->weight)->sum(),
                 'total_weight' => $harvest->weight,
                 'unit_count' => $details->count(),
